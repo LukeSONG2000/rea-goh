@@ -38,7 +38,6 @@ from export_animation import (
 
 SHARED = "shared_animationcontainer"
 SHARED_ENV = None       # lazy, shared across all chars
-_clip_cache = {}        # (bundle, path_id) -> parsed clip
 
 
 def shared_env():
@@ -49,15 +48,13 @@ def shared_env():
 
 
 def clip_by_pathid(env, path_id):
-    key = (id(env), path_id)
-    if key not in _clip_cache:
-        for obj in env.objects:
-            if obj.type.name == "AnimationClip" and obj.path_id == path_id:
-                _clip_cache[key] = parse_animation_clip(obj.get_raw_data())
-                break
-        else:
-            raise SystemExit(f"clip path_id {path_id} not in bundle")
-    return _clip_cache[key]
+    # Deliberately uncached: a previous id(env)-keyed cache could recycle heap
+    # addresses across sequential char envs and poison lookups, and parsing is
+    # ~10ms per clip anyway.
+    for obj in env.objects:
+        if obj.type.name == "AnimationClip" and obj.path_id == path_id:
+            return parse_animation_clip(obj.get_raw_data())
+    raise SystemExit(f"clip path_id {path_id} not in bundle")
 
 
 def shared_clip_names():
@@ -67,27 +64,24 @@ def shared_clip_names():
 
 
 def crc_paths(js):
-    """{crc32: node_index} for every node path relative to the prefab's unit
-    root -- binding paths start at the root's children ('root/pelvis/...',
-    'Scaler/pelvicJNT', ...).  Empirically verified: 34/34 hashes of
-    gen_acklay_idle resolve this way."""
+    """{crc32: node_index} covering every subtree path in the GLB.
+
+    Generic-clip binding paths are relative to whatever transform the
+    character's Animator sits on -- that differs per prefab ('root/pelvis/...'
+    for acklay, 'pelvicJNT/...' for 4lom) -- so enumerate paths from EVERY
+    node as base instead of guessing one.  Hash matching is exact, so extra
+    entries are harmless."""
     nodes = js["nodes"]
-    parent = {}
-    for i, n in enumerate(nodes):
-        for c in n.get("children", []):
-            parent[c] = i
-    roots = [i for i in range(len(nodes)) if i not in parent]
     out = {}
-    for r in roots:
-        for c in nodes[r].get("children", []):
-            stack = [(c, [])]
-            while stack:
-                i, prefix = stack.pop()
-                name = nodes[i].get("name", "")
-                path = "/".join(prefix + [name])
-                out.setdefault(zlib.crc32(path.encode()) & 0xFFFFFFFF, i)
-                stack.extend((ch, prefix + [name])
-                             for ch in nodes[i].get("children", []))
+    for base in range(len(nodes)):
+        stack = [(base, [])]
+        while stack:
+            i, prefix = stack.pop()
+            name = nodes[i].get("name", "")
+            path = "/".join(prefix + [name])
+            out.setdefault(zlib.crc32(path.encode()) & 0xFFFFFFFF, i)
+            stack.extend((ch, prefix + [name])
+                         for ch in nodes[i].get("children", []))
     return out
 
 
@@ -210,7 +204,7 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True):
             n_frames = int(round(mc["stop_time"] * rate)) + 1
             times = [i / rate for i in range(n_frames)]
             poses = [ev.evaluate(t) for t in times]
-            if "__root__" in poses[0]:
+            if "__root__" in poses[0] and "pelvicJNT" in idx:
                 tv = [v for p in poses for v in p["__root__"]["translation"]]
                 channels.append((idx["pelvicJNT"], "translation", tv))
             for bone, rec in sorted(joints.items()):

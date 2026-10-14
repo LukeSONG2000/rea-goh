@@ -2,40 +2,85 @@
 <html lang="zh">
 <head>
 <meta charset="utf-8">
-<title>SWGoH 模型预览</title>
+<title>SWGoH 模型库</title>
 <style>
-  html,body{margin:0;height:100%;overflow:hidden;font-family:Segoe UI,system-ui,sans-serif;background:#15171c;color:#dde}
-  #side{position:fixed;left:0;top:0;bottom:0;width:280px;background:#1b1e24ee;backdrop-filter:blur(6px);
-        padding:12px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;z-index:10}
-  #search{width:100%;box-sizing:border-box;padding:7px 10px;border-radius:6px;border:1px solid #3a4050;
-          background:#12141a;color:#dde;font-size:13px;outline:none}
-  #search:focus{border-color:#5b7bd5}
-  #list{flex:1;overflow-y:auto;margin:0;padding:0;list-style:none}
-  #list li{padding:6px 8px;border-radius:5px;cursor:pointer;font-size:13px;color:#aab;white-space:nowrap;
-           overflow:hidden;text-overflow:ellipsis}
-  #list li:hover{background:#2a2f3a;color:#dde}
-  #list li.on{background:#31415f;color:#fff}
-  #info{font-size:12px;color:#889;line-height:1.5}
-  #bar{position:fixed;right:12px;top:12px;z-index:10;display:flex;gap:6px;flex-wrap:wrap;max-width:60%}
-  button{padding:6px 12px;border-radius:6px;border:1px solid #3a4050;background:#1b1e24cc;color:#ccd;
+  :root{
+    --bg:#101216; --panel:#181b21ee; --panel2:#1f232b; --line:#2b303a;
+    --txt:#dfe3ea; --dim:#8a93a3; --gold:#f0c94a; --red:#e0524a; --gray:#9aa3ad;
+    --acc:#5b8dee;
+  }
+  html,body{margin:0;height:100%;overflow:hidden;font-family:Segoe UI,system-ui,sans-serif;
+            background:var(--bg);color:var(--txt)}
+  /* ---------- header ---------- */
+  #head{position:fixed;left:0;right:0;top:0;height:52px;z-index:20;display:flex;align-items:center;gap:14px;
+        padding:0 14px;box-sizing:border-box;background:var(--panel);backdrop-filter:blur(8px);
+        border-bottom:1px solid var(--line)}
+  #logo{font-size:16px;font-weight:600;letter-spacing:.5px;white-space:nowrap}
+  #logo b{color:var(--gold)}
+  #search{flex:0 1 380px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);
+          background:#0d0f13;color:var(--txt);font-size:13px;outline:none}
+  #search:focus{border-color:var(--acc)}
+  #headStats{margin-left:auto;font-size:12px;color:var(--dim);white-space:nowrap}
+  /* ---------- sidebar ---------- */
+  #side{position:fixed;left:0;top:52px;bottom:0;width:300px;z-index:15;display:flex;flex-direction:column;
+        background:var(--panel);border-right:1px solid var(--line);box-sizing:border-box}
+  #filters{padding:10px 12px 6px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+  .chipRow{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:transparent;
+        color:var(--dim);font-size:12px;cursor:pointer;user-select:none}
+  .chip:hover{color:var(--txt);border-color:#3a4150}
+  .chip.on{background:var(--panel2);color:var(--txt);border-color:var(--acc)}
+  .chip .n{opacity:.55;margin-left:3px;font-size:11px}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px}
+  .dot.light{background:var(--gold)} .dot.dark{background:var(--red)} .dot.neutral{background:var(--gray)}
+  #list{flex:1;overflow-y:auto;margin:0;padding:6px;list-style:none}
+  #list li{padding:7px 9px;border-radius:7px;cursor:pointer;font-size:13px;color:#b6bdc9;
+           white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:2px}
+  #list li:hover{background:#232833;color:var(--txt)}
+  #list li.on{background:#2a3a5c;color:#fff}
+  #list li .zh{color:var(--dim);font-size:12px;margin-left:6px;overflow:hidden;text-overflow:ellipsis}
+  #list li.on .zh{color:#aab}
+  #list li .tag{margin-left:auto;font-size:10px;color:#667;border:1px solid var(--line);
+                border-radius:4px;padding:1px 5px;flex:none}
+  /* ---------- viewport chrome ---------- */
+  #bar{position:fixed;right:12px;top:64px;z-index:10;display:flex;gap:6px;flex-wrap:wrap;max-width:46%}
+  button{padding:6px 12px;border-radius:7px;border:1px solid var(--line);background:#181b21cc;color:#c6ccd8;
          font-size:12px;cursor:pointer}
-  button:hover{background:#2a3040;color:#fff}
-  button.on{background:#31415f;color:#fff;border-color:#5b7bd5}
-  #hint{position:fixed;bottom:10px;right:14px;font-size:11px;color:#667;z-index:10}
+  button:hover{background:#242a35;color:#fff}
+  button.on{background:#2a3a5c;color:#fff;border-color:var(--acc)}
+  #hint{position:fixed;bottom:10px;right:14px;font-size:11px;color:#5b6270;z-index:10}
   #animBar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:none;gap:6px;
-           z-index:10;max-width:70vw;overflow-x:auto;padding:4px}
+           z-index:10;max-width:62vw;overflow-x:auto;padding:4px}
   #animBar button{white-space:nowrap}
-  #animBar button.playing{background:#31415f;color:#fff;border-color:#5b7bd5}
+  #animBar button.playing{background:#2a3a5c;color:#fff;border-color:var(--acc)}
+  /* ---------- info panel ---------- */
+  #info{position:fixed;left:312px;bottom:14px;z-index:10;max-width:420px;background:#14171ccc;
+        border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--dim);
+        line-height:1.65;backdrop-filter:blur(6px)}
+  #info b{color:var(--txt);font-size:14px}
+  #info .zh{color:#c9cfda;font-size:13px;margin-left:6px}
+  #info .chips{margin-top:4px}
+  #info .chips span{display:inline-block;margin:2px 4px 0 0;padding:2px 8px;border-radius:999px;
+        background:#232833;color:#aeb6c2;font-size:11px;border:1px solid var(--line)}
   #drop{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;
         font-size:22px;color:#dde;z-index:99;pointer-events:none}
   canvas{display:block}
+  ::-webkit-scrollbar{width:9px} ::-webkit-scrollbar-thumb{background:#2b313d;border-radius:5px}
+  ::-webkit-scrollbar-track{background:transparent}
 </style>
 </head>
 <body>
+<div id="head">
+  <div id="logo">✦ <b>SWGoH</b> 模型库</div>
+  <input id="search" placeholder="搜索：名字 / 绰号 / defId / char_ 前缀…">
+  <div id="headStats"></div>
+</div>
 <div id="side">
-  <input id="search" placeholder="搜索角色… (char_ 前缀)">
+  <div id="filters">
+    <div class="chipRow" id="catRow"></div>
+    <div class="chipRow" id="alignRow"></div>
+  </div>
   <ul id="list"></ul>
-  <div id="info">未加载模型</div>
 </div>
 <div id="bar">
   <button id="bWire">线框 (W)</button>
@@ -45,8 +90,9 @@
   <button id="bReset">复位 (R)</button>
   <button id="bShot">截图</button>
 </div>
-<div id="hint">拖入任意 .glb 也可预览</div>
+<div id="info">未加载模型 — 从左侧选择</div>
 <div id="animBar"></div>
+<div id="hint">拖入任意 .glb 也可预览</div>
 <div id="drop">松开以加载模型</div>
 <script src="/viewer/vendor/three.min.js"></script>
 <script src="/viewer/vendor/GLTFLoader.js"></script>
@@ -62,7 +108,7 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x15171c);
+scene.background = new THREE.Color(0x101216);
 const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.01, 500);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -131,13 +177,15 @@ function loadBuffer(buf, name){
       clips = gltf.animations;
       buildAnimBar();
       playClip(0);
-      animLine = `<br>动画 ${clips.length} 段`;
+      animLine = `<br>动画 ${clips.length} 段（底部切换）`;
     }
     frame(model);
+    // merge into the info panel, keeping classification lines
     const info = document.getElementById('info');
-    info.innerHTML = `<b style="color:#cdd">${name}</b><br>` +
-      `三角面 ${(tris|0).toLocaleString()} · 顶点 ${verts.toLocaleString()}<br>` +
-      `网格对象 ${mats.size} 材质 · 骨骼 ${bones} · 蒙皮体 ${skinned}` + animLine;
+    const stats = `三角面 ${(tris|0).toLocaleString()} · 顶点 ${verts.toLocaleString()}<br>` +
+      `网格 ${mats.size} 材质 · 骨骼 ${bones} · 蒙皮体 ${skinned}` + animLine;
+    const cls = info.dataset.cls ? JSON.parse(info.dataset.cls) : null;
+    showInfo(cls, name, stats);
   }, err=>{ document.getElementById('info').textContent = '解析失败: '+err; });
 }
 function playClip(i){
@@ -174,15 +222,7 @@ function buildAnimBar(){
   };
   bar.appendChild(pp);
 }
-function loadURL(url){
-  new THREE.GLTFLoader().load(url, gltf=>{}, undefined, e=>{
-    // GLTFLoader.load needs a blob: re-fetch as arrayBuffer then parse
-    fetch(url).then(r=>r.arrayBuffer()).then(b=>loadBuffer(b, url.split('/').pop()))
-              .catch(()=>document.getElementById('info').textContent='加载失败: '+url);
-  });
-}
-// fetch as arrayBuffer then parse (avoids loader path quirks)
-// fallback: try the animated .anim.glb first, fall back to the plain .glb
+// fetch as arrayBuffer then parse; try the animated .anim.glb first, fall back
 function loadModel(url, label, fallback){
   fetch(url).then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); })
             .then(b=>loadBuffer(b, label))
@@ -190,30 +230,145 @@ function loadModel(url, label, fallback){
                                 : document.getElementById('info').textContent='加载失败: '+url);
 }
 
-// ---------- UI ----------
+// ---------- catalog data ----------
+let MODELS = [];          // [{id,en,zh,cls}]
+let CLASS = {};           // id -> classification entry
+const AFFIL_ZH = {
+  rebels:'义军同盟', rebelfighter:'义军战士', empire:'银河帝国', imperialtrooper:'帝国兵',
+  imperialremnant:'帝国残部', republic:'银河共和国', galactic_republic_jedi:'共和国绝地',
+  separatist:'独立星系邦联', cis:'独立星系邦联', sith:'西斯', sithlord:'西斯尊主',
+  jedi:'绝地', nightsisters:'夜姐妹', mandalorian:'曼达洛人', resistance:'抵抗组织',
+  huttcartel:'赫特 cartel', hutt:'赫特', firstorder:'第一秩序', scoundrel:'恶棍',
+  bountyhunter:'赏金猎人', professionalbountyhunter:'职业赏金猎人', droid:'机器人',
+  separatistdroid:'邦联机器人', clone:'克隆人', clonetrooper:'克隆士兵', jawas:'贾瓦人',
+  tusken:'塔斯肯人', ewok:'伊沃克人', wookiee:'伍基人', gungan:'冈根人',
+  underworldcriminal:'地下罪犯', professionalassassin:'刺客', professionaldroid:'职业机器人',
+  lightside:'光明面', darkside:'黑暗面', neutral:'中立', unkartis:'卡蒂斯监狱',
+  phoenix:'凤凰中队', rogue_one:'侠盗一号', ahsoka_tano:'阿索卡小队', badbatch:'异等小队',
+};
+const ROLE_ZH = {attacker:'攻击', defender:'防御', support:'辅助', leader:'领袖',
+                 tank:'坦克', healer:'治疗', null_:''};
+const CAT_DEFS = [
+  ['all',     '全部', null],
+  ['hero',    '英雄', 'hero'],
+  ['pve',     'PVE 单位', 'pve_variant'],
+  ['unknown', '未归类', 'unclassified'],
+];
+let fCat = 'all', fAlign = '';
+
+function classify(id){
+  const c = CLASS[id];
+  if (!c) return {category:'unclassified', alignment:'', affiliations:[], roles:[]};
+  return {
+    category: c.category || 'unclassified',
+    alignment: (c.unit && c.unit.alignment) || '',
+    affiliations: (c.unit && c.unit.affiliations) || [],
+    roles: (c.unit && c.unit.roles) || [],
+    name_en: c.name_en, name_zh: c.name_zh, defId: c.defId_model_map,
+    nickname: c.nickname || (c.nicknames && c.nicknames[0]) || '',
+  };
+}
+function alignDot(a){
+  return a==='light' ? 'light' : a==='dark' ? 'dark' : a==='neutral' ? 'neutral' : '';
+}
+
+// ---------- sidebar UI ----------
 const listEl = document.getElementById('list');
-let MODELS = [];
-function modelName(m){        // entries are {id,en,zh} objects or bare id strings
-  if (typeof m === 'string') return m;
-  return m.zh ? `${m.en}（${m.zh}）` : (m.en || m.id);
+function modelName(m){
+  const zh = m.cls.name_zh || m.zh;
+  const en = m.cls.name_en || m.en;
+  return en ? (zh ? `${en} ${zh}` : en) : m.id;
+}
+function renderFilters(){
+  const catRow = document.getElementById('catRow');
+  catRow.innerHTML = '';
+  const counts = {all:MODELS.length};
+  MODELS.forEach(m=>{ counts[m.cls.category] = (counts[m.cls.category]||0)+1; });
+  CAT_DEFS.forEach(([key,label,cat])=>{
+    const b = document.createElement('div');
+    b.className = 'chip' + (fCat===key?' on':'');
+    b.innerHTML = label + `<span class="n">${counts[cat||'all']||0}</span>`;
+    b.onclick = ()=>{ fCat = key; renderFilters(); renderList(document.getElementById('search').value); };
+    catRow.appendChild(b);
+  });
+  const alignRow = document.getElementById('alignRow');
+  alignRow.innerHTML = '';
+  [['','全部阵营'],['light','光明'],['dark','黑暗'],['neutral','中立']].forEach(([a,label])=>{
+    const b = document.createElement('div');
+    b.className = 'chip' + (fAlign===a?' on':'');
+    b.innerHTML = (a?`<span class="dot ${a}"></span>`:'') + label;
+    b.onclick = ()=>{ fAlign = a; renderFilters(); renderList(document.getElementById('search').value); };
+    alignRow.appendChild(b);
+  });
 }
 function renderList(q){
   listEl.innerHTML='';
-  q = (q||'').toLowerCase();
-  MODELS.filter(m=>!q || (typeof m==='string' ? m : (m.id+' '+m.en+' '+m.zh)).toLowerCase().includes(q)).forEach(m=>{
-    const id = typeof m==='string' ? m : m.id;
-    const li=document.createElement('li'); li.textContent=modelName(m);
-    li.onclick=()=>{ [...listEl.children].forEach(x=>x.classList.remove('on'));
-                     li.classList.add('on');
-                     loadModel('/extracted/'+id+'/'+id+'.anim.glb', modelName(m),
-                               '/extracted/'+id+'/'+id+'.glb'); };
-    listEl.appendChild(li);
+  q = (q||'').toLowerCase().trim();
+  let shown = 0;
+  const frag = document.createDocumentFragment();
+  MODELS.forEach(m=>{
+    if (fCat!=='all' && m.cls.category!==fCat) return;
+    if (fAlign && m.cls.alignment!==fAlign) return;
+    if (q){
+      const hay = (m.id+' '+(m.cls.name_en||m.en||'')+' '+(m.cls.name_zh||m.zh||'')+' '
+                   +(m.cls.nickname||'')+' '+(m.cls.defId||'')).toLowerCase();
+      if (!hay.includes(q)) return;
+    }
+    shown++;
+    const li=document.createElement('li');
+    const d = alignDot(m.cls.alignment);
+    li.innerHTML = (d?`<span class="dot ${d}"></span>`:'') +
+      `<span>${m.cls.name_en||m.en||m.id}</span>` +
+      ((m.cls.name_zh||m.zh)?`<span class="zh">${m.cls.name_zh||m.zh}</span>`:'') +
+      (m.cls.nickname?`<span class="zh">“${m.cls.nickname}”</span>`:'');
+    li.title = m.id;
+    li.onclick=()=>{
+      [...listEl.children].forEach(x=>x.classList.remove('on'));
+      li.classList.add('on');
+      showInfo(m.cls, modelName(m), '加载中…');
+      loadModel('/extracted/'+m.id+'/'+m.id+'.anim.glb', modelName(m),
+                '/extracted/'+m.id+'/'+m.id+'.glb');
+    };
+    frag.appendChild(li);
   });
+  listEl.appendChild(frag);
+  document.getElementById('headStats').textContent = `显示 ${shown} / ${MODELS.length}`;
 }
-fetch('/models.json').then(r=>r.json()).then(d=>{
-  MODELS = d; renderList('');
-  document.getElementById('info').textContent = `共 ${d.length} 个模型，点击加载`;
-}).catch(()=>{ document.getElementById('info').textContent='未找到 models.json（先运行 gen_previews.py）'; });
+function showInfo(cls, label, stats){
+  const info = document.getElementById('info');
+  info.dataset.cls = cls && cls.defId!==undefined ? JSON.stringify(cls) : '';
+  if (!cls || (!cls.category && !cls.name_en)){
+    info.innerHTML = `<b>${label}</b><br>${stats||''}`;
+    return;
+  }
+  const catLabel = {hero:'英雄', pve_variant:'PVE 单位', unclassified:'未归类'}[cls.category]||cls.category;
+  const aff = (cls.affiliations||[]).slice(0,8)
+    .map(a=>AFFIL_ZH[a]||a);
+  const roles = (cls.roles||[]).map(r=>ROLE_ZH[r]||r);
+  info.innerHTML =
+    `<b>${cls.name_en||label}</b>` +
+    (cls.name_zh?`<span class="zh">${cls.name_zh}</span>`:'') +
+    (cls.nickname?`<span class="zh">“${cls.nickname}”</span>`:'') +
+    `<br><span class="dot ${alignDot(cls.alignment)}"></span>${catLabel}` +
+    (cls.alignment?` · ${cls.alignment==='light'?'光明':cls.alignment==='dark'?'黑暗':'中立'}`:'') +
+    (cls.defId?` · defId ${cls.defId}`:'') +
+    `<br>${stats||''}` +
+    ((aff.length||roles.length)?`<div class="chips">${roles.concat(aff).map(t=>`<span>${t}</span>`).join('')}</div>`:'');
+}
+
+Promise.all([
+  fetch('/models.json').then(r=>r.json()),
+  fetch('/catalog/model_classification.json').then(r=>r.json()).catch(()=>null),
+]).then(([list, clsData])=>{
+  CLASS = (clsData && clsData.models) || {};
+  MODELS = list.map(m=> typeof m==='string' ? {id:m, cls:classify(m)}
+                                            : {id:m.id, en:m.en, zh:m.zh, cls:null});
+  MODELS.forEach(m=>{ if (!m.cls) m.cls = classify(m.id); });
+  renderFilters();
+  renderList('');
+}).catch(()=>{
+  document.getElementById('info').textContent='models.json 未找到（先运行 gen_previews.py）';
+});
 document.getElementById('search').oninput = e=>renderList(e.target.value);
 
 document.getElementById('bWire').onclick = ()=>setWire(!wire);
