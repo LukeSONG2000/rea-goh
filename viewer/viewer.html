@@ -70,7 +70,8 @@ const grid = new THREE.GridHelper(10, 20, 0x334, 0x223);
 grid.position.y = 0.001; scene.add(grid);
 
 // ---------- state ----------
-let model = null, bonesHelper = null, wire = false, turn = false;
+let model = null, bonesHelper = null, wire = false, turn = false, mixer = null;
+const clock = new THREE.Clock();
 const _mats = [];
 
 function frame(obj){
@@ -84,6 +85,7 @@ function frame(obj){
 }
 function disposeModel(){
   if (!model) return;
+  if (mixer){ mixer.stopAllAction(); mixer = null; }
   scene.remove(model);
   if (bonesHelper) scene.remove(bonesHelper);
   model.traverse(o=>{ if(o.geometry) o.geometry.dispose(); });
@@ -102,7 +104,7 @@ function loadBuffer(buf, name){
     disposeModel();
     model = gltf.scene;
     scene.add(model);
-    let tris=0, verts=0, mats=new Set(), bones=0, skinned=0;
+    let tris=0, verts=0, mats=new Set(), bones=0, skinned=0, animLine='';
     model.traverse(o=>{
       if (o.isMesh){
         o.material.side = THREE.DoubleSide;
@@ -116,11 +118,17 @@ function loadBuffer(buf, name){
       if (o.isBone) bones++;
     });
     if (bones){ bonesHelper = new THREE.SkeletonHelper(model); scene.add(bonesHelper); setBones(false); }
+    if (gltf.animations && gltf.animations.length){
+      mixer = new THREE.AnimationMixer(model);
+      mixer.clipAction(gltf.animations[0]).play();   // auto-loop first clip
+      const c = gltf.animations[0];
+      animLine = `<br>动画：${c.name || '(unnamed)'} (${c.duration.toFixed(2)}s)`;
+    }
     frame(model);
     const info = document.getElementById('info');
     info.innerHTML = `<b style="color:#cdd">${name}</b><br>` +
       `三角面 ${(tris|0).toLocaleString()} · 顶点 ${verts.toLocaleString()}<br>` +
-      `网格对象 ${mats.size} 材质 · 骨骼 ${bones} · 蒙皮体 ${skinned}`;
+      `网格对象 ${mats.size} 材质 · 骨骼 ${bones} · 蒙皮体 ${skinned}` + animLine;
   }, err=>{ document.getElementById('info').textContent = '解析失败: '+err; });
 }
 function loadURL(url){
@@ -131,10 +139,12 @@ function loadURL(url){
   });
 }
 // fetch as arrayBuffer then parse (avoids loader path quirks)
-function loadModel(url, label){
+// fallback: try the animated .anim.glb first, fall back to the plain .glb
+function loadModel(url, label, fallback){
   fetch(url).then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); })
             .then(b=>loadBuffer(b, label))
-            .catch(()=>document.getElementById('info').textContent='加载失败: '+url);
+            .catch(()=>fallback ? loadModel(fallback, label)
+                                : document.getElementById('info').textContent='加载失败: '+url);
 }
 
 // ---------- UI ----------
@@ -151,7 +161,9 @@ function renderList(q){
     const id = typeof m==='string' ? m : m.id;
     const li=document.createElement('li'); li.textContent=modelName(m);
     li.onclick=()=>{ [...listEl.children].forEach(x=>x.classList.remove('on'));
-                     li.classList.add('on'); loadModel('/extracted/'+id+'/'+id+'.glb', modelName(m)); };
+                     li.classList.add('on');
+                     loadModel('/extracted/'+id+'/'+id+'.anim.glb', modelName(m),
+                               '/extracted/'+id+'/'+id+'.glb'); };
     listEl.appendChild(li);
   });
 }
@@ -198,6 +210,8 @@ addEventListener('drop',e=>{
 });
 // ---------- loop ----------
 renderer.setAnimationLoop(()=>{ controls.autoRotate=turn; controls.autoRotateSpeed=2;
+  const dt = clock.getDelta();
+  if (mixer) mixer.update(dt);
   controls.update(); renderer.render(scene,camera); });
 </script>
 </body>
