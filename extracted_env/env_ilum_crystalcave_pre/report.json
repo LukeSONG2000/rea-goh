@@ -1,0 +1,95 @@
+{
+  "name": "env_ilum_crystalcave_pre",
+  "kind": "environment",
+  "source_bundle": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_ilum_crystalcave_pre\\2a127967e87b07000000000000000000\\__data",
+  "dependency_bundles": [
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_ilum_crystalcave_pre\\2a127967e87b07000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\20c61018549952000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
+  ],
+  "exported_meshes": [
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "env_ilum_cave_rock_04_mesh:env_ilum_cave_rock_04_mesh",
+    "env_ilum_cave_rock_05_mesh:env_ilum_cave_rock_05_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "env_ilum_rock_07_mesh:env_ilum_rock_07_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "hoth_ice_pillar_07_mesh:env_hoth_icePillar_07_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "cave_ground_mesh:cave_ground_mesh",
+    "env_ilum_rock_06_mesh:env_ilum_rock_06_mesh",
+    "ilum_cave_wall_02_mesh:ilum_cave_wall_02_mesh",
+    "env_ilum_cave_rock_06_mesh:env_ilum_cave_rock_06_mesh",
+    "env_ilum_cave_rock_07_mesh:env_ilum_cave_rock_07_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "env_ilum_cave_rock_06_mesh:env_ilum_cave_rock_06_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "cave_ground_mesh:cave_ground_mesh",
+    "env_ilum_rock_03_mesh:env_ilum_rock_03_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "env_ilum_cave_rock_08_mesh:env_ilum_cave_rock_08_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "hoth_ice_pillar_05_mesh:env_hoth_icePillar_05_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "ilum_cave_wall_03_mesh:ilum_cave_wall_03_mesh",
+    "ilum_crystal_01_mesh:env_ilum_crystal_01_mesh",
+    "env_ilum_cave_rock_02_mesh:env_ilum_cave_rock_02_mesh",
+    "env_ilum_rock_03_mesh:env_ilum_rock_03_mesh",
+    "hoth_ice_pillar_07_mesh:env_hoth_icePillar_07_mesh",
+    "env_ilum_cave_rock_05_mesh:env_ilum_cave_rock_05_mesh",
+    "env_ilum_cave_rock_03_mesh:env_ilum_cave_rock_03_mesh",
+    "cave_ground_mesh:cave_ground_mesh",
+    "hoth_ice_pillar_04_mesh:env_hoth_icePillar_04_mesh",
+    "hoth_ice_pillar_05_mesh:env_hoth_icePillar_05_mesh"
+  ],
+  "mesh_errors": [],
+  "texture_errors": [],
+  "limitations": [
+    "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
+    "_Mask texture slot ignored: shader stripped, semantics unknown.",
+    "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
+    "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
+    "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+  ],
+  "duplicate_env_roots": 0,
+  "dropped_flip_layout": true,
+  "renderers_under_scene": {
+    "MeshRenderer_under_scene": 34,
+    "MeshRenderer_inactive": 22,
+    "ParticleSystemRenderer_under_scene": 9,
+    "SkinnedMeshRenderer_outside_scene": 71,
+    "MeshRenderer_outside_scene": 5
+  },
+  "skinned_renderers_skipped": [],
+  "gameobjects_in_scene": 80,
+  "vertex_color_meshes": [
+    {
+      "mesh": "cave_ground_mesh",
+      "rgb_mean": [
+        0.1863,
+        0.1391,
+        0.0153
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        0.6
+      ]
+    }
+  ],
+  "unique_meshes": 17,
+  "triangles": 3578,
+  "vertices": 5255,
+  "battle_camera_nodes": [
+    "Std Cam"
+  ],
+  "nodes_exported": 38,
+  "meshes_exported": 34,
+  "materials": 6,
+  "textures": 4,
+  "glb_bytes": 475032,
+  "seconds": 0.5
+}

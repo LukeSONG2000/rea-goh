@@ -252,6 +252,7 @@ const CAT_DEFS = [
   ['all',     '全部', null],
   ['hero',    '英雄', 'hero'],
   ['pve',     'PVE 单位', 'pve_variant'],
+  ['env',     '场景', 'environment'],
   ['unknown', '未归类', 'unclassified'],
 ];
 let fCat = 'all', fAlign = '';
@@ -326,8 +327,11 @@ function renderList(q){
       [...listEl.children].forEach(x=>x.classList.remove('on'));
       li.classList.add('on');
       showInfo(m.cls, modelName(m), '加载中…');
-      loadModel('/extracted/'+m.id+'/'+m.id+'.anim.glb', modelName(m),
-                '/extracted/'+m.id+'/'+m.id+'.glb');
+      if (m.cls.category==='environment')
+        loadModel('/extracted_env/'+m.id+'/'+m.id+'.glb', modelName(m), null);
+      else
+        loadModel('/extracted/'+m.id+'/'+m.id+'.anim.glb', modelName(m),
+                  '/extracted/'+m.id+'/'+m.id+'.glb');
     };
     frag.appendChild(li);
   });
@@ -341,7 +345,7 @@ function showInfo(cls, label, stats){
     info.innerHTML = `<b>${label}</b><br>${stats||''}`;
     return;
   }
-  const catLabel = {hero:'英雄', pve_variant:'PVE 单位', unclassified:'未归类'}[cls.category]||cls.category;
+  const catLabel = {hero:'英雄', pve_variant:'PVE 单位', unclassified:'未归类', environment:'场景'}[cls.category]||cls.category;
   const aff = (cls.affiliations||[]).slice(0,8)
     .map(a=>AFFIL_ZH[a]||a);
   const roles = (cls.roles||[]).map(r=>ROLE_ZH[r]||r);
@@ -359,11 +363,16 @@ function showInfo(cls, label, stats){
 Promise.all([
   fetch('/models.json').then(r=>r.json()),
   fetch('/catalog/model_classification.json').then(r=>r.json()).catch(()=>null),
-]).then(([list, clsData])=>{
+  fetch('/catalog/env_models.json').then(r=>r.json()).catch(()=>[]),
+]).then(([list, clsData, envList])=>{
   CLASS = (clsData && clsData.models) || {};
   MODELS = list.map(m=> typeof m==='string' ? {id:m, cls:classify(m)}
                                             : {id:m.id, en:m.en, zh:m.zh, cls:null});
   MODELS.forEach(m=>{ if (!m.cls) m.cls = classify(m.id); });
+  (envList||[]).forEach(e=>{
+    MODELS.push({id:e.id, cls:{category:'environment', alignment:'',
+                               affiliations:[], roles:[], name_en:e.name||null}});
+  });
   renderFilters();
   renderList('');
 }).catch(()=>{

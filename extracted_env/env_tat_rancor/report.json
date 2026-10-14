@@ -1,0 +1,134 @@
+{
+  "name": "env_tat_rancor",
+  "kind": "environment",
+  "source_bundle": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_tat_rancor\\b9aacc15998514000000000000000000\\__data",
+  "dependency_bundles": [
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_tat_rancor\\b9aacc15998514000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\20c61018549952000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
+  ],
+  "exported_meshes": [
+    "loth_wire_01_mesh (1):loth_wire_01_mesh",
+    "fogplane_01_mesh (10):fogplane_01_mesh",
+    "sul_rock_06_mesh (4):sul_rock_06_mesh",
+    "tat_ranc_bones_01d_mesh (6):tat_ranc_bones_01d_mesh",
+    "sul_rock_06_mesh (5):sul_rock_06_mesh",
+    "vfx_groud_Steam_02:TaperedPlane1",
+    "sul_rockwall_01_mesh:sul_rockwall_01_mesh",
+    "tat_ranc_wall_02_mesh (1):tat_ranc_wall_02_mesh",
+    "mal_pipes_01c_mesh:mal_pipes_01c_mesh",
+    "sul_rockwall_01_mesh (1):sul_rockwall_01_mesh",
+    "sul_rock_02_mesh:sul_rock_02_mesh",
+    "tat_ranc_door_02_mesh:tat_ranc_door_02_mesh",
+    "hoth_ice_pillar_03_mesh (1):hoth_ice_pillar_03_mesh",
+    "tat_ranc_wall_arch_01_mesh:tat_ranc_wall_arch_01_mesh",
+    "dag_stone_01a_mesh:dag_stone_01a_mesh",
+    "tat_wallpanel_01b_mesh:tat_wallpanel_01b_mesh",
+    "dag_stone_01e_mesh:dag_stone_01e_mesh",
+    "dag_stone_01c_mesh:dag_stone_01c_mesh",
+    "fogplane_01_mesh (11):fogplane_01_mesh",
+    "tat_scrappile_03_mesh:tat_scrappile_03_mesh",
+    "loth_wire_01_mesh:loth_wire_01_mesh",
+    "tat_rancor_grnd_mesh:tat_rancor_grnd_mesh",
+    "tat_rancor_grnd_mesh (1):tat_rancor_grnd_mesh",
+    "tat_ranc_door_01b_mesh:tat_ranc_door_01b_mesh",
+    "tat_ranc_bones_01d_mesh:tat_ranc_bones_01d_mesh",
+    "dag_stone_01b_mesh:dag_stone_01b_mesh",
+    "tat_ranc_door_half_01_mesh:tat_ranc_wall_half_01_mesh",
+    "sul_rock_02_mesh (1):sul_rock_02_mesh",
+    "vfx_ground_Steam_01:TaperedPlane1"
+  ],
+  "mesh_errors": [],
+  "texture_errors": [],
+  "limitations": [
+    "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
+    "_Mask texture slot ignored: shader stripped, semantics unknown.",
+    "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
+    "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
+    "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+  ],
+  "root_fallback": "env.env_tat_rancor.raid_p02_pre",
+  "renderers_under_scene": {
+    "ParticleSystemRenderer_under_scene": 48,
+    "MeshRenderer_outside_scene": 69,
+    "ParticleSystemRenderer_outside_scene": 75,
+    "MeshRenderer_under_scene": 38,
+    "mr_without_mesh": 8,
+    "ParticleSystemRenderer_inactive": 6,
+    "MeshRenderer_inactive": 3,
+    "mr_shadow_go": 1,
+    "SkinnedMeshRenderer_under_scene": 1,
+    "SkinnedMeshRenderer_inactive": 1,
+    "SkinnedMeshRenderer_outside_scene": 72
+  },
+  "skinned_renderers_skipped": [
+    "rancor_door_mesh"
+  ],
+  "gameobjects_in_scene": 218,
+  "vertex_color_meshes": [
+    {
+      "mesh": "tat_ranc_wall_02_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "tat_rancor_grnd_mesh",
+      "rgb_mean": [
+        0.2189,
+        0.1467,
+        0.0287
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        0.6
+      ]
+    },
+    {
+      "mesh": "tat_ranc_door_01b_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "tat_ranc_wall_half_01_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "unique_meshes": 21,
+  "triangles": 5687,
+  "vertices": 8654,
+  "battle_camera_nodes": [],
+  "nodes_exported": 35,
+  "meshes_exported": 29,
+  "materials": 14,
+  "textures": 13,
+  "glb_bytes": 1112188,
+  "seconds": 0.8
+}

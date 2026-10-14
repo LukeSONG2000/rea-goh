@@ -1,0 +1,116 @@
+{
+  "name": "env_tat_jabbaspalace_jthgl_p01_pre",
+  "kind": "environment",
+  "source_bundle": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_tat_jabbaspalace_jthgl_p01_pre\\f70119557c8028000000000000000000\\__data",
+  "dependency_bundles": [
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_tat_jabbaspalace_jthgl_p01_pre\\f70119557c8028000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\223b9ad422852e000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\20c61018549952000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
+  ],
+  "exported_meshes": [
+    "tat_jp_misc_02_mesh (1):tat_jp_misc_02_mesh",
+    "tat_jp_misc_01g_mesh (5):tat_jp_misc01g_mesh",
+    "tat_jp_misc_01f_mesh:tat_jp_misc01f_mesh",
+    "brac_crate_03d_mesh:brac_crate_03d_mesh",
+    "tat_jp_hookah_mesh:tat_jp_hookah_mesh",
+    "tat_jp_misc_01g_mesh (4):tat_jp_misc01g_mesh",
+    "tat_jp_carboniteroom_mesh:tat_jp_carboniteroom_mesh",
+    "brac_drum_01a_mesh:brac_drum_01a_mesh",
+    "tat_jp_misc_01c_mesh:tat_jp_misc01c_mesh",
+    "brac_crate_03d_mesh (1):brac_crate_03d_mesh",
+    "tat_jp_floor_grates_mesh:tat_jp_floor_grates_mesh",
+    "brac_misc_01_mesh:brac_misc_01_mesh",
+    "brac_misc_01_mesh (1):brac_misc_01_mesh",
+    "tat_jp_wall_alcove_mesh:tat_jp_wall_alcove_mesh",
+    "brac_misc_03_mesh:brac_misc_03_mesh",
+    "brac_misc_01_mesh (2):brac_misc_01_mesh",
+    "tat_jp_misc_01e_mesh:tat_jp_misc01e_mesh",
+    "tat_jp_tauntaun_head_mesh (1):tat_jp_tauntaun_head_mesh",
+    "tat_jp_tauntaun_head_mesh:tat_jp_tauntaun_head_mesh",
+    "tat_jp_misc_01g_mesh (6):tat_jp_misc01g_mesh",
+    "tat_jp_wall_arch_01_mesh:tat_jp_wall_arch_01_mesh",
+    "tat_jp_pedastal_mesh:tat_jp_pedastal_mesh",
+    "tat_jp_wall_arch_02_mesh:tat_jp_wall_arch_02_mesh",
+    "tat_jp_misc_01g_mesh (3):tat_jp_misc01g_mesh",
+    "tat_jp_fire_pit_mesh:tat_jp_fire_pit_mesh",
+    "brac_drum_01b_mesh:brac_drum_01b_mesh",
+    "brac_misc_03_mesh (1):brac_misc_03_mesh",
+    "tat_jp_wall_arch_03_mesh:tat_jp_wall_arch_03_mesh",
+    "brac_misc_03_mesh (2):brac_misc_03_mesh",
+    "tat_jp_floor_trapdoor_mesh:tat_jp_floor_trapdoor_mesh",
+    "tat_jp_misc_01g_mesh (7):tat_jp_misc01g_mesh",
+    "tat_jp_misc_01c_mesh (1):tat_jp_misc01c_mesh",
+    "brac_drum_02a_mesh:brac_drum_02a_mesh",
+    "tat_jp_misc_01b_mesh:tat_jp_misc01b_mesh",
+    "tat_jp_backroom_mesh:tat_jp_backroom_mesh",
+    "tat_jp_floor_mesh:tat_jp_floor_mesh",
+    "tat_jp_misc_01a_mesh:tat_jp_misc01a_mesh"
+  ],
+  "mesh_errors": [],
+  "texture_errors": [],
+  "limitations": [
+    "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
+    "_Mask texture slot ignored: shader stripped, semantics unknown.",
+    "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
+    "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
+    "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+  ],
+  "duplicate_env_roots": 0,
+  "renderers_under_scene": {
+    "MeshRenderer_under_scene": 44,
+    "mr_without_mesh": 7,
+    "MeshRenderer_inactive": 1,
+    "SkinnedMeshRenderer_under_scene": 4,
+    "ParticleSystemRenderer_under_scene": 1,
+    "SkinnedMeshRenderer_outside_scene": 71,
+    "MeshRenderer_outside_scene": 5
+  },
+  "skinned_renderers_skipped": [
+    "c3p0_mesh_shadow",
+    "bibfortuna_shadow_mesh",
+    "bibfortuna_mesh",
+    "c3p0_mesh"
+  ],
+  "gameobjects_in_scene": 117,
+  "vertex_color_meshes": [
+    {
+      "mesh": "tat_jp_carboniteroom_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "tat_jp_wall_arch_03_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "unique_meshes": 26,
+  "triangles": 17669,
+  "vertices": 19620,
+  "battle_camera_nodes": [],
+  "nodes_exported": 41,
+  "meshes_exported": 37,
+  "materials": 18,
+  "textures": 18,
+  "glb_bytes": 2585828,
+  "seconds": 0.9
+}

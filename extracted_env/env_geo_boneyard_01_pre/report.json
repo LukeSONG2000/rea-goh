@@ -1,0 +1,152 @@
+{
+  "name": "env_geo_boneyard_01_pre",
+  "kind": "environment",
+  "source_bundle": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_geo_boneyard_01_pre\\86a804cd515a0f000000000000000000\\__data",
+  "dependency_bundles": [
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_geo_boneyard_01_pre\\86a804cd515a0f000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\20c61018549952000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
+  ],
+  "exported_meshes": [
+    "vfx_wispy_sand_01 (1):vfx_force_shield_01",
+    "ground_hill_mesh (7):ground_hill_mesh",
+    "geo_rock_03_mesh (34):geo_rock_03_mesh",
+    "geo_bones_01a_mesh (2):geo_Bones_01a_mesh",
+    "ground_hill_mesh (8):ground_hill_mesh",
+    "geo_bones_01c_mesh:geo_Bones_01c_mesh",
+    "geo_rockwall_01a_mesh (6):geo_rockwall_01a_mesh",
+    "geo_rock_03_mesh (37):geo_rock_03_mesh",
+    "geo_bones_02b_mesh (1):geo_Bones_02b_mesh",
+    "geo_bones_01a_mesh (3):geo_Bones_01a_mesh",
+    "geo_bones_01b_mesh (1):geo_Bones_01b_mesh",
+    "ground_hill_mesh (9):ground_hill_mesh",
+    "geo_bones_01a_mesh (4):geo_Bones_01a_mesh",
+    "geo_rock_03_mesh (32):geo_rock_03_mesh",
+    "geo_bones_02c_mesh (1):geo_Bones_02c_mesh",
+    "geo_rock_03_mesh (33):geo_rock_03_mesh",
+    "geo_rock_03_mesh (35):geo_rock_03_mesh",
+    "ground_hill_mesh (10):ground_hill_mesh",
+    "geo_rock_03_mesh (36):geo_rock_03_mesh",
+    "geo_bones_02b_mesh (2):geo_Bones_02b_mesh",
+    "geo_bones_02c_mesh:geo_Bones_02c_mesh",
+    "geo_rockwall_01a_mesh (7):geo_rockwall_01a_mesh",
+    "geo_bones_01_mesh (2):geo_bones_01_mesh",
+    "geo_bones_01_mesh (1):geo_bones_01_mesh",
+    "vfx_wispy_sand_01:env_vandor_wisp",
+    "hoth_bones_01a_mesh:hoth_bones_mesh",
+    "geo_rockwall_01c_mesh (6):geo_rockwall_01c_mesh",
+    "geo_bones_01b_mesh:geo_Bones_01b_mesh",
+    "geo_rockwall_01a_mesh (8):geo_rockwall_01a_mesh",
+    "geo_rockwall_01b_mesh (7):geo_rockwall_01b_mesh",
+    "geo_rockwall_01b_mesh (6):geo_rockwall_01b_mesh",
+    "geo_rockwall_01c_mesh (7):geo_rockwall_01c_mesh",
+    "geo_bones_02a_mesh:geo_Bones_02a_mesh",
+    "geo_bones_01a_mesh (1):geo_Bones_01a_mesh",
+    "geo_boneyard_ground_01_mesh:geo_boneyard_ground_01_mesh",
+    "geo_bones_01a_mesh (6):geo_Bones_01a_mesh",
+    "geo_rockwall_01b_mesh (5):geo_rockwall_01b_mesh",
+    "geo_bones_01a_mesh (5):geo_Bones_01a_mesh",
+    "geo_bones_01c_mesh (1):geo_Bones_01c_mesh",
+    "geo_rockwall_01c_mesh (8):geo_rockwall_01c_mesh",
+    "geo_bones_01_mesh:geo_bones_01_mesh"
+  ],
+  "mesh_errors": [],
+  "texture_errors": [],
+  "limitations": [
+    "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
+    "_Mask texture slot ignored: shader stripped, semantics unknown.",
+    "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
+    "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
+    "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+  ],
+  "duplicate_env_roots": 0,
+  "renderers_under_scene": {
+    "MeshRenderer_under_scene": 47,
+    "ParticleSystemRenderer_under_scene": 13,
+    "mr_without_mesh": 6,
+    "SpriteRenderer_under_scene": 2,
+    "SkinnedMeshRenderer_outside_scene": 71,
+    "MeshRenderer_outside_scene": 5
+  },
+  "skinned_renderers_skipped": [],
+  "gameobjects_in_scene": 68,
+  "vertex_color_meshes": [
+    {
+      "mesh": "geo_rock_03_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "geo_Bones_01a_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "geo_Bones_01c_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "geo_Bones_01b_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "geo_Bones_01a_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "unique_meshes": 18,
+  "triangles": 24329,
+  "vertices": 21088,
+  "battle_camera_nodes": [],
+  "nodes_exported": 45,
+  "meshes_exported": 41,
+  "materials": 11,
+  "textures": 11,
+  "glb_bytes": 1771956,
+  "seconds": 0.9
+}

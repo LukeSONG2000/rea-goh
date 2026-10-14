@@ -1,0 +1,103 @@
+{
+  "name": "env_empire_bridge_orig_pre",
+  "kind": "environment",
+  "source_bundle": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_empire_bridge_orig_pre\\b8a87852672510000000000000000000\\__data",
+  "dependency_bundles": [
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_empire_bridge_orig_pre\\b8a87852672510000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\20c61018549952000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
+  ],
+  "exported_meshes": [
+    "emp_bridge_command_pit_01_mesh (1):emp_bridge_command_pit_mesh",
+    "emp_bridge_command_pit_01_mesh:emp_bridge_command_pit_mesh",
+    "console_03_mesh (4):console_03_mesh",
+    "console_03_mesh (5):console_03_mesh",
+    "emp_wall_03_mesh (1):emp_wall_03_mesh",
+    "emp_bridge_ceiling_01a_mesh (1):emp_bridge_ceiling_01_mesh",
+    "emp_bridge_ceiling_01a_mesh:emp_bridge_ceiling_01_mesh",
+    "console_02_mesh (2):console_02_mesh",
+    "console_03_mesh (2):console_03_mesh",
+    "emp_wall_01_mesh (2):emp_wall_01_mesh",
+    "emp_wall_03_mesh:emp_wall_03_mesh",
+    "emp_bridge_console_02_mesh:emp_console_02_mesh",
+    "console_03_mesh (7):console_03_mesh",
+    "emp_bridge_window_01_mesh:emp_bridge_window_01_mesh",
+    "emp_bridge_floor_01_mesh:emp_bridge_floor_mesh",
+    "console_02_mesh (2):console_02_mesh",
+    "console_03_mesh (4):console_03_mesh",
+    "console_02_mesh (1):console_02_mesh",
+    "bridge_pitfloor_mesh (2):bridge_pitfloor_mesh",
+    "emp_bridge_floor_01_mesh (1):emp_bridge_floor_mesh",
+    "emp_wall_01_mesh (1):emp_wall_01_mesh",
+    "emp_consoles_01_mesh:emp_consoles_01_mesh",
+    "console_03_mesh (6):console_03_mesh",
+    "emp_bridge_ceiling_01b_mesh:emp_bridge_ceiling_02_mesh",
+    "emp_arch_03_mesh (2):emp_arch_03_mesh",
+    "emp_arch_02b_mesh (2):emp_arch_02b_mesh",
+    "emp_bridge_ceiling_01b_mesh (1):emp_bridge_ceiling_02_mesh",
+    "ship_tie_fighter_mesh:ship_tie_fighter_mesh",
+    "emp_arch_02b_mesh:emp_arch_02b_mesh",
+    "console_03_mesh (3):console_03_mesh",
+    "emp_wall_01_mesh:emp_wall_01_mesh",
+    "emp_wall_03_mesh (2):emp_wall_03_mesh",
+    "emp_pillar_01_mesh:emp_pillar_01_mesh",
+    "emp_arch_03_mesh:emp_arch_03_mesh",
+    "emp_arch_02b_mesh (1):emp_arch_02b_mesh",
+    "emp_arch_03_mesh (1):emp_arch_03_mesh",
+    "console_03_mesh (5):console_03_mesh",
+    "console_02_mesh (3):console_02_mesh",
+    "ship_tie_fighter_mesh:ship_tie_fighter_mesh"
+  ],
+  "mesh_errors": [
+    "starSkyBox 1_p:starSkyBox: TypeError object of type 'NoneType' has no len()\nTraceback (most recent call last):\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\export_env.py\", line 430, in export\n    mesh_idx, _ = self.export_mesh_for_renderer(\n                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        mesh, None, mats, se.go_name(mesh))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\swgoh_extract.py\", line 534, in export_mesh_for_renderer\n    prim = self.export_mesh_primitive(mesh, h, mi, n_bones=len(smr_bones or []))\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\swgoh_extract.py\", line 432, in export_mesh_primitive\n    if len(h.m_Normals) == vc:\n       ~~~^^^^^^^^^^^^^\nTypeError: object of type 'NoneType' has no len()\n",
+    "starSkyBox 1_p:starSkyBox: TypeError object of type 'NoneType' has no len()\nTraceback (most recent call last):\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\export_env.py\", line 430, in export\n    mesh_idx, _ = self.export_mesh_for_renderer(\n                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        mesh, None, mats, se.go_name(mesh))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\swgoh_extract.py\", line 534, in export_mesh_for_renderer\n    prim = self.export_mesh_primitive(mesh, h, mi, n_bones=len(smr_bones or []))\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\swgoh_extract.py\", line 432, in export_mesh_primitive\n    if len(h.m_Normals) == vc:\n       ~~~^^^^^^^^^^^^^\nTypeError: object of type 'NoneType' has no len()\n"
+  ],
+  "texture_errors": [],
+  "limitations": [
+    "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
+    "_Mask texture slot ignored: shader stripped, semantics unknown.",
+    "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
+    "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
+    "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+  ],
+  "duplicate_env_roots": 0,
+  "renderers_under_scene": {
+    "SpriteRenderer_under_scene": 2,
+    "ParticleSystemRenderer_inactive": 22,
+    "MeshRenderer_under_scene": 43,
+    "ParticleSystemRenderer_under_scene": 79,
+    "SpriteRenderer_inactive": 8,
+    "mr_without_mesh": 2,
+    "SkinnedMeshRenderer_outside_scene": 71,
+    "MeshRenderer_outside_scene": 5
+  },
+  "skinned_renderers_skipped": [],
+  "gameobjects_in_scene": 165,
+  "vertex_color_meshes": [
+    {
+      "mesh": "emp_bridge_ceiling_01_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "unique_meshes": 17,
+  "triangles": 30628,
+  "vertices": 45521,
+  "battle_camera_nodes": [],
+  "nodes_exported": 48,
+  "meshes_exported": 39,
+  "materials": 15,
+  "textures": 15,
+  "glb_bytes": 2454340,
+  "seconds": 1.3
+}

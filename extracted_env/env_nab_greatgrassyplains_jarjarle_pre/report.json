@@ -1,0 +1,162 @@
+{
+  "name": "env_nab_greatgrassyplains_jarjarle_pre",
+  "kind": "environment",
+  "source_bundle": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_nab_greatgrassyplains_jarjarle_pre\\a63d0270a61f23000000000000000000\\__data",
+  "dependency_bundles": [
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_nab_greatgrassyplains_jarjarle_pre\\a63d0270a61f23000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\20c61018549952000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
+  ],
+  "exported_meshes": [
+    "veh_mtt_01:veh_mtt_chassis_mesh",
+    "veh_aat_turret_mesh:veh_aat_turret_mesh",
+    "b1_rubble_02b:b1_rubble_02b_mesh",
+    "veh_aat_canonbarrel_mesh:veh_aat_canonbarrel_mesh",
+    "veh_mtt_upper_hatch_mesh:veh_mtt_upper_hatch_mesh",
+    "nab_elders_statue_01:nab_elders_statue_01_mesh",
+    "veh_aat_canonmain_mesh:veh_aat_canonmain_mesh",
+    "kash_flora_grass_01d (2):kas_forest_grass_01d_mesh",
+    "GunganShield_glow:default",
+    "veh_aat_01 3:veh_aat_chassis_mesh",
+    "GunganShield_edge:vfx_shield_raid_rim",
+    "veh_aat_canonmain_mesh:veh_aat_canonmain_mesh",
+    "nab_elders_statue_02:nab_elders_statue_01_mesh",
+    "veh_aat_01:veh_aat_chassis_mesh",
+    "b1_rubble_02b (1):b1_rubble_02b_mesh",
+    "veh_mtt_upper_hatch_mesh:veh_mtt_upper_hatch_mesh",
+    "veh_aat_canonmain_mesh:veh_aat_canonmain_mesh",
+    "naboo_grasslands_cinehill 01:Plane",
+    "naboo_grasslands_cinehill 02:Plane",
+    "veh_aat_canonbarrel_mesh:veh_aat_canonbarrel_mesh",
+    "veh_mtt_lower_hatch_mesh:veh_mtt_lower_hatch_mesh",
+    "brac_skycylinder_mesh:bra_skycyllinder_mesh",
+    "veh_aat_canonbarrel_mesh:veh_aat_canonbarrel_mesh",
+    "b1_rubble_01a (1):b1_rubble_01a_mesh",
+    "nab_great_grassy_plains_ground:nab_great_grassy_plains_ground_mesh",
+    "veh_mtt_01:veh_mtt_chassis_mesh",
+    "veh_aat_turret_mesh:veh_aat_turret_mesh",
+    "veh_aat_01 4:veh_aat_chassis_mesh",
+    "b1_rubble_01b:b1_rubble_01b_mesh",
+    "veh_mtt_interior_mesh:veh_mtt_interior_mesh",
+    "kash_flora_grass_01d (1):kas_forest_grass_01d_mesh",
+    "veh_aat_turret_mesh:veh_aat_turret_mesh",
+    "veh_mtt_lower_hatch_mesh:veh_mtt_lower_hatch_mesh",
+    "kash_flora_grass_01d:kas_forest_grass_01d_mesh",
+    "b1_rubble_04a:b1_rubble_04a_mesh",
+    "b1_rubble_01a:b1_rubble_01a_mesh"
+  ],
+  "mesh_errors": [],
+  "texture_errors": [],
+  "limitations": [
+    "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
+    "_Mask texture slot ignored: shader stripped, semantics unknown.",
+    "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
+    "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
+    "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+  ],
+  "duplicate_env_roots": 0,
+  "renderers_under_scene": {
+    "MeshRenderer_inactive": 2,
+    "MeshRenderer_under_scene": 50,
+    "ParticleSystemRenderer_under_scene": 31,
+    "mr_without_mesh": 13,
+    "SpriteRenderer_under_scene": 1,
+    "mr_shadow_go": 1,
+    "SkinnedMeshRenderer_outside_scene": 71,
+    "MeshRenderer_outside_scene": 5
+  },
+  "skinned_renderers_skipped": [],
+  "gameobjects_in_scene": 107,
+  "vertex_color_meshes": [
+    {
+      "mesh": "veh_mtt_chassis_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "b1_rubble_02b_mesh",
+      "rgb_mean": [
+        0.1415,
+        0.1415,
+        0.1415
+      ],
+      "rgb_max": [
+        0.1429,
+        0.1429,
+        0.1429
+      ]
+    },
+    {
+      "mesh": "veh_aat_chassis_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0183
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "mesh": "b1_rubble_01a_mesh",
+      "rgb_mean": [
+        0.1416,
+        0.1416,
+        0.1416
+      ],
+      "rgb_max": [
+        0.1429,
+        0.1429,
+        0.1429
+      ]
+    },
+    {
+      "mesh": "b1_rubble_01b_mesh",
+      "rgb_mean": [
+        0.142,
+        0.142,
+        0.142
+      ],
+      "rgb_max": [
+        0.1429,
+        0.1429,
+        0.1429
+      ]
+    },
+    {
+      "mesh": "b1_rubble_04a_mesh",
+      "rgb_mean": [
+        0.1414,
+        0.1414,
+        0.1414
+      ],
+      "rgb_max": [
+        0.1429,
+        0.1429,
+        0.1429
+      ]
+    }
+  ],
+  "unique_meshes": 19,
+  "triangles": 23064,
+  "vertices": 27156,
+  "battle_camera_nodes": [],
+  "nodes_exported": 48,
+  "meshes_exported": 36,
+  "materials": 13,
+  "textures": 12,
+  "glb_bytes": 3666200,
+  "seconds": 1.3
+}

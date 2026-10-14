@@ -1,0 +1,145 @@
+{
+  "name": "env_tat_jthgl_p03_pre",
+  "kind": "environment",
+  "source_bundle": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_tat_jthgl_p03_pre\\8370a363cce70e000000000000000000\\__data",
+  "dependency_bundles": [
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_tat_jthgl_p03_pre\\8370a363cce70e000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\20c61018549952000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
+  ],
+  "exported_meshes": [
+    "tat_ranc_ground_01c_mesh:tat_ranc_ground_01c",
+    "tat_ranc_rock_01 (6):tat_ranc_rock_01_mesh",
+    "tat_ranc_threshold:tat_ranc_threshold_01_mesh",
+    "tat_ranc_button_01:tat_ranc_button_mesh",
+    "tat_ranc_ground_01a_mesh:tat_ranc_ground_01a_mesh",
+    "tat_ranc_pebbles_01_mesh:tat_ranc_pebbles_01_mesh",
+    "tat_ranc_rockcave (1):tat_ranc_rockcave_mesh",
+    "tat_ranc_rockcave (6):tat_ranc_rockcave_mesh",
+    "tat_ranc_beams:tat_ranc_beams_mesh",
+    "tat_ranc_rock_03 (7):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_03 (6):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_02 (3):tat_ranc_rock_02_mesh",
+    "tat_ranc_rock_01 (5):tat_ranc_rock_01_mesh",
+    "tat_ranc_gate_01:tat_ranc_gate_01_mesh",
+    "tat_ranc_rock_01:tat_ranc_rock_01_mesh",
+    "tat_ranc_rock_03 (8):tat_ranc_rock_03_mesh",
+    "tat_ranc_pebbles_01_mesh (2):tat_ranc_pebbles_01_mesh",
+    "tat_ranc_rockarch:jak_rock01_mesh007",
+    "tat_ranc_pebbles_01_mesh (2):tat_ranc_pebbles_01_mesh",
+    "tat_ranc_rock_01:tat_ranc_rock_01_mesh",
+    "tat_ranc_rock_03:tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_02 (2):tat_ranc_rock_02_mesh",
+    "tat_ranc_rock_03 (5):tat_ranc_rock_03_mesh",
+    "tat_ranc_ground_01b_mesh:tat_ranc_ground_01b",
+    "tat_ranc_rock_01 (2):tat_ranc_rock_01_mesh",
+    "tat_ranc_rockcave (7):tat_ranc_rockcave_mesh",
+    "tat_ranc_carvedarch_01:Object013",
+    "tat_ranc_rock_02 (1):tat_ranc_rock_02_mesh",
+    "tat_ranc_rock_03 (8):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_03 (1):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_01 (1):tat_ranc_rock_01_mesh",
+    "tat_ranc_pebbles_01_mesh (1):tat_ranc_pebbles_01_mesh",
+    "tat_ranc_pebbles_01_mesh (2):tat_ranc_pebbles_01_mesh",
+    "tat_ranc_rock_03 (4):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_03 (7):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_01 (8):tat_ranc_rock_01_mesh",
+    "tat_ranc_rock_03 (2):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_03 (8):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_02 (5):tat_ranc_rock_02_mesh",
+    "tat_ranc_rock_01 (7):tat_ranc_rock_01_mesh",
+    "tat_ranc_rock_02 (4):tat_ranc_rock_02_mesh",
+    "tat_ranc_rockcave (5):tat_ranc_rockcave_mesh",
+    "tat_ranc_rock_02:tat_ranc_rock_02_mesh",
+    "tat_ranc_rock_01 (9):tat_ranc_rock_01_mesh",
+    "tat_ranc_rock_03 (7):tat_ranc_rock_03_mesh",
+    "tat_ranc_rock_03 (3):tat_ranc_rock_03_mesh"
+  ],
+  "mesh_errors": [],
+  "texture_errors": [],
+  "limitations": [
+    "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
+    "_Mask texture slot ignored: shader stripped, semantics unknown.",
+    "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
+    "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
+    "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+  ],
+  "duplicate_env_roots": 0,
+  "renderers_under_scene": {
+    "MeshRenderer_under_scene": 50,
+    "ParticleSystemRenderer_inactive": 32,
+    "ParticleSystemRenderer_under_scene": 14,
+    "mr_without_mesh": 4,
+    "MeshRenderer_inactive": 12,
+    "SkinnedMeshRenderer_outside_scene": 71,
+    "MeshRenderer_outside_scene": 5
+  },
+  "skinned_renderers_skipped": [],
+  "gameobjects_in_scene": 123,
+  "vertex_color_meshes": [
+    {
+      "mesh": "tat_ranc_threshold_01_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "mesh": "tat_ranc_button_mesh",
+      "rgb_mean": [
+        0.7367,
+        0.7367,
+        0.7367
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "mesh": "tat_ranc_gate_01_mesh",
+      "rgb_mean": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "mesh": "Object013",
+      "rgb_mean": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "unique_meshes": 14,
+  "triangles": 17370,
+  "vertices": 20380,
+  "battle_camera_nodes": [],
+  "nodes_exported": 49,
+  "meshes_exported": 46,
+  "materials": 6,
+  "textures": 5,
+  "glb_bytes": 1704380,
+  "seconds": 1.4
+}

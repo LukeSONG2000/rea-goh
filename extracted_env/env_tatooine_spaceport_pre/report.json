@@ -1,0 +1,108 @@
+{
+  "name": "env_tatooine_spaceport_pre",
+  "kind": "environment",
+  "source_bundle": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_tatooine_spaceport_pre\\2c88aedcfed40a000000000000000000\\__data",
+  "dependency_bundles": [
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_tatooine_spaceport_pre\\2c88aedcfed40a000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\20c61018549952000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
+    "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
+  ],
+  "exported_meshes": [
+    "tat_crate_a1_01_mesh:tat_crate_ a1_01_mesh",
+    "spaceport_striplight_mesh:spaceport_striplight_mesh",
+    "tat_ventpipe_01_mesh:tat_ventpipe_01_mesh",
+    "tat_vent_01a_mesh:tat_vent_01a_mesh",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "spaceport_combatground_mesh:spaceport_combatground_mesh",
+    "spaceport_outerwall_mesh:spaceport_outerwall_mesh",
+    "spaceport_striplight_mesh:spaceport_striplight_mesh",
+    "tat_spaceport_misc_a1_02_mesh:tat_hangar_misc_a1_02_mesh",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "millenium_falcon_prop_mesh:millenium_falcon_prop_mesh",
+    "vfx_falcon_steam_02:pPlane1",
+    "spaceport_outerwall_mesh:spaceport_outerwall_mesh",
+    "tat_vent_01a_mesh:tat_vent_01a_mesh",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "vfx_falcon_steam_02:pPlane1",
+    "vfx_falcon_steam_02:pPlane1",
+    "tat_spaceport_misc_a1_02_mesh:tat_hangar_misc_a1_02_mesh",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "tat_ventpipe_01_mesh:tat_ventpipe_01_mesh",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "spaceport_striplight_mesh:spaceport_striplight_mesh",
+    "tat_spaceport_misc_a1_03_mesh:tat_hangar_misc_a1_03_mesh",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "tat_wallpanel_03_mesh:tat_wallpanel_03_mesh",
+    "tat_wallpanel_07_mesh:tat_wallpanel_07_mesh",
+    "tat_spaceport_misc_a1_04_mesh:tat_hangar_misc_a1_04_mesh",
+    "tat_ventpipe_01_mesh:tat_ventpipe_01_mesh",
+    "spaceport_outerwallnook_mesh:spaceport_outerwallnook_mesh",
+    "vfx_falcon_steam_02:pPlane1",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "tat_crate_a1_01_mesh:tat_crate_ a1_01_mesh",
+    "tat_crate_a1_01_mesh:tat_crate_ a1_01_mesh",
+    "vfx_smoke_bg:pPlane1",
+    "spaceport_outerwall_mesh:spaceport_outerwall_mesh",
+    "spaceport_outerwallnook_mesh:spaceport_outerwallnook_mesh",
+    "tat_ventpipe_01_mesh:tat_ventpipe_01_mesh",
+    "tat_crate_a1_01_mesh:tat_crate_ a1_01_mesh",
+    "tat_crate_a1_01_mesh:tat_crate_ a1_01_mesh",
+    "tat_spaceport_misc_a1_04_mesh:tat_hangar_misc_a1_04_mesh",
+    "tat_crate_a1_02_mesh:tat_crate_a1_02_mesh",
+    "tat_crate_a1_01_mesh:tat_crate_ a1_01_mesh",
+    "spaceport_striplight_mesh:spaceport_striplight_mesh",
+    "tat_spaceport_misc_a1_03_mesh:tat_hangar_misc_a1_03_mesh"
+  ],
+  "mesh_errors": [],
+  "texture_errors": [],
+  "limitations": [
+    "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
+    "_Mask texture slot ignored: shader stripped, semantics unknown.",
+    "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
+    "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
+    "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+  ],
+  "duplicate_env_roots": 0,
+  "dropped_flip_layout": true,
+  "renderers_under_scene": {
+    "ParticleSystemRenderer_under_scene": 20,
+    "MeshRenderer_under_scene": 46,
+    "MeshRenderer_inactive": 40,
+    "ParticleSystemRenderer_inactive": 1,
+    "mr_without_mesh": 1,
+    "SkinnedMeshRenderer_outside_scene": 71,
+    "MeshRenderer_outside_scene": 5
+  },
+  "skinned_renderers_skipped": [],
+  "gameobjects_in_scene": 121,
+  "vertex_color_meshes": [
+    {
+      "mesh": "spaceport_combatground_mesh",
+      "rgb_mean": [
+        0.1235,
+        0.0173,
+        0.0
+      ],
+      "rgb_max": [
+        0.6667,
+        0.1333,
+        0.0
+      ]
+    }
+  ],
+  "unique_meshes": 15,
+  "triangles": 6939,
+  "vertices": 11116,
+  "battle_camera_nodes": [
+    "Std Cam"
+  ],
+  "nodes_exported": 50,
+  "meshes_exported": 45,
+  "materials": 11,
+  "textures": 11,
+  "glb_bytes": 1163128,
+  "seconds": 0.7
+}
