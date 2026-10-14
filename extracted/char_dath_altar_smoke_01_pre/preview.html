@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>char_dath_altar_smoke_01_pre — SWGoH 模型预览</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;font-family:Segoe UI,system-ui,sans-serif;background:#15171c;color:#dde}
+  #bar{position:fixed;right:12px;top:12px;z-index:10;display:flex;gap:6px}
+  button{padding:6px 12px;border-radius:6px;border:1px solid #3a4050;background:#1b1e24cc;color:#ccd;
+         font-size:12px;cursor:pointer}
+  button:hover{background:#2a3040;color:#fff}
+  button.on{background:#31415f;color:#fff;border-color:#5b7bd5}
+  #info{position:fixed;left:12px;top:12px;font-size:12px;color:#889;line-height:1.5;z-index:10;
+        background:#1b1e24aa;padding:8px 10px;border-radius:6px}
+  #hint{position:fixed;bottom:10px;right:14px;font-size:11px;color:#667;z-index:10}
+  #drop{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;
+        font-size:22px;color:#dde;z-index:99;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="bar">
+  <button id="bWire">线框 (W)</button>
+  <button id="bBone">骨骼 (B)</button>
+  <button id="bGrid">网格 (G)</button>
+  <button id="bTurn">转台 (空格)</button>
+  <button id="bReset">复位 (R)</button>
+  <button id="bShot">截图</button>
+</div>
+<div id="info">加载中…</div>
+<div id="hint">拖入任意 .glb 可替换预览</div>
+<div id="drop">松开以加载模型</div>
+<script src="../../viewer/vendor/three.min.js"></script>
+<script src="../../viewer/vendor/GLTFLoader.js"></script>
+<script src="../../viewer/vendor/OrbitControls.js"></script>
+<script>
+'use strict';
+const NAME = "char_dath_altar_smoke_01_pre";
+const B64 = "Z2xURgIAAADUAwAAuAMAAEpTT057ImFzc2V0Ijp7InZlcnNpb24iOiIyLjAiLCJnZW5lcmF0b3IiOiJzd2dvaF9leHRyYWN0LnB5In0sInNjZW5lIjowLCJzY2VuZXMiOlt7Im5vZGVzIjpbMF19XSwiYnVmZmVycyI6W3siYnl0ZUxlbmd0aCI6MH1dLCJub2RlcyI6W3sibmFtZSI6InVuaXQuY2hhcl9kYXRoX2FsdGFyX3Ntb2tlXzAxX3ByZSIsImNoaWxkcmVuIjpbMV19LHsibmFtZSI6IlNjYWxlciIsImNoaWxkcmVuIjpbMiwzLDVdfSx7Im5hbWUiOiJkYXRoX2FsdGFyXzAxX21lc2giLCJyb3RhdGlvbiI6WzguMTQ2MDM0MjQ3MTQ3MzI3ZS0wOCwtMC4wLC0wLjAsMS4wXSwic2NhbGUiOlswLjEwMDAwMDAwMTQ5MDExNjEyLDAuMTAwMDAwMDAxNDkwMTE2MTIsMC4xMDAwMDAwMDE0OTAxMTYxMl19LHsibmFtZSI6InNtb2tlIiwidHJhbnNsYXRpb24iOlswLjEwOTk5OTMxMzk1MDUzODY0LDAuODQ2NDMxMzc0NTQ5ODY1NywwLjEwMDAwMDE0MzA1MTE0NzQ2XSwicm90YXRpb24iOlstMC43MDcxMDY4Mjg2ODk1NzUyLC0xLjQ5MDExNjExOTM4NDc2NTZlLTA4LC0xLjQ5MDExNjExOTM4NDc2NTZlLTA4LDAuNzA3MTA2ODI4Njg5NTc1Ml0sImNoaWxkcmVuIjpbNF19LHsibmFtZSI6IndoaXNwIiwidHJhbnNsYXRpb24iOlstMC4wLDAuMTU5OTk5OTk2NDIzNzIxMywtMC4wXSwicm90YXRpb24iOlstMC4wLDAuMCwtMS4yNjQ0MDQ5NzE4MzQ2NjVlLTA3LDEuMF19LHsibmFtZSI6IkhlYWQiLCJ0cmFuc2xhdGlvbiI6Wy0wLjAsMjcuNjEwMDAwNjEwMzUxNTYyLDAuMF0sInJvdGF0aW9uIjpbOC4xNDYwMzQyNDcxNDczMjdlLTA4LDAuMCwwLjAsMS4wXSwic2NhbGUiOlswLjEwMDAwMDAwMTQ5MDExNjEyLDAuMTAwMDAwMDAxNDkwMTE2MTIsMC4xMDAwMDAwMDE0OTAxMTYxMl19XSwic2FtcGxlcnMiOlt7Im1hZ0ZpbHRlciI6OTcyOSwibWluRmlsdGVyIjo5OTg3LCJ3cmFwUyI6MTA0OTcsIndyYXBUIjoxMDQ5N31dfSAgAAAAAEJJTgA=";
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x15171c);
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.01, 500);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x3a3226, 0.9));
+const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(3,6,4); scene.add(key);
+const rim = new THREE.DirectionalLight(0x88aaff, 0.5); rim.position.set(-4,3,-5); scene.add(rim);
+const grid = new THREE.GridHelper(10, 20, 0x334, 0x223);
+grid.position.y = 0.001; scene.add(grid);
+
+let model = null, bonesHelper = null, wire = false, turn = false;
+
+function frame(obj){
+  const box = new THREE.Box3().setFromObject(obj);
+  if (box.isEmpty()) return;
+  const size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+  const r = Math.max(size.x, size.y, size.z) || 1;
+  camera.near = r/100; camera.far = r*50; camera.updateProjectionMatrix();
+  controls.target.copy(c);
+  camera.position.set(c.x + r*0.9, c.y + r*0.5, c.z + r*1.4);
+}
+function setWire(w){
+  wire = w; document.getElementById('bWire').classList.toggle('on', w);
+  model && model.traverse(o=>{ if(o.isMesh) o.material.wireframe = w; });
+}
+function setBones(b){
+  document.getElementById('bBone').classList.toggle('on', b);
+  if (bonesHelper) bonesHelper.visible = b;
+}
+function loadBuffer(buf, name){
+  new THREE.GLTFLoader().parse(buf, '', gltf=>{
+    if (model) scene.remove(model);
+    if (bonesHelper) scene.remove(bonesHelper);
+    model = gltf.scene; bonesHelper = null;
+    scene.add(model);
+    let tris=0, verts=0, mats=new Set(), bones=0, skinned=0;
+    model.traverse(o=>{
+      if (o.isMesh){
+        o.material.side = THREE.DoubleSide;
+        const g=o.geometry; verts += g.attributes.position.count;
+        tris += (g.index? g.index.count : g.attributes.position.count)/3;
+        [].concat(o.material).forEach(m=>mats.add(m.uuid));
+        if (o.isSkinnedMesh) skinned++;
+        o.material.wireframe = wire;
+      }
+      if (o.isBone) bones++;
+    });
+    if (bones){ bonesHelper = new THREE.SkeletonHelper(model); scene.add(bonesHelper); setBones(false); }
+    frame(model);
+    document.getElementById('info').innerHTML =
+      `<b style="color:#cdd">${name}</b><br>` +
+      `三角面 ${(tris|0).toLocaleString()} · 顶点 ${verts.toLocaleString()}<br>` +
+      `材质 ${mats.size} · 骨骼 ${bones} · 蒙皮体 ${skinned}`;
+  }, err=>{ document.getElementById('info').textContent = '解析失败: '+err; });
+}
+// embedded model
+const bin = atob(B64), bytes = new Uint8Array(bin.length);
+for (let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+loadBuffer(bytes.buffer, NAME);
+
+document.getElementById('bWire').onclick = ()=>setWire(!wire);
+document.getElementById('bBone').onclick = ()=>setBones(!(bonesHelper&&bonesHelper.visible));
+document.getElementById('bGrid').onclick = function(){ grid.visible=!grid.visible; this.classList.toggle('on',grid.visible); };
+document.getElementById('bTurn').onclick = function(){ turn=!turn; this.classList.toggle('on',turn); };
+document.getElementById('bReset').onclick = ()=>model&&frame(model);
+document.getElementById('bShot').onclick = ()=>{
+  renderer.render(scene,camera);
+  const a=document.createElement('a'); a.download=NAME+'.png';
+  a.href=renderer.domElement.toDataURL('image/png'); a.click();
+};
+addEventListener('keydown',e=>{
+  if (e.target.tagName==='INPUT') return;
+  const k=e.key.toLowerCase();
+  if(k==='w') setWire(!wire);
+  if(k==='g') document.getElementById('bGrid').click();
+  if(k==='b') setBones(!(bonesHelper&&bonesHelper.visible));
+  if(k==='r') model&&frame(model);
+  if(k===' '){ e.preventDefault(); document.getElementById('bTurn').click(); }
+});
+addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+const drop = document.getElementById('drop');
+addEventListener('dragover',e=>{ e.preventDefault(); drop.style.display='flex'; });
+addEventListener('dragleave',e=>{ if(e.clientX<=0||e.clientY<=0) drop.style.display='none'; });
+addEventListener('drop',e=>{
+  e.preventDefault(); drop.style.display='none';
+  const f=[...e.dataTransfer.files].find(f=>f.name.toLowerCase().endsWith('.glb'));
+  if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>loadBuffer(new Uint8Array(r.result).buffer, f.name);
+  r.readAsArrayBuffer(f);
+});
+renderer.setAnimationLoop(()=>{ controls.autoRotate=turn; controls.autoRotateSpeed=2;
+  controls.update(); renderer.render(scene,camera); });
+</script>
+</body>
+</html>
