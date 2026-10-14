@@ -79,8 +79,13 @@ from muscle_clip import (  # noqa: E402
 BUNDLE_ROOT = r"C:\Users\PPfavorite\AppData\LocalLow\Unity\Electronic Arts_SWGoH"
 CHAR = "char_jynerso_pre"
 CLIP_NAME = "hmn_homescrn_any01"
-GLB_IN = os.path.join(ROOT, "extracted", CHAR, f"{CHAR}.glb")
-GLB_OUT = os.path.join(ROOT, "extracted", CHAR, f"{CHAR}.anim.glb")
+# clips embedded in every batch .anim.glb (retargeted per char):
+#   any01   -- home-screen idle (what the game shows on the character page)
+#   taunt1  -- taunt gesture, more demonstrative than an idle
+BATCH_CLIPS = ["hmn_homescrn_any01", "hmn_spcl_taunt1"]
+
+_CLIP_CACHE = {}  # clip name -> parsed clip dict (shared_animationcontainer is
+                  # the same 178-clip bundle for every character: parse once)
 
 # ---------------------------------------------------------------------------
 # Unity humanoid tables
@@ -318,12 +323,16 @@ def build_joint_table(av):
 
 
 def load_clip(path, name):
+    if name in _CLIP_CACHE:
+        return _CLIP_CACHE[name]
     env = UnityPy.load(path)
     for obj in env.objects:
         if obj.type.name != "AnimationClip":
             continue
         if obj.read_typetree()["m_Name"] == name:
-            return parse_animation_clip(obj.get_raw_data())
+            clip = parse_animation_clip(obj.get_raw_data())
+            _CLIP_CACHE[name] = clip
+            return clip
     raise SystemExit(f"clip {name} not found in {path}")
 
 
@@ -553,119 +562,190 @@ def make_fk(js, pose):
 # ---------------------------------------------------------------------------
 
 
-def main():
-    probe = "--probe" in sys.argv
+class RigMismatch(Exception):
+    """Avatar leaf names don't follow the game-wide rig naming convention."""
 
-    av = load_avatar(UnityPy.load(latest_bundle(CHAR)))
+
+def export_char(char, clip_names, probe=False, verbose=True):
+    """Convert `clip_names` onto `char`'s humanoid rig and write
+    extracted/<char>/<char>.anim.glb (all clips in one glTF animations array).
+
+    Raises SystemExit (no populated Avatar / missing assets) or RigMismatch
+    (leaf naming doesn't match the convention -> retargeting unsafe)."""
+    glb_in = os.path.join(ROOT, "extracted", char, f"{char}.glb")
+    glb_out = os.path.join(ROOT, "extracted", char, f"{char}.anim.glb")
+    if not os.path.exists(glb_in):
+        raise SystemExit(f"missing {glb_in} (run swgoh_extract.py first)")
+
+    av = load_avatar(UnityPy.load(latest_bundle(char)))
     joints = build_joint_table(av)
-    human_scale = av["m_Avatar"]["m_Human"]["data"]["m_Scale"]
     tos = {int(h): p for h, p in av["m_TOS"]}
 
-    clip = load_clip(latest_bundle("shared_animationcontainer"), CLIP_NAME)
-
-    print(f"avatar: {av['m_Name']}  humanScale={human_scale:.6f}")
-    print(f"clip: {CLIP_NAME}  stop={clip['muscle_clip']['stop_time']:.4f}s")
-
-    # sanity: the avatar's human map must resolve to the rig's naming scheme
+    # sanity: the avatar's human map must resolve to the rig's naming scheme,
+    # otherwise muscle angles would be retargeted onto wrong nodes.
+    # Accepted variants (all verified in the 0.40.7 cache): case differences
+    # (rancor 'left_hipJNT'), and wrist leaves named for the weapon joint some
+    # rigs hang the hand on ('*_wpn_offsetJNT', '*_wpnJNT') -- the retarget
+    # itself always uses the avatar's own m_TOS leaf, never these constants.
+    _HAND_ALT = ("wrstJNT", "wpn_offsetJNT", "wpnJNT")
     for bone, leaf in HUMAN_BONE_TO_RIG_LEAF.items():
         got = joints.get(bone, {}).get("leaf")
-        if got is not None and got != leaf:
-            raise SystemExit(f"human bone {bone}: avatar leaf {got!r} != expected {leaf!r}")
+        if got is None or got == leaf:
+            continue
+        if got.lower() == leaf.lower():
+            continue
+        if bone.endswith("Hand") and got.lower().endswith(tuple(a.lower() for a in _HAND_ALT)):
+            continue
+        raise RigMismatch(f"human bone {bone}: avatar leaf {got!r} != expected {leaf!r}")
 
-    ev = MusclePoseEvaluator(clip, joints, desc_pelvis_q=desc_pelvis_q(av))
-    n_frames = int(round(clip["muscle_clip"]["stop_time"] * ev.rate)) + 1
-    times = [i / ev.rate for i in range(n_frames)]
-    driven = sorted(set(s for sm in ev.joint_slots.values() for s in sm))
-    print(f"frames: {n_frames} @ {ev.rate:.0f}Hz")
-    print(f"driven muscle slots: {driven}")
+    pelvis_q = desc_pelvis_q(av)
+    anim_bundle = latest_bundle("shared_animationcontainer")
 
-    poses = [ev.evaluate(t) for t in times]
-
-    # diagnostics: per-joint max rotation delta vs the GLB rest pose
-    js, binbuf = load_glb(GLB_IN)
+    js, binbuf = load_glb(glb_in)
     idx = node_index_by_name(js)
-    print("\nmax rotation delta vs GLB rest (deg):")
-    for bone, rec in sorted(joints.items()):
-        leaf = rec["leaf"]
-        if leaf not in idx or leaf not in poses[0]:
-            continue
-        rest = js["nodes"][idx[leaf]].get("rotation")
-        if not rest:
-            continue
-        worst = 0.0
-        for p in poses:
-            dot = abs(sum(a * b for a, b in zip(p[leaf]["rotation"], rest)))
-            worst = max(worst, math.degrees(2 * math.acos(min(1.0, dot))))
-        print(f"  {leaf:20s} {worst:7.2f}")
 
-    # stance probe: feet / head world positions at first, middle, last frame
-    print("\nstance probe (world y: ballL ballR ankleL ankleR head):")
-    for t in (times[0], times[len(times) // 2], times[-1]):
-        fk = make_fk(js, ev.evaluate(t))
-        ys = [fk(leaf)[1] for leaf in ("Left_ballJNT", "Right_ballJNT",
-                                       "Left_ankleJNT", "Right_ankleJNT", "headJNT")]
-        print(f"  t={t:.3f}  " + " ".join(f"{v:.4f}" for v in ys))
+    for clip_name in clip_names:
+        clip = load_clip(anim_bundle, clip_name)
+        ev = MusclePoseEvaluator(clip, joints, desc_pelvis_q=pelvis_q)
+        n_frames = int(round(clip["muscle_clip"]["stop_time"] * ev.rate)) + 1
+        times = [i / ev.rate for i in range(n_frames)]
+        poses = [ev.evaluate(t) for t in times]
+
+        if probe:
+            print(f"\n[{char} / {clip_name}] frames {n_frames} @ {ev.rate:.0f}Hz")
+            print("max rotation delta vs GLB rest (deg):")
+            for bone, rec in sorted(joints.items()):
+                leaf = rec["leaf"]
+                if leaf not in idx or leaf not in poses[0]:
+                    continue
+                rest = js["nodes"][idx[leaf]].get("rotation")
+                if not rest:
+                    continue
+                worst = 0.0
+                for p in poses:
+                    dot = abs(sum(a * b for a, b in zip(p[leaf]["rotation"], rest)))
+                    worst = max(worst, math.degrees(2 * math.acos(min(1.0, dot))))
+                print(f"  {leaf:20s} {worst:7.2f}")
+            print("stance probe (world y: ballL ballR ankleL ankleR head):")
+            for t in (times[0], times[len(times) // 2], times[-1]):
+                fk = make_fk(js, ev.evaluate(t))
+                ys = [fk(leaf)[1] for leaf in ("Left_ballJNT", "Right_ballJNT",
+                                               "Left_ankleJNT", "Right_ankleJNT", "headJNT")]
+                print(f"  t={t:.3f}  " + " ".join(f"{v:.4f}" for v in ys))
+
+        channels = []
+        animated = set()
+        # hips root transform (translation + rotation)
+        if "__root__" in poses[0]:
+            tv = []
+            for p in poses:
+                tv.extend(p["__root__"]["translation"])
+            channels.append((idx["pelvicJNT"], "translation", tv))
+            animated.add("pelvicJNT")
+        # muscle-driven joints
+        for bone, rec in sorted(joints.items()):
+            leaf = rec["leaf"]
+            if leaf not in idx or leaf not in poses[0]:
+                continue
+            vals = []
+            for p in poses:
+                vals.extend(p[leaf]["rotation"])
+            channels.append((idx[leaf], "rotation", vals))
+            animated.add(leaf)
+        # clip transform curves (weapon layer)
+        for leaf, attr, curves in transform_curve_bindings(clip, tos):
+            if leaf is None or leaf not in idx:
+                # Hash not in m_TOS: animates a prefab attachment node that has
+                # no counterpart in the GLB (weapon FX / shadow meshes).
+                if verbose:
+                    print(f"  .. skipped transform binding (no GLB node)")
+                continue
+            if attr == 1:    # translation
+                vals = []
+                for t in times:
+                    vals.extend(conv_v3([sample_curve(clip, c, t) for c in curves]))
+                channels.append((idx[leaf], "translation", vals))
+            elif attr == 2:  # rotation
+                vals = []
+                for t in times:
+                    vals.extend(conv_q(q_norm(tuple(sample_curve(clip, c, t) for c in curves))))
+                channels.append((idx[leaf], "rotation", vals))
+            else:
+                # attribute 3 = scale: verified constant (1,1,1) on every weapon
+                # node, already baked into GLB bind pose -- skipping is a no-op.
+                vals = []
+                for t in times:
+                    vals.extend([sample_curve(clip, c, t) for c in curves])
+                if len({tuple(v) for v in (vals[i:i+3] for i in range(0, len(vals), 3))}) != 1 \
+                        and verbose:
+                    print(f"  !! unhandled non-constant scale on {leaf}")
+                continue
+            animated.add(leaf)
+
+        js.setdefault("animations", []).append(
+            build_animation(js, binbuf, clip_name, times, channels))
 
     if probe:
         print("\n[probe] no file written")
+        return {"clips": clip_names, "animated": len(idx)}
+
+    total = save_glb(glb_out, js, binbuf)
+    return {"clips": clip_names, "bytes": total, "animated": len(animated)}
+
+
+def main():
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("chars", nargs="*", default=[], help="char_*_pre ids (default: char_jynerso_pre)")
+    ap.add_argument("--clips", default=",".join(BATCH_CLIPS), help="comma-separated clip names")
+    ap.add_argument("--all", action="store_true", help="batch: every char with a .glb export")
+    ap.add_argument("--force", action="store_true", help="re-export even if .anim.glb exists")
+    ap.add_argument("--probe", action="store_true", help="diagnostics only, no file written")
+    args = ap.parse_args()
+    clip_names = [c.strip() for c in args.clips.split(",") if c.strip()]
+
+    if args.all:
+        import collections
+        models = json.load(open(os.path.join(ROOT, "models.json"), encoding="utf-8"))
+        chars = [m["id"] if isinstance(m, dict) else m for m in models]
+        stats = collections.Counter()
+        skipped = {}
+        for i, char in enumerate(chars):
+            glb_out = os.path.join(ROOT, "extracted", char, f"{char}.anim.glb")
+            if os.path.exists(glb_out) and not args.force:
+                stats["exists"] += 1
+                continue
+            if not os.path.exists(os.path.join(ROOT, "extracted", char, f"{char}.glb")):
+                stats["no-glb"] += 1
+                continue
+            try:
+                r = export_char(char, clip_names)
+                stats["ok"] += 1
+                print(f"[{i+1}/{len(chars)}] {char}: ok {r['bytes']}B "
+                      f"({len(r['clips'])} clips, {r['animated']} nodes)", flush=True)
+            except (SystemExit, RigMismatch, Exception) as e:
+                stats["skipped"] += 1
+                kind = type(e).__name__
+                skipped.setdefault(f"{kind}: {e}", []).append(char)
+                print(f"[{i+1}/{len(chars)}] {char}: SKIP {kind}: {e}", flush=True)
+        print("\n==== batch summary ====")
+        for k, v in stats.items():
+            print(f"  {k}: {v}")
+        if skipped:
+            with open(os.path.join(ROOT, "anim_batch_skipped.json"), "w", encoding="utf-8") as f:
+                json.dump(skipped, f, ensure_ascii=False, indent=1)
+            print(f"  skip reasons -> anim_batch_skipped.json ({len(skipped)} reasons)")
         return
 
-    # --- build animation channels ------------------------------------------
-    channels = []
-    animated = set()
-    # hips root transform (translation + rotation)
-    if "__root__" in poses[0]:
-        tv = []
-        for p in poses:
-            tv.extend(p["__root__"]["translation"])
-        channels.append((idx["pelvicJNT"], "translation", tv))
-        animated.add("pelvicJNT")
-    # muscle-driven joints
-    for bone, rec in sorted(joints.items()):
-        leaf = rec["leaf"]
-        if leaf not in idx or leaf not in poses[0]:
-            continue
-        vals = []
-        for p in poses:
-            vals.extend(p[leaf]["rotation"])
-        channels.append((idx[leaf], "rotation", vals))
-        animated.add(leaf)
-    # clip transform curves (weapon layer)
-    for leaf, attr, curves in transform_curve_bindings(clip, tos):
-        if leaf is None or leaf not in idx:
-            # Hash not in m_TOS: animates a prefab attachment node that has no
-            # counterpart in the GLB (weapon FX / shadow meshes). Nothing to animate.
-            print(f"  .. skipped transform binding: path hash not in avatar (no GLB node)")
-            continue
-        if attr == 1:    # translation
-            vals = []
-            for t in times:
-                vals.extend(conv_v3([sample_curve(clip, c, t) for c in curves]))
-            channels.append((idx[leaf], "translation", vals))
-        elif attr == 2:  # rotation
-            vals = []
-            for t in times:
-                vals.extend(conv_q(q_norm(tuple(sample_curve(clip, c, t) for c in curves))))
-            channels.append((idx[leaf], "rotation", vals))
-        else:
-            # attribute 3 = scale: verified constant (1,1,1) on every weapon node,
-            # already baked into GLB bind pose -- skipping is a no-op.
-            vals = []
-            for t in times:
-                vals.extend([sample_curve(clip, c, t) for c in curves])
-            if len({tuple(v) for v in (vals[i:i+3] for i in range(0, len(vals), 3))}) == 1:
-                print(f"  .. skipped constant scale on {leaf}")
-            else:
-                print(f"  !! unhandled non-constant scale on {leaf}")
-            continue
-        animated.add(leaf)
-
-    anim = build_animation(js, binbuf, CLIP_NAME, times, channels)
-    js.setdefault("animations", []).append(anim)
-
-    total = save_glb(GLB_OUT, js, binbuf)
-    print(f"\nwrote {GLB_OUT} ({total} bytes)")
-    print(f"animated nodes ({len(animated)}): {sorted(animated)}")
+    chars = args.chars or [CHAR]
+    for char in chars:
+        try:
+            r = export_char(char, clip_names, probe=args.probe)
+        except RigMismatch as e:
+            raise SystemExit(f"rig mismatch: {e}")
+        if not args.probe:
+            print(f"{char}: wrote {r['bytes']}B, clips {r['clips']}, "
+                  f"{r['animated']} animated nodes")
 
 
 if __name__ == "__main__":

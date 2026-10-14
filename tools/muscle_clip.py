@@ -654,27 +654,44 @@ def streamed_frame_times(frames: list[dict]) -> list[float]:
     ]
 
 
-def sample_streamed(frames: list[dict], t: float) -> dict[int, float]:
+def _streamed_segments(frames: list[dict]) -> dict[int, tuple]:
+    """Per-curve sorted keys, built once per clip (cached by sample_curve).
+
+    Returns {curve_index: (times_list, keys_list)} sorted by time -- the
+    sample path used to rebuild AND re-sort this for every time point, which
+    made long generic clips crawl (quadratic in clip length).
+    """
+    segs: dict[int, list] = {}
+    for f in frames:
+        tm = f["time"]
+        if not (-1e30 < tm < 1e30):
+            continue
+        for c in f["curves"]:
+            segs.setdefault(c["index"], []).append((tm, c["value"], c["coeff"]))
+    out = {}
+    for idx, keys in segs.items():
+        keys.sort(key=lambda k: k[0])
+        out[idx] = ([k[0] for k in keys], keys)
+    return out
+
+
+def sample_streamed(frames: list[dict], t: float, segs=None) -> dict[int, float]:
     """Evaluate every streamed curve at time t.
 
     Each key's (value, coeff) encodes the cubic segment from its own time to the
     key's NEXT appearance: v = value + cz*dt + cy*dt^2 + cx*dt^3.  The sentinel
     first frame (-FLT_MAX) and terminator frame (+INF) only carry slope data and
-    are skipped.
+    are skipped.  Pass a prebuilt `segs` (see _streamed_segments) to skip the
+    rebuild.
     """
-    real = [f for f in frames if -1e30 < f["time"] < 1e30]
-    if not real:
-        return {}
-    # per curve index: sorted (time, value, coeff) segments
-    segs: dict[int, list] = {}
-    for f in real:
-        for c in f["curves"]:
-            segs.setdefault(c["index"], []).append((f["time"], c["value"], c["coeff"]))
+    import bisect
+
+    if segs is None:
+        segs = _streamed_segments(frames)
     out = {}
-    for idx, keys in segs.items():
-        keys.sort(key=lambda k: k[0])
-        if t <= keys[0][0]:
-            if t == keys[0][0]:
+    for idx, (times, keys) in segs.items():
+        if t <= times[0]:
+            if t == times[0]:
                 out[idx] = keys[0][1]
             else:
                 # extrapolate backwards into the first segment
@@ -682,17 +699,11 @@ def sample_streamed(frames: list[dict], t: float) -> dict[int, float]:
                 out[idx] = _hermite_eval(v0, cf0, t - t0)
             continue
         # last key with time <= t
-        k = 0
-        for j in range(len(keys)):
-            if keys[j][0] <= t:
-                k = j
-            else:
-                break
+        k = bisect.bisect_right(times, t) - 1
         t0, v0, cf0 = keys[k]
         if k + 1 < len(keys):
-            dt = min(t - t0, keys[k + 1][0] - t0)
+            dt = min(t - t0, times[k + 1] - t0)
         else:
-            dt = t - t0 if t <= keys[k][0] + 1e30 else 0.0
             dt = t - t0
         out[idx] = _hermite_eval(v0, cf0, dt)
     return out
@@ -801,13 +812,24 @@ def curve_values(parsed: dict, curve_index: int) -> dict:
     dense = clip["dense"]
     dense_count = dense["curve_count"]
     if curve_index < stream_count:
-        keys = []
-        for frame in parse_streamed(clip["streamed"]["data"]):
-            for c in frame["curves"]:
-                if c["index"] == curve_index and -1e30 < frame["time"] < 1e30:
-                    keys.append(
-                        {"time": frame["time"], "value": c["value"], "out_slope": c["out_slope"]}
-                    )
+        # parse_streamed re-decodes the WHOLE streamed buffer -- raw-calling it
+        # per curve per sample made bulk exports crawl (roar: ~19ms x 424).
+        # Memoize frames and this per-curve key list on the parsed clip.
+        frames = parsed.get("_streamed_frames")
+        if frames is None:
+            frames = parse_streamed(clip["streamed"]["data"])
+            parsed["_streamed_frames"] = frames
+        ckey = ("_cv_keys", curve_index)
+        keys = parsed.get(ckey)
+        if keys is None:
+            keys = [
+                {"time": frame["time"], "value": c["value"], "out_slope": c["out_slope"]}
+                for frame in frames
+                if -1e30 < frame["time"] < 1e30
+                for c in frame["curves"]
+                if c["index"] == curve_index
+            ]
+            parsed[ckey] = keys
         return {"kind": "streamed", "keys": keys}
     if curve_index < stream_count + dense_count:
         ci = curve_index - stream_count
@@ -845,10 +867,25 @@ def sample_curve(parsed: dict, curve_index: int, t: float) -> float:
         return vals[i0] * (1.0 - frac) + vals[i0 + 1] * frac
     if cv["kind"] == "constant":
         return cv["value"]
-    # streamed: evaluate hermite
+    # streamed: evaluate hermite.  Memoize the decoded frames, the per-curve
+    # sorted segments and the per-time evaluation (bulk exports sample every
+    # curve at the same few dozen times; rebuilding any of these per call
+    # made them crawl).
     mc = parsed["muscle_clip"]
-    frames = parse_streamed(mc["clip"]["streamed"]["data"])
-    return sample_streamed(frames, t).get(curve_index, float("nan"))
+    segs = parsed.get("_streamed_segs")
+    if segs is None:
+        frames = parsed.get("_streamed_frames")
+        if frames is None:
+            frames = parse_streamed(mc["clip"]["streamed"]["data"])
+            parsed["_streamed_frames"] = frames
+        segs = _streamed_segments(frames)
+        parsed["_streamed_segs"] = segs
+    cache = parsed.setdefault("_streamed_eval", {})
+    ev = cache.get(t)
+    if ev is None:
+        ev = sample_streamed(None, t, segs)
+        cache[t] = ev
+    return ev.get(curve_index, float("nan"))
 
 
 # ---------------------------------------------------------------------------
