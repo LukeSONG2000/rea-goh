@@ -135,6 +135,50 @@ function frame(obj){
   controls.target.copy(c);
   camera.position.set(c.x + r*0.9, c.y + r*0.5, c.z + r*1.4);
 }
+function frameEnv(obj){
+  // env scenes: sky spheres/parked markers balloon a plain Box3 -- focus on
+  // the median mesh center, radius covering 75% of triangles (same rule as
+  // tools/shot_env.py, whose acceptance shots it was tuned on)
+  const items = [];
+  let trisTotal = 0;
+  obj.traverse(o=>{
+    if (!o.isMesh || !o.visible) return;
+    const g = o.geometry;
+    const tris = (g.index ? g.index.count : g.attributes.position.count)/3;
+    trisTotal += tris;
+    items.push({box: new THREE.Box3().setFromObject(o), tris});
+  });
+  if (!items.length){ frame(obj); return; }
+  const med = a=>{const s=a.slice().sort((x,y)=>x-y); return s[Math.floor(s.length/2)];};
+  const focus = new THREE.Vector3(
+    med(items.map(it=>it.box.getCenter(new THREE.Vector3()).x)),
+    med(items.map(it=>it.box.getCenter(new THREE.Vector3()).y)),
+    med(items.map(it=>it.box.getCenter(new THREE.Vector3()).z)));
+  let acc=0, rmax=items[items.length-1].d||1;
+  const byDist = items.map(it=>{
+    let d=0;
+    for (const x of [it.box.min.x,it.box.max.x])
+      for (const y of [it.box.min.y,it.box.max.y])
+        for (const z of [it.box.min.z,it.box.max.z])
+          d=Math.max(d, Math.hypot(x-focus.x,y-focus.y,z-focus.z));
+    return {d, tris:it.tris};
+  }).sort((a,b)=>a.d-b.d);
+  rmax = byDist[byDist.length-1].d;
+  for (const it of byDist){
+    acc += it.tris;
+    if (acc >= trisTotal*0.75){ rmax = it.d; break; }
+  }
+  const radius = Math.max(rmax, 0.001);
+  camera.fov = 50;
+  camera.near = radius/200; camera.far = radius*40;
+  camera.updateProjectionMatrix();
+  controls.target.copy(focus);
+  const az = Math.PI/4;   // orbit45 -- the best-behaved default of the six
+  camera.position.set(focus.x + Math.cos(az)*radius*1.7,
+                      focus.y + radius*0.55,
+                      focus.z + Math.sin(az)*radius*1.7);
+  camera.lookAt(focus);
+}
 function disposeModel(){
   if (!model) return;
   if (mixer){ mixer.stopAllAction(); mixer = null; }
@@ -153,10 +197,14 @@ function setBones(b){
   document.getElementById('bBone').classList.toggle('on', b);
   if (bonesHelper) bonesHelper.visible = b;
 }
-function loadBuffer(buf, name){
+function loadBuffer(buf, name, isEnv){
   new THREE.GLTFLoader().parse(buf, '', gltf=>{
     disposeModel();
     model = gltf.scene;
+    if (isEnv){
+      // sky spheres / backdrop planes are legit content but block the view
+      model.traverse(o=>{ if (o.isMesh && /skybox|backdrop|skydome/i.test(o.name)) o.visible = false; });
+    }
     scene.add(model);
     let tris=0, verts=0, mats=new Set(), bones=0, skinned=0, animLine='';
     model.traverse(o=>{
@@ -179,7 +227,7 @@ function loadBuffer(buf, name){
       playClip(0);
       animLine = `<br>动画 ${clips.length} 段（底部切换）`;
     }
-    frame(model);
+    if (isEnv) frameEnv(model); else frame(model);
     // merge into the info panel, keeping classification lines
     const info = document.getElementById('info');
     const stats = `三角面 ${(tris|0).toLocaleString()} · 顶点 ${verts.toLocaleString()}<br>` +
@@ -223,10 +271,10 @@ function buildAnimBar(){
   bar.appendChild(pp);
 }
 // fetch as arrayBuffer then parse; try the animated .anim.glb first, fall back
-function loadModel(url, label, fallback){
+function loadModel(url, label, fallback, isEnv){
   fetch(url).then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); })
-            .then(b=>loadBuffer(b, label))
-            .catch(()=>fallback ? loadModel(fallback, label)
+            .then(b=>loadBuffer(b, label, isEnv))
+            .catch(()=>fallback ? loadModel(fallback, label, isEnv)
                                 : document.getElementById('info').textContent='加载失败: '+url);
 }
 
@@ -287,9 +335,9 @@ function renderFilters(){
   MODELS.forEach(m=>{ counts[m.cls.category] = (counts[m.cls.category]||0)+1; });
   CAT_DEFS.forEach(([key,label,cat])=>{
     const b = document.createElement('div');
-    b.className = 'chip' + (fCat===key?' on':'');
+    b.className = 'chip' + (fCat===(cat||'all')?' on':'');
     b.innerHTML = label + `<span class="n">${counts[cat||'all']||0}</span>`;
-    b.onclick = ()=>{ fCat = key; renderFilters(); renderList(document.getElementById('search').value); };
+    b.onclick = ()=>{ fCat = cat||'all'; renderFilters(); renderList(document.getElementById('search').value); };
     catRow.appendChild(b);
   });
   const alignRow = document.getElementById('alignRow');
@@ -328,7 +376,7 @@ function renderList(q){
       li.classList.add('on');
       showInfo(m.cls, modelName(m), '加载中…');
       if (m.cls.category==='environment')
-        loadModel('/extracted_env/'+m.id+'/'+m.id+'.glb', modelName(m), null);
+        loadModel('/extracted_env/'+m.id+'/'+m.id+'.glb', modelName(m), null, true);
       else
         loadModel('/extracted/'+m.id+'/'+m.id+'.anim.glb', modelName(m),
                   '/extracted/'+m.id+'/'+m.id+'.glb');
