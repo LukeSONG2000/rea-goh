@@ -1,0 +1,15 @@
+# White-list: only ship the recovery corpus.
+/*
+!/.gitignore
+!/README.md
+!/UNPACK_GUIDE.md
+!/models.json
+!/catalog
+!/extracted
+!/viewer
+!/tools
+!/raw_bundles
+
+# scratch inside kept dirs
+__pycache__/
+*.log

@@ -1,0 +1,3005 @@
+{
+ "ship": [
+  {
+   "bundle": "ship_profundity_pre",
+   "size": 1998299,
+   "types": {
+    "Transform": 54,
+    "GameObject": 54,
+    "ParticleSystemRenderer": 26,
+    "ParticleSystem": 26,
+    "Material": 22,
+    "Texture2D": 13,
+    "MonoBehaviour": 9,
+    "MonoScript": 9,
+    "MeshRenderer": 7,
+    "MeshFilter": 7,
+    "Mesh": 5,
+    "Shader": 2
+   },
+   "names": [
+    "Glow",
+    "vfx_capship_explo_eng_Lg",
+    "WeaponArea1",
+    "HeadArea",
+    "big_debris",
+    "sparks",
+    "WeaponAreas",
+    "SHIP_DEBRIS_2D",
+    "Shock",
+    "profundity_back",
+    "profundity_front",
+    "unit.ship_profundity_pre",
+    "vfx_engine_flame1",
+    "vfx.vfx_capship_engine_exp_pre",
+    "vfx_engine_flame1 (2)",
+    "CameraMarkers",
+    "debri",
+    "vfx_engine_flame1 (3)",
+    "engines",
+    "post_sparks"
+   ],
+   "textures": [
+    "flare_03_tex_blue",
+    "snow_explosion_5x5",
+    "flare_underline_01_tex",
+    "vfx_crack_01",
+    "Profundity_01a_mask",
+    "t_fx_dustCloud",
+    "Profundity_03c_tex",
+    "Profundity_03c_mask",
+    "Profundity_02b_tex",
+    "Profundity_01a_tex",
+    "smoke_07_mask",
+    "Profundity_02b_mask"
+   ]
+  },
+  {
+   "bundle": "ship_outrider_pre",
+   "size": 391498,
+   "types": {
+    "Transform": 18,
+    "GameObject": 18,
+    "MonoBehaviour": 8,
+    "MonoScript": 8,
+    "Texture2D": 2,
+    "Mesh": 2,
+    "MeshFilter": 2,
+    "MeshRenderer": 2,
+    "Rigidbody": 1,
+    "AnimatorController": 1,
+    "BoxCollider": 1,
+    "Animator": 1
+   },
+   "names": [
+    "HitArea2",
+    "ship_hull_JNT",
+    "HeadArea",
+    "CenterArea",
+    "OffhandArea2",
+    "ship_outrider_mesh",
+    "WeaponArea2",
+    "OffhandArea1",
+    "UI",
+    "unit.ship_outrider_pre",
+    "WeaponAreas",
+    "HitArea3",
+    "WeaponArea1",
+    "HitAreas",
+    "Scaler",
+    "HitArea1",
+    "AnimatorJointOffset",
+    "vfx_engine_flame_outrider"
+   ],
+   "textures": [
+    "ship_outrider_mask",
+    "ship_outrider_tex"
+   ]
+  },
+  {
+   "bundle": "ship_b28extinctionclassbomber_pre",
+   "size": 194494,
+   "types": {
+    "Transform": 18,
+    "GameObject": 18,
+    "MonoScript": 9,
+    "MonoBehaviour": 9,
+    "MeshRenderer": 3,
+    "MeshFilter": 3,
+    "Texture2D": 2,
+    "AnimatorController": 1,
+    "Animator": 1,
+    "AssetBundle": 1,
+    "Material": 1,
+    "Mesh": 1
+   },
+   "names": [
+    "ship_b28imperialbomber_mesh",
+    "WeaponArea1",
+    "vfx_engine_flame1",
+    "HitArea2",
+    "unit.ship_b28extinctionclassbomber_pre",
+    "HitAreas",
+    "WeaponAreas",
+    "HeadArea",
+    "HitArea3",
+    "WeaponArea2",
+    "Scaler",
+    "CenterArea",
+    "OffhandArea3",
+    "OffhandArea4",
+    "AnimatorJointOffset",
+    "HitArea1",
+    "ship_hull_JNT",
+    "vfx_engine_flame1 (1)"
+   ],
+   "textures": [
+    "ship_b28extinctionclassbomber_mask",
+    "ship_b28extinctionclassbomber_tex"
+   ]
+  },
+  {
+   "bundle": "ship_btl_b_y_wing_pre",
+   "size": 160928,
+   "types": {
+    "GameObject": 17,
+    "Transform": 17,
+    "MonoScript": 8,
+    "MonoBehaviour": 8,
+    "MeshFilter": 3,
+    "MeshRenderer": 3,
+    "Texture2D": 2,
+    "Rigidbody": 1,
+    "AnimatorController": 1,
+    "Animator": 1,
+    "Material": 1,
+    "AssetBundle": 1
+   },
+   "names": [
+    "WeaponAreas",
+    "OffhandArea3",
+    "vfx_engine_flame1",
+    "Scaler",
+    "vfx_engine_flame2",
+    "unit.ship_btl_b_y_wing_pre",
+    "HitAreas",
+    "ship_hull_JNT",
+    "CenterArea",
+    "AnimatorJointOffset",
+    "WeaponArea2",
+    "WeaponArea1",
+    "ship_btl_b_y_wing_mesh",
+    "HitArea1",
+    "HitArea3",
+    "HitArea2",
+    "HeadArea"
+   ],
+   "textures": [
+    "ship_btl_b_y_wing_mask",
+    "ship_btl_b_y_wing_tex"
+   ]
+  },
+  {
+   "bundle": "ship_geonosis_fighter_soldier_pre",
+   "size": 142817,
+   "types": {
+    "Transform": 18,
+    "GameObject": 18,
+    "MonoBehaviour": 8,
+    "MonoScript": 8,
+    "MeshRenderer": 3,
+    "MeshFilter": 3,
+    "Animator": 2,
+    "Texture2D": 2,
+    "Rigidbody": 1,
+    "AnimatorController": 1,
+    "AssetBundle": 1,
+    "BoxCollider": 1
+   },
+   "names": [
+    "Scaler",
+    "unit.ship_geonosis_fighter_soldier_pre",
+    "HitArea2",
+    "HitArea1",
+    "vfx_engine_flame1 (1)",
+    "vfx_engine_flame1",
+    "OffhandArea1",
+    "OffhandArea2",
+    "ship_hull_JNT",
+    "HitAreas",
+    "HeadArea",
+    "HitArea3",
+    "AnimatorJointOffset",
+    "CenterArea",
+    "WeaponArea1",
+    "ship_geonosis_fighter_mesh",
+    "WeaponArea2",
+    "WeaponAreas"
+   ],
+   "textures": [
+    "ship_geonosis_fighter_soldier_tex",
+    "ship_geonosis_fighter_mask"
+   ]
+  }
+ ],
+ "env": [
+  {
+   "bundle": "env_nab_raid_pre",
+   "size": 19826037,
+   "types": {
+    "GameObject": 2485,
+    "Transform": 2483,
+    "MonoBehaviour": 1652,
+    "ParticleSystemRenderer": 808,
+    "ParticleSystem": 808,
+    "MeshRenderer": 332,
+    "MeshFilter": 332,
+    "Animator": 253,
+    "AnimationClip": 228,
+    "SpriteRenderer": 175,
+    "MeshCollider": 143,
+    "Material": 108
+   },
+   "names": [
+    "debris",
+    "Left_clavJNT",
+    "Right_hipJNT",
+    "Explosion_orang",
+    "Right_clavJNT",
+    "SH02_TRACK",
+    "Right_kneeJNT",
+    "VD_02",
+    "vfx_amb_star streaks_basic",
+    "naboo_grasslands_cinehill",
+    "VD_04",
+    "Right_kneeJNT",
+    "B1 HERO 01",
+    "Left_wpnJNT",
+    "Right_wrstJNT",
+    "Muzl_Flash (1)",
+    "JARJAR",
+    "Flash",
+    "Bottom Shadow",
+    "B1 GROUP"
+   ],
+   "textures": [
+    "nab_raid_soil_01_tex",
+    "b1_sprite_malfunction_a_tex",
+    "veh_aat_droid_tank_01_a_tex",
+    "b1_sprite_blaster_c_tex",
+    "sca_water_tex_lowcontrast",
+    "lucrehulk_cine_dome_mask",
+    "gungan_celebrate_sprite_01_tex",
+    "blackSquare",
+    "captaintarpals_mask",
+    "dooble_glow_tex",
+    "fx_shield_skin_purple",
+    "veh_aat_droid_tank_01_a_mask"
+   ]
+  },
+  {
+   "bundle": "env_ruus_valley_jedi_01_pre",
+   "size": 3880927,
+   "types": {
+    "GameObject": 140,
+    "Transform": 140,
+    "MeshRenderer": 100,
+    "MeshFilter": 100,
+    "MonoBehaviour": 96,
+    "Mesh": 69,
+    "Material": 27,
+    "Texture2D": 23,
+    "ParticleSystemRenderer": 13,
+    "ParticleSystem": 13,
+    "Shader": 5,
+    "MeshCollider": 4
+   },
+   "names": [
+    "ruus_walkway_01_mesh 7",
+    "ruus_walkway_01_mesh 4",
+    "ruus_riser_01_mesh",
+    "ruus_statue_01_mesh15",
+    "vfx_slow_ember_dark",
+    "vfx_ember_glow",
+    "group6",
+    "vfx_dust_pulse",
+    "ruus_fence_01_mesh 9 (3)",
+    "group7",
+    "ruus_walkway_01_mesh 2",
+    "ruus_face_statue_01_mesh (1)",
+    "env.env_ruus_valley_jedi_01_pre",
+    "env_vfx_meatball_helicopter",
+    "ruus_sculpture_01_mesh1 8",
+    "tyth_rock_05a_mesh",
+    "ruus_statue_01_mesh14 (1)",
+    "ruus_sculpture_01_mesh1 6",
+    "middle_stream",
+    "battle_layout_marker_standard"
+   ],
+   "textures": [
+    "geo_rockwall_01a_tex",
+    "smoke_04_mask",
+    "ruus_walkway_01_tex",
+    "ruus_facestatue_hi_01_tex",
+    "ruus_statue_01_tex",
+    "grad_trail_01_tex",
+    "ruus_valley_heart_01b_tex",
+    "geo_rockwall_01b_tex",
+    "ruus_valley_heart_01d_tex",
+    "ruus_ground_01_tex",
+    "kor_wall_01_tex",
+    "kor_rubble_curb_01_tex"
+   ]
+  },
+  {
+   "bundle": "env_empire_hallway_pre",
+   "size": 2723520,
+   "types": {
+    "Transform": 363,
+    "GameObject": 363,
+    "MeshRenderer": 251,
+    "MeshFilter": 251,
+    "MonoBehaviour": 197,
+    "ParticleSystemRenderer": 80,
+    "ParticleSystem": 80,
+    "Material": 68,
+    "Texture2D": 33,
+    "Mesh": 31,
+    "SpriteRenderer": 12,
+    "MeshCollider": 8
+   },
+   "names": [
+    "emp_wall_01_mesh (7)",
+    "emp_wall_04_mesh (7)",
+    "gen_drum_03_mesh (1)",
+    "Quad (10)",
+    "emp_wall_04c_tex (11)",
+    "VFX_STD",
+    "emp_wall_03_mesh (7)",
+    "emp_ceiling_hallway_01_mesh (1)",
+    "emp_wall_03_mesh (3)",
+    "emp_wall_04c_tex (2)",
+    "vfx.vfx_background_bullets_red_pre",
+    "gen_drum_03_mesh",
+    "Glow_Grnd",
+    "emp_wall_04b_tex",
+    "env_vfx_mouse_droid",
+    "Flash (2)",
+    "crate_a3_10_mesh (1)",
+    "emp_wall_04c_tex (15)",
+    "emp_wall_04_mesh (10)",
+    "emp_wall_04b_tex (1)"
+   ],
+   "textures": [
+    "whiteSquare",
+    "emp_wall_a1_02_tex",
+    "gen_crate_03_tex",
+    "emp_throne_floor_02_tex",
+    "emp_wallalarm_02_tex",
+    "wall_04_tex",
+    "hangar_platedwall_tex",
+    "hangar_archfrieze_emiss_tex",
+    "emp_hangar_pit_emiss_tex",
+    "white_square",
+    "skb_ground_01_tex",
+    "mfalcon_prop_tex"
+   ]
+  },
+  {
+   "bundle": "env_geo_foundry_ent_pre",
+   "size": 1889343,
+   "types": {
+    "Transform": 65,
+    "GameObject": 65,
+    "MeshFilter": 40,
+    "MeshRenderer": 40,
+    "MonoBehaviour": 32,
+    "Material": 28,
+    "Texture2D": 23,
+    "ParticleSystem": 17,
+    "ParticleSystemRenderer": 17,
+    "Mesh": 15,
+    "Shader": 6,
+    "MonoScript": 4
+   },
+   "names": [
+    "Art Assets",
+    "vfx_smoke_dark_3",
+    "geo_sewer_pipe_01a_mesh (1)",
+    "cock_Fire",
+    "splashes",
+    "vfx_env_fire_wing",
+    "Quad (1)",
+    "geo_rock_03_mesh (10)",
+    "vfx_glowy_buttons_upper",
+    "geo_crate_02_mesh (2)",
+    "sparks",
+    "battle_layout_marker_standard",
+    "Glow_Wall_2",
+    "geo_rock_03_mesh (9)",
+    "splashes",
+    "vfx_env_waterfall_distort",
+    "vfx_env_sparks_R",
+    "vfx_smoke_dark_1",
+    "geo_rockwall_02b_mesh (4)",
+    "geo_crate_04_mesh (2)"
+   ],
+   "textures": [
+    "geo_rockwall_01a_tex",
+    "geo_barrier_crate_0104_tex",
+    "waterfall_mask",
+    "geo_foundry_door_01c_tex",
+    "tat_cave_02a_tex",
+    "geo_foundry_door_01b_tex",
+    "geo_rock_arch_01b_tex",
+    "laat_prop_dst_tex",
+    "flicker_4x4R_tex",
+    "generic_ground_mask",
+    "waterfall_water",
+    "geo_sewer_pipe_01_tex"
+   ]
+  },
+  {
+   "bundle": "env_space_mandalore_01_pre",
+   "size": 1427858,
+   "types": {
+    "Transform": 19,
+    "GameObject": 19,
+    "Texture2D": 7,
+    "MeshRenderer": 7,
+    "MeshFilter": 7,
+    "Material": 5,
+    "Mesh": 5,
+    "MonoScript": 3,
+    "Light": 3,
+    "MonoBehaviour": 3,
+    "MeshCollider": 2,
+    "Shader": 2
+   },
+   "names": [
+    "planet_fresnel_mesh",
+    "GameObject (3)",
+    "RTL_01",
+    "starSkyBox 1_p",
+    "env.env_space_mandalore_01_pre",
+    "GameObject (4)",
+    "Fill Light - Ships",
+    "space_fog (1)",
+    "Starfield",
+    "Main Light - Ships",
+    "VFX (1)",
+    "starSkyBox 1_p",
+    "Planets",
+    "planet_body_mesh",
+    "planet_glow_mesh",
+    "man_planet_pre",
+    "Main Light - Planet",
+    "Art Assets",
+    "battle_layout_marker"
+   ],
+   "textures": [
+    "man_planet_tex",
+    "smoke_04_mask",
+    "noise_smoke_01_tex",
+    "stars32_tex",
+    "shared_cloud_light_tex",
+    "vfx_gradient_horiz_L",
+    "smoke_dual_02_tex"
+   ]
+  },
+  {
+   "bundle": "env_tatooine_spaceport_pre",
+   "size": 986910,
+   "types": {
+    "Transform": 121,
+    "GameObject": 121,
+    "MeshRenderer": 86,
+    "MeshFilter": 86,
+    "MonoBehaviour": 82,
+    "ParticleSystemRenderer": 21,
+    "ParticleSystem": 21,
+    "Material": 21,
+    "Mesh": 20,
+    "Texture2D": 12,
+    "Light": 5,
+    "MonoScript": 3
+   },
+   "names": [
+    "env.env_tatooine_spaceport_pre",
+    "tat_crate_a1_01_mesh",
+    "vfx.columnlights_pre (2)",
+    "tat_spaceport_misc_a1_01_mesh",
+    "spaceport_outerwall_mesh",
+    "tat_spaceport_misc_a1_02_mesh",
+    "Art Assets",
+    "vfx_falcon_steam_02",
+    "hose_template_mesh",
+    "tat_crate_a1_02_mesh",
+    "tat_ventpipe_01_mesh",
+    "battle_layout_marker_standard",
+    "Directional light (1)",
+    "hose_template_mesh",
+    "tat_crate_a1_02_mesh",
+    "spaceport_outerwall_mesh",
+    "vfx_smoke_bg",
+    "tat_spaceport_misc_a1_04_mesh",
+    "tat_ventpipe_01_mesh",
+    "tat_wallpanel_07_mesh"
+   ],
+   "textures": [
+    "tat_wallpanel_07_tex",
+    "tat_wallpanel_01_tex",
+    "tat_spaceport_misc_a1_tex",
+    "millenium_falcon_prop_tex",
+    "tat_vent_01_tex",
+    "tat_misc_02_tex",
+    "tat_ground_clay_01_tex",
+    "tat_wallpanel_03_tex",
+    "Lightmap-0_comp_light",
+    "spaceport_outerwall_tex",
+    "hose_tile_tex",
+    "tat_crate_drum_a1_tex"
+   ]
+  }
+ ],
+ "cin_scene": [
+  {
+   "bundle": "col_01_arena_01_cin_scene",
+   "size": 10011222,
+   "types": {
+    "GameObject": 879,
+    "Transform": 879,
+    "MeshRenderer": 768,
+    "MeshFilter": 768,
+    "Mesh": 47,
+    "Material": 45,
+    "Texture2D": 45,
+    "ParticleSystem": 13,
+    "ParticleSystemRenderer": 13,
+    "MonoBehaviour": 13,
+    "Shader": 6,
+    "MeshCollider": 5
+   },
+   "names": [
+    "col_01_crowd_01_row_10",
+    "col_01_bleacher_seats_01",
+    "col_01_divider_top",
+    "col_01_awning_01 (5)",
+    "zef_rock_pile_01b (2)",
+    "col_01_crowd_01_row_12",
+    "col_01_pipe_01b (1)",
+    "col_01_main_rail (6)",
+    "col_01_crowd_01_row_09",
+    "col_01_crowd_01_row_03",
+    "col_01_misc_pole",
+    "col_01_crowd_01_row_06",
+    "col_01_crowd_01_row_13",
+    "col_01_crowd_01_row_14",
+    "col_01_misc_pole",
+    "col_01_crowd_01_row_07",
+    "col_01_misc_pole",
+    "col_01_light_01 (1)",
+    "col_01_divider_02 (1)",
+    "col_01_bleacher_trim_mesh"
+   ],
+   "textures": [
+    "col_01_concrete_02_tex",
+    "loth_city_ground_01_tex",
+    "col_01_banner_01_tex",
+    "col_01_light_tex",
+    "Lightmap-0_comp_light",
+    "col_01_misc_02_tex",
+    "col_01_side_hall_01_tex",
+    "smoke_dual_02_tex",
+    "col_01_door_01_tex",
+    "col_01_door_02_tex",
+    "col_01_bleacher_wall_tex",
+    "col_01_window_tex"
+   ]
+  },
+  {
+   "bundle": "col_01_arena_01_scene",
+   "size": 7997713,
+   "types": {
+    "GameObject": 479,
+    "Transform": 479,
+    "MeshRenderer": 418,
+    "MeshFilter": 418,
+    "Mesh": 44,
+    "Texture2D": 43,
+    "Material": 42,
+    "MonoBehaviour": 19,
+    "ParticleSystem": 9,
+    "ParticleSystemRenderer": 9,
+    "Shader": 8,
+    "MeshCollider": 4
+   },
+   "names": [
+    "battle_layout_marker_alternate_1",
+    "col_01_crowd_01_row_13",
+    "col_01_bleacher_pillar_mesh",
+    "col_01_crowd_01_row_11",
+    "col_01_side_hall (1)",
+    "col_01_crowd_01_row_10",
+    "col_01_crowd_01_row_01",
+    "col_01_bleachers_pillar (9)",
+    "col_01_crowd_01_row_07",
+    "col_01_bleacher_wall",
+    "tat_ranc_button_01 (2)",
+    "col_01_light_01 (2)",
+    "col_01_back_wall",
+    "col_01_crowd_01_row_02",
+    "col_01_main_rail (3)",
+    "col_01_main_back",
+    "col_01_crowd_01_row_09",
+    "col_01_misc_pole",
+    "col_01_awning_01",
+    "col_01_back_wall"
+   ],
+   "textures": [
+    "col_01_concrete_02_tex",
+    "grad_line_vertical_05_clamp_tex",
+    "loth_city_ground_01_tex",
+    "col_01_banner_01_tex",
+    "col_01_light_tex",
+    "col_01_misc_02_tex",
+    "col_01_side_hall_01_tex",
+    "col_01_door_01_tex",
+    "col_01_door_02_tex",
+    "col_01_bleacher_wall_tex",
+    "col_01_window_tex",
+    "col_01_light_mask"
+   ]
+  },
+  {
+   "bundle": "pas_desert_01_scene",
+   "size": 6021133,
+   "types": {
+    "GameObject": 148,
+    "Transform": 148,
+    "MeshRenderer": 100,
+    "MeshFilter": 100,
+    "MonoBehaviour": 84,
+    "Material": 45,
+    "Texture2D": 35,
+    "ParticleSystem": 32,
+    "ParticleSystemRenderer": 32,
+    "Mesh": 16,
+    "Shader": 4,
+    "MonoScript": 3
+   },
+   "names": [
+    "raka_foliage_01a_mesh (3)",
+    "raka_foliage_01a_mesh (3)",
+    "pas_mountain_01_mesh (1)",
+    "vfx_background_blowingsand (1)",
+    "vfx_wispy_sand_01",
+    "gusts",
+    "vfx_smoke_dark",
+    "pas_mountain_03_mesh (2)",
+    "temp ground",
+    "pas_speeder_01_temp_mesh",
+    "sul_rock_01a_mesh",
+    "pas_speeder_01a_temp_mesh",
+    "battle_layout_marker_flipped",
+    "vfx_sand_wisps_01",
+    "kor_rubble_pile_01c_mesh",
+    "sand_gusts",
+    "canyon_combatground_mesh (9)",
+    "Standard",
+    "env.env_pas_desert_01_pre",
+    "vfx_smoke_dark (1)"
+   ],
+   "textures": [
+    "raka_foliage_light_01c_tex",
+    "sul_rocks_a2_tex",
+    "flare_jj_01_tex",
+    "flicker_4x4R_tex",
+    "tat_scrap_11_tex",
+    "pas_mountain_02_tex",
+    "smoke_dual_02_tex",
+    "pas_ground_02_mask",
+    "kor_rubble_curb_01_tex",
+    "tat_ground_singedirt_homescreen_tex",
+    "pas_mountain_01b_tex",
+    "sun_moon_tex"
+   ]
+  },
+  {
+   "bundle": "emp_throne_room_dest_scene",
+   "size": 5051845,
+   "types": {
+    "GameObject": 89,
+    "Transform": 89,
+    "MonoBehaviour": 55,
+    "MeshRenderer": 54,
+    "MeshFilter": 54,
+    "Material": 22,
+    "ParticleSystem": 19,
+    "ParticleSystemRenderer": 19,
+    "Texture2D": 18,
+    "Mesh": 6,
+    "MonoScript": 5,
+    "Shader": 4
+   },
+   "names": [
+    "emp_debris_02c_mesh (1)",
+    "emp_debris_01_mesh (6)",
+    "env_vfx_rain",
+    "emp_debris_02b_mesh",
+    "emp_debris_02e_mesh (4)",
+    "vfx.vfx_background_waves_slpashs_pre",
+    "flare_lg (1)",
+    "emp_debris_02e_mesh (1)",
+    "RealtimeLight02",
+    "Plane Transform 2",
+    "emp_debris_03b_mesh (5)",
+    "emp_broken_windows",
+    "emp_debris_01_mesh (3)",
+    "emp_broken_windows",
+    "emp_debris_01_mesh (7)",
+    "emp_debris_03b_mesh (4)",
+    "emp_throne_screen_mesh (2)",
+    "emp_debris_03b_mesh (3)",
+    "battle_layout_marker_flipped",
+    "emp_debris_02e_mesh"
+   ],
+   "textures": [
+    "emp_debris_04_tex",
+    "emp_throne_screen_tex",
+    "Lightmap-0_comp_light",
+    "emp_throne_dest_floor_mask",
+    "deathstar_skybox_01_tex",
+    "emp_debris_03_tex",
+    "emp_window_dest_tex",
+    "emp_throne_dest_tex",
+    "emp_debris_02_tex",
+    "godray_04_tex",
+    "emp_wall_05_tex",
+    "emp_debris_01_tex"
+   ]
+  },
+  {
+   "bundle": "fo_kylo_quarters_kijimi_scene",
+   "size": 3165235,
+   "types": {
+    "GameObject": 326,
+    "Transform": 326,
+    "MonoBehaviour": 258,
+    "MeshRenderer": 188,
+    "MeshFilter": 188,
+    "Material": 58,
+    "Mesh": 46,
+    "Texture2D": 42,
+    "ParticleSystem": 32,
+    "ParticleSystemRenderer": 32,
+    "MonoScript": 21,
+    "MeshCollider": 8
+   },
+   "names": [
+    "kiji_arch_wall_02_mesh",
+    "kiji_wall_corner_01a_mesh (6)",
+    "fo_pillar_02_mesh (4)",
+    "fo_pillar_02_mesh",
+    "env_vfx_spot_light",
+    "fo_vader_pedestal_01b_mesh",
+    "whitewall",
+    "whitewall (1)",
+    "clash hold",
+    "fo_wall_window_01_mesh (2)",
+    "kiji_wall_01b_mesh (29)",
+    "streaks_default_vfx",
+    "env_vfx_snow_fog",
+    "Art Assets",
+    "fo_misc_02b_mesh",
+    "kiji_light_01_mesh",
+    "RealtimeLightKijimi02",
+    "Kijimi",
+    "Global Track",
+    "kiji_wall_01b_mesh (12)"
+   ],
+   "textures": [
+    "flare_jj_01_tex",
+    "kiji_misc_02_tex",
+    "kiji_light_03_tex",
+    "smoke_dual_02_tex",
+    "fo_stairs_02_tex",
+    "fo_floor_02bcd_tex",
+    "kiji_wall_corner_01_tex",
+    "ship_sith_fighter_mask",
+    "fo_wall_window_01_tex",
+    "jak_misc_04_tex",
+    "kiji_lights_misc_0102_tex",
+    "fo_pillar_02_emiss"
+   ]
+  },
+  {
+   "bundle": "kashyyk_beach_scene",
+   "size": 2688394,
+   "types": {
+    "GameObject": 211,
+    "Transform": 211,
+    "MonoBehaviour": 138,
+    "MeshRenderer": 103,
+    "MeshFilter": 103,
+    "Material": 46,
+    "ParticleSystem": 43,
+    "ParticleSystemRenderer": 43,
+    "Texture2D": 26,
+    "Mesh": 12,
+    "SpriteRenderer": 12,
+    "MonoScript": 8
+   },
+   "names": [
+    "Position Curve Track",
+    "Directional light",
+    "temple_ground_mesh (2)",
+    "end_trunk_a1_01_mesh (2)",
+    "ground_edge_01b_mesh",
+    "prop.ship_hmp_droid_gunship_pre",
+    "vfx.vfx_pro_ship_red_pre (1)",
+    "env_asteroid_02_mesh",
+    "vfx_smoke_light_slow (1)",
+    "kash_water_platform_01_mesh (2)",
+    "Curve Clip",
+    "Curve Clip",
+    "prop.ship_hmp_droid_gunship_pre",
+    "ship_hmp_droid_gunship_prop_mesh",
+    "vfx.MfalconFlare_pre",
+    "Art_Assets",
+    "Curve Clip",
+    "kash_treebaseplatforms_mesh (2)",
+    "Position Curve Track",
+    "vfx.vfx_kashyyyk_env_impct01_pre"
+   ],
+   "textures": [
+    "yavin_ground_02_tex",
+    "kash_building_01_tex",
+    "kash_mountedgun_tex",
+    "generic_ground_mask",
+    "yav_tree_01_tex",
+    "kash_tree_tex",
+    "end_fern_a1_tex",
+    "treecanopy_plane_01_tex",
+    "kash_tree_platforms_tex",
+    "kash_pipes_tex",
+    "empire_hangarfloormetal_01_tex",
+    "kash_water_platform_01_tex"
+   ]
+  }
+ ],
+ "cin_other": [
+  {
+   "bundle": "cin_col_ztgintro_med_pre",
+   "size": 9443885,
+   "types": {
+    "Transform": 359,
+    "GameObject": 359,
+    "MonoBehaviour": 231,
+    "ParticleSystem": 104,
+    "ParticleSystemRenderer": 104,
+    "MonoScript": 41,
+    "Material": 31,
+    "AnimationClip": 27,
+    "Animator": 23,
+    "Texture2D": 18,
+    "MeshFilter": 11,
+    "MeshRenderer": 11
+   },
+   "names": [
+    "smoke_core",
+    "chestBallJNT",
+    "Left_wrstJNT",
+    "vfx_boss_footDust_L",
+    "imp_glow",
+    "Back_costume_middle_JNT",
+    "chestBallJNT",
+    "dust_stretch_thin",
+    "neckJNT",
+    "smoke",
+    "Glow_Grnd",
+    "Left_hipJNT",
+    "spine2JNT",
+    "DebrisBurst_col",
+    "weapon_ref_area 2",
+    "spine2JNT",
+    "Dust_ground",
+    "Right_shldrJNT",
+    "Left_wpnJNT",
+    "SH01_TRACK"
+   ],
+   "textures": [
+    "weequay_enforcer_tex",
+    "vfx_rain_01",
+    "Black_Sq_tex",
+    "weequay_enforcer_mask",
+    "flare_underline_01_tex",
+    "vfx_crack_01",
+    "zeffotombguardian_b_mask",
+    "noise_smoke_01_tex",
+    "rfl_z6rotary_mask",
+    "flare_jj_01_tex",
+    "ice_rock_01",
+    "rfl_z6rotary_tex"
+   ]
+  },
+  {
+   "bundle": "cin_event_andorle_tier04_enc01_outro_pre",
+   "size": 1214319,
+   "types": {
+    "Transform": 196,
+    "GameObject": 196,
+    "ParticleSystem": 112,
+    "ParticleSystemRenderer": 112,
+    "MonoBehaviour": 71,
+    "MeshFilter": 46,
+    "MeshRenderer": 44,
+    "Material": 35,
+    "Animator": 29,
+    "Texture2D": 19,
+    "Mesh": 13,
+    "MonoScript": 11
+   },
+   "names": [
+    "holes (1)",
+    "dust",
+    "core",
+    "sie_testhangar_pillar_02b (2)",
+    "cm",
+    "big_debris",
+    "debris",
+    "main_sparks",
+    "Sparks_stretch",
+    "sie_testhangar_wall_02c (4)",
+    "main_sparks",
+    "sie_testhangar_wall_02d",
+    "vfx_spark_wing_B_cam3",
+    "Explosion",
+    "sie_testhangar_wall_02a",
+    "sie_testhangar_pillar_02b (10)",
+    "sie_testhangar_pillar_02a",
+    "cm",
+    "bolt_L (1)",
+    "Smoke"
+   ],
+   "textures": [
+    "fx_door_hole",
+    "TIE_LeftWing",
+    "ven_hangar_wall_a_d_mask",
+    "veh_testhangar_tieavenger_body_tex_Engine",
+    "redSquare",
+    "brac_cables_tex",
+    "ven_hangar_wall_a_d_tex",
+    "sie_testhangar_desing_01_mask",
+    "sie_testhangar_consolewall_mask",
+    "TIE_RightWing",
+    "sie_testhangar_consolewall_tex",
+    "flare_jj_01_tex"
+   ]
+  },
+  {
+   "bundle": "cin_raid_krayt_intro_long_tltimeline",
+   "size": 350408,
+   "types": {
+    "MonoBehaviour": 176,
+    "AnimationClip": 39,
+    "MonoScript": 20,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": []
+  },
+  {
+   "bundle": "cin_event_calhj_tier04_enc02_outro_tl",
+   "size": 167596,
+   "types": {
+    "MonoBehaviour": 97,
+    "MonoScript": 17,
+    "AnimationClip": 13,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": []
+  },
+  {
+   "bundle": "cin_ship_defeat_pre",
+   "size": 19710,
+   "types": {
+    "Transform": 70,
+    "GameObject": 70,
+    "MonoBehaviour": 70,
+    "MonoScript": 8,
+    "AssetBundle": 1
+   },
+   "names": [
+    "Position Curve Track",
+    "Curve Clip",
+    "Curve Clip",
+    "Position Curve Track",
+    "Curve Clip",
+    "Curve Clip",
+    "Rotation Curve Track",
+    "1-UnitMarkerEnemy Group",
+    "Curve Clip",
+    "Curve Clip",
+    "Curve Clip",
+    "2-UnitMarkerPlayer Group",
+    "Camera Track Group",
+    "Curve Clip",
+    "4-UnitMarkerEnemy Group",
+    "Curve Clip",
+    "cin.cin_ship_defeat_pre",
+    "0-UnitMarkerPlayer Group",
+    "Position Curve Track",
+    "Position Curve Track"
+   ],
+   "textures": []
+  }
+ ],
+ "pack": [
+  {
+   "bundle": "pack_yodachewbacca_x12",
+   "size": 874911,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.pack_yodachewbacca_x12"
+   ]
+  },
+  {
+   "bundle": "pack_lightspeed_darthmalgus_bundle",
+   "size": 67147,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.pack_lightspeed_darthmalgus_bundle"
+   ]
+  },
+  {
+   "bundle": "pack_datacron_d_enhanced_ii_bundle",
+   "size": 65123,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.pack_datacron_d_enhanced_ii_bundle"
+   ]
+  },
+  {
+   "bundle": "pack_crystal_energy_kyro_calendar",
+   "size": 61833,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.pack_crystal_energy_kyro_calendar"
+   ]
+  },
+  {
+   "bundle": "pack_jp_support_5x",
+   "size": 59403,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.pack_jp_support_5x"
+   ]
+  },
+  {
+   "bundle": "pack_generalsyndulla_01",
+   "size": 56675,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.pack_generalsyndulla_01"
+   ]
+  }
+ ],
+ "ability": [
+  {
+   "bundle": "ability_ship_cap_ultimate_profundity",
+   "size": 3827505,
+   "types": {
+    "GameObject": 161,
+    "Transform": 161,
+    "MonoBehaviour": 89,
+    "ParticleSystemRenderer": 57,
+    "ParticleSystem": 57,
+    "MonoScript": 39,
+    "MeshFilter": 36,
+    "MeshRenderer": 36,
+    "Material": 34,
+    "Texture2D": 20,
+    "Animator": 15,
+    "AnimationClip": 7
+   },
+   "names": [
+    "ship_cr90_corvette_mesh",
+    "starfield_player",
+    "starfield_player_adjust",
+    "vfx_engine_flame1 (9)",
+    "post_glow",
+    "vfx_engine_flame1 (7)",
+    "Corvette DROP HANDLE",
+    "Glow",
+    "sparks",
+    "engines",
+    "Battle Camera - CameraMarker",
+    "starSkyBox 1_p",
+    "Opposing Cap",
+    "Laser FireShip",
+    "vfx.vfx_capship_hangar_exp_pre",
+    "HeadArea",
+    "vfx_engine_flame1 (6)",
+    "profundity_front",
+    "Shock Ring",
+    "OffhandArea4"
+   ],
+   "textures": [
+    "flare_03_tex_blue",
+    "snow_explosion_5x5",
+    "flare_underline_01_tex",
+    "vfx_crack_01",
+    "ship_cr90_corvette_01b_mask",
+    "ship_cr90_corvette_01b_tex",
+    "Profundity_01a_mask",
+    "t_fx_dustCloud",
+    "env_asteroid_02_tex",
+    "Profundity_03c_tex",
+    "stars32_tex",
+    "Profundity_03c_mask"
+   ]
+  },
+  {
+   "bundle": "ability_char_force_push_fifthbrother_lb2",
+   "size": 149441,
+   "types": {
+    "GameObject": 19,
+    "Transform": 19,
+    "Material": 17,
+    "ParticleSystem": 16,
+    "ParticleSystemRenderer": 16,
+    "Shader": 7,
+    "MonoBehaviour": 5,
+    "MonoScript": 4,
+    "AssetBundle": 1,
+    "SpriteRenderer": 1,
+    "Texture2D": 1
+   },
+   "names": [
+    "force_reflect",
+    "debri",
+    "Grnd_smoke_line",
+    "vfx.force_projection_pre",
+    "Scorch",
+    "vfx.force_mzl_pre",
+    "Projectiles",
+    "Grnd_shock_line (1)",
+    "Trails (2)",
+    "Shock",
+    "sparks",
+    "Glw_Grnd",
+    "vfx.force_projectile_pre",
+    "Grnd_smoke_line (1)",
+    "Grnd_shock_line",
+    "prefab.ability_char_force_push_fifthbrother_LB2",
+    "Flash_Half (2)",
+    "vfx.force_impct_pre",
+    "Glow"
+   ],
+   "textures": [
+    "Default-Particle"
+   ]
+  },
+  {
+   "bundle": "ability_char_triple_kick_combo_fennec_atk",
+   "size": 113749,
+   "types": {
+    "Transform": 7,
+    "GameObject": 7,
+    "ParticleSystemRenderer": 6,
+    "ParticleSystem": 6,
+    "Material": 5,
+    "MonoBehaviour": 3,
+    "MonoScript": 3,
+    "Shader": 3,
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [
+    "pebbles",
+    "prefab.ability_char_triple_kick_combo_fennec_atk",
+    "sparks_sharp",
+    "vfx.vfx_ctrct_two_kick_impact",
+    "vfx.vfx_LB_imp_saber_01_pre",
+    "Smoke2",
+    "Glow"
+   ],
+   "textures": [
+    "Default-Particle"
+   ]
+  },
+  {
+   "bundle": "ability_luke_jml_special02",
+   "size": 10814,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.ability_luke_jml_special02"
+   ]
+  },
+  {
+   "bundle": "ability_stormtrooperluke_special01",
+   "size": 10680,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.ability_stormtrooperluke_special01"
+   ]
+  },
+  {
+   "bundle": "ability_rotta_special03",
+   "size": 10463,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.ability_rotta_special03"
+   ]
+  }
+ ],
+ "vfx": [
+  {
+   "bundle": "vfx_nab_raid_pre",
+   "size": 572435,
+   "types": {
+    "Transform": 47,
+    "GameObject": 47,
+    "ParticleSystem": 33,
+    "ParticleSystemRenderer": 33,
+    "Material": 23,
+    "Texture2D": 10,
+    "MeshRenderer": 9,
+    "MeshFilter": 9,
+    "Shader": 7,
+    "Mesh": 3,
+    "MonoScript": 2,
+    "MonoBehaviour": 2
+   },
+   "names": [
+    "bolt",
+    "GunganShield_glow",
+    "Flash",
+    "vfx_cin_gungan_shield_impact",
+    "muzz",
+    "glow",
+    "Glow_Wall",
+    "vfx_cin_gungan_shield_impact (1)",
+    "Blast Mark 2",
+    "muzz",
+    "bolt",
+    "vfx_smoke_dark",
+    "vfx_fire_01",
+    "ripples",
+    "Flash2",
+    "GunganShield_edge",
+    "sparks",
+    "Gungan_Shield_Container",
+    "SubEmitter0",
+    "vfx_smoke_dark"
+   ],
+   "textures": [
+    "sca_water_tex_lowcontrast",
+    "fx_shield_skin_purple",
+    "t_shield_color",
+    "grad_line_vert_grey",
+    "fx_shield_skin_mask_02",
+    "blaster_bolt_red",
+    "fx_shield_rim_mask_02",
+    "sca_water_tex",
+    "t_fx_moons",
+    "Default-ParticleSystem"
+   ]
+  },
+  {
+   "bundle": "vfx_loth_city_pre",
+   "size": 155115,
+   "types": {
+    "GameObject": 11,
+    "Transform": 11,
+    "ParticleSystemRenderer": 8,
+    "ParticleSystem": 8,
+    "Material": 4,
+    "Texture2D": 3,
+    "MeshFilter": 2,
+    "MeshRenderer": 2,
+    "Shader": 2,
+    "AssetBundle": 1
+   },
+   "names": [
+    "Particle System",
+    "vfx_condenser_steam (3)",
+    "vfx_condenser_steam",
+    "vfx_amb_gasLeak",
+    "vfx_condenser_steam (4)",
+    "env.vfx_loth_city_pre",
+    "Particle System",
+    "vfx_condenser_steam (2)",
+    "vfx_condenser_steam (1)",
+    "vfx_dust_bg_03",
+    "vfx_dust_bg_01"
+   ],
+   "textures": [
+    "t_fx_dustCloud",
+    "Default-ParticleSystem",
+    "smoke_07_mask"
+   ]
+  },
+  {
+   "bundle": "vfx_cor_slums_1315_pre",
+   "size": 86183,
+   "types": {
+    "GameObject": 22,
+    "Transform": 22,
+    "ParticleSystem": 19,
+    "ParticleSystemRenderer": 19,
+    "Shader": 2,
+    "Material": 2,
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [
+    "vfx_signAtmos_yellow_01 (3)",
+    "vfx_signAtmos_blue_03",
+    "env.vfx_cor_slums_1315_pre",
+    "vfx_signAtmos_yellow_01 (1)",
+    "vfx_signAtmos_orange_01",
+    "vfx_amb_lights_beam",
+    "vfx_standard",
+    "vfx_amb_lights_beam (4)",
+    "vfx_signAtmos_blue_02",
+    "vfx_signAtmos_yellow_03",
+    "vfx_signAtmos_blue_01 (1)",
+    "vfx_signAtmos_orange_01 (1)",
+    "vfx_signAtmos_blue_01 (2)",
+    "vfx_signAtmos_yellow_01 (2)",
+    "vfx_amb_lights_beam (1)",
+    "vfx_amb_lights_beam (3)",
+    "vfx_signAtmos_blue_03 (1)",
+    "vfx_signAtmos_yellow_02",
+    "vfx_flipped",
+    "vfx_amb_lights_beam (2)"
+   ],
+   "textures": [
+    "godray_03_tex"
+   ]
+  },
+  {
+   "bundle": "vfx_blaster_impact_red01",
+   "size": 69621,
+   "types": {
+    "GameObject": 5,
+    "Transform": 5,
+    "ParticleSystemRenderer": 5,
+    "ParticleSystem": 5,
+    "Material": 3,
+    "AssetBundle": 1,
+    "Shader": 1,
+    "MonoBehaviour": 1,
+    "MonoScript": 1
+   },
+   "names": [
+    "Sparks_stretch",
+    "poolvfx.vfx_blaster_Impact_red01",
+    "Smoke",
+    "Flash (2)",
+    "Sparks"
+   ],
+   "textures": []
+  }
+ ],
+ "objective": [
+  {
+   "bundle": "objective_merrin",
+   "size": 961322,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.objective_merrin"
+   ]
+  },
+  {
+   "bundle": "objective_maulhatefueled",
+   "size": 656964,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.objective_maulhatefueled"
+   ]
+  },
+  {
+   "bundle": "objective_lukestarkiller",
+   "size": 504949,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.objective_lukestarkiller"
+   ]
+  },
+  {
+   "bundle": "objective_cobbvanth",
+   "size": 390544,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.objective_cobbvanth"
+   ]
+  }
+ ],
+ "territorymap": [
+  {
+   "bundle": "territorymap_tb3_mixed",
+   "size": 33527923,
+   "types": {
+    "Transform": 1407,
+    "GameObject": 1407,
+    "MonoBehaviour": 700,
+    "ParticleSystem": 396,
+    "ParticleSystemRenderer": 396,
+    "Animator": 370,
+    "MeshRenderer": 366,
+    "MeshFilter": 366,
+    "Mesh": 230,
+    "PlayableDirector": 124,
+    "Material": 92,
+    "Texture2D": 55
+   },
+   "names": [
+    "phase05_conflict03_5M",
+    "sector_6DB_extrude",
+    "ring_grow",
+    "ring_grow",
+    "vfx_UI_TB3_ring_yellow_master",
+    "kaf_ringofkafrene_combined_mesh_low",
+    "shadow",
+    "vfx_UI_TB3_ring_blue_master",
+    "ParticlesOutroEndTimeline",
+    "ring",
+    "vfx_atmos_space_starfield",
+    "glow",
+    "alignment_border_light",
+    "planet_path_2M_3M",
+    "glow",
+    "starSkyBox 1_p",
+    "vfx_anchor",
+    "vfx_geo_planet_full_v2",
+    "planet_glow",
+    "GameObject"
+   ],
+   "textures": [
+    "van_planet_tex",
+    "man_planet_tex",
+    "t_ring_geonosis",
+    "hoth_planet_tex",
+    "ring_of_kafrene_tex",
+    "shared_cloud_swirl_alpha_tex",
+    "dooble_glow_tex",
+    "shared_cloud_heavy_tex",
+    "core_planet_tex",
+    "smoke_04_mask",
+    "kash_planet_tex",
+    "tb_bonus_ring_active"
+   ]
+  },
+  {
+   "bundle": "territorymap_hothempire",
+   "size": 3516688,
+   "types": {
+    "GameObject": 618,
+    "Transform": 618,
+    "ParticleSystemRenderer": 253,
+    "ParticleSystem": 253,
+    "MonoBehaviour": 236,
+    "MeshFilter": 160,
+    "MeshRenderer": 160,
+    "Mesh": 92,
+    "Material": 30,
+    "SpriteRenderer": 18,
+    "MeshCollider": 16,
+    "Texture2D": 12
+   },
+   "names": [
+    "Glow",
+    "vfx_bolt_01",
+    "sfx_anchor_p6-2",
+    "vfx_anchor",
+    "tb_outline_03_mesh",
+    "vfx_enemy_units_01",
+    "camera_marker",
+    "glow",
+    "glow",
+    "tb_meeple_05a_mesh",
+    "Grnd_Fire",
+    "vfx_player_units_01",
+    "glow",
+    "ui_anchor",
+    "hoth_empire_phase03_conflict02",
+    "props",
+    "glow_up",
+    "smoke_03",
+    "Quad (14)",
+    "home_prop_atat_mesh (1)"
+   ],
+   "textures": [
+    "hoth_echo_door_tex",
+    "hoth_turret_03_tex",
+    "tb_terrain_hoth_01_tex",
+    "lightbeams02_tex",
+    "Background",
+    "ship_tie_fighter_homescreen_tex",
+    "ship_snow_speeder_tex",
+    "tb_base_entrance_tex",
+    "HomeShipsFleet_emp_tex",
+    "hoth_turret_01_tex",
+    "vfx_unit_friendly_01_tex",
+    "tb_terrain_hoth_mask_01"
+   ]
+  },
+  {
+   "bundle": "territorymap_war",
+   "size": 667268,
+   "types": {
+    "GameObject": 591,
+    "Transform": 591,
+    "ParticleSystem": 280,
+    "ParticleSystemRenderer": 280,
+    "MonoBehaviour": 189,
+    "MeshFilter": 83,
+    "MeshRenderer": 83,
+    "Mesh": 83,
+    "MeshCollider": 20,
+    "Material": 18,
+    "MonoScript": 12,
+    "Texture2D": 6
+   },
+   "names": [
+    "Grnd_Fire",
+    "sfx_anchor",
+    "glow",
+    "vfx_anchor",
+    "smoke",
+    "Fireball",
+    "phase4_conflict3_wall",
+    "phase01_conflict01",
+    "star_anchor",
+    "phase4_conflict3_wall",
+    "arrows",
+    "Glow",
+    "glow",
+    "glow_up",
+    "vfx_enemy_units_01",
+    "smoke",
+    "camera_marker",
+    "vfx_enemy_units_01",
+    "vfx_enemy_units_01",
+    "Grnd_Fire"
+   ],
+   "textures": [
+    "guild_banner_mask",
+    "tw_map_mask",
+    "fire_2x2_01",
+    "lightbeams02_tex",
+    "guild_icon_noguild_tex",
+    "vfx_unit_friendly_01_tex"
+   ]
+  },
+  {
+   "bundle": "territorymap_tournament_2v2",
+   "size": 558579,
+   "types": {
+    "Transform": 100,
+    "GameObject": 100,
+    "MonoBehaviour": 34,
+    "ParticleSystemRenderer": 20,
+    "ParticleSystem": 20,
+    "MeshRenderer": 16,
+    "Mesh": 16,
+    "MeshFilter": 16,
+    "Material": 13,
+    "MonoScript": 13,
+    "Texture2D": 7,
+    "Shader": 6
+   },
+   "names": [
+    "phase01_conflict01_wall",
+    "prop_anchor",
+    "vfx_anchor",
+    "tt_territories_2v2_border",
+    "territory_prop_arrow_mesh",
+    "phase01_conflict01",
+    "terrain marker",
+    "phase01_conflict02_wall",
+    "prefab.territorymap_tournament_2v2",
+    "CharacterIntroAnimPrefs",
+    "LeagueIcon",
+    "star_anchor",
+    "phase01_conflict01_base",
+    "vfx_wall_BR",
+    "opponent_side",
+    "phase01_conflict01_duel01",
+    "Guild Banners",
+    "ui_anchor",
+    "ui_anchor",
+    "vfx_wall_TR"
+   ],
+   "textures": [
+    "guild_banner_mask",
+    "lightbeams02_tex",
+    "fireTile_01",
+    "guild_icon_noguild_tex",
+    "grad_square_02",
+    "smoke_dual_02_tex",
+    "fireTile_02"
+   ]
+  }
+ ],
+ "battle": [
+  {
+   "bundle": "battle_ship_pve_hidden_capship",
+   "size": 1376298,
+   "types": {
+    "GameObject": 137,
+    "Transform": 137,
+    "MonoBehaviour": 75,
+    "MonoScript": 28,
+    "MeshRenderer": 19,
+    "MeshFilter": 19,
+    "Texture2D": 6,
+    "Material": 5,
+    "MeshCollider": 3,
+    "BoxCollider": 2,
+    "Rigidbody": 2,
+    "Mesh": 2
+   },
+   "names": [
+    "2-UnitMarkerEnemy",
+    "Disable",
+    "OffhandArea4",
+    "CameraMarker",
+    "HitArea1",
+    "HitArea2",
+    "CameraMarkerPlayer_LaserBarrage",
+    "1-UnitMarkerPlayerCD",
+    "CameraMarkerPlayer_Buff",
+    "OffhandArea4",
+    "WeaponArea3",
+    "WeaponArea1",
+    "OffhandArea3 (1)",
+    "CameraMarkerEnemy_Buff",
+    "ship_stardestroyernew_mesh",
+    "ShipLayout",
+    "0-UnitMarkerEnemyCD (capship)",
+    "UIMarker",
+    "CameraMarkerPlayer_IonCannonBlue",
+    "OffhandArea1 (1)"
+   ],
+   "textures": [
+    "ship_stardestroyer_01a_tex",
+    "ship_stardestroyer_01b_tex",
+    "battle_wipe_edge_tex",
+    "ship_stardestroyer_01a_mask",
+    "ship_stardestroyer_01b_mask",
+    "battle_wipe_black_tex"
+   ]
+  },
+  {
+   "bundle": "battle_character_event_nexu_layout_00",
+   "size": 74963,
+   "types": {
+    "Transform": 63,
+    "GameObject": 63,
+    "MonoBehaviour": 53,
+    "MonoScript": 22,
+    "MeshRenderer": 10,
+    "MeshFilter": 10,
+    "MeshCollider": 4,
+    "Material": 4,
+    "Texture2D": 2,
+    "AnimationClip": 2,
+    "Animator": 1,
+    "Camera": 1
+   },
+   "names": [
+    "Wwise",
+    "EnemyMarkers",
+    "3-UnitMarker",
+    "4-UnitMarker",
+    "EnemyMarkersAOE",
+    "WipeToBlackCenter",
+    "Actor Track",
+    "Stop Cutscene",
+    "All",
+    "Curve Clip",
+    "BackRow",
+    "prefab.battle_character_event_nexu_layout_00",
+    "PlayerMarkers",
+    "Enable",
+    "1-UnitMarker",
+    "5-UnitMarker",
+    "All",
+    "Character Track Group",
+    "FrontRow",
+    "Post Wwise Event"
+   ],
+   "textures": [
+    "battle_wipe_edge_tex",
+    "battle_wipe_black_tex"
+   ]
+  },
+  {
+   "bundle": "battle_character_event_glrey_layout",
+   "size": 47930,
+   "types": {
+    "Transform": 49,
+    "GameObject": 49,
+    "MonoBehaviour": 40,
+    "MonoScript": 16,
+    "MeshFilter": 9,
+    "MeshRenderer": 9,
+    "MeshCollider": 3,
+    "Material": 3,
+    "Texture2D": 2,
+    "BoxCollider": 1,
+    "AssetBundle": 1,
+    "Camera": 1
+   },
+   "names": [
+    "All",
+    "FrontRow",
+    "Actor Track",
+    "prefab.battle_character_event_glrey_layout",
+    "BackRow",
+    "WipeToBlackCutscenes",
+    "Curve Clip",
+    "Curve Clip",
+    "4-UnitMarker",
+    "Enable",
+    "WipeToBlackIn",
+    "WipeToBlack",
+    "Curve Track",
+    "All",
+    "Actor Track",
+    "Actor Track",
+    "WipeToBlackOut",
+    "Particle_collision_plane",
+    "WipeToBlackCenter",
+    "3-UnitMarker"
+   ],
+   "textures": [
+    "battle_wipe_edge_tex",
+    "battle_wipe_black_tex"
+   ]
+  },
+  {
+   "bundle": "battle_character_pve_jabbagl_tier5",
+   "size": 16255,
+   "types": {
+    "GameObject": 28,
+    "Transform": 28,
+    "MonoBehaviour": 20,
+    "Animator": 13,
+    "MonoScript": 7,
+    "MeshFilter": 6,
+    "MeshRenderer": 6,
+    "BoxCollider": 1,
+    "Material": 1,
+    "AssetBundle": 1,
+    "Camera": 1
+   },
+   "names": [
+    "prefab.battle_character_pve_jabbaGL_tier5",
+    "PlayerMarkersAOE",
+    "1-UnitMarker",
+    "2-UnitMarker",
+    "BackRow",
+    "Camera",
+    "All",
+    "3-UnitMarker",
+    "7-UnitMarker (Big)",
+    "EnemyMarkers",
+    "6-UnitMarker",
+    "FrontRow",
+    "Particle_collision_plane",
+    "4-UnitMarker",
+    "5-UnitMarker",
+    "1-UnitMarker",
+    "6-UnitMarker (Ally)",
+    "4-UnitMarker",
+    "3-UnitMarker",
+    "BackRow"
+   ],
+   "textures": []
+  }
+ ],
+ "background": [
+  {
+   "bundle": "background_episode_08",
+   "size": 2064758,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.background_episode_08"
+   ]
+  },
+  {
+   "bundle": "background_episode_09",
+   "size": 1792821,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.background_episode_09"
+   ]
+  },
+  {
+   "bundle": "background_episode_07",
+   "size": 1117362,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.background_episode_07"
+   ]
+  }
+ ],
+ "cantinapatron": [
+  {
+   "bundle": "cantinapatron_zygerrian_female_01_pre",
+   "size": 1666398,
+   "types": {
+    "GameObject": 30,
+    "Transform": 30,
+    "AnimationClip": 21,
+    "MonoBehaviour": 7,
+    "Texture2D": 5,
+    "MonoScript": 3,
+    "Material": 2,
+    "Shader": 2,
+    "Mesh": 2,
+    "SkinnedMeshRenderer": 1,
+    "CapsuleCollider": 1,
+    "AnimatorController": 1
+   },
+   "names": [
+    "Left_shldrJNT",
+    "Right_ankleJNT",
+    "Left_hipJNT",
+    "neckJNT",
+    "Left_wrstJNT",
+    "pelvicJNT",
+    "cantinapatron_zygerrian_female_01_mesh",
+    "Right_wpn_offsetJNT",
+    "Right_wrstJNT",
+    "Right_ballJNT",
+    "home_cup_01",
+    "headJNT",
+    "spine2JNT",
+    "Left_ankleJNT",
+    "Left_clavJNT",
+    "Left_wpn_offsetJNT",
+    "Left_wpnJNT",
+    "Right_shldrJNT",
+    "spine1JNT",
+    "Left_ballJNT"
+   ],
+   "textures": [
+    "matcap_kraytdragon_teeth_tex",
+    "cantinapatron_zygerrian_female_01_tex",
+    "home_cups_tex",
+    "cantinapatron_zygerrian_female_01_mask",
+    "home_cups_char_mask"
+   ]
+  },
+  {
+   "bundle": "cantinapatron_rodian_male_01_pre",
+   "size": 1642874,
+   "types": {
+    "Transform": 30,
+    "GameObject": 30,
+    "AnimationClip": 21,
+    "MonoBehaviour": 7,
+    "Texture2D": 4,
+    "MonoScript": 3,
+    "Material": 2,
+    "Shader": 2,
+    "Mesh": 2,
+    "MeshFilter": 1,
+    "AnimatorController": 1,
+    "AssetBundle": 1
+   },
+   "names": [
+    "Right_hipJNT",
+    "Right_wpnJNT",
+    "Right_kneeJNT",
+    "home_cup_01",
+    "spine1JNT",
+    "Left_ballJNT",
+    "Left_elbwJNT",
+    "CupLocator",
+    "spine2JNT",
+    "prefab.cantinapatron_rodian_male_01_pre",
+    "Left_clavJNT",
+    "headJNT",
+    "Right_clavJNT",
+    "Left_wrstJNT",
+    "Right_shldrJNT",
+    "Right_ballJNT",
+    "Left_shldrJNT",
+    "Left_wpn_offsetJNT",
+    "Scaler",
+    "Left_wpnJNT"
+   ],
+   "textures": [
+    "cantinapatron_rodian_male_01_mask",
+    "cantinapatron_rodian_male_01_tex",
+    "home_cups_tex",
+    "home_cups_char_mask"
+   ]
+  },
+  {
+   "bundle": "cantinapatron_human_male_01_pre",
+   "size": 1564179,
+   "types": {
+    "Transform": 30,
+    "GameObject": 30,
+    "AnimationClip": 21,
+    "MonoBehaviour": 7,
+    "Texture2D": 4,
+    "MonoScript": 3,
+    "Shader": 2,
+    "Mesh": 2,
+    "Material": 2,
+    "MeshFilter": 1,
+    "Avatar": 1,
+    "AnimatorController": 1
+   },
+   "names": [
+    "Left_wpn_offsetJNT",
+    "home_cup_01",
+    "Right_wrstJNT",
+    "Right_clavJNT",
+    "Right_shldrJNT",
+    "spine2JNT",
+    "Left_ankleJNT",
+    "Left_wrstJNT",
+    "Left_clavJNT",
+    "Right_wpn_offsetJNT",
+    "Left_elbwJNT",
+    "Right_elbwJNT",
+    "Left_wpnJNT",
+    "Left_hipJNT",
+    "Right_ankleJNT",
+    "Scaler",
+    "pelvicJNT",
+    "Left_ballJNT",
+    "Left_kneeJNT",
+    "cantinapatron_human_male_01_mesh"
+   ],
+   "textures": [
+    "cantinapatron_human_male_01_tex",
+    "cantinapatron_human_male_01_mask",
+    "home_cups_tex",
+    "home_cups_char_mask"
+   ]
+  }
+ ],
+ "vanity": [
+  {
+   "bundle": "vanity_seventhsister",
+   "size": 35997,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.vanity_seventhsister"
+   ]
+  },
+  {
+   "bundle": "vanity_kylotros",
+   "size": 9841,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.vanity_kylotros"
+   ]
+  },
+  {
+   "bundle": "vanity_extralife2024",
+   "size": 9666,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.vanity_extralife2024"
+   ]
+  }
+ ],
+ "newsletter": [
+  {
+   "bundle": "newsletter_large_rue",
+   "size": 415391,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.newsletter_large_rue"
+   ]
+  },
+  {
+   "bundle": "newsletter_fifthbrother_lp",
+   "size": 107437,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.newsletter_fifthbrother_lp"
+   ]
+  },
+  {
+   "bundle": "newsletter_era05",
+   "size": 18491,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.newsletter_era05"
+   ]
+  }
+ ],
+ "charui": [
+  {
+   "bundle": "charui_onboarding_c3p0",
+   "size": 105323,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.charui_onboarding_c3p0"
+   ]
+  },
+  {
+   "bundle": "charui_stormtrooperconcept",
+   "size": 8466,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.charui_stormtrooperconcept"
+   ]
+  },
+  {
+   "bundle": "charui_jedi_vanguard_03",
+   "size": 7540,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.charui_jedi_vanguard_03"
+   ]
+  }
+ ],
+ "ui": [
+  {
+   "bundle": "ui_galacticbundlecelebration_view",
+   "size": 1102123,
+   "types": {
+    "Transform": 449,
+    "GameObject": 449,
+    "MonoBehaviour": 399,
+    "ParticleSystemRenderer": 54,
+    "ParticleSystem": 54,
+    "MonoScript": 34,
+    "Material": 26,
+    "Texture2D": 10,
+    "MeshFilter": 6,
+    "MeshRenderer": 6,
+    "TrailRenderer": 6,
+    "Animation": 4
+   },
+   "names": [
+    "Text Reveal (1)",
+    "Curve Clip",
+    "Enable",
+    "Music",
+    "GalacticBundleCelebrationCutscene",
+    "Top Tiny Label",
+    "Disable",
+    "play",
+    "Item Container",
+    "futura_bold",
+    "Disable",
+    "Text Reveal",
+    "resource flare 03",
+    "Text Hide",
+    "dot1",
+    "Center",
+    "Items Complete",
+    "Resource Container",
+    "Tally Text SFX",
+    "Disable"
+   ],
+   "textures": [
+    "godray_03_tex",
+    "vfx_gear_5x5_tex",
+    "flare_underline_01_tex",
+    "vfx_ships_4x2_tex",
+    "grad_line_vertical_03_tex",
+    "lens_grunge_tex",
+    "flare_jj_01_tex",
+    "vfx_holo_sphere_lines_01_tex",
+    "spark_cloud_tex",
+    "vfx_chars_5x5_tex"
+   ]
+  },
+  {
+   "bundle": "ui_material_tile_variant_small",
+   "size": 90763,
+   "types": {
+    "GameObject": 53,
+    "Transform": 53,
+    "MonoBehaviour": 50,
+    "MonoScript": 13,
+    "Material": 11,
+    "Texture2D": 4,
+    "AssetBundle": 1,
+    "BoxCollider": 1
+   },
+   "names": [
+    "Star Seven Container",
+    "Challenges Highlight",
+    "Sprite",
+    "Three Star Rarity",
+    "mod_material_tile_helper",
+    "Add Icon",
+    "Information Label",
+    "Tile Background",
+    "Tier Sprite",
+    "standard_tile_helper",
+    "Ship Thumbnail Texture",
+    "Seven Star Rarity",
+    "One Star Rarity",
+    "Star Four Container",
+    "Found Container",
+    "Star Six Container",
+    "ui.ui_material_tile_variant_small",
+    "Ship Shard Tile Background",
+    "Background",
+    "standard_body_font_ref"
+   ],
+   "textures": [
+    "modsalvage_frame_mask_tex",
+    "equip_modsalvage_glow",
+    "shardui_noise_tex",
+    "ship_shard_grid_tex"
+   ]
+  },
+  {
+   "bundle": "ui_chip_shard_tile",
+   "size": 57723,
+   "types": {
+    "MonoBehaviour": 15,
+    "Transform": 12,
+    "GameObject": 12,
+    "MonoScript": 9,
+    "Material": 8,
+    "Texture2D": 2,
+    "AssetBundle": 1,
+    "BoxCollider": 1
+   },
+   "names": [
+    "Press Highlight",
+    "standard_tile_helper",
+    "Highlight",
+    "Back",
+    "Tile Backface",
+    "standard_body_font_ref",
+    "Galactic Legend Shard Texture Frame",
+    "trade_gothic",
+    "Shard Texture",
+    "Front",
+    "ui.ui_chip_shard_tile",
+    "Info Label"
+   ],
+   "textures": [
+    "shardui_noise_tex",
+    "ship_shard_grid_tex"
+   ]
+  }
+ ],
+ "relic": [
+  {
+   "bundle": "relic_detailsview",
+   "size": 1116236,
+   "types": {
+    "MonoBehaviour": 686,
+    "GameObject": 525,
+    "Transform": 525,
+    "BoxCollider": 48,
+    "MonoScript": 40,
+    "ParticleSystemRenderer": 38,
+    "ParticleSystem": 38,
+    "Material": 17,
+    "Texture2D": 9,
+    "Shader": 3,
+    "Rigidbody": 2,
+    "AssetBundle": 1
+   },
+   "names": [
+    "energy",
+    "Green Plus",
+    "growing_dot",
+    "Green Plus",
+    "Max",
+    "futura_bold",
+    "bottom_L",
+    "greeble",
+    "Green Plus",
+    "Divider",
+    "Amount",
+    "Button",
+    "Max Container",
+    "Divider",
+    "standard_flexibletile_tag",
+    "Button",
+    "Max",
+    "Divider",
+    "Icon",
+    "Amount"
+   ],
+   "textures": [
+    "pips_empty-23",
+    "pips_fill_white",
+    "pips_gradient",
+    "relic_atlas",
+    "circle_dash_in_3x3",
+    "ring_01_tex",
+    "amplifier_frame",
+    "Default-Particle",
+    "pips_mask-23"
+   ]
+  },
+  {
+   "bundle": "relic_item_k2so",
+   "size": 25338,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.relic_item_k2so"
+   ]
+  },
+  {
+   "bundle": "relic_pst_lando",
+   "size": 20520,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.relic_pst_lando"
+   ]
+  }
+ ],
+ "equip": [
+  {
+   "bundle": "equip_powerconvertor",
+   "size": 72571,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.equip_powerconvertor"
+   ]
+  },
+  {
+   "bundle": "equip_shieldgenerator_salvage",
+   "size": 10348,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.equip_shieldgenerator_salvage"
+   ]
+  },
+  {
+   "bundle": "equip_injectorhead_prototype",
+   "size": 9672,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.equip_injectorhead_prototype"
+   ]
+  }
+ ],
+ "guild": [
+  {
+   "bundle": "guild_territory_geonosisseparatists_icon",
+   "size": 364191,
+   "types": {
+    "Texture2D": 7,
+    "Transform": 5,
+    "GameObject": 5,
+    "MeshRenderer": 4,
+    "MeshFilter": 4,
+    "Material": 4,
+    "MonoScript": 3,
+    "MonoBehaviour": 3,
+    "Mesh": 3,
+    "AssetBundle": 1
+   },
+   "names": [
+    "separatists",
+    "prefab.guild_territory_geonosisseparatists_icon",
+    "hailfire_mesh",
+    "geonosis_planet",
+    "atte_mesh"
+   ],
+   "textures": [
+    "atte_tex",
+    "space_planet_clouds_03_tex",
+    "hailfire_tex",
+    "tb_faction_empire_tex",
+    "scan_line_blue",
+    "space_planet_yavin4_tex",
+    "space_planet_bespin_tex"
+   ]
+  },
+  {
+   "bundle": "guild_icon_sithempire",
+   "size": 25188,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.guild_icon_sithempire"
+   ]
+  },
+  {
+   "bundle": "guild_icon_blacksun_small",
+   "size": 9530,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.guild_icon_blacksun_small"
+   ]
+  }
+ ],
+ "conquest": [
+  {
+   "bundle": "conquest_map_layout_legendary_path_treasurenode_x3",
+   "size": 4625980,
+   "types": {
+    "MonoBehaviour": 10310,
+    "GameObject": 9534,
+    "Transform": 9534,
+    "BoxCollider": 149,
+    "Animator": 79,
+    "MonoScript": 31,
+    "ParticleSystem": 5,
+    "Material": 5,
+    "ParticleSystemRenderer": 5,
+    "AnimationClip": 4,
+    "AssetBundle": 1,
+    "Shader": 1
+   },
+   "names": [
+    "Boss Preview Unit",
+    "Foreground",
+    "Omicron Texture",
+    "Six Star Rarity",
+    "Pip (5)",
+    "Stamina Percentage Label",
+    "Pip (2)",
+    "Stamina Percentage Label",
+    "Non Leader Sprite",
+    "Pip (3)",
+    "Star One Container",
+    "Pip",
+    "Pip (13)",
+    "Star Six Container",
+    "Star Three Container",
+    "Pip (1)",
+    "ShieldBar",
+    "RarityPanel",
+    "Zeta Alternate Label",
+    "InCrewPanel"
+   ],
+   "textures": []
+  },
+  {
+   "bundle": "conquest_inventory_artifacts_subview",
+   "size": 135807,
+   "types": {
+    "MonoBehaviour": 200,
+    "GameObject": 138,
+    "Transform": 138,
+    "MonoScript": 30,
+    "BoxCollider": 10,
+    "Material": 1,
+    "AssetBundle": 1
+   },
+   "names": [
+    "standard_conquestflexibletile",
+    "vfx effect",
+    "standard_badge_label",
+    "Percent Label",
+    "Filter 1",
+    "Badge Label",
+    "Idle Animation",
+    "vfx effect",
+    "discount_group",
+    "Sale Tab",
+    "Original Price Label",
+    "Filter 3",
+    "Scroll View Panel",
+    "standard_badge_label",
+    "Press Highlight",
+    "Original Price",
+    "Percent Label",
+    "Confirm Cost Button",
+    "Icon",
+    "Filter Sprite"
+   ],
+   "textures": []
+  },
+  {
+   "bundle": "conquest_consumables_mini",
+   "size": 73850,
+   "types": {
+    "MonoBehaviour": 71,
+    "GameObject": 63,
+    "Transform": 63,
+    "MonoScript": 14,
+    "BoxCollider": 4,
+    "Material": 1,
+    "AssetBundle": 1
+   },
+   "names": [
+    "ui.ui_consumable_slot",
+    "Timer Label",
+    "Consumable Type Icon",
+    "TimerIVP",
+    "Consumable Type Icon",
+    "Consumable Effect Icon",
+    "standard_badge_label",
+    "Consumable Subicon Frame Rarity ",
+    "TimerIVP",
+    "TimerIVP",
+    "Consumable Subicon Frame Rarity ",
+    "Consumable Frame Rarity",
+    "Consumable Available Indicator",
+    "ConsumableGroup",
+    "Consumable Subicon Frame Rarity ",
+    "Consumable Type Icon",
+    "ui.ui_consumable",
+    "Consumable1",
+    "Time Icon",
+    "Time Icon"
+   ],
+   "textures": []
+  }
+ ],
+ "events": [
+  {
+   "bundle": "events_cinta",
+   "size": 276712,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.events_cinta"
+   ]
+  },
+  {
+   "bundle": "events_b28",
+   "size": 116932,
+   "types": {
+    "AssetBundle": 1,
+    "Texture2D": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.events_b28"
+   ]
+  },
+  {
+   "bundle": "events_icon_dathomir_battle",
+   "size": 4653,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.events_icon_dathomir_battle"
+   ]
+  }
+ ],
+ "shared_misc": [
+  {
+   "bundle": "shared_animationcontainer",
+   "size": 4222072,
+   "types": {
+    "AnimationClip": 178,
+    "MonoScript": 2,
+    "GameObject": 1,
+    "MonoBehaviour": 1,
+    "Transform": 1,
+    "AssetBundle": 1
+   },
+   "names": [
+    "prefab.shared_animationcontainer"
+   ],
+   "textures": []
+  },
+  {
+   "bundle": "shared_resourcecontainer",
+   "size": 14955759,
+   "types": {
+    "Transform": 400,
+    "GameObject": 400,
+    "Texture2D": 156,
+    "Mesh": 77,
+    "SkinnedMeshRenderer": 71,
+    "Avatar": 15,
+    "Animator": 15,
+    "Material": 11,
+    "MonoBehaviour": 9,
+    "Sprite": 6,
+    "MeshFilter": 5,
+    "MeshRenderer": 5
+   },
+   "names": [
+    "Right_ballJNT",
+    "Right_wrstJNT",
+    "Left_clavJNT",
+    "Left_kneeJNT",
+    "Right_elbwJNT",
+    "Right_ballJNT",
+    "Left_ballJNT",
+    "Left_wpn_offsetJNT",
+    "pelvicJNT",
+    "Right_kneeJNT",
+    "headJNT",
+    "Left_wpnJNT",
+    "troopersnow_kama_mesh",
+    "Left_clavJNT",
+    "Left_wpnJNT",
+    "Left_kneeJNT",
+    "ewok_warrior_mesh",
+    "Left_wrstJNT",
+    "Right_elbwJNT",
+    "Right_shldrJNT"
+   ],
+   "textures": [
+    "noiseglw01_tex",
+    "noiseglw01_alpha_tex",
+    "ui_taunt_01",
+    "matcap_skin_tex",
+    "sparkler_tex",
+    "Smoke_cloud4x4",
+    "lightbeams01_tex",
+    "ewok_tex",
+    "vfx_heightmap_01_tex",
+    "matcap_leather_tex",
+    "pirate_body_mask",
+    "Smoke_cloudB4x4"
+   ]
+  },
+  {
+   "bundle": "shared_shadercontainer",
+   "size": 312732,
+   "types": {
+    "Shader": 39,
+    "Material": 4,
+    "Texture2D": 4,
+    "GameObject": 1,
+    "MonoBehaviour": 1,
+    "AssetBundle": 1,
+    "MonoScript": 1,
+    "Transform": 1
+   },
+   "names": [
+    "prefab.shared_shadercontainer"
+   ],
+   "textures": [
+    "shipui_capship_alpha_mask_tex",
+    "shipui_alpha_mask_tex",
+    "charui_alpha_mask_tex",
+    "shadowsmash_pattern"
+   ]
+  },
+  {
+   "bundle": "shared_uicontainer",
+   "size": 35120578,
+   "types": {
+    "MonoBehaviour": 24,
+    "Texture2D": 8,
+    "MonoScript": 7,
+    "Material": 7,
+    "Transform": 1,
+    "Shader": 1,
+    "GameObject": 1,
+    "AssetBundle": 1
+   },
+   "names": [
+    "ui.shared_uicontainer"
+   ],
+   "textures": [
+    "charactermods_datacard_atlas",
+    "standard_atlas",
+    "battleui_view_rgba_atlas",
+    "misc_atlas",
+    "resourcesshared_atlas",
+    "unit_atlas",
+    "grad_slash_01_tex",
+    "standard_rgba_atlas"
+   ]
+  }
+ ],
+ "misc_odd": [
+  {
+   "bundle": "malevolence_pre",
+   "size": 999445,
+   "types": {
+    "GameObject": 57,
+    "Transform": 57,
+    "ParticleSystemRenderer": 23,
+    "ParticleSystem": 23,
+    "Material": 18,
+    "Texture2D": 11,
+    "MonoScript": 9,
+    "MonoBehaviour": 9,
+    "Mesh": 2,
+    "MeshRenderer": 2,
+    "Shader": 2,
+    "MeshFilter": 2
+   },
+   "names": [
+    "OffhandArea (6)",
+    "vfx.vfx_capship_engine_exp_pre",
+    "WeaponArea2",
+    "CameraMarker_Player_Ion_Buff",
+    "malevolence_a_mesh",
+    "malevolence_mesh",
+    "CameraMarker_Player_Ion_Cannon",
+    "CapShipHitArea",
+    "HitArea1",
+    "post_smoke",
+    "OffhandArea (5)",
+    "CameraMarker_Enemy_Ion_Buff",
+    "WeaponArea3",
+    "CameraMarker_Enemy_Atk",
+    "CameraMarker_Enemy_Ion_Cannon",
+    "blursmoke",
+    "HeadArea",
+    "Flare",
+    "Shock",
+    "UIMarker"
+   ],
+   "textures": [
+    "flare_03_tex_blue",
+    "malevolence_a_mask",
+    "snow_explosion_5x5",
+    "flare_underline_01_tex",
+    "vfx_crack_01",
+    "malevolence_b_tex",
+    "t_fx_dustCloud",
+    "malevolence_a_tex",
+    "smoke_07_mask",
+    "Default-Particle",
+    "malevolence_b_mask"
+   ]
+  },
+  {
+   "bundle": "pabu_sunset",
+   "size": 875354,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.pabu_sunset"
+   ]
+  },
+  {
+   "bundle": "shar_cantina_pre",
+   "size": 1689958,
+   "types": {
+    "Transform": 32,
+    "GameObject": 32,
+    "AnimationClip": 21,
+    "MonoBehaviour": 7,
+    "Texture2D": 4,
+    "MonoScript": 3,
+    "Mesh": 2,
+    "Shader": 2,
+    "Material": 2,
+    "Avatar": 1,
+    "MeshRenderer": 1,
+    "AnimatorController": 1
+   },
+   "names": [
+    "Right_sholdrPadJNT",
+    "Left_clavJNT",
+    "Right_ballJNT",
+    "Left_wpn_offsetJNT",
+    "Right_wrstJNT",
+    "Left_sholdrPadJNT",
+    "home_cup_01",
+    "Left_wrstJNT",
+    "Left_wpnJNT",
+    "neckJNT",
+    "prefab.shar_cantina_pre",
+    "Left_ballJNT",
+    "Left_hipJNT",
+    "Right_wpn_offsetJNT",
+    "Left_ankleJNT",
+    "Right_wpnJNT",
+    "Scaler",
+    "Left_kneeJNT",
+    "headJNT",
+    "Left_shldrJNT"
+   ],
+   "textures": [
+    "shar_tex",
+    "home_cups_tex",
+    "shar_mask",
+    "home_cups_char_mask"
+   ]
+  },
+  {
+   "bundle": "emp_throne_room_dest_scene",
+   "size": 5051845,
+   "types": {
+    "GameObject": 89,
+    "Transform": 89,
+    "MonoBehaviour": 55,
+    "MeshRenderer": 54,
+    "MeshFilter": 54,
+    "Material": 22,
+    "ParticleSystem": 19,
+    "ParticleSystemRenderer": 19,
+    "Texture2D": 18,
+    "Mesh": 6,
+    "MonoScript": 5,
+    "Shader": 4
+   },
+   "names": [
+    "emp_debris_02c_mesh (1)",
+    "emp_debris_01_mesh (6)",
+    "env_vfx_rain",
+    "emp_debris_02b_mesh",
+    "emp_debris_02e_mesh (4)",
+    "vfx.vfx_background_waves_slpashs_pre",
+    "flare_lg (1)",
+    "emp_debris_02e_mesh (1)",
+    "RealtimeLight02",
+    "Plane Transform 2",
+    "emp_debris_03b_mesh (5)",
+    "emp_broken_windows",
+    "emp_debris_01_mesh (3)",
+    "emp_broken_windows",
+    "emp_debris_01_mesh (7)",
+    "emp_debris_03b_mesh (4)",
+    "emp_throne_screen_mesh (2)",
+    "emp_debris_03b_mesh (3)",
+    "battle_layout_marker_flipped",
+    "emp_debris_02e_mesh"
+   ],
+   "textures": [
+    "emp_debris_04_tex",
+    "emp_throne_screen_tex",
+    "Lightmap-0_comp_light",
+    "emp_throne_dest_floor_mask",
+    "deathstar_skybox_01_tex",
+    "emp_debris_03_tex",
+    "emp_window_dest_tex",
+    "emp_throne_dest_tex",
+    "emp_debris_02_tex",
+    "godray_04_tex",
+    "emp_wall_05_tex",
+    "emp_debris_01_tex"
+   ]
+  },
+  {
+   "bundle": "fo_kylo_quarters_kijimi_scene",
+   "size": 3165235,
+   "types": {
+    "GameObject": 326,
+    "Transform": 326,
+    "MonoBehaviour": 258,
+    "MeshRenderer": 188,
+    "MeshFilter": 188,
+    "Material": 58,
+    "Mesh": 46,
+    "Texture2D": 42,
+    "ParticleSystem": 32,
+    "ParticleSystemRenderer": 32,
+    "MonoScript": 21,
+    "MeshCollider": 8
+   },
+   "names": [
+    "kiji_arch_wall_02_mesh",
+    "kiji_wall_corner_01a_mesh (6)",
+    "fo_pillar_02_mesh (4)",
+    "fo_pillar_02_mesh",
+    "env_vfx_spot_light",
+    "fo_vader_pedestal_01b_mesh",
+    "whitewall",
+    "whitewall (1)",
+    "clash hold",
+    "fo_wall_window_01_mesh (2)",
+    "kiji_wall_01b_mesh (29)",
+    "streaks_default_vfx",
+    "env_vfx_snow_fog",
+    "Art Assets",
+    "fo_misc_02b_mesh",
+    "kiji_light_01_mesh",
+    "RealtimeLightKijimi02",
+    "Kijimi",
+    "Global Track",
+    "kiji_wall_01b_mesh (12)"
+   ],
+   "textures": [
+    "flare_jj_01_tex",
+    "kiji_misc_02_tex",
+    "kiji_light_03_tex",
+    "smoke_dual_02_tex",
+    "fo_stairs_02_tex",
+    "fo_floor_02bcd_tex",
+    "kiji_wall_corner_01_tex",
+    "ship_sith_fighter_mask",
+    "fo_wall_window_01_tex",
+    "jak_misc_04_tex",
+    "kiji_lights_misc_0102_tex",
+    "fo_pillar_02_emiss"
+   ]
+  },
+  {
+   "bundle": "logo_splash_era08_newrepublic",
+   "size": 1032769,
+   "types": {
+    "Texture2D": 1,
+    "AssetBundle": 1
+   },
+   "names": [],
+   "textures": [
+    "tex.logo_splash_era08_newrepublic"
+   ]
+  },
+  {
+   "bundle": "era_characterupgradecelebrationui_view",
+   "size": 504485,
+   "types": {
+    "Transform": 498,
+    "GameObject": 498,
+    "MonoBehaviour": 462,
+    "MonoScript": 43,
+    "ParticleSystemRenderer": 41,
+    "ParticleSystem": 41,
+    "Material": 12,
+    "BoxCollider": 5,
+    "Shader": 3,
+    "Texture2D": 2,
+    "Rigidbody": 1,
+    "AssetBundle": 1
+   },
+   "names": [
+    "Play VFX Event",
+    "Curve Track",
+    "vfx.vfx_star_background_pre",
+    "Post Wwise Event",
+    "Curve Track",
+    "Actor Track",
+    "ui.era_characterupgradecelebrationui_view",
+    "_Promotion Cutscene",
+    "Enable",
+    "Animated Intelligence Amount",
+    "Actor Track Group",
+    "Actor Track Group",
+    "View",
+    "Right Unit Level Label Cutscene",
+    "Enable",
+    "Disable",
+    "Curve Track",
+    "Actor Track",
+    "Curve Clip",
+    "Right Unit Level Label"
+   ],
+   "textures": [
+    "White_Sq_tex",
+    "eraportrait_alpha_mask_tex"
+   ]
+  }
+ ]
+}
