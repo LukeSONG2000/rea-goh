@@ -38,6 +38,18 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 | roster UI 官方头像 | ✅ 01:1x（game/portraits.json 237/308 经 units.json thumbnailName 解析；/api/roster 下发 web-root 路径；battle.html 卡片优先头像、无头像回退 T-pose；本地+公共均验证 200；坑: 索引 portraits 路径无 tex. 前缀且为旧文件名 → 以 thumbnailName 为准） |
 | B 回归修复 | ⏳ 等 B（tracker 每 ~5 分钟巡检 GLB mtime + verifier） |
 
+## 终验矩阵（01:12 tracker 复跑）
+
+| 门 | 结果 |
+|---|---|
+| tools/verify_attachments.py（A, 7 char 广集） | ✅ exit 0, all prop attachments within tolerance（upright probe: 脚 y≈0/头上位 = 倾斜修复保持） |
+| tools/verify_variants_vfx.py（B, 4 char × 6 项） | ⚠️ 18 PASS / 2 FAIL（jynerso P5 缺 1 隐藏标记；vaderduelsend P7 披风 t0 max 0.76）— NEEDS-REVIEW |
+| tools/verify_env_ground.py（C, 地面+站位覆盖） | ✅ 5/6（env_ata_chopperbase 不在缓存=预期缺失） |
+| tools/audit_fidelity.py（fleet 1466 GLB） | ✅ exit 0, V1=0, V2=0 |
+| 引擎确定性（本地 4 组对阵） | ✅ 同种子逐字段一致 / 异种子不同 |
+| 公共确定性（seed=123 两次请求） | ✅ 事件 md5 一致 2b5e8e78 |
+| 公共面 | ✅ battle.html 200（staging+头像代码在位）/ /api/battle 技能名 / portrait 200 / env+anim GLB 200 / goh-battle active |
+
 ## 事件日志
 
 - 10-15 23:20 tracker 启动；快照：A 未交付、B 未交付、C 进行中（资产半数已落盘，服务端/前端补丁未到）
