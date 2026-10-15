@@ -23,6 +23,11 @@ UNIT_SPEED_FILL_MAX = 100.0     # GameConstants+0x24B4 (ctor imm 0x42C80000)
 CRIT_RATING_MOD = 100.0         # +0x2308 attack / +0x22F0 ability (ctor imm)
 CRIT_CHANCE_LEVEL_DELTA_MAX = 1.0   # +0x22F8 attack / +0x22E0 ability (ctor imm)
 DAMAGE_MOD_LEVEL_DELTA_MAX = 1.0    # +0x2340 / era +0x2334 (ctor imm)
+ARMOR_RATING_MOD = 100.0        # +0x22F4 UnitArmorRatingMod (ctor imm)
+SUPPRESSION_RATING_MOD = 100.0  # +0x24E0 UnitSuppressionRatingMod (ctor imm)
+MITIGATION_LEVEL_OFFSET = 0     # +0x1C34 ShipMitigationAttackerLevelOffset
+                                # (data-driven; the same offset serves units --
+                                # disasm selects armor/suppression by damageType)
 
 # Data-driven GameConstants fields (not in the binary; from gamedata mirror):
 CRIT_CHANCE_LEVEL_DELTA_PER_LEVEL = 0.0    # +0x2300 / ability +0x22E8
@@ -305,16 +310,24 @@ class BattleSimulation:
         """ProcessMitigation (0x181366000) stat selection:
         physical -> target ARMOR vs attacker ARMOR_PENETRATION
         ability  -> target SUPPRESSION vs attacker SUPPRESSION_PENETRATION
-        plus target's DEFENSE_PENETRATION_TARGET_PERCENT_ADDITIVE (stat 56).
-        The percentage formula itself lives in
-        StatCalculator.GetMitigationPercentFromRating (0x180FDFDF0), which
-        decompiled to a thin dispatch -- rating->percent conversion constants
-        are data-driven; plug in from the gamedata mirror."""
+        plus target's DEFENSE_PENETRATION_TARGET_PERCENT_ADDITIVE (stat 56)."""
         if is_attack:
             return (target.get_stat(STAT_ARMOR),
                     attacker.get_stat(STAT_ARMOR_PENETRATION))
         return (target.get_stat(STAT_SUPPRESSION),
                 attacker.get_stat(STAT_SUPPRESSION_PENETRATION))
+
+    @staticmethod
+    def mitigation_percent(rating, attacker_level, is_attack):
+        """GetMitigationPercentFromRating (0x180FDFDF0, from disassembly --
+        the C decompile mangled the float return):
+        pct = rating / (rating + (attacker_level + LevelOffset) * RatingMod) * 100
+        RatingMod: physical UnitArmorRatingMod(+0x22F4)=100, ability
+        UnitSuppressionRatingMod(+0x24E0)=100; ship-mode variants
+        (+0x1C28/+0x1C64) also 100.  LevelOffset (+0x1C34) is data-driven."""
+        mod = ARMOR_RATING_MOD if is_attack else SUPPRESSION_RATING_MOD
+        denom = rating + (attacker_level + MITIGATION_LEVEL_OFFSET) * mod
+        return rating / denom * 100.0
 
     # -- turn priority (GiveUnitTurnPriority 0x181CFF800) ------------------
     def give_turn_priority(self, unit):
