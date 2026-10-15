@@ -79,15 +79,33 @@ def staging_for_env(env):
     return out
 
 
+_PORTRAITS = None
+
+
+def portraits():
+    """def_id -> official UI portrait path (extracted_ui/charui, resolved
+    from units.json thumbnailName; game/portraits.json built offline)."""
+    global _PORTRAITS
+    if _PORTRAITS is None:
+        path = os.path.join(ROOT, "game", "portraits.json")
+        _PORTRAITS = json.load(open(path, encoding="utf-8")) \
+            if os.path.exists(path) else {}
+    return _PORTRAITS
+
+
 def roster_payload():
     r = data_units.roster()
+    ports = portraits()
     out = []
     for k, v in sorted(r.items()):
         folder = v.get("char") or ""
         anim = os.path.exists(os.path.join(
             ROOT, "extracted", folder, folder + ".anim.glb"))
         out.append({"def_id": k, "name": (v.get("en") or k),
-                    "folder": folder, "anim": anim})
+                    "folder": folder, "anim": anim,
+                    # web-rooted so /viewer pages resolve it (404s would
+                    # otherwise strip the card image via onerror)
+                    "portrait": ('/' + ports[k]) if ports.get(k) else ""})
     return out
 
 

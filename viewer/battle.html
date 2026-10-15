@@ -156,7 +156,9 @@ function fillSelect(sel, preset){
     c.className = 'pc' + (sel._picked.has(u.def_id) ? ' sel' : '');
     c.title = u.name;
     const img = document.createElement('img');
-    img.src = u.folder ? `/previews/${u.folder}.jpg` : '';
+    // official UI portrait (extracted_ui/charui) when resolved,
+    // else the T-pose preview render
+    img.src = u.portrait || (u.folder ? `/previews/${u.folder}.jpg` : '');
     img.loading = 'lazy';
     img.onerror = ()=>img.remove();
     const nm = document.createElement('div');
