@@ -61,3 +61,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 - 10-16 00:38 **B 重试 #3 FAIL → 正式 NEEDS-REVIEW**（三次复跑同结果，输入未变）
 - 10-16 01:0x **roster UI 官方头像落地并部署**: portraits.json（thumbnailName 策略 237/308）+ /api/roster portrait 字段（web-root 路径）+ battle.html 卡片优先头像。调试记录: 8138 曾有**双进程 SO_REUSEADDR 影子监听**导致响应 alternation（全杀后单进程恢复）；相对路径 portrait 从 /viewer/ 页解析成 /viewer/extracted_ui/... 404 被 onerror 移除 → 改 web-root。验证: 本地 474 头像卡片渲染（截图），公共 /api/roster 237、portrait URL 200、battle API 正常
 - 10-16 01:1x jynerso/vaderduelsend 显式补同步（首次全量同步时的竞态文件），md5 c8add6fe / c2d40e70 一致
+- 10-16 01:02 公共 /api/battle 确定性: 两次独立请求（seed=123）事件流 md5 完全一致（2b5e8e78）——公共部署端到端确定性成立。公共静态面: battle.html 200（含 staging/头像代码 9 处命中）、env GLB 200、anim GLB 200
+- agent 侧: 3f6da4f6 docs P1-P6 原版参考截图（验收基准）落库
