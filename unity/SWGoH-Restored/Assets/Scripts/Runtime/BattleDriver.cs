@@ -36,6 +36,7 @@ namespace SwgohRestored.Battle
         readonly Dictionary<string, Animator> _anims = new();
         readonly Dictionary<string, BattleUnit> _unitsById = new();
         BattleSim _sim;
+        readonly BattleHUD _hud = new BattleHUD();
 
         [Serializable]
         class StatKV { public string k; public double v; }
@@ -59,6 +60,8 @@ namespace SwgohRestored.Battle
 
         void Update()
         {
+            if (_sim != null && Camera.main != null)
+                foreach (var u in _sim.Units) _hud.UpdateUnit(u, Camera.main);
             if (!CaptureEnabled) return;
             _captureFrame++;
             foreach (var f in CaptureFrames)
@@ -83,6 +86,7 @@ namespace SwgohRestored.Battle
         {
             var cam = Camera.main;
             if (cam == null) { Debug.LogError("[Capture] no camera"); return; }
+            _hud.SetCamera(cam);   // overlay canvas won't render into cam.Render()
             var diag = _anims.Values.FirstOrDefault();
             if (diag != null)
                 Debug.Log($"[Capture@{path}] animator ctrl={(diag.runtimeAnimatorController ? diag.runtimeAnimatorController.name : "NULL")} " +
@@ -109,6 +113,7 @@ namespace SwgohRestored.Battle
             var opponent = BuildTeam(roster, OpponentTeam, 1);
 
             _sim = new BattleSim(player, opponent, Seed);
+            foreach (var u in player.Concat(opponent)) _hud.TrackUnit(u, Camera.main);
             int guard = 0;
             while (!_sim.CheckEnd(out _) && guard++ < 500)
             {
@@ -189,6 +194,7 @@ namespace SwgohRestored.Battle
             float z = (slot - 2) * SlotSpacing;
             go.transform.position = new Vector3(x, 0, z);
             go.transform.rotation = Quaternion.LookRotation(side == 0 ? Vector3.right : Vector3.left);
+            go.name = u.UnitId;        // BattleHUD resolves bars by UnitId
             go.SetActive(true);   // staged prefabs park inactive
             _rigs[u.UnitId] = go;
             _anims[u.UnitId] = go.GetComponentInChildren<Animator>();
@@ -201,6 +207,7 @@ namespace SwgohRestored.Battle
                 switch (ev.Kind)
                 {
                     case "turn":
+                        _hud.SetTurnText($"Round {_sim.Round}  ·  {ev.Actor}");
                         PlayClip(ev.Actor, "Attack", "Idle");
                         yield return new WaitForSeconds(1.1f);
                         break;
@@ -209,6 +216,7 @@ namespace SwgohRestored.Battle
                         var go = RigOf(ev.Target);
                         if (go) StartCoroutine(Flash(go));
                         PlayClip(ev.Target, "Hit");
+                        _hud.ShowDamage(ev.Target, ev.Amount, ev.Kind == "crit", Camera.main);
                         yield return new WaitForSeconds(0.4f);
                         break;
                     case "death":
