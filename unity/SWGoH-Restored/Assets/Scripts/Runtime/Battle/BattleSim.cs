@@ -320,7 +320,11 @@ namespace SwgohRestored.Battle
             if (foes.Count == 0) return actor;
             var target = foes[0];
             double power = actor.GetStat(actor.IsAttackRole ? 6 : 7);   // ATK / ABILITY_POWER
-            var eff = new DamageEffect { Mult = 1.0, Variance = 0.0, IsAttack = actor.IsAttackRole };
+            // v0 basic attack: damage = ATK via the casterPower factor; the
+            // ProcessSourceDamage factor is neutralized (mult 0 + flat 1)
+            // until ability effect-DOs are wired in
+            var eff = new DamageEffect { Mult = 1.0, Variance = 0.0, IsAttack = actor.IsAttackRole,
+                                         SourceMult = 0.0, SourceFlat = 1.0 };
             ApplyDamage(actor, target, power, eff);
             Log.Add(new BattleEvent { Turn = Round, Actor = actor.BaseId, ActorSide = actor.Side == 0 ? "player" : "opponent",
                                       Kind = "turn", Target = target.BaseId });
