@@ -123,8 +123,13 @@ def generic_channels(js, idx, cmap, clip, times, verbose):
     return channels
 
 
-def export_char_v2(char, refs, shared_names, force=False, verbose=True):
+def export_char_v2(char, refs, shared_names, force=False, verbose=True,
+                   states=None):
     """refs: [{'source','path_id'}] -- the char's own controller bindings.
+    states: optional state table from catalog/char_anim_states.json --
+    when given, animations are ORDERED by the game's state machine
+    (default state first) and NAMED by state name (the real action name),
+    replacing the clip-name heuristics entirely.
     Returns (status, n_clips, bytes)."""
     glb_in = os.path.join(ROOT, "extracted", char, f"{char}.glb")
     glb_out = os.path.join(ROOT, "extracted", char, f"{char}.anim.glb")
@@ -163,15 +168,53 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True):
     except (SystemExit, RigMismatch):
         joints = None   # non-humanoid rig -> generic route only
 
-    # order clips: standing idle first
-    named = []
-    for r in refs:
-        if r["source"] == SHARED:
-            name = shared_names.get(r["path_id"], f"shared_{r['path_id']&0xFFFF}")
-        else:
-            name = r.get("name") or f"local_{r['path_id']&0xFFFF}"
-        named.append((clip_priority(name), name, r))
-    named.sort(key=lambda x: (x[0], x[1]))
+    if states:
+        # state-machine order: default state first, then the game's own
+        # layer/state order.  Animation name = state name (layer prefix
+        # stripped; kept on collision).  Blend-tree children get @threshold
+        # suffixes so both idle variants survive.
+        named = []
+        used_names = set()
+        order = 0
+        indexed = list(enumerate(states))
+        indexed.sort(key=lambda t: (not t[1]["default"], t[1]["layer"], t[0]))
+        for _, s in indexed:
+            label = s["name"].split(".")[-1].strip()
+            motions = [m for m in s["motion"] if m.get("path_id")]
+            multi = len([m for m in motions if "threshold" in m]) > 1
+            for m in motions:
+                if m["source"] == SHARED:
+                    nm = shared_names.get(m["path_id"])
+                elif str(m["source"]).startswith("ext"):
+                    nm = shared_names.get(m["path_id"])   # may be None -> drop later
+                else:
+                    nm = m.get("name")
+                if nm is None and str(m["source"]).startswith("ext"):
+                    continue      # not a shared clip; unresolvable external
+                if multi and "threshold" in m:
+                    anim = f"{label}@{m['threshold']}"
+                else:
+                    anim = label
+                base = anim
+                k = 2
+                while anim in used_names:      # cross-layer collision
+                    anim = f"{base} ({k})"
+                    k += 1
+                used_names.add(anim)
+                named.append((order, anim, {"source": m["source"],
+                                            "path_id": m["path_id"],
+                                            "name": nm}))
+                order += 1
+    else:
+        # order clips: standing idle first (legacy heuristic)
+        named = []
+        for r in refs:
+            if r["source"] == SHARED:
+                name = shared_names.get(r["path_id"], f"shared_{r['path_id']&0xFFFF}")
+            else:
+                name = r.get("name") or f"local_{r['path_id']&0xFFFF}"
+            named.append((clip_priority(name), name, r))
+        named.sort(key=lambda x: (x[0], x[1]))
 
     js, binbuf = load_glb(glb_in)
     if "animations" in js:
@@ -279,6 +322,10 @@ def main():
 
     bpath = os.path.join(ROOT, "catalog", "char_anim_bindings.json")
     bindings = json.load(open(bpath, encoding="utf-8"))
+    spath = os.path.join(ROOT, "catalog", "char_anim_states.json")
+    states_map = {}
+    if os.path.exists(spath):
+        states_map = json.load(open(spath, encoding="utf-8"))
     shared_names = shared_clip_names()
 
     if args.all:
@@ -290,12 +337,15 @@ def main():
     stats = collections.Counter()
     for i, char in enumerate(chars):
         entry = bindings.get(char)
-        if not entry:
+        st = states_map.get(char)
+        if not entry and not st:
             stats["no-bindings"] += 1
             continue
-        refs = [r for k in entry for r in k["clips"]]
+        refs = [r for k in entry for r in k["clips"]] if entry else []
         try:
-            status, n, total = export_char_v2(char, refs, shared_names, force=args.force)
+            status, n, total = export_char_v2(
+                char, refs, shared_names, force=args.force,
+                states=st["states"] if st else None)
             stats[status] += 1
             if status == "ok":
                 print(f"[{i+1}/{len(chars)}] {char}: {n} clips, {total}B", flush=True)

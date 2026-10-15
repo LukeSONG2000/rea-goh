@@ -65,6 +65,15 @@
   button:hover{background:#242a35;color:#fff}
   button.on{background:#2a3a5c;color:#fff;border-color:var(--acc)}
   #hint{position:fixed;bottom:10px;right:14px;font-size:11px;color:#5b6270;z-index:10}
+  /* ---------- parts panel (per-mesh visibility, e.g. helmet on/off) ---------- */
+  #parts{position:fixed;right:12px;bottom:64px;z-index:10;max-width:230px;max-height:42vh;
+         overflow-y:auto;background:#14171ccc;border:1px solid var(--line);border-radius:10px;
+         padding:8px 10px;font-size:12px;backdrop-filter:blur(6px);display:none}
+  #parts h4{margin:0 0 6px;font-size:11px;color:var(--dim);font-weight:600}
+  #parts label{display:flex;align-items:center;gap:6px;padding:2px 0;cursor:pointer;
+               color:#b6bdc9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #parts label:hover{color:#fff}
+  #parts input{accent-color:var(--acc)}
   #animBar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:none;gap:6px;
            z-index:10;max-width:62vw;overflow-x:auto;padding:4px}
   #animBar button{white-space:nowrap}
@@ -114,7 +123,8 @@
 </div>
 <div id="info">未加载模型 — 从左侧选择</div>
 <div id="animBar"></div>
-<div id="hint">拖入任意 .glb 也可预览</div>
+<div id="parts"><h4>部件显示</h4><div id="partsList"></div></div>
+<div id="hint">左键旋转 · 双指/Shift+滚轮 平移 · 右键平移 · Ctrl+滚轮缩放 · 拖入任意 .glb 也可预览</div>
 <div id="drop">松开以加载模型</div>
 <script src="/viewer/vendor/three.min.js"></script>
 <script src="/viewer/vendor/GLTFLoader.js"></script>
@@ -132,8 +142,28 @@ document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x101216);
 const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.01, 500);
+// plain wheel (mac two-finger scroll) / Shift+wheel = pan; Ctrl+wheel (pinch) = zoom.
+// Registered BEFORE OrbitControls so the capture listener pre-empts its wheel-zoom.
+renderer.domElement.addEventListener('wheel', e=>{
+  if (!e.ctrlKey && !e.metaKey){
+    e.preventDefault(); e.stopImmediatePropagation();
+    const s = Math.max(camera.position.distanceTo(controls.target)/600, .05);
+    panBy(-e.deltaX*s, -e.deltaY*s);
+  }
+}, {capture:true, passive:false});
+function panBy(dx, dy){
+  // replicate OrbitControls pan: slide target & camera in the camera plane
+  const te = camera.matrix.elements;
+  const px = new THREE.Vector3(te[0], te[1], te[2]);
+  const py = new THREE.Vector3(te[4], te[5], te[6]);
+  controls.target.addScaledVector(px, dx).addScaledVector(py, dy);
+  camera.position.addScaledVector(px, dx).addScaledVector(py, dy);
+}
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
+controls.screenSpacePanning = true;
+controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY,
+                          RIGHT: THREE.MOUSE.PAN };
 
 scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x3a3226, 0.9));
 const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(3,6,4); scene.add(key);
@@ -147,6 +177,28 @@ let model = null, bonesHelper = null, wire = false, turn = false, mixer = null;
 let clips = [], curAction = null, paused = false;
 const clock = new THREE.Clock();
 const _mats = [];
+
+function buildPartsPanel(root){
+  // per-mesh visibility toggles: variant bundles (helmet on/off etc.) load
+  // every part at once -- this lets the user switch forms by hand
+  const panel = document.getElementById('parts');
+  const list = document.getElementById('partsList');
+  list.innerHTML = '';
+  const meshes = [];
+  root.traverse(o=>{ if (o.isMesh) meshes.push(o); });
+  if (meshes.length < 2){ panel.style.display = 'none'; return; }
+  meshes.forEach((m, i)=>{
+    const name = m.name || `mesh_${i}`;
+    const lb = document.createElement('label');
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = m.visible;
+    cb.onchange = ()=>{ m.visible = cb.checked; };
+    lb.appendChild(cb);
+    lb.appendChild(document.createTextNode(name));
+    list.appendChild(lb);
+  });
+  panel.style.display = 'block';
+}
 
 function frame(obj){
   // SkinnedMesh geometry bounds live in bind space and collapse to zero for
@@ -223,6 +275,7 @@ function disposeModel(){
   if (mixer){ mixer.stopAllAction(); mixer = null; }
   clips = []; curAction = null; paused = false;
   document.getElementById('animBar').style.display = 'none';
+  document.getElementById('parts').style.display = 'none';
   scene.remove(model);
   if (bonesHelper) scene.remove(bonesHelper);
   model.traverse(o=>{ if(o.geometry) o.geometry.dispose(); });
@@ -259,6 +312,7 @@ function loadBuffer(buf, name, isEnv){
       if (o.isBone) bones++;
     });
     if (bones){ bonesHelper = new THREE.SkeletonHelper(model); scene.add(bonesHelper); setBones(false); }
+    buildPartsPanel(model);
     if (gltf.animations && gltf.animations.length){
       mixer = new THREE.AnimationMixer(model);
       clips = gltf.animations;

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SWGoH 可玩对战 Demo</title>
+<style>
+  :root{ --bg:#101216; --panel:#181b21ee; --panel2:#1f232b; --line:#2b303a;
+         --txt:#dfe3ea; --dim:#8a93a3; --gold:#f0c94a; --red:#e0524a;
+         --blue:#5b8dee; --green:#57c26b; }
+  html,body{margin:0;height:100%;overflow:hidden;font-family:Segoe UI,system-ui,sans-serif;
+            background:var(--bg);color:var(--txt)}
+  #gl{position:fixed;inset:0}
+  /* ---------- top bar ---------- */
+  #top{position:fixed;left:0;right:0;top:0;z-index:10;display:flex;align-items:center;gap:10px;
+       padding:8px 12px;box-sizing:border-box;background:var(--panel);
+       border-bottom:1px solid var(--line);flex-wrap:wrap}
+  #logo{font-weight:600;white-space:nowrap}
+  #logo b{color:var(--gold)}
+  select{background:#0d0f13;color:var(--txt);border:1px solid var(--line);border-radius:6px;
+         padding:5px 6px;font-size:12px;max-width:170px}
+  .tlabel{font-size:11px;color:var(--gold);white-space:nowrap}
+  .tlabel.b{color:var(--red)}
+  #seed{width:70px;background:#0d0f13;color:var(--txt);border:1px solid var(--line);
+        border-radius:6px;padding:5px 6px;font-size:12px}
+  button{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:6px;
+         padding:6px 14px;font-size:13px;cursor:pointer}
+  button:hover{border-color:var(--blue)}
+  button.primary{background:#2a3a5c;border-color:var(--blue)}
+  button:disabled{opacity:.45;cursor:default}
+  #hint{font-size:11px;color:var(--dim);margin-left:auto;white-space:nowrap}
+  /* ---------- log ---------- */
+  #log{position:fixed;right:0;top:53px;bottom:0;width:290px;z-index:9;overflow-y:auto;
+       background:var(--panel);border-left:1px solid var(--line);padding:8px 10px;
+       box-sizing:border-box;font-size:12px;line-height:1.7}
+  #log .t{color:var(--dim);margin-right:6px}
+  #log .a{color:var(--gold)} #log .d{color:var(--red)}
+  #log .win{color:var(--green);font-weight:600;margin-top:8px}
+  #log .row{border-bottom:1px dashed #232833;padding:2px 0}
+  /* ---------- banner ---------- */
+  #banner{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:15;
+          font-size:42px;font-weight:800;letter-spacing:4px;color:var(--gold);
+          text-shadow:0 2px 24px #000;pointer-events:none;opacity:0;transition:opacity .4s}
+  #loadmsg{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:12;
+           font-size:12px;color:var(--dim);background:#0009;padding:4px 12px;border-radius:99px}
+  @media (max-width:820px){ #log{display:none} }
+</style>
+</head>
+<body>
+<div id="gl"></div>
+<div id="top">
+  <span id="logo">SWGoH <b>对战</b></span>
+  <span class="tlabel">我方</span><select id="teamA" multiple size="1"></select>
+  <span class="tlabel b">敌方</span><select id="teamB" multiple size="1"></select>
+  <span class="tlabel">种子</span><input id="seed" value="42">
+  <button id="fight" class="primary">开战</button>
+  <span id="hint">拖动=旋转 · 双指/滚轮=平移 · 右键=平移 · Ctrl+滚轮=缩放</span>
+</div>
+<div id="log"><div id="logHead" style="color:var(--dim)">战报将显示在这里</div></div>
+<div id="banner"></div>
+<div id="loadmsg"></div>
+
+<script src="/viewer/vendor/three.min.js"></script>
+<script src="/viewer/vendor/GLTFLoader.js"></script>
+<script src="/viewer/vendor/OrbitControls.js"></script>
+<script>
+'use strict';
+// ---------- three setup ----------
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.getElementById('gl').appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x101216);
+scene.fog = new THREE.Fog(0x101216, 18, 55);
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.05, 300);
+
+// plain wheel (mac two-finger scroll) = pan, ctrl+wheel (pinch) = zoom.
+// Registered BEFORE OrbitControls so capture order lets us pre-empt its
+// wheel-zoom for the plain-gesture case.
+renderer.domElement.addEventListener('wheel', e=>{
+  if (!e.ctrlKey && !e.metaKey){
+    e.preventDefault(); e.stopImmediatePropagation();
+    const s = Math.max(camera.position.distanceTo(controls.target)/600, .05);
+    panBy(-e.deltaX*s, -e.deltaY*s);
+  }
+}, {capture:true, passive:false});
+function panBy(dx, dy){
+  // replicate OrbitControls pan: move target & camera in camera plane
+  const te = camera.matrix.elements;
+  const px = new THREE.Vector3(te[0], te[1], te[2]);   // camera right
+  const py = new THREE.Vector3(te[4], te[5], te[6]);   // camera up
+  controls.target.addScaledVector(px, dx).addScaledVector(py, dy);
+  camera.position.addScaledVector(px, dx).addScaledVector(py, dy);
+}
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.screenSpacePanning = true;         // pan keeps the grab point under cursor
+controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY,
+                          RIGHT: THREE.MOUSE.PAN };
+
+scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x3a3226, 0.95));
+const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(4,8,5); scene.add(key);
+const rim = new THREE.DirectionalLight(0x88aaff, .45); rim.position.set(-5,4,-6); scene.add(rim);
+const grid = new THREE.GridHelper(24, 48, 0x36405a, 0x222a3c);
+scene.add(grid);
+
+addEventListener('resize', ()=>{
+  camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+// ---------- state ----------
+const clock = new THREE.Clock();
+const loader = new THREE.GLTFLoader();
+const fighters = [];            // runtime actors
+let playing = false, queue = [], logEl, loadCount = 0;
+const msg = t=>{ document.getElementById('loadmsg').textContent = t||''; };
+
+// ---------- roster / team selects ----------
+let ROSTER = [];
+function fillSelect(sel, preset){
+  sel.innerHTML = '';
+  ROSTER.forEach(u=>{
+    const o = document.createElement('option');
+    o.value = u.def_id;
+    o.textContent = (u.anim?'':'· ') + u.name;
+    sel.appendChild(o);
+  });
+  [...sel.options].forEach(o=>{ if(preset.includes(o.value)) o.selected = true; });
+}
+const PICK = sel=>[...sel.selectedOptions].map(o=>o.value).slice(0,5);
+
+// ---------- fighter ----------
+function findClip(clips, kw, exclude){
+  const hit = clips.filter(c=>c.name && c.name.toLowerCase().includes(kw)
+                             && (!exclude || !c.name.toLowerCase().includes(exclude)));
+  return hit[0] || null;
+}
+function makeBar(name, hp){
+  const cv = document.createElement('canvas'); cv.width = 128; cv.height = 36;
+  const tex = new THREE.CanvasTexture(cv);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:tex, depthTest:false}));
+  sp.scale.set(1.15, .32, 1);
+  const draw = (hpNow, hpMax)=>{
+    const c = cv.getContext('2d');
+    c.clearRect(0,0,128,36);
+    c.fillStyle = '#000a'; c.fillRect(4,4,120,13);
+    const f = Math.max(0, hpNow/hpMax);
+    c.fillStyle = f>.5 ? '#57c26b' : f>.25 ? '#f0c94a' : '#e0524a';
+    c.fillRect(5,5,118*f,11);
+    c.fillStyle = '#dfe3ea'; c.font = '11px system-ui'; c.textAlign = 'center';
+    c.fillText(name, 64, 30);
+    tex.needsUpdate = true;
+  };
+  draw(hp, hp);
+  return {sprite:sp, draw};
+}
+function addFighter(u, slot, side){
+  const f = {meta:u, hp:u.hp, maxhp:u.hp, alive:true, mixer:null,
+             idle:null, attack:null, death:null, hit:null, model:null, flash:0};
+  const url = `/extracted/${u.folder}/${u.folder}.anim.glb`;
+  const fb  = `/extracted/${u.folder}/${u.folder}.glb`;
+  loadCount++; msg(`加载模型 ${u.name} …`);
+  fetch(url).then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); })
+    .catch(()=>fetch(fb).then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); }))
+    .then(buf=>new Promise((res,rej)=>loader.parse(buf,'',res,rej)))
+    .then(gltf=>{
+      const m = gltf.scene;
+      m.traverse(o=>{ if(o.isMesh){ o.material.side = THREE.DoubleSide;
+                                    o.frustumCulled = false; } });
+      const g = new THREE.Group();
+      g.add(m);
+      // game layout: teams face each other across x, front row of 3 + back rows
+      const sgn = side==='player' ? -1 : 1;
+      const x = sgn * (2.7 + 1.5*Math.floor(slot/3));
+      const z = ((slot%3) - 1) * 2.1;
+      g.position.set(x, 0, z);
+      g.rotation.y = side==='player'? Math.PI/2 : -Math.PI/2;
+      scene.add(g);
+      f.group = g; f.model = m;
+      const bar = makeBar(u.name, u.hp);
+      bar.sprite.position.y = 2.3;
+      g.add(bar.sprite);
+      f.bar = bar;
+      if (gltf.animations && gltf.animations.length){
+        f.mixer = new THREE.AnimationMixer(m);
+        const cs = gltf.animations;
+        f.attack = findClip(cs,'attack') || cs.find(c=>!/idle|death|hit/i.test(c.name||'')) || cs[0];
+        f.idle   = findClip(cs,'idle','hurt') || cs[0];
+        f.death  = findClip(cs,'death') || findClip(cs,'die');
+        f.hit    = findClip(cs,'hit','death') || findClip(cs,'flinch');
+        play(f, f.idle, true);
+      }
+      fighters.push(f);
+      if (--loadCount === 0) msg('');
+    })
+    .catch(()=>{ if(--loadCount === 0) msg(''); });
+  return f;
+}
+function play(f, clip, loop){
+  if (!f.mixer || !clip) return;
+  const next = f.mixer.clipAction(clip);
+  next.reset();
+  next.setLoop(loop ? THREE.LoopRepeat : THREE.LoopOnce, loop?Infinity:1);
+  next.clampWhenFinished = !loop;
+  if (f.cur && f.cur !== next){ f.cur.fadeOut(.18); next.play().fadeIn(.18); }
+  else next.play();
+  f.cur = next;
+}
+
+// ---------- battle flow ----------
+let WINNER = null;
+const byId = {};
+function resetScene(){
+  fighters.forEach(f=>{ scene.remove(f.group);
+    f.group.traverse(o=>{ if(o.geometry) o.geometry.dispose(); }); });
+  fighters.length = 0;
+  for (const k in byId) delete byId[k];
+}
+function banner(text, color){
+  const b = document.getElementById('banner');
+  b.textContent = text; b.style.color = color||'var(--gold)';
+  b.style.opacity = 1;
+  setTimeout(()=>b.style.opacity = 0, 1400);
+}
+function step(){
+  if (!playing) return;
+  const e = queue.shift();
+  if (!e){ playing = false; return; }
+  const actor = byIdOf(e.actor);
+  const target = e.target ? byIdOf(e.target) : null;
+  logRow(e);
+  const dur = (actor && actor.attack && actor.attack.duration
+               ? Math.min(actor.attack.duration, 1.6) : 1.1) * 1000;
+  if (actor){
+    play(actor, actor.attack, false);
+    setTimeout(()=>{ if (actor.alive) play(actor, actor.idle, true); }, dur);
+  }
+  setTimeout(()=>{
+    if (target && e.damage != null){
+      target.hp = Math.max(0, e.hp_after != null ? e.hp_after : target.hp - e.damage);
+      target.bar.draw(target.hp, target.maxhp);
+      target.flash = 0.18;
+      if (target.hp <= 0){
+        target.alive = false;
+        play(target, target.death, false);
+        target.bar.sprite.visible = false;
+      } else if (target.hit){
+        play(target, target.hit, false);
+        setTimeout(()=>{ if(target.alive) play(target, target.idle, true); }, 600);
+      }
+    }
+    if (queue.length) setTimeout(step, 120);
+    else {
+      playing = false;
+      banner(WINNER === 'player' ? '我方胜利' :
+             WINNER === 'opponent' ? '敌方胜利' : '平局',
+             WINNER === 'player' ? 'var(--green)' :
+             WINNER === 'opponent' ? 'var(--red)' : 'var(--dim)');
+      const w = document.createElement('div');
+      w.className = 'win';
+      w.textContent = (WINNER === 'player' ? '★ 我方胜利' :
+                       WINNER === 'opponent' ? '★ 敌方胜利' : '★ 平局');
+      logEl.appendChild(w);
+    }
+  }, dur*0.55);
+}
+function byIdOf(id){
+  return byId[id] || fighters.find(f=>f.meta.unit_id === id) || null;
+}
+function logRow(e){
+  const d = document.createElement('div');
+  d.className = 'row';
+  let s = `<span class="t">#${e.turn}</span><span class="a">${e.actor_name||e.actor}</span>`;
+  if (e.damage != null)
+    s += ` → <span class="d">${e.target_name||e.target}</span> <b>${(+e.damage).toLocaleString()}</b>`;
+  d.innerHTML = s;
+  logEl.appendChild(d);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+document.getElementById('fight').onclick = ()=>{
+  if (playing) return;
+  const a = PICK(document.getElementById('teamA'));
+  const b = PICK(document.getElementById('teamB'));
+  if (!a.length || !b.length){ msg('双方各至少选 1 人（Ctrl 多选，最多 5）'); return; }
+  const seed = parseInt(document.getElementById('seed').value)||1;
+  msg('计算战斗 …');
+  fetch(`/api/battle?a=${a.join(',')}&b=${b.join(',')}&seed=${seed}`)
+    .then(r=>r.json())
+    .then(data=>{
+      if (data.error){ msg('出错: '+data.error); return; }
+      WINNER = data.winner;
+      resetScene();
+      const slots = {player:0, opponent:0};
+      data.units.forEach(u=>{
+        const f = addFighter(u, slots[u.side]++, u.side);
+        byId[u.unit_id] = f; byId[u.def_id] = f;
+      });
+      queue = data.events.map(e=>({...e}));
+      logEl = document.getElementById('log');
+      logEl.innerHTML = '';
+      playing = true;
+      setTimeout(step, 900);
+    });
+};
+
+// ---------- loop ----------
+renderer.setAnimationLoop(()=>{
+  const dt = clock.getDelta();
+  fighters.forEach(f=>{
+    if (f.mixer) f.mixer.update(dt);
+    if (f.flash > 0){
+      f.flash -= dt;
+      const k = Math.max(f.flash, 0)/0.18;
+      f.model.traverse(o=>{ if(o.isMesh && o.material){
+        o.material.emissive = o.material.emissive || new THREE.Color();
+        o.material.emissive.setRGB(k*.6, 0, 0); } });
+    }
+  });
+  controls.update();
+  renderer.render(scene, camera);
+});
+
+// ---------- boot ----------
+Promise.all([
+  fetch('/api/roster').then(r=>r.json()),
+]).then(([list])=>{
+  ROSTER = list;
+  fillSelect(document.getElementById('teamA'), ['DARTHREVAN','GRANDMASTERLUKE']);
+  fillSelect(document.getElementById('teamB'), ['VADER','REY','ADMIRALACKBAR']);
+  msg('');
+}).catch(()=>msg('roster 加载失败 — 先启动 game/server.py'));
+
+// camera default: elevated side view framing both teams
+camera.position.set(0, 4.6, 11.5);
+controls.target.set(0, 1.2, 0);
+</script>
+</body>
+</html>
