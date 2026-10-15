@@ -63,6 +63,7 @@
 <script src="/viewer/vendor/three.min.js"></script>
 <script src="/viewer/vendor/GLTFLoader.js"></script>
 <script src="/viewer/vendor/OrbitControls.js"></script>
+<script src="/viewer/vendor/particles.js"></script>
 <script>
 'use strict';
 // ---------- three setup ----------
@@ -210,6 +211,22 @@ function addFighter(u, slot, side){
         f.hit    = findClip(cs,'hit','death') || findClip(cs,'flinch');
         play(f, f.idle, true);
       }
+      // weapon/char vfx: muzzle flashes ride the skeleton nodes, ambient
+      // glows (saber blades etc.) show permanently
+      fetch(`/extracted/${u.folder}/vfx.json`).then(r=>r.ok?r.json():null).then(list=>{
+        if (!list || !list.length || !f.model) return;
+        const layer = EnvFX.build(list, `/extracted/${u.folder}/vfx_tex/`);
+        f.vfxLayer = layer;
+        layer.emitters.forEach(em=>{
+          const node = em.entry.node && m.getObjectByName(em.entry.node);
+          if (node) node.add(em.points);
+          // battle context: only muzzle flashes render (shown during attack
+          // windows); ambient/saber-trail emitters stay off -- they need
+          // real blade plates, point sprites would spray
+          em.points.visible = false;
+        });
+        layer.update(0, 0);
+      }).catch(()=>{});
       fighters.push(f);
       if (--loadCount === 0) msg('');
     })
@@ -231,8 +248,14 @@ function play(f, clip, loop){
 let WINNER = null;
 const byId = {};
 function resetScene(){
-  fighters.forEach(f=>{ scene.remove(f.group);
-    f.group.traverse(o=>{ if(o.geometry) o.geometry.dispose(); }); });
+  fighters.forEach(f=>{
+    if (f.vfxLayer) f.vfxLayer.emitters.forEach(e=>{
+      e.geo.dispose(); e.mat.dispose();
+      if (e.points.parent) e.points.parent.remove(e.points);
+    });
+    scene.remove(f.group);
+    f.group.traverse(o=>{ if(o.geometry) o.geometry.dispose(); });
+  });
   fighters.length = 0;
   for (const k in byId) delete byId[k];
 }
@@ -253,7 +276,14 @@ function step(){
                ? Math.min(actor.attack.duration, 1.6) : 1.1) * 1000;
   if (actor){
     play(actor, actor.attack, false);
-    setTimeout(()=>{ if (actor.alive) play(actor, actor.idle, true); }, dur);
+    const muzzles = (actor.vfxLayer ? actor.vfxLayer.emitters : [])
+      .filter(em=>em.points.parent && /muz|flash|muzzle/i.test(em.entry.name))
+      .map(em=>em.points);
+    muzzles.forEach(p=>p.visible = true);
+    setTimeout(()=>{
+      muzzles.forEach(p=>p.visible = false);
+      if (actor.alive) play(actor, actor.idle, true);
+    }, dur);
   }
   setTimeout(()=>{
     if (target && e.damage != null){
@@ -328,6 +358,7 @@ renderer.setAnimationLoop(()=>{
   const dt = clock.getDelta();
   fighters.forEach(f=>{
     if (f.mixer) f.mixer.update(dt);
+    if (f.vfxLayer) f.vfxLayer.update(dt, clock.elapsedTime);
     if (f.flash > 0){
       f.flash -= dt;
       const k = Math.max(f.flash, 0)/0.18;

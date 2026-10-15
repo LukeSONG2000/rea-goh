@@ -138,6 +138,7 @@
 <script src="/viewer/vendor/three.min.js"></script>
 <script src="/viewer/vendor/GLTFLoader.js"></script>
 <script src="/viewer/vendor/OrbitControls.js"></script>
+<script src="/viewer/vendor/particles.js"></script>
 <script>
 'use strict';
 // ---------- three.js setup ----------
@@ -185,6 +186,32 @@ grid.position.y = 0.001; scene.add(grid);
 let model = null, bonesHelper = null, wire = false, turn = false, mixer = null;
 let clips = [], curAction = null, paused = false;
 const clock = new THREE.Clock();
+let vfxLayer = null;          // exported Unity ParticleSystems (env/char vfx.json)
+function disposeVfx(){
+  if (!vfxLayer) return;
+  scene.remove(vfxLayer.group);
+  vfxLayer.emitters.forEach(e=>{ e.geo.dispose(); e.mat.dispose(); });
+  vfxLayer = null;
+}
+function attachVfx(kind, id){        // kind: 'extracted_env' | 'extracted'
+  disposeVfx();
+  if (!id) return;
+  fetch(`/${kind}/${id}/vfx.json`).then(r=>r.ok ? r.json() : null).then(list=>{
+    if (!list || !list.length || !model) return;
+    vfxLayer = EnvFX.build(list, `/${kind}/${id}/vfx_tex/`);
+    // entries bound to a skeleton node (char muzzle flashes, saber glows)
+    // re-parent onto that node; the rest stay at absolute scene coords
+    vfxLayer.emitters.forEach(em=>{
+      if (em.entry.node){
+        const n = model.getObjectByName(em.entry.node);
+        if (n){ n.add(em.points); return; }
+      }
+      vfxLayer.group.add(em.points);
+    });
+    scene.add(vfxLayer.group);
+    vfxLayer.update(0, 0);
+  }).catch(()=>{});
+}
 const _mats = [];
 
 function buildPartsPanel(root){
@@ -281,6 +308,7 @@ function frameEnv(obj){
 }
 function disposeModel(){
   if (!model) return;
+  disposeVfx();
   if (mixer){ mixer.stopAllAction(); mixer = null; }
   clips = []; curAction = null; paused = false;
   document.getElementById('animBar').style.display = 'none';
@@ -330,6 +358,7 @@ function loadBuffer(buf, name, isEnv){
       animLine = `<br>动画 ${clips.length} 段（底部切换）`;
     }
     if (isEnv) frameEnv(model); else frame(model);
+    attachVfx(isEnv ? 'extracted_env' : 'extracted', window.CUR_ID);
     // merge into the info panel, keeping classification lines
     const info = document.getElementById('info');
     const stats = `三角面 ${(tris|0).toLocaleString()} · 顶点 ${verts.toLocaleString()}<br>` +
@@ -493,6 +522,7 @@ function renderList(q){
       [...listEl.children].forEach(x=>x.classList.remove('on'));
       li.classList.add('on');
       showInfo(m.cls, modelName(m), '加载中…');
+      window.CUR_ID = m.id;
       if (m.cls.category==='environment')
         loadModel('/extracted_env/'+m.id+'/'+m.id+'.glb', modelName(m), null, true);
       else
@@ -597,6 +627,7 @@ addEventListener('drop',e=>{
 renderer.setAnimationLoop(()=>{ controls.autoRotate=turn; controls.autoRotateSpeed=2;
   const dt = clock.getDelta();
   if (mixer) mixer.update(dt);
+  if (vfxLayer) vfxLayer.update(dt, clock.elapsedTime);
   controls.update(); renderer.render(scene,camera); });
 </script>
 </body>
