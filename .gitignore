@@ -19,3 +19,6 @@
 # scratch inside kept dirs
 __pycache__/
 *.log
+
+# oversized: rebuild from effect.json.br via tools/build_gamedata.py
+/catalog/gamedata/effect.json
