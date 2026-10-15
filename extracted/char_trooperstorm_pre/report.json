@@ -5,5 +5,22 @@
     "trooperstorm_mesh [skinned x21]"
   ],
   "mesh_errors": [],
-  "texture_errors": []
+  "texture_errors": [],
+  "particle_excluded": [],
+  "renderer_disabled_skipped": [],
+  "glow_materials": [],
+  "dropped_inactive": [],
+  "dropped_staging": [],
+  "reattached_props": [
+    "trooperstorm_helmet_mesh -> rfl_stormtrooper_mesh",
+    "trooperstorm_mesh -> rfl_stormtrooper_mesh",
+    "trooperstorm_mesh_shadow -> rfl_stormtrooper_mesh_shadow",
+    "trooperstorm_helmet_mesh_shadow -> rfl_stormtrooper_mesh_shadow"
+  ],
+  "reattach_planned": [
+    "trooperstorm_mesh_shadow -> rfl_stormtrooper_mesh_shadow",
+    "trooperstorm_mesh -> rfl_stormtrooper_mesh",
+    "trooperstorm_helmet_mesh -> rfl_stormtrooper_mesh",
+    "trooperstorm_helmet_mesh_shadow -> rfl_stormtrooper_mesh_shadow"
+  ]
 }
