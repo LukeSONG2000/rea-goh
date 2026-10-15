@@ -16,6 +16,7 @@
     "debrispile_05_mesh (1):debrispile_05_mesh",
     "treecanopy_plane_01_mesh (8):treecanopy_plane_01",
     "kash_island_bg_mesh (7):kash_island_bg_mesh",
+    "vfx_smoke_light_slow:builtin:quad",
     "kash_pipes_mesh:kash_pipes_mesh",
     "yav_foliage_01_mesh (1):env_yav_foliage_01_mesh",
     "treecanopy_plane_01_mesh (1):treecanopy_plane_01",
@@ -58,6 +59,7 @@
     "debrispile_05_mesh:debrispile_05_mesh",
     "env_asteroid_02_mesh:env_asteroid_02_mesh",
     "kash_island_bg_mesh (5):kash_island_bg_mesh",
+    "vfx_smoke_light_slow (1):builtin:quad",
     "kash_island_bg_mesh (3):kash_island_bg_mesh",
     "kash_island_bg_mesh (4):kash_island_bg_mesh",
     "yav_foliage_02_mesh (4):env_yav_foliage_02_mesh",
@@ -114,14 +116,15 @@
     "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
     "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
     "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
-    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope).",
+    "Unity builtin-primitive meshes (Quad/Plane/Cube/Sphere/Cylinder/Capsule: exact for Quad/Plane/Cube, canonical-shape approximations for Sphere/Cylinder/Capsule) are synthesized; see report builtin_meshes. Real meshes living in unresolvable external bundles are still skipped (renderers.external_mesh)."
   ],
   "duplicate_env_roots": 0,
   "renderers_under_scene": {
     "MeshRenderer_under_scene": 98,
     "ParticleSystemRenderer_under_scene": 23,
     "SpriteRenderer_under_scene": 12,
-    "mr_without_mesh": 2,
+    "mr_builtin_mesh": 2,
     "ParticleSystemRenderer_inactive": 20,
     "MeshRenderer_inactive": 5,
     "SkinnedMeshRenderer_outside_scene": 71,
@@ -148,10 +151,14 @@
   "triangles": 10831,
   "vertices": 13856,
   "battle_camera_nodes": [],
-  "nodes_exported": 102,
-  "meshes_exported": 96,
-  "materials": 21,
-  "textures": 20,
-  "glb_bytes": 1622444,
-  "seconds": 0.8
+  "builtin_meshes": [
+    "vfx_smoke_light_slow:builtin:quad",
+    "vfx_smoke_light_slow (1):builtin:quad"
+  ],
+  "nodes_exported": 106,
+  "meshes_exported": 98,
+  "materials": 22,
+  "textures": 21,
+  "glb_bytes": 1692012,
+  "seconds": 0.9
 }

@@ -3,7 +3,11 @@
 
 Routes:
     /api/roster                     -> playable roster [{def_id, name}]
-    /api/battle?a=A,B&b=C,D&seed=N  -> {units, events, winner}
+    /api/battle?a=A,B&b=C,D&seed=N  -> {units, events, winner, seed,
+                                        env, staging?}
+    /api/staging?env=ENV_ID         -> original arena staging markers
+                                       (catalog/battle_staging.json; {}
+                                        when unknown)
     /...                            -> static files from repo root
                                        (extracted/, viewer/, catalog/, ...)
 
@@ -23,6 +27,57 @@ for p in (ROOT, os.path.join(ROOT, "il2cpp", "offline")):
 
 from game import data_units, engine  # noqa: E402
 
+# ---------------------------------------------------------------------------
+# battle staging (bug P1 fix): catalog/battle_staging.json holds the original
+# per-arena unit markers decoded from the battle_*_layout bundles (see
+# tools/dump_battle_staging.py).  Positions are stored in Unity space; the
+# exported env GLBs are X-mirrored, so we mirror x / quaternion here and hand
+# the client GLB-space coords it can use directly.
+# ---------------------------------------------------------------------------
+_STAGING = None
+
+
+def load_staging():
+    global _STAGING
+    if _STAGING is None:
+        path = os.path.join(ROOT, "catalog", "battle_staging.json")
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                _STAGING = json.load(f)
+    return _STAGING
+
+
+def _mirror_pos(p):
+    return [-p[0], p[1], p[2]]
+
+
+def _mirror_rot(q):
+    return [q[0], -q[1], -q[2], q[3]]
+
+
+def staging_for_env(env):
+    """GLB-space staging markers for an env id (client defaults apply when
+    the env has no concrete gamedata binding: pvp default for the demo)."""
+    st = load_staging()
+    if not st:
+        return None
+    layout = (st.get("env_index", {}).get(env or "")
+              or st.get("_meta", {}).get("defaults", {}).get("pvp"))
+    lay = (st.get("layouts", {}).get(layout) or {})
+    if lay.get("kind") != "battle":
+        return None
+    out = {"layout": layout, "player": [], "enemy": []}
+    for side in ("player", "enemy"):
+        for s in lay.get("slots", {}).get(side, []):
+            out[side].append({"slot": s["slot"], "label": s["label"],
+                              "tag": s["tag"],
+                              "pos": _mirror_pos(s["pos"]),
+                              "rot": _mirror_rot(s["rot"])})
+    cam = lay.get("camera")
+    out["camera"] = ({"pos": _mirror_pos(cam["pos"]),
+                      "rot": _mirror_rot(cam["rot"])} if cam else None)
+    return out
+
 
 def roster_payload():
     r = data_units.roster()
@@ -36,13 +91,18 @@ def roster_payload():
     return out
 
 
-def battle_payload(a, b, seed):
+def battle_payload(a, b, seed, env=None):
     a = [x for x in a if x]
     b = [x for x in b if x]
     if not a or not b:
         return {"error": "both teams need at least one unit"}
     events, winner, units = engine.battle(a, b, seed)
-    return {"units": units, "events": events, "winner": winner, "seed": seed}
+    out = {"units": units, "events": events, "winner": winner, "seed": seed,
+           "env": env or ""}
+    staging = staging_for_env(env)
+    if staging:
+        out["staging"] = staging
+    return out
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -74,11 +134,16 @@ class Handler(SimpleHTTPRequestHandler):
                 a = (q.get("a", [""])[0]).split(",")
                 b = (q.get("b", [""])[0]).split(",")
                 seed = int(q.get("seed", ["1"])[0])
-                return self.send_json(battle_payload(a, b, seed))
+                env = (q.get("env", [""])[0]) or None
+                return self.send_json(battle_payload(a, b, seed, env))
             except SystemExit as e:      # data_units.resolve errors
                 return self.send_json({"error": str(e)}, 400)
             except Exception as e:
                 return self.send_json({"error": f"{type(e).__name__}: {e}"}, 500)
+        if u.path == "/api/staging":
+            q = parse_qs(u.query)
+            env = (q.get("env", [""])[0]) or None
+            return self.send_json(staging_for_env(env) or {})
         if u.path == "/":
             self.send_response(302)
             self.send_header("Location", "/viewer/battle.html")

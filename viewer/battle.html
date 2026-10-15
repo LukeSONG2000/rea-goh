@@ -172,7 +172,52 @@ function fillSelect(sel, preset){
 }
 const PICK = sel=>[...(sel._picked||[])].slice(0,5);
 
+// ---------- staging (original per-arena unit placement, bug P1 fix) ----------
+// server mirrors the Unity layout coords into env-GLB space (x negated) and
+// hands us marker pos + rot per side; models are authored facing +Z, so the
+// player side (markers at -Z) keeps yaw 0 and the enemy flips pi.
+let STAGING = null;             // set per battle from /api/battle payload
+let ARENA_STAGING = null;       // set per arena from /api/staging
+function markerYaw(q){
+  if (!q) return 0;
+  const [x, y, z, w] = q;
+  return Math.atan2(2*(w*y + x*z), 1 - 2*(y*y + z*z));
+}
+function placeFighter(g, slot, side){
+  const st = STAGING;
+  const list = st && st[side === 'opponent' ? 'enemy' : 'player'];
+  const m = list && list[slot];
+  if (m){
+    g.position.set(m.pos[0], m.pos[1], m.pos[2]);
+    g.rotation.y = markerYaw(m.rot) + (side === 'opponent' ? Math.PI : 0);
+    return true;
+  }
+  // fallback: legacy hardcoded grid (teams across x)
+  const sgn = side==='player' ? -1 : 1;
+  const x = sgn * (2.7 + 1.5*Math.floor(slot/3));
+  const z = ((slot%3) - 1) * 2.1;
+  g.position.set(x, 0, z);
+  g.rotation.y = side==='player'? Math.PI/2 : -Math.PI/2;
+  return false;
+}
+
 // ---------- fighter ----------
+// BUGS.md P5: the exporter stamps nodes with extensions.SWGOH_active=false
+// for GameObjects the source prefab authored inactive (variant parts: fist
+// vs open hand, hidden blades).  Hide those meshes so only the authored-
+// active subset renders, exactly like the game's default outfit.
+function applyAuthoredVisibility(root){
+  root.traverse(o=>{
+    if (!o.isMesh) return;
+    for (let p = o; p; p = p.parent){
+      const u = p.userData;
+      if (u && u.gltfExtensions && u.gltfExtensions.SWGOH_active === false){
+        o.visible = false;
+        break;
+      }
+    }
+  });
+}
 function findClip(clips, kw, exclude){
   const hit = clips.filter(c=>c.name && c.name.toLowerCase().includes(kw)
                              && (!exclude || !c.name.toLowerCase().includes(exclude)));
@@ -210,6 +255,7 @@ function addFighter(u, slot, side){
       const m = gltf.scene;
       m.traverse(o=>{ if(o.isMesh){ o.material.side = THREE.DoubleSide;
                                     o.frustumCulled = false; } });
+      applyAuthoredVisibility(m);
       const g = new THREE.Group();
       g.add(m);
       // ground clamp: drop the rig so its lowest point sits on y=0
@@ -226,12 +272,8 @@ function addFighter(u, slot, side){
         else if (o.isMesh) gbox.expandByObject(o);
       });
       if (!gbox.isEmpty()) g.position.y -= gbox.min.y;
-      // game layout: teams face each other across x, front row of 3 + back rows
-      const sgn = side==='player' ? -1 : 1;
-      const x = sgn * (2.7 + 1.5*Math.floor(slot/3));
-      const z = ((slot%3) - 1) * 2.1;
-      g.position.set(x, 0, z);
-      g.rotation.y = side==='player'? Math.PI/2 : -Math.PI/2;
+      // original staging markers when available, else legacy grid
+      placeFighter(g, slot, side);
       scene.add(g);
       f.group = g; f.model = m;
       const bar = makeBar(u.name, u.hp);
@@ -300,7 +342,7 @@ function showParts(f){
     const cb = document.createElement('input');
     cb.type = 'checkbox'; cb.checked = m.visible;
     cb.onchange = ()=>{ m.visible = cb.checked; };
-    lb.append(cb, document.createTextNode(m.name || `mesh_${i}`));
+    lb.append(cb, document.createTextNode((m.name || `mesh_${i}`) + (m.visible ? '' : ' （源文件隐藏）')));
     list.appendChild(lb);
   });
   partsEl.style.display = 'block';
@@ -326,8 +368,14 @@ renderer.domElement.addEventListener('pointerup', e=>{
 });
 
 // ---------- arena backdrop (env GLB + its particle FX) ----------
-// curated: verified renderers at arena scale, all <7MB
+// curated: verified renderers at arena scale, all <7MB; the first five are
+// re-exported with their original ground (bug P2 fix)
 const ARENAS = [
+  ["env_tatooine_moseisley_pre",      "莫斯艾斯利（沙地）"],
+  ["env_arv7_nikto_base_pre",         "AV-7 尼克托基地"],
+  ["env_bar_conquest8_pre",           "征服沙场"],
+  ["env_hoth_snow_plains_01_pre",     "霍雪平原"],
+  ["env_kash_beach_pre",              "卡希克海滩"],
   ["env_dath_nightsister_cavern_pre", "灵魂祭坛（火焰）"],
   ["env_speederbike_01_pre",          "恩多森林"],
   ["env_tat_kraytraid_01_pre",        "塔图因·克雷特袭击"],
@@ -365,37 +413,68 @@ function disposeArena(){
 }
 function loadArena(id){
   disposeArena();
+  ARENA_STAGING = null;
   if (!id) return;
   msg('加载场地 …');
-  fetch(`/extracted_env/${id}/${id}.glb`).then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); })
+  // original staging for this arena (decides framing; no recentering then)
+  const pStaging = fetch(`/api/staging?env=${encodeURIComponent(id)}`)
+    .then(r=>r.ok?r.json():null)
+    .then(st=>st && st.layout ? st : null)
+    .catch(()=>null);
+  fetch(`/extracted_env/${id}/${id}.glb`)
+    .then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); })
+    .then(buf=>pStaging.then(st=>{ ARENA_STAGING = st; return buf; }))
     .then(buf=>new Promise((res,rej)=>loader.parse(buf,'',res,rej)))
     .then(gltf=>{
       const m = gltf.scene;
       m.traverse(o=>{ if(o.isMesh){ o.material.side = THREE.DoubleSide;
                                     o.frustumCulled = false; } });
-      // envs are authored where the game staged them; recenter on the median
-      // mesh center (XZ) so the arena floor sits under the fighters
-      m.updateWorldMatrix(true, true);
-      const cx = [], cz = [];
-      m.traverse(o=>{
-        if (o.isMesh){
-          const b = new THREE.Box3().setFromObject(o);
-          if (!b.isEmpty()){ cx.push((b.min.x+b.max.x)/2); cz.push((b.min.z+b.max.z)/2); }
+      // envs are authored in world coords where the game staged the battle;
+      // with staging markers we keep those coords verbatim (units will be
+      // placed there too) and frame the original layout camera instead.
+      let group;
+      if (ARENA_STAGING){
+        group = new THREE.Group();
+        // keep the env in its authored world coords; frame the staging area
+        // along the original layout camera's direction, fitted to the marker
+        // bounding sphere so props never block the squads
+        const all = ARENA_STAGING.player.concat(ARENA_STAGING.enemy);
+        const box = new THREE.Box3();
+        all.forEach(p=>box.expandByPoint(new THREE.Vector3(p.pos[0], 0.8, p.pos[2])));
+        const sph = box.getBoundingSphere(new THREE.Sphere());
+        sph.center.y = 0.8;
+        controls.target.copy(sph.center);
+        const cam = ARENA_STAGING.camera;
+        const dir = cam
+          ? new THREE.Vector3(cam.pos[0], cam.pos[1], cam.pos[2]).sub(sph.center).normalize()
+          : new THREE.Vector3(0, 0.42, -0.9);
+        if (!isFinite(dir.x) || dir.lengthSq() < 0.5) dir.set(0, 0.42, -0.9);
+        camera.position.copy(sph.center).addScaledVector(dir, sph.radius * 2.4 + 4);
+        camera.lookAt(sph.center);
+      } else {
+        // no staging: recenter on the median mesh center (XZ) so the arena
+        // floor sits under the fighters (legacy fallback framing)
+        m.updateWorldMatrix(true, true);
+        const cx = [], cz = [];
+        m.traverse(o=>{
+          if (o.isMesh){
+            const b = new THREE.Box3().setFromObject(o);
+            if (!b.isEmpty()){ cx.push((b.min.x+b.max.x)/2); cz.push((b.min.z+b.max.z)/2); }
+          }
+        });
+        group = new THREE.Group();
+        if (cx.length){
+          cx.sort((a,b)=>a-b); cz.sort((a,b)=>a-b);
+          group.position.set(-cx[cx.length>>1], 0, -cz[cz.length>>1]);
         }
-      });
-      const group = new THREE.Group();
-      if (cx.length){
-        cx.sort((a,b)=>a-b); cz.sort((a,b)=>a-b);
-        group.position.set(-cx[cx.length>>1], 0, -cz[cz.length>>1]);
+        camera.position.set(0, 7, 17);
+        controls.target.set(0, 1.2, 0);
       }
       group.add(m);
       arenaGroup = group;
       scene.add(arenaGroup);
       grid.visible = false;
       scene.fog.near = 30; scene.fog.far = 140;
-      // wide framing shot; the user can orbit freely afterwards
-      camera.position.set(0, 7, 17);
-      controls.target.set(0, 1.2, 0);
       // env particle FX (fires, embers, holo glow) ride env-world coords
       fetch(`/extracted_env/${id}/vfx.json`).then(r=>r.ok?r.json():null).then(list=>{
         if (!list || !list.length) return;
@@ -498,12 +577,15 @@ document.getElementById('fight').onclick = ()=>{
   const b = PICK(document.getElementById('teamB'));
   if (!a.length || !b.length){ msg('双方各至少选 1 人（Ctrl 多选，最多 5）'); return; }
   const seed = parseInt(document.getElementById('seed').value)||1;
+  const env = document.getElementById('arena').value;
   msg('计算战斗 …');
-  fetch(`/api/battle?a=${a.join(',')}&b=${b.join(',')}&seed=${seed}`)
+  fetch(`/api/battle?a=${a.join(',')}&b=${b.join(',')}&seed=${seed}&env=${encodeURIComponent(env)}`)
     .then(r=>r.json())
     .then(data=>{
       if (data.error){ msg('出错: '+data.error); return; }
       WINNER = data.winner;
+      // staging only when an arena is selected; otherwise the legacy grid
+      STAGING = (env && data.staging) ? data.staging : null;
       resetScene();
       const slots = {player:0, opponent:0};
       data.units.forEach(u=>{

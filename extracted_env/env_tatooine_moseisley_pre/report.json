@@ -127,6 +127,7 @@
     "tat_moseisley_wallpanel_02b:tat_moseisley_wallpanel_02b_mesh",
     "tat_moseisley_vaporator_01 (2):tat_moseisley_vaporator_01_mesh",
     "tat_moseisley_cable_01:tat_moseisley_cable_01_mesh",
+    "vfx_atmospherics:builtin:quad",
     "tat_moseisley_building_05:tat_moseisley_building_05_mesh",
     "tat_moseisley_vent_01 (5):tat_moseisley_vent_01_mesh",
     "tat_crate_01:tat_crate_01_mesh",
@@ -143,7 +144,8 @@
     "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
     "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
     "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
-    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope).",
+    "Unity builtin-primitive meshes (Quad/Plane/Cube/Sphere/Cylinder/Capsule: exact for Quad/Plane/Cube, canonical-shape approximations for Sphere/Cylinder/Capsule) are synthesized; see report builtin_meshes. Real meshes living in unresolvable external bundles are still skipped (renderers.external_mesh)."
   ],
   "duplicate_env_roots": 0,
   "renderers_under_scene": {
@@ -152,7 +154,7 @@
     "ParticleSystemRenderer_under_scene": 33,
     "SkinnedMeshRenderer_inactive": 1,
     "ParticleSystemRenderer_inactive": 3,
-    "mr_without_mesh": 1,
+    "mr_builtin_mesh": 1,
     "SkinnedMeshRenderer_outside_scene": 71,
     "MeshRenderer_outside_scene": 5
   },
@@ -176,10 +178,13 @@
   "triangles": 41103,
   "vertices": 45984,
   "battle_camera_nodes": [],
-  "nodes_exported": 132,
-  "meshes_exported": 125,
-  "materials": 32,
-  "textures": 29,
-  "glb_bytes": 4870056,
-  "seconds": 1.8
+  "builtin_meshes": [
+    "vfx_atmospherics:builtin:quad"
+  ],
+  "nodes_exported": 136,
+  "meshes_exported": 126,
+  "materials": 33,
+  "textures": 30,
+  "glb_bytes": 4916752,
+  "seconds": 2.7
 }

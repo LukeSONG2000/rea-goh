@@ -46,6 +46,17 @@ Design notes
   are recorded in report.json).
 * SkinnedMeshRenderers (staged characters inside big scenes such as
   env_nab_raid_pre) are out of scope for static scenes and only counted.
+* Ground: arenas stage their terrain either with real meshes inside the env
+  bundle (tat_moseisley_ground_mesh, tb_terrain_hoth_01_mesh) or with Unity
+  BUILTIN primitives -- the MeshFilter mesh PPtr points into the external
+  "unity default resources" file (pathID 10210 Quad / 10209 Plane / 10202
+  Cube, ...), which does not ship in the cache.  Those renderers used to be
+  dropped as mr_without_mesh, which is why many env GLBs had no ground
+  (catalog/BUGS.md P2, e.g. env_arv7_nikto_base_pre).  Builtin primitives are
+  now synthesized (exact Quad/Plane/Cube geometry; canonical approximations
+  for Sphere/Cylinder/Capsule) and listed in report builtin_meshes.  A census
+  found 222/269 env bundles referencing builtin meshes; the heavy users are
+  mostly fog/billboard quads plus the missing grounds.
 """
 import argparse
 import gc
@@ -79,7 +90,187 @@ LIMITATIONS = [
     "game HDR-brightens, a glTF viewer would clip).",
     "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
     "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope).",
+    "Unity builtin-primitive meshes (Quad/Plane/Cube/Sphere/Cylinder/Capsule: "
+    "exact for Quad/Plane/Cube, canonical-shape approximations for Sphere/"
+    "Cylinder/Capsule) are synthesized; see report builtin_meshes. Real meshes "
+    "living in unresolvable external bundles are still skipped "
+    "(renderers.external_mesh).",
 ]
+
+# ---------------------------------------------------------------------------
+# Unity builtin "unity default resources" primitives
+# ---------------------------------------------------------------------------
+# Many envs stage their ground / fog / AOE decals with Unity's PRIMITIVE
+# meshes: the MeshFilter's mesh PPtr points into an external file ("unity
+# default resources", fileID != 0, e.g. pathID 10210) that is not shipped in
+# the SWGoH bundle cache -- previously these renderers were dropped
+# ("mr_without_mesh"), which is exactly why those arenas had no ground.
+# pathIDs are Unity's well-known builtin ids; Quad (10210) and Cube (10202)
+# are confirmed against GO names/scales in this app (Quad-billboards face the
+# -Z camera at identity rotation, 'Ground' nodes lay the same quad flat with a
+# +90deg X rotation; 'Cube' grounds scale 1x1 unit slabs).  Geometry is
+# canonical Unity: Quad 1x1 XY facing -Z, Plane 10x10 XZ facing +Y (11x11
+# verts), Cube 1x1x1; Sphere/Cylinder/Capsule are canonical-shape
+# approximations (radius .5, height 2, modest tessellation).
+BUILTIN_QUAD = 10210
+BUILTIN_PLANE = 10209
+BUILTIN_CUBE = 10202
+BUILTIN_SPHERE = 10206
+BUILTIN_CYLINDER = 10207
+BUILTIN_CAPSULE = 10208
+BUILTIN_NAMES = {
+    BUILTIN_CUBE: "cube", BUILTIN_SPHERE: "sphere", BUILTIN_CYLINDER: "cylinder",
+    BUILTIN_CAPSULE: "capsule", BUILTIN_PLANE: "plane", BUILTIN_QUAD: "quad",
+}
+
+
+def _builtin_quad():
+    v = [(-.5, -.5, 0), (.5, -.5, 0), (.5, .5, 0), (-.5, .5, 0)]
+    uv = [(0, 0), (1, 0), (1, 1), (0, 1)]
+    n = (0, 0, -1)                       # Unity Quad faces -Z (the camera)
+    tri = [(0, 2, 1), (0, 3, 2)]         # winding consistent with normal
+    return v, [n] * 4, uv, tri
+
+
+def _builtin_cube():
+    faces = [   # (axis, sign): 1x1x1 centered, per-face uv square
+        ((0, 0, -1), [( -.5, -.5, -.5), (.5, -.5, -.5), (.5, .5, -.5), (-.5, .5, -.5)]),
+        ((0, 0, 1), [(.5, -.5, .5), (-.5, -.5, .5), (-.5, .5, .5), (.5, .5, .5)]),
+        ((-1, 0, 0), [(-.5, -.5, .5), (-.5, -.5, -.5), (-.5, .5, -.5), (-.5, .5, .5)]),
+        ((1, 0, 0), [(.5, -.5, -.5), (.5, -.5, .5), (.5, .5, .5), (.5, .5, -.5)]),
+        ((0, 1, 0), [(-.5, .5, -.5), (.5, .5, -.5), (.5, .5, .5), (-.5, .5, .5)]),
+        ((0, -1, 0), [(-.5, -.5, .5), (.5, -.5, .5), (.5, -.5, -.5), (-.5, -.5, -.5)]),
+    ]
+    v, n, uv, tri = [], [], [], []
+    uvs = [(0, 0), (1, 0), (1, 1), (0, 1)]
+    for nrm, quad in faces:
+        base = len(v)
+        v += quad
+        n += [nrm] * 4
+        uv += uvs
+        tri += [(base, base + 2, base + 1), (base, base + 3, base + 2)]
+    return v, n, uv, tri
+
+
+def _builtin_plane():
+    # Unity Plane: 10x10 units in XZ, normal +Y, 11x11 vertices
+    v, uv, tri = [], [], []
+    N = 10
+    for j in range(N + 1):
+        for i in range(N + 1):
+            x, z = -5 + i, -5 + j
+            v.append((x, 0, z))
+            uv.append((i / N, j / N))
+
+    def vid(i, j):
+        return j * (N + 1) + i
+    for j in range(N):
+        for i in range(N):
+            a, b, c, d = vid(i, j), vid(i + 1, j), vid(i, j + 1), vid(i + 1, j + 1)
+            tri += [(a, c, b), (c, d, b)]    # +Y winding
+    n = (0, 1, 0)
+    return v, [n] * len(v), uv, tri
+
+
+def _builtin_uv_sphere(seg_u=24, seg_v=16):
+    # radius .5 sphere centered at origin (canonical Unity Sphere, lower tess)
+    import math
+    v, uv, n, tri = [], [], [], []
+    for j in range(seg_v + 1):
+        phi = math.pi * j / seg_v
+        for i in range(seg_u + 1):
+            th = 2 * math.pi * i / seg_u
+            p = (0.5 * math.sin(phi) * math.cos(th), 0.5 * math.cos(phi),
+                 0.5 * math.sin(phi) * math.sin(th))
+            v.append(p)
+            n.append(p)
+            uv.append((i / seg_u, 1 - j / seg_v))
+    def vid(i, j):
+        return j * (seg_u + 1) + i
+    for j in range(seg_v):
+        for i in range(seg_u):
+            a, b, c, d = vid(i, j), vid(i + 1, j), vid(i, j + 1), vid(i + 1, j + 1)
+            tri += [(a, b, d), (a, d, c)]
+    return v, n, uv, tri
+
+
+def _builtin_cylinder(seg=24):
+    # radius .5, height 2, Y-centered, capped (canonical Unity Cylinder)
+    import math
+    v, uv, n, tri = [], [], [], []
+    ring = seg + 1
+    for y, ny in ((-1.0, 0.0), (1.0, 0.0)):
+        for i in range(ring):
+            th = 2 * math.pi * i / seg
+            cx, cz = math.cos(th), math.sin(th)
+            v.append((0.5 * cx, y, 0.5 * cz))
+            n.append((cx, 0, cz))
+            uv.append((i / seg, 0.0 if y < 0 else 1.0))
+    for i in range(seg):
+        a, b, c, d = i, i + 1, ring + i, ring + i + 1
+        tri += [(a, c, b), (b, c, d)]
+    for cy, ny, cidx in ((-1.0, -1.0, 0), (1.0, 1.0, 1)):
+        center = len(v)
+        v.append((0, cy, 0))
+        n.append((0, ny, 0))
+        uv.append((0.5, 0.5))
+        for i in range(ring):
+            th = 2 * math.pi * i / seg
+            v.append((0.5 * math.cos(th), cy, 0.5 * math.sin(th)))
+            n.append((0, ny, 0))
+            uv.append((0.5 + 0.5 * math.cos(th), 0.5 + 0.5 * math.sin(th)))
+        for i in range(seg):
+            a, b = center + 1 + i, center + 1 + i + 1
+            if ny > 0:
+                tri.append((center, b, a))
+            else:
+                tri.append((center, a, b))
+    return v, n, uv, tri
+
+
+def _builtin_capsule(seg_u=16, seg_v=8):
+    # radius .5, total height 2: cylinder core + hemispherical caps (approx)
+    import math
+    half = 0.5                       # cylinder half-height
+    # profile from bottom pole to top pole: (y, radius, ny, nr)
+    profile = []
+    for j in range(seg_v, -1, -1):   # bottom hemisphere: t = pi..pi/2
+        t = math.pi * j / seg_v
+        profile.append((-half + half * math.cos(t), half * math.sin(t),
+                        math.cos(t), math.sin(t)))
+    profile.append((-half, half, 0.0, 1.0))     # wall bottom ring
+    profile.append((half, half, 0.0, 1.0))      # wall top ring
+    for j in range(seg_v, -1, -1):   # top hemisphere: t = pi/2..0
+        t = math.pi * j / seg_v
+        profile.append((half + half * math.cos(t), half * math.sin(t),
+                        math.cos(t), math.sin(t)))
+    v, uv, n, tri = [], [], [], []
+    for i in range(seg_u + 1):
+        th = 2 * math.pi * i / seg_u
+        cx, cz = math.cos(th), math.sin(th)
+        for y, r, ny, nr in profile:
+            v.append((r * cx, y, r * cz))
+            n.append((nr * cx, ny, nr * cz))
+            uv.append((i / seg_u, (y + 1) / 2))
+    rows = len(profile)
+
+    def vid(i, j):
+        return j * (seg_u + 1) + i
+    for j in range(rows - 1):
+        for i in range(seg_u):
+            a, b, c, d = vid(i, j), vid(i + 1, j), vid(i, j + 1), vid(i + 1, j + 1)
+            tri += [(a, b, d), (a, d, c)]
+    return v, n, uv, tri
+
+
+_BUILTIN_BUILDERS = {
+    BUILTIN_QUAD: _builtin_quad,
+    BUILTIN_PLANE: _builtin_plane,
+    BUILTIN_CUBE: _builtin_cube,
+    BUILTIN_SPHERE: _builtin_uv_sphere,
+    BUILTIN_CYLINDER: _builtin_cylinder,
+    BUILTIN_CAPSULE: _builtin_capsule,
+}
 
 
 # --------------------------------------------------------------------------
@@ -232,17 +423,36 @@ class EnvExporter(se.CharacterExporter):
                 counts["mr_shadow_go"] += 1
                 continue
             mesh = None
+            builtin_pid = None
             try:
                 gparsed = self.go_parsed(r.m_GameObject)
                 for comp in gparsed.m_Component:
                     f = self.deref(comp.component)
                     if f is not None and type(f).__name__ == "MeshFilter":
                         mesh = self.deref(f.m_Mesh)
+                        if mesh is None:
+                            mp = getattr(f, "m_Mesh", None)
+                            pid = getattr(mp, "m_PathID", 0)
+                            if pid in _BUILTIN_BUILDERS:
+                                builtin_pid = pid
                         break
             except Exception:
                 pass
-            if mesh is None:
+            if mesh is None and builtin_pid is None:
                 counts["mr_without_mesh"] += 1
+                continue
+            if mesh is None:
+                # Unity builtin primitive ("unity default resources"): the
+                # game stages grounds/fog/AOE decals with these; synthesize
+                # the canonical geometry (see BUILTIN_* notes above)
+                usable.append((trk, ("builtin", builtin_pid), list(r.m_Materials or []),
+                               f"{gname}:builtin:{BUILTIN_NAMES[builtin_pid]}"))
+                info[trk]["mesh"] = True
+                p = info[trk]["parent"]
+                while p is not None:                 # keep the ancestor chain
+                    info[p]["mesh"] = True
+                    p = info[p]["parent"]
+                counts["mr_builtin_mesh"] += 1
                 continue
             mname = se.go_name(mesh)
             if (any(p in mname for p in se.SKIP_GO_NAME_PARTS)
@@ -265,6 +475,8 @@ class EnvExporter(se.CharacterExporter):
         tri_total = vert_total = 0
         vcol = []
         for _, mesh, _, _ in usable:
+            if isinstance(mesh, tuple) and mesh[0] == "builtin":
+                continue                # synthesized primitives: no source mesh
             k = se.rkey(mesh.object_reader)
             if k in seen:
                 continue
@@ -412,6 +624,39 @@ class EnvExporter(se.CharacterExporter):
                 p = info[p]["parent"]
         self.report["battle_camera_nodes"] = kept
 
+    def _export_builtin_primitive(self, path_id, node_idx, mat_ptrs, label):
+        """Synthesize a Unity builtin primitive mesh (see BUILTIN_* above) and
+        attach it to node_idx.  Unity->glTF X-mirror applied by hand: mirrored
+        positions/normals and reversed winding, same as MeshHandler path."""
+        verts, norms, uvs, tris = _BUILTIN_BUILDERS[path_id]()
+        g = self.g
+        pos = [c for p in verts for c in (-p[0], p[1], p[2])]
+        nrm = [c for n in norms for c in (-n[0], n[1], n[2])]
+        uvs = [c for t in uvs for c in (t[0], 1.0 - t[1])]
+        attrs = {
+            "POSITION": g.add_accessor(pos, "float", len(verts), "VEC3",
+                                       minmax=True),
+            "NORMAL": g.add_accessor(nrm, "float", len(verts), "VEC3"),
+            "TEXCOORD_0": g.add_accessor(uvs, "float", len(verts), "VEC2"),
+        }
+        flat = []
+        for a, b, c in tris:
+            flat += (a, c, b)            # reverse winding after X-mirror
+        prim = {"attributes": attrs, "mode": 4, "indices": g.add_indices(flat)}
+        mi = None
+        for p in (mat_ptrs or []):
+            mi = self.get_material_index(p)
+            if mi is not None:
+                break
+        if mi is not None:
+            prim["material"] = mi
+        name = f"builtin:{BUILTIN_NAMES[path_id]}"
+        g.meshes.append({"name": name, "primitives": [prim]})
+        mesh_idx = len(g.meshes) - 1
+        g.nodes[node_idx]["mesh"] = mesh_idx
+        self.report["exported_meshes"].append(label)
+        self.report.setdefault("builtin_meshes", []).append(label)
+
     # -- run ----------------------------------------------------------------
     def export(self):
         """Build and write the GLB; returns (path, stats)."""
@@ -429,6 +674,15 @@ class EnvExporter(se.CharacterExporter):
         for trk, mesh, mats, label in usable:
             node_idx = self.node_of.get(trk)
             if node_idx is None:
+                continue
+            if isinstance(mesh, tuple) and mesh[0] == "builtin":
+                try:
+                    self._export_builtin_primitive(mesh[1], node_idx, mats, label)
+                except Exception as e:
+                    import traceback
+                    self.report["mesh_errors"].append(
+                        f"{label}: builtin {type(e).__name__} {e}\n"
+                        + traceback.format_exc())
                 continue
             try:
                 mesh_idx, _ = self.export_mesh_for_renderer(

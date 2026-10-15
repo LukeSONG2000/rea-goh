@@ -12,6 +12,7 @@
     "bar_rock_06 (2):bar_rock_06_mesh",
     "bar_rock_06 (5):bar_rock_06_mesh",
     "bar_rock_06 (3):bar_rock_06_mesh",
+    "background_fog:builtin:plane",
     "bar_rock_06 (1):bar_rock_06_mesh",
     "tat_ranc_pebbles_01_mesh (1):tat_ranc_pebbles_01_mesh",
     "kor_rubble_pile_01c_mesh:kor_rubble_pile_01c_mesh",
@@ -23,6 +24,7 @@
     "bar_rock_01:bar_rock_01_mesh",
     "bar_rock_01 (2):bar_rock_01_mesh",
     "sul_rock_06_mesh (8):sul_rock_06_mesh",
+    "background_fog (1):builtin:plane",
     "sul_rock_06_mesh (11):sul_rock_06_mesh",
     "sul_rock_06b_mesh (10):sul_rock_06b_mesh",
     "sul_rock_06b_mesh (5):sul_rock_06b_mesh",
@@ -52,6 +54,7 @@
     "bar_rock_05 (4):bar_rock_05_mesh",
     "arv7_mountain_01_mesh (1):arv7_mountain_01_mesh",
     "bar_rock_05 (3):bar_rock_05_mesh",
+    "background_fog (2):builtin:plane",
     "tat_ranc_pebbles_01_mesh (4):tat_ranc_pebbles_01_mesh",
     "bar_rock_04:bar_rock_04_mesh",
     "sul_rock_06b_mesh:sul_rock_06b_mesh",
@@ -66,12 +69,13 @@
     "_IllumAmt ignored: outdoor env shaders set it to 1.0 scene-wide (sun-brightness, not glow); mapping it to glTF emissive whiteouts surfaces.",
     "_Color*_Tint baseColorFactor clamped to 1.0 (outdoor tints reach 1.58; game HDR-brightens, a glTF viewer would clip).",
     "Alpha-blended decal / particle materials exported opaque (no shader to tell).",
-    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope)."
+    "Lights, cameras, particle VFX, sprites not exported (glTF static mesh scope).",
+    "Unity builtin-primitive meshes (Quad/Plane/Cube/Sphere/Cylinder/Capsule: exact for Quad/Plane/Cube, canonical-shape approximations for Sphere/Cylinder/Capsule) are synthesized; see report builtin_meshes. Real meshes living in unresolvable external bundles are still skipped (renderers.external_mesh)."
   ],
   "duplicate_env_roots": 0,
   "renderers_under_scene": {
     "MeshRenderer_under_scene": 51,
-    "mr_without_mesh": 3,
+    "mr_builtin_mesh": 3,
     "SkinnedMeshRenderer_outside_scene": 71,
     "MeshRenderer_outside_scene": 5
   },
@@ -96,10 +100,15 @@
   "triangles": 9435,
   "vertices": 11649,
   "battle_camera_nodes": [],
-  "nodes_exported": 52,
-  "meshes_exported": 48,
+  "builtin_meshes": [
+    "background_fog:builtin:plane",
+    "background_fog (1):builtin:plane",
+    "background_fog (2):builtin:plane"
+  ],
+  "nodes_exported": 56,
+  "meshes_exported": 51,
   "materials": 8,
   "textures": 7,
-  "glb_bytes": 875548,
-  "seconds": 0.6
+  "glb_bytes": 893632,
+  "seconds": 0.7
 }
