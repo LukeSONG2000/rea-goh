@@ -344,8 +344,11 @@ class BattleSimulation:
             # shield: stat 34 SHIELD_PENETRATION (clamped 0..1) splits hp/shield parts
             # effect flag +0xf0 & 1: cannot reduce below 1 HP
             # then ApplyAttackDamage(target, -hp_part, -shield_part, ...)
-        (caster_power = virtual getter on the module; the caster's
-        attack/ability-power stat.  effect = the ability's damage effect DO.)"""
+        (caster_power = DamageModule.GetContextValue(context), virtual slot
+        klass+0x1f8 -> base impl 0x18136A570: SUM of this unit's float results
+        recorded by preceding effect modules in the ability's
+        BattleEffectContext.EffectResults (List<PooledDictionary<Unit,float>>
+        at context+0x18).  effect = the ability's damage effect DO.)"""
         dmg = caster_power * effect.get("mult", 1.0) + effect.get("flat", 0.0)
         dmg *= self.process_source_damage(
             attacker, target, effect.get("base_stat_value", 0.0),
@@ -360,6 +363,32 @@ class BattleSimulation:
             v = int(dmg * variance)
             dmg += self.ctx.battle_random.next_int(v * 2 | 1) - v
         return max(dmg, 0.0)
+
+    @staticmethod
+    def modify_effect_amount(outgoing_mods, incoming_mods):
+        """PersistentEffectsController.GetModifyEffectAmount
+        (private 0x181A73980 -> get_modify_effect_amount_priv.c, public wrapper
+        0x181A73880, static multiplier read from .rdata 0x18529EF3C = 1.0):
+
+        per matching persistent effect, its modifier amounts aggregate per
+        source-key -- positives as MAX, negatives as MIN (strongest wins;
+        weaker same-key modifiers are skipped); totals sum across effects;
+        final = (1 + outgoing_total) * (1 + incoming_total), clamped >= 0.
+        EffectParamEnum 45=INCOMING 46=OUTGOING.  Modifiers excluded by the
+        incoming effect's NO_MODIFIER-style params are dropped first.
+        Each arg: iterable of (source_key, amount)."""
+        def aggregate(mods):
+            pos, neg = {}, {}
+            for key, amount in mods:
+                if amount > 0.0:
+                    if key not in pos or amount > pos[key]:
+                        pos[key] = amount
+                elif amount < 0.0:
+                    if key not in neg or amount < neg[key]:
+                        neg[key] = amount
+            return sum(pos.values()) + sum(neg.values())
+        total = (aggregate(outgoing_mods) + 1.0) * (aggregate(incoming_mods) + 1.0)
+        return max(total, 0.0)
 
     # -- turn priority (GiveUnitTurnPriority 0x181CFF800) ------------------
     def give_turn_priority(self, unit):

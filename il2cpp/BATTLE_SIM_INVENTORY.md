@@ -37,6 +37,20 @@ Corrections to the guesses below, now confirmed from the binary:
   shield split via stat **34 = SHIELD_PENETRATION** (clamp 0..1, fraction of damage routed through
   shields); effect flag `+0xf0 & 1` = cannot reduce below 1 HP; then ApplyAttackDamage.
   Ported as `BattleSimulation.apply_damage_pipeline` (determinism-verified).
+- **casterPower slot identified**: the virtual at klass+0x1f8 is `GetContextValue(BattleEffectContext)`
+  (base impl 0x18136A570 → `get_context_value.c`; the module's only other virtual is ApplyToTargets
+  at the adjacent invoke slot). It SUMS the unit's float results accumulated by preceding effect
+  modules into `BattleEffectContext.EffectResults` (context+0x18,
+  `List<PooledDictionary<BattleUnitController,float>>`). So damage input = context-accumulated
+  values × effect mult/flat — not a direct stat read.
+- **GetModifyEffectAmount decoded** (`BattlePersistentEffectsController`, private 0x181A73980 →
+  `get_modify_effect_amount_priv.c`, public wrapper 0x181A73880, EffectParamEnum 45=INCOMING
+  46=OUTGOING): per matching persistent effect, modifier amounts aggregate **per source-key —
+  positives MAX, negatives MIN** (strongest wins); totals = Σ survivors; final =
+  `(1 + outgoing) × (1 + incoming)`, clamp ≥ 0 (static multiplier at .rdata 0x18529EF3C = 1.0,
+  read from the dll). `ProcessDamageModification` (0x181365FC0) just forwards to
+  `BattleStatController.GetModifyEffectAmount(target, effect, modifyType=28, 0xFF)`.
+  Ported as `BattleSimulation.modify_effect_amount`.
 
 Source: `il2cpp/dump/cs/il2cpp.cs` (34.5MB stub from Il2CppInspectorRedux; regenerated via
 `Il2CppInspector.Redux.CLI.exe process GameAssembly.dll global-metadata.dat -o dump -s -m`).
