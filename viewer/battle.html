@@ -74,6 +74,7 @@
   <span class="tlabel">我方</span><div id="teamA" class="pgrid"></div>
   <span class="tlabel b">敌方</span><div id="teamB" class="pgrid"></div>
   <span class="tlabel">种子</span><input id="seed" value="42">
+  <select id="arena"><option value="">场地：无</option></select>
   <button id="fight" class="primary">开战</button>
   <span id="hint">拖动=旋转 · 双指/滚轮=平移 · 右键=平移 · Ctrl+滚轮=缩放</span>
 </div>
@@ -324,6 +325,89 @@ renderer.domElement.addEventListener('pointerup', e=>{
   else hideParts();
 });
 
+// ---------- arena backdrop (env GLB + its particle FX) ----------
+// curated: verified renderers at arena scale, all <7MB
+const ARENAS = [
+  ["env_dath_nightsister_cavern_pre", "灵魂祭坛（火焰）"],
+  ["env_speederbike_01_pre",          "恩多森林"],
+  ["env_tat_kraytraid_01_pre",        "塔图因·克雷特袭击"],
+  ["env_core_street_slums_01_pre",    "核心街贫民窟"],
+  ["env_dath_kujets_tomb_02_pre",     "达索米尔墓穴"],
+  ["env_tak_mazcastle_courtyard_pre", "马兹城堡庭院"],
+  ["env_sca_beachbunker_pre",         "海滩碉堡"],
+  ["env_space_deathstar_01_pre",      "死星表面"],
+  ["env_empire_hangar_pre",           "帝国机库"],
+  ["env_nab_greatgrassyplains_pre",   "纳布草原"],
+];
+let arenaGroup = null, arenaVfx = null;
+{
+  const sel = document.getElementById('arena');
+  ARENAS.forEach(([id, label])=>{
+    const o = document.createElement('option');
+    o.value = id; o.textContent = '场地：' + label;
+    sel.appendChild(o);
+  });
+  sel.onchange = ()=>loadArena(sel.value);
+}
+function disposeArena(){
+  if (arenaVfx) arenaVfx.emitters.forEach(e=>{
+    e.geo.dispose(); e.mat.dispose();
+    if (e.points.parent) e.points.parent.remove(e.points);
+  });
+  if (arenaGroup){
+    arenaGroup.traverse(o=>{ if(o.geometry) o.geometry.dispose();
+                             if(o.material) o.material.dispose(); });
+    scene.remove(arenaGroup);
+  }
+  arenaGroup = null; arenaVfx = null;
+  grid.visible = true;
+  scene.fog.near = 18; scene.fog.far = 55;
+}
+function loadArena(id){
+  disposeArena();
+  if (!id) return;
+  msg('加载场地 …');
+  fetch(`/extracted_env/${id}/${id}.glb`).then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); })
+    .then(buf=>new Promise((res,rej)=>loader.parse(buf,'',res,rej)))
+    .then(gltf=>{
+      const m = gltf.scene;
+      m.traverse(o=>{ if(o.isMesh){ o.material.side = THREE.DoubleSide;
+                                    o.frustumCulled = false; } });
+      // envs are authored where the game staged them; recenter on the median
+      // mesh center (XZ) so the arena floor sits under the fighters
+      m.updateWorldMatrix(true, true);
+      const cx = [], cz = [];
+      m.traverse(o=>{
+        if (o.isMesh){
+          const b = new THREE.Box3().setFromObject(o);
+          if (!b.isEmpty()){ cx.push((b.min.x+b.max.x)/2); cz.push((b.min.z+b.max.z)/2); }
+        }
+      });
+      const group = new THREE.Group();
+      if (cx.length){
+        cx.sort((a,b)=>a-b); cz.sort((a,b)=>a-b);
+        group.position.set(-cx[cx.length>>1], 0, -cz[cz.length>>1]);
+      }
+      group.add(m);
+      arenaGroup = group;
+      scene.add(arenaGroup);
+      grid.visible = false;
+      scene.fog.near = 30; scene.fog.far = 140;
+      // wide framing shot; the user can orbit freely afterwards
+      camera.position.set(0, 7, 17);
+      controls.target.set(0, 1.2, 0);
+      // env particle FX (fires, embers, holo glow) ride env-world coords
+      fetch(`/extracted_env/${id}/vfx.json`).then(r=>r.ok?r.json():null).then(list=>{
+        if (!list || !list.length) return;
+        arenaVfx = EnvFX.build(list, `/extracted_env/${id}/vfx_tex/`);
+        scene.add(arenaVfx.group);
+        arenaVfx.update(0, 0);
+      }).catch(()=>{});
+      msg('');
+    })
+    .catch(()=>{ msg('场地加载失败'); disposeArena(); });
+}
+
 // ---------- battle flow ----------
 let WINNER = null;
 const byId = {};
@@ -440,6 +524,7 @@ renderer.setAnimationLoop(()=>{
   fighters.forEach(f=>{
     if (f.mixer) f.mixer.update(dt);
     if (f.vfxLayer) f.vfxLayer.update(dt, clock.elapsedTime);
+    if (arenaVfx) arenaVfx.update(dt, clock.elapsedTime);
     if (f.flash > 0){
       f.flash -= dt;
       const k = Math.max(f.flash, 0)/0.18;
