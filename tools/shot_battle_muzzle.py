@@ -9,16 +9,16 @@ with sync_playwright() as p:
     errs = []
     pg.on("pageerror", lambda e: errs.append(str(e)))
     pg.goto("http://127.0.0.1:8138/viewer/battle.html")
-    pg.wait_for_function("document.querySelectorAll('#teamA option').length > 100",
+    pg.wait_for_function("document.querySelectorAll('#teamA .pc').length > 100",
                          timeout=30000)
     def pick(sel, needle):
         return pg.evaluate("""([sid, needle])=>{
           const s = document.getElementById(sid);
-          const o = [...s.options].find(o=>o.textContent.includes(needle));
+          const o = [...s.querySelectorAll('.pc')].find(c=>c.title.includes(needle));
           if (!o) return null;
-          [...s.options].forEach(x=>x.selected = false);
-          o.selected = true;
-          return o.textContent.trim();
+          [...s.querySelectorAll('.pc')].forEach(c=>c.classList.remove('sel'));
+          o.click();
+          return o.title;
         }""", [sel, needle])
     print("A:", pick("teamA", "IG-88"), " B:", pick("teamB", "Vader"))
     pg.fill("#seed", "7")

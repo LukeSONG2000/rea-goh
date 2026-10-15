@@ -23,6 +23,7 @@ from export_animation import latest_bundle
 from export_env_vfx import (
     _c, _f, flatten_minmax, minmax, shape_names,
 )
+import swgoh_extract as se
 
 MODULE_UV = ("tilesX", "tilesY", "frameCount")
 
@@ -37,65 +38,75 @@ def export_char_vfx(char, force=False):
     tex_dir = os.path.join(ROOT, "extracted", char, "vfx_tex")
     os.makedirs(tex_dir, exist_ok=True)
 
-    env = UnityPy.load(path)
+    # merge dependency bundles: most PSR materials (saber glow, muzzle flash)
+    # live in shared/ability bundles, not the char bundle itself
+    files = se.resolve_deps_recursively(path)
+    env = UnityPy.load(*[str(f) for f in files])
     gos = {}
     for o in env.objects:
         if o.type.name == "GameObject":
             gos[o.path_id] = o.read_typetree().get("m_Name", "?")
-    psr = {}
+    psr_obj = {}
     for o in env.objects:
         if o.type.name == "ParticleSystemRenderer":
-            t = o.read_typetree()
-            psr[t.get("m_GameObject", {}).get("m_PathID", 0)] = t
+            go_pid = (o.read_typetree().get("m_GameObject", {}) or {}).get("m_PathID", 0)
+            try:
+                psr_obj[go_pid] = o.parse_as_object()
+            except Exception:
+                pass
 
     textures = {}
-    def tex_png(pid):
-        if pid in textures:
-            return textures[pid]
-        if not pid:
+    def tex_png(ptr):
+        """PPtr -> saved png name (resolved across merged deps via deref)."""
+        if ptr is None or getattr(ptr, "m_PathID", 0) == 0:
             return None
-        for o in env.objects:
-            if o.type.name == "Texture2D" and o.path_id == pid:
-                t = o.read_typetree()
-                nm = t.get("m_Name") or f"tex_{pid}"
-                fn, i = nm, 2
-                while os.path.exists(os.path.join(tex_dir, fn + ".png")):
-                    fn = f"{nm}_{i}"; i += 1
-                try:
-                    o.read().image.save(os.path.join(tex_dir, fn + ".png"))
-                    textures[pid] = fn + ".png"
-                    return textures[pid]
-                except Exception:
-                    return None
-        return None
+        try:
+            reader = ptr.deref()
+        except Exception:
+            return None
+        k = se.rkey(reader)
+        if k in textures:
+            return textures[k]
+        try:
+            nm = reader.read_typetree().get("m_Name") or f"tex_{k[1]}"
+            fn, i = nm, 2
+            while os.path.exists(os.path.join(tex_dir, fn + ".png")):
+                fn = f"{nm}_{i}"; i += 1
+            reader.read().image.save(os.path.join(tex_dir, fn + ".png"))
+            textures[k] = fn + ".png"
+            return textures[k]
+        except Exception:
+            return None
 
     def mat_of(go_pid):
-        r = psr.get(go_pid)
-        if not r:
+        po = psr_obj.get(go_pid)
+        if po is None:
             return None, None
-        out = {}
-        shader = None
-        m = r.get("m_Materials") or []
-        if m:
-            pid = m[0].get("m_PathID", 0)
-            for o in env.objects:
-                if o.type.name == "Material" and o.path_id == pid:
-                    t = o.read_typetree()
-                    out["name"] = t.get("m_Name")
-                    sh = t.get("m_Shader", {}).get("m_PathID", 0)
-                    for o2 in env.objects:
-                        if o2.type.name == "Shader" and o2.path_id == sh:
-                            tt = o2.read_typetree()
-                            shader = (tt.get("m_ParsedForm", {}) or {}).get("m_Name") or tt.get("m_Name")
-                    props = t.get("m_SavedProperties", {})
-                    for nm, data in (props.get("m_TexEnvs") or []):
-                        if nm == "_MainTex":
-                            tid = (data.get("m_Texture") or {}).get("m_PathID", 0)
-                            if tid:
-                                out["tex"] = tex_png(tid)
-                    for nm, data in (props.get("m_Colors") or []):
-                        if nm in ("_TintColor", "_Color", "_MainColor"):
-                            out["tint"] = _c(data)
+        out, shader = {}, None
+        mats = getattr(po, "m_Materials", None) or []
+        if mats:
+            try:
+                mat = mats[0].deref().parse_as_object()
+            except Exception:
+                return out, shader
+            out["name"] = getattr(mat, "m_Name", None)
+            try:
+                shader = getattr(mat.m_Shader.deref().parse_as_object(),
+                                 "m_Name", None) or "Shader"
+            except Exception:
+                shader = None
+            props = mat.m_SavedProperties
+            texs = {t[0]: t[1] for t in props.m_TexEnvs}
+            cols = {c[0]: c[1] for c in props.m_Colors}
+            main = texs.get("_MainTex")
+            if main is not None:
+                tex = tex_png(getattr(main, "m_Texture", None))
+                if tex:
+                    out["tex"] = tex
+            for cn in ("_TintColor", "_Color", "_MainColor"):
+                if cn in cols:
+                    c = cols[cn]
+                    out["tint"] = _c({k: getattr(c, k) for k in "rgba"})
         return out, shader
 
     out_list = []
