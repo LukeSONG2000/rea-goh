@@ -12,6 +12,23 @@ Usage:
     py swgoh_extract.py extract-all [--only char]
 Output:
     F:\\PPfavorite\\Work\\goh\\extracted\\<name>\\<name>.glb + textures\\
+
+Per-object state honored from the source prefab (BUGS.md P5/P8):
+
+  * GameObject m_IsActive is recorded per node as the custom node extension
+    ``extensions.SWGOH_active = false`` (only written when false; declared in
+    extensionsUsed).  That flag is the game's authored outfit-variant truth --
+    helmet on/off, fist vs open hand, hidden VFX rigs -- so viewers must start
+    those nodes (and their subtrees) hidden.  This is the single chosen
+    mechanism; there is deliberately no top-level SWGOH_inactive array.
+  * Renderers on ParticleSystem GameObjects (and their subtrees) are excluded
+    from mesh export: particles are simulated effects, not static meshes.
+  * Materials the engine blends as effects (particle/additive shaders, glow /
+    trail / beam / vfx names, mostly-black+white gradient textures) are
+    exported with alphaMode BLEND + an emissive term instead of opaque slabs.
+  * Renderers with m_Enabled = 0 are skipped -- the engine never draws them.
+  * Real VFX playback (particle emission, trails, sabers) is a separate
+    future system; see tools/export_char_vfx.py for the point-sprite stopgap.
 """
 import argparse
 import io
@@ -27,7 +44,8 @@ import numpy as np
 from UnityPy.helpers.MeshHelper import MeshHandler
 
 CACHE = Path(os.path.expandvars(r"%USERPROFILE%\AppData\LocalLow\Unity\Electronic Arts_SWGoH"))
-OUT_ROOT = Path(__file__).parent / "extracted"
+_TOOLS_DIR = Path(__file__).resolve().parent
+OUT_ROOT = (_TOOLS_DIR.parent if _TOOLS_DIR.name == "tools" else _TOOLS_DIR) / "extracted"
 
 
 # --------------------------------------------------------------------------
@@ -183,6 +201,9 @@ class GLTFBuilder:
         }
         if self.extensionsUsed:
             json_data["extensionsUsed"] = self.extensionsUsed
+        else:
+            # nodes stamped by walk() for BUGS.md P5 (authored m_IsActive)
+            json_data["extensionsUsed"] = ["SWGOH_active"]
         for key in ("meshes", "materials", "textures", "images", "samplers",
                     "accessors", "bufferViews", "skins", "nodes"):
             if not json_data[key]:
@@ -316,7 +337,10 @@ class CharacterExporter:
         self.g = GLTFBuilder()
         self.node_of = {}          # Transform ObjectReader -> node index
         self.trans_of_go = {}      # GameObject ObjectReader -> Transform ObjectReader
+        self.go_of_node = {}       # node index -> GameObject ObjectReader
+        self.name_of_node = {}     # node index -> GameObject name
         self.tex_cache = {}        # texture ObjectReader -> glTF texture index
+        self.tex_stats_cache = {}  # texture ObjectReader -> (black, white) ratios
         self.mesh_cache = {}       # (mesh reader, bones tuple) -> glTF mesh idx
         self.mat_cache = {}        # material reader -> glTF material idx
         self.parent_of = {}        # node index -> parent node index
@@ -324,6 +348,27 @@ class CharacterExporter:
         self.bind_globals = {}     # node index -> mirrored bind global (from IBM)
         self.bind_pose_mode = False
         self.png_dir = out_dir / "textures"
+        # -- source-hierarchy survey (filled by _survey_hierarchy) ----------
+        # P3/P6/+1: the game parents props to hand sockets at RUNTIME, so the
+        # prefab serializes them either as INACTIVE staging copies or inside
+        # MOVER scaffolds outside the skeleton (measured: jedimaster_staff
+        # RIFLE_CONSTRAINT/RIFLE_MOVER -> socket RIFLE_LEFT_HAND under
+        # Left_wpnJNT; leia_princess root-level blaster duplicate of the
+        # in-skeleton pst_defendersportingblaster_pre).  The survey below
+        # feeds the walk filters and the attachment plan; everything is read
+        # from serialized state, never guessed.
+        self.go_info = {}          # transform rkey -> (name, own m_IsActive)
+        self.children_of = {}      # transform rkey -> [child transform rkeys]
+        self.root_tkeys = []       # transforms with no father
+        self.skin_bone_tkeys = set()
+        self.subtree_bone = {}     # rkey -> subtree (incl. self) holds a skin bone
+        self.subtree_staged = {}   # rkey -> subtree holds a runtime-attached prop
+        self.prune_tkeys = set()   # subtrees removed from the scene graph
+        self.staged_parent = {}    # prop transform rkey -> socket transform rkey
+        self.pending_reparent = [] # (prop node idx, socket node idx)
+        self.inactive_kept = set() # node idxs kept for skins, meshes skipped
+        self.spawned_props = set() # transform rkeys: inactive socket weapons
+        self.spawned_nodes = set() # their glTF node idxs (mesh still exported)
 
     # -- object helpers ----------------------------------------------------
     def deref(self, ptr):
@@ -331,6 +376,285 @@ class CharacterExporter:
             return ptr.deref_parse_as_object()
         except Exception:
             return None
+
+    # -- source-hierarchy survey / serialized attachment plan --------------
+    def _survey_hierarchy(self):
+        """One typetree pass over the bundle's Transform/GameObject pairs:
+        names, own m_IsActive flags, children map and the skinned-mesh bone
+        set.  Feeds the walk filters and _plan_attachments."""
+        go_of = {}      # go rkey -> (name, active)
+        go_trans = {}   # go rkey -> transform rkey
+        for obj in self.env.objects:
+            if obj.type.name == "GameObject":
+                try:
+                    g = obj.parse_as_object()
+                    go_of[rkey(obj)] = (go_name(g),
+                                        bool(getattr(g, "m_IsActive", True)))
+                except Exception:
+                    continue
+            elif obj.type.name == "Transform":
+                try:
+                    t = obj.parse_as_object()
+                except Exception:
+                    continue
+                tk = rkey(obj)
+                gp = getattr(t, "m_GameObject", None)
+                if gp is not None and gp.m_PathID:
+                    try:
+                        gk = rkey(gp.deref())
+                        go_trans[gk] = tk
+                        # _attach_renderers keys renderers by GO rkey
+                        self.trans_of_go[gk] = tk
+                    except Exception:
+                        pass
+                father = getattr(t, "m_Father", None)
+                if father is None or not father.m_PathID:
+                    self.root_tkeys.append(tk)
+                else:
+                    try:
+                        fk = rkey(father.deref())
+                        self.children_of.setdefault(fk, []).append(tk)
+                    except Exception:
+                        self.root_tkeys.append(tk)
+                ch = []
+                for c in getattr(t, "m_Children", None) or []:
+                    try:
+                        ch.append(rkey(c.deref()))
+                    except Exception:
+                        pass
+                self.children_of.setdefault(tk, ch)
+        for gk, (name, active) in go_of.items():
+            tk = go_trans.get(gk)
+            if tk is not None:
+                self.go_info[tk] = (name, active)
+        # skin bones: every transform referenced by any SkinnedMeshRenderer
+        for obj in self.env.objects:
+            if obj.type.name != "SkinnedMeshRenderer":
+                continue
+            try:
+                r = obj.parse_as_object()
+            except Exception:
+                continue
+            for bp in getattr(r, "m_Bones", None) or []:
+                try:
+                    self.skin_bone_tkeys.add(rkey(bp.deref()))
+                except Exception:
+                    pass
+
+    def _has_skin_bone(self, tk):
+        """Subtree rooted at tk contains a skinned-mesh bone (memoized)."""
+        v = self.subtree_bone.get(tk)
+        if v is not None:
+            return v
+        v = tk in self.skin_bone_tkeys
+        if not v:
+            for c in self.children_of.get(tk, ()):
+                if self._has_skin_bone(c):
+                    v = True
+                    break
+        self.subtree_bone[tk] = v
+        return v
+
+    def _descendants(self, tk, include_self=True):
+        out = [tk] if include_self else []
+        stack = list(self.children_of.get(tk, ()))
+        while stack:
+            c = stack.pop()
+            out.append(c)
+            stack.extend(self.children_of.get(c, ()))
+        return out
+
+    def _renderer_tkeys(self):
+        """Transform rkeys whose GameObject carries a (skinned) mesh renderer.
+        Requires the GO->transform map built by _survey_hierarchy."""
+        out = set()
+        for obj in self.env.objects:
+            if obj.type.name not in ("SkinnedMeshRenderer", "MeshRenderer"):
+                continue
+            try:
+                r = obj.parse_as_object()
+                gp = r.m_GameObject
+                if gp is None or not gp.m_PathID:
+                    continue
+                tk = self.trans_of_go.get(rkey(gp.deref()))
+                if tk is not None:
+                    out.add(tk)
+            except Exception:
+                continue
+        return out
+
+    def _plan_attachments(self, root_tkey):
+        """Classify props the engine does not render where they are authored
+        (all truth from serialized state; BUGS.md P3②/P6/+1):
+
+        * inactive GO without any skin bone in its subtree -> pruned
+          (m_IsActive is the outfit/loadout truth: raid-Grievous sabers,
+          leia's R2-D2 companion, fist/hand mesh variants);
+        * renderer-bearing subtree OUTSIDE the bone container with a
+          same-named counterpart inside -> runtime staging duplicate, pruned
+          (leia princess root-level blaster copy);
+        * renderer-bearing subtree OUTSIDE the bone container whose name
+          shares a token with a socket under a hand joint -> re-parented
+          onto that socket post-walk, authored world pose preserved
+          expressed in the socket's rest space (jedimaster_staff rifle
+          RIFLE_CONSTRAINT/RIFLE_MOVER -> RIFLE_LEFT_HAND).
+        """
+        self._survey_hierarchy()
+        if root_tkey is None:
+            root_tkey = self.root_tkeys[0] if self.root_tkeys else None
+        if root_tkey is None:
+            return
+        parent_src = {}
+        for tk, chs in self.children_of.items():
+            for c in chs:
+                parent_src[c] = tk
+
+        def chain_of(tk):
+            out = []
+            while tk is not None:
+                out.append(tk)
+                tk = parent_src.get(tk)
+            return out
+
+        # inside = descendants of the bone-bearing containers (Scaler, or the
+        # mesh node itself on rigs without a Scaler)
+        inside = set()
+        containers = [c for c in self.children_of.get(root_tkey, ())
+                      if self._has_skin_bone(c)]
+        if not containers and self._has_skin_bone(root_tkey):
+            containers = [root_tkey]
+        for c in containers:
+            inside.update(self._descendants(c))
+        inside_names = {self.go_info[t][0] for t in inside if t in self.go_info}
+        renderers = self._renderer_tkeys()
+
+        # Weapon joints carry the character's loadout.  A renderer-bearing
+        # GO the prefab serialized INACTIVE under a hand/weapon joint is a
+        # spawned weapon (Grievous's four sabers are inactive in every
+        # bundle -- the game enables them on spawn): keep it stamped
+        # inactive UNLESS the joint already parents an active weapon (then
+        # the inactive one is an unselected loadout variant -- jedimaster
+        # Obi-Wan's spare swd_anakin_mesh next to his active saber).
+        def hand_joint_ancestor(tk):
+            for a in chain_of(tk)[:-1]:
+                an = self.go_info.get(a, ("", ""))[0].lower()
+                if ("wpn" in an or "wrst" in an or "weapon" in an or
+                        "hand" in an) and "jnt" in an:
+                    return a
+            return None
+
+        for t in renderers & inside:
+            name_t, active_t = self.go_info.get(t, ("", True))
+            if active_t:
+                continue
+            j = hand_joint_ancestor(t)
+            if j is None:
+                continue
+            # shadow-caster duplicates don't count as the joint's weapon
+            siblings = [c for c in self.children_of.get(j, ())
+                        if c in renderers
+                        and not any(p in self.go_info.get(c, ("", ""))[0]
+                                    for p in SKIP_GO_NAME_PARTS)]
+            if not any(self.go_info.get(c, ("", False))[1] for c in siblings):
+                self.spawned_props.update(self._descendants(t))
+
+        # only transforms that belong to THIS prefab's graph; dependency
+        # packs bring their own renderers whose chains never reach the root
+        staged = sorted(
+            (t for t in renderers
+             if t not in inside and root_tkey in chain_of(t)),
+            key=lambda t: len(chain_of(t)))          # top-down
+        handled = set()
+
+        for prop in staged:
+            if prop in handled:
+                continue
+            name, active = self.go_info.get(prop, ("", True))
+            subtree = self._descendants(prop)
+            if not active:
+                continue
+            # 1) duplicate of an in-skeleton counterpart -> prune the whole
+            #    staging subtree (the in-skeleton instance is the rendered one)
+            if name in inside_names:
+                for t in subtree:
+                    if t not in inside:
+                        self.prune_tkeys.add(t)
+                handled.update(subtree)
+                self.report["dropped_staging"].append(
+                    f"{name} (duplicate of in-skeleton {name})")
+                continue
+            # 2) socket match under a hand joint -> re-parent post-walk
+            tokens = set()
+            for a in chain_of(prop):
+                aname = self.go_info.get(a, ("", ""))[0]
+                for tok in aname.replace("_", " ").split():
+                    tok = "".join(ch for ch in tok.lower() if ch.isalpha())
+                    if len(tok) >= 3:
+                        tokens.add(tok)
+            sockets = []
+            for t in inside:
+                sname, sactive = self.go_info.get(t, ("", True))
+                low = sname.lower()
+                if not any(tok in low for tok in tokens):
+                    continue
+                tchain = chain_of(t)
+                tchain_names = [self.go_info.get(a, ("", ""))[0].lower()
+                                for a in tchain]
+                if low.endswith("hand"):
+                    rank = 0
+                elif any(k in n for n in tchain_names
+                         for k in ("wrst", "wpn", "wrist")):
+                    rank = 1
+                else:
+                    continue
+                ntok = sum(1 for tok in tokens if tok in low)
+                sockets.append((rank, not sactive, -ntok, t))
+            if sockets:
+                sockets.sort()
+                socket = sockets[0][-1]
+                self.staged_parent[prop] = socket
+                handled.update(subtree)
+                self.report.setdefault("reattach_planned", []).append(
+                    f"{name} -> {self.go_info[socket][0]}")
+            else:
+                self.report.setdefault("staged_unattached", []).append(name)
+
+    def _apply_pending_reparents(self):
+        """Move staged props onto their sockets, preserving the authored
+        world transform expressed in the socket's rest space (glTF space)."""
+        for prop_idx, socket_tkey in self.pending_reparent:
+            socket_idx = self.node_of.get(socket_tkey)
+            if socket_idx is None:
+                self.report.setdefault("staged_unattached", []).append(
+                    f"{self.g.nodes[prop_idx].get('name')} (socket missing)")
+                continue
+            old_parent = self.parent_of.get(prop_idx)
+            Gp = self._global_of(socket_idx)
+            W = self._global_of(prop_idx)
+            L = np.linalg.inv(Gp) @ W
+            trs = decompose_trs(L)
+            nd = self.g.nodes[prop_idx]
+            nd.pop("matrix", None)
+            if trs is None:
+                for k in ("translation", "rotation", "scale"):
+                    nd.pop(k, None)
+                nd["matrix"] = [float(x) for x in L.T.reshape(-1)]
+            else:
+                t, q, s = trs
+                nd["translation"] = [float(t[0]), float(t[1]), float(t[2])]
+                nd["rotation"] = [float(q[0]), float(q[1]), float(q[2]), float(q[3])]
+                nd["scale"] = [float(s[0]), float(s[1]), float(s[2])]
+            self.local_M[prop_idx] = L
+            self.parent_of[prop_idx] = socket_idx
+            if old_parent is not None:
+                ch = self.g.nodes[old_parent].get("children", [])
+                if prop_idx in ch:
+                    ch.remove(prop_idx)
+            self.g.nodes[socket_idx].setdefault("children", []).append(prop_idx)
+            self.report["reattached_props"].append(
+                f"{self.g.nodes[prop_idx].get('name')} -> "
+                f"{self.g.nodes[socket_idx].get('name')}")
+        self.pending_reparent = []
 
     # -- textures ----------------------------------------------------------
     def texture_png(self, tex):
@@ -365,7 +689,67 @@ class CharacterExporter:
         self.tex_cache[rkey(reader)] = idx
         return idx
 
+    def tex_luma_stats(self, tex_ptr):
+        """(near_black_ratio, near_white_ratio) of a texture, on a 48x48
+        thumbnail of its luminance.  Used by the glow-material heuristic;
+        cached per texture."""
+        if not tex_ptr or tex_ptr.m_PathID == 0:
+            return None
+        reader = None
+        try:
+            reader = tex_ptr.deref()
+        except Exception:
+            return None
+        key = rkey(reader)
+        if key in self.tex_stats_cache:
+            return self.tex_stats_cache[key]
+        stats = None
+        try:
+            img = reader.parse_as_object().image.convert("L").resize((48, 48))
+            h = img.histogram()
+            n = sum(h)
+            stats = (sum(h[:16]) / n, sum(h[240:]) / n)
+        except Exception:
+            stats = None
+        self.tex_stats_cache[key] = stats
+        return stats
+
     # -- materials ---------------------------------------------------------
+    # Materials the engine renders with special particle/effect blending
+    # (additive sabers, trails, muzzle flashes).  Exported as OPAQUE these
+    # turn into solid white slabs (BUGS.md P8), so they are flagged glow and
+    # re-exported as alphaMode BLEND with an emissive term.
+    GLOW_MAT_NAME = r"(glow|beam|add(itive)?($|_)|trail|slash|bolt|flare|lens|spark|halo|smoke|fire|burn|flash|muzzle|(^|_)vfx(_|$))"
+    GLOW_SHADER_NAME = r"(additive|alpha\s*blended|particles|vfx)"
+
+    def shader_name(self, mat):
+        ptr = getattr(mat, "m_Shader", None)
+        if not ptr or ptr.m_PathID == 0:
+            return ""
+        try:
+            sh = ptr.deref_parse_as_object()
+        except Exception:
+            return ""
+        form = getattr(sh, "m_ParsedForm", None)
+        nm = getattr(form, "m_Name", "") if form is not None else ""
+        return nm or getattr(sh, "m_Name", "") or ""
+
+    def is_glow_material(self, mat, mat_name, texs):
+        import re
+        shader = self.shader_name(mat)
+        if re.search(self.GLOW_SHADER_NAME, shader, re.I):
+            return f"shader:{shader}"
+        if re.search(self.GLOW_MAT_NAME, mat_name, re.I):
+            return f"name:{mat_name}"
+        # additive-gradient texture: mostly near-black with a bright core
+        main = texs.get("_MainTex")
+        stats = self.tex_luma_stats(main) if main is not None else None
+        if stats is not None:
+            black, white = stats
+            if black >= 0.45 and white >= 0.05:
+                return "texture:black+white-gradient"
+        return None
+
     def get_material_index(self, mat_ptr):
         if not mat_ptr or mat_ptr.m_PathID == 0:
             return None
@@ -416,6 +800,24 @@ class CharacterExporter:
         if cutoff:
             mat_json["alphaMode"] = "MASK"
             mat_json["alphaCutoff"] = cutoff
+
+        # P8: particle/effect materials must blend, not render as solid slabs.
+        ptrs = {k: getattr(v, "m_Texture", None) for k, v in texs.items()}
+        glow = self.is_glow_material(mat, go_name(mat), ptrs)
+        if glow:
+            mat_json["alphaMode"] = "BLEND"
+            mat_json.pop("alphaCutoff", None)
+            mat_json["doubleSided"] = True
+            if "emissiveTexture" not in mat_json and main is not None:
+                mat_json["emissiveTexture"] = {"index": main}
+            if "emissiveFactor" not in mat_json:
+                tint = cols.get("_TintColor")
+                if tint is not None and (tint.r or tint.g or tint.b):
+                    mat_json["emissiveFactor"] = [tint.r, tint.g, tint.b]
+                else:
+                    mat_json["emissiveFactor"] = [1.0, 1.0, 1.0]
+            self.report.setdefault("glow_materials", []).append(
+                f"{go_name(mat)} ({glow})")
 
         g.materials.append(mat_json)
         idx = len(g.materials) - 1
@@ -667,19 +1069,58 @@ class CharacterExporter:
                 best = best or t
         return best
 
-    def walk(self, transform, parent=None):
-        """Depth-first: create glTF nodes for the whole hierarchy."""
+    def walk(self, transform, parent=None, chain_active=True):
+        """Depth-first: create glTF nodes for the whole hierarchy.
+
+        Honors the serialized state and the attachment plan from
+        _plan_attachments:
+
+        * subtrees marked in prune_tkeys are skipped wholesale;
+        * an inactive GO whose subtree holds neither skin bones nor a staged
+          prop is dropped together with its subtree (m_IsActive is the
+          outfit/loadout truth -- BUGS.md P5/P6/+1);
+        * inactive GOs kept only for skinning are stamped with the
+          SWGOH_active extension so viewers start them hidden;
+        * staged props keep their natural parenting here and are moved onto
+          their hand sockets afterwards (_apply_pending_reparents).
+        """
         tkey = rkey(transform.object_reader)
         if tkey in self.node_of:
             return self.node_of[tkey]
-        go = self.deref(transform.m_GameObject)
-        if go is not None:
-            self.trans_of_go[rkey(go.object_reader)] = tkey
-        name = go_name(go) if go else "unnamed"
+        if tkey in self.prune_tkeys:
+            return None
+        name, own_active = self.go_info.get(tkey, (None, True))
+        if name is None:
+            go = self.deref(transform.m_GameObject)
+            if go is not None:
+                self.trans_of_go[rkey(go.object_reader)] = tkey
+            name = go_name(go) if go else "unnamed"
+            own_active = bool(getattr(go, "m_IsActive", 1)) if go is not None else True
+        active_chain = chain_active and own_active
+        has_bone = self._has_skin_bone(tkey)
+        has_staged = tkey in self.staged_parent or any(
+            self._has_staged(c) for c in self.children_of.get(tkey, ()))
+        spawned_here = tkey in self.spawned_props
+        if not active_chain and not has_bone and not has_staged \
+                and not spawned_here:
+            # P5/P6/+1: what the engine renders at load is the serialized
+            # m_IsActive state; a GO that is off (or sits under an off
+            # parent) without skin bones, a runtime-attached prop or a
+            # spawned weapon stays out of the scene graph entirely.
+            self.prune_tkeys.add(tkey)
+            self.subtree_bone[tkey] = False
+            self.report["dropped_inactive"].append(name)
+            return None
         lp = transform.m_LocalPosition
         lr = transform.m_LocalRotation
         ls = transform.m_LocalScale
         node = {"name": name}
+        if not own_active:
+            # P5: the prefab's authored GameObject m_IsActive IS the
+            # outfit-variant truth (helmet on/off, fist vs open hand).
+            # Kept nodes (bones / staged-prop carriers) are stamped so
+            # viewers start them hidden.
+            node["extensions"] = {"SWGOH_active": False}
         if (lp.x, lp.y, lp.z) != (0.0, 0.0, 0.0):
             node["translation"] = [-lp.x, lp.y, lp.z]
         if (lr.x, lr.y, lr.z, lr.w) != (0.0, 0.0, 0.0, 1.0):
@@ -689,6 +1130,20 @@ class CharacterExporter:
         self.g.nodes.append(node)
         idx = len(self.g.nodes) - 1
         self.node_of[tkey] = idx
+        go_reader = getattr(transform, "m_GameObject", None)
+        if go_reader is not None and go_reader.m_PathID:
+            try:
+                self.go_of_node[idx] = go_reader.deref()
+            except Exception:
+                pass
+        self.name_of_node[idx] = name
+        if not own_active:
+            self.inactive_kept.add(idx)
+        if spawned_here:
+            # spawned weapon: keep the mesh exported (it is the character's
+            # loadout) while the inactive stamp stays for consumers
+            self.spawned_nodes.add(idx)
+            self.inactive_kept.discard(idx)
         if parent is not None:
             self.parent_of[idx] = parent
         L = np.eye(4)
@@ -696,14 +1151,40 @@ class CharacterExporter:
         L[:3, 3] = (-lp.x, lp.y, lp.z)
         self.local_M[idx] = L
 
+        if tkey in self.staged_parent:
+            # runtime-attached prop: moved onto its hand socket after the
+            # walk, authored world pose preserved in the socket rest space.
+            # Once attached it defines its own visibility, so its children
+            # are walked active regardless of the staging ancestors.
+            self.pending_reparent.append((idx, self.staged_parent[tkey]))
+            active_chain = True
+
         children = []
+        node_visible = active_chain or has_bone or has_staged
         for ch in transform.m_Children:
             ct = self.deref(ch)
             if ct is not None:
-                children.append(self.walk(ct, parent=idx))
+                gltf_parent = idx if node_visible else parent
+                c = self.walk(ct, parent=gltf_parent, chain_active=active_chain)
+                if c is not None:
+                    children.append(c)
         if children:
             node["children"] = children
         return idx
+
+    def _has_staged(self, tk):
+        """Subtree rooted at tk contains a runtime-attached prop root."""
+        v = self.subtree_staged.get(tk)
+        if v is not None:
+            return v
+        v = tk in self.staged_parent
+        if not v:
+            for c in self.children_of.get(tk, ()):
+                if self._has_staged(c):
+                    v = True
+                    break
+        self.subtree_staged[tk] = v
+        return v
 
     # -- run ---------------------------------------------------------------
     def run(self, root_transform):
@@ -714,16 +1195,68 @@ class CharacterExporter:
         root_idx = self.node_of.get(rkey(root_transform.object_reader))
         if root_idx is None:
             raise RuntimeError("root transform not indexed")
+        if any("SWGOH_active" in n.get("extensions", {}) for n in self.g.nodes):
+            self.g.extensionsUsed.append("SWGOH_active")
         glb = self.g.build_glb([root_idx])
         out = self.out_dir / f"{self.char_name}.glb"
         out.write_bytes(glb)
         return out
 
     def _build_all_nodes(self, root_transform):
+        # runtime-attachment plan (staged props / inactive pruning), then
         # walk hierarchy from the character root (bones live inside it)
+        self._plan_attachments(rkey(root_transform.object_reader))
         self.walk(root_transform)
+        # move staged props onto their hand sockets (authored world pose
+        # preserved in the socket rest space)
+        self._apply_pending_reparents()
         # then attach renderer meshes
         self._attach_renderers()
+
+    def _particle_go_set(self):
+        """GO rkeys that own a ParticleSystem component, extended with every
+        descendant GO (BUGS.md P8a).  Particle quads are simulated effects,
+        not exportable static meshes -- in-game the ParticleSystemRenderer
+        draws them; here they either fail to resolve (built-in Quad mesh,
+        path_id 10210) or render as white blobs."""
+        ps_gos = set()
+        for obj in self.env.objects:
+            if obj.type.name != "ParticleSystem":
+                continue
+            try:
+                ps = obj.parse_as_object()
+            except Exception:
+                continue
+            goptr = getattr(ps, "m_GameObject", None)
+            if goptr is None or goptr.m_PathID == 0:
+                continue
+            try:
+                ps_gos.add(rkey(goptr.deref()))
+            except Exception:
+                continue
+        if not ps_gos:
+            return set()
+        out = set()
+        for n in range(len(self.g.nodes)):
+            gored = self.go_of_node.get(n)
+            if gored is None or rkey(gored) not in ps_gos:
+                continue
+            stack = [n]
+            while stack:
+                cur = stack.pop()
+                if cur in self.go_of_node:
+                    out.add(rkey(self.go_of_node[cur]))
+                stack.extend(ch for ch in self.g.nodes[cur].get("children", []))
+        return out
+
+    def _under_vfx_branch(self, idx):
+        """True if the node's chain (self excluded) carries a 'vfx' name."""
+        p = self.parent_of.get(idx)
+        while p is not None:
+            if "vfx" in (self.name_of_node.get(p) or "").lower():
+                return True
+            p = self.parent_of.get(p)
+        return False
 
     def _attach_renderers(self):
         # map GameObject reader -> renderers
@@ -742,6 +1275,9 @@ class CharacterExporter:
                 except Exception:
                     continue
                 go_renderers.setdefault(rkey(go), []).append((go, r))
+        # P8a: GOs owning a ParticleSystem + their whole subtree are excluded
+        # from mesh export (needs the walk, which built go_of_node).
+        particle_gos = self._particle_go_set()
         # Shared mesh packs ship several renderers for the same mesh with
         # different bone-list lengths (e.g. b1_mesh with 21 and 25 bones).
         # boneWeight indices address the mesh's bindpose space, so a renderer
@@ -776,7 +1312,21 @@ class CharacterExporter:
             node_idx = self.node_of.get(treader) if treader is not None else None
             if node_idx is None:
                 continue
+            # P3/P6: a GO the prefab serialized inactive is not rendered --
+            # nodes kept only for skinning get no mesh either.
+            if node_idx in self.inactive_kept:
+                self.report.setdefault("inactive_skipped", []).append(name)
+                continue
+            # P8a: renderers owned by (or nested under) a ParticleSystem are
+            # simulated effects -- never export them as static meshes.
+            if rkey(go) in particle_gos:
+                self.report.setdefault("particle_excluded", []).append(name)
+                continue
             for _, r in rs:
+                # a renderer the prefab disabled is not rendered by the engine
+                if not getattr(r, "m_Enabled", 1):
+                    self.report.setdefault("renderer_disabled_skipped", []).append(name)
+                    continue
                 rtype = type(r).__name__
                 if rtype == "SkinnedMeshRenderer":
                     mesh = self.deref(r.m_Mesh)
@@ -795,6 +1345,12 @@ class CharacterExporter:
                     continue
                 mname = go_name(mesh)
                 if any(p in mname for p in SKIP_GO_NAME_PARTS) or "shadowmesh" in mname.lower():
+                    continue
+                # trail/beam quads inside a vfx branch are effect geometry
+                if self._under_vfx_branch(node_idx) and \
+                        any(p in mname.lower() for p in ("trail", "beam")):
+                    self.report.setdefault("particle_excluded", []).append(
+                        f"{name} ({mname})")
                     continue
                 if rtype == "SkinnedMeshRenderer":
                     bones = (best_bones.get(rkey(mesh.object_reader))
@@ -838,7 +1394,11 @@ def extract(bundle_name: str, bind_pose: bool = False):
 
     out_dir = OUT_ROOT / bundle_name
     out_dir.mkdir(parents=True, exist_ok=True)
-    report = {"exported_meshes": [], "mesh_errors": [], "texture_errors": []}
+    report = {"exported_meshes": [], "mesh_errors": [], "texture_errors": [],
+              "particle_excluded": [], "renderer_disabled_skipped": [],
+              "glow_materials": [],
+              "dropped_inactive": [], "dropped_staging": [],
+              "reattached_props": []}
 
     exp = CharacterExporter(env, bundle_name, out_dir, report)
     exp.bind_pose_mode = bind_pose
@@ -854,6 +1414,10 @@ def extract(bundle_name: str, bind_pose: bool = False):
         print(f"     meshes: {len(report['exported_meshes'])}, "
               f"errors: {len(report['mesh_errors'])} mesh / "
               f"{len(report['texture_errors'])} tex")
+        if report.get("particle_excluded"):
+            print(f"     particle-excluded renderers: {report['particle_excluded']}")
+        if report.get("glow_materials"):
+            print(f"     glow (BLEND) materials: {report['glow_materials']}")
         for m in report["exported_meshes"]:
             print(f"       - {m}")
         if report["mesh_errors"] or report["texture_errors"]:

@@ -170,7 +170,9 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
                 continue
             raise RigMismatch(f"{bone}: {got!r} != {leaf!r}")
         pelvis_q = desc_pelvis_q(av)
-        tos = {int(h): p for h, p in av["m_TOS"]}
+        # m_TOS hashes are CRC32 -- normalize to unsigned to match binding
+        # paths (& 0xFFFFFFFF below)
+        tos = {int(h) & 0xFFFFFFFF: p for h, p in av["m_TOS"]}
     except (SystemExit, RigMismatch):
         joints = None   # non-humanoid rig -> generic route only
 
@@ -179,6 +181,15 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
         # layer/state order.  Animation name = state name (layer prefix
         # stripped; kept on collision).  Blend-tree children get @threshold
         # suffixes so both idle variants survive.
+        #
+        # P3 (tilt): within a state the children are ordered by clip kind,
+        # NOT by authored threshold.  Several default "Idle" states are
+        # blend trees whose threshold-0 child is the HURT idle
+        # (ackbaradmiral / jedimaster_staff: the first animation used to be
+        # hmn_hurt_idle, a pain pose that reads as the whole rig standing
+        # tilted) with the real idle at threshold 1.  clip_priority sinks
+        # hurt/sit variants so the representative first animation is the
+        # character's real idle; thresholds stay in the names.
         named = []
         used_names = set()
         order = 0
@@ -188,15 +199,18 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
             label = s["name"].split(".")[-1].strip()
             motions = [m for m in s["motion"] if m.get("path_id")]
             multi = len([m for m in motions if "threshold" in m]) > 1
-            for m in motions:
-                if m["source"] == SHARED:
-                    nm = shared_names.get(u64(m["path_id"]))
-                elif str(m["source"]).startswith("ext"):
-                    nm = shared_names.get(u64(m["path_id"]))  # None -> drop later
-                else:
-                    nm = m.get("name")
-                if nm is None and str(m["source"]).startswith("ext"):
-                    continue      # not a shared clip; unresolvable external
+
+            def resolve(m):
+                if m["source"] == SHARED or str(m["source"]).startswith("ext"):
+                    return shared_names.get(u64(m["path_id"]))
+                return m.get("name")
+
+            resolved = [(m, resolve(m)) for m in motions]
+            resolved = [(m, nm) for m, nm in resolved
+                        if not (nm is None and str(m["source"]).startswith("ext"))]
+            resolved.sort(key=lambda t2: (clip_priority(t2[1] or label),
+                                          float(t2[0].get("threshold") or 0)))
+            for m, nm in resolved:
                 if multi and "threshold" in m:
                     anim = f"{label}@{m['threshold']}"
                 else:
@@ -275,23 +289,44 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
                 if leaf in idx and leaf in poses[0]:
                     channels.append((idx[leaf], "rotation",
                                      [v for p in poses for v in p[leaf]["rotation"]]))
-            # transform-layer curves (weapon nodes etc.) via avatar m_TOS
+            # transform-layer curves (weapon nodes etc.) via avatar m_TOS.
+            # BUGS.md P7: the curve-index walk must consume EVERY binding --
+            # humanoid muscle bindings occupy curve slots in the same index
+            # space, and skipping them (the old `continue` before acc += d)
+            # shifted every transform offset (127 slots on vader's idle),
+            # sending cape/weapon curves onto foreign bones -> the cape flew
+            # off the body.  Nodes are matched by exact full-path CRC (the
+            # same hash the bindings use), with the m_TOS leaf name as
+            # fallback; (node, prop) pairs are deduped because two same-leaf
+            # paths (two weapon sockets) used to emit conflicting channels.
             from muscle_clip import binding_dimensions
             acc = 0
+            done_pairs = set()
             for b, d in zip(clip["bindings"]["generic_bindings"], binding_dimensions(clip)):
-                if b["type_id"] != 4:
-                    continue
-                path = tos.get(b["path"])
-                leaf2 = path.split("/")[-1] if path else None
                 curves = list(range(acc, acc + d))
                 acc += d
-                if leaf2 not in idx:
+                if b["type_id"] != 4:
+                    continue
+                node = cmap.get(b["path"] & 0xFFFFFFFF)
+                if node is None:
+                    path = tos.get(b["path"] & 0xFFFFFFFF)
+                    leaf2 = path.split("/")[-1] if path else None
+                    node = idx.get(leaf2)
+                if node is None:
                     continue
                 if b["attribute"] == 1:
-                    channels.append((idx[leaf2], "translation",
+                    key = (node, "translation")
+                    if key in done_pairs:
+                        continue
+                    done_pairs.add(key)
+                    channels.append((node, "translation",
                         [v for t in times for v in conv_v3([sample_curve(clip, c, t) for c in curves])]))
                 elif b["attribute"] == 2:
-                    channels.append((idx[leaf2], "rotation",
+                    key = (node, "rotation")
+                    if key in done_pairs:
+                        continue
+                    done_pairs.add(key)
+                    channels.append((node, "rotation",
                         [v for t in times for v in conv_q(q_norm(tuple(sample_curve(clip, c, t) for c in curves)))]))
         elif mc:
             # generic-binding clip: transform curves via CRC path matching

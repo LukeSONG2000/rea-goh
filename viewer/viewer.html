@@ -214,9 +214,28 @@ function attachVfx(kind, id){        // kind: 'extracted_env' | 'extracted'
 }
 const _mats = [];
 
+// BUGS.md P5: the exporter stamps nodes with extensions.SWGOH_active=false
+// when the source prefab's GameObject m_IsActive was false (outfit-variant
+// truth: helmet vs burned head, fist vs open hand, hidden VFX rigs).  Meshes
+// in such subtrees get visible=false directly, so the parts panel checkboxes
+// reflect the authored state and can toggle it back on.
+function applyAuthoredVisibility(root){
+  root.traverse(o=>{
+    if (!o.isMesh) return;
+    for (let p = o; p; p = p.parent){
+      const u = p.userData;
+      if (u && u.gltfExtensions && u.gltfExtensions.SWGOH_active === false){
+        o.visible = false;
+        break;
+      }
+    }
+  });
+}
+
 function buildPartsPanel(root){
   // per-mesh visibility toggles: variant bundles (helmet on/off etc.) load
-  // every part at once -- this lets the user switch forms by hand
+  // every part at once -- this lets the user switch forms by hand.  Parts the
+  // source prefab authored inactive (SWGOH_active=false) start unchecked.
   const panel = document.getElementById('parts');
   const list = document.getElementById('partsList');
   list.innerHTML = '';
@@ -230,7 +249,7 @@ function buildPartsPanel(root){
     cb.type = 'checkbox'; cb.checked = m.visible;
     cb.onchange = ()=>{ m.visible = cb.checked; };
     lb.appendChild(cb);
-    lb.appendChild(document.createTextNode(name));
+    lb.appendChild(document.createTextNode(name + (m.visible ? '' : ' （源文件隐藏）')));
     list.appendChild(lb);
   });
   panel.style.display = 'block';
@@ -349,6 +368,7 @@ function loadBuffer(buf, name, isEnv){
       if (o.isBone) bones++;
     });
     if (bones){ bonesHelper = new THREE.SkeletonHelper(model); scene.add(bonesHelper); setBones(false); }
+    applyAuthoredVisibility(model);
     buildPartsPanel(model);
     if (gltf.animations && gltf.animations.length){
       mixer = new THREE.AnimationMixer(model);
