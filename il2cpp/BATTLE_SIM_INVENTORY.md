@@ -61,6 +61,21 @@ Corrections to the guesses below, now confirmed from the binary:
   **MAX_SHIELD(25) floor 0**, then **int truncation** for all stats except {16, 18-19, 24-45,
   53-62} (the rating/percent family stays float). Ported as `get_calculated_stat_value`
   (modifier lists are BattleUnit stand-ins until the persistent-effect pipeline lands).
+- **AI decision architecture mapped** (classes + RVAs; bodies not yet ported):
+  driver `BattleAbilityAIController.GetAbilityAIResult(BattleAbilityAIContext)` 0x1816A2EC0 →
+  `GetAbilityDecisionTreeId(owner)` (per-owner tree id, gamedata) → tree walker
+  `GetAbilityAIResult(node, ctx)` 0x1816A30C0: per `AbilityDecisionNodeDO` (type, target,
+  excludeSelf, params, paramModifier GT/EQ/LT, chance, negate, Success/FailureResult chain) →
+  chance roll → `GetDecisionModule(type).EvaluateCondition(node, targets, ctx, out targets)`
+  (per-type modules 0x1816A4CB0..) → `ProcessResult` 0x1816A3540 picks ability+targets.
+  AIContext = {PreferredTarget, Self, EnemyTargetOptions, Enemies, Allies, SpecialAbilities,
+  PrimaryAbility, Chance}.  Default tree (AbilityDecisionTreeProvider.Get 0x180FECDC0) node
+  order: UltimatePriority → Priority → Revive → TeamHealAlly(+Allies/+ExcludingSelf×2) →
+  SelfHeal → KillLowHPEnemy → TargetLock → AllyDispel → SelfDispel → AOE → EnemyDispel →
+  KillHighHPEnemy → Damage → Default → Taunt → Reinforce → Summon; DecisionTypes
+  SINGLE_HEALTH/MEDIAN_HEALTH/NUMBER_OF_TARGETS/PERSISTENT_EFFECT/NUMBER_OF_ENEMIES_ALIVE/
+  REINFORCE_AVAILABLE/OUTNUMBERED/SINGLE_SURVIVABILITY_PERCENT/SUMMON_AVAILABLE/
+  SINGLE_PROTECTION/SINGLE_SPEED_FILL/TARGET_BY_UNIT_IDS.
 
 Source: `il2cpp/dump/cs/il2cpp.cs` (34.5MB stub from Il2CppInspectorRedux; regenerated via
 `Il2CppInspector.Redux.CLI.exe process GameAssembly.dll global-metadata.dat -o dump -s -m`).
