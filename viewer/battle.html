@@ -51,7 +51,20 @@
           text-shadow:0 2px 24px #000;pointer-events:none;opacity:0;transition:opacity .4s}
   #loadmsg{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:12;
            font-size:12px;color:var(--dim);background:#0009;padding:4px 12px;border-radius:99px}
-  @media (max-width:820px){ #log{display:none} }
+  /* ---------- parts popover (click a fighter) ---------- */
+  #parts{position:fixed;right:302px;top:60px;z-index:11;width:220px;max-height:46vh;
+         overflow-y:auto;background:var(--panel);border:1px solid var(--line);
+         border-radius:8px;padding:8px 10px;box-sizing:border-box;display:none}
+  #parts h4{margin:0 0 6px;font-size:11px;color:var(--gold);font-weight:600;
+            display:flex;justify-content:space-between;align-items:center}
+  #parts h4 span{cursor:pointer;color:var(--dim);font-weight:400}
+  #parts h4 span:hover{color:var(--txt)}
+  #parts label{display:flex;align-items:center;gap:6px;padding:2px 0;cursor:pointer;
+               font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;
+               text-overflow:ellipsis}
+  #parts label:hover{color:var(--txt)}
+  #parts input{accent-color:var(--gold)}
+  @media (max-width:820px){ #log{display:none} #parts{right:12px} }
 </style>
 </head>
 <body>
@@ -67,6 +80,8 @@
 <div id="log"><div id="logHead" style="color:var(--dim)">战报将显示在这里</div></div>
 <div id="banner"></div>
 <div id="loadmsg"></div>
+<div id="parts"><h4><span id="partsName">部件</span><span id="partsClose" title="关闭">✕</span></h4>
+  <div id="partsList"></div></div>
 
 <script src="/viewer/vendor/three.min.js"></script>
 <script src="/viewer/vendor/GLTFLoader.js"></script>
@@ -264,10 +279,56 @@ function play(f, clip, loop){
   f.cur = next;
 }
 
+// ---------- parts popover: click a fighter to toggle its meshes ----------
+// variant bundles load every form at once (helmet AND no-helmet); this is
+// the battle-page equivalent of the viewer's parts panel
+const partsEl = document.getElementById('parts');
+let partsFighter = null;
+function hideParts(){ partsEl.style.display = 'none'; partsFighter = null; }
+document.getElementById('partsClose').onclick = hideParts;
+function showParts(f){
+  partsFighter = f;
+  document.getElementById('partsName').textContent = f.meta.name;
+  const list = document.getElementById('partsList');
+  list.innerHTML = '';
+  const meshes = [];
+  f.model.traverse(o=>{ if (o.isMesh) meshes.push(o); });
+  if (!meshes.length){ hideParts(); return; }
+  meshes.forEach((m, i)=>{
+    const lb = document.createElement('label');
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = m.visible;
+    cb.onchange = ()=>{ m.visible = cb.checked; };
+    lb.append(cb, document.createTextNode(m.name || `mesh_${i}`));
+    list.appendChild(lb);
+  });
+  partsEl.style.display = 'block';
+}
+// screen-space pick: raycast is unreliable on skinned meshes mid-animation
+let downX = 0, downY = 0;
+renderer.domElement.addEventListener('pointerdown', e=>{ downX = e.clientX; downY = e.clientY; });
+renderer.domElement.addEventListener('pointerup', e=>{
+  if (Math.hypot(e.clientX-downX, e.clientY-downY) > 6) return;   // was a drag
+  const v = new THREE.Vector3();
+  let best = null, bestD = 90;   // px radius around body center
+  fighters.forEach(f=>{
+    if (!f.group) return;
+    v.setFromMatrixPosition(f.group.matrixWorld); v.y += 1.1;
+    v.project(camera);
+    const sx = (v.x*0.5+0.5)*innerWidth, sy = (-v.y*0.5+0.5)*innerHeight;
+    const d = Math.hypot(e.clientX-sx, e.clientY-sy);
+    if (d < bestD){ bestD = d; best = f; }
+  });
+  if (best && best === partsFighter) hideParts();
+  else if (best) showParts(best);
+  else hideParts();
+});
+
 // ---------- battle flow ----------
 let WINNER = null;
 const byId = {};
 function resetScene(){
+  hideParts();
   fighters.forEach(f=>{
     if (f.vfxLayer) f.vfxLayer.emitters.forEach(e=>{
       e.geo.dispose(); e.mat.dispose();
