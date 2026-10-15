@@ -76,6 +76,19 @@ Corrections to the guesses below, now confirmed from the binary:
   SINGLE_HEALTH/MEDIAN_HEALTH/NUMBER_OF_TARGETS/PERSISTENT_EFFECT/NUMBER_OF_ENEMIES_ALIVE/
   REINFORCE_AVAILABLE/OUTNUMBERED/SINGLE_SURVIVABILITY_PERCENT/SUMMON_AVAILABLE/
   SINGLE_PROTECTION/SINGLE_SPEED_FILL/TARGET_BY_UNIT_IDS.
+- **Data-driven GameConstants: NOT on disk.** Searched the gamedata mirror (92 files), the
+  Unity cache (11.4k bundles — no config bundles), and the binary (`_embedded` suffix only
+  covers UI/fonts). The Min/PerLevel/Base* fields hydrate from **ConfigEntry** list
+  (GameConstants+0x18 `_cachedConfigEntries`, `_hasOverridesApplied`), server-sent at login.
+  The config KEY names are string literals in global-metadata.dat (pool ~0x280268,
+  `|`-separated): `UnitAttackCritRatingMod`, `UnitAttackCritChancePerLevelDelta`,
+  `UnitAttackCritChanceLevelDeltaMin/Max`, `UnitBaseAttackCritChance`,
+  `UnitBaseAbilityCritChance`, `UnitAbilityCritRatingMod`, `UnitArmorRatingMod`,
+  `UnitDamageModPerLevelDelta`, `UnitDamageModLevelDeltaMin/Max`,
+  `UnitDamageModPerEraLevelDelta`, `UnitSpeedFillMax`, … — 1:1 with the ctor offsets
+  (+0x22F4 armor mod, +0x2300 crit per-level, +0x230C/+0x2314 base crit chances, +0x24B4
+  speed fill max).  Acquisition options: read the hydrated GameConstants object from the
+  live process after login (offsets fully known), or capture the login config response.
 
 Source: `il2cpp/dump/cs/il2cpp.cs` (34.5MB stub from Il2CppInspectorRedux; regenerated via
 `Il2CppInspector.Redux.CLI.exe process GameAssembly.dll global-metadata.dat -o dump -s -m`).
