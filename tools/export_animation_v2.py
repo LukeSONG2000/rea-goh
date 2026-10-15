@@ -262,6 +262,14 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
             if "__root__" in poses[0] and "pelvicJNT" in idx:
                 tv = [v for p in poses for v in p["__root__"]["translation"]]
                 channels.append((idx["pelvicJNT"], "translation", tv))
+                # RootQ: the hips rotation (rootQ(t)·descPelvisQ, glTF space).
+                # The muscle table never drives Hips, so without this channel
+                # the pelvis stays at bind rotation -- root-motion tilts
+                # (deaths, knockdowns) play as upright slides/sinks instead.
+                # Emitted as absolute local rotation; at identity rootQ it
+                # equals the node's bind rotation (no pop on idles).
+                rv = [v for p in poses for v in p["__root__"]["rotation"]]
+                channels.append((idx["pelvicJNT"], "rotation", rv))
             for bone, rec in sorted(joints.items()):
                 leaf = rec["leaf"]
                 if leaf in idx and leaf in poses[0]:
