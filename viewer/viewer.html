@@ -8,7 +8,9 @@
     --bg:#101216; --panel:#181b21ee; --panel2:#1f232b; --line:#2b303a;
     --txt:#dfe3ea; --dim:#8a93a3; --gold:#f0c94a; --red:#e0524a; --gray:#9aa3ad;
     --acc:#5b8dee;
+    --sidew:300px;
   }
+  body.side-off{--sidew:0px}
   html,body{margin:0;height:100%;overflow:hidden;font-family:Segoe UI,system-ui,sans-serif;
             background:var(--bg);color:var(--txt)}
   /* ---------- header ---------- */
@@ -23,7 +25,12 @@
   #headStats{margin-left:auto;font-size:12px;color:var(--dim);white-space:nowrap}
   /* ---------- sidebar ---------- */
   #side{position:fixed;left:0;top:52px;bottom:0;width:300px;z-index:15;display:flex;flex-direction:column;
-        background:var(--panel);border-right:1px solid var(--line);box-sizing:border-box}
+        background:var(--panel);border-right:1px solid var(--line);box-sizing:border-box;
+        transition:margin-left .18s ease}
+  body.side-off #side{margin-left:-301px}
+  #sideBtn{padding:4px 9px;border-radius:7px;border:1px solid var(--line);background:transparent;
+           color:var(--dim);cursor:pointer;font-size:14px;line-height:1}
+  #sideBtn:hover{color:var(--txt);border-color:#3a4150}
   #filters{padding:10px 12px 6px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
   .chipRow{display:flex;gap:6px;flex-wrap:wrap}
   .chip{padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:transparent;
@@ -74,13 +81,13 @@
                color:#b6bdc9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   #parts label:hover{color:#fff}
   #parts input{accent-color:var(--acc)}
-  #animBar{position:fixed;left:calc(312px + (100vw - 312px)/2);bottom:14px;transform:translateX(-50%);
-           display:none;gap:6px;z-index:10;max-width:min(62vw, calc(100vw - 336px));
-           overflow-x:auto;padding:4px}
+  #animBar{position:fixed;left:calc(var(--sidew) + (100vw - var(--sidew))/2);bottom:14px;transform:translateX(-50%);
+           display:none;gap:6px;z-index:10;max-width:min(62vw, calc(100vw - var(--sidew) - 24px));
+           overflow-x:auto;padding:4px;transition:left .18s ease}
   #animBar button{white-space:nowrap}
   #animBar button.playing{background:#2a3a5c;color:#fff;border-color:var(--acc)}
   /* ---------- info panel ---------- */
-  #info{position:fixed;left:312px;bottom:58px;z-index:10;max-width:420px;background:#14171ccc;
+  #info{position:fixed;left:calc(var(--sidew) + 12px);bottom:58px;z-index:10;max-width:420px;background:#14171ccc;
         border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--dim);
         line-height:1.65;backdrop-filter:blur(6px)}
   #info b{color:var(--txt);font-size:14px}
@@ -97,6 +104,7 @@
 </head>
 <body>
 <div id="head">
+  <button id="sideBtn" title="收起/展开侧栏">◧</button>
   <div id="logo">✦ <b>SWGoH</b> 模型库</div>
   <input id="search" placeholder="搜索：名字 / 绰号 / defId / char_ 前缀…">
   <div id="headStats"></div>
@@ -537,6 +545,12 @@ Promise.all([
     localStorage.setItem('goh_vm','grid'); renderList(document.getElementById('search').value); };
   document.getElementById('vList').onclick = ()=>{ viewMode='list';
     localStorage.setItem('goh_vm','list'); renderList(document.getElementById('search').value); };
+  const sideBtn = document.getElementById('sideBtn');
+  if (localStorage.getItem('goh_side')==='off') document.body.classList.add('side-off');
+  sideBtn.onclick = ()=>{
+    const off = document.body.classList.toggle('side-off');
+    localStorage.setItem('goh_side', off ? 'off' : 'on');
+  };
   renderFilters();
   renderList('');
 }).catch(()=>{
