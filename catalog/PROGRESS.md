@@ -28,6 +28,16 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 - PHASE 2: 技能链接入 game/engine.py（读 il2cpp/BATTLE_SIM_INVENTORY.md DECODE STATUS：ApplyToTargets 链已解码于 `il2cpp/offline/battle.py`；用 catalog/gamedata/units.json 每单位 skillReference 选技能）→ 种子确定性验证 → commit+push → sync game/ → `sudo systemctl restart goh-demo` → 验证 /api/battle 事件带技能名
 - 之后: 主城 roster UI（extracted_ui 头像）
 
+## 路线图状态
+
+| 项 | 状态 |
+|---|---|
+| 三 Agent 集成 | A ✅ (0d724a04+57baba25 delta 同步) / C ✅ (1e91acc4) / B ⚠️ NEEDS-REVIEW（2 项 GLB 内容回归，见总表） |
+| E2E 站位断言 | ✅ 00:45（两场地 dist=0 + 截图差 md5） |
+| PHASE 2 技能链 | ✅（abilities.py + engine v1，确定性 PASS，公共 /api/battle 带技能名） |
+| roster UI 官方头像 | ✅ 01:1x（game/portraits.json 237/308 经 units.json thumbnailName 解析；/api/roster 下发 web-root 路径；battle.html 卡片优先头像、无头像回退 T-pose；本地+公共均验证 200；坑: 索引 portraits 路径无 tex. 前缀且为旧文件名 → 以 thumbnailName 为准） |
+| B 回归修复 | ⏳ 等 B（tracker 每 ~5 分钟巡检 GLB mtime + verifier） |
+
 ## 事件日志
 
 - 10-15 23:20 tracker 启动；快照：A 未交付、B 未交付、C 进行中（资产半数已落盘，服务端/前端补丁未到）
@@ -48,3 +58,6 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 - 10-16 00:2x agent 侧追加: `57baba25` fleet fidelity（ offending 字符全量重导，audit → 0 offender）+ `af07115c` Unity 工程同步 256 animator。tracker 独立复跑 audit_fidelity.py: **exit 0, V1=0, V2=0 属实**
 - 10-16 00:30 29 个 fleet-fix GLB 增量同步 /srv/goh（md5 88366e9e 一致）；fleet 修复后 A 门复跑 **PASS**（7 char 全 tolerance）
 - 10-16 00:30 **B 重试 #2 仍 FAIL**（同 2 项，GLB 内容自 23:58/00:00 未再变）→ #3 ~00:40，失败即 NEEDS-REVIEW（修复属 B 域: P5 导出器 inactive 集漏 swd_jynerso_mesh + P7 披风 t0 采样）
+- 10-16 00:38 **B 重试 #3 FAIL → 正式 NEEDS-REVIEW**（三次复跑同结果，输入未变）
+- 10-16 01:0x **roster UI 官方头像落地并部署**: portraits.json（thumbnailName 策略 237/308）+ /api/roster portrait 字段（web-root 路径）+ battle.html 卡片优先头像。调试记录: 8138 曾有**双进程 SO_REUSEADDR 影子监听**导致响应 alternation（全杀后单进程恢复）；相对路径 portrait 从 /viewer/ 页解析成 /viewer/extracted_ui/... 404 被 onerror 移除 → 改 web-root。验证: 本地 474 头像卡片渲染（截图），公共 /api/roster 237、portrait URL 200、battle API 正常
+- 10-16 01:1x jynerso/vaderduelsend 显式补同步（首次全量同步时的竞态文件），md5 c8add6fe / c2d40e70 一致
