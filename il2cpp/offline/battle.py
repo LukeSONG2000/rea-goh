@@ -39,6 +39,7 @@ DAMAGE_MOD_PER_LEVEL_DELTA = 0.0           # +0x2348
 DAMAGE_MOD_LEVEL_DELTA_MIN = 0.0           # +0x2344
 DAMAGE_MOD_PER_ERA_LEVEL_DELTA = 0.0       # +0x233C
 DAMAGE_MOD_ERA_LEVEL_DELTA_MIN = 0.0       # +0x2338
+DAMAGE_MOD_ERA_LEVEL_DELTA_MAX = 1.0       # +0x2334 (ctor imm, era twin of +0x2340)
 
 # UnitStatEnum values used by the damage pipeline (dump/cs/il2cpp.cs:602463)
 STAT_SPEED = 5
