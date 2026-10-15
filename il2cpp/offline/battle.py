@@ -55,6 +55,7 @@ STAT_ABILITY_CRIT_NEGATE_RATING = 23
 STAT_CRIT_PERCENT_ADDITIVE = 28
 STAT_SHIELD_PENETRATION = 34   # fraction (clamped 0..1) of damage routed to shields
 STAT_CRIT_NEGATE_PERCENT_ADDITIVE = 40
+STAT_MASTERY = 61              # recursion root: mastery converts into sub-stats
 
 # SEEDING: BattleFsmController._SendBattleStartRequest_b__0 (0x181A5EFB0,
 # decompiled/battle_start_seed.c) constructs FIVE JavaRandom instances from
@@ -106,6 +107,23 @@ class BattleUnit:
     def get_stat(self, stat):
         """GetStatValue stand-in: base stats only (modifier lists pending)."""
         return self.stats.get(stat, 0.0)
+
+    # modifier sources: BattleUnit has none of the real IStatModifierSource
+    # machinery yet; these hooks exist so get_calculated_stat_value below
+    # mirrors the binary's exact pass structure when the effect pipeline lands.
+    def additives_for_stat(self, stat):
+        """StatCalculator.GetAdditivesForStat (0x180FE0480) stand-in."""
+        return []
+
+    def percent_additives_for_stat(self, stat):
+        """StatCalculator.GetPercentAdditivesForStat (0x180FE0280) stand-in."""
+        return []
+
+    def mastery_contribution(self, stat):
+        """StatCalculator.GetMasteryContribution (0x180FDFF40) stand-in:
+        GameDataDomainController.GetUnitMasteryTable (0x181BE74A0) lookup
+        keyed by stat-source identity -> conversion table call."""
+        return 0.0
 
     @property
     def speed(self):
@@ -389,6 +407,49 @@ class BattleSimulation:
             return sum(pos.values()) + sum(neg.values())
         total = (aggregate(outgoing_mods) + 1.0) * (aggregate(incoming_mods) + 1.0)
         return max(total, 0.0)
+
+    # -- stat aggregation (StatCalculator.GetCalculatedStatValue) -----------
+    # Stats the final clamp/truncate pass keeps fractional (switch default
+    # truncates everything else to int): 16, 18-19, 24-45, 53-62.
+    _FLOAT_STATS = ({16} | set(range(18, 20)) | {24}
+                    | set(range(24, 46)) | set(range(53, 63)))
+    _MIN_ONE_STATS = (1, 6, 7)   # MAX_HEALTH, ATTACK_DAMAGE, ABILITY_POWER
+
+    def get_calculated_stat_value(self, unit, stat, initial=0.0):
+        """StatCalculator.GetCalculatedStatValue (0x180FDE5C0 ->
+        stat_calculated_value.c).  Five passes over the modifier lists:
+
+            v = base(unit, stat) + initial
+            v += Σ slot4(m, stat)                    # GetAdditivesForStat (0x180FE0480)
+            if stat != MASTERY(61):
+                v += calc_stat(MASTERY) * mastery_contribution(stat)   # 0x180FDFF40
+            p += Σ (slot4 + slot5)(m, stat)          # GetPercentAdditivesForStat (0x180FE0280)
+            v = unit.slot5(stat, exclude, skip) + (1 + p) * v          # statSource's own
+            v += Σ slot5(m, stat, exclude, skip)     # GetAdditivesForStat again, aware form
+            # clamps: MAX_HEALTH/ATTACK/ABILITY_POWER floor 1.0 (+inf/nan guard);
+            # MAX_SHIELD(25) floor 0; then int-truncate unless stat in _FLOAT_STATS
+        (slot4 = plain modifier accessor, slot5 = exclusion-aware accessor --
+        both on the IStatModifierSource interface; the modifier lists are
+        stand-ins on BattleUnit until the persistent-effect pipeline lands.)"""
+        v = unit.get_stat(stat) + initial
+        for m in unit.additives_for_stat(stat):
+            v += m.get("flat", 0.0)
+        if stat != STAT_MASTERY:
+            v += self.get_calculated_stat_value(unit, STAT_MASTERY) \
+                * unit.mastery_contribution(stat)
+        p = 0.0
+        for m in unit.percent_additives_for_stat(stat):
+            p += m.get("pct", 0.0) + m.get("pct_aware", 0.0)
+        v = 0.0 + (1.0 + p) * v   # statSource slot5 term: placeholder (no source yet)
+        for m in unit.additives_for_stat(stat):
+            v += m.get("flat_aware", 0.0)
+        if stat in self._MIN_ONE_STATS and (v < 1.0 or v != v or v == float("inf")):
+            v = 1.0
+        elif stat == 25 and v < 0.0:              # MAX_SHIELD
+            v = 0.0
+        if stat not in self._FLOAT_STATS:
+            v = float(int(v))
+        return v
 
     # -- turn priority (GiveUnitTurnPriority 0x181CFF800) ------------------
     def give_turn_priority(self, unit):

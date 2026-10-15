@@ -51,6 +51,16 @@ Corrections to the guesses below, now confirmed from the binary:
   read from the dll). `ProcessDamageModification` (0x181365FC0) just forwards to
   `BattleStatController.GetModifyEffectAmount(target, effect, modifyType=28, 0xFF)`.
   Ported as `BattleSimulation.modify_effect_amount`.
+- **Stat aggregation decoded** (`StatCalculator.GetCalculatedStatValue` 0x180FDE5C0 →
+  `stat_calculated_value.c`): v = base+initial → Σ flat additives (`GetAdditivesForStat`
+  0x180FE0480) → `+= calc(MASTERY=61) × GetMasteryContribution(stat)` (0x180FDFF40 →
+  `GetUnitMasteryTable` 0x181BE74A0 keyed lookup; skipped when stat==MASTERY) →
+  `× (1 + Σ percent additives)` (`GetPercentAdditivesForStat` 0x180FE0280) → Σ exclusion-aware
+  flat additives (slot-5 accessors on the same list; also the statSource's own slot-5 term).
+  Final clamp: **MAX_HEALTH/ATTACK_DAMAGE/ABILITY_POWER floor 1.0** (incl. inf/nan guard),
+  **MAX_SHIELD(25) floor 0**, then **int truncation** for all stats except {16, 18-19, 24-45,
+  53-62} (the rating/percent family stays float). Ported as `get_calculated_stat_value`
+  (modifier lists are BattleUnit stand-ins until the persistent-effect pipeline lands).
 
 Source: `il2cpp/dump/cs/il2cpp.cs` (34.5MB stub from Il2CppInspectorRedux; regenerated via
 `Il2CppInspector.Redux.CLI.exe process GameAssembly.dll global-metadata.dat -o dump -s -m`).
