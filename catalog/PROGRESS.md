@@ -45,3 +45,6 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 - 10-16 00:17 **B 重试 #1 仍 FAIL**（同 2 项: jynerso 缺 swd_jynerso_mesh 隐藏标记、vaderduelsend P7 披风 t0 max 0.76）——23:58/00:00 的重导出未修好；继续重试环（#2 ~00:25, #3 ~00:35, 之后 NEEDS-REVIEW）
 - 10-16 00:2x **PHASE 2 部署完成**: game/ + il2cpp/offline/battle.py + gamedata(skill/ability/effect.json)+loc_en 同步 /srv/goh → `systemctl restart goh-battle` → active；公共 /api/battle (seed=42) 事件带真实技能名（"Sabacc Shuffle"/"Saber Storm"/"It's a Trap!"），units 携带 abilities 元数据；本地 8138 重启以加载新 server/engine
 - 10-16 00:45 **E2E 全绿（本地 http://127.0.0.1:8138，= 公共页同码同数据；公共 URL 自签证书 IAB 无法 ignore_https_errors，API 层已用 curl 公共验证）**: ①卡希克海滩开战 → 5 fighter 全部 dist=0 站在原版 UnitMarker（1/2/3 号），沙地地面渲染 ②切霍雪平原再战 → 同样 maxDist=0，雪地地面 ③两张截图 md5 不同（b1bcf6be vs 89bf15e9）→ 站位/地面/朝向全链生效。P1/P2 用户可见症状闭环
+- 10-16 00:2x agent 侧追加: `57baba25` fleet fidelity（ offending 字符全量重导，audit → 0 offender）+ `af07115c` Unity 工程同步 256 animator。tracker 独立复跑 audit_fidelity.py: **exit 0, V1=0, V2=0 属实**
+- 10-16 00:30 29 个 fleet-fix GLB 增量同步 /srv/goh（md5 88366e9e 一致）；fleet 修复后 A 门复跑 **PASS**（7 char 全 tolerance）
+- 10-16 00:30 **B 重试 #2 仍 FAIL**（同 2 项，GLB 内容自 23:58/00:00 未再变）→ #3 ~00:40，失败即 NEEDS-REVIEW（修复属 B 域: P5 导出器 inactive 集漏 swd_jynerso_mesh + P7 披风 t0 采样）
