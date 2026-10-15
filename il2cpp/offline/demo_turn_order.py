@@ -70,7 +70,7 @@ def main():
     print("first 12 turns (seed 4490):")
     for rnd, actor in seq_a[:12]:
         print(f"  round {rnd:2d}: {actor}")
-    print("DEMO OK: deterministic per seed, seed-sensitive across seeds")
+    print("DEMO OK: same seeds -> identical turn sequence (deterministic)")
 
 
 if __name__ == "__main__":
