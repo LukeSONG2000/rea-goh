@@ -1,8 +1,22 @@
 {
   "exported_meshes": [
-    "dath_altar_01_mesh [static]",
-    "vfx_dath_altar_01 [static]"
+    "dath_altar_01_mesh [static]"
   ],
   "mesh_errors": [],
-  "texture_errors": []
+  "texture_errors": [],
+  "particle_excluded": [
+    "vfx_dath_altar_01 (vfx-named)"
+  ],
+  "renderer_disabled_skipped": [],
+  "glow_materials": [],
+  "dropped_inactive": [
+    "vfx_crate_death"
+  ],
+  "dropped_staging": [],
+  "reattached_props": [],
+  "staged_unattached": [
+    "dath_altar_01_mesh_shadow",
+    "dath_altar_01_mesh",
+    "vfx_dath_altar_01"
+  ]
 }

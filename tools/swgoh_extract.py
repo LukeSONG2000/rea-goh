@@ -1322,6 +1322,12 @@ class CharacterExporter:
             if rkey(go) in particle_gos:
                 self.report.setdefault("particle_excluded", []).append(name)
                 continue
+            # audit fleet run showed 9 stragglers whose VFX meshes hang under
+            # plain GameObjects (vfx_geo_/vfx_cone_...) with no ParticleSystem
+            # anywhere up the chain -- the vfx_ name family is conclusive.
+            if name.lower().startswith("vfx"):
+                self.report.setdefault("particle_excluded", []).append(name + " (vfx-named)")
+                continue
             for _, r in rs:
                 # a renderer the prefab disabled is not rendered by the engine
                 if not getattr(r, "m_Enabled", 1):
