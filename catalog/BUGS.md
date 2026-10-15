@@ -2,8 +2,8 @@
 
 | # | 症状 | 根因假设 | 忠实来源 | 状态 |
 |---|------|---------|---------|------|
-| P1 | 对战中人物在场景外 | 未使用原版站位 | `catalog/ui_layouts.json`（142 个 battle_*_layout = 3D 竞技场定位树）| 修复中 |
-| P2 | 场景没有地面 | 地面/地形在独立 bundle（同 char_aat 案例）| 环境包依赖链 m_Dependencies | 修复中 |
+| P1 | 对战中人物在场景外 | 未使用原版站位 | `catalog/battle_staging.json`（130 个 battle_*_layout 的 PlayerMarkers/EnemyMarkers 槽位已解码；layout↔env 绑定来自 gamedata encounters，空 layoutPrefab 用客户端默认 pvp/pve layout，见 il2cpp 字符串）| 已修复（2026-10-15：tools/dump_battle_staging.py；server /api/staging + battle payload `staging`；battle.html 按 marker 摆人，无 staging 时回退旧网格）|
+| P2 | 场景没有地面 | 不是独立 bundle：地面渲染器引用 Unity 内置图元（"unity default resources"，pathID 10210=Quad 等，缓存里没有该外部文件），此前被当 mr_without_mesh 丢弃；222/269 个 env bundle 有此引用 | env bundle 内部：内置图元几何按 Unity 规范合成（Quad/Plane/Cube 精确，Sphere/Cylinder/Capsule 近似）| 已修复（2026-10-15：tools/export_env.py 合成内置图元并重导出 moseisley/nikto_base/conquest8/hoth_snow/kash_beach；tools/verify_env_ground.py 校验地面存在+Y 覆盖站位）|
 | P3 | 立面不垂直 + 武器不在手中 | ①部分 rig 整体倾斜（Avatar axes 应用错误）②道具 authored 在 bind/rest 空间未挂骨骼 | Avatar m_TOS / 挂点路径；骨骼世界姿态 | 修复中 |
 | P5 | 多装扮不生效/偏移（Vader 头盔+脸同显） | 导出器忽略源 prefab 的 GameObject m_IsActive | 源 prefab 序列化的 active 态 = 原版装扮开关真值 | 修复中 |
 | P6 | 多武器同时出现（Obiwan 四件悬浮） | 挂件未按 loadout 挂到手部 socket | 同 P3 挂点机制 | 修复中 |
