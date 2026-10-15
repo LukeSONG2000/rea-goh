@@ -42,6 +42,22 @@
   #list li.on .zh{color:#aab}
   #list li .tag{margin-left:auto;font-size:10px;color:#667;border:1px solid var(--line);
                 border-radius:4px;padding:1px 5px;flex:none}
+  /* ---------- grid (thumbnail) mode ---------- */
+  #viewToggle{display:flex;gap:4px;margin-left:auto;flex:none}
+  #viewToggle button{padding:3px 10px;font-size:11px;border-radius:6px}
+  #list.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));
+             grid-auto-rows:192px;gap:8px;padding:8px}
+  #list.grid li{display:flex;flex-direction:column;align-items:center;gap:4px;
+                padding:6px 5px 7px;border:1px solid var(--line);border-radius:10px;background:#151820}
+  #list.grid li:hover{background:#1d222c;border-color:#3a4150;transform:translateY(-1px)}
+  #list.grid li.on{background:#22304e;border-color:var(--acc)}
+  #list.grid li .thumb{width:100%;height:0;position:relative;padding-top:100%;
+                       border-radius:7px;overflow:hidden;background:#0d0f13}
+  #list.grid li .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  #list.grid li .nm{font-size:11px;line-height:1.25;text-align:center;max-width:100%;
+                    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#c3cad6}
+  #list.grid li .zh{margin:0;font-size:10px}
+  #list.grid li .dot{position:absolute;left:4px;top:4px;margin:0;box-shadow:0 0 3px #000a}
   /* ---------- viewport chrome ---------- */
   #bar{position:fixed;right:12px;top:64px;z-index:10;display:flex;gap:6px;flex-wrap:wrap;max-width:46%}
   button{padding:6px 12px;border-radius:7px;border:1px solid var(--line);background:#181b21cc;color:#c6ccd8;
@@ -77,7 +93,13 @@
 </div>
 <div id="side">
   <div id="filters">
-    <div class="chipRow" id="catRow"></div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <div class="chipRow" id="catRow" style="flex:1"></div>
+      <div id="viewToggle">
+        <button id="vGrid" title="缩略图网格">▦</button>
+        <button id="vList" title="列表">☰</button>
+      </div>
+    </div>
     <div class="chipRow" id="alignRow"></div>
   </div>
   <ul id="list"></ul>
@@ -127,7 +149,24 @@ const clock = new THREE.Clock();
 const _mats = [];
 
 function frame(obj){
-  const box = new THREE.Box3().setFromObject(obj);
+  // SkinnedMesh geometry bounds live in bind space and collapse to zero for
+  // rigged characters -- frame those from skeleton bone positions instead
+  const box = new THREE.Box3();
+  let has = false;
+  const tmp = new THREE.Vector3();
+  obj.updateWorldMatrix(true, true);
+  obj.traverse(o=>{
+    if (o.isSkinnedMesh && o.skeleton){
+      o.skeleton.bones.forEach(bone=>{
+        tmp.setFromMatrixPosition(bone.matrixWorld);
+        if (isFinite(tmp.x)){ box.expandByPoint(tmp); has = true; }
+      });
+    } else if (o.isMesh){
+      const mb = new THREE.Box3().setFromObject(o);
+      if (!mb.isEmpty()){ box.union(mb); has = true; }
+    }
+  });
+  if (!has) box.setFromObject(obj);
   if (box.isEmpty()) return;
   const size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
   const r = Math.max(size.x, size.y, size.z) || 1;
@@ -281,6 +320,8 @@ function loadModel(url, label, fallback, isEnv){
 // ---------- catalog data ----------
 let MODELS = [];          // [{id,en,zh,cls}]
 let CLASS = {};           // id -> classification entry
+let PREVIEWS = new Set(); // ids that have previews/<id>.jpg
+let viewMode = localStorage.getItem('goh_vm') || 'grid';
 const AFFIL_ZH = {
   rebels:'义军同盟', rebelfighter:'义军战士', empire:'银河帝国', imperialtrooper:'帝国兵',
   imperialremnant:'帝国残部', republic:'银河共和国', galactic_republic_jedi:'共和国绝地',
@@ -352,6 +393,9 @@ function renderFilters(){
 }
 function renderList(q){
   listEl.innerHTML='';
+  listEl.classList.toggle('grid', viewMode==='grid');
+  document.getElementById('vGrid').classList.toggle('on', viewMode==='grid');
+  document.getElementById('vList').classList.toggle('on', viewMode==='list');
   q = (q||'').toLowerCase().trim();
   let shown = 0;
   const frag = document.createDocumentFragment();
@@ -366,10 +410,21 @@ function renderList(q){
     shown++;
     const li=document.createElement('li');
     const d = alignDot(m.cls.alignment);
-    li.innerHTML = (d?`<span class="dot ${d}"></span>`:'') +
-      `<span>${m.cls.name_en||m.en||m.id}</span>` +
-      ((m.cls.name_zh||m.zh)?`<span class="zh">${m.cls.name_zh||m.zh}</span>`:'') +
-      (m.cls.nickname?`<span class="zh">“${m.cls.nickname}”</span>`:'');
+    const en = m.cls.name_en||m.en||m.id;
+    const zh = m.cls.name_zh||m.zh||'';
+    const dot = d?`<span class="dot ${d}"></span>`:'';
+    if (viewMode==='grid'){
+      const hasImg = PREVIEWS.has(m.id);
+      li.innerHTML =
+        `<div class="thumb">${hasImg?`<img loading="lazy" src="/previews/${m.id}.jpg" alt="">`:''}${dot}</div>` +
+        `<span class="nm">${en}</span>` +
+        (zh?`<span class="zh">${zh}</span>`:'');
+    } else {
+      li.innerHTML = dot +
+        `<span>${en}</span>` +
+        (zh?`<span class="zh">${zh}</span>`:'') +
+        (m.cls.nickname?`<span class="zh">“${m.cls.nickname}”</span>`:'');
+    }
     li.title = m.id;
     li.onclick=()=>{
       [...listEl.children].forEach(x=>x.classList.remove('on'));
@@ -412,7 +467,8 @@ Promise.all([
   fetch('/models.json').then(r=>r.json()),
   fetch('/catalog/model_classification.json').then(r=>r.json()).catch(()=>null),
   fetch('/catalog/env_models.json').then(r=>r.json()).catch(()=>[]),
-]).then(([list, clsData, envList])=>{
+  fetch('/previews/index.json').then(r=>r.json()).catch(()=>[]),
+]).then(([list, clsData, envList, prevIds])=>{
   CLASS = (clsData && clsData.models) || {};
   MODELS = list.map(m=> typeof m==='string' ? {id:m, cls:classify(m)}
                                             : {id:m.id, en:m.en, zh:m.zh, cls:null});
@@ -421,10 +477,15 @@ Promise.all([
     MODELS.push({id:e.id, cls:{category:'environment', alignment:'',
                                affiliations:[], roles:[], name_en:e.name||null}});
   });
+  PREVIEWS = new Set(prevIds||[]);
+  document.getElementById('vGrid').onclick = ()=>{ viewMode='grid';
+    localStorage.setItem('goh_vm','grid'); renderList(document.getElementById('search').value); };
+  document.getElementById('vList').onclick = ()=>{ viewMode='list';
+    localStorage.setItem('goh_vm','list'); renderList(document.getElementById('search').value); };
   renderFilters();
   renderList('');
 }).catch(()=>{
-  document.getElementById('info').textContent='models.json 未找到（先运行 gen_previews.py）';
+  document.getElementById('info').textContent='models.json 未找到（先运行 tools/gen_previews.py）';
 });
 document.getElementById('search').oninput = e=>renderList(e.target.value);
 
