@@ -75,3 +75,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 - 10-16 01:1x jynerso/vaderduelsend 显式补同步（首次全量同步时的竞态文件），md5 c8add6fe / c2d40e70 一致
 - 10-16 01:02 公共 /api/battle 确定性: 两次独立请求（seed=123）事件流 md5 完全一致（2b5e8e78）——公共部署端到端确定性成立。公共静态面: battle.html 200（含 staging/头像代码 9 处命中）、env GLB 200、anim GLB 200
 - agent 侧: 3f6da4f6 docs P1-P6 原版参考截图（验收基准）落库
+- 10-16 01:29 tracker 巡检: B 仍无动作（jynerso/vaderduelsend GLB、导出器、verifier mtime 均未变）；unity/ 工程出现新在产写入（Scripts/Runtime/UI、Scenes、StreamingAssets、UiSprites —— Unity 侧 UI 工作流，不与 tracker/三 Agent 文件域冲突），tracker 不介入
