@@ -47,19 +47,25 @@ def shared_env():
     return SHARED_ENV
 
 
+_U64 = 0xFFFFFFFFFFFFFFFF
+def u64(p):
+    """UnityPy object.path_id is UNSIGNED int64 while typetree/JSON PPtr
+    values come out SIGNED -- normalize before every comparison/lookup."""
+    return int(p) & _U64
+
 def clip_by_pathid(env, path_id):
     # Deliberately uncached: a previous id(env)-keyed cache could recycle heap
     # addresses across sequential char envs and poison lookups, and parsing is
     # ~10ms per clip anyway.
     for obj in env.objects:
-        if obj.type.name == "AnimationClip" and obj.path_id == path_id:
+        if obj.type.name == "AnimationClip" and u64(obj.path_id) == u64(path_id):
             return parse_animation_clip(obj.get_raw_data())
     raise SystemExit(f"clip path_id {path_id} not in bundle")
 
 
 def shared_clip_names():
     env = shared_env()
-    return {o.path_id: o.read_typetree()["m_Name"]
+    return {u64(o.path_id): o.read_typetree()["m_Name"]
             for o in env.objects if o.type.name == "AnimationClip"}
 
 
@@ -141,7 +147,7 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
     # exists there (verified against the 178-clip catalog)
     refs = [dict(r) for r in refs
             if r["source"] == SHARED or not str(r["source"]).startswith("ext")
-            or r["path_id"] in shared_names]
+            or u64(r["path_id"]) in shared_names]
     for r in refs:
         if str(r["source"]).startswith("ext"):
             r["source"] = SHARED
@@ -184,9 +190,9 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
             multi = len([m for m in motions if "threshold" in m]) > 1
             for m in motions:
                 if m["source"] == SHARED:
-                    nm = shared_names.get(m["path_id"])
+                    nm = shared_names.get(u64(m["path_id"]))
                 elif str(m["source"]).startswith("ext"):
-                    nm = shared_names.get(m["path_id"])   # may be None -> drop later
+                    nm = shared_names.get(u64(m["path_id"]))  # None -> drop later
                 else:
                     nm = m.get("name")
                 if nm is None and str(m["source"]).startswith("ext"):
@@ -201,7 +207,10 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
                     anim = f"{base} ({k})"
                     k += 1
                 used_names.add(anim)
-                named.append((order, anim, {"source": m["source"],
+                src = m["source"]
+                if str(src).startswith("ext"):
+                    src = SHARED        # resolved against the shared container
+                named.append((order, anim, {"source": src,
                                             "path_id": m["path_id"],
                                             "name": nm}))
                 order += 1
@@ -210,7 +219,7 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
         named = []
         for r in refs:
             if r["source"] == SHARED:
-                name = shared_names.get(r["path_id"], f"shared_{r['path_id']&0xFFFF}")
+                name = shared_names.get(u64(r["path_id"]), f"shared_{r['path_id']&0xFFFF}")
             else:
                 name = r.get("name") or f"local_{r['path_id']&0xFFFF}"
             named.append((clip_priority(name), name, r))
@@ -232,6 +241,9 @@ def export_char_v2(char, refs, shared_names, force=False, verbose=True,
         try:
             clip = clip_by_pathid(env, r["path_id"])
         except SystemExit:
+            if verbose:
+                print(f"    !! {name}: clip {r['path_id']} not in "
+                      f"{'shared' if r['source'] == SHARED else 'char'} env -- skipped")
             continue
         times = None
         channels = []
