@@ -1,5 +1,36 @@
 # SWGoH Client-Side Battle Simulation — Inventory (2026-10-15)
 
+## DECODE STATUS (Ghidra pass, 2026-10-15 — decompiled sources in `dump/decompiled/*.c`, port in `offline/battle.py`)
+
+Corrections to the guesses below, now confirmed from the binary:
+
+- **Seeding**: all FIVE `BattleContext` JavaRandom streams (+0x158..0x178) are constructed from the
+  **same int** (`BattleStartResponse`+0x18) inside `BattleFsmController._SendBattleStartRequest_b__0`
+  (0x181A5EFB0 → `battle_start_seed.c`). There is **no separate targeting seed stream** — the proto
+  field exists but the client we ship seeds everything from one value. `JavaRandom..ctor` (0x180CAC420)
+  = `seed = (s ^ 0x5DEECE66D) & (2^48-1)`.
+- **`UnitSpeedFillMax` = 100.0** (not 1000). GameConstants..ctor (0x1811EBF50) hardcodes only some
+  fields — extract via `C7 8x disp32 imm32` scan of the ctor's machine code. Hardcoded: SpeedFillMax
+  100.0, Attack/AbilityCritRatingMod 100.0, ArmorRatingMod 100.0, SuppressionRatingMod 100.0,
+  crit/damage level-delta MAXes 1.0, crit-negate-rating divisors 2400.0. The Min/PerLevel/Base* fields
+  are data-driven (hydrated from gamedata; NOT in binary or local assets).
+- **Turn order** (`ProcessUnitsSpeed` 0x181CFFB50 → `turn_order.c`): ticks_i = (100−fill)/speed for
+  eligible units; candidate window |ticks−ticks_min| < max(maxspan·1e-6, ~8e-6); `_turnPriorityUnits`
+  walked backward (non-candidates evicted), survivors scored by overflow+speed·ticks_min; group-max by
+  speed; ties → `BattleRandom.nextInt(n)`. Everyone then += speed·ticks (fill AND overflow), ability
+  cooldowns −= base·ticks clamp [0,max]. **The actor zeroes BOTH meter fields when its turn starts**
+  (`BattleFsmController_TriggerTurnStarted` 0x18193B880) — no overflow carry into the next round.
+- **Crit** (`ProcessCritChance` 0x181365B20): chance = (rating−negateRating)/100 + pctAdditive-diff
+  (capped 1.0) + clamp(levelDiff·perLevel, Min, Max) + base; roll = `nextInt(100) < chance·100`.
+  Crit damage (`ProcessCritDamage`): stat16 + UnitBaseCritDamage, floor 1.0.
+- **Damage scaling** (`ProcessSourceDamage` 0x1813658C0): physical ×(relicDelta+1)·(1+clamp(levelDiff·
+  perLvl)); ability ×(1+clamp(eraDiff·perEra)).
+- **Mitigation** (`GetMitigationPercentFromRating` 0x180FDFDF0 — C decompile mangled, recovered from
+  raw listing): `pct = rating / (rating + (attacker_level + LevelOffset(+0x1C34)) * RatingMod) * 100`,
+  RatingMod = ArmorRatingMod/SuppressionRatingMod by damage type.
+- **ApplyAttackDamage** (0x181BC50B0 → `apply_attack_damage.c`) is the HP-application + event layer
+  (death records, ConditionTriggered events, stat-42 turn-meter-gain roll → random valid target).
+
 Source: `il2cpp/dump/cs/il2cpp.cs` (34.5MB stub from Il2CppInspectorRedux; regenerated via
 `Il2CppInspector.Redux.CLI.exe process GameAssembly.dll global-metadata.dat -o dump -s -m`).
 All line numbers refer to that file. Nearly every method carries an `// 0x...-0x...` RVA
