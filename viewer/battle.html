@@ -175,6 +175,20 @@ function addFighter(u, slot, side){
                                     o.frustumCulled = false; } });
       const g = new THREE.Group();
       g.add(m);
+      // ground clamp: drop the rig so its lowest point sits on y=0
+      // (fixes floating stances from rest-pose / clip offset mismatches)
+      m.updateWorldMatrix(true, true);
+      const gbox = new THREE.Box3();
+      const gtmp = new THREE.Vector3();
+      m.traverse(o=>{
+        if (o.isSkinnedMesh && o.skeleton)
+          o.skeleton.bones.forEach(b=>{
+            gtmp.setFromMatrixPosition(b.matrixWorld);
+            if (isFinite(gtmp.x)) gbox.expandByPoint(gtmp);
+          });
+        else if (o.isMesh) gbox.expandByObject(o);
+      });
+      if (!gbox.isEmpty()) g.position.y -= gbox.min.y;
       // game layout: teams face each other across x, front row of 3 + back rows
       const sgn = side==='player' ? -1 : 1;
       const x = sgn * (2.7 + 1.5*Math.floor(slot/3));
