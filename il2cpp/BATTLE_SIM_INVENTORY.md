@@ -30,6 +30,13 @@ Corrections to the guesses below, now confirmed from the binary:
   RatingMod = ArmorRatingMod/SuppressionRatingMod by damage type.
 - **ApplyAttackDamage** (0x181BC50B0 → `apply_attack_damage.c`) is the HP-application + event layer
   (death records, ConditionTriggered events, stat-42 turn-meter-gain roll → random valid target).
+- **Full damage pipeline** (`DamageModule.ApplyToTargets` 0x181364CA0 → `damage_apply_to_targets.c`):
+  per target `dmg = casterPower(virtual +0x1f8)·effectData.mult(+0x2C) [+ flat(+0x24)] ·
+  ProcessSourceDamage · (crit ? ProcessCritDamage : 1) · GetModifyEffectAmount(stat 28) ·
+  ProcessMitigation`; variance roll = `BattleRandom.nextInt(dmg·variance(+0x30)·2 | 1) − dmg·variance`;
+  shield split via stat **34 = SHIELD_PENETRATION** (clamp 0..1, fraction of damage routed through
+  shields); effect flag `+0xf0 & 1` = cannot reduce below 1 HP; then ApplyAttackDamage.
+  Ported as `BattleSimulation.apply_damage_pipeline` (determinism-verified).
 
 Source: `il2cpp/dump/cs/il2cpp.cs` (34.5MB stub from Il2CppInspectorRedux; regenerated via
 `Il2CppInspector.Redux.CLI.exe process GameAssembly.dll global-metadata.dat -o dump -s -m`).

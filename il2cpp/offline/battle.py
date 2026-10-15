@@ -53,6 +53,7 @@ STAT_CRIT_DAMAGE_NEGATE = 17
 STAT_ATTACK_CRIT_NEGATE_RATING = 22
 STAT_ABILITY_CRIT_NEGATE_RATING = 23
 STAT_CRIT_PERCENT_ADDITIVE = 28
+STAT_SHIELD_PENETRATION = 34   # fraction (clamped 0..1) of damage routed to shields
 STAT_CRIT_NEGATE_PERCENT_ADDITIVE = 40
 
 # SEEDING: BattleFsmController._SendBattleStartRequest_b__0 (0x181A5EFB0,
@@ -328,6 +329,37 @@ class BattleSimulation:
         mod = ARMOR_RATING_MOD if is_attack else SUPPRESSION_RATING_MOD
         denom = rating + (attacker_level + MITIGATION_LEVEL_OFFSET) * mod
         return rating / denom * 100.0
+
+    def apply_damage_pipeline(self, attacker, target, caster_power, effect,
+                              is_attack):
+        """DamageModule.ApplyToTargets (0x181364CA0 -> damage_apply_to_targets.c),
+        the full chain per target:
+
+            dmg = caster_power * effect.mult(+0x2C) [+ effect.flat(+0x24)]
+            dmg *= ProcessSourceDamage(attacker, target)     # level/era scaling
+            if crit (roll):  dmg *= ProcessCritDamage(attacker)
+            dmg *= GetModifyEffectAmount(attacker, target, stat=28)
+            dmg *= ProcessMitigation(attacker, target)       # 1 - mitigation%
+            # variance roll on BattleRandom: nextInt(v*2|1) - v, v = dmg * effect.variance(+0x30)
+            # shield: stat 34 SHIELD_PENETRATION (clamped 0..1) splits hp/shield parts
+            # effect flag +0xf0 & 1: cannot reduce below 1 HP
+            # then ApplyAttackDamage(target, -hp_part, -shield_part, ...)
+        (caster_power = virtual getter on the module; the caster's
+        attack/ability-power stat.  effect = the ability's damage effect DO.)"""
+        dmg = caster_power * effect.get("mult", 1.0) + effect.get("flat", 0.0)
+        dmg *= self.process_source_damage(
+            attacker, target, effect.get("base_stat_value", 0.0),
+            effect.get("source_mult", 1.0), effect.get("source_flat", 0.0),
+            is_attack)
+        if self.process_crit_chance(attacker, target, is_attack):
+            dmg *= self.process_crit_damage(attacker)
+        mit = self.process_mitigation_stats(target, attacker, is_attack)
+        dmg *= 1.0 - self.mitigation_percent(mit[0], attacker.level, is_attack) / 100.0
+        variance = effect.get("variance", 0.0)
+        if variance > 0.0:
+            v = int(dmg * variance)
+            dmg += self.ctx.battle_random.next_int(v * 2 | 1) - v
+        return max(dmg, 0.0)
 
     # -- turn priority (GiveUnitTurnPriority 0x181CFF800) ------------------
     def give_turn_priority(self, unit):
