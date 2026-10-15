@@ -8,7 +8,14 @@
     "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
     "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
   ],
-  "exported_meshes": [],
+  "exported_meshes": [
+    "prop_table_consoles:prop_table_consoles",
+    "prop_table_spaceBG:prop_table_spaceBG",
+    "prop_table_holoHaze:prop_table_holoHaze",
+    "prop_table_mainBody:prop_table_mainBody",
+    "prop_table_projectorLights:prop_table_projectorLights",
+    "prop_table_buttons:prop_table_buttons"
+  ],
   "mesh_errors": [],
   "texture_errors": [],
   "limitations": [
@@ -21,22 +28,25 @@
   ],
   "duplicate_env_roots": 0,
   "renderers_under_scene": {
-    "ParticleSystemRenderer_inactive": 58,
-    "MeshRenderer_inactive": 10,
+    "ParticleSystemRenderer_inactive": 33,
+    "ParticleSystemRenderer_under_scene": 25,
+    "MeshRenderer_inactive": 1,
+    "MeshRenderer_under_scene": 9,
+    "mr_without_mesh": 3,
     "SkinnedMeshRenderer_outside_scene": 71,
     "MeshRenderer_outside_scene": 5
   },
   "skinned_renderers_skipped": [],
   "gameobjects_in_scene": 92,
   "vertex_color_meshes": [],
-  "unique_meshes": 0,
-  "triangles": 0,
-  "vertices": 0,
+  "unique_meshes": 6,
+  "triangles": 970,
+  "vertices": 1492,
   "battle_camera_nodes": [],
-  "nodes_exported": 1,
-  "meshes_exported": 0,
-  "materials": 0,
-  "textures": 0,
-  "glb_bytes": 312,
-  "seconds": 0.4
+  "nodes_exported": 10,
+  "meshes_exported": 6,
+  "materials": 3,
+  "textures": 3,
+  "glb_bytes": 812788,
+  "seconds": 0.6
 }

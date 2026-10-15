@@ -8,7 +8,52 @@
     "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
     "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
   ],
-  "exported_meshes": [],
+  "exported_meshes": [
+    "sea_floor_mesh (3):zef_rock_wall_mesh",
+    "sea_floor_mesh (2):zef_rock_wall_mesh",
+    "sea_tree_05 (1):sea_tree_05_mesh",
+    "body_mesh:body_mesh",
+    "sea_tree_05 (2):sea_tree_05_mesh",
+    "sea_tree_01 (1):sea_tree_01_mesh",
+    "nab_darkfalcon_ground:nab_darkfalcon_ground_mesh",
+    "zef_arena_rock_rubble_01c (3):zef_arena_rock_rubble_01c",
+    "sea_tree_02:sea_tree_02_mesh",
+    "sea_henge_skybox_forest_mesh:sea_skybox_forest_mesh",
+    "sea_floor_mesh (6):zef_rock_wall_mesh",
+    "glass_mesh:glass_mesh",
+    "ramp_mesh:ramp_mesh",
+    "greebles_mesh:greebles_mesh",
+    "sea_tree_04:sea_tree_04_mesh",
+    "zef_arena_rock_rubble_01a (2):zef_arena_rock_rubble_01a",
+    "sea_tree_01:sea_tree_01_mesh",
+    "sea_tree_02 (4):sea_tree_02_mesh",
+    "sea_tree_02 (1):sea_tree_02_mesh",
+    "zef_arena_rock_rubble_01c (2):zef_arena_rock_rubble_01c",
+    "sea_tree_06:sea_tree_06_mesh",
+    "sea_tree_01 (2):sea_tree_01_mesh",
+    "kash_flora_vine_root_03 (4):kash_flora_vine_root_03_mesh",
+    "sea_tree_01 (3):sea_tree_01_mesh",
+    "sea_tree_02 (2):sea_tree_02_mesh",
+    "landing_gears_mesh:landing_gears_mesh",
+    "sea_tree_05:sea_tree_05_mesh",
+    "sea_tree_06 (2):sea_tree_06_mesh",
+    "ramp_foot_mesh:ramp_foot_mesh",
+    "sea_tree_03 (1):sea_tree_03_mesh",
+    "sea_tree_02 (3):sea_tree_02_mesh",
+    "kash_flora_vine_root_02:kash_flora_vine_root_02_mesh",
+    "BLOCKER:BLOCKER",
+    "nab_elders_statue_01:nab_elders_statue_01_mesh",
+    "sea_tree_06 (1):sea_tree_06_mesh",
+    "ramp_hydrolics_02_mesh:ramp_hydrolics_02_mesh",
+    "dark_falcon_radar:dark_falcon_radar_mesh",
+    "ramp_hydrolics_01_mesh:ramp_hydrolics_01_mesh",
+    "pipes_mesh:pipes_mesh",
+    "sea_tree_05 (3):sea_tree_05_mesh",
+    "sea_tree_03:sea_tree_03_mesh",
+    "sea_tree_05 (4):sea_tree_05_mesh",
+    "kash_flora_vine_root_02 (6):kash_flora_vine_root_02_mesh",
+    "sea_floor_mesh (5):zef_rock_wall_mesh"
+  ],
   "mesh_errors": [],
   "texture_errors": [],
   "limitations": [
@@ -21,22 +66,90 @@
   ],
   "duplicate_env_roots": 0,
   "renderers_under_scene": {
-    "MeshRenderer_inactive": 54,
-    "ParticleSystemRenderer_inactive": 32,
+    "MeshRenderer_under_scene": 54,
+    "mr_without_mesh": 10,
+    "ParticleSystemRenderer_under_scene": 31,
+    "ParticleSystemRenderer_inactive": 1,
     "SkinnedMeshRenderer_outside_scene": 71,
     "MeshRenderer_outside_scene": 5
   },
   "skinned_renderers_skipped": [],
   "gameobjects_in_scene": 100,
-  "vertex_color_meshes": [],
-  "unique_meshes": 0,
-  "triangles": 0,
-  "vertices": 0,
+  "vertex_color_meshes": [
+    {
+      "mesh": "body_mesh",
+      "rgb_mean": [
+        0.865,
+        0.865,
+        0.865
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "mesh": "ramp_mesh",
+      "rgb_mean": [
+        0.4768,
+        0.4768,
+        0.4768
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "mesh": "greebles_mesh",
+      "rgb_mean": [
+        0.1238,
+        0.1238,
+        0.1238
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "mesh": "BLOCKER",
+      "rgb_mean": [
+        0.7513,
+        0.7513,
+        0.7513
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "mesh": "pipes_mesh",
+      "rgb_mean": [
+        0.0822,
+        0.0822,
+        0.0822
+      ],
+      "rgb_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "unique_meshes": 25,
+  "triangles": 32954,
+  "vertices": 34240,
   "battle_camera_nodes": [],
-  "nodes_exported": 1,
-  "meshes_exported": 0,
-  "materials": 0,
-  "textures": 0,
-  "glb_bytes": 304,
-  "seconds": 0.4
+  "nodes_exported": 48,
+  "meshes_exported": 44,
+  "materials": 11,
+  "textures": 11,
+  "glb_bytes": 3189652,
+  "seconds": 1.6
 }

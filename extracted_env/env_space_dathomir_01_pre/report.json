@@ -8,8 +8,21 @@
     "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
     "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
   ],
-  "exported_meshes": [],
-  "mesh_errors": [],
+  "exported_meshes": [
+    "planet_fresnel_mesh:planet_fresnel_mesh",
+    "planet_glow_mesh:planet_glow_mesh",
+    "planet_glow_mesh:planet_glow_mesh",
+    "planet_body_mesh:planet_body_mesh",
+    "planet_fresnel_mesh:planet_fresnel_mesh",
+    "planet_glow_mesh:planet_glow_mesh",
+    "planet_body_mesh:planet_body_mesh",
+    "planet_fresnel_mesh:planet_fresnel_mesh",
+    "planet_body_mesh:planet_body_mesh"
+  ],
+  "mesh_errors": [
+    "starSkyBox 1_p:starSkyBox: TypeError object of type 'NoneType' has no len()\nTraceback (most recent call last):\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\export_env.py\", line 434, in export\n    mesh_idx, _ = self.export_mesh_for_renderer(\n                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        mesh, None, mats, se.go_name(mesh))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\swgoh_extract.py\", line 534, in export_mesh_for_renderer\n    prim = self.export_mesh_primitive(mesh, h, mi, n_bones=len(smr_bones or []))\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\swgoh_extract.py\", line 432, in export_mesh_primitive\n    if len(h.m_Normals) == vc:\n       ~~~^^^^^^^^^^^^^\nTypeError: object of type 'NoneType' has no len()\n",
+    "starSkyBox 1_p:starSkyBox: TypeError object of type 'NoneType' has no len()\nTraceback (most recent call last):\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\export_env.py\", line 434, in export\n    mesh_idx, _ = self.export_mesh_for_renderer(\n                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        mesh, None, mats, se.go_name(mesh))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\swgoh_extract.py\", line 534, in export_mesh_for_renderer\n    prim = self.export_mesh_primitive(mesh, h, mi, n_bones=len(smr_bones or []))\n  File \"F:\\PPfavorite\\Work\\goh\\tools\\swgoh_extract.py\", line 432, in export_mesh_primitive\n    if len(h.m_Normals) == vc:\n       ~~~^^^^^^^^^^^^^\nTypeError: object of type 'NoneType' has no len()\n"
+  ],
   "texture_errors": [],
   "limitations": [
     "COLOR_0 skipped: env vertex colors are runtime tint/channel masks, not albedo (measured; see module docstring). Per-mesh list in vertex_color_meshes.",
@@ -21,22 +34,24 @@
   ],
   "duplicate_env_roots": 0,
   "renderers_under_scene": {
-    "MeshRenderer_inactive": 34,
-    "ParticleSystemRenderer_inactive": 11,
+    "MeshRenderer_under_scene": 11,
+    "MeshRenderer_inactive": 23,
+    "ParticleSystemRenderer_inactive": 9,
+    "ParticleSystemRenderer_under_scene": 2,
     "SkinnedMeshRenderer_outside_scene": 71,
     "MeshRenderer_outside_scene": 5
   },
   "skinned_renderers_skipped": [],
   "gameobjects_in_scene": 63,
   "vertex_color_meshes": [],
-  "unique_meshes": 0,
-  "triangles": 0,
-  "vertices": 0,
+  "unique_meshes": 4,
+  "triangles": 7060,
+  "vertices": 8529,
   "battle_camera_nodes": [],
-  "nodes_exported": 1,
-  "meshes_exported": 0,
-  "materials": 0,
-  "textures": 0,
-  "glb_bytes": 308,
-  "seconds": 0.4
+  "nodes_exported": 18,
+  "meshes_exported": 9,
+  "materials": 4,
+  "textures": 3,
+  "glb_bytes": 355348,
+  "seconds": 0.6
 }

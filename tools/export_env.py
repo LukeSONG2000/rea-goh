@@ -168,6 +168,10 @@ class EnvExporter(se.CharacterExporter):
                 info[ckey] = {"t": ct, "go": None, "parent": rk, "mesh": False}
                 e["children"].append(ckey)
                 stack.append(ckey)
+        # the prefab root GO is often stored m_IsActive=False (the game enables
+        # it when staging the scene) -- that must not mute the whole tree;
+        # non-root inactive nodes stay pruned (real hidden decor)
+        info[root_rk]["active"] = True
         return info, root_rk
 
     @staticmethod

@@ -9,7 +9,34 @@
     "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\0699a21d142b01000000000000000000\\__data",
     "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\152715c2eb157b000000000000000000\\__data"
   ],
-  "exported_meshes": [],
+  "exported_meshes": [
+    "kraytraid_mountian_modular:raid_mountian_modular_mesh",
+    "tat_raid_rocks_large_03:tat_raid_rocks_large_mesh",
+    "tat_krayt_ground_mesh:tat_krayt_ground_mesh",
+    "tat_krayt_rocks_01a:tat_krayt_rocks_01a_mesh",
+    "tat_krayt_rocks_01a_03:tat_krayt_rocks_01a_mesh",
+    "kraytraid_mountian_modular_01:raid_mountian_modular_mesh",
+    "tat_raid_rocks_large_02:tat_raid_rocks_large_mesh",
+    "tat_ranc_pebbles_01_mesh_05:tat_ranc_pebbles_01_mesh",
+    "tat_ranc_pebbles_01_mesh:tat_ranc_pebbles_01_mesh",
+    "tat_raid_rocks_small_02:tat_raid_rocks_small_mesh",
+    "tat_raid_rocks_small_03:tat_raid_rocks_small_mesh",
+    "tat_ranc_pebbles_01_mesh_02:tat_ranc_pebbles_01_mesh",
+    "tat_krayt_rocks_01a_02:tat_krayt_rocks_01a_mesh",
+    "tat_raid_rocks_small:tat_raid_rocks_small_mesh",
+    "tat_ranc_pebbles_01_mesh_06:tat_ranc_pebbles_01_mesh",
+    "tat_ranc_pebbles_01_mesh_04:tat_ranc_pebbles_01_mesh",
+    "tat_krayt_rocks_01b:tat_krayt_rocks_01b_mesh",
+    "tat_raid_rocks_small_05:tat_raid_rocks_small_mesh",
+    "tat_ranc_pebbles_01_mesh_03:tat_ranc_pebbles_01_mesh",
+    "tat_krayt_mountain_01_mesh:tat_krayt_mountain_01_mesh",
+    "tat_ranc_pebbles_01_mesh_01:tat_ranc_pebbles_01_mesh",
+    "kraytraid_mountian_modular_02:raid_mountian_modular_mesh",
+    "skybox_01_mesh:skybox_01_mesh",
+    "tat_raid_rocks_small_04:tat_raid_rocks_small_mesh",
+    "tat_raid_rocks_small_01:tat_raid_rocks_small_mesh",
+    "tat_krayt_rocks_01a_01:tat_krayt_rocks_01a_mesh"
+  ],
   "mesh_errors": [],
   "texture_errors": [],
   "limitations": [
@@ -23,21 +50,37 @@
   "duplicate_env_roots": 0,
   "renderers_under_scene": {
     "ParticleSystemRenderer_inactive": 12,
-    "MeshRenderer_inactive": 43,
+    "MeshRenderer_under_scene": 27,
+    "MeshRenderer_inactive": 16,
+    "mr_without_mesh": 1,
     "SkinnedMeshRenderer_outside_scene": 71,
     "MeshRenderer_outside_scene": 5
   },
   "skinned_renderers_skipped": [],
   "gameobjects_in_scene": 111,
-  "vertex_color_meshes": [],
-  "unique_meshes": 0,
-  "triangles": 0,
-  "vertices": 0,
+  "vertex_color_meshes": [
+    {
+      "mesh": "tat_krayt_mountain_01_mesh",
+      "rgb_mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rgb_max": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "unique_meshes": 9,
+  "triangles": 27249,
+  "vertices": 16593,
   "battle_camera_nodes": [],
-  "nodes_exported": 1,
-  "meshes_exported": 0,
-  "materials": 0,
-  "textures": 0,
-  "glb_bytes": 304,
-  "seconds": 0.5
+  "nodes_exported": 28,
+  "meshes_exported": 26,
+  "materials": 5,
+  "textures": 4,
+  "glb_bytes": 2051196,
+  "seconds": 0.7
 }
