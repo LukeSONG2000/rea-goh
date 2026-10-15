@@ -200,10 +200,10 @@ class GLTFBuilder:
             "skins": self.skins,
         }
         if self.extensionsUsed:
-            json_data["extensionsUsed"] = self.extensionsUsed
-        else:
-            # nodes stamped by walk() for BUGS.md P5 (authored m_IsActive)
-            json_data["extensionsUsed"] = ["SWGOH_active"]
+            # declare only extensions actually stamped into the JSON by
+            # walk() for BUGS.md P5 (authored m_IsActive); declaring an
+            # unused extension misleads consumers into hunting for stamps
+            json_data["extensionsUsed"] = list(self.extensionsUsed)
         for key in ("meshes", "materials", "textures", "images", "samplers",
                     "accessors", "bufferViews", "skins", "nodes"):
             if not json_data[key]:

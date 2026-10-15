@@ -1,8 +1,6 @@
 {
   "exported_meshes": [
     "swd_vader_de_mesh [static]",
-    "vaderduelsend_hand_l_mesh [skinned x5]",
-    "vaderduelsend_hand_open_mesh [skinned x5]",
     "vaderduelsend_fist_l_mesh [skinned x5]",
     "vaderduelsend_head_mesh [skinned x8]",
     "vaderduelsend_mesh [skinned x47]",
@@ -16,5 +14,35 @@
   "renderer_disabled_skipped": [],
   "glow_materials": [
     "vfx_vader_helm_burn (name:vfx_vader_helm_burn)"
+  ],
+  "dropped_inactive": [
+    "vaderduelsend_hand_l_mesh",
+    "vaderduelsend_hand_open_mesh",
+    "=====Cracks==================",
+    "=====Trails===================",
+    "VFX_crack_trail_3",
+    "VFX_crack_trail_2",
+    "VFX_crack_trail_1",
+    "col",
+    "=====sub_crack_pops============",
+    "vfx_vader_GroundCrack_subCrack",
+    "vfx_vader_GroundCrack_subCrack (1)",
+    "vfx_vader_GroundCrack_subCrack (2)",
+    "vfx_vader_GroundCrack_subCrack (3)",
+    "vfx_vader_GroundCrack_subCrack (4)",
+    "vfx_vader_GroundCrack_subCrack (5)"
+  ],
+  "dropped_staging": [],
+  "reattached_props": [
+    "Quad_C -> swd_vaderduelsend_pre",
+    "Quad_hot -> swd_vaderduelsend_pre",
+    "Quad_B -> swd_vaderduelsend_pre",
+    "Quad_A -> swd_vaderduelsend_pre"
+  ],
+  "reattach_planned": [
+    "Quad_C -> swd_vaderduelsend_pre",
+    "Quad_A -> swd_vaderduelsend_pre",
+    "Quad_hot -> swd_vaderduelsend_pre",
+    "Quad_B -> swd_vaderduelsend_pre"
   ]
 }
