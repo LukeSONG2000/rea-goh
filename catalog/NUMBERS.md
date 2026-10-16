@@ -139,3 +139,44 @@ TargetLock→AllyDispel→SelfDispel→AOE→EnemyDispel→KillHighHP→Damage�
 | AI 各 EvaluateCondition 模块体（~20 个） | 未逐一反编译（树结构已全解）|
 | 原版字体 | 不存在（动态渲染）——永久替代 |
 | GetRelicLevelDeltaMod | 占位 0.0（遗物等级差）|
+
+## 13. Buff/Debuff 施加与抵抗（ProcessResistance 0x181BCAC50【DC】+【RT】）
+效果（增益/减益）施加时的抵抗判定，一条内联公式（常数官方名来自已捕获 839 字段表）：
+```
+resistChance = (施加方 Potency(19) − 目标 Tenacity(18))
+             + clamp((施加Lv − 目标Lv) × UnitResistChancePerLevelDelta(0.05), 0, 0.30)
+             + UnitBaseResistChance(0.15)
+resistRaw = max(resistChance, 0)
+roll:  BattleRandom.nextInt(100) < (resistRaw + 0) × 100  → 被抵抗（DisplayResist）
+```
+要点：①基础抵抗 15%【RT】；②等级差每级 +5%，钳 [0, +30%]【RT】；③Potency（效果命中）与
+Tenacity（效果抵抗）为相互独立的命中/抵抗属性（运行时 stat 19/18）；④掷骰走 BattleRandom
+（内联 LCG，与 §8 同流）；⑤被抵抗的效果记录于 BattleEffectAppliedRecordDO.WasResisted。
+
+## 14. 暴击几率与"暴击抵抗"（对应关系）
+- 进攻方暴击几率合成见 §5：评级差/2400 + 百分比差(≤1.0) + 等级差(≤0.15) + 基础 10%
+- 防守方的"暴击抵抗"即 §5 中的三个减项（均为防守方属性）：
+  CRIT_NEGATE_RATING（22/23，评级抵抗）、CRIT_NEGATE_PERCENT_ADDITIVE（40，百分比抵抗）
+- 伤害侧另有无视类：SHIELD_PENETRATION(34) 只作用于护盾分流（§7）
+
+## 15. 全英雄技能伤害计算方法（统一管线 + 逐英雄参数）
+所有英雄/技能共用 §7 同一条管线；英雄间的差异全部来自**数据参数**（GD：
+skill.json → ability.json → effect.json 链，已烘焙为 StreamingAssets/abilities.json，
+2107 单位 / 5257 技能）。每个技能的参数集：
+```
+{ name: 技能名(中文, loc_cn),
+  kind: basic/special/leader/unique/ultimate,
+  cooldown: 冷却回合数,
+  damageMultiplier: 倍率（×施放方对应攻击/特攻）,
+  flatDamage: 固定伤害加值,
+  damageType: 1=物理(吃护甲/穿透) / 2=特殊(吃压制),
+  chance: 触发概率（默认 100）,
+  dmgSide/dmgSelect: 目标选择（敌我方/单体/全体/最低HP）,
+  healAmount/healSide/healSelect: 治疗量（×特攻）与目标 }
+```
+实例（LORDVADER 达斯·维达大人）：
+- 复仇风暴（基本）：×3.75 攻击，特殊类型伤害，无冷却
+- 黑暗先驱（特殊，CD3）：×3.4
+- 不羁情感（特殊，CD5）：治疗 2.0×特攻
+→ 代入 §7：final = (该技能倍率 × 攻击/特攻) × 减伤余量 × (暴击?×暴伤) ± 方差。
+全 2107 单位的参数表见 `unity/SWGoH-Restored/Assets/StreamingAssets/abilities.json`。
