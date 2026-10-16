@@ -1,4 +1,5 @@
-// BattleSim -- faithful C# port of the client's decoded turn core.
+// BattleSim -- selected decoded turn/numeric routines plus a limited effect executor.
+// This is not the full client FSM, targeting evaluator or persistent-effect system.
 // Source of truth: il2cpp/offline/battle.py (which cites, per method, the
 // Ghidra-decompiled GameAssembly.dll function it came from).  Constants were
 // extracted from GameConstants..ctor machine code; RNG from JavaRandom..ctor.
@@ -142,6 +143,8 @@ namespace SwgohRestored.Battle
     {
         public int Turn;
         public string Actor;         // baseId
+        public string ActorUnitId;
+        public string TargetUnitId;
         public string ActorSide;
         public string Kind;          // "turn" | "damage" | "crit" | "death"
         public string Target;
@@ -160,6 +163,7 @@ namespace SwgohRestored.Battle
         readonly List<BattleUnit> _turnPriority = new();   // +0xB8
         public List<BattleEvent> Log = new();
         public int Round;
+        public BattleUnit PendingActor { get; private set; }
 
         public BattleSim(IEnumerable<BattleUnit> player, IEnumerable<BattleUnit> opponent, long seed)
         {
@@ -211,6 +215,7 @@ namespace SwgohRestored.Battle
         // -- ProcessUnitsSpeed (0x181CFFB50) ---------------------------------
         public BattleUnit ProcessUnitsSpeed()
         {
+            if (PendingActor != null) return PendingActor;
             var (ticksMin, entries) = DetermineTicks();
             if (entries.Count == 0) return null;
             var (allList, prio) = PopulateCandidates(entries, ticksMin);
@@ -319,9 +324,11 @@ namespace SwgohRestored.Battle
             tgt.CurrentHp -= hpPart;
 
             Log.Add(new BattleEvent { Turn = Round, Actor = atk.BaseId, ActorSide = atk.Side == 0 ? "player" : "opponent",
+                                      ActorUnitId = atk.UnitId, TargetUnitId = tgt.UnitId,
                                       Kind = crit ? "crit" : "damage", Target = tgt.BaseId, Amount = dmg });
             if (tgt.CurrentHp <= 0)
                 Log.Add(new BattleEvent { Turn = Round, Actor = atk.BaseId, ActorSide = atk.Side == 0 ? "player" : "opponent",
+                                          ActorUnitId = atk.UnitId, TargetUnitId = tgt.UnitId,
                                           Kind = "death", Target = tgt.BaseId });
             return dmg;
         }
@@ -344,34 +351,106 @@ namespace SwgohRestored.Battle
         /// damage pipeline (chance roll -> caster stat x mult + flat ->
         /// ProcessSourceDamage -> crit -> mitigation).  Units without a baked
         /// chain keep the v0 flat-ATK basic.
-        public BattleUnit RunTurn(BattleUnit actor)
+        // Offline command bridge, not a reconstruction of the original FSM.
+        // Original manual records: dump/cs/il2cpp.cs LogPlayerManualSelectRecord /
+        // LogPlayerManualAbilityRecord (0x181BA7E60 / 0x181BA7F70).
+        // Full BattleTargetingRuleEvaluator and persistent effects remain pending.
+        public BattleUnit PrepareNextTurn()
         {
-            BeginTurn(actor);
-            Round++;
-            var foes = _units.Where(u => u.Side != actor.Side && u.Alive)
-                             .OrderBy(u => u.CurrentHp).ToList();
+            if (PendingActor != null) return PendingActor;
+            if (CheckEnd(out _)) return null;
+            var actor = ProcessUnitsSpeed();
+            if (actor != null) PrepareTurn(actor);
+            return actor;
+        }
 
-            // per-owner cooldown tick (ProcessCooldowns stand-in)
+        void PrepareTurn(BattleUnit actor)
+        {
+            if (PendingActor != null)
+            {
+                if (PendingActor != actor) throw new InvalidOperationException("Another turn is pending.");
+                return;
+            }
+            if (actor == null || !_units.Contains(actor) || !actor.Alive)
+                throw new ArgumentException("Actor must be a living battle unit.", nameof(actor));
+            PendingActor = actor;
+            BeginTurn(actor);
             foreach (var a in actor.Abilities)
                 if (actor.CooldownLeft.TryGetValue(a.Id, out var cd) && cd > 0)
                     actor.CooldownLeft[a.Id] = cd - 1;
+        }
 
-            var used = PickAbility(actor);
-            if (used != null)
-                ExecuteAbility(actor, used, foes);
-            else
-                LegacyBasic(actor, foes);
+        public bool IsAbilityReady(int index)
+        {
+            var actor = PendingActor;
+            if (actor == null || !actor.Alive) return false;
+            if (index == -1) return actor.Abilities.Count == 0;
+            if (index < 0 || index >= actor.Abilities.Count) return false;
+            return !actor.CooldownLeft.TryGetValue(actor.Abilities[index].Id, out var cd) || cd <= 0;
+        }
+
+        public IReadOnlyList<BattleUnit> GetLegalTargets(int index)
+        {
+            if (!IsAbilityReady(index)) return Array.Empty<BattleUnit>();
+            var actor = PendingActor;
+            var ability = index < 0 ? null : actor.Abilities[index];
+            bool damage = ability == null || ability.DamageMultiplier > 0 || ability.FlatDamage > 0;
+            if (damage) return _units.Where(u => u.Alive && u.Side != actor.Side).ToList();
+            if (ability.HealAmount > 0)
+                return ability.HealSelect == 4 ? new[] { actor }
+                    : _units.Where(u => u.Alive && u.Side == actor.Side).ToArray();
+            return Array.Empty<BattleUnit>(); // no executable effect in the current slice
+        }
+
+        public bool TrySubmitCommand(int abilityIndex, BattleUnit target, out string error)
+        {
+            // All validation precedes RNG, logs, cooldown and state mutation.
+            if (!IsAbilityReady(abilityIndex)) { error = "Ability is unavailable."; return false; }
+            if (target == null || !GetLegalTargets(abilityIndex).Contains(target))
+            { error = "Target is not legal for this ability."; return false; }
+            var actor = PendingActor;
+            var used = abilityIndex < 0 ? null : actor.Abilities[abilityIndex];
+            Round++;
 
             Log.Add(new BattleEvent
             {
                 Turn = Round,
                 Actor = actor.BaseId,
+                ActorUnitId = actor.UnitId,
+                TargetUnitId = target.UnitId,
                 ActorSide = actor.Side == 0 ? "player" : "opponent",
                 Kind = "turn",
-                Target = foes.Count > 0 ? foes[0].BaseId : null,
+                Target = target.BaseId,
                 AbilityName = used?.Name ?? "",
                 AbilityId = used?.Id ?? "",
             });
+            var foes = _units.Where(u => u.Side != actor.Side && u.Alive)
+                .OrderBy(u => u == target ? 0 : 1).ThenBy(u => u.CurrentHp).ToList();
+            if (used != null) ExecuteAbility(actor, used, foes, target);
+            else LegacyBasic(actor, foes);
+            PendingActor = null;
+            error = null;
+            return true;
+        }
+
+        public BattleUnit RunAutomaticTurn()
+        {
+            var actor = PrepareNextTurn();
+            if (actor == null) return null;
+            var used = PickAbility(actor);
+            int index = used == null ? -1 : actor.Abilities.IndexOf(used);
+            var targets = GetLegalTargets(index);
+            var target = targets.OrderBy(u => u.Side == actor.Side
+                ? u.CurrentHp / Math.Max(u.MaxHp, 1) : u.CurrentHp).FirstOrDefault();
+            if (!TrySubmitCommand(index, target, out var error))
+                throw new InvalidOperationException("No supported automatic command: " + error);
+            return actor;
+        }
+
+        public BattleUnit RunTurn(BattleUnit actor)
+        {
+            PrepareTurn(actor);
+            RunAutomaticTurn();
             return actor;
         }
 
@@ -406,7 +485,7 @@ namespace SwgohRestored.Battle
             return null;
         }
 
-        void ExecuteAbility(BattleUnit actor, UnitAbility used, List<BattleUnit> foes)
+        void ExecuteAbility(BattleUnit actor, UnitAbility used, List<BattleUnit> foes, BattleUnit selectedTarget)
         {
             double healDone = 0.0;
             // percent chance roll (ConditionStatus.RerollChance: nextInt(100))
@@ -422,7 +501,8 @@ namespace SwgohRestored.Battle
                 var pool = _units.Where(u => u.Side == actor.Side && u.Alive).ToList();
                 BattleUnit tgt = used.HealSelect == 4
                     ? actor
-                    : pool.OrderBy(u => u.CurrentHp / Math.Max(u.MaxHp, 1)).FirstOrDefault();
+                    : (selectedTarget.Side == actor.Side ? selectedTarget
+                        : pool.OrderBy(u => u.CurrentHp / Math.Max(u.MaxHp, 1)).FirstOrDefault());
                 _healTarget = tgt;
                 if (tgt != null)
                 {
@@ -461,6 +541,8 @@ namespace SwgohRestored.Battle
                 {
                     Turn = Round,
                     Actor = actor.BaseId,
+                    ActorUnitId = actor.UnitId,
+                    TargetUnitId = _healTarget?.UnitId,
                     ActorSide = actor.Side == 0 ? "player" : "opponent",
                     Kind = "heal",
                     Target = _healTarget != null ? _healTarget.BaseId : null,

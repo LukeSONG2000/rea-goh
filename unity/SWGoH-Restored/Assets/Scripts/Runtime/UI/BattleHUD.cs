@@ -19,7 +19,7 @@ using UnityEngine.UI;
 
 namespace SwgohRestored.Battle
 {
-    public class BattleHUD : MonoBehaviour
+    public class BattleHUD
     {
         Canvas _canvas;          // world-anchored bars (plane 10)
         Canvas _screenCanvas;    // screen-anchored chrome (plane 0.2: the floor
@@ -43,7 +43,7 @@ namespace SwgohRestored.Battle
                 cam.nearClipPlane = Mathf.Min(cam.nearClipPlane, 0.05f);
                 _canvas.worldCamera = cam;
                 _canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                var plane = 10f;
+                var plane = 0.2f;
                 _canvas.planeDistance = plane;
                 _screenCanvas.worldCamera = cam;
                 _screenCanvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -67,7 +67,10 @@ namespace SwgohRestored.Battle
             var go = new GameObject("HUD");
             _canvas = go.AddComponent<Canvas>();
             _canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            go.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            var barScaler = go.AddComponent<CanvasScaler>();
+            barScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            barScaler.referenceResolution = new Vector2(1920, 1080);
+            barScaler.matchWidthOrHeight = 0.5f;
             go.AddComponent<GraphicRaycaster>();
             var screenGo = new GameObject("HUDScreen");
             _screenCanvas = screenGo.AddComponent<Canvas>();
@@ -81,7 +84,7 @@ namespace SwgohRestored.Battle
             screenScaler.referenceResolution = new Vector2(1920, 1080);
             screenScaler.matchWidthOrHeight = 0.5f;
             screenGo.AddComponent<GraphicRaycaster>();
-            if (FindObjectOfType<EventSystem>() == null)
+            if (Object.FindObjectOfType<EventSystem>() == null)
             {
                 var es = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
                 Object.DontDestroyOnLoad(es);
@@ -95,13 +98,13 @@ namespace SwgohRestored.Battle
         }
 
         public void TrackUnit(BattleUnit u, Camera cam, string chipLetter = null,
-                              string[] buffSprites = null, Color[] buffTints = null)
+                              string[] buffSprites = null, Color[] buffTints = null, System.Action onPick = null)
         {
             EnsureCanvas();
             var rootGo = new GameObject($"hp_{u.BaseId}", typeof(RectTransform));
             rootGo.transform.SetParent(_canvas.transform, false);
             var root = rootGo.GetComponent<RectTransform>();
-            root.sizeDelta = new Vector2(90, 14);
+            root.sizeDelta = new Vector2(180, 22);
 
             var bg = CreateImage(rootGo.transform, new Color(0, 0, 0, 0.6f));
             var bgrt = bg.GetComponent<RectTransform>();
@@ -112,6 +115,9 @@ namespace SwgohRestored.Battle
             var healthBg = UiKit.LoadWidget("unit_health_bg");
             var healthFill = UiKit.LoadWidget("unit_health_fill");
             if (healthBg != null) { frame.sprite = healthBg; frame.color = Color.white; frame.type = Image.Type.Simple; }
+            var targetButton = rootGo.AddComponent<Button>();
+            targetButton.targetGraphic = frame;
+            targetButton.onClick.AddListener(() => onPick?.Invoke());
 
             var fillGo = new GameObject("fill", typeof(RectTransform));
             fillGo.transform.SetParent(root.transform, false);
@@ -129,7 +135,7 @@ namespace SwgohRestored.Battle
             labelGo.transform.SetParent(root.transform, false);
             var label = labelGo.AddComponent<Text>();
             label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            label.fontSize = 11; label.alignment = TextAnchor.MiddleCenter;
+            label.fontSize = 18; label.alignment = TextAnchor.MiddleCenter;
             label.color = Color.white;
             var lrt = label.GetComponent<RectTransform>();
             lrt.anchorMin = Vector2.zero; lrt.anchorMax = Vector2.one; lrt.sizeDelta = Vector2.zero;
@@ -187,7 +193,7 @@ namespace SwgohRestored.Battle
             // ScreenSpaceCamera world size at planeDistance=10 makes 90 canvas
             // units render ~6x oversized -- 0.30 lands the bar near P5's ~9%
             // screen-width bars.
-            root.localScale = new Vector3(0.30f, 0.30f, 1f);
+            root.localScale = Vector3.one;
             _bars[u.UnitId] = new Bar
             {
                 Root = root.GetComponent<RectTransform>(),
@@ -246,7 +252,11 @@ namespace SwgohRestored.Battle
             var sp = cam != null ? cam.WorldToScreenPoint(anchor) : Vector3.zero;
             if (_canvas != null && _canvas.worldCamera != null &&
                 _canvas.renderMode == RenderMode.ScreenSpaceCamera)
-                rt.position = anchor;      // SSC canvas: element lives in world space
+            {
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(
+                    (RectTransform)_canvas.transform, sp, _canvas.worldCamera, out var point);
+                rt.position = point;
+            }
             else
                 rt.position = new Vector3(sp.x, sp.y, 0);   // overlay: screen px
             float frac = fracOverride >= 0
@@ -381,6 +391,8 @@ namespace SwgohRestored.Battle
         RectTransform _skillBar;
         Text _skillTitle;
         readonly List<Button> _skillButtons = new();
+        readonly List<Text> _skillCaptions = new();
+        RectTransform _targetBar;
 
         public void ShowSkillBar(UnitEntry entry, string actorLabel, System.Action<int> onPick, bool showKeys = true)
         {
@@ -408,9 +420,10 @@ namespace SwgohRestored.Battle
             trt.sizeDelta = new Vector2(0, 28);
 
             _skillButtons.Clear();
+            _skillCaptions.Clear();
             float x = 0;
             int key = 0;
-            string[] keys = { "Q", "W", "E" };
+            string[] keys = { "Q", "W", "E", "R", "T", "Y" };
             foreach (var sk in ActiveAbilities(entry))
             {
                 var btnGo = new GameObject("skill_" + sk.id, typeof(RectTransform));
@@ -458,9 +471,63 @@ namespace SwgohRestored.Battle
                 var button = btnGo.AddComponent<Button>();
                 button.onClick.AddListener(() => onPick?.Invoke(idx));
                 _skillButtons.Add(button);
+                var caption = NewText(btnGo.transform, "caption", sk.name, 18, Color.white, TextAnchor.MiddleCenter);
+                caption.raycastTarget = false;
+                caption.rectTransform.anchorMin = new Vector2(0, 1);
+                caption.rectTransform.anchorMax = Vector2.one;
+                caption.rectTransform.pivot = new Vector2(0.5f, 0);
+                caption.rectTransform.anchoredPosition = Vector2.zero;
+                caption.rectTransform.sizeDelta = new Vector2(0, 48);
+                _skillCaptions.Add(caption);
                 key++;
-                if (key >= 3) break;
+                if (key >= keys.Length) break;
             }
+            _skillBar.sizeDelta = new Vector2(Mathf.Max(500, x), 270);
+        }
+
+        public void SetSkillAvailability(int index, bool ready, string name, int cooldown)
+        {
+            if (index < 0 || index >= _skillButtons.Count) return;
+            _skillButtons[index].interactable = ready;
+            _skillCaptions[index].text = cooldown > 0 ? $"{name}\n冷却 {cooldown}" : name;
+        }
+
+        // Temporary command bridge; target names/icons come from original unit data.
+        // PENDING-ORIGINAL: replace this list with the recovered targeting presentation.
+        public void ShowTargets(IReadOnlyList<BattleUnit> targets, System.Func<BattleUnit, string> label,
+                                System.Action<BattleUnit> onPick)
+        {
+            HideTargets();
+            EnsureCanvas();
+            var go = new GameObject("manualTargets", typeof(RectTransform));
+            go.transform.SetParent(_screenCanvas.transform, false);
+            _targetBar = go.GetComponent<RectTransform>();
+            _targetBar.anchorMin = _targetBar.anchorMax = new Vector2(0, 0);
+            _targetBar.pivot = Vector2.zero;
+            _targetBar.anchoredPosition = new Vector2(24, 24);
+            _targetBar.sizeDelta = new Vector2(340, targets.Count * 54);
+            for (int i = 0; i < targets.Count; i++)
+            {
+                var target = targets[i];
+                var buttonGo = new GameObject("target_" + target.UnitId, typeof(RectTransform), typeof(Image), typeof(Button));
+                buttonGo.transform.SetParent(go.transform, false);
+                var rt = buttonGo.GetComponent<RectTransform>();
+                rt.anchorMin = rt.anchorMax = Vector2.zero;
+                rt.pivot = Vector2.zero;
+                rt.anchoredPosition = new Vector2(0, (targets.Count - 1 - i) * 54);
+                rt.sizeDelta = new Vector2(340, 48);
+                buttonGo.GetComponent<Image>().color = new Color(0.05f, 0.16f, 0.23f, 0.95f);
+                buttonGo.GetComponent<Button>().onClick.AddListener(() => onPick(target));
+                var text = NewText(buttonGo.transform, "label", $"{i + 1} · {label(target)}", 22, Color.white, TextAnchor.MiddleCenter);
+                Stretch(text.rectTransform);
+                text.raycastTarget = false;
+            }
+        }
+
+        public void HideTargets()
+        {
+            if (_targetBar != null) Object.Destroy(_targetBar.gameObject);
+            _targetBar = null;
         }
 
         /// basic + special abilities only (leader/unique passives aren't cast).
@@ -483,6 +550,7 @@ namespace SwgohRestored.Battle
 
         public void HideSkillBar()
         {
+            HideTargets();
             if (_skillBar != null) Object.Destroy(_skillBar.gameObject);
             _skillBar = null;
             _skillButtons.Clear();

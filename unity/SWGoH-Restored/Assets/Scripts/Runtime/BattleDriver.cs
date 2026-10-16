@@ -1,17 +1,6 @@
-// BattleDriver -- spawns two teams from StreamingAssets/roster.json, runs the
-// decoded BattleSim deterministically, then replays the event log on the 3D
-// rigs (state-machine animation names from catalog/char_anim_states.json).
-//
-// P5 squad-battle HUD wiring (acceptance: shots/reference/P5.png):
-//   - battle timer counts down 4:49 over real elapsed replay time
-//   - controls row: 自动 (log-driven auto), 速度 2x (multiplies replay waits),
-//     锁定 (camera follow of the acting unit) -- keys B / C / V
-//   - per-unit key chips (player Q/W/E/R/T, enemies 1..n) + buff icon slots
-//   - on each player "turn" event the bottom skill bar offers the actor's
-//     ui_units.json abilities; Q/W/E or click picks the ability whose NAME is
-//     then shown in the turn label + log (effectReference isn't in
-//     ui_units.json, so per acceptance the damage stays flat-ATK from the log)
-//   - enemy commander portrait top-right (first enemy unit's charui portrait)
+// Incremental command-driven battle presentation. Native manual-selection entry
+// points are documented in the recovery ledger; this Unity bridge is new code.
+// The underlying flattened effect executor remains an incomplete reconstruction.
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -55,11 +44,16 @@ namespace SwgohRestored.Battle
 
         // P5 HUD state
         float _speedMult = 1f;      // 速度 2x toggle multiplies replay waits
-        bool _autoBattle = true;    // 自动 (log-driven replay is auto by nature)
+        bool _autoBattle;           // Manual commands are the default.
         bool _lockOn;               // 锁定 -- camera follows the acting unit
         Vector3 _lockOffset;
         GameObject _lastActorRig;
         Action<int> _onSkillPick;
+        bool _waitingForCommand;
+        int _selectedSkill = int.MinValue;
+        IReadOnlyList<BattleUnit> _legalTargets = Array.Empty<BattleUnit>();
+        public bool WaitingForCommand => _waitingForCommand;
+        public BattleSim Simulation => _sim;
         bool _replayActive;
         float _replayStart;
         const float BattleSeconds = 4f * 60 + 49;   // 4:49
@@ -93,19 +87,7 @@ namespace SwgohRestored.Battle
 
         void Update()
         {
-            if (_sim != null && Camera.main != null)
-                foreach (var u in _sim.Units)
-                {
-                    // bars follow the REPLAY (per-turn HP), not the final sim
-                    // state -- units that die late in the battle stay visible
-                    // until their death event is replayed
-                    double hp = _replayHp.TryGetValue(u.UnitId, out var h) ? h : u.MaxHp;
-                    float frac = u.MaxHp > 0 ? Mathf.Clamp01((float)(hp / u.MaxHp)) : 0f;
-                    bool alive = _replayHp.Count == 0 ? u.Alive : hp > 0;
-                    Vector3? anchor = _rigs.TryGetValue(u.UnitId, out var rig)
-                        ? rig.transform.position + Vector3.up * 2.2f : (Vector3?)null;
-                    _hud.UpdateUnit(u, Camera.main, frac, alive, anchor);
-                }
+            RefreshUnitBars();
             if (_replayActive)
                 _hud.UpdateTimer(BattleSeconds - (Time.time - _replayStart));
             if (_lockOn && _lastActorRig != null && Camera.main != null)
@@ -120,7 +102,7 @@ namespace SwgohRestored.Battle
             foreach (var f in CaptureFrames)
                 if (_captureFrame == f)
                 {
-                    CaptureShot($"F:/PPfavorite/Work/goh/unity/shot_{f}.png");
+                    CaptureShot($"F:/PPfavorite/Work/goh/logs/rea_gap_review/shot_{f}.png");
                     Debug.Log($"[Capture] frame {_captureFrame} -> shot_{f}.png");
                 }
             if (_captureFrame >= CaptureFrames[CaptureFrames.Length - 1] + 10)
@@ -134,6 +116,23 @@ namespace SwgohRestored.Battle
             }
         }
 
+        void RefreshUnitBars()
+        {
+            if (_sim != null && Camera.main != null)
+                foreach (var u in _sim.Units)
+                {
+                    // bars follow the REPLAY (per-turn HP), not the final sim
+                    // state -- units that die late in the battle stay visible
+                    // until their death event is replayed
+                    double hp = _replayHp.TryGetValue(u.UnitId, out var h) ? h : u.MaxHp;
+                    float frac = u.MaxHp > 0 ? Mathf.Clamp01((float)(hp / u.MaxHp)) : 0f;
+                    bool alive = _replayHp.Count == 0 ? u.Alive : hp > 0;
+                    Vector3? anchor = _rigs.TryGetValue(u.UnitId, out var rig)
+                        ? rig.transform.position + Vector3.up * 2.2f : (Vector3?)null;
+                    _hud.UpdateUnit(u, Camera.main, frac, alive, anchor);
+                }
+        }
+
         void HandleKeys()
         {
             if (Input.GetKeyDown(KeyCode.B)) ToggleAuto();
@@ -144,6 +143,15 @@ namespace SwgohRestored.Battle
                 if (Input.GetKeyDown(KeyCode.Q)) _onSkillPick(0);
                 if (Input.GetKeyDown(KeyCode.W)) _onSkillPick(1);
                 if (Input.GetKeyDown(KeyCode.E)) _onSkillPick(2);
+                if (Input.GetKeyDown(KeyCode.R)) _onSkillPick(3);
+                if (Input.GetKeyDown(KeyCode.T)) _onSkillPick(4);
+                if (Input.GetKeyDown(KeyCode.Y)) _onSkillPick(5);
+            }
+            if (_waitingForCommand)
+            {
+                for (int i = 0; i < _legalTargets.Count && i < 9; i++)
+                    if (Input.GetKeyDown((KeyCode)((int)KeyCode.Alpha1 + i)))
+                    { SubmitTarget(_legalTargets[i]); break; }
             }
         }
 
@@ -174,22 +182,36 @@ namespace SwgohRestored.Battle
         // the camera into a RenderTexture and write the bytes ourselves.
         void CaptureShot(string path)
         {
+            StartCoroutine(CaptureFrame(path));
+        }
+
+        public IEnumerator CaptureFrame(string path)
+        {
             var cam = Camera.main;
-            if (cam == null) { Debug.LogError("[Capture] no camera"); return; }
+            if (cam == null) { Debug.LogError("[Capture] no camera"); yield break; }
             _hud.SetCamera(cam);   // overlay canvas won't render into cam.Render()
             var prevRT = cam.targetTexture;
-            var rt = new RenderTexture(1280, 720, 24);
+            int width = Mathf.Max(1, Screen.width), height = Mathf.Max(1, Screen.height);
+            var rt = new RenderTexture(width, height, 24);
             cam.targetTexture = rt;
+            // Match the actual viewport; a fixed 1280x720 target crops camera-space
+            // canvas controls when the batch GameView has a different aspect ratio.
+            yield return null;
+            Canvas.ForceUpdateCanvases();
+            RefreshUnitBars();
             cam.Render();
             RenderTexture.active = rt;
-            var tex = new Texture2D(1280, 720, TextureFormat.RGB24, false);
-            tex.ReadPixels(new Rect(0, 0, 1280, 720), 0, 0);
+            var tex = new Texture2D(width, height, TextureFormat.RGB24, false);
+            tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             tex.Apply();
             cam.targetTexture = prevRT;
             RenderTexture.active = null;
+            Canvas.ForceUpdateCanvases();
+            RefreshUnitBars();
             System.IO.File.WriteAllBytes(path, tex.EncodeToPNG());
             Destroy(tex);
             Destroy(rt);
+            yield return null;
         }
 
         IEnumerator RunBattle()
@@ -204,28 +226,95 @@ namespace SwgohRestored.Battle
             foreach (var u in player.Concat(opponent))
             {
                 _replayHp[u.UnitId] = u.MaxHp;
-                _hud.TrackUnit(u, Camera.main, ChipLetter(u), BuffIcons(u.Side), BuffTints(u.Side));
+                _hud.TrackUnit(u, Camera.main, ChipLetter(u), onPick: () => SubmitTarget(u));
             }
             BuildP5Chrome(opponent.Count > 0 ? opponent[0] : null);
 
+            _replayStart = Time.time;
+            _replayActive = true;
             int guard = 0;
-            while (!_sim.CheckEnd(out _) && guard++ < 500)
+            while (!_sim.CheckEnd(out _) && guard++ < 500 && Time.time - _replayStart < BattleSeconds)
             {
-                var actor = _sim.ProcessUnitsSpeed();
+                int firstEvent = _sim.Log.Count;
+                var actor = _sim.PrepareNextTurn();
                 if (actor == null) break;
-                _sim.RunTurn(actor);
+                if (actor.Side == 0 && !_autoBattle)
+                {
+                    BeginManualInput(actor);
+                    while (_waitingForCommand && !_autoBattle && Time.time - _replayStart < BattleSeconds)
+                        yield return null;
+                    if (Time.time - _replayStart >= BattleSeconds) break;
+                }
+                if (_sim.PendingActor != null) _sim.RunAutomaticTurn();
+                EndManualInput();
+                // Only this committed action exists; no later turn is precomputed.
+                yield return PresentEvents(firstEvent);
+                foreach (var unit in _sim.Units) _replayHp[unit.UnitId] = unit.CurrentHp;
             }
-            bool ended = _sim.CheckEnd(out int winnerSide);
-            Debug.Log($"[BattleSim] simulated {_sim.Log.Count} events, guard={guard}, " +
-                      $"winnerSide={winnerSide} (0=player,1=opponent,-1=unfinished)");
-            // v0 sim crits nearly always (base crit chance data not hydrated),
-            // so sample the "crit" kind too
-            foreach (var ev in _sim.Log.Where(e => e.Kind == "damage" || e.Kind == "crit").Take(4))
-                Debug.Log($"[BattleSim] sample dmg {ev.Actor}->{ev.Target} = {ev.Amount}");
-            foreach (var u in player.Concat(opponent))
-                Debug.Log($"[BattleSim] {u.BaseId} hp={u.CurrentHp:0} atk={u.GetStat(6)} spd={u.Speed}");
+            EndManualInput();
+            _replayActive = false;
+            _sim.CheckEnd(out int winner);
+            _hud.SetTurnText(winner == 0 ? "胜利" : winner == 1 ? "战败" : "战斗结束（超时或无法行动）");
+            Debug.Log($"[BattleDriver] finished events={_sim.Log.Count} winnerSide={winner}");
+        }
 
-            yield return Replay();
+        void BeginManualInput(BattleUnit actor)
+        {
+            _waitingForCommand = true;
+            _selectedSkill = int.MinValue;
+            var original = EntryOf(actor.BaseId);
+            var entry = new UnitEntry { def_id = actor.BaseId, skills = new List<SkillEntry>() };
+            // Display order is the executor's order, not an independent UI ordering.
+            foreach (var ability in actor.Abilities)
+            {
+                var source = original?.skills?.Find(sk => sk.id == ability.Id || sk.id == ability.SkillId);
+                entry.skills.Add(new SkillEntry { id = ability.SkillId, name = ability.Name,
+                    icon = source?.icon, tag = ability.Kind == "basic" ? "基本" : "特殊" });
+            }
+            if (entry.skills.Count == 0)
+                entry.skills.Add(new SkillEntry { id = "fallback", name = "攻击", tag = "基本" });
+            _onSkillPick = PickSkill;
+            _hud.ShowSkillBar(entry, $"{original?.name ?? actor.BaseId} · 选择技能，再选择目标", PickSkill);
+            for (int i = 0; i < actor.Abilities.Count; i++)
+            {
+                var ability = actor.Abilities[i];
+                actor.CooldownLeft.TryGetValue(ability.Id, out int cooldown);
+                _hud.SetSkillAvailability(i, _sim.IsAbilityReady(i) && _sim.GetLegalTargets(i).Count > 0, ability.Name, cooldown);
+            }
+            _hud.SetTurnText($"{original?.name ?? actor.BaseId} · 等待指令（Q/W/E/R/T/Y）");
+            Debug.Log($"[BattleDriver] awaiting command actor={actor.UnitId} events={_sim.Log.Count}");
+        }
+
+        void PickSkill(int index)
+        {
+            if (!_waitingForCommand || _sim.PendingActor == null) return;
+            var actor = _sim.PendingActor;
+            int abilityIndex = actor.Abilities.Count == 0 && index == 0 ? -1 : index;
+            if (!_sim.IsAbilityReady(abilityIndex) || _sim.GetLegalTargets(abilityIndex).Count == 0) return;
+            _selectedSkill = abilityIndex;
+            _legalTargets = _sim.GetLegalTargets(abilityIndex);
+            _hud.HighlightSkill(index);
+            _hud.ShowTargets(_legalTargets, u => EntryOf(u.BaseId)?.name ?? u.BaseId, SubmitTarget);
+            string name = abilityIndex < 0 ? "攻击" : actor.Abilities[abilityIndex].Name;
+            _hud.SetTurnText($"{name} · 选择目标（点击下方姓名或数字键）");
+        }
+
+        void SubmitTarget(BattleUnit target)
+        {
+            if (!_waitingForCommand || _selectedSkill == int.MinValue) return;
+            if (!_sim.TrySubmitCommand(_selectedSkill, target, out string error))
+            { _hud.SetTurnText(error); return; }
+            Debug.Log($"[BattleDriver] command committed skill={_selectedSkill} target={target.UnitId}");
+            EndManualInput();
+        }
+
+        void EndManualInput()
+        {
+            _waitingForCommand = false;
+            _onSkillPick = null;
+            _selectedSkill = int.MinValue;
+            _legalTargets = Array.Empty<BattleUnit>();
+            _hud.HideSkillBar();
         }
 
         // ---- P5 chrome: timer, controls row, commander portrait ------------
@@ -233,7 +322,7 @@ namespace SwgohRestored.Battle
         {
             _hud.BuildTimer();
             _hud.BuildControls(ToggleAuto, ToggleSpeed, ToggleLock);
-            _hud.SetControlState("auto", true);
+            _hud.SetControlState("auto", _autoBattle);
             _hud.SetControlState("speed", false);
             _hud.SetControlState("lock", false);
             _commander = commander;
@@ -257,173 +346,44 @@ namespace SwgohRestored.Battle
             return i >= 0 && int.TryParse(u.UnitId.Substring(i + 1), out var s) ? s : 0;
         }
 
-        // Original buff/debuff icon crops; white silhouettes tinted like NGUI did
-        static readonly string[] PlayerBuffs = { "indicator_buff", "icon_buff_attack", "icon_buff_speed" };
-        static readonly string[] EnemyBuffs = { "indicator_debuff", "icon_debuff_taunt", "icon_debuff_disarm" };
-        static readonly Color BuffGreen = new(0.36f, 0.92f, 0.42f);
-        static readonly Color DebuffRed = new(1f, 0.42f, 0.36f);
-
-        static string[] BuffIcons(int side) => side == 0 ? PlayerBuffs : EnemyBuffs;
-
-        static Color[] BuffTints(int side) => side == 0
-            ? new[] { Color.white, BuffGreen, BuffGreen }
-            : new[] { Color.white, Color.white, DebuffRed };
-
         UnitEntry EntryOf(string defId) =>
             _uiUnits != null ? _uiUnits.Find(x => x.def_id == defId) : null;
 
-        BattleUnit UnitOf(BattleEvent ev) =>
-            _unitsById.Values.FirstOrDefault(u => u.BaseId == ev.Actor && ev.ActorSide == (u.Side == 0 ? "player" : "opponent"))
-            ?? _unitsById.Values.FirstOrDefault(u => u.BaseId == ev.Actor || u.UnitId == ev.Target)
-            ?? _unitsById.Values.FirstOrDefault(u => u.BaseId == ev.Target);
-
-        /// log events carry baseIds; sim units are keyed by UnitId
-        string TargetUnitId(string baseId) =>
-            _unitsById.Values.FirstOrDefault(u => u.BaseId == baseId)?.UnitId;
-
-        // ------------------------------------------------------------------
-        // Replay with P5 pacing: speed multiplier, ability choice windows and
-        // capture-frame alignment (capture frames land inside player turns so
-        // the skill bar is on screen at 240/480/800).
-        // ------------------------------------------------------------------
-        IEnumerator Replay()
+        IEnumerator PresentEvents(int start)
         {
-            _replayStart = Time.time;
-            _replayActive = true;
-            var waits = ComputeWaits(_sim.Log);
-            for (int i = 0; i < _sim.Log.Count; i++)
+            int end = _sim.Log.Count;
+            for (int i = start; i < end; i++)
             {
                 var ev = _sim.Log[i];
-                float w = waits[i] / _speedMult;
-                switch (ev.Kind)
+                if (ev.Kind == "turn")
                 {
-                    case "turn":
-                        yield return TurnStep(ev, w);
-                        break;
-                    case "damage":
-                    case "crit":
-                        var tid = TargetUnitId(ev.Target);
-                        if (tid != null && _replayHp.TryGetValue(tid, out var hp))
-                        {
-                            hp = Math.Max(0, hp - ev.Amount);
-                            _replayHp[tid] = hp;
-                            if (_commander != null && tid == _commander.UnitId && _commander.MaxHp > 0)
-                                _hud.UpdateCommander((float)(hp / _commander.MaxHp));
-                        }
-                        var go = RigOf(ev.Target);
-                        if (go) StartCoroutine(Flash(go));
-                        PlayClip(ev.Target, "Hit");
-                        _hud.ShowDamage(ev.Target, ev.Amount, ev.Kind == "crit", Camera.main);
-                        yield return new WaitForSeconds(w);
-                        break;
-                    case "death":
-                        var dtid = TargetUnitId(ev.Target);
-                        if (dtid != null) _replayHp[dtid] = 0;
-                        if (_commander != null && dtid == _commander.UnitId) _hud.UpdateCommander(0);
-                        PlayClip(ev.Target, "Death");
-                        yield return new WaitForSeconds(w);
-                        break;
-                    case "heal":
-                        var htid = TargetUnitId(ev.Target);
-                        if (htid != null && _replayHp.TryGetValue(htid, out var hhp))
-                        {
-                            double max = _unitsById[htid].MaxHp;
-                            _replayHp[htid] = Math.Min(max, hhp + ev.Amount);
-                            if (_commander != null && htid == _commander.UnitId && max > 0)
-                                _hud.UpdateCommander((float)((double)_replayHp[htid] / max));
-                        }
-                        _hud.ShowDamage(ev.Target, ev.Amount, crit: false, Camera.main, heal: true);
-                        yield return new WaitForSeconds(w);
-                        break;
+                    _unitsById.TryGetValue(ev.ActorUnitId ?? "", out var actor);
+                    _rigs.TryGetValue(ev.ActorUnitId ?? "", out _lastActorRig);
+                    _hud.SetTurnText($"第{ev.Turn}回合 · {EntryOf(actor?.BaseId)?.name ?? ev.Actor} · {ev.AbilityName}");
+                    PlayClip(ev.ActorUnitId, "Attack", "Idle");
+                    yield return new WaitForSeconds(0.6f / _speedMult);
+                }
+                else if (ev.Kind == "damage" || ev.Kind == "crit" || ev.Kind == "heal")
+                {
+                    string id = ev.TargetUnitId;
+                    if (id != null && _unitsById.TryGetValue(id, out var target))
+                    {
+                        double old = _replayHp[id];
+                        _replayHp[id] = ev.Kind == "heal" ? Math.Min(target.MaxHp, old + ev.Amount) : Math.Max(0, old - ev.Amount);
+                        if (target == _commander) _hud.UpdateCommander((float)(_replayHp[id] / target.MaxHp));
+                        var go = RigOf(id);
+                        if (go && ev.Kind != "heal") { StartCoroutine(Flash(go)); PlayClip(id, "Hit"); }
+                        _hud.ShowDamage(id, ev.Amount, ev.Kind == "crit", Camera.main, ev.Kind == "heal");
+                    }
+                    yield return new WaitForSeconds(0.35f / _speedMult);
+                }
+                else if (ev.Kind == "death")
+                {
+                    if (ev.TargetUnitId != null) _replayHp[ev.TargetUnitId] = 0;
+                    PlayClip(ev.TargetUnitId, "Death");
+                    yield return new WaitForSeconds(0.6f / _speedMult);
                 }
             }
-            _replayActive = false;
-            _hud.HideSkillBar();
-            Debug.Log("[BattleDriver] replay finished");
-        }
-
-        IEnumerator TurnStep(BattleEvent ev, float wait)
-        {
-            var actor = UnitOf(ev);
-            string baseId = actor?.BaseId ?? ev.Actor;
-            var entry = EntryOf(baseId);
-            var abilities = BattleHUD.ActiveAbilities(entry);
-            string actorName = entry != null ? entry.name : baseId;
-            bool isPlayer = ev.ActorSide == "player";
-            var rig = RigOf(baseId);
-            if (rig != null) _lastActorRig = rig;
-
-            // the sim ALREADY picked the real ability (engine lite tree per
-            // cooldown) -- the label shows the log truth and the skill bar
-            // highlights it; keys/click only re-highlight for inspection
-            string usedName = !string.IsNullOrEmpty(ev.AbilityName) ? ev.AbilityName : "攻击";
-            string usedSkillId = actor?.Abilities
-                ?.FirstOrDefault(a => a.Id == ev.AbilityId)?.SkillId;
-            int hi = abilities.FindIndex(s => s.id == usedSkillId);
-            if (hi < 0 && !string.IsNullOrEmpty(ev.AbilityName) && ev.AbilityName != "攻击")
-            {
-                // ui_units.json stores skill ids; fall back to kind ordering
-                bool isBasic = usedSkillId != null && usedSkillId.StartsWith("basicskill");
-                hi = abilities.FindIndex(s => isBasic
-                    ? (s.tag != null && s.tag.Contains("基本"))
-                    : (s.tag != null && s.tag.Contains("特殊")));
-            }
-
-            _hud.ShowSkillBar(entry,
-                isPlayer ? $"{actorName} ▶ {usedName}" : $"{actorName} · {usedName}",
-                idx => _hud.HighlightSkill(idx), showKeys: isPlayer);
-            if (hi >= 0) _hud.HighlightSkill(hi);
-            _hud.SetTurnText($"第{ev.Turn}回合 · {actorName} · {usedName}");
-            Debug.Log($"[BattleDriver] turn {ev.Turn} {ev.ActorSide} {actorName} uses {usedName} " +
-                      $"({ev.AbilityId}{(hi >= 0 ? $", skill bar #{hi}" : ", no bar entry")})");
-            PlayClip(baseId, "Attack", "Idle");
-            // 自动 off = manual pacing: player turns linger for a key/click
-            if (isPlayer && !_autoBattle) wait *= 2.5f;
-            yield return new WaitForSeconds(wait);
-            _onSkillPick = null;
-        }
-
-        static float BaseWait(BattleEvent ev)
-        {
-            switch (ev.Kind)
-            {
-                case "turn": return ev.ActorSide == "player" ? 1.5f : 0.9f;
-                case "death": return 0.8f;
-                case "damage":
-                case "crit": return 0.4f;
-                default: return 0.3f;
-            }
-        }
-
-        /// Capture-mode pacing: stretch the player-turn window that precedes
-        /// each capture frame so 240/480/800 land inside a skill-bar window.
-        float[] ComputeWaits(List<BattleEvent> log)
-        {
-            var waits = new float[log.Count];
-            for (int i = 0; i < log.Count; i++) waits[i] = BaseWait(log[i]);
-            if (!CaptureEnabled) return waits;
-
-            const float fps = 60f;
-            var starts = new float[log.Count + 1];
-            float t = 24f;   // frames before the first replay event (build/sim)
-            for (int i = 0; i < log.Count; i++) { starts[i] = t; t += waits[i] * fps; }
-            starts[log.Count] = t;
-            float shift = 0;
-            foreach (var f in CaptureFrames)
-            {
-                int best = -1;
-                for (int i = 0; i < log.Count; i++)
-                {
-                    if (log[i].Kind != "turn" || log[i].ActorSide != "player") continue;
-                    if (starts[i] + shift <= f - 18f) best = i;
-                }
-                if (best < 0) continue;
-                float windowEnd = starts[best] + shift + waits[best] * fps;
-                float extra = f + 18f - windowEnd;
-                if (extra > 0) { waits[best] += extra / fps; shift += extra; }
-            }
-            Debug.Log($"[Capture] replay pacing aligned to frames {string.Join(",", CaptureFrames)}");
-            return waits;
         }
 
         List<RosterEntry> LoadRoster()
@@ -552,8 +512,8 @@ namespace SwgohRestored.Battle
             _anims[u.UnitId] = go.GetComponentInChildren<Animator>();
         }
 
-        GameObject RigOf(string baseId) =>
-            _rigs.FirstOrDefault(kv => kv.Key.StartsWith(baseId + "#")).Value;
+        GameObject RigOf(string unitId) =>
+            unitId != null && _rigs.TryGetValue(unitId, out var rig) ? rig : null;
 
         void PlayClip(string baseId, string clip, string fallback = null)
         {

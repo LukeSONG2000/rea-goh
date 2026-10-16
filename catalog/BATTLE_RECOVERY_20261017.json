@@ -1,0 +1,296 @@
+{
+  "date": "2026-10-17",
+  "purpose": "Correct the gameplay direction after independent REA provenance review; deliver first real manual-command milestone.",
+  "conclusion": "The previous deliverable combines recovered assets and selected reverse-engineered numeric routines with newly authored simplified combat and UI. It is not a faithful reconstruction of the original gameplay. The replacement command bridge below restores player agency but is not claimed to reproduce the complete native FSM.",
+  "original_evidence": {
+    "sha256": "12cc254525a58aedea122a2967d0476da05b98ef0c219dc18cfc0b7207538db6",
+    "native_batch": "catalog/rea_workspace/out_main/04_batch_decompile.json",
+    "evidence_id": "ev_f1d406a85114967f46ffcea0c505409bcdafe0d6eee13969eacfae277688ed51",
+    "method": "Reuse original REA pseudocode bound to the independently verified unchanged binary. No new full native decompilation.",
+    "functions": [
+      {
+        "va": "0x18193B880",
+        "name": "BattleFsmController.TriggerTurnStarted",
+        "status": "body_observed",
+        "observation": "Conditional branch calls FUN_18193ba20 then returns; metadata maps this target to StartAbilitySelectPhase.",
+        "limitation": "Exact business meaning of branch variables and the full selection-phase internals remain unproven."
+      },
+      {
+        "va": "0x18193BA20",
+        "name": "StartAbilitySelectPhase",
+        "status": "metadata_and_call_target_only"
+      },
+      {
+        "va": "0x18193A440",
+        "name": "PlayerManualAbilitySelected",
+        "status": "metadata_only"
+      },
+      {
+        "va": "0x18193B020",
+        "name": "SelectAlly",
+        "status": "metadata_only"
+      },
+      {
+        "va": "0x18193B630",
+        "name": "ManualAbilityPlayerConfirmed",
+        "status": "metadata_only"
+      },
+      {
+        "va": "0x181BAE7F0",
+        "name": "SelectManualTarget",
+        "status": "metadata_only"
+      },
+      {
+        "va": "0x181364CA0",
+        "name": "DamageModule.ApplyToTargets",
+        "status": "body_observed",
+        "observation": "Per-target damage pipeline contains context and persistent-effect modification; cannot be represented generally by summed damage multiplier."
+      },
+      {
+        "va": "0x18136A570",
+        "name": "GetContextValue",
+        "status": "body_observed",
+        "observation": "Prior effect results contribute to context values."
+      }
+    ],
+    "batch_coverage": {
+      "functions_requested": 23,
+      "succeeded": 21,
+      "failed": 2,
+      "interpretation": "Successful decompilation of a small selection is not full gameplay or source-equivalence validation."
+    }
+  },
+  "before": {
+    "assembly_sha256": "123757130fd6f2a50414404b44054fbc85bc586750c6fc28334362ba1ebfe21d",
+    "fresh_rea_members": "ev_7244f54641db8e5bda472938edb41c592628a93f67e22ea4d586438c353b1c28",
+    "behavior": "RunBattle calculates entire match before replay. Skill callbacks only highlight; auto off multiplies presentation wait."
+  },
+  "implemented": [
+    "Default manual mode: prepare one actor, wait, choose executable skill and legal target, commit once, present that action, then prepare next actor.",
+    "Enemy and auto mode use the same validated command submission path.",
+    "Invalid commands and waiting queries leave combat state and all five RNG streams unchanged.",
+    "Unique actor/target instance identifiers prevent confusing equal base IDs.",
+    "Skill display follows executor order, resolves original icons by ability ID, disables cooldown/unexecutable skills.",
+    "Target list, numeric keys and health-bar pointer callbacks submit real targets.",
+    "Removed constant illustrative buff/debuff rows; no status icons without underlying state.",
+    "Regression tests include deterministic command replay, different choices, invalid commands, cooldown, real UI raycast/pointer dispatch and auto on/off."
+  ],
+  "remaining_fidelity_gaps": [
+    "Flattened abilities still lose effect ordering, target categories, variance, contexts, triggers and expiry. The previously proven VADER 3.241+3.241 -> 6.482 error is NOT repaired by this milestone.",
+    "Leader/unique effects, taunt, dispel, assist/counter, protection, cooldown/turn-meter changes and full original targeting are not reconstructed.",
+    "Existing simplified AI and damage formulas were not certified against full original runtime behavior.",
+    "Scene, camera, animation timing, VFX, audio and NGUI hierarchy fidelity remain incomplete.",
+    "New command and target-list UI is an explicitly temporary reconstruction bridge, not recovered original source or original prefab.",
+    "Build is produced from the existing shared worktree, which contains earlier uncommitted UI/build-script edits. This change set commits only claimed battle code, new regressions and its evidence ledger."
+  ],
+  "next_obligations": [
+    {
+      "priority": "P0",
+      "task": "Preserve ordered effectReference graph and all raw target/context/trigger/expiry fields; replace lossy aggregate exporter.",
+      "gate": "VADER mutually exclusive damage branches remain separate; no unsupported effect silently disappears."
+    },
+    {
+      "priority": "P0",
+      "task": "Recover native target-condition semantics and persistent-effect lifecycle, then implement a bounded character set.",
+      "gate": "Conditions choose exactly the appropriate effect branch; real status changes determine legal targets/actions; expiry/trigger cases tested against native/data evidence."
+    },
+    {
+      "priority": "P0",
+      "task": "Reconcile original damage/context/protection pipeline before claiming combat parity.",
+      "gate": "Compare stepwise traces, not only deterministic wins or event counts."
+    },
+    {
+      "priority": "P1",
+      "task": "Restore original serialized battle layout, stage and presentation sequences.",
+      "gate": "Reference screenshots only for acceptance; originals and serialized values are data sources."
+    }
+  ],
+  "zcode": {
+    "cli_version": "0.16.9",
+    "entry": "D:/Program Files/ZCode/resources/glm/zcode.cjs",
+    "computer_use": false,
+    "mode": "plan",
+    "disallowed_tools": [
+      "Bash",
+      "Edit",
+      "Write",
+      "NotebookEdit"
+    ],
+    "outcome": "Provider path resolved through process-local supported environment variables; model creation failed. No useful model review returned, no global config or credentials changed."
+  },
+  "scope_constraints": {
+    "original_install_read_only": true,
+    "online_game_api_calls": false,
+    "currency_or_mod_actions": false,
+    "original_computer_use_this_milestone": false
+  },
+  "validation": {
+    "core": {
+      "command": "dotnet run --project tools/tests/BattleCommandRegression.csproj",
+      "result": "PASS",
+      "scope": "State/RNG invariants, deterministic identical commands, changed choices, legality, cooldown, unique identities, auto/legacy compatibility; not full original parity."
+    },
+    "turn_order": {
+      "command": "py il2cpp/offline/demo_turn_order.py",
+      "result": "PASS",
+      "log": "logs/rea_gap_review/turn-order-check.log"
+    },
+    "playmode": {
+      "entry": "SwgohRestored.EditorTools.BattleCommandPlayModeGate.Run",
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "logs/rea_gap_review/manual-viewport-playmode.log",
+      "checks": [
+        "Manual default waits without combat progress.",
+        "Actual EventSystem raycast resolves expected button; its four corners stay inside viewport.",
+        "Pointer click selects real ability with non-null original icon; choosing a skill alone does not commit.",
+        "Pointer click on last legal target commits exactly once with expected ability and unique target IDs.",
+        "Double invocation cannot commit a second action.",
+        "Next player actor waits; auto on releases pending actor; auto off restores manual waiting."
+      ],
+      "screenshots": [
+        "logs/rea_gap_review/manual-select-target.png",
+        "logs/rea_gap_review/manual-action.png",
+        "logs/rea_gap_review/manual-resumed.png"
+      ],
+      "limitations": "Native batch GameView is 640x480. Stage/camera/rig framing remains visibly incomplete; these captures do not certify original visual fidelity."
+    },
+    "build": {
+      "exit_code": 0,
+      "log": "logs/rea_gap_review/manual-final-build.log",
+      "executable": "unity/build/SWGoH-Restored.exe"
+    },
+    "smoke": {
+      "alive_after_15_seconds": true,
+      "error_matches": 0,
+      "log": "logs/rea_gap_review/manual-player-smoke.log",
+      "result_file": "logs/rea_gap_review/manual-player-smoke-result.txt",
+      "scope": "Standalone player boot; battle command and pointer regressions ran in PlayMode, not through live OS mouse input in the standalone player."
+    }
+  },
+  "after": {
+    "assembly_sha256": "54e5d69787c398499b6a308362c05a358929fef36e592abd0ebffa412257d01f",
+    "rea_members": "ev_6e33e87a9f66819ab3c866bdf313c61bb4142a772d4f31ad455afee2a2873e56",
+    "mvid": "bf1465b7-c304-42a3-9494-455c759591f1",
+    "static_edges": [
+      {
+        "caller_token": "0x06000076",
+        "caller": "SwgohRestored.Battle.BattleSim.TrySubmitCommand",
+        "opcode": "ldftn",
+        "target_token": "0x060000f0",
+        "target_kind": "method-def",
+        "target_name": "<TrySubmitCommand>b__0",
+        "target_declaring_type": "<>c__DisplayClass29_0"
+      },
+      {
+        "caller_token": "0x06000076",
+        "caller": "SwgohRestored.Battle.BattleSim.TrySubmitCommand",
+        "opcode": "ldftn",
+        "target_token": "0x060000f1",
+        "target_kind": "method-def",
+        "target_name": "<TrySubmitCommand>b__1",
+        "target_declaring_type": "<>c__DisplayClass29_0"
+      },
+      {
+        "caller_token": "0x06000076",
+        "caller": "SwgohRestored.Battle.BattleSim.TrySubmitCommand",
+        "opcode": "ldftn",
+        "target_token": "0x060000dd",
+        "target_kind": "method-def",
+        "target_name": "<TrySubmitCommand>b__29_2",
+        "target_declaring_type": "<>c"
+      },
+      {
+        "caller_token": "0x06000077",
+        "caller": "SwgohRestored.Battle.BattleSim.RunAutomaticTurn",
+        "opcode": "call",
+        "target_token": "0x06000072",
+        "target_kind": "method-def",
+        "target_name": "PrepareNextTurn",
+        "target_declaring_type": "SwgohRestored.Battle.BattleSim"
+      },
+      {
+        "caller_token": "0x06000077",
+        "caller": "SwgohRestored.Battle.BattleSim.RunAutomaticTurn",
+        "opcode": "ldftn",
+        "target_token": "0x060000f3",
+        "target_kind": "method-def",
+        "target_name": "<RunAutomaticTurn>b__0",
+        "target_declaring_type": "<>c__DisplayClass30_0"
+      },
+      {
+        "caller_token": "0x06000077",
+        "caller": "SwgohRestored.Battle.BattleSim.RunAutomaticTurn",
+        "opcode": "call",
+        "target_token": "0x06000076",
+        "target_kind": "method-def",
+        "target_name": "TrySubmitCommand",
+        "target_declaring_type": "SwgohRestored.Battle.BattleSim"
+      },
+      {
+        "caller_token": "0x06000078",
+        "caller": "SwgohRestored.Battle.BattleSim.RunTurn",
+        "opcode": "call",
+        "target_token": "0x06000077",
+        "target_kind": "method-def",
+        "target_name": "RunAutomaticTurn",
+        "target_declaring_type": "SwgohRestored.Battle.BattleSim"
+      },
+      {
+        "caller_token": "0x06000089",
+        "caller": "SwgohRestored.Battle.BattleDriver.BeginManualInput",
+        "opcode": "ldftn",
+        "target_token": "0x06000103",
+        "target_kind": "method-def",
+        "target_name": "<BeginManualInput>b__0",
+        "target_declaring_type": "<>c__DisplayClass45_0"
+      },
+      {
+        "caller_token": "0x0600008b",
+        "caller": "SwgohRestored.Battle.BattleDriver.SubmitTarget",
+        "opcode": "callvirt",
+        "target_token": "0x06000076",
+        "target_kind": "method-def",
+        "target_name": "TrySubmitCommand",
+        "target_declaring_type": "SwgohRestored.Battle.BattleSim"
+      },
+      {
+        "caller_token": "0x0600011a",
+        "caller": "<RunBattle>d__44.MoveNext",
+        "opcode": "callvirt",
+        "target_token": "0x06000072",
+        "target_kind": "method-def",
+        "target_name": "PrepareNextTurn",
+        "target_declaring_type": "SwgohRestored.Battle.BattleSim"
+      },
+      {
+        "caller_token": "0x0600011a",
+        "caller": "<RunBattle>d__44.MoveNext",
+        "opcode": "call",
+        "target_token": "0x06000089",
+        "target_kind": "method-def",
+        "target_name": "BeginManualInput",
+        "target_declaring_type": "SwgohRestored.Battle.BattleDriver"
+      },
+      {
+        "caller_token": "0x0600011a",
+        "caller": "<RunBattle>d__44.MoveNext",
+        "opcode": "callvirt",
+        "target_token": "0x06000077",
+        "target_kind": "method-def",
+        "target_name": "RunAutomaticTurn",
+        "target_declaring_type": "SwgohRestored.Battle.BattleSim"
+      },
+      {
+        "caller_token": "0x0600011a",
+        "caller": "<RunBattle>d__44.MoveNext",
+        "opcode": "call",
+        "target_token": "0x06000091",
+        "target_kind": "method-def",
+        "target_name": "PresentEvents",
+        "target_declaring_type": "SwgohRestored.Battle.BattleDriver"
+      }
+    ],
+    "evidence_bundle": "logs/rea_gap_review/manual-command-rea-evidence.json"
+  }
+}

@@ -116,3 +116,10 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 ## 2026-10-17 核心玩法纠偏
 - 【Codex-battle-recovery】认领：原始战斗流程/效果语义交叉审查，并推进真实逐回合玩家指令闭环。写域 BattleSim、BattleDriver、BattleHUD 与专用回归；其他 UI/资产不动。Git 由主智能体单写。
+
+- 【Codex-battle-recovery】第一闭环已实现：默认手动，单回合准备→技能/合法目标选择→校验提交→本步表现→下一行动者；自动同入口，等待/非法指令不推进状态与5条RNG。移除示例状态图标，事件用唯一单位ID，修复技能ID/abilityID图标映射。
+- 原版来源复核：REA历史同SHA函数体 TriggerTurnStarted@18193B880 确有到 StartAbilitySelectPhase@18193BA20 的分支；其他手动选择入口仅metadata，不冒称完整FSM反编译。新实现明确为恢复桥接，非完整原函数移植。
+- 验证：dotnet run --project tools/tests/BattleCommandRegression.csproj PASS（同种子同命令/不同选招目标/非法命令/冷却/唯一身份）；py il2cpp/offline/demo_turn_order.py PASS；PlayMode真实EventSystem射线及pointer事件、按钮四角边界、等待、选招/目标、双击与auto切换 PASS exit0；最终build exit0；exe存活15s、异常匹配0。日志和截图均在 logs/rea_gap_review/。
+- actual build REA复检 ev_6e33e87a9f66819ab3c866bdf313c61bb4142a772d4f31ad455afee2a2873e56，Assembly-CSharp SHA256 54e5d69787c398499b6a308362c05a358929fef36e592abd0ebffa412257d01f。确认 SubmitTarget→TrySubmitCommand 与逐回合RunBattle调用链。详见 BATTLE_RECOVERY_20261017.json。
+- 未完成保真项维持P0：扁平技能导出（包括VADER互斥倍率错误）、完整target/context/trigger/expiry、持续状态/护盾/助攻反击/驱散；场景/NGUI/动画/VFX仍不合原版。不以手动闭环替代完整玩法验收。
+- ZCode CLI 0.16.9已定位，进程局部provider路径修复后调用仍Model creation failed；未取得模型辅助结果，未改全局配置。原版本轮零computer use、零货币/Mod操作、未访问线上API。
