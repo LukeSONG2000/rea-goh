@@ -107,3 +107,9 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 ## 2026-10-17 REA 原始内容与复现差距审查
 - 【Codex-rea-gap-review】认领只读制品分析、现有 Unity 成果对照及指导意见；分工检查 UI/资产接入与战斗语义。原版安装 E: 只读，不访问游戏线上 API，不改实现。
+
+- 【Codex-rea-gap-review】完成方向审查：详见 RESTORATION_REVIEW_20261017.json；新 REA 证据保存在 logs/rea_gap_review/rea-evidence.json。原版 GameAssembly SHA256 与历史 native 证据一致；本轮新检 actual build 的 CIL 与随附数据，不冒称重跑全量反编译。
+- 确认 P0：构建程序集先整局模拟再回放，技能回调仅 HighlightSkill；VADER 普攻互斥的 3.241+3.241 两分支被导出为 6.482，工程及 build abilities.json 字节一致；leader/unique 与持续效果未完整执行，HUD 图标为固定示例。
+- 确认 UI：7x294 网格超出1632可视宽，文本锚点使姓名跑到上一行；抽查三份头像源图与导入图一致，无需为该症状重导头像。原版字体已取得但未接入，详情 Animator 被禁用，表现链仍有缺口。
+- 指导：保留资产及已核实公式，停止扩展演示覆盖；先修逐effect语义与真实手动命令，再交付固定3v3状态/目标/表现闭环，由独立验收复核 actual build。未改实现、未发送 Zcode 指令。
+- 原版 computer use 限于关闭登录/公告/促销弹窗及回到主城观察，已停止遍历；无购买、无货币/体力消耗、无 Mod 操作。旧截图仅作验收参考，未用于生成数据。

@@ -1,0 +1,205 @@
+{
+  "review_date": "2026-10-17",
+  "purpose": "REA-assisted independent review of the current Zcode restoration deliverables and project direction",
+  "decision": "Preserve recovered assets and proven low-level formulas; redirect work from expanding demo coverage to a small, genuinely interactive and data-faithful vertical slice.",
+  "scope": {
+    "original_executable": "E:/Games/EA Games/SWGoH/SWGoH.exe",
+    "original_native_sha256": "12cc254525a58aedea122a2967d0476da05b98ef0c219dc18cfc0b7207538db6",
+    "built_assembly_sha256": "123757130fd6f2a50414404b44054fbc85bc586750c6fc28334362ba1ebfe21d",
+    "built_abilities_sha256": "563c29e6f28a06b2c48627d0422cebf74042774b620e96b9b58f694c9e21cc2c",
+    "methods": [
+      "Fresh REA PE inventory and identity of original GameAssembly.dll",
+      "Fresh REA managed metadata/CIL/call-edge inspection of actual built Assembly-CSharp.dll",
+      "Original saved native REA evidence checked against the identical current binary SHA256",
+      "Read-only comparison of raw gamedata mirror, conversion code, runtime code and shipped JSON",
+      "Bounded live original window observation: dismiss overlays and navigate home; no battle, currency purchase, or Mod action",
+      "Existing restoration screenshots used only as historical visual acceptance evidence"
+    ]
+  },
+  "limitations": [
+    "No fresh full native decompilation was run; original function evidence is reused historical evidence bound to the verified unchanged binary.",
+    "The gamedata mirror was not reconciled against this live account's skill levels; the identified lossy conversion is independently reproducible within the local source-to-build pipeline.",
+    "The restored executable was not launched during this review; current source findings and built CIL are distinguished from historical screenshots.",
+    "No full original UI traversal or battle-equivalence certification was performed.",
+    "REA's managed inspection is static; call edges do not themselves constitute execution traces."
+  ],
+  "evidence": {
+    "bundle": "F:/PPfavorite/Work/goh/logs/rea_gap_review/rea-evidence.json",
+    "native_identity": "ev_6c7f1d99d7aa48e96e8119b870e33e929be453127d481dce8717425634c90f34",
+    "built_core": "ev_a6083bb3fa93ec49fb71014f97b1793ea41d05c2a73c04bf396d1d79522287fb",
+    "built_driver": "ev_8dbb82f7840518911600bbfd4814d9deba7e6beed2a2c61b28775c07d6990f80",
+    "built_coroutines": "ev_e8f58e324297978f370bab6b184a34fa59b48f91abaf4690268d78bd6841f4cd",
+    "historical_native_batch": {
+      "id": "ev_f1d406a85114967f46ffcea0c505409bcdafe0d6eee13969eacfae277688ed51",
+      "path": "F:/PPfavorite/Work/goh/catalog/rea_workspace/out_main/04_batch_decompile.json"
+    },
+    "live_home": "F:/PPfavorite/Work/goh/logs/rea_gap_review/original_live_home_clear.png"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P0",
+      "title": "战斗为预计算回放，玩家技能输入没有改变模拟",
+      "status": "confirmed-source-and-built-cil",
+      "source": [
+        "F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets/Scripts/Runtime/BattleDriver.cs:211",
+        "F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets/Scripts/Runtime/BattleDriver.cs:374"
+      ],
+      "evidence_id": "ev_e8f58e324297978f370bab6b184a34fa59b48f91abaf4690268d78bd6841f4cd",
+      "detail": "RunBattle.MoveNext calls ProcessUnitsSpeed/RunTurn/CheckEnd before Replay. The TurnStep click delegate calls only HighlightSkill. Auto-off merely changes pacing.",
+      "change": "以等待玩家命令为状态，验证技能/目标后结算一回合；自动模式走同一命令入口。",
+      "acceptance": [
+        "关闭自动后玩家回合持续等待，不擅自推进",
+        "相同初始状态和seed，不同合法技能/目标产生相应不同事件",
+        "相同seed与命令序列产生相同事件"
+      ]
+    },
+    {
+      "id": "F2",
+      "priority": "P0",
+      "title": "技能导出把条件效果压平，维达普攻系数翻倍",
+      "status": "confirmed-raw-mirror-to-shipped-json",
+      "source": [
+        "F:/PPfavorite/Work/goh/tools/build_abilities_data.py:102",
+        "F:/PPfavorite/Work/goh/tools/build_abilities_data.py:128",
+        "F:/PPfavorite/Work/goh/catalog/gamedata/ability.json",
+        "F:/PPfavorite/Work/goh/catalog/gamedata/effect.json"
+      ],
+      "detail": {
+        "ability": "basicability_darthvader",
+        "tier": "tier[-1]",
+        "effects": [
+          {
+            "id": "basicability_vader_damage_jedi_u05",
+            "multiplierAmountDecimal": 32410,
+            "resultVarianceDecimal": 500,
+            "categories": [
+              {
+                "id": "profession_jedi",
+                "exclude": false
+              },
+              {
+                "id": "affiliation_rebels",
+                "exclude": false
+              }
+            ]
+          },
+          {
+            "id": "basicability_vader_damage_u05",
+            "multiplierAmountDecimal": 32410,
+            "resultVarianceDecimal": 500,
+            "categories": [
+              {
+                "id": "profession_jedi",
+                "exclude": true
+              },
+              {
+                "id": "affiliation_rebels",
+                "exclude": true
+              }
+            ]
+          }
+        ],
+        "exported_multiplier": 6.482,
+        "expected_per_applicable_branch_multiplier": 3.241,
+        "shipped_matches_project_bytes": true
+      },
+      "change": "保留effect ID、顺序、条件、目标类别、概率、上下文、嵌套引用与variance；不再把互斥分支求和。",
+      "acceptance": [
+        "对Jedi、Rebel、其他类别分别测试合法分支",
+        "同一目标不得把这两条互斥damage效果同时执行",
+        "逐效果记录命中条件和RNG消耗，回查原始记录"
+      ]
+    },
+    {
+      "id": "F3",
+      "priority": "P0",
+      "title": "被动与持续状态缺失，HUD使用示例图标",
+      "status": "confirmed-source-and-selected-built-model",
+      "source": [
+        "F:/PPfavorite/Work/goh/tools/build_abilities_data.py:102",
+        "F:/PPfavorite/Work/goh/tools/build_abilities_data.py:126",
+        "F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets/Scripts/Runtime/BattleDriver.cs:261",
+        "F:/PPfavorite/Work/goh/il2cpp/decompiled/conditions.c"
+      ],
+      "detail": "导出仅保留basic/special与DAMAGE/RECOVER；leader/unique及其他effect不进入执行数据。当前Buff图标按阵营固定。",
+      "change": "固定小队先实现最小持续效果系统：嘲讽、封技、DOT、驱散、领袖被动与触发/过期。HUD仅显示实际状态。",
+      "acceptance": [
+        "每个显示图标能追溯到活动effect实例",
+        "被动生效、触发次数、持续与消失时机有具体断言",
+        "未实现机制明确标记，不伪装已生效"
+      ]
+    },
+    {
+      "id": "F4",
+      "priority": "P1",
+      "title": "角色列表裁切与文字错位造成资源错配观感",
+      "status": "confirmed-current-source-with-historical-screenshot",
+      "source": [
+        "F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets/Scripts/Runtime/UI/RosterUI.cs:150",
+        "F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets/Scripts/Runtime/UI/RosterUI.cs:261",
+        "F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets/Scripts/Runtime/UI/UiKit.cs:174"
+      ],
+      "detail": "1920设计宽中网格可用1632，7列294合计2058；左栏到x360，网格从x268起。名字/阵营上下拉伸锚点加正offsetMax使标签位于本卡上方。K2SO/JAXXON/HERMITYODA导入PNG与对应原图SHA256一致，不能误判为头像源映射错误。",
+      "change": "恢复完整父级布局、缩放、裁剪区与文本锚点；无需重导这三份头像。",
+      "acceptance": [
+        "1600x900与1920x1080下无侧栏覆盖、非预期卡片裁切",
+        "三个人物姓名位于其自己的头像卡片内",
+        "按照原始prefab层级与尺寸建立映射证据"
+      ]
+    },
+    {
+      "id": "F5",
+      "priority": "P1",
+      "title": "已恢复资产尚未形成原版表现链",
+      "status": "confirmed-source-with-bounded-asset-check",
+      "source": [
+        "F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets/Scripts/Runtime/UI/DetailUI.cs:209",
+        "F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets/Scripts/Runtime/UI/UiKit.cs:76",
+        "F:/PPfavorite/Work/goh/catalog/fonts_original",
+        "F:/PPfavorite/Work/goh/extracted/char_anakin_fallen_pre/vfx.json"
+      ],
+      "detail": "详情页销毁Animator以绕过root-motion问题；UI统一系统字体，而三款原版TTF已存在（均无CJK）。当前脚本未接入ParticleSystem/AudioSource/VFX参数，不能由此断言所有场景特效或原始音频都不存在。原版实机主城与历史复现截图在构图、材质灯光、人物/全息内容上明显有差距。",
+      "change": "先选择一个角色展示和2-3个技能接通正确idle、根骨、材质、原版数字/西文字体及明确中文回退、动作/命中特效时间线。",
+      "acceptance": [
+        "详情角色真实待机且不漂移",
+        "技能动作、命中特效、伤害数字在同一事件时间线上",
+        "主城构图及素材缺口逐项列证据，不用新占位掩盖"
+      ]
+    },
+    {
+      "id": "F6",
+      "priority": "P0-process",
+      "title": "交付验收证明范围被扩大",
+      "status": "review-conclusion",
+      "source": [
+        "F:/PPfavorite/Work/goh/catalog/REA_GUIDANCE.md",
+        "F:/PPfavorite/Work/goh/catalog/PROGRESS.md"
+      ],
+      "detail": "RVA/基础公式抽查与同seed自重复，不能证明完整战斗语义、技能选择或视觉复现。已有资源、可构建、能播放与完整复现是不同验收状态。",
+      "change": "由独立复核者依据原始记录、源码、实际构建制品与少量运行证据分别验收；Zcode交付报告不作为自证。",
+      "acceptance": [
+        "每项功能写出原始依据、实现入口、构建制品、可观察结果与局限",
+        "持续保留本次反例，修复后以行为测试关闭",
+        "不以资源数量/页面数量/无报错作为完成率"
+      ]
+    }
+  ],
+  "recommended_sequence": [
+    "先冻结新页面、全量重导及扩大角色数量，保留现有资产与公式成果。",
+    "第一交付修正技能数据导出，加入维达条件分支回归；产出保留逐effect语义的新数据格式。",
+    "第二交付实现真实手动命令闭环，以固定3v3小队完成基础状态/目标/护盾/触发。",
+    "第三交付修正角色列表布局，接通详情idle和两三个标志性技能表现；与前两步可按文件域分工。",
+    "由我们独立检查实际build、命令序列重放、原始数据条件与限定截图后，再允许扩大范围。"
+  ],
+  "zcode_instruction": "暂停扩大页面和角色覆盖。先交付一个固定3v3的可操作闭环：逐effect保留原始条件/目标/概率/上下文，修复VADER普攻互斥分支被求和；关闭自动时等待真实技能和目标命令；实现所选小队所需持续状态，HUD只显示真实状态；修复Roster网格/文本锚点并恢复详情idle。每步提交具体原始记录、实现入口、构建hash、行为测试结果与未实现清单。不得仅凭构建成功、同seed相同或截图上有按钮宣布完成。先完成这些验收，再扩展功能。",
+  "takeover_policy": "本轮为独立审查，未发送Zcode指令或修改实现。建议Zcode保留执行角色，我们掌握范围与验收；若不能通过上述具体反例的验收，再由我们接管对应核心模块，避免全项目重写。",
+  "question_status": {
+    "original_identity": "answered",
+    "built_input_behavior": "answered-static",
+    "skill_conversion_counterexample": "answered",
+    "visual_mapping": "answered-source-and-historical-visual",
+    "full_original_runtime_equivalence": "not-claimed",
+    "direction_change": "answered"
+  }
+}
