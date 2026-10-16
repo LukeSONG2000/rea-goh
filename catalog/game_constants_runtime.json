@@ -1,0 +1,41 @@
+{
+ "tool": "il2cpp/tools/read_game_constants.py",
+ "generated_at_utc": "2026-10-16T00:38:35.432470+00:00",
+ "target": {
+  "process": "SWGoH.exe",
+  "pids": [],
+  "all_memory": false
+ },
+ "signature": {
+  "anchors": [
+   "0x22E0==1.0",
+   "0x22F0==100.0",
+   "0x22F4==100.0",
+   "0x22F8==1.0",
+   "0x2308==100.0",
+   "0x2334==1.0",
+   "0x2340==1.0",
+   "0x24B4==100.0",
+   "0x24E0==100.0"
+  ],
+  "anchors_source": "ctor machine-code pass (BATTLE_SIM_INVENTORY.md)"
+ },
+ "status": "game_not_running",
+ "status_detail": "no process named SWGoH.exe; launch + log into the game, then rerun",
+ "fields": {},
+ "prize_offsets": [
+  "0x2300",
+  "0x22E8",
+  "0x22FC",
+  "0x22E4",
+  "0x2314",
+  "0x230C",
+  "0x231C",
+  "0x2348",
+  "0x2344",
+  "0x233C",
+  "0x2338",
+  "0x1C34"
+ ],
+ "candidates": []
+}
