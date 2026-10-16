@@ -50,16 +50,16 @@ def main():
     for b in light + dark:
         assert b in by_base, f"unit {b} missing from catalog"
 
-    def run(seed, targeting_seed):
+    def run(seed):
         sim = BattleSimulation(squad(light, "player", by_base),
                                squad(dark, "opponent", by_base),
-                               seed, targeting_seed)
+                               seed)
         for _ in range(30):
-            sim.run_round()
-        return [(a["round"], a["actor"]) for a in sim.actors]
+            sim.run_turn()
+        return [(a["turn"], a["actor"]) for a in sim.actors]
 
-    seq_a = run(4490, 1)
-    seq_b = run(4490, 1)
+    seq_a = run(4490)
+    seq_b = run(4490)
     assert seq_a == seq_b, "same seeds diverged -- RNG not deterministic"
     # NB: cross-seed equality is EXPECTED here: turn order only depends on
     # speeds until chance mechanics (crit/dodge/targeting) consume the
