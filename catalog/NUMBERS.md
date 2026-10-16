@@ -132,3 +132,32 @@ TargetLock→AllyDispel→SelfDispel→AOE→EnemyDispel→KillHighHP→Damage�
 | AI 各 EvaluateCondition 模块体（~20 个） | 未逐一反编译（树结构已全解）|
 | 原版字体 | 不存在（动态渲染）——永久替代 |
 | GetRelicLevelDeltaMod | 占位 0.0（relic 等级差）|
+
+---
+
+## 13. 官方术语中英对照（文档与 UI 建模统一用词）
+| 官方中文 | 官方英文 | 备注 |
+|---|---|---|
+| 银河力量 | Galactic Power | 账号/单位总战力（单位=Σstat25/10）|
+| 生命/最大生命 | Health / Max Health | stat 1 |
+| 防御（护甲/抗性）| Defense（Armor / Resistance）| stat 8/9 |
+| 进攻/攻击伤害 | Offense / Attack Damage | stat 6 |
+| 特攻/能力强度 | Ability Power（特攻强度）| stat 7 |
+| 速度 | Speed | stat 5 |
+| 暴击几率/暴击伤害 | Critical Chance / Critical Damage | stat 14/15/16 族 |
+| 效果命中/效果抵抗 | Potency / Tenacity | proto 12/13 |
+| 命中/闪避 | Accuracy / Evasion | proto 17/18 |
+| 最大防护 | Max Protection（Shield）| proto 28 |
+| 物理伤害/特殊能力 | Physical damage / Special ability | damageType 1/2 |
+| 位移/纪元 | Relic（遗物）/ Era（时代）| 纪元=Pre-OT/OT/ST 内容世代 |
+| 装备等级 | Gear Level（Gear I-XIII）| gearLvl 1-13 |
+| 改装件 | Mods | 属性插件系统（未解码）|
+| 回合/轮 | Turn / Round | — |
+| 冷却 | Cooldown | — |
+| 持续效果/增益/减益 | Buff / Debuff | indicator 族 |
+| 目标锁定 | Target Lock | 舰队核心机制 |
+| 数据全像记录器 | Datacron | UI 页签 |
+| 光速代币 | Lightspeed Tokens（Kickback）| UI 页签 |
+| 物品栏 | Inventory（Characters/Units 列表）| P3 |
+| 战役/竞技场/角斗场 | Battles / Squad Arena / Grand Arena | P2 热键 G/S/D |
+（UI 文案以客户端 Loc_CHS_CN 为准；本表用于代码/文档统一命名。）
