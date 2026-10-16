@@ -82,3 +82,10 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 - GameConstants runtime scanner ready + 12h watcher armed (auto-captures when game runs+logs in).
 - P6 recon: no separate fleet simulator (CombatType byte); crew tables pre-extracted to catalog/fleet_crew_tables.json for the data pass.
 - P2 cantina home shell: agent in flight.
+
+## 2026-10-16 LIVE-GAME EXTRACTION (user ran the game)
+- Game login triggered runtime downloads: **4,677 NEW bundles** into the standard cache (junction-visible). Includes env_home_screen_cantina_01_pre (P2 backdrop, already extracted 3.4MB), cantinapatron NPCs, homebase_camera_rig, and hundreds of **ui_*_view/ui_*_tile view prefab bundles**.
+- **Original UI layout values ARE locally serialized**: homebaseui_view has 526/875 transforms with non-zero authored local positions + NGUI widget components (UIPanel/UIWidget/UISprite/UILabel) — REFERENCE-MEASURED approximations can now be replaced with ORIGINAL-EXTRACTED values.
+- Font verdict final: Font objects are EmptyFont stubs everywhere (dynamic rendering) — original TTF does not exist; closest free font substitution is permanent, documented PENDING-ORIGINAL-unobtainable.
+- NGUI layout extraction agent dispatched -> catalog/ngui_layouts.json (screen-definition bundles for P2/P3/P4/P5).
+- Memory probes: bootstrap URL + cgswprod strings + 22 UnityFS headers found in live memory (walk valid); in-memory bundle bodies fragmented — disk cache is the reliable acquisition path (now proven).
