@@ -169,7 +169,7 @@ skill.json → ability.json → effect.json 链，已烘焙为 StreamingAssets/a
   cooldown: 冷却回合数,
   damageMultiplier: 倍率（×施放方对应攻击/特攻）,
   flatDamage: 固定伤害加值,
-  damageType: 1=物理(吃护甲/穿透) / 2=特殊(吃压制),
+  damageType: 1=物理伤害（受护甲/Defense 减免）/ 2=特殊伤害（受抗性/Resist 减免）,
   chance: 触发概率（默认 100）,
   dmgSide/dmgSelect: 目标选择（敌我方/单体/全体/最低HP）,
   healAmount/healSide/healSelect: 治疗量（×特攻）与目标 }
