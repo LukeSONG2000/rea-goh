@@ -78,10 +78,13 @@ namespace SwgohRestored.Battle
         void Start()
         {
             // statics don't survive the play-mode domain reload -- the batch
-            // harness signals us with a marker file instead
-            if (File.Exists(@"F:\PPfavorite\Work\goh\unity\capture.marker"))
+            // harness signals us with a marker file instead.  One-shot: consume
+            // it so a shipped player never self-captures + quits on a stale marker.
+            const string marker = @"F:\PPfavorite\Work\goh\unity\capture.marker";
+            if (File.Exists(marker))
             {
                 CaptureEnabled = true;
+                try { File.Delete(marker); } catch { /* editor harness owns it */ }
                 Application.targetFrameRate = 60;    // deterministic capture pacing
                 QualitySettings.vSyncCount = 0;
             }
@@ -192,8 +195,9 @@ namespace SwgohRestored.Battle
         IEnumerator RunBattle()
         {
             var roster = LoadRoster();
-            var player = BuildTeam(roster, PlayerTeam, 0);
-            var opponent = BuildTeam(roster, OpponentTeam, 1);
+            var abilityMap = LoadAbilities();
+            var player = BuildTeam(roster, PlayerTeam, 0, abilityMap);
+            var opponent = BuildTeam(roster, OpponentTeam, 1, abilityMap);
             _uiUnits = UiData.LoadUnits();
 
             _sim = new BattleSim(player, opponent, Seed);
@@ -319,6 +323,18 @@ namespace SwgohRestored.Battle
                         PlayClip(ev.Target, "Death");
                         yield return new WaitForSeconds(w);
                         break;
+                    case "heal":
+                        var htid = TargetUnitId(ev.Target);
+                        if (htid != null && _replayHp.TryGetValue(htid, out var hhp))
+                        {
+                            double max = _unitsById[htid].MaxHp;
+                            _replayHp[htid] = Math.Min(max, hhp + ev.Amount);
+                            if (_commander != null && htid == _commander.UnitId && max > 0)
+                                _hud.UpdateCommander((float)((double)_replayHp[htid] / max));
+                        }
+                        _hud.ShowDamage(ev.Target, ev.Amount, crit: false, Camera.main, heal: true);
+                        yield return new WaitForSeconds(w);
+                        break;
                 }
             }
             _replayActive = false;
@@ -333,37 +349,33 @@ namespace SwgohRestored.Battle
             var entry = EntryOf(baseId);
             var abilities = BattleHUD.ActiveAbilities(entry);
             string actorName = entry != null ? entry.name : baseId;
-            int chosen = 0;
             bool isPlayer = ev.ActorSide == "player";
             var rig = RigOf(baseId);
             if (rig != null) _lastActorRig = rig;
 
-            void SetLabel()
+            // the sim ALREADY picked the real ability (engine lite tree per
+            // cooldown) -- the label shows the log truth and the skill bar
+            // highlights it; keys/click only re-highlight for inspection
+            string usedName = !string.IsNullOrEmpty(ev.AbilityName) ? ev.AbilityName : "攻击";
+            string usedSkillId = actor?.Abilities
+                ?.FirstOrDefault(a => a.Id == ev.AbilityId)?.SkillId;
+            int hi = abilities.FindIndex(s => s.id == usedSkillId);
+            if (hi < 0 && !string.IsNullOrEmpty(ev.AbilityName) && ev.AbilityName != "攻击")
             {
-                string abName = abilities.Count > 0 ? abilities[Mathf.Clamp(chosen, 0, abilities.Count - 1)].name : "攻击";
-                _hud.SetTurnText($"第{ev.Turn}回合 · {actorName} · {abName}");
+                // ui_units.json stores skill ids; fall back to kind ordering
+                bool isBasic = usedSkillId != null && usedSkillId.StartsWith("basicskill");
+                hi = abilities.FindIndex(s => isBasic
+                    ? (s.tag != null && s.tag.Contains("基本"))
+                    : (s.tag != null && s.tag.Contains("特殊")));
             }
 
-            if (abilities.Count > 0)
-            {
-                if (isPlayer)
-                {
-                    // pause window: Q/W/E or click picks the ability for the turn
-                    _onSkillPick = idx =>
-                    {
-                        if (idx < abilities.Count) { chosen = idx; _hud.HighlightSkill(idx); SetLabel(); }
-                    };
-                    _hud.ShowSkillBar(entry, $"{actorName} ▶ 选择技能", _onSkillPick, showKeys: true);
-                }
-                else
-                {
-                    chosen = 0;   // enemy side auto-picks (basic)
-                    _hud.ShowSkillBar(entry, $"{actorName} · 敌方行动", null, showKeys: false);
-                }
-            }
-            SetLabel();
-            var used = abilities.Count > 0 ? abilities[Mathf.Clamp(chosen, 0, abilities.Count - 1)] : null;
-            Debug.Log($"[BattleDriver] turn {ev.Turn} {ev.ActorSide} {actorName} uses {(used != null ? used.name + " (" + used.id + ")" : "basic attack")}");
+            _hud.ShowSkillBar(entry,
+                isPlayer ? $"{actorName} ▶ {usedName}" : $"{actorName} · {usedName}",
+                idx => _hud.HighlightSkill(idx), showKeys: isPlayer);
+            if (hi >= 0) _hud.HighlightSkill(hi);
+            _hud.SetTurnText($"第{ev.Turn}回合 · {actorName} · {usedName}");
+            Debug.Log($"[BattleDriver] turn {ev.Turn} {ev.ActorSide} {actorName} uses {usedName} " +
+                      $"({ev.AbilityId}{(hi >= 0 ? $", skill bar #{hi}" : ", no bar entry")})");
             PlayClip(baseId, "Attack", "Idle");
             // 自动 off = manual pacing: player turns linger for a key/click
             if (isPlayer && !_autoBattle) wait *= 2.5f;
@@ -421,7 +433,63 @@ namespace SwgohRestored.Battle
             return JsonUtilityArray<RosterEntry>.FromJson(json);
         }
 
-        List<BattleUnit> BuildTeam(List<RosterEntry> roster, string[] ids, int side)
+        // ---- REAL ability chains (STEP 4) --------------------------------
+        // StreamingAssets/abilities.json is baked by tools/build_abilities_data.py
+        // from catalog/gamedata through the decoded chain (skillReference ->
+        // abilityReference -> tier[-1].effectReference -> effect.json -- the
+        // game/abilities.py v1 walk).
+        [Serializable]
+        class AbilityRec
+        {
+            public string id, skill_id, name, kind;
+            public int cooldown;
+            public double damageMultiplier, flatDamage, healAmount, chance;
+            public int damageType, dmgSide, dmgSelect, healSide, healSelect;
+        }
+
+        [Serializable]
+        class UnitAbilityRec { public string def_id; public AbilityRec[] abilities; }
+
+        Dictionary<string, List<UnitAbility>> LoadAbilities()
+        {
+            var map = new Dictionary<string, List<UnitAbility>>();
+            try
+            {
+                var path = Path.Combine(Application.streamingAssetsPath, "abilities.json");
+                foreach (var ua in JsonUtilityArray<UnitAbilityRec>.FromJson(File.ReadAllText(path)))
+                {
+                    var list = new List<UnitAbility>();
+                    foreach (var a in ua.abilities ?? new AbilityRec[0])
+                        list.Add(new UnitAbility
+                        {
+                            Id = a.id,
+                            SkillId = a.skill_id,
+                            Name = a.name,
+                            Kind = a.kind,
+                            Cooldown = a.cooldown,
+                            DamageMultiplier = a.damageMultiplier,
+                            FlatDamage = a.flatDamage,
+                            DamageType = a.damageType,
+                            HealAmount = a.healAmount,
+                            Chance = a.chance,
+                            DmgSide = a.dmgSide,
+                            DmgSelect = a.dmgSelect,
+                            HealSide = a.healSide,
+                            HealSelect = a.healSelect,
+                        });
+                    map[ua.def_id] = list;
+                }
+                Debug.Log($"[BattleDriver] ability chains loaded for {map.Count} units");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[BattleDriver] abilities.json unavailable ({ex.Message}) -- sim falls back to v0 basic");
+            }
+            return map;
+        }
+
+        List<BattleUnit> BuildTeam(List<RosterEntry> roster, string[] ids, int side,
+                                   Dictionary<string, List<UnitAbility>> abilityMap)
         {
             var byDef = roster.ToDictionary(r => r.def_id, r => r);
             var list = new List<BattleUnit>();
@@ -451,6 +519,11 @@ namespace SwgohRestored.Battle
                     CurrentHp = hpStat,
                 };
                 foreach (var kv in statMap) u.Stats[kv.Key] = kv.Value;
+                if (abilityMap != null && abilityMap.TryGetValue(e.def_id, out var ab))
+                {
+                    u.Abilities = ab;
+                    foreach (var a in ab) u.CooldownLeft[a.Id] = 0;
+                }
                 _unitsById[u.UnitId] = u;
                 SpawnRig(e.folder, side, slot, u);
                 list.Add(u);

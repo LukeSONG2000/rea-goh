@@ -19,6 +19,7 @@
 // builds scenes, drops the capture marker, opens RosterScene and enters play
 // mode; the runtime UiCaptureDriver then captures ui_roster.png, chains into
 // DetailScene, captures ui_detail.png and quits.
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -148,6 +149,128 @@ namespace SwgohRestored.EditorTools
             Debug.Log($"[UiAssetImporter] battle HUD widgets imported: {copied.Count}/{BattleWidgets.Count}");
         }
 
+        // P2 home-shell widgets (homebase harvest + shared energy/currency
+        // icons).  Resolved through the atlas index so sprites harvested in
+        // any bundle are found (icon_collection/icon_inbox live in the
+        // allies bundles, chat/icon_time in shared, etc.).  Sprites with a
+        // border get spriteBorder for uGUI sliced Images.
+        static readonly Dictionary<string, int[]> HomeWidgets = new Dictionary<string, int[]>
+        {
+            // top-bar energy bolts + purple crystal + counter pills
+            { "icon_pathofconquest_energy", null },   // counter 1: blue hex bolt
+            { "icon_mod_energy", null },              // counter 2: green bolt
+            { "icon_cantina_energy", null },          // counter 3: red bolt
+            // counter 4: the gold bolt-in-circle variant was not in the
+            // harvest -- blue ship bolt stands in (HomeUI lists it
+            // PENDING-ORIGINAL)
+            { "icon_ship_energy", null },
+            { "icon_premium", null },                 // 紫色晶体
+            { "counter_currency_small", null },
+            { "counter_currency", null },
+            { "player_level", null },
+            { "button_home", null },
+            { "button_settings", null },
+            { "icon_plus", null },
+            // left rail
+            { "icon_collection", null },
+            { "icon_journeyguide", null },
+            { "icon_guild", null },                   // 盟友 handshake
+            { "icon_inbox", null },                   // 邮箱 envelope
+            { "Badge_Notif", null },                  // red 3+ badge
+            { "bg_key", new[] { 14, 14, 14, 14 } },   // key/number chips
+            { "keyboard_binding_bg", null },
+            // right rail event cards
+            { "event_icon", null },
+            { "icon_decks", null },
+            { "btn_circle_idle", null },
+            { "btn_circle_selected", null },
+            { "icon_time", null },
+            // bottom stubs
+            { "button_chat", null },
+            { "bg_pillpanel", new[] { 10, 10, 10, 10 } },
+            { "bg_green", new[] { 10, 10, 10, 10 } }, // 开始 CTA
+        };
+
+        // bundle preference when one sprite name was harvested several times
+        // (crops are identical everywhere; some bundles came out transparent)
+        static readonly string[] HarvestOrder =
+        {
+            "shared_uicontainer", "alliesui_allycodeview", "homebaseui_view",
+            "homebaseui_v2_view", "guildraidmission_shared_header_component",
+            "accountmanagementui_successview", "battleui_coliseum_results_view",
+            "guildactivties_raids_card", "championship_atlas",
+        };
+
+        [MenuItem("SWGoH/UI/5 Import Home Sprites (P2)")]
+        public static void ImportHomeSprites()
+        {
+            Directory.CreateDirectory(WidgetDest);
+            var copied = new List<KeyValuePair<string, int[]>>();
+            foreach (var kv in HomeWidgets)
+            {
+                var src = ResolveHarvest(kv.Key);
+                if (src == null)
+                {
+                    Debug.LogWarning("[UiAssetImporter] home sprite not harvested: " + kv.Key);
+                    continue;
+                }
+                var dst = Path.Combine(WidgetDest, SwgohRestored.UI.UiKit.Sanitize(kv.Key) + ".png");
+                File.Copy(src, dst, true);
+                copied.Add(kv);
+            }
+            AssetDatabase.Refresh();
+            foreach (var kv in copied)
+                Configure(Path.Combine(WidgetDest, SwgohRestored.UI.UiKit.Sanitize(kv.Key) + ".png"), kv.Value);
+            AssetDatabase.SaveAssets();
+            Debug.Log($"[UiAssetImporter] home sprites imported: {copied.Count}/{HomeWidgets.Count}");
+        }
+
+        static string _harvestIndex;
+        static string ResolveHarvest(string sprite)
+        {
+            // preferred bundles first, then anything the index knows
+            foreach (var bundle in HarvestOrder)
+            {
+                var cand = Path.Combine(HarvestRoot, bundle, sprite + ".png");
+                if (File.Exists(cand)) return cand;
+            }
+            try
+            {
+                if (_harvestIndex == null)
+                    _harvestIndex = File.ReadAllText(
+                        Path.Combine(HarvestRoot, "index.json"));
+                var needle = "\"" + sprite + "\": {\"sprite\": \"" + sprite + "\", \"atlas\": \"";
+                int at = 0;
+                while ((at = _harvestIndex.IndexOf(needle, at, StringComparison.Ordinal)) >= 0)
+                {
+                    int a0 = at + needle.Length;
+                    int a1 = _harvestIndex.IndexOf('"', a0);
+                    var bundle = _harvestIndex.Substring(a0, a1 - a0);
+                    var cand = Path.Combine(HarvestRoot, bundle, sprite + ".png");
+                    if (File.Exists(cand) && !IsTransparent(cand)) return cand;
+                    at = a1;
+                }
+            }
+            catch { /* index fallback failed -- treat as not harvested */ }
+            return null;
+        }
+
+        static bool IsTransparent(string png)
+        {
+            try
+            {
+                var tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+                if (!tex.LoadImage(File.ReadAllBytes(png))) return true;
+                var px = tex.GetPixels32();
+                bool any = false;
+                for (int i = 0; i < px.Length; i++)
+                    if (px[i].a > 4) { any = true; break; }
+                UnityEngine.Object.DestroyImmediate(tex);
+                return !any;
+            }
+            catch { return false; }
+        }
+
         [MenuItem("SWGoH/UI/1 Import All UI Assets")]
         public static void ImportAll()
         {
@@ -260,12 +383,17 @@ namespace SwgohRestored.EditorTools
         {
             BuildRosterScene();
             BuildDetailScene();
-            EditorBuildSettings.scenes = new[]
+            var scenes = new List<EditorBuildSettingsScene>
             {
                 new EditorBuildSettingsScene("Assets/Scenes/BattleDemo.unity", true),
                 new EditorBuildSettingsScene("Assets/Scenes/RosterScene.unity", true),
                 new EditorBuildSettingsScene("Assets/Scenes/DetailScene.unity", true),
             };
+            // P2 home shell joins the chain once built (SWGoH/UI/6)
+            if (Directory.Exists("Assets/EnvBackdrop") &&
+                AssetDatabase.LoadAssetAtPath<GameObject>(EnvBackdropAsset) != null)
+                scenes.Add(new EditorBuildSettingsScene("Assets/Scenes/HomeScene.unity", true));
+            EditorBuildSettings.scenes = scenes.ToArray();
             Debug.Log("[UiAssetImporter] scenes built + build settings updated");
         }
 
@@ -376,7 +504,7 @@ namespace SwgohRestored.EditorTools
                 inst.name = folder;
                 inst.SetActive(false);
                 var legacy = inst.GetComponentInChildren<Animation>(true);
-                if (legacy != null) Object.DestroyImmediate(legacy);
+                if (legacy != null) UnityEngine.Object.DestroyImmediate(legacy);
                 if (inst.GetComponent<Animator>() == null)
                     inst.AddComponent<Animator>();
                 var ctrl = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(
@@ -389,6 +517,144 @@ namespace SwgohRestored.EditorTools
 
             EditorSceneManager.SaveScene(scene, "Assets/Scenes/DetailScene.unity");
         }
+
+        // ---------------- P2 home scene ----------------
+
+        // The cantina backdrop is the ORIGINAL env GLB (the true home-screen
+        // environment; env_bar_* are cantina-adjacent environments but
+        // env_home_screen_cantina_01_pre is literally the home screen set).
+        const string EnvSourceGlb =
+            @"F:\PPfavorite\Work\goh\extracted_env\env_home_screen_cantina_01_pre\env_home_screen_cantina_01_pre.glb";
+        const string EnvBackdropAsset = "Assets/EnvBackdrop/env_home_screen_cantina_01_pre.glb";
+
+        // hotspot anchors in cantina-frame space -- (along=units into the room
+        // from the bar, side=+cross(up,front), up) -- SOLVED numerically against
+        // the true camera projection so the P2 labels land on the reference's
+        // screen spots over this env: bar counter = 船运(left) / 商店(right),
+        // corner game tables = 竞技场(left) / 战役(right) upper edge +
+        // 角斗场(left) / 达斯·加·加(right) lower edge
+        static readonly Vector3[] HotspotFrame =
+        {
+            new Vector3(11.20f,  3.41f, 2.94f),// 竞技场 S (left table, upper)
+            new Vector3(11.32f,  1.90f, 1.89f),// 角斗场 D (left table, lower)
+            new Vector3(11.14f, -1.30f, 1.88f),// 达斯·加·加 F (right table, lower)
+            new Vector3(10.96f, -2.77f, 2.78f),// 战役 G (right table, upper)
+            new Vector3(1.2f,   -5.31f, 2.51f),// 商店 R (bar right)
+            new Vector3(1.5f,    5.39f, 2.59f),// 船运货物 E (bar left)
+        };
+
+        [MenuItem("SWGoH/UI/6 Build HomeScene (P2)")]
+        public static void BuildHomeScene()
+        {
+            EnsureEnvBackdrop();
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+
+            // ---- original cantina env as static backdrop ----
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(EnvBackdropAsset);
+            var env = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+            env.name = "CantinaEnv";
+            env.isStatic = true;
+            foreach (var a in env.GetComponentsInChildren<Animation>(true))
+                UnityEngine.Object.DestroyImmediate(a);          // static backdrop, no doors
+            foreach (var a in env.GetComponentsInChildren<Animator>(true))
+                UnityEngine.Object.DestroyImmediate(a);
+
+            // The env is a huge complex (terrace floors span 140+ units) --
+            // frame on the BAR: the barback renderer marks the back wall side,
+            // bar-front = the open floor where the P2 hotspots sit.
+            var bar = ComputeCantinaFrame(env);
+
+            // ---- lighting: 1 directional + ambient ----
+            var key = new GameObject("KeyLight");
+            key.transform.rotation = Quaternion.Euler(42f, -34f, 0);
+            var kl = key.AddComponent<Light>();
+            kl.type = LightType.Directional;
+            kl.intensity = 1.15f;
+            kl.color = new Color(1f, 0.94f, 0.85f);
+            RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+            RenderSettings.ambientLight = new Color(0.36f, 0.37f, 0.44f);
+
+            // ---- camera: wide cantina view like P2 -- pulled back + raised
+            // (FOV 55) so the bar counter sits on the upper third and the
+            // front holo tables + floor fill the lower half (was 13.5/5.6/42:
+            // too tight -- the bar filled the frame and the hotspot labels
+            // bunched at screen center)
+            var cam = MakeCamera("MainCam",
+                bar.center + bar.front * 16.5f + Vector3.up * 6.8f,
+                55f, new Color(0.02f, 0.03f, 0.05f));
+            cam.transform.LookAt(bar.center + bar.front * 3.0f + Vector3.up * 0.9f);
+
+            // ---- home shell host ----
+            var root = new GameObject("HomeRoot");
+            var ui = root.AddComponent<SwgohRestored.UI.HomeUI>();
+            var anchors = new Vector3[HotspotFrame.Length];
+            Vector3 side = Vector3.Cross(Vector3.up, bar.front);   // bar-left +
+            for (int i = 0; i < HotspotFrame.Length; i++)
+            {
+                var f = HotspotFrame[i];
+                anchors[i] = bar.center + bar.front * f.x + side * f.y + Vector3.up * f.z;
+            }
+            ui.HotspotAnchors = anchors;
+
+            Directory.CreateDirectory("Assets/Scenes");
+            EditorSceneManager.SaveScene(scene, "Assets/Scenes/HomeScene.unity");
+
+            var list = new List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
+            if (!list.Exists(s => s.path == "Assets/Scenes/HomeScene.unity"))
+            {
+                list.Add(new EditorBuildSettingsScene("Assets/Scenes/HomeScene.unity", true));
+                EditorBuildSettings.scenes = list.ToArray();
+            }
+            Debug.Log($"[UiAssetImporter] HomeScene built (bar {bar.center} front {bar.front})");
+        }
+
+        // bar counter center + the horizontal direction pointing into the room
+        static (Vector3 center, Vector3 front) ComputeCantinaFrame(GameObject env)
+        {
+            Bounds bar = new Bounds(), back = new Bounds();
+            bool hb = false, hk = false;
+            foreach (var r in env.GetComponentsInChildren<Renderer>(true))
+            {
+                string n = r.name.ToLowerInvariant();
+                if (n.Contains("home_dump_barback")) { back = hb ? back : r.bounds; hk = true; }
+                else if (n.Contains("home_dump_bar_mesh")) { if (!hb) { bar = r.bounds; hb = true; } }
+            }
+            Vector3 center = hb ? bar.center : new Vector3(0f, 1f, 0f);
+            Vector3 front = Vector3.forward;
+            if (hb && hk)
+            {
+                var d = center - back.center; d.y = 0f;
+                if (d.sqrMagnitude > 0.01f) front = d.normalized;
+            }
+            return (center, front);
+        }
+
+
+        static void EnsureEnvBackdrop()
+        {
+            Directory.CreateDirectory("Assets/EnvBackdrop");
+            if (AssetDatabase.LoadAssetAtPath<GameObject>(EnvBackdropAsset) == null)
+            {
+                File.Copy(EnvSourceGlb, EnvBackdropAsset, true);
+                AssetDatabase.ImportAsset(EnvBackdropAsset, ImportAssetOptions.ForceUpdate);
+            }
+        }
+
+        const string HomeMarker = @"F:\PPfavorite\Work\goh\unity\ui_capture_home.marker";
+
+        [MenuItem("SWGoH/UI/7 Capture HomeScene (batch entry)")]
+        public static void CaptureHomeScene() => BatchCaptureHomeScene();
+
+        public static void BatchCaptureHomeScene()
+        {
+            ImportHomeSprites();
+            BuildHomeScene();
+            File.Delete(@"F:\PPfavorite\Work\goh\unity\ui_home.png");
+            File.WriteAllText(HomeMarker, "home-capture");
+            EditorSceneManager.OpenScene("Assets/Scenes/HomeScene.unity");
+            EditorApplication.isPlaying = true;
+        }
+
 
         // ---------------- batch capture ----------------
 

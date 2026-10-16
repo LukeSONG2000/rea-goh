@@ -74,7 +74,12 @@ namespace SwgohRestored.Battle
             _screenCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
             // separate ROOT canvas (nested canvases inherit the root's plane
             // distance, which would defeat the near-plane trick)
-            screenGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            var screenScaler = screenGo.AddComponent<CanvasScaler>();
+            screenScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            // same reference space as every other screen (UiKit) -- without it
+            // the scaler defaults to 800x600 and inflates all layout numbers
+            screenScaler.referenceResolution = new Vector2(1920, 1080);
+            screenScaler.matchWidthOrHeight = 0.5f;
             screenGo.AddComponent<GraphicRaycaster>();
             if (FindObjectOfType<EventSystem>() == null)
             {
@@ -266,15 +271,25 @@ namespace SwgohRestored.Battle
             go.transform.SetParent(_screenCanvas.transform, false);
             _timer = go.AddComponent<Text>();
             _timer.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            _timer.fontSize = 30; _timer.fontStyle = FontStyle.Bold;
+            // ORIGINAL-EXTRACTED (slim JSON battleui_view): BattleTimerLabel at
+            // design (0, 306), box 512x34, pivot top, fontSize 32 -> x1.5 onto
+            // the 1920x1080 canvas = 768x51 at 81px below the top; NGUI renders
+            // the label's own left alignment as optically centered for "4:49"
+            // (P5 reference), so keep UpperCenter here
+            _timer.fontSize = 48; _timer.fontStyle = FontStyle.Bold;
             _timer.alignment = TextAnchor.UpperCenter;
             _timer.color = new Color(1f, 0.36f, 0.28f);
             _timer.text = "4:49";
             var rt = _timer.rectTransform;
             rt.anchorMin = new Vector2(0.5f, 1); rt.anchorMax = new Vector2(0.5f, 1);
             rt.pivot = new Vector2(0.5f, 1);
-            rt.anchoredPosition = new Vector2(0, -10);
-            rt.sizeDelta = new Vector2(140, 40);
+            // box taller than the 48pt line height -- a 51px box truncates the
+            // glyphs against the top edge and renders nothing
+            rt.anchoredPosition = new Vector2(0, -70);
+            rt.sizeDelta = new Vector2(768, 96);
+            var outline = go.AddComponent<Outline>();
+            outline.effectColor = new Color(0f, 0.05f, 0.12f, 0.9f);
+            outline.effectDistance = new Vector2(2, -2);
         }
 
         public void UpdateTimer(float remainingSeconds)
@@ -307,43 +322,49 @@ namespace SwgohRestored.Battle
             var rt = go.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(0, 1); rt.anchorMax = new Vector2(0, 1);
             rt.pivot = new Vector2(0, 1);
-            rt.anchoredPosition = new Vector2(12 + index * 54, -10);
-            rt.sizeDelta = new Vector2(46, 46);
+            // sized for the 1920x1080 reference space (was tuned against the
+            // old default 800x600 scaler -- x1.6 keeps the previous look)
+            rt.anchoredPosition = new Vector2(19 + index * 87, -16);
+            rt.sizeDelta = new Vector2(74, 74);
             var img = go.AddComponent<Image>();
             if (bg != null) img.sprite = bg;
             else img.color = new Color(0.10f, 0.22f, 0.35f, 0.9f);   // PENDING-ORIGINAL fallback
-            if (overlayIcon != null)
-            {
-                if (overlayIcon == "2x")
+                if (overlayIcon != null)
                 {
-                    var t = NewText(go.transform, "2x", "2x", 17, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
-                    Stretch(t.rectTransform);
+                    if (overlayIcon == "2x")
+                    {
+                        var t = NewText(go.transform, "2x", "2x", 27, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
+                        Stretch(t.rectTransform);
+                    }
+                    else
+                    {
+                        var icGo = new GameObject("icon", typeof(RectTransform));
+                        icGo.transform.SetParent(go.transform, false);
+                        var ic = icGo.AddComponent<Image>();
+                        ic.sprite = UiKit.LoadWidget(overlayIcon);
+                        ic.color = Color.white;
+                        Stretch(ic.rectTransform);
+                        ic.rectTransform.offsetMin = new Vector2(14, 14);
+                        ic.rectTransform.offsetMax = new Vector2(-14, -14);
+                        _ctl[id + "_icon"] = ic;
+                    }
                 }
-                else
-                {
-                    var icGo = new GameObject("icon", typeof(RectTransform));
-                    icGo.transform.SetParent(go.transform, false);
-                    var ic = icGo.AddComponent<Image>();
-                    ic.sprite = UiKit.LoadWidget(overlayIcon);
-                    ic.color = Color.white;
-                    Stretch(ic.rectTransform);
-                    ic.rectTransform.offsetMin = new Vector2(9, 9);
-                    ic.rectTransform.offsetMax = new Vector2(-9, -9);
-                    _ctl[id + "_icon"] = ic;
-                }
-            }
-            var btn = go.AddComponent<Button>();
-            btn.onClick.AddListener(() => onClick?.Invoke());
-            _ctl[id] = img;
+                var btn = go.AddComponent<Button>();
+                btn.onClick.AddListener(() => onClick?.Invoke());
+                _ctl[id] = img;
 
-            var cap = NewText(_screenCanvas.transform, "cap_" + id, caption, 12,
-                new Color(0.92f, 0.96f, 1f), TextAnchor.UpperCenter);
-            var crt = cap.rectTransform;
-            crt.anchorMin = new Vector2(0, 1); crt.anchorMax = new Vector2(0, 1);
-            crt.pivot = new Vector2(0.5f, 1);
-            crt.anchoredPosition = new Vector2(12 + index * 54 + 23, -58);
-            crt.sizeDelta = new Vector2(60, 18);
-            _ctlCap[id] = cap;
+                var cap = NewText(_screenCanvas.transform, "cap_" + id, caption, 19,
+                    new Color(0.92f, 0.96f, 1f), TextAnchor.UpperCenter);
+                // outline keeps the captions readable over the bright sky band
+                var capOl = cap.gameObject.AddComponent<Outline>();
+                capOl.effectColor = new Color(0f, 0.05f, 0.12f, 0.9f);
+                capOl.effectDistance = new Vector2(2, -2);
+                var crt = cap.rectTransform;
+                crt.anchorMin = new Vector2(0, 1); crt.anchorMax = new Vector2(0, 1);
+                crt.pivot = new Vector2(0.5f, 1);
+                crt.anchoredPosition = new Vector2(19 + index * 87 + 37, -94);
+                crt.sizeDelta = new Vector2(96, 29);
+                _ctlCap[id] = cap;
         }
 
         /// Visual state of the control buttons (toggled = bright, off = dim).
@@ -371,15 +392,20 @@ namespace SwgohRestored.Battle
             _skillBar.anchorMin = new Vector2(1, 0); _skillBar.anchorMax = new Vector2(1, 0);
             _skillBar.pivot = new Vector2(1, 0);
             _skillBar.anchoredPosition = new Vector2(-10, 12);
-            _skillBar.sizeDelta = new Vector2(240, 104);
+            // ORIGINAL-EXTRACTED button frames (slim JSON battle_ability_button):
+            // basic 100x100 design sliced battle_btn_attack_sliced, ultimate
+            // 128x128 ability_button_ult_bg -> 150 / 192 canvas; the ultimate
+            // bg sprite was not in the widget harvest -- gold frame stands in
+            // (PENDING-ORIGINAL), documented substitution
+            _skillBar.sizeDelta = new Vector2(500, 230);
 
-            _skillTitle = NewText(rootGo.transform, "title", actorLabel, 14,
+            _skillTitle = NewText(rootGo.transform, "title", actorLabel, 21,
                 new Color(0.95f, 0.93f, 0.8f), TextAnchor.UpperRight, FontStyle.Bold);
             var trt = _skillTitle.rectTransform;
             trt.anchorMin = new Vector2(0, 1); trt.anchorMax = new Vector2(1, 1);
             trt.pivot = new Vector2(0.5f, 1);
-            trt.anchoredPosition = new Vector2(0, -16);
-            trt.sizeDelta = new Vector2(0, 20);
+            trt.anchoredPosition = new Vector2(0, -20);
+            trt.sizeDelta = new Vector2(0, 28);
 
             _skillButtons.Clear();
             float x = 0;
@@ -393,8 +419,8 @@ namespace SwgohRestored.Battle
                 brt.anchorMin = new Vector2(0, 0); brt.anchorMax = new Vector2(0, 0);
                 brt.pivot = new Vector2(0, 0);
                 brt.anchoredPosition = new Vector2(x, 0);
-                brt.sizeDelta = new Vector2(72, 72);
-                x += 80;
+                brt.sizeDelta = new Vector2(150, 150);
+                x += 158;
 
                 var frame = btnGo.AddComponent<Image>();
                 bool isBasic = sk.tag != null && sk.tag.Contains("基本");
@@ -408,23 +434,23 @@ namespace SwgohRestored.Battle
                 icon.sprite = UiKit.LoadIcon(sk.icon);
                 icon.preserveAspect = true;
                 Stretch(icon.rectTransform);
-                icon.rectTransform.offsetMin = new Vector2(8, 8);
-                icon.rectTransform.offsetMax = new Vector2(-8, -8);
+                icon.rectTransform.offsetMin = new Vector2(16, 16);
+                icon.rectTransform.offsetMax = new Vector2(-16, -16);
 
                 var keyGo = new GameObject("key", typeof(RectTransform));
                 keyGo.transform.SetParent(btnGo.transform, false);
                 var krt = keyGo.GetComponent<RectTransform>();
                 krt.anchorMin = new Vector2(0.5f, 0); krt.anchorMax = new Vector2(0.5f, 0);
                 krt.pivot = new Vector2(0.5f, 0);
-                krt.anchoredPosition = new Vector2(0, showKeys ? -12 : 3);
-                krt.sizeDelta = new Vector2(24, 17);
+                krt.anchoredPosition = new Vector2(0, showKeys ? -16 : 6);
+                krt.sizeDelta = new Vector2(36, 26);
                 if (showKeys)
                 {
                     var keyBg = keyGo.AddComponent<Image>();
                     var kbSp = UiKit.LoadWidget("bg_key");
                     if (kbSp != null) { keyBg.sprite = kbSp; keyBg.type = Image.Type.Sliced; }
                     else keyBg.color = new Color(0.05f, 0.10f, 0.16f, 0.9f);   // PENDING-ORIGINAL fallback
-                    var kt = NewText(keyGo.transform, "k", keys[key], 11, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
+                    var kt = NewText(keyGo.transform, "k", keys[key], 18, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
                     Stretch(kt.rectTransform);
                 }
 
@@ -477,8 +503,10 @@ namespace SwgohRestored.Battle
             var rt = go.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(1, 1); rt.anchorMax = new Vector2(1, 1);
             rt.pivot = new Vector2(1, 1);
-            rt.anchoredPosition = new Vector2(-8, -8);
-            rt.sizeDelta = new Vector2(240, 62);
+            // ORIGINAL-EXTRACTED: TargetContainer 376x112 design at (436, 291)
+            // -> 564x168 canvas, 24px off the right edge / 20px off the top
+            rt.anchoredPosition = new Vector2(-24, -20);
+            rt.sizeDelta = new Vector2(564, 168);
 
             // portrait + red opponent ring (turn_order_frame_opponent)
             var portGo = new GameObject("portrait", typeof(RectTransform));
@@ -486,8 +514,8 @@ namespace SwgohRestored.Battle
             var prt = portGo.GetComponent<RectTransform>();
             prt.anchorMin = Vector2.one; prt.anchorMax = Vector2.one;
             prt.pivot = Vector2.one;
-            prt.anchoredPosition = new Vector2(-2, -2);
-            prt.sizeDelta = new Vector2(58, 58);
+            prt.anchoredPosition = new Vector2(-3, -3);
+            prt.sizeDelta = new Vector2(87, 87);
             var port = portGo.AddComponent<Image>();
             var circ = UiKit.LoadCircularPortrait(entry != null ? entry.def_id : "", 96);
             if (circ != null) port.sprite = circ;
@@ -499,25 +527,30 @@ namespace SwgohRestored.Battle
             if (ringSp != null) ring.sprite = ringSp;
             else ring.color = new Color(0.85f, 0.15f, 0.12f, 0.9f);   // PENDING-ORIGINAL fallback
             Stretch(ring.rectTransform);
-            ring.rectTransform.offsetMin = new Vector2(-4, -4);
-            ring.rectTransform.offsetMax = new Vector2(4, 4);
+            ring.rectTransform.offsetMin = new Vector2(-6, -6);
+            ring.rectTransform.offsetMax = new Vector2(6, 6);
 
-            // name + green HP bar left of the portrait
-            _cmdrName = NewText(go.transform, "name", unitName, 15,
+            // name + long HP bar left of the portrait.  ORIGINAL-EXTRACTED
+            // TargetContainer 376x112 carries the bar as a child (HealthBar at
+            // design (60,-10)); HealthBar-Long 768x32 belongs to the
+            // TargetContainer-Boss variant and at full 1152px canvas width it
+            // blankets the timer, so the squad HUD keeps the bar inside the
+            // container like the P5 reference (right edge at the portrait)
+            _cmdrName = NewText(go.transform, "name", unitName, 22,
                 new Color(0.93f, 0.97f, 0.85f), TextAnchor.UpperRight, FontStyle.Bold);
             var nrt = _cmdrName.rectTransform;
             nrt.anchorMin = new Vector2(0, 1); nrt.anchorMax = new Vector2(1, 1);
             nrt.pivot = new Vector2(1, 1);
-            nrt.anchoredPosition = new Vector2(-66, 0);
-            nrt.sizeDelta = new Vector2(-10, 22);
+            nrt.anchoredPosition = new Vector2(-99, -6);
+            nrt.sizeDelta = new Vector2(-15, 30);
 
             var barGo = new GameObject("hpbar", typeof(RectTransform));
             barGo.transform.SetParent(go.transform, false);
             var brt = barGo.GetComponent<RectTransform>();
-            brt.anchorMin = new Vector2(0, 1); brt.anchorMax = new Vector2(1, 1);
+            brt.anchorMin = new Vector2(1, 1); brt.anchorMax = new Vector2(1, 1);
             brt.pivot = new Vector2(1, 1);
-            brt.anchoredPosition = new Vector2(-66, -24);
-            brt.sizeDelta = new Vector2(-16, 13);
+            brt.anchoredPosition = new Vector2(-96, -44);
+            brt.sizeDelta = new Vector2(462, 44);
             var barBg = barGo.AddComponent<Image>();
             var bgSp = UiKit.LoadWidget("progressbar_clipped_bg");
             if (bgSp != null) { barBg.sprite = bgSp; barBg.color = Color.white; }
@@ -531,7 +564,7 @@ namespace SwgohRestored.Battle
             _cmdrFill.color = new Color(0.35f, 0.85f, 0.38f);
             var frt = _cmdrFill.rectTransform;
             frt.anchorMin = Vector2.zero; frt.anchorMax = Vector2.one;
-            frt.offsetMin = new Vector2(2, 2); frt.offsetMax = new Vector2(-2, -2);
+            frt.offsetMin = new Vector2(3, 3); frt.offsetMax = new Vector2(-3, -3);
         }
 
         public void UpdateCommander(float frac)
@@ -551,18 +584,18 @@ namespace SwgohRestored.Battle
                 go.transform.SetParent(_screenCanvas.transform, false);
                 _turnLabel = go.AddComponent<Text>();
                 _turnLabel.font = UiKit.FontCjk();
-                _turnLabel.fontSize = 18; _turnLabel.alignment = TextAnchor.UpperLeft;
+                _turnLabel.fontSize = 29; _turnLabel.alignment = TextAnchor.UpperLeft;
                 _turnLabel.color = new Color(0.95f, 0.79f, 0.29f);
                 var rt = _turnLabel.GetComponent<RectTransform>();
                 rt.anchorMin = new Vector2(0, 1); rt.anchorMax = new Vector2(0, 1);
                 rt.pivot = new Vector2(0, 1);
-                rt.anchoredPosition = new Vector2(16, -80);
-                rt.sizeDelta = new Vector2(600, 30);
+                rt.anchoredPosition = new Vector2(26, -140);
+                rt.sizeDelta = new Vector2(960, 48);
             }
             _turnLabel.text = s;
         }
 
-        public void ShowDamage(string unitId, double amount, bool crit, Camera cam)
+        public void ShowDamage(string unitId, double amount, bool crit, Camera cam, bool heal = false)
         {
             if (!_bars.TryGetValue(unitId, out var bar)) return;
             var go = new GameObject("dmg", typeof(RectTransform));
@@ -571,9 +604,10 @@ namespace SwgohRestored.Battle
             t.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             t.fontSize = crit ? 26 : 19;
             t.fontStyle = crit ? FontStyle.Bold : FontStyle.Normal;
-            t.color = crit ? new Color(1f, 0.62f, 0.20f) : Color.white;
+            t.color = heal ? new Color(0.40f, 0.95f, 0.45f)
+                    : crit ? new Color(1f, 0.62f, 0.20f) : Color.white;
             t.alignment = TextAnchor.MiddleCenter;
-            t.text = crit ? $"{(int)amount}!" : $"{(int)amount}";
+            t.text = heal ? $"+{(int)amount}" : crit ? $"{(int)amount}!" : $"{(int)amount}";
             var rt = go.GetComponent<RectTransform>();
             rt.position = bar.Root.position + new Vector3(Random.Range(-4f, 4f), 3f, 0);
             rt.sizeDelta = new Vector2(120, 30);

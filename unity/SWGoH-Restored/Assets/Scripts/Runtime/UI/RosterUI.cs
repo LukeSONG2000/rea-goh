@@ -98,21 +98,28 @@ namespace SwgohRestored.UI
             SetAbs(filterBtn.rectTransform, new Vector2(1, 0.5f), new Vector2(-42, 0), new Vector2(56, 56));
 
             // ---- left tab bar ----
+            // ORIGINAL-EXTRACTED rail metrics (slim JSON Inventory/Accordion):
+            // side_nav_bg drawer 416x832 design (624x1248 canvas -- serialized
+            // wider than the screen; it is a slide-in drawer), header row
+            // highlight 236x76 -> 354x114, submenu row sprite 285x60 -> 90 tall
+            // at a 68-design (102px) pitch.  The visible strip keeps ~360px so
+            // the grid keeps its full original width.
             var tabBar = UiKit.NewRect(_canvas.transform, "TabBar",
-                new Vector2(0, 0), new Vector2(0, 1), new Vector2(8, 40), new Vector2(250, -170));
+                new Vector2(0, 0), new Vector2(0, 1), new Vector2(8, 40), new Vector2(360, -170));
             var navPanel = UiKit.NewImage(tabBar, "NavPanel", UiKit.LoadWidget("RoundedRect_4pt"),
                 new Color(0.07f, 0.11f, 0.17f, 0.92f));
             navPanel.type = Image.Type.Sliced;
             Stretch(navPanel.rectTransform, Vector2.zero, Vector2.one);
             navPanel.rectTransform.SetAsFirstSibling();
 
-            float rowH = (1080f - 170f - 60f) / Tabs.Length;
+            const float RowH = 114f;   // 76 design x1.5 (panel button highlight)
+            const float RowStep = 118f;
             for (int i = 0; i < Tabs.Length; i++)
             {
                 var (key, label, enabled) = Tabs[i];
                 var row = UiKit.NewRect(tabBar, "Tab_" + key,
                     new Vector2(0, 1), new Vector2(1, 1),
-                    new Vector2(6, -rowH * (i + 1) + 3), new Vector2(-6, -rowH * i - 3));
+                    new Vector2(6, -RowStep * (i + 1) + 2), new Vector2(-6, -RowStep * i - 2));
                 var bg = UiKit.NewImage(row, "bg", UiKit.LoadWidget("side_nav_btn_unselected"),
                     enabled ? Color.white : new Color(0.55f, 0.55f, 0.55f, 0.35f));
                 bg.type = Image.Type.Sliced;
@@ -141,11 +148,17 @@ namespace SwgohRestored.UI
             var content = UiKit.NewRect(viewport, "Content",
                 new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, 0), new Vector2(0, 0));
             var grid = content.gameObject.AddComponent<GridLayoutGroup>();
-            grid.cellSize = new Vector2(118, 168);
-            grid.spacing = new Vector2(10, 14);
-            grid.padding = new RectOffset(2, 2, 4, 4);
+            // ORIGINAL-EXTRACTED (catalog/ngui_layouts_slim.json ->
+            // inventoryui_masterinventoryview / Character Inventory/ScrollPanel/
+            // InventoryGrid, UIWrapGridContent): _maxPerLine 7, _itemWidth 196,
+            // _itemHeight 192, _layoutSpacingX/Y 0.  NGUI serializes in the
+            // UIRoot 1280x720 design space; the canvas here uses a 1920x1080
+            // reference resolution -> exact 1.5x mapping.
+            grid.cellSize = new Vector2(294, 288);   // 196x192 x1.5
+            grid.spacing = new Vector2(0, 0);
+            grid.padding = new RectOffset(0, 0, 0, 0);
             grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-            grid.constraintCount = 11;
+            grid.constraintCount = 7;                // _maxPerLine 7
             grid.childAlignment = TextAnchor.UpperLeft;
             content.gameObject.AddComponent<ContentSizeFitter>().verticalFit =
                 ContentSizeFitter.FitMode.PreferredSize;
@@ -206,30 +219,32 @@ namespace SwgohRestored.UI
             bg.rectTransform.SetAsFirstSibling();
 
             // ---- circular portrait with faction ring ----
+            // card internals scaled to the ORIGINAL-EXTRACTED cell
+            // (196x192 design -> 294x288 canvas, x1.65 vs the old 118-cell art)
             var ring = UiKit.NewImage(card.transform, "ring", UiKit.LoadWidget("BIT_Portrait_Frame"),
                 UiKit.AlignColor(u.alignment));
-            SetAbs(ring.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -64), new Vector2(92, 92));
+            SetAbs(ring.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -96), new Vector2(152, 152));
             var glow = UiKit.NewImage(card.transform, "glow", UiKit.LoadWidget("glow_ring"),
                 Alpha(UiKit.AlignColor(u.alignment), 0.45f));
-            SetAbs(glow.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -64), new Vector2(104, 104));
+            SetAbs(glow.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -96), new Vector2(172, 172));
             glow.rectTransform.SetAsFirstSibling();
 
             var portrait = UiKit.LoadCircularPortrait(u.def_id, 256);
             var portImg = UiKit.NewImage(card.transform, "portrait", portrait,
                 portrait ? Color.white : new Color(0.25f, 0.3f, 0.38f, 1f));
             portImg.preserveAspect = true;
-            SetAbs(portImg.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -62), new Vector2(80, 80));
+            SetAbs(portImg.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -94), new Vector2(128, 128));
 
             // level diamond (player_level sprite + number)
             var lvl = UiKit.NewImage(card.transform, "level", UiKit.LoadWidget("player_level"), Color.white);
-            SetAbs(lvl.rectTransform, new Vector2(0.5f, 1f), new Vector2(-38, -104), new Vector2(30, 30));
-            UiKit.NewText(lvl.transform, "n", u.level.ToString(), 15, Color.white, TextAnchor.MiddleCenter,
+            SetAbs(lvl.rectTransform, new Vector2(0.5f, 1f), new Vector2(-96, -206), new Vector2(44, 44));
+            UiKit.NewText(lvl.transform, "n", u.level.ToString(), 22, Color.white, TextAnchor.MiddleCenter,
                 FontStyle.Bold);
 
             // ---- star row ----
             var starRow = UiKit.NewRect(card.transform, "stars",
                 new Vector2(0.5f, 1f), new Vector2(0.5f, 1f),
-                new Vector2(-55, -126), new Vector2(55, -112));
+                new Vector2(-62, -217), new Vector2(94, -194));
             var gold = UiKit.LoadWidget("rarity_star");
             var gray = UiKit.LoadWidget("rarity_star_empty");
             for (int s = 0; s < 7; s++)
@@ -243,15 +258,15 @@ namespace SwgohRestored.UI
             }
 
             // ---- name + alignment chip ----
-            var nameTxt = UiKit.NewText(card.transform, "name", u.name, 14, new Color(0.95f, 0.97f, 1f),
+            var nameTxt = UiKit.NewText(card.transform, "name", u.name, 22, new Color(0.95f, 0.97f, 1f),
                 TextAnchor.UpperCenter, new Vector2(0, 0), new Vector2(1, 1),
-                new Vector2(2, 20), new Vector2(-2, 42));
+                new Vector2(3, 32), new Vector2(-3, 68));
             nameTxt.horizontalOverflow = HorizontalWrapMode.Wrap;
             nameTxt.verticalOverflow = VerticalWrapMode.Overflow;
             string alignLabel = u.alignment == "dark" ? "黑暗" : u.alignment == "light" ? "光明" : "中立";
-            UiKit.NewText(card.transform, "align", alignLabel, 12, Alpha(UiKit.AlignColor(u.alignment), 0.9f),
+            UiKit.NewText(card.transform, "align", alignLabel, 19, Alpha(UiKit.AlignColor(u.alignment), 0.9f),
                 TextAnchor.UpperCenter, new Vector2(0, 0), new Vector2(1, 1),
-                new Vector2(2, 2), new Vector2(-2, 18));
+                new Vector2(3, 3), new Vector2(-3, 29));
 
             var btn = card.AddComponent<Button>();
             btn.targetGraphic = bg;

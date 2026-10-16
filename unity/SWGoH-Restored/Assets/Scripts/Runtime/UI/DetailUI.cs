@@ -62,10 +62,14 @@ namespace SwgohRestored.UI
                 new Vector2(120, -66), new Vector2(-320, -6), FontStyle.Bold);
 
             var chipRow = UiKit.NewRect(_canvas.transform, "TagChips",
-                new Vector2(0, 1), new Vector2(1, 1), new Vector2(120, -110), new Vector2(-320, -74));
+                new Vector2(0, 1), new Vector2(1, 1), new Vector2(120, -108), new Vector2(-320, -72));
             float x = 0;
             foreach (var tag in _unit.tags)
             {
+                // ORIGINAL-EXTRACTED: unitdetailsui_characterview /
+                // ui.unitdetailsui_categorytagscomponent Table rows step
+                // 41.98 design units (63px canvas) and sit 28 design under the
+                // headline; chip height follows the popup row height 28 -> 42px
                 float w = tag.Length * 20f + 30f;
                 var chip = UiKit.NewImage(chipRow, "chip_" + tag, UiKit.LoadWidget("bg_pillpanel"),
                     new Color(0.85f, 0.95f, 1.15f, 0.5f));
@@ -73,9 +77,9 @@ namespace SwgohRestored.UI
                 rt.anchorMin = new Vector2(0, 0.5f); rt.anchorMax = new Vector2(0, 0.5f);
                 rt.pivot = new Vector2(0, 0.5f);
                 rt.anchoredPosition = new Vector2(x, 0);
-                rt.sizeDelta = new Vector2(w, 34);
-                UiKit.NewText(chip.transform, "t", tag, 19, new Color(0.88f, 0.96f, 1.1f), TextAnchor.MiddleCenter);
-                x += w + 10;
+                rt.sizeDelta = new Vector2(w, 42);
+                UiKit.NewText(chip.transform, "t", tag, 23, new Color(0.88f, 0.96f, 1.1f), TextAnchor.MiddleCenter);
+                x += w + 21f;   // 41.98 design pitch x1.5 minus ~42 chip body
             }
 
             // ---- currency chip top-right (unit power; account credits are
@@ -91,6 +95,12 @@ namespace SwgohRestored.UI
                 new Vector2(0, 0), new Vector2(1, 1), new Vector2(-120, 0), new Vector2(-40, 0));
 
             // ---- left skill list ----
+            // ORIGINAL-EXTRACTED (slim JSON unitdetailsui_characterinfopanelsview):
+            // character_ability_list_item / Standard Ability Button 280x72
+            // design -> 420x108 canvas, sprite detail_ability_button (ultimate
+            // rows: detail_ultimate_button); icon Image at x -104 -> -156;
+            // Name label 200x24 fontSize 24 at (+32,+12) -> font 36 at (+48,+18);
+            // Level label fontSize 20 at (+32,-12) -> font 30 at (+48,-18)
             var skillList = UiKit.NewRect(_canvas.transform, "SkillList",
                 new Vector2(0, 0), new Vector2(0, 1), new Vector2(60, 90), new Vector2(430, -140));
             float y = 0;
@@ -98,21 +108,21 @@ namespace SwgohRestored.UI
             {
                 var row = UiKit.NewRect(skillList, "skill_" + sk.id,
                     new Vector2(0, 1), new Vector2(1, 1),
-                    new Vector2(0, -y - 70), new Vector2(0, -y));
+                    new Vector2(0, -y - 108), new Vector2(0, -y));
                 var frame = UiKit.NewImage(row, "frame", UiKit.LoadWidget("detail_ability_button"), Color.white);
-                UiKit.SetAbs(frame.rectTransform, new Vector2(0, 1), new Vector2(30, -35), new Vector2(60, 60));
+                UiKit.SetAbs(frame.rectTransform, new Vector2(0, 0.5f), new Vector2(54, 0), new Vector2(96, 96));
                 var icon = UiKit.LoadIcon(sk.icon);
                 var iconImg = UiKit.NewImage(frame.transform, "icon", icon, Color.white);
                 iconImg.preserveAspect = true;
                 UiKit.Stretch(iconImg.rectTransform, Vector2.zero, Vector2.one);
-                iconImg.rectTransform.offsetMin = new Vector2(5, 5);
-                iconImg.rectTransform.offsetMax = new Vector2(-5, -5);
-                // explicit from-top bands: name in the top half, sub below it
-                UiKit.NewText(row, "name", sk.name, 23, new Color(0.93f, 0.96f, 1f), TextAnchor.LowerLeft,
-                    new Vector2(0, 1), new Vector2(1, 1), new Vector2(72, -34), new Vector2(-4, -2));
-                UiKit.NewText(row, "sub", "满级" + sk.tag, 17, new Color(0.62f, 0.66f, 0.72f), TextAnchor.UpperLeft,
-                    new Vector2(0, 1), new Vector2(1, 1), new Vector2(72, -66), new Vector2(-4, -36));
-                y += 72;
+                iconImg.rectTransform.offsetMin = new Vector2(8, 8);
+                iconImg.rectTransform.offsetMax = new Vector2(-8, -8);
+                // explicit from-top bands: name in the top half, level/sub below
+                UiKit.NewText(row, "name", sk.name, 36, new Color(0.93f, 0.96f, 1f), TextAnchor.LowerLeft,
+                    new Vector2(0, 1), new Vector2(1, 1), new Vector2(114, -48), new Vector2(-4, -2));
+                UiKit.NewText(row, "sub", "满级" + sk.tag, 30, new Color(0.62f, 0.66f, 0.72f), TextAnchor.UpperLeft,
+                    new Vector2(0, 1), new Vector2(1, 1), new Vector2(114, -100), new Vector2(-4, -54));
+                y += 108;
             }
 
             // ---- relic board top-right (original panel + badge tiles;

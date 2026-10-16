@@ -292,11 +292,16 @@ namespace SwgohRestored.UI
 
         void Start()
         {
-            if (SceneId == "roster" && File.Exists(@"F:\PPfavorite\Work\goh\unity\ui_capture.marker"))
+            // one-shot markers: consume them so a shipped player never
+            // self-captures on stale files
+            bool roster = File.Exists(@"F:\PPfavorite\Work\goh\unity\ui_capture.marker");
+            bool detail = File.Exists(@"F:\PPfavorite\Work\goh\unity\ui_capture_detail.marker");
+            if (roster) { try { File.Delete(@"F:\PPfavorite\Work\goh\unity\ui_capture.marker"); } catch { } }
+            if (detail) { try { File.Delete(@"F:\PPfavorite\Work\goh\unity\ui_capture_detail.marker"); } catch { } }
+            if (SceneId == "roster" && roster)
                 _active = true;
             else if (SceneId == "detail")
-                _active = File.Exists(@"F:\PPfavorite\Work\goh\unity\ui_capture.marker")
-                          || File.Exists(@"F:\PPfavorite\Work\goh\unity\ui_capture_detail.marker");
+                _active = roster || detail;
         }
 
         bool _active;

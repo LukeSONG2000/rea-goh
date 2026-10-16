@@ -72,9 +72,35 @@ namespace SwgohRestored.Battle
         public double SpeedFillOverflow;   // +0x20C
         public bool IsAttackRole = true;   // basic = physical (vs ability)
 
+        // REAL ability chain (StreamingAssets/abilities.json, baked from
+        // catalog/gamedata by tools/build_abilities_data.py -- the same
+        // skillReference -> abilityReference -> tier[-1].effectReference
+        // -> effect.json walk as game/abilities.py v1)
+        public List<UnitAbility> Abilities = new List<UnitAbility>();
+        public readonly Dictionary<string, int> CooldownLeft = new Dictionary<string, int>();
+
         public bool Alive => !HasFled && CurrentHp > 0;
         public double GetStat(int s) => Stats.TryGetValue(s, out var v) ? v : 0.0;
         public double Speed => GetStat(Stat.Speed) < 0 ? 0 : GetStat(Stat.Speed);
+    }
+
+    /// Compact executable ability (the v1 sim slice of an ability row:
+    /// DAMAGE effects sum mult+flat, RECOVER effects sum mult+flat; per-effect
+    /// targeting kept for damage/heal separately).
+    public class UnitAbility
+    {
+        public string Id;
+        public string SkillId;
+        public string Name;
+        public string Kind;              // "basic" | "special"
+        public int Cooldown;
+        public double DamageMultiplier;
+        public double FlatDamage;
+        public int DamageType;           // 1 UNMITIGABLE, 2 ATTACK_DAMAGE, 3 ABILITY_POWER
+        public double HealAmount;
+        public double Chance;            // percent
+        public int DmgSide, DmgSelect;   // 3 enemy / 2 ally, 2 selected / 1 all / 4 self
+        public int HealSide, HealSelect;
     }
 
     /// One damage effect DO (mult +0x2C, flat +0x24, variance +0x30, source
@@ -121,6 +147,9 @@ namespace SwgohRestored.Battle
         public string Target;
         public double Amount;
         public string Note;
+        public string AbilityName;   // REAL ability used this turn ("" = v0 basic)
+        public string AbilityId;
+        public double Heal;
     }
 
     /// BattleUnitsController turn loop + DamageModule pipeline (headless port).
@@ -309,27 +338,149 @@ namespace SwgohRestored.Battle
             return true;
         }
 
-        /// Deterministic AI: lowest-HP living enemy, basic attack through the
-        /// full decoded pipeline.  (Real AbilityDecisionTree is data-driven --
-        /// the 17-node default tree is mapped in BATTLE_SIM_INVENTORY.md.)
+        /// Turn loop with the REAL ability pipeline (engine.py v1 lite tree):
+        /// per-owner cooldown tick at turn start -> team-heal special when an
+        /// ally is hurt -> damage special -> basic; effects run the decoded
+        /// damage pipeline (chance roll -> caster stat x mult + flat ->
+        /// ProcessSourceDamage -> crit -> mitigation).  Units without a baked
+        /// chain keep the v0 flat-ATK basic.
         public BattleUnit RunTurn(BattleUnit actor)
         {
             BeginTurn(actor);
             Round++;
             var foes = _units.Where(u => u.Side != actor.Side && u.Alive)
                              .OrderBy(u => u.CurrentHp).ToList();
-            if (foes.Count == 0) return actor;
+
+            // per-owner cooldown tick (ProcessCooldowns stand-in)
+            foreach (var a in actor.Abilities)
+                if (actor.CooldownLeft.TryGetValue(a.Id, out var cd) && cd > 0)
+                    actor.CooldownLeft[a.Id] = cd - 1;
+
+            var used = PickAbility(actor);
+            if (used != null)
+                ExecuteAbility(actor, used, foes);
+            else
+                LegacyBasic(actor, foes);
+
+            Log.Add(new BattleEvent
+            {
+                Turn = Round,
+                Actor = actor.BaseId,
+                ActorSide = actor.Side == 0 ? "player" : "opponent",
+                Kind = "turn",
+                Target = foes.Count > 0 ? foes[0].BaseId : null,
+                AbilityName = used?.Name ?? "",
+                AbilityId = used?.Id ?? "",
+            });
+            return actor;
+        }
+
+        /// engine.py _act decision tree lite: heal special when an ally is
+        /// below the heal urge -> damage special -> basic; first READY entry
+        /// per cooldown.
+        UnitAbility PickAbility(BattleUnit actor)
+        {
+            if (actor.Abilities.Count == 0) return null;
+            const double healUrge = 0.55;
+            bool hurt = _units.Any(u => u.Side == actor.Side && u.Alive
+                                        && u.CurrentHp < healUrge * u.MaxHp);
+            if (hurt)
+            {
+                var heal = Ready(actor, "special", a => a.HealAmount > 0);
+                if (heal != null) return heal;
+            }
+            var dmg = Ready(actor, "special", a => a.DamageMultiplier > 0 || a.FlatDamage > 0);
+            if (dmg != null) return dmg;
+            return Ready(actor, "basic", null);
+        }
+
+        static UnitAbility Ready(BattleUnit actor, string kind, Func<UnitAbility, bool> pred)
+        {
+            foreach (var a in actor.Abilities)
+            {
+                if (a.Kind != kind) continue;
+                if (actor.CooldownLeft.TryGetValue(a.Id, out var cd) && cd > 0) continue;
+                if (pred != null && !pred(a)) continue;
+                return a;
+            }
+            return null;
+        }
+
+        void ExecuteAbility(BattleUnit actor, UnitAbility used, List<BattleUnit> foes)
+        {
+            double healDone = 0.0;
+            // percent chance roll (ConditionStatus.RerollChance: nextInt(100))
+            if (used.Chance < 100.0 && _ctx.BattleRandom.NextInt(100) >= used.Chance)
+                return;   // fizzled -- turn event still logs the attempt
+
+            // RECOVER branch: (mult+flat) * caster ABILITY_POWER; negative
+            // heals (drain rows) are not executed -- logged as damage-only
+            if (used.HealAmount > 0)
+            {
+                double power = actor.GetStat(7);
+                double heal = used.HealAmount * power;
+                var pool = _units.Where(u => u.Side == actor.Side && u.Alive).ToList();
+                BattleUnit tgt = used.HealSelect == 4
+                    ? actor
+                    : pool.OrderBy(u => u.CurrentHp / Math.Max(u.MaxHp, 1)).FirstOrDefault();
+                _healTarget = tgt;
+                if (tgt != null)
+                {
+                    tgt.CurrentHp = Math.Min(tgt.MaxHp, tgt.CurrentHp + heal);
+                    healDone = heal;
+                }
+            }
+
+            // DAMAGE branch: routed by damageType like ApplyToTargets --
+            // ATTACK_DAMAGE(2) physical/armor, ABILITY_POWER(3)/UNMITIGABLE(1)
+            // suppression stats; targets: SELECT_ALL(1) = every living foe,
+            // else the lowest-HP primary (Damage node target)
+            if (used.DamageMultiplier > 0 || used.FlatDamage > 0)
+            {
+                bool isAttack = used.DamageType == 2;
+                double stat = actor.GetStat(isAttack ? 6 : 7);
+                var targets = used.DmgSelect == 1
+                    ? foes
+                    : (foes.Count > 0 ? new List<BattleUnit> { foes[0] } : new List<BattleUnit>());
+                foreach (var t in targets)
+                    ApplyDamage(actor, t, 1.0, new DamageEffect
+                    {
+                        Mult = used.DamageMultiplier,
+                        Flat = used.FlatDamage,
+                        BaseStatValue = stat,
+                        SourceMult = 1.0,
+                        SourceFlat = 0.0,
+                        IsAttack = isAttack,
+                    });
+            }
+
+            if (used.Cooldown > 0)
+                actor.CooldownLeft[used.Id] = used.Cooldown;
+            if (healDone > 0)
+                Log.Add(new BattleEvent
+                {
+                    Turn = Round,
+                    Actor = actor.BaseId,
+                    ActorSide = actor.Side == 0 ? "player" : "opponent",
+                    Kind = "heal",
+                    Target = _healTarget != null ? _healTarget.BaseId : null,
+                    Amount = healDone,
+                    AbilityName = used.Name,
+                    AbilityId = used.Id,
+                });
+        }
+
+        BattleUnit _healTarget;
+
+        /// v0 flat-ATK basic for units without a baked ability chain.
+        void LegacyBasic(BattleUnit actor, List<BattleUnit> foes)
+        {
+            if (foes.Count == 0) return;
             var target = foes[0];
             double power = actor.GetStat(actor.IsAttackRole ? 6 : 7);   // ATK / ABILITY_POWER
-            // v0 basic attack: damage = ATK via the casterPower factor; the
-            // ProcessSourceDamage factor is neutralized (mult 0 + flat 1)
-            // until ability effect-DOs are wired in
             var eff = new DamageEffect { Mult = 1.0, Variance = 0.0, IsAttack = actor.IsAttackRole,
                                          SourceMult = 0.0, SourceFlat = 1.0 };
             ApplyDamage(actor, target, power, eff);
-            Log.Add(new BattleEvent { Turn = Round, Actor = actor.BaseId, ActorSide = actor.Side == 0 ? "player" : "opponent",
-                                      Kind = "turn", Target = target.BaseId });
-            return actor;
         }
     }
 }
