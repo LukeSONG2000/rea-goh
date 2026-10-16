@@ -28,30 +28,31 @@ namespace SwgohRestored.Battle
         public const int Mastery = 61;
     }
 
-    // GameConstants values from the ctor's immediate moves; the Min/PerLevel/
-    // Base* fields are data-driven (hydrated from gamedata at runtime) and are
-    // modelled here as settable properties fed from the roster JSON.
+    // GameConstants values -- LIVE RUNTIME TRUTH read from the client process
+    // (catalog/game_constants_runtime.json, klass-anchored instance
+    // 0x2DCD1A5F000, 2026-10-16).  Ctor hardcodes are superseded by the
+    // server-hydrated config values below.
     public static class GameConstants
     {
-        public static float UnitSpeedFillMax = 100.0f;      // +0x24B4
-        public static float CritRatingMod = 100.0f;         // +0x2308 / +0x22F0
-        public static float CritChanceLevelDeltaMax = 1.0f; // +0x22F8 / +0x22E0
-        public static float DamageModLevelDeltaMax = 1.0f;  // +0x2340 / era +0x2334
-        public static float ArmorRatingMod = 100.0f;        // +0x22F4
-        public static float SuppressionRatingMod = 100.0f;  // +0x24E0
-        public static int MitigationLevelOffset = 0;        // +0x1C34 (data-driven)
+        public static float UnitSpeedFillMax = 1000.0f;     // +0x24B4 (ctor 100.0f)
+        public static float CritRatingMod = 2400.0f;        // +0x2308 / +0x22F0
+        public static float CritChanceLevelDeltaMax = 0.15f;// +0x22F8 / +0x22E0
+        public static float DamageModLevelDeltaMax = 0.0f;  // +0x2340 (config-set zero)
+        public static float ArmorRatingMod = 7.5f;          // +0x22F4
+        public static float SuppressionRatingMod = 7.5f;    // +0x24E0
+        public static int MitigationLevelOffset = 60;       // +0x1C34
 
-        // data-driven placeholders -- hydrate from gamedata when plumbed
-        public static float CritChanceLevelDeltaPerLevel = 0.0f; // +0x2300
-        public static float CritChanceLevelDeltaMin = 0.0f;      // +0x22FC
-        public static float BaseAttackCritChance = 0.0f;         // +0x2314
-        public static float BaseAbilityCritChance = 0.0f;        // +0x230C
-        public static float BaseCritDamage = 0.0f;               // +0x231C
-        public static float DamageModPerLevelDelta = 0.0f;       // +0x2348
-        public static float DamageModLevelDeltaMin = 0.0f;       // +0x2344
-        public static float DamageModPerEraLevelDelta = 0.0f;    // +0x233C
-        public static float DamageModEraLevelDeltaMin = 0.0f;    // +0x2338
-        public static float DamageModEraLevelDeltaMax = 1.0f;    // +0x2334
+        // data-driven -- live-hydrated from the server config at login
+        public static float CritChanceLevelDeltaPerLevel = 0.01f; // +0x2300
+        public static float CritChanceLevelDeltaMin = 0.0f;       // +0x22FC
+        public static float BaseAttackCritChance = 0.1f;          // +0x2314
+        public static float BaseAbilityCritChance = 0.1f;         // +0x230C
+        public static float BaseCritDamage = 1.5f;                // +0x231C
+        public static float DamageModPerLevelDelta = 0.0f;        // +0x2348
+        public static float DamageModLevelDeltaMin = 0.0f;        // +0x2344
+        public static float DamageModPerEraLevelDelta = 0.075f;   // +0x233C
+        public static float DamageModEraLevelDeltaMin = -0.75f;   // +0x2338
+        public static float DamageModEraLevelDeltaMax = 0.75f;    // +0x2334
     }
 
     /// Runtime slice of BattleUnitController (+0xC0 hp, +0x208 speedFill,

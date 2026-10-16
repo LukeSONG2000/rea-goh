@@ -14,32 +14,28 @@ skeletons -- they need the persistent-effect pipeline, not the turn core.
 from java_random import JavaRandom
 
 # ---------------------------------------------------------------- constants
-# GameConstants instance fields, values extracted from the ctor's machine
-# code (mov dword ptr [reg+disp], imm32 -- see tools note in BATTLE_SIM_INVENTORY).
-# The ctor only hardcodes these; the Min/PerLevel/Base* fields are data-driven
-# (hydrated from gamedata at runtime, absent from the binary) -> sourced from
-# the gamedata mirror, defaults here are placeholders.
-UNIT_SPEED_FILL_MAX = 100.0     # GameConstants+0x24B4 (ctor imm 0x42C80000)
-CRIT_RATING_MOD = 100.0         # +0x2308 attack / +0x22F0 ability (ctor imm)
-CRIT_CHANCE_LEVEL_DELTA_MAX = 1.0   # +0x22F8 attack / +0x22E0 ability (ctor imm)
-DAMAGE_MOD_LEVEL_DELTA_MAX = 1.0    # +0x2340 / era +0x2334 (ctor imm)
-ARMOR_RATING_MOD = 100.0        # +0x22F4 UnitArmorRatingMod (ctor imm)
-SUPPRESSION_RATING_MOD = 100.0  # +0x24E0 UnitSuppressionRatingMod (ctor imm)
-MITIGATION_LEVEL_OFFSET = 0     # +0x1C34 ShipMitigationAttackerLevelOffset
-                                # (data-driven; the same offset serves units --
-                                # disasm selects armor/suppression by damageType)
+# GameConstants values -- LIVE RUNTIME TRUTH (catalog/game_constants_runtime.json,
+# klass-anchored instance 0x2DCD1A5F000, pid 52516, 2026-10-16).  Ctor hardcodes
+# (comments below) are superseded by server-hydrated values.
+UNIT_SPEED_FILL_MAX = 1000.0    # GameConstants+0x24B4 (ctor imm 100.0)
+CRIT_RATING_MOD = 2400.0        # +0x2308 attack / +0x22F0 ability (ctor imm 100.0)
+CRIT_CHANCE_LEVEL_DELTA_MAX = 0.15  # +0x22F8 attack / +0x22E0 ability (ctor imm 1.0)
+DAMAGE_MOD_LEVEL_DELTA_MAX = 0.0    # +0x2340 (ctor imm 1.0; config-set zero)
+ARMOR_RATING_MOD = 7.5          # +0x22F4 UnitArmorRatingMod (ctor imm 100.0)
+SUPPRESSION_RATING_MOD = 7.5    # +0x24E0 UnitSuppressionRatingMod (ctor imm 100.0)
+MITIGATION_LEVEL_OFFSET = 60    # +0x1C34 ShipMitigationAttackerLevelOffset
 
-# Data-driven GameConstants fields (not in the binary; from gamedata mirror):
-CRIT_CHANCE_LEVEL_DELTA_PER_LEVEL = 0.0    # +0x2300 / ability +0x22E8
-CRIT_CHANCE_LEVEL_DELTA_MIN = 0.0          # +0x22FC / ability +0x22E4
-BASE_ATTACK_CRIT_CHANCE = 0.0              # +0x2314
-BASE_ABILITY_CRIT_CHANCE = 0.0             # +0x230C
-BASE_CRIT_DAMAGE = 0.0                     # +0x231C
-DAMAGE_MOD_PER_LEVEL_DELTA = 0.0           # +0x2348
-DAMAGE_MOD_LEVEL_DELTA_MIN = 0.0           # +0x2344
-DAMAGE_MOD_PER_ERA_LEVEL_DELTA = 0.0       # +0x233C
-DAMAGE_MOD_ERA_LEVEL_DELTA_MIN = 0.0       # +0x2338
-DAMAGE_MOD_ERA_LEVEL_DELTA_MAX = 1.0       # +0x2334 (ctor imm, era twin of +0x2340)
+# Data-driven GameConstants fields -- live-hydrated values:
+CRIT_CHANCE_LEVEL_DELTA_PER_LEVEL = 0.01   # +0x2300 / ability +0x22E8
+CRIT_CHANCE_LEVEL_DELTA_MIN = 0.0          # +0x22FC / ability +0x22E4 (config-set zero)
+BASE_ATTACK_CRIT_CHANCE = 0.1              # +0x2314
+BASE_ABILITY_CRIT_CHANCE = 0.1             # +0x230C
+BASE_CRIT_DAMAGE = 1.5                     # +0x231C
+DAMAGE_MOD_PER_LEVEL_DELTA = 0.0           # +0x2348 (config-set zero)
+DAMAGE_MOD_LEVEL_DELTA_MIN = 0.0           # +0x2344 (config-set zero)
+DAMAGE_MOD_PER_ERA_LEVEL_DELTA = 0.075     # +0x233C (+7.5% damage per era level)
+DAMAGE_MOD_ERA_LEVEL_DELTA_MIN = -0.75     # +0x2338
+DAMAGE_MOD_ERA_LEVEL_DELTA_MAX = 0.75      # +0x2334 (ctor imm 1.0)
 
 # UnitStatEnum values used by the damage pipeline (dump/cs/il2cpp.cs:602463)
 STAT_SPEED = 5
