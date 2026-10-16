@@ -30,3 +30,7 @@
 - **内存读取**：GameConstants = ✅ 首选路径（扫描器已就绪，游戏登录一次自动抓真值，含 30+ 附加常数族）；UI 对象图 = 可行但高成本，仅当截图测量不够时再做
 - **社区提供**：gamedata 滞后 ✅、字体 ✅；GameConstants/UI prefab ✗（无公开来源——这就是自研逆向的价值）
 - **总纲**：反编译文件里没有 ≠ 拿不到——分层处理：磁盘有的提取、内存有的读取、社区有的借用、真没有的测量或自建并申报
+
+## 严格标准修订（2026-10-16：反编译全拿 + 游戏抓取，禁近似品）
+新证据（il2cpp.cs 字面量/反编译）：bootstrap CDN `swgoh-bootstrap.akamaized.net`、配置水合 `ProcessConfigEntry` 0x183D2CCF0、运行时下载流程 `DownloadAssets` 0x180F80F90 等。
+→ "反编译拿不到"的部分改判：UI prefab/字体/音频/config **可从原版 CDN 直接抓取**（反编译还原 URL 构造即可，agent 攻坚中）。exe 本体=Unity 标准启动 stub，反编译无价值；有价值的是 GameAssembly 内的**启动流程链**（配置水合+CDN 构造+下载逻辑）——已定点反编译取证。原版字体若为 EA 授权字体仍需版权评估。
