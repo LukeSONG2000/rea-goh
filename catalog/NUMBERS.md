@@ -174,9 +174,9 @@ skill.json → ability.json → effect.json 链，已烘焙为 StreamingAssets/a
   dmgSide/dmgSelect: 目标选择（敌我方/单体/全体/最低HP）,
   healAmount/healSide/healSelect: 治疗量（×特攻）与目标 }
 ```
-实例（LORDVADER 达斯·维达大人）：
-- 复仇风暴（基本）：×3.75 攻击，特殊类型伤害，无冷却
-- 黑暗先驱（特殊，CD3）：×3.4
+实例（LORDVADER 达斯·维达大人，数据实锤）：
+- 复仇风暴（基本）：物理 ×1.25 × 3 段 = 3.75 总倍率（±5% 方差），无冷却
+- 黑暗先驱（特殊，CD3）：×3.4 物理
 - 不羁情感（特殊，CD5）：治疗 2.0×特攻
 → 代入 §7：final = (该技能倍率 × 攻击/特攻) × 减伤余量 × (暴击?×暴伤) ± 方差。
 全 2107 单位的参数表见 `unity/SWGoH-Restored/Assets/StreamingAssets/abilities.json`。
