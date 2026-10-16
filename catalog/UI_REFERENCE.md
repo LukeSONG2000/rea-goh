@@ -20,3 +20,10 @@
 - 泛化架构：构建**数据驱动的 NGUI→uGUI 渲染器**——通用组件实例化器按序列化布局自动生成任何屏幕（_widget=UISprite→Image+atlas 切片, UILabel→Text+loc 表, UIButton→交互），而非逐屏手工搭建
 - 屏幕清单：从 bundle 名+内容提示枚举全部屏幕（数百个 ui_*_view），按"已复现核心页→同族扩展→其余"分级推进
 - 交互逻辑：逐屏从 il2cpp dump 对应 View 类反编译接线（类名与 bundle 名一致，可直接定位）
+
+## 逐角色 PDF 格式规范（2026-10-16 用户定版：LoL Wiki 冠军页模板）
+每个角色 = LoL Wiki champion 页结构：
+1. **Infobox**：标题（中文名+头衔）+ 标签/定位/阵营环 + **基础数值表带区间**（基础 1 级 → 满配 85/G13/7 星，如 "生命 19930 → …"；数据=units.json baseStat → gameData gearLvl13，标注缩放）+ 银河力量
+2. **Abilities**（逐技能）：头部 meta chips（冷却/目标/伤害类型/触发几率）+ ACTIVE 描述句（效果链翻译：施加的 Buff/Debuff 用 English（中文）+持续+几率）+ **伤害公式行**（LoL 式："伤害 = 3.75 × 攻击（特殊，吃压制）"；有分档按技能等级 "x/y/z"）+ Notes（特殊机制：秒杀/免疫/复活/目标锁定…逐条 English（中文）+ 出处引用 NUMBERS.md 章节号）
+3. Damage Info 折叠节：完整 §7 管线代入计算
+泛化指令不变：模板跑通后覆盖全部 2107 单位。
