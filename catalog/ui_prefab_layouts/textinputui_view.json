@@ -1,0 +1,3668 @@
+{
+ "bundle": "textinputui_view",
+ "gameobjects": 65,
+ "transforms": 65,
+ "rect_transforms": 0,
+ "roots": [
+  {
+   "name": "standard_header_font_ref",
+   "active": true,
+   "layer": 0,
+   "components": [
+    "Transform",
+    "UIFont"
+   ],
+   "localPos": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "localRot": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "w": 1.0
+   },
+   "localScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "ngui": [
+    {
+     "replacementUIFont": -911006982973512542,
+     "mode": "dynamic",
+     "class": "UIFont"
+    }
+   ],
+   "children": []
+  },
+  {
+   "name": "standard_system_font_ref",
+   "active": true,
+   "layer": 0,
+   "components": [
+    "Transform",
+    "UIFont"
+   ],
+   "localPos": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "localRot": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "w": 1.0
+   },
+   "localScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "ngui": [
+    {
+     "replacementUIFont": 1766243725292662145,
+     "mode": "dynamic",
+     "class": "UIFont"
+    }
+   ],
+   "children": []
+  },
+  {
+   "name": "standard_body_font_ref",
+   "active": true,
+   "layer": 0,
+   "components": [
+    "Transform",
+    "UIFont"
+   ],
+   "localPos": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "localRot": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "w": 1.0
+   },
+   "localScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "ngui": [
+    {
+     "replacementUIFont": 2304775339614787884,
+     "mode": "dynamic",
+     "class": "UIFont"
+    }
+   ],
+   "children": []
+  },
+  {
+   "name": "ui.textinputui_view",
+   "active": true,
+   "layer": 8,
+   "components": [
+    "Transform",
+    "TextInputView",
+    "UITriggeredAudioEvent",
+    "UITriggeredAudioEvent"
+   ],
+   "localPos": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "localRot": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "w": 1.0
+   },
+   "localScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "children": [
+    {
+     "name": "UI Root",
+     "active": true,
+     "layer": 8,
+     "components": [
+      "Transform",
+      "UIPanel",
+      "UIRoot",
+      "Rigidbody"
+     ],
+     "localPos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+     },
+     "localRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+     },
+     "localScale": {
+      "x": 0.0028,
+      "y": 0.0028,
+      "z": 0.0028
+     },
+     "ngui": [
+      {
+       "alpha": 0.0,
+       "depth": 0,
+       "clipRange": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+       ],
+       "sortingOrder": null,
+       "class": "UIPanel"
+      }
+     ],
+     "children": [
+      {
+       "name": "BackdropScrim",
+       "active": true,
+       "layer": 8,
+       "components": [
+        "Transform",
+        "UISprite",
+        "UIButton",
+        "BoxCollider",
+        "UITriggeredAudioEvent"
+       ],
+       "localPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+       },
+       "localRot": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+       },
+       "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+       },
+       "ngui": [
+        {
+         "color": [
+          0.0588,
+          0.098,
+          0.1765,
+          0.9216
+         ],
+         "width": 1680,
+         "height": 1120,
+         "depth": 0,
+         "anchors": {
+          "leftAnchor": {
+           "relative": 0.0,
+           "absolute": -200,
+           "target": 6709414598115191854
+          },
+          "rightAnchor": {
+           "relative": 1.0,
+           "absolute": 200,
+           "target": 6709414598115191854
+          },
+          "bottomAnchor": {
+           "relative": 0.0,
+           "absolute": -200,
+           "target": 6709414598115191854
+          },
+          "topAnchor": {
+           "relative": 1.0,
+           "absolute": 200,
+           "target": 6709414598115191854
+          }
+         },
+         "spriteName": "pixel",
+         "class": "UISprite"
+        }
+       ],
+       "children": []
+      },
+      {
+       "name": "Window",
+       "active": true,
+       "layer": 8,
+       "components": [
+        "Transform",
+        "UIWidget",
+        "NguiAppearAnimation"
+       ],
+       "localPos": {
+        "x": 0.0,
+        "y": 20.0,
+        "z": 0.0
+       },
+       "localRot": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+       },
+       "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+       },
+       "ngui": [
+        {
+         "color": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+         ],
+         "width": 760,
+         "height": 400,
+         "depth": 1,
+         "anchors": {
+          "leftAnchor": {
+           "relative": 0.5,
+           "absolute": -380,
+           "target": 6709414598115191854
+          },
+          "rightAnchor": {
+           "relative": 0.5,
+           "absolute": 380,
+           "target": 6709414598115191854
+          },
+          "bottomAnchor": {
+           "relative": 0.5,
+           "absolute": -180,
+           "target": 6709414598115191854
+          },
+          "topAnchor": {
+           "relative": 0.5,
+           "absolute": 220,
+           "target": 6709414598115191854
+          }
+         },
+         "class": "UIWidget"
+        }
+       ],
+       "children": [
+        {
+         "name": "Background",
+         "active": true,
+         "layer": 8,
+         "components": [
+          "Transform",
+          "UISprite",
+          "BoxCollider"
+         ],
+         "localPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+         },
+         "localRot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+         },
+         "localScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+         },
+         "ngui": [
+          {
+           "color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+           ],
+           "width": 760,
+           "height": 400,
+           "depth": 2,
+           "anchors": {
+            "leftAnchor": {
+             "relative": 0.0,
+             "absolute": 0,
+             "target": 8231060351289709362
+            },
+            "rightAnchor": {
+             "relative": 1.0,
+             "absolute": 0,
+             "target": 8231060351289709362
+            },
+            "bottomAnchor": {
+             "relative": 0.0,
+             "absolute": -32,
+             "target": -5706347748259127911
+            },
+            "topAnchor": {
+             "relative": 1.0,
+             "absolute": 0,
+             "target": 8231060351289709362
+            }
+           },
+           "spriteName": "panel_button_tr",
+           "class": "UISprite"
+          }
+         ],
+         "children": []
+        },
+        {
+         "name": "BackgroundScrim",
+         "active": true,
+         "layer": 8,
+         "components": [
+          "Transform",
+          "UISprite",
+          "BoxCollider"
+         ],
+         "localPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+         },
+         "localRot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+         },
+         "localScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+         },
+         "ngui": [
+          {
+           "color": [
+            1.0,
+            1.0,
+            1.0,
+            0.5176
+           ],
+           "width": 760,
+           "height": 400,
+           "depth": 1,
+           "anchors": {
+            "leftAnchor": {
+             "relative": 0.0,
+             "absolute": 0,
+             "target": -5906722880024600608
+            },
+            "rightAnchor": {
+             "relative": 1.0,
+             "absolute": 0,
+             "target": -5906722880024600608
+            },
+            "bottomAnchor": {
+             "relative": 0.0,
+             "absolute": 0,
+             "target": -5906722880024600608
+            },
+            "topAnchor": {
+             "relative": 1.0,
+             "absolute": 0,
+             "target": -5906722880024600608
+            }
+           },
+           "spriteName": "custom_scrim",
+           "class": "UISprite"
+          }
+         ],
+         "children": []
+        },
+        {
+         "name": "TopBar",
+         "active": true,
+         "layer": 8,
+         "components": [
+          "Transform",
+          "UISprite"
+         ],
+         "localPos": {
+          "x": 0.0,
+          "y": 164.0,
+          "z": 0.0
+         },
+         "localRot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+         },
+         "localScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+         },
+         "ngui": [
+          {
+           "color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+           ],
+           "width": 760,
+           "height": 72,
+           "depth": 3,
+           "anchors": {
+            "leftAnchor": {
+             "relative": 0.0,
+             "absolute": 0,
+             "target": 8231060351289709362
+            },
+            "rightAnchor": {
+             "relative": 1.0,
+             "absolute": 0,
+             "target": 8231060351289709362
+            },
+            "bottomAnchor": {
+             "relative": 1.0,
+             "absolute": -72,
+             "target": 8231060351289709362
+            },
+            "topAnchor": {
+             "relative": 1.0,
+             "absolute": 0,
+             "target": 8231060351289709362
+            }
+           },
+           "spriteName": "panel_button_title",
+           "class": "UISprite"
+          }
+         ],
+         "children": [
+          {
+           "name": "TitleLabel",
+           "active": true,
+           "layer": 8,
+           "components": [
+            "Transform",
+            "UILocalizedLabel"
+           ],
+           "localPos": {
+            "x": 0.0,
+            "y": -20.0,
+            "z": 0.0
+           },
+           "localRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+           },
+           "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+           },
+           "ngui": [
+            {
+             "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+             ],
+             "width": 728,
+             "height": 40,
+             "depth": 4,
+             "anchors": {
+              "leftAnchor": {
+               "relative": 0.0,
+               "absolute": 16,
+               "target": -8295381040508444819
+              },
+              "rightAnchor": {
+               "relative": 1.0,
+               "absolute": -16,
+               "target": -8295381040508444819
+              },
+              "bottomAnchor": {
+               "relative": 0.0,
+               "absolute": 16,
+               "target": -8295381040508444819
+              },
+              "topAnchor": {
+               "relative": 1.0,
+               "absolute": -16,
+               "target": -8295381040508444819
+              }
+             },
+             "text": "[TITLE]",
+             "fontSize": 28,
+             "alignment": 0,
+             "overflow": 0,
+             "class": "UILocalizedLabel"
+            }
+           ],
+           "children": []
+          },
+          {
+           "name": "standard_close_button",
+           "active": true,
+           "layer": 8,
+           "components": [
+            "Transform",
+            "UISprite",
+            "UIButton",
+            "BoxCollider",
+            "EvolvePrefab",
+            "UITriggeredAudioEvent"
+           ],
+           "localPos": {
+            "x": 352.0,
+            "y": 8.0,
+            "z": 0.0
+           },
+           "localRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+           },
+           "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+           },
+           "ngui": [
+            {
+             "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+             ],
+             "width": 72,
+             "height": 72,
+             "depth": 4,
+             "anchors": {
+              "leftAnchor": {
+               "relative": 1.0,
+               "absolute": -64,
+               "target": -8295381040508444819
+              },
+              "rightAnchor": {
+               "relative": 1.0,
+               "absolute": 8,
+               "target": -8295381040508444819
+              },
+              "bottomAnchor": {
+               "relative": 1.0,
+               "absolute": -64,
+               "target": -8295381040508444819
+              },
+              "topAnchor": {
+               "relative": 1.0,
+               "absolute": 8,
+               "target": -8295381040508444819
+              }
+             },
+             "spriteName": "button_close_circle",
+             "class": "UISprite"
+            }
+           ],
+           "children": [
+            {
+             "name": "X icon",
+             "active": true,
+             "layer": 8,
+             "components": [
+              "Transform",
+              "UISprite"
+             ],
+             "localPos": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+             },
+             "localScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+             },
+             "ngui": [
+              {
+               "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+               ],
+               "width": 72,
+               "height": 72,
+               "depth": 5,
+               "anchors": {
+                "leftAnchor": {
+                 "relative": 0.0,
+                 "absolute": 0,
+                 "target": null
+                },
+                "rightAnchor": {
+                 "relative": 1.0,
+                 "absolute": 0,
+                 "target": null
+                },
+                "bottomAnchor": {
+                 "relative": 0.0,
+                 "absolute": 0,
+                 "target": null
+                },
+                "topAnchor": {
+                 "relative": 1.0,
+                 "absolute": 0,
+                 "target": null
+                }
+               },
+               "spriteName": "button_close",
+               "class": "UISprite"
+              }
+             ],
+             "children": []
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "MessageContainer",
+         "active": true,
+         "layer": 8,
+         "components": [
+          "Transform",
+          "UIStretchChildren",
+          "UICollapseInactive"
+         ],
+         "localPos": {
+          "x": 0.0,
+          "y": 60.0,
+          "z": 0.0
+         },
+         "localRot": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+         },
+         "localScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+         },
+         "ngui": [
+          {
+           "color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+           ],
+           "width": 696,
+           "height": 104,
+           "depth": 6,
+           "anchors": {
+            "leftAnchor": {
+             "relative": 0.0,
+             "absolute": 32,
+             "target": -8295381040508444819
+            },
+            "rightAnchor": {
+             "relative": 1.0,
+             "absolute": -32,
+             "target": -8295381040508444819
+            },
+            "bottomAnchor": {
+             "relative": 0.0,
+             "absolute": -120,
+             "target": -8295381040508444819
+            },
+            "topAnchor": {
+             "relative": 0.0,
+             "absolute": -16,
+             "target": -8295381040508444819
+            }
+           },
+           "class": "UIStretchChildren"
+          }
+         ],
+         "children": [
+          {
+           "name": "standard_scrollable_label",
+           "active": true,
+           "layer": 8,
+           "components": [
+            "Transform",
+            "UIWidget"
+           ],
+           "localPos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+           },
+           "localRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+           },
+           "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+           },
+           "ngui": [
+            {
+             "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+             ],
+             "width": 696,
+             "height": 104,
+             "depth": 7,
+             "anchors": {
+              "leftAnchor": {
+               "relative": 0.0,
+               "absolute": 0,
+               "target": -1929796768901672492
+              },
+              "rightAnchor": {
+               "relative": 1.0,
+               "absolute": 0,
+               "target": -1929796768901672492
+              },
+              "bottomAnchor": {
+               "relative": 0.0,
+               "absolute": 0,
+               "target": null
+              },
+              "topAnchor": {
+               "relative": 1.0,
+               "absolute": 0,
+               "target": null
+              }
+             },
+             "class": "UIWidget"
+            }
+           ],
+           "children": [
+            {
+             "name": "Scroll View",
+             "active": true,
+             "layer": 8,
+             "components": [
+              "Transform",
+              "UIPanel",
+              "UIScrollView"
+             ],
+             "localPos": {
+              "x": 0.0,
+              "y": 247.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+             },
+             "localScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+             },
+             "children": [
+              {
+               "name": "Text",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UILocalizedLabel"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": -247.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 696,
+                 "height": 28,
+                 "depth": 8,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -5837627847946947448
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -5837627847946947448
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": null
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": null
+                  }
+                 },
+                 "text": "[Scrollable text]",
+                 "fontSize": 28,
+                 "alignment": 2,
+                 "overflow": 3,
+                 "class": "UILocalizedLabel"
+                }
+               ],
+               "children": []
+              }
+             ]
+            },
+            {
+             "name": "Drag Area Panel",
+             "active": true,
+             "layer": 8,
+             "components": [
+              "Transform",
+              "UIPanel"
+             ],
+             "localPos": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+             },
+             "localScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+             },
+             "ngui": [
+              {
+               "alpha": 0.0,
+               "depth": 0,
+               "clipRange": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+               ],
+               "sortingOrder": null,
+               "class": "UIPanel"
+              }
+             ],
+             "children": [
+              {
+               "name": "Drag Area",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UIWidget",
+                "UIDragScrollView",
+                "BoxCollider"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 696,
+                 "height": 104,
+                 "depth": 11,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -5837627847946947448
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -5837627847946947448
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -5837627847946947448
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -5837627847946947448
+                  }
+                 },
+                 "class": "UIWidget"
+                }
+               ],
+               "children": []
+              }
+             ]
+            },
+            {
+             "name": "standard_scrollbar",
+             "active": true,
+             "layer": 8,
+             "components": [
+              "Transform",
+              "UIScrollBar",
+              "UIWidget",
+              "EvolvePrefab"
+             ],
+             "localPos": {
+              "x": 352.0,
+              "y": 0.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+             },
+             "localScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+             },
+             "ngui": [
+              {
+               "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+               ],
+               "width": 8,
+               "height": 104,
+               "depth": 8,
+               "anchors": {
+                "leftAnchor": {
+                 "relative": 1.0,
+                 "absolute": 0,
+                 "target": -5837627847946947448
+                },
+                "rightAnchor": {
+                 "relative": 1.0,
+                 "absolute": 8,
+                 "target": -5837627847946947448
+                },
+                "bottomAnchor": {
+                 "relative": 0.0,
+                 "absolute": 0,
+                 "target": -5837627847946947448
+                },
+                "topAnchor": {
+                 "relative": 1.0,
+                 "absolute": 0,
+                 "target": -5837627847946947448
+                }
+               },
+               "class": "UIWidget"
+              }
+             ],
+             "children": [
+              {
+               "name": "Background",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UISprite"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 8,
+                 "height": 104,
+                 "depth": 9,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -8061044936914627407
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -8061044936914627407
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -8061044936914627407
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -8061044936914627407
+                  }
+                 },
+                 "spriteName": "scroll_bar_track",
+                 "class": "UISprite"
+                }
+               ],
+               "children": []
+              },
+              {
+               "name": "Foreground",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UISprite"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 8,
+                 "height": 104,
+                 "depth": 11,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -8061044936914627407
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -8061044936914627407
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -8061044936914627407
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -8061044936914627407
+                  }
+                 },
+                 "spriteName": "scroll_bar_handle",
+                 "class": "UISprite"
+                }
+               ],
+               "children": []
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "EntryContainer",
+         "active": true,
+         "layer": 8,
+         "components": [
+          "Transform",
+          "UIWidget",
+          "UIInput",
+          "BoxCollider"
+         ],
+         "localPos": {
+          "x": 0.0,
+          "y": -40.0,
+          "z": 0.0
+         },
+         "localRot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+         },
+         "localScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+         },
+         "ngui": [
+          {
+           "color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+           ],
+           "width": 696,
+           "height": 64,
+           "depth": 10,
+           "anchors": {
+            "leftAnchor": {
+             "relative": 0.0,
+             "absolute": 0,
+             "target": -1929796768901672492
+            },
+            "rightAnchor": {
+             "relative": 1.0,
+             "absolute": 0,
+             "target": -1929796768901672492
+            },
+            "bottomAnchor": {
+             "relative": 0.0,
+             "absolute": -80,
+             "target": -1929796768901672492
+            },
+            "topAnchor": {
+             "relative": 0.0,
+             "absolute": -16,
+             "target": -1929796768901672492
+            }
+           },
+           "class": "UIWidget"
+          }
+         ],
+         "children": [
+          {
+           "name": "EntryLabel",
+           "active": true,
+           "layer": 8,
+           "components": [
+            "Transform",
+            "UILocalizedLabel"
+           ],
+           "localPos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+           },
+           "localRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+           },
+           "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+           },
+           "ngui": [
+            {
+             "color": [
+              0.1373,
+              0.7843,
+              0.9608,
+              1.0
+             ],
+             "width": 568,
+             "height": 32,
+             "depth": 13,
+             "anchors": {
+              "leftAnchor": {
+               "relative": 0.0,
+               "absolute": 64,
+               "target": -8780488748846777660
+              },
+              "rightAnchor": {
+               "relative": 1.0,
+               "absolute": -64,
+               "target": -8780488748846777660
+              },
+              "bottomAnchor": {
+               "relative": 0.0,
+               "absolute": 16,
+               "target": -8780488748846777660
+              },
+              "topAnchor": {
+               "relative": 1.0,
+               "absolute": -16,
+               "target": -8780488748846777660
+              }
+             },
+             "text": "[Enter Text]",
+             "fontSize": 24,
+             "alignment": 2,
+             "overflow": 1,
+             "class": "UILocalizedLabel"
+            }
+           ],
+           "children": []
+          },
+          {
+           "name": "Background",
+           "active": true,
+           "layer": 8,
+           "components": [
+            "Transform",
+            "UISprite"
+           ],
+           "localPos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+           },
+           "localRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+           },
+           "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+           },
+           "ngui": [
+            {
+             "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+             ],
+             "width": 696,
+             "height": 64,
+             "depth": 12,
+             "anchors": {
+              "leftAnchor": {
+               "relative": 0.0,
+               "absolute": 0,
+               "target": -8780488748846777660
+              },
+              "rightAnchor": {
+               "relative": 1.0,
+               "absolute": 0,
+               "target": -8780488748846777660
+              },
+              "bottomAnchor": {
+               "relative": 0.0,
+               "absolute": 0,
+               "target": -8780488748846777660
+              },
+              "topAnchor": {
+               "relative": 1.0,
+               "absolute": 0,
+               "target": -8780488748846777660
+              }
+             },
+             "spriteName": "progress_bar_frame",
+             "class": "UISprite"
+            }
+           ],
+           "children": []
+          },
+          {
+           "name": "Sprite",
+           "active": true,
+           "layer": 8,
+           "components": [
+            "Transform",
+            "UISprite"
+           ],
+           "localPos": {
+            "x": 316.0,
+            "y": 0.0,
+            "z": 0.0
+           },
+           "localRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+           },
+           "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+           },
+           "ngui": [
+            {
+             "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+             ],
+             "width": 32,
+             "height": 32,
+             "depth": 14,
+             "anchors": {
+              "leftAnchor": {
+               "relative": 1.0,
+               "absolute": -48,
+               "target": -8780488748846777660
+              },
+              "rightAnchor": {
+               "relative": 1.0,
+               "absolute": -16,
+               "target": -8780488748846777660
+              },
+              "bottomAnchor": {
+               "relative": 1.0,
+               "absolute": -48,
+               "target": -8780488748846777660
+              },
+              "topAnchor": {
+               "relative": 1.0,
+               "absolute": -16,
+               "target": -8780488748846777660
+              }
+             },
+             "spriteName": "icon_text_edit",
+             "class": "UISprite"
+            }
+           ],
+           "children": []
+          }
+         ]
+        },
+        {
+         "name": "BottomBar",
+         "active": true,
+         "layer": 8,
+         "components": [
+          "Transform",
+          "UIWidget"
+         ],
+         "localPos": {
+          "x": 0.0,
+          "y": -136.0,
+          "z": 0.0
+         },
+         "localRot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+         },
+         "localScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+         },
+         "ngui": [
+          {
+           "color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+           ],
+           "width": 696,
+           "height": 64,
+           "depth": 1,
+           "anchors": {
+            "leftAnchor": {
+             "relative": 0.0,
+             "absolute": 0,
+             "target": -8780488748846777660
+            },
+            "rightAnchor": {
+             "relative": 1.0,
+             "absolute": 0,
+             "target": -8780488748846777660
+            },
+            "bottomAnchor": {
+             "relative": 0.0,
+             "absolute": -96,
+             "target": -8780488748846777660
+            },
+            "topAnchor": {
+             "relative": 0.0,
+             "absolute": -32,
+             "target": -8780488748846777660
+            }
+           },
+           "class": "UIWidget"
+          }
+         ],
+         "children": [
+          {
+           "name": "Confirm",
+           "active": true,
+           "layer": 8,
+           "components": [
+            "Transform",
+            "UIWidget",
+            "SmartButton"
+           ],
+           "localPos": {
+            "x": 178.0,
+            "y": 0.0,
+            "z": 0.0
+           },
+           "localRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+           },
+           "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+           },
+           "ngui": [
+            {
+             "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+             ],
+             "width": 340,
+             "height": 64,
+             "depth": 10,
+             "anchors": {
+              "leftAnchor": {
+               "relative": 1.0,
+               "absolute": 0,
+               "target": 3788957596185786428
+              },
+              "rightAnchor": {
+               "relative": 1.0,
+               "absolute": 0,
+               "target": -5706347748259127911
+              },
+              "bottomAnchor": {
+               "relative": 0.0,
+               "absolute": 0,
+               "target": -5706347748259127911
+              },
+              "topAnchor": {
+               "relative": 1.0,
+               "absolute": 0,
+               "target": -5706347748259127911
+              }
+             },
+             "class": "UIWidget"
+            }
+           ],
+           "children": [
+            {
+             "name": "discount_group",
+             "active": false,
+             "layer": 8,
+             "components": [
+              "Transform"
+             ],
+             "localPos": {
+              "x": 249.6,
+              "y": 0.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": -0.0,
+              "y": -0.0,
+              "z": -0.0,
+              "w": 1.0
+             },
+             "localScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+             },
+             "children": [
+              {
+               "name": "Original Price",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UIWidget"
+               ],
+               "localPos": {
+                "x": -342.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": -0.0,
+                "y": -0.0,
+                "z": -0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 84,
+                 "height": 30,
+                 "depth": 12,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 16,
+                   "target": -850762842590631282
+                  },
+                  "rightAnchor": {
+                   "relative": 0.0,
+                   "absolute": 100,
+                   "target": -850762842590631282
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.5,
+                   "absolute": -15,
+                   "target": -850762842590631282
+                  },
+                  "topAnchor": {
+                   "relative": 0.5,
+                   "absolute": 15,
+                   "target": -850762842590631282
+                  }
+                 },
+                 "class": "UIWidget"
+                }
+               ],
+               "children": [
+                {
+                 "name": "StrikeThru",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UISprite"
+                 ],
+                 "localPos": {
+                  "x": 1.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    0.7075,
+                    0.0,
+                    0.0,
+                    1.0
+                   ],
+                   "width": 64,
+                   "height": 2,
+                   "depth": 18,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": -4332417005115374980
+                    },
+                    "rightAnchor": {
+                     "relative": 1.0,
+                     "absolute": 2,
+                     "target": -4332417005115374980
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.5,
+                     "absolute": -1,
+                     "target": -4332417005115374980
+                    },
+                    "topAnchor": {
+                     "relative": 0.5,
+                     "absolute": 1,
+                     "target": -4332417005115374980
+                    }
+                   },
+                   "spriteName": "pixel",
+                   "class": "UISprite"
+                  }
+                 ],
+                 "children": []
+                },
+                {
+                 "name": "Original Price Label",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UILocalizedLabel"
+                 ],
+                 "localPos": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 62,
+                   "height": 24,
+                   "depth": 15,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": null
+                    },
+                    "rightAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": null
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.0,
+                     "absolute": 3,
+                     "target": null
+                    },
+                    "topAnchor": {
+                     "relative": 1.0,
+                     "absolute": -3,
+                     "target": null
+                    }
+                   },
+                   "text": "$29.99",
+                   "fontSize": 24,
+                   "alignment": 0,
+                   "overflow": 2,
+                   "class": "UILocalizedLabel"
+                  }
+                 ],
+                 "children": []
+                }
+               ]
+              },
+              {
+               "name": "Sale Tab",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UISprite"
+               ],
+               "localPos": {
+                "x": -134.0,
+                "y": 17.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": -0.0,
+                "y": -0.0,
+                "z": -0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 68,
+                 "height": 29,
+                 "depth": 13,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 1.0,
+                   "absolute": -68,
+                   "target": -850762842590631282
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -850762842590631282
+                  },
+                  "bottomAnchor": {
+                   "relative": 1.0,
+                   "absolute": -29,
+                   "target": -850762842590631282
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -850762842590631282
+                  }
+                 },
+                 "spriteName": "tab_corner",
+                 "class": "UISprite"
+                }
+               ],
+               "children": [
+                {
+                 "name": "Percent Label",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UILocalizedLabel"
+                 ],
+                 "localPos": {
+                  "x": 2.5,
+                  "y": 0.1,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 32,
+                   "height": 24,
+                   "depth": 15,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 0.0,
+                     "absolute": -30,
+                     "target": null
+                    },
+                    "rightAnchor": {
+                     "relative": 1.0,
+                     "absolute": 30,
+                     "target": null
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.0,
+                     "absolute": -54,
+                     "target": null
+                    },
+                    "topAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": null
+                    }
+                   },
+                   "text": "5%",
+                   "fontSize": 24,
+                   "alignment": 0,
+                   "overflow": 2,
+                   "class": "UILocalizedLabel"
+                  }
+                 ],
+                 "children": []
+                }
+               ]
+              },
+              {
+               "name": "Discount Price Label",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UILocalizedLabel"
+               ],
+               "localPos": {
+                "x": -234.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": -0.0,
+                "y": -0.0,
+                "z": -0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0001,
+                "y": 1.0001,
+                "z": 1.0001
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 132,
+                 "height": 56,
+                 "depth": 11,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": 5265668188150129085
+                  },
+                  "rightAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": 7917014306740819633
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 4,
+                   "target": -850762842590631282
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": -4,
+                   "target": -850762842590631282
+                  }
+                 },
+                 "text": "Standard Button",
+                 "fontSize": 32,
+                 "alignment": 2,
+                 "overflow": 0,
+                 "class": "UILocalizedLabel"
+                }
+               ],
+               "children": []
+              }
+             ]
+            },
+            {
+             "name": "standard_badge_label",
+             "active": false,
+             "layer": 8,
+             "components": [
+              "Transform",
+              "UIWidget",
+              "EvolvePrefab",
+              "BadgingLabel"
+             ],
+             "localPos": {
+              "x": 143.0,
+              "y": 26.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": -0.0,
+              "y": -0.0,
+              "z": -0.0,
+              "w": 1.0
+             },
+             "localScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+             },
+             "ngui": [
+              {
+               "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+               ],
+               "width": 36,
+               "height": 36,
+               "depth": 20,
+               "anchors": {
+                "leftAnchor": {
+                 "relative": 1.0,
+                 "absolute": -25,
+                 "target": -850762842590631282
+                },
+                "rightAnchor": {
+                 "relative": 1.0,
+                 "absolute": 11,
+                 "target": -850762842590631282
+                },
+                "bottomAnchor": {
+                 "relative": 1.0,
+                 "absolute": -24,
+                 "target": -850762842590631282
+                },
+                "topAnchor": {
+                 "relative": 1.0,
+                 "absolute": 12,
+                 "target": -850762842590631282
+                }
+               },
+               "class": "UIWidget"
+              }
+             ],
+             "children": [
+              {
+               "name": "Badge Label",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UILocalizedLabel"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 36,
+                 "height": 36,
+                 "depth": 22,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": 3277316756888452277
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": 3277316756888452277
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": 3277316756888452277
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": 3277316756888452277
+                  }
+                 },
+                 "text": "3",
+                 "fontSize": 18,
+                 "alignment": 0,
+                 "overflow": 0,
+                 "class": "UILocalizedLabel"
+                }
+               ],
+               "children": []
+              },
+              {
+               "name": "Background",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UISprite"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 36,
+                 "height": 36,
+                 "depth": 21,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": 3277316756888452277
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": 3277316756888452277
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": 3277316756888452277
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": 3277316756888452277
+                  }
+                 },
+                 "spriteName": "icon_badge",
+                 "class": "UISprite"
+                }
+               ],
+               "children": []
+              },
+              {
+               "name": "vfx effect",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UITexture",
+                "TweenAlpha"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "children": []
+              },
+              {
+               "name": "CornerHighlight",
+               "active": false,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UISprite"
+               ],
+               "localPos": {
+                "x": -15.0,
+                "y": -14.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 158,
+                 "height": 158,
+                 "depth": 2,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": null
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": null
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": null
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": null
+                  }
+                 },
+                 "spriteName": "badge_highlight",
+                 "class": "UISprite"
+                }
+               ],
+               "children": []
+              }
+             ]
+            },
+            {
+             "name": "Background",
+             "active": true,
+             "layer": 8,
+             "components": [
+              "Transform",
+              "UISprite",
+              "BoxCollider",
+              "UITriggeredAudioEvent",
+              "UILabelButton"
+             ],
+             "localPos": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": -0.0,
+              "y": -0.0,
+              "z": -0.0,
+              "w": 1.0
+             },
+             "localScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+             },
+             "ngui": [
+              {
+               "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+               ],
+               "width": 340,
+               "height": 64,
+               "depth": 10,
+               "anchors": {
+                "leftAnchor": {
+                 "relative": 0.0,
+                 "absolute": 0,
+                 "target": -850762842590631282
+                },
+                "rightAnchor": {
+                 "relative": 1.0,
+                 "absolute": 0,
+                 "target": -850762842590631282
+                },
+                "bottomAnchor": {
+                 "relative": 0.0,
+                 "absolute": 0,
+                 "target": -850762842590631282
+                },
+                "topAnchor": {
+                 "relative": 1.0,
+                 "absolute": 0,
+                 "target": -850762842590631282
+                }
+               },
+               "spriteName": "button_64",
+               "class": "UISprite"
+              }
+             ],
+             "children": [
+              {
+               "name": "Idle Animation",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UITexture",
+                "NguiIdleAnimation"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": -0.0,
+                "y": -0.0,
+                "z": -0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "children": []
+              },
+              {
+               "name": "Button Name",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UILocalizedLabel"
+               ],
+               "localPos": {
+                "x": -3.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": -0.0,
+                "y": -0.0,
+                "z": -0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 304,
+                 "height": 56,
+                 "depth": 13,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 12,
+                   "target": -850762842590631282
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": -18,
+                   "target": -850762842590631282
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 4,
+                   "target": -850762842590631282
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": -4,
+                   "target": -850762842590631282
+                  }
+                 },
+                 "text": "[Confirm]",
+                 "fontSize": 32,
+                 "alignment": 2,
+                 "overflow": 0,
+                 "class": "UILocalizedLabel"
+                }
+               ],
+               "children": []
+              }
+             ]
+            },
+            {
+             "name": "Press Highlight",
+             "active": false,
+             "layer": 8,
+             "components": [
+              "Transform",
+              "UISprite"
+             ],
+             "localPos": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": 0.00873,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.99996
+             },
+             "localScale": {
+              "x": 1.2,
+              "y": 1.2,
+              "z": 1.0
+             },
+             "ngui": [
+              {
+               "color": [
+                0.6,
+                1.0,
+                0.2,
+                0.0
+               ],
+               "width": 324,
+               "height": 104,
+               "depth": 11,
+               "anchors": {
+                "leftAnchor": {
+                 "relative": 0.0,
+                 "absolute": -12,
+                 "target": -850762842590631282
+                },
+                "rightAnchor": {
+                 "relative": 1.0,
+                 "absolute": 12,
+                 "target": -850762842590631282
+                },
+                "bottomAnchor": {
+                 "relative": 0.0,
+                 "absolute": -20,
+                 "target": -850762842590631282
+                },
+                "topAnchor": {
+                 "relative": 1.0,
+                 "absolute": 20,
+                 "target": -850762842590631282
+                }
+               },
+               "spriteName": "scanlines_default_button",
+               "class": "UISprite"
+              }
+             ],
+             "children": []
+            }
+           ]
+          },
+          {
+           "name": "Cancel Container",
+           "active": true,
+           "layer": 8,
+           "components": [
+            "Transform",
+            "UIWidget",
+            "UICollapseInactive"
+           ],
+           "localPos": {
+            "x": -170.0,
+            "y": 0.0,
+            "z": 0.0
+           },
+           "localRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+           },
+           "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+           },
+           "ngui": [
+            {
+             "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+             ],
+             "width": 356,
+             "height": 64,
+             "depth": 15,
+             "anchors": {
+              "leftAnchor": {
+               "relative": 0.0,
+               "absolute": 0,
+               "target": -5706347748259127911
+              },
+              "rightAnchor": {
+               "relative": 0.5,
+               "absolute": 8,
+               "target": -5706347748259127911
+              },
+              "bottomAnchor": {
+               "relative": 0.0,
+               "absolute": 0,
+               "target": -5706347748259127911
+              },
+              "topAnchor": {
+               "relative": 1.0,
+               "absolute": 0,
+               "target": -5706347748259127911
+              }
+             },
+             "class": "UIWidget"
+            }
+           ],
+           "children": [
+            {
+             "name": "Cancel Button",
+             "active": true,
+             "layer": 8,
+             "components": [
+              "Transform",
+              "UIWidget",
+              "SmartButton"
+             ],
+             "localPos": {
+              "x": -8.0,
+              "y": 0.0,
+              "z": 0.0
+             },
+             "localRot": {
+              "x": -0.0,
+              "y": -0.0,
+              "z": -0.0,
+              "w": 1.0
+             },
+             "localScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+             },
+             "ngui": [
+              {
+               "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+               ],
+               "width": 340,
+               "height": 64,
+               "depth": 10,
+               "anchors": {
+                "leftAnchor": {
+                 "relative": 0.0,
+                 "absolute": 0,
+                 "target": 3788957596185786428
+                },
+                "rightAnchor": {
+                 "relative": 1.0,
+                 "absolute": -16,
+                 "target": 3788957596185786428
+                },
+                "bottomAnchor": {
+                 "relative": 0.0,
+                 "absolute": 0,
+                 "target": 3788957596185786428
+                },
+                "topAnchor": {
+                 "relative": 1.0,
+                 "absolute": 0,
+                 "target": 3788957596185786428
+                }
+               },
+               "class": "UIWidget"
+              }
+             ],
+             "children": [
+              {
+               "name": "discount_group",
+               "active": false,
+               "layer": 8,
+               "components": [
+                "Transform"
+               ],
+               "localPos": {
+                "x": 249.6,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": -0.0,
+                "y": -0.0,
+                "z": -0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "children": [
+                {
+                 "name": "Original Price",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UIWidget"
+                 ],
+                 "localPos": {
+                  "x": -342.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 84,
+                   "height": 30,
+                   "depth": 12,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 0.0,
+                     "absolute": 16,
+                     "target": -6865945764376184290
+                    },
+                    "rightAnchor": {
+                     "relative": 0.0,
+                     "absolute": 100,
+                     "target": -6865945764376184290
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.5,
+                     "absolute": -15,
+                     "target": -6865945764376184290
+                    },
+                    "topAnchor": {
+                     "relative": 0.5,
+                     "absolute": 15,
+                     "target": -6865945764376184290
+                    }
+                   },
+                   "class": "UIWidget"
+                  }
+                 ],
+                 "children": [
+                  {
+                   "name": "StrikeThru",
+                   "active": true,
+                   "layer": 8,
+                   "components": [
+                    "Transform",
+                    "UISprite"
+                   ],
+                   "localPos": {
+                    "x": 1.0,
+                    "y": 0.0,
+                    "z": 0.0
+                   },
+                   "localRot": {
+                    "x": -0.0,
+                    "y": -0.0,
+                    "z": -0.0,
+                    "w": 1.0
+                   },
+                   "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                   },
+                   "ngui": [
+                    {
+                     "color": [
+                      0.7075,
+                      0.0,
+                      0.0,
+                      1.0
+                     ],
+                     "width": 64,
+                     "height": 2,
+                     "depth": 18,
+                     "anchors": {
+                      "leftAnchor": {
+                       "relative": 0.0,
+                       "absolute": 0,
+                       "target": -1734220561161784223
+                      },
+                      "rightAnchor": {
+                       "relative": 1.0,
+                       "absolute": 2,
+                       "target": -1734220561161784223
+                      },
+                      "bottomAnchor": {
+                       "relative": 0.5,
+                       "absolute": -1,
+                       "target": -1734220561161784223
+                      },
+                      "topAnchor": {
+                       "relative": 0.5,
+                       "absolute": 1,
+                       "target": -1734220561161784223
+                      }
+                     },
+                     "spriteName": "pixel",
+                     "class": "UISprite"
+                    }
+                   ],
+                   "children": []
+                  },
+                  {
+                   "name": "Original Price Label",
+                   "active": true,
+                   "layer": 8,
+                   "components": [
+                    "Transform",
+                    "UILocalizedLabel"
+                   ],
+                   "localPos": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                   },
+                   "localRot": {
+                    "x": -0.0,
+                    "y": -0.0,
+                    "z": -0.0,
+                    "w": 1.0
+                   },
+                   "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                   },
+                   "ngui": [
+                    {
+                     "color": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                     ],
+                     "width": 62,
+                     "height": 24,
+                     "depth": 15,
+                     "anchors": {
+                      "leftAnchor": {
+                       "relative": 0.0,
+                       "absolute": 0,
+                       "target": null
+                      },
+                      "rightAnchor": {
+                       "relative": 1.0,
+                       "absolute": 0,
+                       "target": null
+                      },
+                      "bottomAnchor": {
+                       "relative": 0.0,
+                       "absolute": 3,
+                       "target": null
+                      },
+                      "topAnchor": {
+                       "relative": 1.0,
+                       "absolute": -3,
+                       "target": null
+                      }
+                     },
+                     "text": "$29.99",
+                     "fontSize": 24,
+                     "alignment": 0,
+                     "overflow": 2,
+                     "class": "UILocalizedLabel"
+                    }
+                   ],
+                   "children": []
+                  }
+                 ]
+                },
+                {
+                 "name": "Sale Tab",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UISprite"
+                 ],
+                 "localPos": {
+                  "x": -134.0,
+                  "y": 17.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 68,
+                   "height": 29,
+                   "depth": 13,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 1.0,
+                     "absolute": -68,
+                     "target": -6865945764376184290
+                    },
+                    "rightAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": -6865945764376184290
+                    },
+                    "bottomAnchor": {
+                     "relative": 1.0,
+                     "absolute": -29,
+                     "target": -6865945764376184290
+                    },
+                    "topAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": -6865945764376184290
+                    }
+                   },
+                   "spriteName": "tab_corner",
+                   "class": "UISprite"
+                  }
+                 ],
+                 "children": [
+                  {
+                   "name": "Percent Label",
+                   "active": true,
+                   "layer": 8,
+                   "components": [
+                    "Transform",
+                    "UILocalizedLabel"
+                   ],
+                   "localPos": {
+                    "x": 2.5,
+                    "y": 0.1,
+                    "z": 0.0
+                   },
+                   "localRot": {
+                    "x": -0.0,
+                    "y": -0.0,
+                    "z": -0.0,
+                    "w": 1.0
+                   },
+                   "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                   },
+                   "ngui": [
+                    {
+                     "color": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                     ],
+                     "width": 32,
+                     "height": 24,
+                     "depth": 15,
+                     "anchors": {
+                      "leftAnchor": {
+                       "relative": 0.0,
+                       "absolute": -30,
+                       "target": null
+                      },
+                      "rightAnchor": {
+                       "relative": 1.0,
+                       "absolute": 30,
+                       "target": null
+                      },
+                      "bottomAnchor": {
+                       "relative": 0.0,
+                       "absolute": -54,
+                       "target": null
+                      },
+                      "topAnchor": {
+                       "relative": 1.0,
+                       "absolute": 0,
+                       "target": null
+                      }
+                     },
+                     "text": "5%",
+                     "fontSize": 24,
+                     "alignment": 0,
+                     "overflow": 2,
+                     "class": "UILocalizedLabel"
+                    }
+                   ],
+                   "children": []
+                  }
+                 ]
+                },
+                {
+                 "name": "Discount Price Label",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UILocalizedLabel"
+                 ],
+                 "localPos": {
+                  "x": -234.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0001,
+                  "y": 1.0001,
+                  "z": 1.0001
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 132,
+                   "height": 56,
+                   "depth": 11,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": -3285753213972666966
+                    },
+                    "rightAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": -1469954062910862519
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.0,
+                     "absolute": 4,
+                     "target": -6865945764376184290
+                    },
+                    "topAnchor": {
+                     "relative": 1.0,
+                     "absolute": -4,
+                     "target": -6865945764376184290
+                    }
+                   },
+                   "text": "Standard Button",
+                   "fontSize": 32,
+                   "alignment": 2,
+                   "overflow": 0,
+                   "class": "UILocalizedLabel"
+                  }
+                 ],
+                 "children": []
+                }
+               ]
+              },
+              {
+               "name": "standard_badge_label",
+               "active": false,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UIWidget",
+                "EvolvePrefab",
+                "BadgingLabel"
+               ],
+               "localPos": {
+                "x": 143.0,
+                "y": 26.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": -0.0,
+                "y": -0.0,
+                "z": -0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 36,
+                 "height": 36,
+                 "depth": 20,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 1.0,
+                   "absolute": -25,
+                   "target": -6865945764376184290
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 11,
+                   "target": -6865945764376184290
+                  },
+                  "bottomAnchor": {
+                   "relative": 1.0,
+                   "absolute": -24,
+                   "target": -6865945764376184290
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 12,
+                   "target": -6865945764376184290
+                  }
+                 },
+                 "class": "UIWidget"
+                }
+               ],
+               "children": [
+                {
+                 "name": "Badge Label",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UILocalizedLabel"
+                 ],
+                 "localPos": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 36,
+                   "height": 36,
+                   "depth": 22,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": -463775736663869000
+                    },
+                    "rightAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": -463775736663869000
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": -463775736663869000
+                    },
+                    "topAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": -463775736663869000
+                    }
+                   },
+                   "text": "3",
+                   "fontSize": 18,
+                   "alignment": 0,
+                   "overflow": 0,
+                   "class": "UILocalizedLabel"
+                  }
+                 ],
+                 "children": []
+                },
+                {
+                 "name": "Background",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UISprite"
+                 ],
+                 "localPos": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 36,
+                   "height": 36,
+                   "depth": 21,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": -463775736663869000
+                    },
+                    "rightAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": -463775736663869000
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": -463775736663869000
+                    },
+                    "topAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": -463775736663869000
+                    }
+                   },
+                   "spriteName": "icon_badge",
+                   "class": "UISprite"
+                  }
+                 ],
+                 "children": []
+                },
+                {
+                 "name": "vfx effect",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UITexture",
+                  "TweenAlpha"
+                 ],
+                 "localPos": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "children": []
+                },
+                {
+                 "name": "CornerHighlight",
+                 "active": false,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UISprite"
+                 ],
+                 "localPos": {
+                  "x": -15.0,
+                  "y": -14.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 158,
+                   "height": 158,
+                   "depth": 2,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": null
+                    },
+                    "rightAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": null
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.0,
+                     "absolute": 0,
+                     "target": null
+                    },
+                    "topAnchor": {
+                     "relative": 1.0,
+                     "absolute": 0,
+                     "target": null
+                    }
+                   },
+                   "spriteName": "badge_highlight",
+                   "class": "UISprite"
+                  }
+                 ],
+                 "children": []
+                }
+               ]
+              },
+              {
+               "name": "Background",
+               "active": true,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UISprite",
+                "BoxCollider",
+                "UITriggeredAudioEvent",
+                "UILabelButton"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": -0.0,
+                "y": -0.0,
+                "z": -0.0,
+                "w": 1.0
+               },
+               "localScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "width": 340,
+                 "height": 64,
+                 "depth": 10,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -6865945764376184290
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -6865945764376184290
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": 0,
+                   "target": -6865945764376184290
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 0,
+                   "target": -6865945764376184290
+                  }
+                 },
+                 "spriteName": "button_56",
+                 "class": "UISprite"
+                }
+               ],
+               "children": [
+                {
+                 "name": "Idle Animation",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UITexture",
+                  "NguiIdleAnimation"
+                 ],
+                 "localPos": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "children": []
+                },
+                {
+                 "name": "Button Name",
+                 "active": true,
+                 "layer": 8,
+                 "components": [
+                  "Transform",
+                  "UILocalizedLabel"
+                 ],
+                 "localPos": {
+                  "x": -3.0,
+                  "y": 0.0,
+                  "z": 0.0
+                 },
+                 "localRot": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                 },
+                 "localScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                 },
+                 "ngui": [
+                  {
+                   "color": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "width": 304,
+                   "height": 56,
+                   "depth": 13,
+                   "anchors": {
+                    "leftAnchor": {
+                     "relative": 0.0,
+                     "absolute": 12,
+                     "target": -6865945764376184290
+                    },
+                    "rightAnchor": {
+                     "relative": 1.0,
+                     "absolute": -18,
+                     "target": -6865945764376184290
+                    },
+                    "bottomAnchor": {
+                     "relative": 0.0,
+                     "absolute": 4,
+                     "target": -6865945764376184290
+                    },
+                    "topAnchor": {
+                     "relative": 1.0,
+                     "absolute": -4,
+                     "target": -6865945764376184290
+                    }
+                   },
+                   "text": "[Cancel]",
+                   "fontSize": 32,
+                   "alignment": 2,
+                   "overflow": 0,
+                   "class": "UILocalizedLabel"
+                  }
+                 ],
+                 "children": []
+                }
+               ]
+              },
+              {
+               "name": "Press Highlight",
+               "active": false,
+               "layer": 8,
+               "components": [
+                "Transform",
+                "UISprite"
+               ],
+               "localPos": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+               },
+               "localRot": {
+                "x": 0.00873,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.99996
+               },
+               "localScale": {
+                "x": 1.2,
+                "y": 1.2,
+                "z": 1.0
+               },
+               "ngui": [
+                {
+                 "color": [
+                  0.6,
+                  1.0,
+                  0.2,
+                  0.0
+                 ],
+                 "width": 324,
+                 "height": 104,
+                 "depth": 11,
+                 "anchors": {
+                  "leftAnchor": {
+                   "relative": 0.0,
+                   "absolute": -12,
+                   "target": -6865945764376184290
+                  },
+                  "rightAnchor": {
+                   "relative": 1.0,
+                   "absolute": 12,
+                   "target": -6865945764376184290
+                  },
+                  "bottomAnchor": {
+                   "relative": 0.0,
+                   "absolute": -20,
+                   "target": -6865945764376184290
+                  },
+                  "topAnchor": {
+                   "relative": 1.0,
+                   "absolute": 20,
+                   "target": -6865945764376184290
+                  }
+                 },
+                 "spriteName": "scanlines_default_button",
+                 "class": "UISprite"
+                }
+               ],
+               "children": []
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "futura_bold",
+   "active": true,
+   "layer": 0,
+   "components": [
+    "Transform",
+    "UIFont"
+   ],
+   "localPos": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "localRot": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "w": 1.0
+   },
+   "localScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "ngui": [
+    {
+     "mode": "dynamic",
+     "class": "UIFont"
+    }
+   ],
+   "children": []
+  },
+  {
+   "name": "empty_font",
+   "active": true,
+   "layer": 0,
+   "components": [
+    "Transform",
+    "UIFont"
+   ],
+   "localPos": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "localRot": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "w": 1.0
+   },
+   "localScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "ngui": [
+    {
+     "mode": "dynamic",
+     "dynamicFont": 6156242472358159869,
+     "dynamicFontSize": 36,
+     "dynamicFontStyle": 0,
+     "class": "UIFont"
+    }
+   ],
+   "children": []
+  },
+  {
+   "name": "trade_gothic",
+   "active": true,
+   "layer": 0,
+   "components": [
+    "Transform",
+    "UIFont"
+   ],
+   "localPos": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "localRot": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "w": 1.0
+   },
+   "localScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "ngui": [
+    {
+     "mode": "dynamic",
+     "class": "UIFont"
+    }
+   ],
+   "children": []
+  }
+ ]
+}
