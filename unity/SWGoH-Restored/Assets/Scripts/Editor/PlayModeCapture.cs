@@ -15,6 +15,8 @@ namespace SwgohRestored.EditorTools
         public static void Run()
         {
             File.WriteAllText(Marker, "capture");
+            SwgohRestored.EditorTools.RestoredImporter.EnsureBattleRigsStaged();  // scene may predate newer GLBs
+            SwgohRestored.EditorTools.UiAssetImporter.ImportBattleHud();          // P5 HUD widgets (idempotent)
             EditorSceneManager.OpenScene("Assets/Scenes/BattleDemo.unity");
             EditorApplication.isPlaying = true;
         }

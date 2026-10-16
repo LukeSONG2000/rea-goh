@@ -56,6 +56,98 @@ namespace SwgohRestored.EditorTools
             "slot_nopanel", "squareframe_grayscale", "Circle_Stroke_2pt", "Circle_Stroke_2pt_Glow",
         };
 
+        // P5 battle HUD widgets (shared_uicontainer harvest -- the same-named
+        // battleui_view crops came out fully transparent, see p5 sprite survey).
+        // Sprites listed with a border get spriteBorder so uGUI sliced Images
+        // keep their corners when stretched to button size.
+        static readonly Dictionary<string, int[]> BattleWidgets = new Dictionary<string, int[]>
+        {
+            // commander portrait ring + unit health bars
+            { "turn_order_frame_opponent", null },
+            { "turn_order_frame_allies", null },
+            { "unit_health_bg", null },
+            { "unit_health_fill", null },
+            { "unit_health_fill_glow", null },
+            { "Stat_Bar_Bg", null },
+            { "Stat_Bar_Fill", null },
+            { "progressbar_clipped_bg", null },
+            { "progressbar_clipped_bg_small", null },
+            // key-binding chips (per-unit letter markers + skill key captions)
+            { "bg_key", new[] { 14, 14, 14, 14 } },
+            { "keyboard_binding_bg", null },
+            // top-left controls row (auto / speed / lock)
+            { "auto_battle", null },
+            { "bg_toggle", new[] { 16, 16, 16, 16 } },
+            { "bg_toggle_icon", null },
+            { "button_toggle_icon", null },
+            { "lock_filled", null },
+            { "icon_flat_lock", null },
+            { "button_locked", null },
+            { "button_unlocked", null },
+            { "btn_circle_idle", null },
+            { "btn_circle_selected", null },
+            { "btn_circle_highlight", null },
+            { "max_set_circle_button", null },
+            { "hud_button", null },
+            { "hud_button_press", null },
+            { "hud_button_disabled", null },
+            { "hud_button_highlight", null },
+            { "icon_play", null },
+            { "icon_stat_speed", null },
+            { "icon_timer", null },
+            // buff / debuff chips (white silhouettes are tinted at runtime,
+            // exactly like the original NGUI tinting)
+            { "indicator_buff", null },
+            { "indicator_debuff", null },
+            { "icon_buff_attack", null },
+            { "icon_buff_armor", null },
+            { "icon_buff_health", null },
+            { "icon_buff_speed", null },
+            { "icon_buff_crit_chance", null },
+            { "icon_buff_critical_damage", null },
+            { "icon_buff_defense", null },
+            { "icon_buff_generic", null },
+            { "icon_buff_taunt", null },
+            { "icon_debuff_taunt", null },
+            { "icon_debuff_disarm", null },
+            // bottom skill bar ability button frames
+            { "battle_btn_frame_gold", new[] { 8, 10, 8, 10 } },
+            { "battle_btn_frame_red", new[] { 8, 10, 8, 10 } },
+            { "battle_btn_attack_sliced", new[] { 8, 10, 8, 10 } },
+            { "battle_btn_round", null },
+            { "battle_btn_round_glow", null },
+            { "progress_circle_blue", null },
+            { "progress_circle_empty", null },
+        };
+
+        [MenuItem("SWGoH/UI/4 Import Battle HUD Sprites (P5)")]
+        public static void ImportBattleHud()
+        {
+            Directory.CreateDirectory(WidgetDest);
+            var shared = Path.Combine(HarvestRoot, "shared_uicontainer");
+            var copied = new List<KeyValuePair<string, int[]>>();
+            foreach (var kv in BattleWidgets)
+            {
+                var src = Path.Combine(shared, kv.Key + ".png");
+                if (!File.Exists(src))
+                {
+                    Debug.LogWarning("[UiAssetImporter] battle widget not harvested: " + kv.Key);
+                    continue;
+                }
+                var dst = Path.Combine(WidgetDest, SwgohRestored.UI.UiKit.Sanitize(kv.Key) + ".png");
+                File.Copy(src, dst, true);
+                copied.Add(kv);
+            }
+            // new files must be imported before Configure can reach their
+            // TextureImporter (GetAtPath is null until Refresh) -- otherwise
+            // they stay plain textures and Resources.Load<Sprite> misses them
+            AssetDatabase.Refresh();
+            foreach (var kv in copied)
+                Configure(Path.Combine(WidgetDest, SwgohRestored.UI.UiKit.Sanitize(kv.Key) + ".png"), kv.Value);
+            AssetDatabase.SaveAssets();
+            Debug.Log($"[UiAssetImporter] battle HUD widgets imported: {copied.Count}/{BattleWidgets.Count}");
+        }
+
         [MenuItem("SWGoH/UI/1 Import All UI Assets")]
         public static void ImportAll()
         {

@@ -133,6 +133,50 @@ namespace SwgohRestored.EditorTools
         // batch-mode entry: creates the scene and saves it to disk
         public static void SetupSceneAndSave() => SetupSceneInternal(save: true);
 
+        /// BattleDemo may predate later GLB imports (e.g. char_tarkinadmiral_pre
+        /// was imported after the scene was last saved, so SpawnRig logs
+        /// "rig not imported") -- stage any missing rig prefabs into
+        /// ImportedCharacters with the same recipe and re-save the scene.
+        public static void EnsureBattleRigsStaged()
+        {
+            if (!Directory.Exists("Assets/Characters")) return;
+            var scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene(
+                "Assets/Scenes/BattleDemo.unity");
+            var root = GameObject.Find("ImportedCharacters");
+            if (root == null)
+            {
+                Debug.LogWarning("[RestoredImporter] ImportedCharacters missing in BattleDemo -- run SWGoH/Setup Demo Battle Scene (save)");
+                return;
+            }
+            var driver = Object.FindObjectOfType<SwgohRestored.Battle.BattleDriver>();
+            var prefabRoot = driver != null && driver.CharacterPrefabRoot != null
+                ? driver.CharacterPrefabRoot.transform : root.transform;
+            int added = 0;
+            foreach (var glb in Directory.GetFiles("Assets/Characters", "*.glb"))
+            {
+                var folder = Path.GetFileNameWithoutExtension(glb);
+                if (prefabRoot.Find(folder) != null) continue;
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(glb);
+                if (prefab == null) continue;
+                var inst = (GameObject)PrefabUtility.InstantiatePrefab(prefab, prefabRoot);
+                inst.name = folder;
+                inst.SetActive(false);
+                var legacy = inst.GetComponentInChildren<Animation>(true);
+                if (legacy != null) Object.DestroyImmediate(legacy);
+                if (inst.GetComponent<Animator>() == null)
+                    inst.AddComponent<Animator>();
+                var ctrl = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(
+                    $"Assets/Animators/{folder}.controller");
+                if (ctrl != null)
+                    inst.GetComponentInChildren<Animator>(true).runtimeAnimatorController = ctrl;
+                added++;
+            }
+            if (added > 0)
+                UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene,
+                    "Assets/Scenes/BattleDemo.unity");
+            Debug.Log($"[RestoredImporter] battle rigs ensured (+{added} staged)");
+        }
+
         static void SetupSceneInternal(bool save)
         {
             var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
