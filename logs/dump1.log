@@ -1,0 +1,415 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-PPfavorite" at "2026-10-15T10:43:09.8818428Z"
+[Licensing::Client] Code 1 while verifying Licensing Client signature (process Id: 46092, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.16.2'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-PPfavorite"
+[Licensing::IpcConnector] LicenseClient-PPfavorite channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-PPfavorite-2022.3.62 doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 46836)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-PPfavorite-2022.3.62" at "2026-10-15T10:43:10.7543943Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 46836, path: "F:/Unity/2022.3.62f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.16.2+bdef8f5
+  Session Id:              d477375292854f78aab9e58ff42a637e
+  Correlation Id:          197ad83ac07176e85fc129ff1a185be3
+  External correlation Id: 1602600093082418653
+  Machine Id:              9BP9CLOdnfM8gyP+SAQtSGLsSOE=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-PPfavorite-2022.3.62" (connect: 0.85s, validation: 0.06s, handshake: 0.04s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-PPfavorite-2022.3.62-notifications" at "2026-10-15T10:43:10.8609075Z"
+[Licensing::Module] Connected to LicensingClient (PId: 46836, launch time: 0.00, total connection time: 0.96s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+Built from '2022.3/china_unity/release' branch; Version is '2022.3.62f1c1 (b0109b07edb8) revision 11538587'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit Professional' Language: 'zh' Physical Memory: 32706 MB
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "F4-ZVEP-7NUE-J7DB-Y5UW-XXXX"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Licensing::Client] Successfully resolved entitlement details
+
+COMMAND LINE ARGUMENTS:
+F:\Unity\2022.3.62f1\Editor\Unity.exe
+-batchmode
+-quit
+-nographics
+-projectPath
+F:\PPfavorite\Work\goh\unity\SWGoH-Restored
+-executeMethod
+SwgohRestored.EditorTools.RestoredImporter.DebugDumpGlb
+-logFile
+dump1.log
+Successfully changed project path to: F:\PPfavorite\Work\goh\unity\SWGoH-Restored
+F:/PPfavorite/Work/goh/unity/SWGoH-Restored
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [50864]  Target information:
+
+Player connection [50864]  * "[IP] 192.168.0.10 [Port] 55504 [Flags] 2 [Guid] 1920143010 [EditorId] 1920143010 [Version] 1048832 [Id] WindowsEditor(7,Luke_Desktop) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [50864]  * "[IP] 172.24.224.1 [Port] 55504 [Flags] 2 [Guid] 1920143010 [EditorId] 1920143010 [Version] 1048832 [Id] WindowsEditor(7,Luke_Desktop) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [50864]  * "[IP] 198.18.0.1 [Port] 55504 [Flags] 2 [Guid] 1920143010 [EditorId] 1920143010 [Version] 1048832 [Id] WindowsEditor(7,Luke_Desktop) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [50864] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [50864] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[Package Manager] UpmClient::Connect -- Connected to IPC stream "Upm-52672" after 0.4 seconds.
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 56 packages:
+  Packages from [https://packages.unity.cn]:
+    com.unity.ads@4.4.2 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.ads@4.4.2)
+    com.unity.ai.navigation@1.1.6 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.ai.navigation@1.1.6)
+    com.unity.analytics@3.8.1 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.analytics@3.8.1)
+    com.unity.cloud.gltfast@6.7.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.cloud.gltfast@6.7.0)
+    com.unity.collab-proxy@2.7.1 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.collab-proxy@2.7.1)
+    com.unity.ide.rider@3.0.36 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.ide.rider@3.0.36)
+    com.unity.ide.visualstudio@2.0.22 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.ide.visualstudio@2.0.22)
+    com.unity.ide.vscode@1.2.5 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.ide.vscode@1.2.5)
+    com.unity.nuget.newtonsoft-json@3.2.1 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1)
+    com.unity.purchasing@4.11.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.purchasing@4.11.0)
+    com.unity.test-framework@1.1.33 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.test-framework@1.1.33)
+    com.unity.textmeshpro@3.0.7 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.textmeshpro@3.0.7)
+    com.unity.timeline@1.7.7 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.timeline@1.7.7)
+    com.unity.xr.legacyinputhelpers@2.1.12 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.xr.legacyinputhelpers@2.1.12)
+    com.unity.ext.nunit@1.0.6 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.ext.nunit@1.0.6)
+    com.unity.services.core@1.14.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.services.core@1.14.0)
+    com.unity.burst@1.8.21 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.burst@1.8.21)
+    com.unity.collections@1.5.1 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.collections@1.5.1)
+    com.unity.mathematics@1.3.1 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.mathematics@1.3.1)
+    com.unity.services.analytics@6.0.3 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.services.analytics@6.0.3)
+    com.unity.nuget.mono-cecil@1.11.4 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4)
+  Built-in packages:
+    com.unity.2d.sprite@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.2d.sprite@1.0.0)
+    com.unity.2d.tilemap@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.2d.tilemap@1.0.0)
+    com.unity.ugui@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.ugui@1.0.0)
+    com.unity.modules.ai@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.ai@1.0.0)
+    com.unity.modules.androidjni@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.androidjni@1.0.0)
+    com.unity.modules.animation@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.animation@1.0.0)
+    com.unity.modules.assetbundle@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.assetbundle@1.0.0)
+    com.unity.modules.audio@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.audio@1.0.0)
+    com.unity.modules.cloth@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.cloth@1.0.0)
+    com.unity.modules.director@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.director@1.0.0)
+    com.unity.modules.imageconversion@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.imageconversion@1.0.0)
+    com.unity.modules.imgui@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.imgui@1.0.0)
+    com.unity.modules.jsonserialize@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0)
+    com.unity.modules.particlesystem@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.particlesystem@1.0.0)
+    com.unity.modules.physics@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.physics@1.0.0)
+    com.unity.modules.physics2d@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.physics2d@1.0.0)
+    com.unity.modules.screencapture@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.screencapture@1.0.0)
+    com.unity.modules.terrain@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.terrain@1.0.0)
+    com.unity.modules.terrainphysics@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0)
+    com.unity.modules.tilemap@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.tilemap@1.0.0)
+    com.unity.modules.ui@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.ui@1.0.0)
+    com.unity.modules.uielements@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.uielements@1.0.0)
+    com.unity.modules.umbra@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.umbra@1.0.0)
+    com.unity.modules.unityanalytics@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0)
+    com.unity.modules.unitywebrequest@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0)
+    com.unity.modules.vehicles@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.vehicles@1.0.0)
+    com.unity.modules.video@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.video@1.0.0)
+    com.unity.modules.vr@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.vr@1.0.0)
+    com.unity.modules.wind@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.wind@1.0.0)
+    com.unity.modules.xr@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.xr@1.0.0)
+    com.unity.modules.subsystems@1.0.0 (location: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\Library\PackageCache\com.unity.modules.subsystems@1.0.0)
+[Subsystems] No new subsystems found in resolved package list.
+Package Manager log level set to [2]
+[Package Manager] Done registering packages in 0.39 seconds
+Refreshing native plugins compatible for Editor in 37.27 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.62f1c1 (b0109b07edb8)
+[Subsystems] Discovering subsystems at path F:/Unity/2022.3.62f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path F:/PPfavorite/Work/goh/unity/SWGoH-Restored/Assets
+Forcing GfxDevice: Null
+GfxDevice: creating device client; threaded=0; jobified=0
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+[Licensing::Client] Successfully resolved entitlement details
+Initialize mono
+Mono path[0] = 'F:/Unity/2022.3.62f1/Editor/Data/Managed'
+Mono path[1] = 'F:/Unity/2022.3.62f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'F:/Unity/2022.3.62f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56672
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: F:/Unity/2022.3.62f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.013863 seconds.
+- Loaded All Assemblies, in  0.398 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.255 seconds
+Domain Reload Profiling: 648ms
+	BeginReloadAssembly (135ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (36ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (74ms)
+	LoadAllAssembliesAndSetupDomain (138ms)
+		LoadAssemblies (130ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (136ms)
+			TypeCache.Refresh (134ms)
+				TypeCache.ScanAssembly (121ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (255ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (210ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (12ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (141ms)
+			ProcessInitializeOnLoadMethodAttributes (48ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: F:\PPfavorite\Work\goh\unity\SWGoH-Restored\
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc - - 200 - application/grpc 38.0442ms
+Starting: F:\Unity\2022.3.62f1\Editor\Data\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: F:/PPfavorite/Work/goh/unity/SWGoH-Restored
+DisplayProgressbar: Compiling Scripts
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "F:\Unity\2022.3.62f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "F:\Unity\2022.3.62f1\Editor\Data\NetStandard\Extensions\2.0.0\System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "F:\Unity\2022.3.62f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\System.ComponentModel.Composition.dll" in favor of "F:\Unity\2022.3.62f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ComponentModel.Composition.dll"
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library\PackageCache\com.unity.burst@1.8.21\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4\Mono.Cecil.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors application/grpc - - 200 - application/grpc 76.0616ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      Processing assembly Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll, with 118 defines and 270 references
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running Unity.Jobs.CodeGen.JobsILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Collections, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with Library\Bee\artifacts\1900b0aE.dag\Unity.Collections.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with F:\Unity\2022.3.62f1\Editor\Data\Managed\UnityEngine\UnityEditor.CoreModule.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with F:\Unity\2022.3.62f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil.Rocks, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library\PackageCache\com.unity.burst@1.8.21\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly application/grpc - - 200 - application/grpc 379.1484ms
+ExitCode: 0 Duration: 4s840ms
+[690/896    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[892/896    4s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[893/896    0s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+Processing assembly Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll, with 118 defines and 270 references
+
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[894/896    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[895/896    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (4.80 seconds), 5 items updated, 896 evaluated
+AssetDatabase: script compilation time: 5.388065s
+Begin MonoManager ReloadAssembly
+Total cache size 14995884
+Total cache size after purge 14995884
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.847 seconds
+Refreshing native plugins compatible for Editor in 23.35 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Start importing Assets/Scripts/Editor/RestoredImporter.cs using Guid(612b537c3313f5c4f9bc05d84ff0eab7) Importer(-1,00000000000000000000000000000000) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'bd9dd83acfa01deebdb867ebad113632') in 0.008706 seconds
+Refreshing native plugins compatible for Editor in 23.46 ms, found 2 plugins.
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.586 seconds
+Domain Reload Profiling: 3420ms
+	BeginReloadAssembly (175ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (23ms)
+	RebuildCommonClasses (33ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (47ms)
+	LoadAllAssembliesAndSetupDomain (569ms)
+		LoadAssemblies (517ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (155ms)
+			TypeCache.Refresh (127ms)
+				TypeCache.ScanAssembly (109ms)
+			ScanForSourceGeneratedMonoScriptInfo (24ms)
+			ResolveRequiredComponents (3ms)
+	FinalizeReload (2586ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (2470ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (5ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (103ms)
+			ProcessInitializeOnLoadAttributes (1998ms)
+			ProcessInitializeOnLoadMethodAttributes (340ms)
+			AfterProcessingInitializeOnLoad (16ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (8ms)
+Refreshing native plugins compatible for Editor in 23.95 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=a640624d19b1f65468f2144635fc04a9): Total: 10.598 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=3 ms, native=1463 ms
+		Asset DB Callback time: managed=44 ms, native=34 ms
+		Scripting: domain reloads=1, domain reload time=3587 ms, compile time=5390 ms, other=74 ms
+		Project Asset Count: scripts=3985, non-scripts=1506
+		Asset File Changes: new=0, changed=1, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeBeforeRefreshCallbacks: 1.646ms
+	ApplyChangesToAssetFolders: 0.056ms
+	Scan: 89.131ms
+	OnSourceAssetsModified: 2.453ms
+	GetAllGuidsForCategorization: 3.847ms
+	CategorizeAssets: 81.247ms
+	ImportOutOfDateAssets: 2674.716ms (-2747.555ms without children)
+		ImportManagerImport: 11.349ms (2.377ms without children)
+			ImportInProcess: 8.948ms
+			UpdateCategorizedAssets: 0.024ms
+		CompileScripts: 5390.062ms
+		ReloadNativeAssets: 0.000ms
+		UnloadImportedAssets: 16.975ms
+		ReloadImportedAssets: 0.564ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 2.260ms
+		InitializingProgressBar: 0.000ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 1.060ms
+	PostProcessAllAssets: 49.530ms
+	Hotreload: 25.028ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
+	UnloadStreamsBegin: 0.285ms
+	PersistCurrentRevisions: 0.334ms
+	UnloadStreamsEnd: 0.040ms
+	GenerateScriptTypeHashes: 1.217ms
+	Untracked: 7670.061ms
+Application.AssetDatabase Initial Refresh End
+Scanning for USB devices : 8.694ms
+Initializing Unity extensions:
+[Licensing::Client] Successfully resolved entitlement details
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-SWGoH-Restored
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ProgressiveSceneManager::Cancel()
+Unloading 12 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 109 unused Assets / (1.0 MB). Loaded Objects now: 3648.
+Memory consumption went from 122.8 MB to 121.8 MB.
+Total: 8.575100 ms (FindLiveObjects: 0.266500 ms CreateObjectMapping: 0.255800 ms MarkObjects: 7.414800 ms  DeleteObjects: 0.637000 ms)
+
+[Dump] LoadAllAssetsAtPath: GameObject:Right_kneeJNT, GameObject:Left_wpnJNT, GameObject:neckJNT, Transform:spine1JNT, Transform:Right_elbwJNT, GameObject:char_jynerso_pre, Transform:Left_hipJNT, Mesh:jynarso_pst_mesh, Transform:headJNT, Transform:char_jynerso_pre, Transform:Left_wpn_offsetJNT, Transform:Right_kneeJNT, GameObject:pelvicJNT, GameObject:jynerso_truncheon_end_shadow, GameObject:swd_jynerso_mesh, AnimationClip:Hit, GameObject:Left_wpn_offsetJNT, GameObject:jynerso_truncheon_end, AnimationClip:Death, GameObject:Right_ankleJNT, Transform:jynerso_truncheon_end, GameObject:Right_wpn_offsetJNT, Transform:neckJNT, GameObject:Left_shldrJNT, Transform:Left_shldrJNT, AnimationClip:Idle@1.0, GameObject:Right_clavJNT, Mesh:jynerso_truncheon_end, GameObject:Left_ankleJNT, Transform:jynscarif_mesh_shadow, GameObject:weapon_node, GameObject:Left_ballJNT, GameObject:Left_clavJNT, Transform:Left_ballJNT, Transform:Right_ballJNT, GameObject:Left_hipJNT, Texture2D:jynerso_tex, GameObject:headJNT, Transform:Left_clavJNT, GameObject:spine1JNT, GameObject:Right_hipJNT, Transform:Left_wpnJNT, MeshFilter:jynerso_pst_mesh, GameObject:jynerso_pst_mesh, AnimationClip:Special Ability 2, Transform:Right_ankleJNT, Transform:pelvicJNT, Transform:swd_jynerso_mesh_shadow, AnimationClip:PointAtEnemy, MeshRenderer:jynerso_truncheon_end, MeshRenderer:swd_jynerso_mesh, AnimationClip:Attack, Transform:jynerso_pst_mesh_shadow, Transform:swd_jynerso_mesh, GameObject:Right_ballJNT, GameObject:jynerso_pst_mesh_shadow, AnimationClip:Run, Transform:Left_kneeJNT, Mesh:jynerso_truncheon_base, Material:jynerso_mat, AnimationClip:Idle@0.0, Material:swd_jynerso_mat, Transform:spine2JNT, Transform:jynscarif_mesh, Mesh:jynscarif_mesh, GameObject:Right_wpnJNT, SkinnedMeshRenderer:jynscarif_mesh, Transform:Left_ankleJNT, Transform:unit.char_jynerso_pre, GameObject:Left_elbwJNT, Texture2D:pst_jynerso_tex, GameObject:spine2JNT, MeshRenderer:jynerso_pst_mesh, GameObject:Right_shldrJNT, Transform:Right_hipJNT, Transform:Left_elbwJNT, Texture2D:swd_jynerso_tex, AnimationClip:Homescreen Idle, Transform:Right_wpnJNT, Transform:Right_shldrJNT, AnimationClip:WeaponSwap, GameObject:Scaler, Transform:Right_wpn_offsetJNT, Transform:Left_wrstJNT, Transform:jynerso_pst_mesh, AnimationClip:SpecialAbility, GameObject:Right_elbwJNT, GameObject:Left_kneeJNT, Material:pst_jynerso_mat, Transform:weapon_node, GameObject:Left_wrstJNT, GameObject:unit.char_jynerso_pre, MeshFilter:jynerso_truncheon_end, Transform:Right_wrstJNT, MeshFilter:swd_jynerso_mesh, Transform:jynerso_truncheon_end_shadow, GameObject:swd_jynerso_mesh_shadow, Transform:Scaler, GameObject:jynscarif_mesh_shadow, GameObject:jynscarif_mesh, GameObject:Right_wrstJNT, Transform:Right_clavJNT, Animator:char_jynerso_pre
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SwgohRestored.EditorTools.RestoredImporter:DebugDumpGlb () (at Assets/Scripts/Editor/RestoredImporter.cs:200)
+
+(Filename: Assets/Scripts/Editor/RestoredImporter.cs Line: 200)
+
+[Dump] Representations: GameObject:unit.char_jynerso_pre, Material:jynerso_mat, Material:pst_jynerso_mat, Material:swd_jynerso_mat, Texture2D:jynerso_tex, Texture2D:pst_jynerso_tex, Texture2D:swd_jynerso_tex, Mesh:jynarso_pst_mesh, Mesh:jynerso_truncheon_base, Mesh:jynerso_truncheon_end, Mesh:jynscarif_mesh, AnimationClip:Attack, AnimationClip:Death, AnimationClip:Hit, AnimationClip:Homescreen Idle, AnimationClip:Idle@0.0, AnimationClip:Idle@1.0, AnimationClip:PointAtEnemy, AnimationClip:Run, AnimationClip:Special Ability 2, AnimationClip:SpecialAbility, AnimationClip:WeaponSwap
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SwgohRestored.EditorTools.RestoredImporter:DebugDumpGlb () (at Assets/Scripts/Editor/RestoredImporter.cs:202)
+
+(Filename: Assets/Scripts/Editor/RestoredImporter.cs Line: 202)
+
+Batchmode quit successfully invoked - shutting down!
+Curl error 42: Callback aborted
+Curl error 42: Callback aborted
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-PPfavorite-2022.3.62-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-PPfavorite-2022.3.62 channel disconnected successfully.

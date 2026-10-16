@@ -1,0 +1,181 @@
+GameConstants: 2072 fields, instance window 0x3398 bytes, 2069 UTF-16 needles (S1), relaxed S2 signature variant 1
+   ctor anchor: 0x24B4 UnitSpeedFillMax                             imm 100.0
+   ctor anchor: 0x2308 UnitAttackCritRatingMod                      imm 100.0
+   ctor anchor: 0x22F0 UnitAbilityCritRatingMod                     imm 100.0
+   ctor anchor: 0x22F4 UnitArmorRatingMod                           imm 100.0
+   ctor anchor: 0x24E0 UnitSuppressionRatingMod                     imm 100.0
+   ctor anchor: 0x22F8 UnitAttackCritChanceLevelDeltaMax            imm 1.0
+   ctor anchor: 0x22E0 UnitAbilityCritChanceLevelDeltaMax           imm 1.0
+   ctor anchor: 0x2340 UnitDamageModLevelDeltaMax                   imm 1.0
+   ctor anchor: 0x2334 UnitDamageModEraLevelDeltaMax                imm 1.0
+scanning pid 52516 (SWGoH.exe) ...
+[52516] sweep A (variant 1, private memory) ...
+  regions: 513, bytes read: 1647.3 MB, instance candidates: 73, GC key strings: 2079 / header-less (pool) hits: 82
+  pointer sweep: 519 regions, 1647.4 MB, 2267 sites for 2067 string base(s)
+  FieldInfo chain: 2065/2066 votes -> GameConstants klass 0x2DAA18EF600; runtime offsets vs il2cpp.cs: 2065 match / 1 mismatch of 2066
+  pointer sweep: 521 regions, 1647.4 MB, 6949 sites for 1 string base(s)
+  klass sweep: 6949 site(s) for GameConstants class
+  candidate 0xEF948FF618: short read at 0xEF948FF618 (0/13208)
+  candidate 0x2DCD1A64010: short read at 0x2DCD1A64010 (0/13208)
+  candidate 0x2DCD1A64050: short read at 0x2DCD1A64050 (0/13208)
+  candidate 0x2DCD1A64090: short read at 0x2DCD1A64090 (0/13208)
+  candidate 0x2DCD1A640D0: short read at 0x2DCD1A640D0 (0/13208)
+  candidate 0x2DCD1A64110: short read at 0x2DCD1A64110 (0/13208)
+  candidate 0x2DCD1A64150: short read at 0x2DCD1A64150 (0/13208)
+  candidate 0x2DCD1A64190: short read at 0x2DCD1A64190 (0/13208)
+  candidate 0x2DCD1A641D0: short read at 0x2DCD1A641D0 (0/13208)
+  candidate 0x2DCD1A64210: short read at 0x2DCD1A64210 (0/13208)
+  candidate 0x2DCD1A64250: short read at 0x2DCD1A64250 (0/13208)
+  candidate 0x2DCD1A64290: short read at 0x2DCD1A64290 (0/13208)
+  candidate 0x2DCD1A642D0: short read at 0x2DCD1A642D0 (0/13208)
+  candidate 0x2DCD1A64310: short read at 0x2DCD1A64310 (0/13208)
+  candidate 0x2DCD1A64350: short read at 0x2DCD1A64350 (0/13208)
+  candidate 0x2DCD1A64390: short read at 0x2DCD1A64390 (0/13208)
+  candidate 0x2DCD1A643D0: short read at 0x2DCD1A643D0 (0/13208)
+  candidate 0x2DCD1A64410: short read at 0x2DCD1A64410 (0/13208)
+  candidate 0x2DCD1A64450: short read at 0x2DCD1A64450 (0/13208)
+  candidate 0x2DCD1A64490: short read at 0x2DCD1A64490 (0/13208)
+  candidate 0x2DCD1A644D0: short read at 0x2DCD1A644D0 (0/13208)
+  candidate 0x2DCD1A64510: short read at 0x2DCD1A64510 (0/13208)
+  candidate 0x2DCD1A64550: short read at 0x2DCD1A64550 (0/13208)
+  candidate 0x2DCD1A64590: short read at 0x2DCD1A64590 (0/13208)
+  candidate 0x2DCD1A645D0: short read at 0x2DCD1A645D0 (0/13208)
+  candidate 0x2DCD1A64610: short read at 0x2DCD1A64610 (0/13208)
+  candidate 0x2DCD1A64650: short read at 0x2DCD1A64650 (0/13208)
+  candidate 0x2DCD1A64690: short read at 0x2DCD1A64690 (0/13208)
+  candidate 0x2DCD1A646D0: short read at 0x2DCD1A646D0 (0/13208)
+  candidate 0x2DCD1A64710: short read at 0x2DCD1A64710 (0/13208)
+  candidate 0x2DCD1A64750: short read at 0x2DCD1A64750 (0/13208)
+  candidate 0x2DCD1A64790: short read at 0x2DCD1A64790 (0/13208)
+  candidate 0x2DCD1A647D0: short read at 0x2DCD1A647D0 (0/13208)
+  candidate 0x2DCD1A64810: short read at 0x2DCD1A64810 (0/13208)
+  candidate 0x2DCD1A64850: short read at 0x2DCD1A64850 (0/13208)
+  candidate 0x2DCD1A64890: short read at 0x2DCD1A64890 (0/13208)
+  candidate 0x2DCD1A648D0: short read at 0x2DCD1A648D0 (0/13208)
+  candidate 0x2DCD1A64910: short read at 0x2DCD1A64910 (0/13208)
+  candidate 0x2DCD1A64950: short read at 0x2DCD1A64950 (0/13208)
+  candidate 0x2DCD1A64990: short read at 0x2DCD1A64990 (0/13208)
+  candidate 0x2DCD1A649D0: short read at 0x2DCD1A649D0 (0/13208)
+  candidate 0x2DCD1A64A10: short read at 0x2DCD1A64A10 (0/13208)
+  candidate 0x2DCD1A64A50: short read at 0x2DCD1A64A50 (0/13208)
+  candidate 0x2DCD1A64A90: short read at 0x2DCD1A64A90 (0/13208)
+  candidate 0x2DCD1A64AD0: short read at 0x2DCD1A64AD0 (0/13208)
+  candidate 0x2DCD1A64B10: short read at 0x2DCD1A64B10 (0/13208)
+  candidate 0x2DCD1A64B50: short read at 0x2DCD1A64B50 (0/13208)
+  candidate 0x2DCD1A64B90: short read at 0x2DCD1A64B90 (0/13208)
+  candidate 0x2DCD1A64BD0: short read at 0x2DCD1A64BD0 (0/13208)
+  candidate 0x2DCD1A64C10: short read at 0x2DCD1A64C10 (0/13208)
+  candidate 0x2DCD1A64C50: short read at 0x2DCD1A64C50 (0/13208)
+  candidate 0x2DCD1A64C90: short read at 0x2DCD1A64C90 (0/13208)
+  candidate 0x2DCD1A64CD0: short read at 0x2DCD1A64CD0 (0/13208)
+  candidate 0x2DCD1A64D10: short read at 0x2DCD1A64D10 (0/13208)
+  candidate 0x2DCD1A64D50: short read at 0x2DCD1A64D50 (0/13208)
+  candidate 0x2DCD1A64D90: short read at 0x2DCD1A64D90 (0/13208)
+  candidate 0x2DCD1A64DD0: short read at 0x2DCD1A64DD0 (0/13208)
+  candidate 0x2DCD1A64E10: short read at 0x2DCD1A64E10 (0/13208)
+  candidate 0x2DCD1A64E50: short read at 0x2DCD1A64E50 (0/13208)
+  candidate 0x2DCD1A64E90: short read at 0x2DCD1A64E90 (0/13208)
+  candidate 0x2DCD1A64ED0: short read at 0x2DCD1A64ED0 (0/13208)
+  candidate 0x2DCD1A64F10: short read at 0x2DCD1A64F10 (0/13208)
+  candidate 0x2DCD1A64F50: short read at 0x2DCD1A64F50 (0/13208)
+  candidate 0x2DCD1A64F90: short read at 0x2DCD1A64F90 (0/13208)
+  candidate 0x2DCD1A64FD0: short read at 0x2DCD1A64FD0 (0/13208)
+  candidate 0x2DD1C533CD0: short read at 0x2DD1C533CD0 (0/13208)
+  candidate 0x2DD1C533D50: short read at 0x2DD1C533D50 (0/13208)
+  candidate 0x2DD1C533DD0: short read at 0x2DD1C533DD0 (0/13208)
+  candidate 0x2DD1C533E50: short read at 0x2DD1C533E50 (0/13208)
+  candidate 0x2DD1C533ED0: short read at 0x2DD1C533ED0 (0/13208)
+  candidate 0x2DD1C533F50: short read at 0x2DD1C533F50 (0/13208)
+  candidate 0x2DD1C533FD0: short read at 0x2DD1C533FD0 (0/13208)
+  candidate 0x2DD1C534050: short read at 0x2DD1C534050 (0/13208)
+  candidate 0x2DD1C5340D0: short read at 0x2DD1C5340D0 (0/13208)
+  candidate 0x2DD1C534150: short read at 0x2DD1C534150 (0/13208)
+  candidate 0x2DD1C5341D0: short read at 0x2DD1C5341D0 (0/13208)
+  candidate 0x2DD1C534250: short read at 0x2DD1C534250 (0/13208)
+  candidate 0x2DD1C5342D0: short read at 0x2DD1C5342D0 (0/13208)
+  candidate 0x2DD1C534350: short read at 0x2DD1C534350 (0/13208)
+  candidate 0x2DD1C5343D0: short read at 0x2DD1C5343D0 (0/13208)
+  candidate 0x2DD1C534450: short read at 0x2DD1C534450 (0/13208)
+  candidate 0x2DD1C5344D0: short read at 0x2DD1C5344D0 (0/13208)
+  candidate 0x2DD1C534550: short read at 0x2DD1C534550 (0/13208)
+  candidate 0x2DD1C5345D0: short read at 0x2DD1C5345D0 (0/13208)
+  candidate 0x2DD1C534650: short read at 0x2DD1C534650 (0/13208)
+  candidate 0x2DD1C5346D0: short read at 0x2DD1C5346D0 (0/13208)
+  candidate 0x2DD1C534750: short read at 0x2DD1C534750 (0/13208)
+  candidate 0x2DD1C5347D0: short read at 0x2DD1C5347D0 (0/13208)
+  candidate 0x2DD1C534850: short read at 0x2DD1C534850 (0/13208)
+  candidate 0x2DD1C5348D0: short read at 0x2DD1C5348D0 (0/13208)
+  candidate 0x2DD1C534950: short read at 0x2DD1C534950 (0/13208)
+  candidate 0x2DD1C5349D0: short read at 0x2DD1C5349D0 (0/13208)
+  candidate 0x2DD1C534A50: short read at 0x2DD1C534A50 (0/13208)
+  candidate 0x2DD1C534AD0: short read at 0x2DD1C534AD0 (0/13208)
+  candidate 0x2DD1C534B50: short read at 0x2DD1C534B50 (0/13208)
+  candidate 0x2DD1C534BD0: short read at 0x2DD1C534BD0 (0/13208)
+  candidate 0x2DD1C534C50: short read at 0x2DD1C534C50 (0/13208)
+  candidate 0x2DD1C534CD0: short read at 0x2DD1C534CD0 (0/13208)
+  candidate 0x2DD1C534D50: short read at 0x2DD1C534D50 (0/13208)
+  candidate 0x2DD1C534DD0: short read at 0x2DD1C534DD0 (0/13208)
+  candidate 0x2DD1C534E50: short read at 0x2DD1C534E50 (0/13208)
+  candidate 0x2DD1C534ED0: short read at 0x2DD1C534ED0 (0/13208)
+  candidate 0x2DD1C534F50: short read at 0x2DD1C534F50 (0/13208)
+  candidate 0x2DD1C534FD0: short read at 0x2DD1C534FD0 (0/13208)
+  candidate 0x2DD1C535050: short read at 0x2DD1C535050 (0/13208)
+  candidate 0x2DD1C5350D0: short read at 0x2DD1C5350D0 (0/13208)
+  candidate 0x2DD1C535150: short read at 0x2DD1C535150 (0/13208)
+  candidate 0x2DD1C5351D0: short read at 0x2DD1C5351D0 (0/13208)
+  candidate 0x2DD1C535250: short read at 0x2DD1C535250 (0/13208)
+  candidate 0x2DD1C5352D0: short read at 0x2DD1C5352D0 (0/13208)
+  candidate 0x2DD1C535350: short read at 0x2DD1C535350 (0/13208)
+  candidate 0x2DD1C5353D0: short read at 0x2DD1C5353D0 (0/13208)
+  candidate 0x2DD1C535450: short read at 0x2DD1C535450 (0/13208)
+  candidate 0x2DD1C5354D0: short read at 0x2DD1C5354D0 (0/13208)
+  candidate 0x2DD1C535550: short read at 0x2DD1C535550 (0/13208)
+  candidate 0x2DD1C5355D0: short read at 0x2DD1C5355D0 (0/13208)
+  candidate 0x2DD1C535650: short read at 0x2DD1C535650 (0/13208)
+  candidate 0x2DD1C5356D0: short read at 0x2DD1C5356D0 (0/13208)
+  candidate 0x2DD1C535750: short read at 0x2DD1C535750 (0/13208)
+  candidate 0x2DD1C5357D0: short read at 0x2DD1C5357D0 (0/13208)
+  candidate 0x2DD1C535850: short read at 0x2DD1C535850 (0/13208)
+  candidate 0x2DD1C5358D0: short read at 0x2DD1C5358D0 (0/13208)
+  candidate 0x2DD1C535950: short read at 0x2DD1C535950 (0/13208)
+  candidate 0x2DD1C5359D0: short read at 0x2DD1C5359D0 (0/13208)
+  candidate 0x2DD1C535A50: short read at 0x2DD1C535A50 (0/13208)
+  candidate 0x2DD1C535AD0: short read at 0x2DD1C535AD0 (0/13208)
+  candidate 0x2DD1C535B50: short read at 0x2DD1C535B50 (0/13208)
+  candidate 0x2DD1C535BD0: short read at 0x2DD1C535BD0 (0/13208)
+  candidate 0x2DD1C535C50: short read at 0x2DD1C535C50 (0/13208)
+  candidate 0x2DD1C535CD0: short read at 0x2DD1C535CD0 (0/13208)
+  candidate 0x2DD1C535D50: short read at 0x2DD1C535D50 (0/13208)
+  candidate 0x2DD1C535DD0: short read at 0x2DD1C535DD0 (0/13208)
+  candidate 0x2DD1C535E50: short read at 0x2DD1C535E50 (0/13208)
+  candidate 0x2DD1C535ED0: short read at 0x2DD1C535ED0 (0/13208)
+  candidate 0x2DD1C535F50: short read at 0x2DD1C535F50 (0/13208)
+  candidate 0x2DD1C535FD0: short read at 0x2DD1C535FD0 (0/13208)
+  instance clusters: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1] (consensus: 1 member(s), klass-anchored: 1, walk-known-keys=0)
+  hunt: 1 key(s) resolved (modal-klass 0x2dcd1c59ac0, contested: 0)
+  S1 config table: 551 key(s) (walk: 550, hunt: 1)
+wrote catalog/game_constants_runtime.json
+
+data-driven GameConstants (server-sent config truth where available):
+  offset            value  source                                     cross    field
+  +0x2300 0.009999999776  instance-scan                              -        UnitAttackCritChancePerLevelDelta
+  +0x22E8 0.009999999776  instance-scan                              -        UnitAbilityCritChancePerLevelDelta
+  +0x22FC              0  instance-scan                              -        UnitAttackCritChanceLevelDeltaMin
+  +0x22E4              0  instance-scan                              -        UnitAbilityCritChanceLevelDeltaMin
+  +0x2314   0.1000000015  instance-scan                              -        UnitBaseAttackCritChance
+  +0x230C   0.1000000015  instance-scan                              -        UnitBaseAbilityCritChance
+  +0x231C            1.5  instance-scan                              -        UnitBaseCritDamage
+  +0x2348              0  instance-scan                              -        UnitDamageModPerLevelDelta  [FAIL: PerLevelDelta 0.0 outside 0.001..0.5]
+  +0x2344              0  instance-scan                              -        UnitDamageModLevelDeltaMin
+  +0x233C  0.07500000298  instance-scan                              -        UnitDamageModPerEraLevelDelta
+  +0x2338          -0.75  instance-scan                              -        UnitDamageModEraLevelDeltaMin  [FAIL: Min delta -0.75 outside -0.5..0.5]
+  +0x1C34             60  instance-scan                              -        ShipMitigationAttackerLevelOffset
+  +0x24B4           1000  instance-scan                              -        UnitSpeedFillMax
+  +0x2308           2400  instance-scan                              -        UnitAttackCritRatingMod  [FAIL: rating mod 2400.0 outside 50..500]
+  +0x22F0           2400  instance-scan                              -        UnitAbilityCritRatingMod  [FAIL: rating mod 2400.0 outside 50..500]
+  +0x22F4            7.5  instance-scan                              -        UnitArmorRatingMod  [FAIL: rating mod 7.5 outside 50..500]
+  +0x24E0            7.5  instance-scan                              -        UnitSuppressionRatingMod  [FAIL: rating mod 7.5 outside 50..500]
+  +0x22F8    0.150000006  instance-scan                              -        UnitAttackCritChanceLevelDeltaMax
+  +0x22E0    0.150000006  instance-scan                              -        UnitAbilityCritChanceLevelDeltaMax
+  +0x2340              0  instance-scan                              -        UnitDamageModLevelDeltaMax  [FAIL: Max delta 0.0 outside 0.1..2.0]
+  +0x2334           0.75  instance-scan                              -        UnitDamageModEraLevelDeltaMax

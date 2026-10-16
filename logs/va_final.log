@@ -1,0 +1,30 @@
+  char_ackbaradmiral_pre  [char_ackbaradmiral_pre.anim.glb]  anim='Idle@1.0'  tol=0.5
+    PASS  pst_dh17_pre                             -> Right_wpnJNT             d=0.440  prop@[-0.1659, 0.3905, 0.1854] joint@[-0.2237, 0.813, 0.0762]
+  upright probe ['Idle@1.0']: pelvicJNT=0.957  headJNT=1.568  Left_ballJNT=-0.045  Right_ballJNT=0.009
+  char_grievous_pre  [char_grievous_pre.anim.glb]  anim='Idle'  tol=0.5
+    PASS  saber_left_back                          -> leftWeaponBackJNT        d=0.074  prop@[0.6171, 0.7435, -0.4239] joint@[0.6194, 0.7532, -0.3502]
+    PASS  saber_left_front                         -> leftWeaponFrontJNT       d=0.018  prop@[0.7411, 1.5807, -0.015] joint@[0.741, 1.5873, -0.0317]
+    PASS  saber_right_back                         -> rightWeaponBackJNT       d=0.021  prop@[-0.5878, 0.7108, -0.4437] joint@[-0.5904, 0.7088, -0.4641]
+    PASS  saber_right_front                        -> rightWeaponFrontJNT      d=0.066  prop@[-0.7857, 1.6139, -0.1066] joint@[-0.7848, 1.5896, -0.0455]
+  upright probe ['Idle']: RootJNTBND=0.95  HeadJNTBND=1.427  leftBallJNTBND=0.067  rightBallJNTBND=0.075
+  char_grievousraid_pre  [char_grievousraid_pre.anim.glb]  anim='Idle'  tol=0.5
+    PASS  saber_left_back                          -> leftWeaponBackJNT        d=0.081  prop@[0.6685, 0.8054, -0.4592] joint@[0.671, 0.816, -0.3794]
+    PASS  saber_left_front                         -> leftWeaponFrontJNT       d=0.019  prop@[0.8029, 1.7124, -0.0162] joint@[0.8027, 1.7196, -0.0344]
+    PASS  saber_right_back                         -> rightWeaponBackJNT       d=0.022  prop@[-0.6368, 0.7701, -0.4807] joint@[-0.6396, 0.7679, -0.5027]
+    PASS  saber_right_front                        -> rightWeaponFrontJNT      d=0.071  prop@[-0.8512, 1.7484, -0.1155] joint@[-0.8502, 1.7221, -0.0493]
+  upright probe ['Idle']: RootJNTBND=1.029  HeadJNTBND=1.546  leftBallJNTBND=0.072  rightBallJNTBND=0.081
+  char_vaderduelsend_pre  [char_vaderduelsend_pre.anim.glb]  anim='Idle@1.0'  tol=0.5
+    PASS  swd_vaderduelsend_pre                    -> Right_wpnJNT             d=0.000  prop@[-0.4941, 0.9632, 0.0977] joint@[-0.4941, 0.9632, 0.0977]
+  upright probe ['Idle@1.0']: pelvicJNT=1.093  headJNT=1.762  Left_ballJNT=0.042  Right_ballJNT=0.042
+  char_jynerso_pre  [char_jynerso_pre.anim.glb]  anim='Idle@1.0'  tol=0.5
+    PASS  jynerso_pst_mesh                         -> Right_wpnJNT             d=0.068  prop@[-0.0215, 0.6287, 0.189] joint@[-0.06, 0.6792, 0.1655]
+  upright probe ['Idle@1.0']: pelvicJNT=0.91  headJNT=1.294  Left_ballJNT=0.043  Right_ballJNT=0.172
+  char_obiwanep4_pre  [char_obiwanep4_pre.anim.glb]  anim='Idle@1.0'  tol=0.5
+    PASS  swd_obiwanep4_mesh                       -> Right_wpnJNT             d=0.022  prop@[-0.3432, 0.9197, 0.211] joint@[-0.3443, 0.9253, 0.2323]
+  upright probe ['Idle@1.0']: pelvicJNT=0.933  headJNT=1.44  Left_ballJNT=0.044  Right_ballJNT=0.186
+  char_anakin_gl_remastered_pre  [char_anakin_gl_remastered_pre.anim.glb]  anim='Idle@1.0'  tol=0.5
+    PASS  swd_anakin_pre                           -> Left_wpnJNT              d=0.099  prop@[0.2202, 0.8922, 0.3874] joint@[0.2968, 0.8694, 0.3298]
+    PASS  swd_anakin_pre                           -> Right_wpnJNT             d=0.000  prop@[-0.3786, 0.8632, -0.2251] joint@[-0.3786, 0.8632, -0.2251]
+  upright probe ['Idle@1.0']: pelvicJNT=1.055  headJNT=1.688  Left_ballJNT=0.039  Right_ballJNT=0.04
+
+all prop attachments within tolerance
