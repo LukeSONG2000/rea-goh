@@ -1,6 +1,6 @@
 'use strict';
 // PENDING-ORIGINAL: experimental standalone probe dependency, NOT a working trial API.
-// Native conversion currently reports system error; do not load in the normal host.
+// Original conversion currently raises ArgumentNullException; not a working trial.
 // Main-thread only. Convert the WHOLE original payload so encounter-local definitions,
 // overrides and state use the original factory ordering. Does not start a battle.
 globalThis.convertCapturedBattle=(bytes,metadata)=>{
@@ -30,11 +30,23 @@ globalThis.convertCapturedBattle=(bytes,metadata)=>{
   const method=R.findMethod(R.classOf(factory),'Get',3,['Protos.BattleData','CampaignElementIdentifierDO','RelicTierEnum']);
   if(!method.readPointer().equals(R.module.base.add(0x1D0BFF0)))throw Error('Unexpected BattleData factory revision');
   globalThis.captureConversionPhase='original-factory-get';
-  // Diagnostic alternative to runtime_invoke; both currently fail. Hook silence
-  // alone does not establish where the native failure happens.
-  const get=new NativeFunction(method.readPointer(),'pointer',['pointer','pointer','pointer','uint8','pointer']);
-  globalThis.captureConversionPhase='native-function-created';
-  const returned=get(factory,source.object,identity,metadata.overrideRelicTier,method);
+  // Let IL2CPP runtime_invoke catch its own managed C++ exception. Frida's
+  // default first-chance interception masks it as a generic "system error".
+  // Never use propagate on a direct business-method call without this boundary.
+  const invokeManaged=new NativeFunction(R.module.getExportByName('il2cpp_runtime_invoke'),
+   'pointer',['pointer','pointer','pointer','pointer'],{exceptions:'propagate'});
+  const args=Memory.alloc(24),tier=Memory.alloc(1),exception=Memory.alloc(8);
+  tier.writeU8(metadata.overrideRelicTier);exception.writePointer(ptr(0));
+  args.writePointer(source.object);args.add(8).writePointer(identity);args.add(16).writePointer(tier);
+  const returned=invokeManaged(method,factory,args,exception);
+  const ex=exception.readPointer();
+  if(!ex.isNull()){
+   const error=Error('Original BattleData conversion raised a managed exception');
+   const buffer=Memory.alloc(16384);
+   R.api('format_exception','void',['pointer','pointer','int'])(ex,buffer,16384);
+   error.originalException=buffer.readUtf8String();
+   throw error;
+  }
   globalThis.captureConversionPhase='native-function-returned';
   const data=own(returned);
   globalThis.captureConversionPhase='converted';

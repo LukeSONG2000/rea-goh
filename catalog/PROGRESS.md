@@ -198,3 +198,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 campaign-cli】转换调用故障未解，继续完整目标中的原菜单CLI：root接通已实测Home→战役列表→CampaignGameState及原返回Home，写runtime_observer/commands/cli/host；不开放开战/扫荡/购买。
 
 【Codex/root 2026-10-18 campaign-cli validated】接通campaign-menu/enter/home及snapshot.campaignMenu原入口列表，Home和可见未锁定row门禁，重复menu no-op；原光明面导航多轮+正常启动脚本重启后再一轮闭环PASS，缺menu/feature255拒绝，畸形feature邮箱回归PASS。原奖励页经原Continue退出，最终19440 Home、显示宿主20732实际存活、错误空；未新开战/扫荡/购买/改装备。完整转换system error继续未解：只确认RVA/可执行原prolog/实例类型/byte枚举/依赖有效，traps与RaiseException诊断没有给出原因。不得标免费试玩/隔离完成。详见CAMPAIGN_CLI_VALIDATION_20261018.json。
+
+【Codex/root 2026-10-18 managed-conversion-diagnostic】调用故障取得可复核新证据：exclusive调度仍system error，未挂factory钩子的异常地址KERNELBASE+0xC408A、寄存器含C++异常码0xE06D7363；原生计数探针对成功thread_current也计0，故入口0不可定位，traps all另触发frida-agent访问异常，已撤除。仅在原il2cpp_runtime_invoke异常捕获边界采用exceptions:propagate，三次成功取回原System.ArgumentNullException而不是笼统system error；禁止直接业务函数propagate。tracked captured_battle及probe保留原异常文本，真实12607字节数据仍转换失败，空参数位置待定位，不改payload、不声称试玩完成。证据logs/high_reuse/captured-battle-{managed-catch,managed-details,tracked-check}-evidence.json。日常宿主42980与原19440实际存活，errors空；未新增战斗/消费/装备操作。

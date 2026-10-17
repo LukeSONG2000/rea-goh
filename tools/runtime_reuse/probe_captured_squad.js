@@ -37,6 +37,6 @@
    result.encounters.push({id:S.string(R.readRef(encounters[0][i],'EncounterId')),units:rows});
   }
   result.passed=result.encounters.length>0&&result.sharedFields.length===0;
- });}catch(e){result.error=String(e);result.stack=e.stack;result.conversionPhase=globalThis.captureConversionPhase;}
+ });}catch(e){result.error=String(e);result.originalException=e.originalException||null;result.stack=e.stack;result.conversionPhase=globalThis.captureConversionPhase;}
  finally{for(const s of sources)s.release();R.releaseAll();send(result);}
 })();
