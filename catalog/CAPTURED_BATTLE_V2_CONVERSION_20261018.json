@@ -1,0 +1,86 @@
+{
+  "status": "whole conversion and scoped enemy isolation passed; playable trial incomplete",
+  "capture": {
+    "kind": "original-battle-proto-captured",
+    "scope": "natural response factory input; BattleData only",
+    "encoding": "direct-protobuf-v2",
+    "semanticRoundtripVerified": false,
+    "mission": {
+      "_campaignID": "C01L",
+      "_mapId": "M01",
+      "_nodeId": "N01",
+      "_missionId": "Mi01",
+      "difficulty": 1
+    },
+    "overrideRelicTier": 0,
+    "bytes": 16657,
+    "path": "logs/high_reuse/battle-proto-v2-19440.pb",
+    "sha256": "285490df427518812d76387eb3e3c12e43248d78d54432811a9fcd205963f7ae"
+  },
+  "normalization": {
+    "sourceSha256": "285490df427518812d76387eb3e3c12e43248d78d54432811a9fcd205963f7ae",
+    "normalizedSha256": "a4fc97730de0aba6b96b15a65523b134f8c87005c85e6c466df4fb771f69ef46",
+    "schemaSha256": "6e3cffb80a2b2991a43e3d103a9cb39c7ca5e08ff9f6943cd0302ec3301d60b0",
+    "method": "materialize omitted original struct DefaultValue fields"
+  },
+  "runtimeEvidence": {
+    "provider": "REA-installed Frida",
+    "pid": 19440,
+    "messages": [
+      {
+        "type": "send",
+        "payload": {
+          "kind": "protobuf-probe-complete",
+          "scope": "captured enemy squad original factory isolation",
+          "passed": true,
+          "encounters": [
+            {
+              "id": "1",
+              "units": [
+                {
+                  "baseId": "PVE_OOMCOMMANDBATTLEDROID",
+                  "level": 1
+                },
+                {
+                  "baseId": "PVE_OOMSECURITYBATTLEDROID",
+                  "level": 1
+                },
+                {
+                  "baseId": "PVE_B1BATTLEDROID",
+                  "level": 1
+                },
+                {
+                  "baseId": "PVE_B1BATTLEDROID",
+                  "level": 1
+                },
+                {
+                  "baseId": "PVE_DROIDEKA",
+                  "level": 1
+                }
+              ]
+            }
+          ],
+          "sharedFields": [],
+          "phase": "inspect-encounter-0-cell-4",
+          "originalDefinitionMapRestored": true
+        }
+      }
+    ],
+    "detached": true
+  },
+  "liveMission": {
+    "id": "C01L/M01/N01/Mi01",
+    "costGuard": "energy1,currency0,Datacron null",
+    "displayedCost": 6,
+    "actualBalanceDelta": "not measured",
+    "completion": "original auto reached rewards; Continue and campaign-home returned Home"
+  },
+  "remaining": [
+    "full graph isolation audit including states/datacron",
+    "faithful player squad isolation",
+    "original-context lifetime and actual resource-free replay",
+    "all other active goal requirements"
+  ],
+  "normalHost": 1124,
+  "client": 19440
+}

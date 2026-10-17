@@ -1,6 +1,7 @@
 'use strict';
 // PENDING-ORIGINAL: experimental standalone probe dependency, NOT a working trial API.
-// Original conversion currently raises ArgumentNullException; not a working trial.
+// Direct v2 capture + schema defaults passed original conversion and enemy-copy checks.
+// Player isolation and playable mission replay remain unverified. No normal-host loading.
 // Main-thread only. Convert the WHOLE original payload so encounter-local definitions,
 // overrides and state use the original factory ordering. Does not start a battle.
 globalThis.convertCapturedBattle=(bytes,metadata)=>{
