@@ -188,3 +188,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 natural-battle-capture】真实光明面1-A（C01L/M01/N01/Mi01/difficulty1）经原酒馆控制器→战役→支援→出战进入BattleGameState，原费用类型energy1/currency0、datacron空、页面6体力。原自然响应F8F750范围内Factory.Get入口捕获BattleData 12607字节，SHA d321d26c536e658c327f1fc288822d39ae1b578e5569be5301ca5f3f4e71b831；原Deserialize→Serialize文件回环逐字节一致PASS，1 encounter/index0。原auto完成至奖励页；无购买/装备拆卸，实际体力余额差未复核。新增可选CaptureBattle宿主、序列化/反序列化、回环探针及mock捕获边界回归，邮箱/单宿主/turn-order PASS。正常显示宿主38100恢复。真实数据来源已证实，但队伍精确隔离与捕获关卡的隔离重放尚未实现，不能称免费试玩完成；详见BATTLE_NATURAL_CAPTURE_VALIDATION_20261018.json。
 
 【Codex/root 2026-10-18 capture-host纠正】上一条及BATTLE_NATURAL_CAPTURE_VALIDATION记录的宿主38100仅启动返回PID，后续核对发现已因中文源码解码错误退出，不能视作恢复成功；Windows PowerShell5 Get-Content默认ANSI导致JS中文字符串损坏。启动脚本改为显式UTF-8读取，重新启动26380，原PID19440及宿主实际存活、status detached=false/errors空、合并源码node --check PASS。真实proto捕获与native回环验证不受此启动失败影响。
+
+【Codex/root 2026-10-18 trial-isolation】认领真实关卡试玩的原factory转换与玩家队伍隔离；root写tools/runtime_reuse相关模块及运行时验证，visual_gap独占Ghidra只读核对Squad/Unit proto转换保真与缓存共享。当前客户端19440、显示宿主26380实际存活，捕获文件保持只读；不将库存fixture替代真实关卡。
