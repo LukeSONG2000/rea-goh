@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {processCommands} from './runtime_commands.mjs';
+const root=fs.mkdtempSync(path.resolve('logs/high_reuse/command-test-'));
+const box=path.join(root,'commands');fs.mkdirSync(box);
+let calls=0;const execute=async()=>{calls++;return {transitionConfirmed:true};};
+const owner={pid:123,hostPid:456},now=()=>10000;
+async function test(extra){
+ const id=crypto.randomUUID();fs.writeFileSync(path.join(box,id+'.request.json'),JSON.stringify({id,...owner,operation:'inventory-home',expiresAt:11000,...extra}));
+ await processCommands(root,owner,execute,now);return JSON.parse(fs.readFileSync(path.join(box,id+'.result.json')));
+}
+try{
+ assert.equal((await test({})).ok,true);assert.equal(calls,1);
+ for(const invalid of [{pid:999},{hostPid:999},{expiresAt:9999},{expiresAt:Infinity},{operation:'purchase'},{operation:'eval'}]){
+  const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
+ }
+ assert.equal(calls,1,'Rejected commands never dispatch');
+ await processCommands(root,owner,execute,now);assert.equal(calls,1,'Completed requests are not replayed');
+ const completed=fs.readdirSync(box).find(f=>JSON.parse(fs.readFileSync(path.join(box,f))).ok);
+ const completedId=completed.replace('.result.json','');
+ fs.writeFileSync(path.join(box,completedId+'.request.json'),JSON.stringify({id:completedId,...owner,operation:'inventory-home',expiresAt:11000}));
+ await processCommands(root,owner,execute,now);assert.equal(calls,1,'Duplicate completed IDs must not dispatch again');
+ const pendingId=crypto.randomUUID();
+ fs.writeFileSync(path.join(box,pendingId+'.request.json'),JSON.stringify({id:pendingId,...owner,operation:'inventory-home',expiresAt:11000}));
+ await processCommands(root,owner,async()=>({transitionConfirmed:false}),now);
+ const pending=JSON.parse(fs.readFileSync(path.join(box,pendingId+'.result.json')));
+ assert.equal(pending.ok,false);assert.equal(pending.dispatched,true);
+ const id=crypto.randomUUID();fs.writeFileSync(path.join(box,id+'.running.json'),'{}');
+ await processCommands(root,owner,execute,now);assert.equal(calls,1,'Uncertain running commands are never retried');
+ console.log('PASS: valid dispatch, wrong owner/expired/unknown operations rejected, no replay or retry.');
+}finally{
+ for(const file of fs.readdirSync(box))fs.unlinkSync(path.join(box,file));fs.rmdirSync(box);fs.rmdirSync(root);
+}

@@ -170,3 +170,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 attributes-overlay】新增置顶只读窗口入口tools/start_attribute_overlay.cmd，初始/当前/净变化、总/永久/临时护盾及状态期限，过期或断连清空。原隔离JMK实测永久101823、临时152211、总254034，精通60→75净+15，属性warnings0，零攻击/正式BattleService0，回Home清理PASS。新增CLI inventory-home原UI导航实测及watch。早先持续观察出现frida-agent BEX64 c0000409，不能标稳定；改为脚本生命周期单一dispatcher hook+队列+优雅停止，40引用与100排队/重入/超时测试PASS，新PID41904持续读+并行隔离模拟+退场/停止后仍存活，无新错误观察。根因未完全证实，长时/全模式待验；右上角绝对值等完整目标未完。详见ATTRIBUTE_OVERLAY_VALIDATION_20261018.json。
 
 【Codex/root 2026-10-18 target-header】长按面板及右上目标区新增生命/总护盾/永久护盾/临时护盾四行原getter绝对值；JMK与Stormtrooper隔离原UI截图确认不重叠，零攻击/回合/正式BattleService，回Home/guard/GC清理PASS。记录02:34:30再次frida-agent BEX64，dispatcher单改不足；本次改UI+observer单一宿主，悬浮窗只读JSON，CLI snapshot用fresh cache，互斥锁拒绝第二观察宿主。不能宣称长期崩溃已根治或全模式验收；详见BATTLE_HEADER_VALIDATION_20261018.json。
+
+【Codex/root 2026-10-18 inventory-cli】共享宿主命令邮箱接通原角色/舰船收藏与返回酒馆：原TransitionData+StateController入口保留feature lock，实际type1/nav8与type2/nav10两轮闭环；最终PID19440 Home，宿主40468存活、错误日志空。请求绑定game/host PID、截止时间、白名单，先claim再执行，重复完成ID不重放；未确认目标页返回失败，超时不盲重试。单宿主锁及邮箱回归PASS，酒馆误调用inventory-home原门禁拒绝。无购买/装备操作，不宣称其他菜单/忠实试玩/AI预测或长期稳定已完成。证据INVENTORY_CLI_VALIDATION_20261018.json。

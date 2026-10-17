@@ -1,3 +1,4 @@
+import {processCommands} from './runtime_commands.mjs';
 import {acquireRuntimeSession} from './runtime_session_lock.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -19,7 +20,19 @@ try{
  await script.load();
  while(!detached&&!stop&&!fs.existsSync(stopPath)){
   await new Promise(resolve=>setTimeout(resolve,1000));
-  if(!detached){last=await script.exports.status();save();
+  if(!detached){
+   await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async operation=>{
+    const home=operation==='inventory-home';
+    const result=home?await script.exports.inventoryhome():await script.exports.openinventory(operation==='inventory-characters'?'characters':'ships');
+    let after,confirmed=false;
+    for(let i=0;i<10;i++){
+     await new Promise(r=>setTimeout(r,300));after=await script.exports.snapshot();
+     confirmed=home?after.state==='HomeBaseGameState':after.state==='MasterInventoryGameState'&&after.inventory?.type===(operation==='inventory-characters'?1:2);
+     if(confirmed)break;
+    }
+    return {...result,transitionConfirmed:confirmed,afterState:after.state,inventory:after.inventory};
+   });
+   last=await script.exports.status();save();
    const snapshot=await script.exports.snapshot();
    fs.writeFileSync(path.join(directory,'runtime-snapshot.json'),JSON.stringify({...snapshot,pid:Number(pid),observedAt:new Date().toISOString()}));}
  }

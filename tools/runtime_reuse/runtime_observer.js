@@ -1,10 +1,14 @@
 'use strict';
-// Main-thread observation only. No UI navigation, input or service calls.
+// Snapshot is read-only; separate explicit RPC exports perform original UI navigation.
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const R=RuntimeApi,S=SceneApi;
  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
  const stateName=R.fullName(R.classOf(state));
  const result={schemaVersion:1,state:stateName,units:[],scope:'observed current client; no gameplay input'};
+ if(stateName==='MasterInventoryGameState'){
+  const controller=R.readRef(state,'_masterInventoryController'),data=R.readRef(controller,'_transitionData');
+  result.inventory={type:R.readValue(data,'<Type>k__BackingField','i32'),navigation:R.readValue(data,'<NavType>k__BackingField','i32')};
+ }
  if(stateName!=='BattleGameState')return result;
  const context=R.readRef(R.readRef(state,'_battleController'),'_battleContext');
  const seen=new Set();
@@ -25,4 +29,19 @@ globalThis.inventoryHome=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  S.invoke('MasterInventoryView','OnHomeButtonClick',views[0]);
  return {invoked:'MasterInventoryView.OnHomeButtonClick',effect:'original UI navigation',transitionConfirmed:false};
 });
-rpc.exports={...rpc.exports,snapshot:()=>readRuntimeSnapshot(),inventoryhome:()=>inventoryHome()};
+globalThis.openInventory=kind=>RuntimeApi.runOnMainThreadOnce(()=>{
+ if(!['characters','ships'].includes(kind))throw Error('Unsupported inventory kind');
+ const R=RuntimeApi,S=SceneApi,A=R.arg,controller=R.findBound('StateController');
+ const state=R.readRef(controller,'<CurrentState>k__BackingField');
+ if(R.fullName(R.classOf(state))!=='HomeBaseGameState')throw Error('Opening inventory requires HomeBaseGameState');
+ const klass=R.findClass('MasterInventoryGameState+TransitionData'),data=R.api('object_new','pointer',['pointer'])(klass),handle=R.retain(data);
+ try{
+ S.invoke('MasterInventoryGameState+TransitionData','.ctor',data);
+ for(const [name,value] of [['Type',kind==='characters'?1:2],['NavType',kind==='characters'?8:10]])S.invoke('MasterInventoryGameState+TransitionData','set_'+name,data,[A.value('i32',value)]);
+ S.invoke('MasterInventoryGameState+TransitionData','set_IsPlayerRoster',data,[A.value('bool',true)]);
+ S.invoke('MasterInventoryGameState+TransitionData','set_UseConditionalCachedTransitionData',data,[A.value('bool',false)]);
+ S.invoke('StateController','EnterState',controller,[A.ref(S.type('MasterInventoryGameState')),A.ref(data),A.value('bool',false)],['System.Type','IStateTransitionData','System.Boolean']);
+ return {invoked:'StateController.EnterState',effect:'original inventory navigation',kind,transitionConfirmed:false};
+ }finally{R.release(handle);}
+});
+rpc.exports={...rpc.exports,snapshot:()=>readRuntimeSnapshot(),inventoryhome:()=>inventoryHome(),openinventory:kind=>openInventory(kind)};

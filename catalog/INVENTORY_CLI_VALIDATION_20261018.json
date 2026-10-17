@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-18",
+  "gamePid": 19440,
+  "hostPid": 40468,
+  "scope": "Original inventory navigation through one shared runtime host",
+  "receipts": [
+    {
+      "id": "508e0920-4707-4335-9878-a0297998e81d",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "StateController.EnterState",
+        "effect": "original inventory navigation",
+        "kind": "characters",
+        "transitionConfirmed": true,
+        "afterState": "MasterInventoryGameState",
+        "inventory": {
+          "type": 1,
+          "navigation": 8
+        }
+      }
+    },
+    {
+      "id": "f36c2ca8-9dc5-452d-affa-33c686ccd9ed",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "MasterInventoryView.OnHomeButtonClick",
+        "effect": "original UI navigation",
+        "transitionConfirmed": true,
+        "afterState": "HomeBaseGameState"
+      }
+    },
+    {
+      "id": "c441960b-5112-44b5-ac24-dcbb81786ef4",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "StateController.EnterState",
+        "effect": "original inventory navigation",
+        "kind": "ships",
+        "transitionConfirmed": true,
+        "afterState": "MasterInventoryGameState",
+        "inventory": {
+          "type": 2,
+          "navigation": 10
+        }
+      }
+    },
+    {
+      "id": "59880c88-2cfc-44e1-b2b2-06c01b2a388e",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "MasterInventoryView.OnHomeButtonClick",
+        "effect": "original UI navigation",
+        "transitionConfirmed": true,
+        "afterState": "HomeBaseGameState"
+      }
+    },
+    {
+      "id": "78c3f11e-9a92-4fa1-a54e-fcbc60797e13",
+      "ok": false,
+      "dispatched": true,
+      "error": "Error: inventory-home requires the inventory screen"
+    }
+  ],
+  "tests": [
+    "command mailbox validation and duplicate-ID replay prevention PASS",
+    "unconfirmed navigation fails rather than reporting success PASS",
+    "single live host lock PASS",
+    "original character/home/ship/home round trip PASS",
+    "invalid-state home request rejected PASS"
+  ],
+  "limitations": [
+    "No purchases or equipment changes implemented",
+    "No full mission trial or AI prediction delivered",
+    "Original feature locks preserved; locked account not tested",
+    "Long-term Frida stability remains unproven"
+  ],
+  "screenshot": "logs/high_reuse/inventory-ships-cli.png"
+}
