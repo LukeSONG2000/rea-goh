@@ -232,3 +232,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 datacron-isolation】认领保存小队Datacron原Factory.Get(BattleStat)对象图及词缀/原计算修正审计；原squad-with-units native调用15487C0已定位，先只读验证，不拆装装备、不开放未证实分支。
 
 【Codex/root 2026-10-18 datacron-isolation validated】新增probe_private_datacron：原saved type3 Datacron root/tags/affix/GrantedAbility/Ability对象独立，9词缀原标量/字符串一致、620原GetStatModifier+9启用判断一致；三能力DO独立，原set/template/ability/target定义保留共享。初探instanceType字节假设错误由元数据检查拒绝，修i32后完整PASS。logs隔离诊断保留原Datacron进入原模拟，activeIndex5、五单位context均私有且出现alignment035/faction028原handler，两次终态/正式service0，战后Datacron复核及370单位22940属性装备复核PASS。关键原mission.IsDatacronAllowed=false，故1-A诊断不等于合法模式支持；公开入口新增原关卡明确拒绝且不删除队伍记录仪，允许模式仍待端到端验证。拒绝测试发现headless builder0tick未初始化被runner误判未清理，新增trial_lifecycle精确判定与回归；首次只在guard/GC/hooks全释放证据确认后停止本次自有node32820，再测自动detached=true/拒绝exit1 PASS。报告DATACRON_ISOLATION_VALIDATION_20261018.json；正常宿主34412与原19440存活Home，无装备API/消费操作。
+
+【Codex/root 2026-10-18 original-ai-trace】认领原AI被动决策轨迹：仅观察owned隔离战斗自然GetAbilityAIResult/决策节点/原返回技能目标，零额外Evaluate或随机调用，先与同seed无观察运行对照；不修改原AI/共享树。
