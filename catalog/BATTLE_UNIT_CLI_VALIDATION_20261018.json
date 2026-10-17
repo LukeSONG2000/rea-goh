@@ -1,0 +1,262 @@
+{
+  "date": "2026-10-18",
+  "operation": "battle-unit",
+  "nativeSources": [
+    "manual_unit_tapped",
+    "ability_context_ready",
+    "manually_activate_move",
+    "can_perform_move"
+  ],
+  "receipts": [
+    {
+      "id": "fd54a2df-2042-4950-b5df-bf61d7f7ffaf",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "abilityId": "specialability_jedimasterkenobi02",
+        "index": 2,
+        "turn": 0,
+        "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+        "resolution": "Original callback invoked; outcome requires subsequent observation"
+      }
+    },
+    {
+      "id": "e3a73ac6-69df-45b7-bd47-faa4a554fb78",
+      "ok": false,
+      "dispatched": true,
+      "error": "Error: Unit is not in original selection candidates"
+    },
+    {
+      "id": "e62ddcd5-d14a-46c8-968d-4b4edf30b936",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "selectionCompleted": true,
+        "targetId": "_dYj_ndZT7WFuQbVeA-sTQ",
+        "invoked": "BattleManualUnitSelectController.HandleUnitTapped"
+      }
+    },
+    {
+      "id": "abb32e83-2d2d-4a0e-91cb-38d632e1d2ab",
+      "ok": false,
+      "dispatched": true,
+      "error": "Error: Stale battle input snapshot"
+    },
+    {
+      "id": "8a980101-b537-41b9-a6ed-79bfa0022654",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "abilityId": "specialability_jedimasterkenobi02",
+        "index": 2,
+        "turn": 0,
+        "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+        "resolution": "Original callback invoked; outcome requires subsequent observation"
+      }
+    },
+    {
+      "id": "59ad67db-47dd-40a2-baeb-79ff47df39d8",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "selectionCompleted": true,
+        "targetId": "_dYj_ndZT7WFuQbVeA-sTQ",
+        "invoked": "BattleManualUnitSelectController.HandleUnitTapped"
+      }
+    },
+    {
+      "id": "a926268d-7e20-4453-8606-de0b69324305",
+      "ok": false,
+      "dispatched": true,
+      "error": "Error: Original ability button unavailable"
+    },
+    {
+      "id": "61e1a10c-21e0-440e-85fa-fd30cc74dfdc",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "abilityId": "basicability_jedimasterkenobi",
+        "index": 0,
+        "turn": 1,
+        "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+        "resolution": "Original callback invoked; outcome requires subsequent observation"
+      }
+    }
+  ],
+  "pendingCandidates": [
+    {
+      "id": "_dYj_ndZT7WFuQbVeA-sTQ",
+      "baseId": "GENERALKENOBI"
+    }
+  ],
+  "effectsAfterSelection": [
+    {
+      "id": "specialability_jedimasterkenobi02_tenacity_buff_all",
+      "duration": "剩余 3 次自身完整回合完成；另有原移除条件"
+    },
+    {
+      "id": "specialability_jedimasterkenobi02_foresight_dodge_all",
+      "duration": "剩余 3 次自身完整回合完成；另有原移除条件"
+    },
+    {
+      "id": "specialability_jedimasterkenobi02_foresight_deflection_all",
+      "duration": "剩余 3 次自身完整回合完成；另有原移除条件"
+    },
+    {
+      "id": "specialability_jedimasterkenobi02_galactic_republic_damage_immunity_selected_target_1turn",
+      "duration": "剩余 1 次自身完整回合完成；另有原移除条件"
+    },
+    {
+      "id": "specialability_jedimasterkenobi02_protection_buff",
+      "duration": "剩余 2 次自身完整回合完成；另有原移除条件"
+    }
+  ],
+  "cooldownSnapshot": {
+    "token": "19440:1792265842301:6",
+    "turn": 1,
+    "previous": 34,
+    "next": 1,
+    "actor": "0x287b7359d20",
+    "abilities": [
+      {
+        "index": 0,
+        "id": "basicability_jedimasterkenobi",
+        "active": true,
+        "ready": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 1,
+        "id": "specialability_jedimasterkenobi01",
+        "active": true,
+        "ready": true,
+        "abilityType": 3,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 2,
+        "id": "specialability_jedimasterkenobi02",
+        "active": true,
+        "ready": false,
+        "abilityType": 3,
+        "buttonState": 0,
+        "cooldown": 4
+      },
+      {
+        "index": 3,
+        "id": "ultimateability_jedimasterkenobi",
+        "active": true,
+        "ready": false,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 4,
+        "id": "leaderability_jedimasterkenobi",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 5,
+        "id": "uniqueability_jedimasterkenobi01",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 6,
+        "id": "uniqueability_galacticlegend01",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      }
+    ],
+    "targets": [
+      {
+        "id": "Z7ODJb78RXm_0_AYC4TAGw",
+        "baseId": "STORMTROOPER"
+      }
+    ],
+    "selectedTarget": "Z7ODJb78RXm_0_AYC4TAGw",
+    "manualTarget": "Z7ODJb78RXm_0_AYC4TAGw",
+    "selectingUnit": false,
+    "selectionCandidates": [],
+    "awaitingAbility": true,
+    "scope": "original primary ability table, enemy targets and pending unit selection; ultimate UI pending"
+  },
+  "completion": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": false,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 2,
+      "currentState": "CampaignGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 2,
+      "sendto": 1,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 1,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": true,
+      "foreignTransition": false
+    }
+  },
+  "tests": [
+    "invalid candidate rejected and selection remained open",
+    "valid ally completed selection with original effects applied",
+    "repeated selection rejected as stale",
+    "original readiness rejects cooldown4 while buttonState0",
+    "rejected cooldown input did not consume valid basic token",
+    "original terminal136 turn2 serviceCalls0 and cleanup PASS",
+    "mailbox malformed payload PASS",
+    "turn-order deterministic regression PASS"
+  ],
+  "limitations": [
+    "JMK special02 tested; not all ally-select skills or modes",
+    "first observation run ended at deadline after turn1; second run reached terminal",
+    "legacy autoClick=false makes verifiedVisualBattle=false; external CLI receipts plus terminal are the proof",
+    "ultimate UI, cancellation, faithful mission trial and AI features remain incomplete"
+  ]
+}

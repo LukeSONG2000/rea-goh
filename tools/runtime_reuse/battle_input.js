@@ -35,12 +35,14 @@ globalThis.BattleInputBridge=(()=>{
    const data=R.readRef(ability,'<AbilityDO>k__BackingField');
    const active=!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(button)),'bool');
    abilities.push({index,id:S.string(S.invoke('AbilityDO','get_Id',data)),active,
+    ready:!!R.unbox(S.invoke('AbilityContext','get_IsAbilityReady',ability),'bool'),
     abilityType:R.unbox(S.invoke('AbilityDO','get_AbilityType',data),'u8'),
     buttonState:R.readValue(button,'<CurrentState>k__BackingField','i32'),
     cooldown:R.readValue(ability,'<CooldownCounter>k__BackingField','i32')});
   }
   const selection=R.readRef(context,'<BattleManualUnitSelectController>k__BackingField');
   const selectingUnit=!selection.isNull()&&!!R.unbox(S.invoke('BattleManualUnitSelectController','get_CurrentlyPerformingUnitSelection',selection),'bool');
+  const selectionCandidates=selectingUnit?unitList(R.readRef(selection,'_units')).map(unit=>({id:unitId(unit),baseId:S.string(R.readRef(R.readRef(R.readRef(unit,'_unitDO'),'<Definition>k__BackingField'),'BaseId'))})):[];
   const awaitingAbility=previous===34&&next===1&&visible&&owner===0&&!selectingUnit;
   const targeting=actor.isNull()?R.nil:R.readRef(actor,'_targetingController');
   let targets=[],selectedTarget=null,manualTarget=null;
@@ -49,10 +51,10 @@ globalThis.BattleInputBridge=(()=>{
    selectedTarget=unitId(S.invoke('BattleTargetingController','GetCurrentTarget',targeting));
    manualTarget=unitId(S.invoke('BattleTargetingController','get_ManualTarget',targeting));
   }
-  const currentSignature=JSON.stringify([context.toString(),actor.toString(),turn,previous,next,visible,owner,abilities,targets,selectedTarget,manualTarget,selectingUnit]);
+  const currentSignature=JSON.stringify([context.toString(),actor.toString(),turn,previous,next,visible,owner,abilities,targets,selectedTarget,manualTarget,selectingUnit,selectionCandidates]);
   if(currentSignature!==signature){signature=currentSignature;token=epoch+':'+(++serial);}
-  return {table,list,targeting,public:{token,turn,previous,next,actor:actor.toString(),abilities,targets,selectedTarget,manualTarget,selectingUnit,
-   awaitingAbility,scope:'current original primary ability table and enemy targets; ultimate and special unit selection pending'}};
+  return {table,list,targeting,selection,public:{token,turn,previous,next,actor:actor.toString(),abilities,targets,selectedTarget,manualTarget,selectingUnit,selectionCandidates,
+   awaitingAbility,scope:'original primary ability table, enemy targets and pending unit selection; ultimate UI pending'}};
  }
  function choose(request){
   if(!request||typeof request.token!=='string'||!Number.isInteger(request.index))throw Error('Expected token and integer index');
@@ -61,7 +63,7 @@ globalThis.BattleInputBridge=(()=>{
   if(consumed===request.token)throw Error('This input token was already dispatched; inspect state before retrying');
   if(!info.awaitingAbility)throw Error('Original FSM is not awaiting ability input');
   const ability=info.abilities.find(a=>a.index===request.index);
-  if(!ability||!ability.active||![0,1].includes(ability.buttonState)||[1,4].includes(ability.abilityType))throw Error('Original ability button unavailable');
+  if(!ability||!ability.active||!ability.ready||![0,1].includes(ability.buttonState)||[1,4].includes(ability.abilityType))throw Error('Original ability button unavailable');
   consumed=request.token;
   S.invoke('BattleAbilityTableComponent','HandleAbilityButtonClicked',live.table,[A.value('i32',ability.index),A.ref(live.list)]);
   return {inputDispatched:true,abilityId:ability.id,index:ability.index,turn:info.turn,
@@ -80,5 +82,16 @@ globalThis.BattleInputBridge=(()=>{
   const manual=unitId(S.invoke('BattleTargetingController','get_ManualTarget',live.targeting));
   return {inputDispatched:true,targetConfirmed:actual===request.targetId&&manual===request.targetId,targetId:request.targetId,actualTarget:actual,manualTarget:manual,invoked:'BattleTargetingController.SelectManualTarget'};
  }
- return {snapshot:()=>inspect().public,choose,selectTarget};
+ function selectUnit(request){
+  if(!request||typeof request.token!=='string'||typeof request.targetId!=='string')throw Error('Expected token and targetId');
+  const live=inspect(),info=live.public;
+  if(request.token!==info.token)throw Error('Stale battle input snapshot');
+  if(!info.selectingUnit||consumed===request.token)throw Error('No pending original unit selection');
+  // Invalid native IDs finish the selection with null. Never forward them.
+  if(!info.selectionCandidates.some(t=>t.id===request.targetId))throw Error('Unit is not in original selection candidates');
+  consumed=request.token;
+  S.invoke('BattleManualUnitSelectController','HandleUnitTapped',live.selection,[A.ref(R.string(request.targetId))]);
+  return {inputDispatched:true,selectionCompleted:!R.unbox(S.invoke('BattleManualUnitSelectController','get_CurrentlyPerformingUnitSelection',live.selection),'bool'),targetId:request.targetId,invoked:'BattleManualUnitSelectController.HandleUnitTapped'};
+ }
+ return {snapshot:()=>inspect().public,choose,selectTarget,selectUnit};
 })();

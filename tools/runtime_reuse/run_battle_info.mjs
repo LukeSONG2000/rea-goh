@@ -23,6 +23,7 @@ try{
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
     if(operation==='battle-ability')return await script.exports.battleability(payload);
+    if(operation==='battle-unit')return await script.exports.battleunit(payload);
     if(operation==='battle-target')return await script.exports.battletarget(payload);
     const home=operation==='inventory-home';
     const result=home?await script.exports.inventoryhome():await script.exports.openinventory(operation==='inventory-characters'?'characters':'ships');
