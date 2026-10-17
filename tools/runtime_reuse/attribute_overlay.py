@@ -36,9 +36,6 @@ def main():
     scroll.pack(side='right',fill='y');table.pack(fill='both',expand=True)
     effects=tk.Text(tabs,wrap='word',height=12);tabs.add(effects,text='状态期限')
     ttk.Label(window,text='净变化包含全部战斗因素；不等同于精通单独贡献。面板基础值尚未验证。',wraplength=620).pack(fill='x',padx=12,pady=8)
-    logdir=ROOT/'logs/high_reuse';logdir.mkdir(parents=True,exist_ok=True)
-    out=(logdir/'attribute-overlay-host.log').open('w',encoding='utf-8')
-    host=subprocess.Popen(['node',str(ROOT/'tools/runtime_reuse/runtime_cli.mjs'),'watch','--pid',str(args.pid)],cwd=ROOT,stdout=out,stderr=out,creationflags=subprocess.CREATE_NO_WINDOW)
     keys=[]
     def clear(message):
         status.config(text=message);health.config(text='');table.delete(*table.get_children());choice['values']=[];choice.set('')
@@ -46,7 +43,6 @@ def main():
     def refresh():
         nonlocal keys
         try:
-            if host.poll() is not None: raise ValueError('读取进程已退出；请查看 attribute-overlay-host.log')
             data=json.loads(SNAPSHOT.read_text(encoding='utf-8-sig'))
             age=(datetime.now(timezone.utc)-datetime.fromisoformat(data['observedAt'].replace('Z','+00:00'))).total_seconds()
             if data.get('pid')!=args.pid or age>5: raise ValueError('等待新读数（旧数据已隐藏）')
@@ -68,9 +64,6 @@ def main():
         except (OSError,ValueError,KeyError,TypeError) as exc: clear(str(exc))
         window.after(1000,refresh)
     def close():
-        if host.poll() is None: (logdir/f'runtime-watch-{host.pid}.stop').write_text('stop',encoding='utf-8')
-        try: host.wait(timeout=20)
-        except subprocess.TimeoutExpired: host.kill();host.wait()
-        out.close();window.destroy()
+        window.destroy()
     window.protocol('WM_DELETE_WINDOW',close);refresh();window.mainloop()
 if __name__=='__main__': main()

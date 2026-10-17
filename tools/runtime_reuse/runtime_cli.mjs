@@ -1,3 +1,4 @@
+import {acquireRuntimeSession} from './runtime_session_lock.mjs';
 // JSON CLI, backed by REA-installed Frida. Observation only; no hidden actions.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,6 +19,16 @@ if(args.length===1&&args[0]==='capabilities'){
  const frida=createRequire(path.join(npmRoot,'rea-agents','package.json'))('frida');
  const directory=path.dirname(fileURLToPath(import.meta.url));
  const source=['runtime_api.js','unity_scene_api.js','battle_status_reader.js','battle_attributes_reader.js','runtime_observer.js'].map(f=>fs.readFileSync(path.join(directory,f),'utf8')).join('\n');
+ const statusPath=path.resolve(directory,'../../logs/high_reuse/battle-info-status.json');
+ if(args[0]==='snapshot'&&fs.existsSync(statusPath)){
+  const status=JSON.parse(fs.readFileSync(statusPath,'utf8'));
+  if(status.pid===pid&&!status.detached){
+   const cached=JSON.parse(fs.readFileSync(path.resolve(directory,'../../logs/high_reuse/runtime-snapshot.json'),'utf8'));
+   if(cached.pid!==pid||Date.now()-Date.parse(cached.observedAt)>5000)throw Error('Owner snapshot stale; do not attach another host');
+   console.log(JSON.stringify(cached,null,2));process.exit(0);
+  }
+ }
+ const releaseOwnership=acquireRuntimeSession(pid);
  const session=await frida.attach(pid);
  try{
   const script=await session.createScript(source);
@@ -40,7 +51,7 @@ if(args.length===1&&args[0]==='capabilities'){
     await new Promise(resolve=>setTimeout(resolve,1000));
    }
   }
- }finally{await session.detach();}
+ }finally{await session.detach();releaseOwnership();}
 }else{
  console.error('Usage: node tools/runtime_reuse/runtime_cli.mjs capabilities | snapshot|watch|inventory-home --pid <SWGoH PID>');process.exitCode=2;
 }

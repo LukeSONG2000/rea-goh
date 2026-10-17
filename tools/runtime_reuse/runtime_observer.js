@@ -25,4 +25,4 @@ globalThis.inventoryHome=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  S.invoke('MasterInventoryView','OnHomeButtonClick',views[0]);
  return {invoked:'MasterInventoryView.OnHomeButtonClick',effect:'original UI navigation',transitionConfirmed:false};
 });
-rpc.exports={snapshot:()=>readRuntimeSnapshot(),inventoryhome:()=>inventoryHome()};
+rpc.exports={...rpc.exports,snapshot:()=>readRuntimeSnapshot(),inventoryhome:()=>inventoryHome()};

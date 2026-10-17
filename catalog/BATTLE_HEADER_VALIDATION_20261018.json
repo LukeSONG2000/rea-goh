@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-18",
+  "validation": {
+    "kind": "battle-info-validation",
+    "opened": true,
+    "status": {
+      "shows": 1,
+      "updates": 37,
+      "modeGateCalls": 1,
+      "tutorialDisplays": 0,
+      "errors": [],
+      "last": {
+        "health": "生命 202948 / 202948\n总护盾 254034 / 254034\n永久护盾 101823 / 101823\n临时护盾 152211 / 152211",
+        "effects": [
+          {
+            "icon": "icon_mastery_up",
+            "suffix": "未读取到计时（原显示标记）",
+            "instances": 0
+          },
+          {
+            "icon": "icon_protection",
+            "suffix": "剩余 4 次自身完整回合完成；另有原移除条件",
+            "instances": 1
+          }
+        ]
+      },
+      "target": "生命 546 / 546\n总护盾 0 / 0\n永久护盾 0 / 0\n临时护盾 0 / 0"
+    }
+  },
+  "cleanup": {
+    "home": true,
+    "exitedOwnedStates": 1,
+    "guardRestored": true,
+    "gcReleased": true,
+    "errors": []
+  },
+  "attacked": false,
+  "turns": 0,
+  "battleServiceCalls": 0,
+  "screenshot": "logs/high_reuse/battle-info-window-only.png",
+  "changes": [
+    "Four independent native getter pairs in popup and opponent header: HP, total protection, permanent protection, bonus protection",
+    "Popup scroll panel top anchor reserves140 units; four-line header no overlap in verified screenshot",
+    "UI patch and runtime observer share one Frida script/host; overlay consumes JSON only; CLI snapshot uses fresh owner cache",
+    "Per-client live-host ownership lock rejects second CLI observer; no stealing live locks"
+  ],
+  "stability": "Earlier dispatcher-only mitigation insufficient: another frida-agent BEX64 event at02:34:30. Single-host consolidation is the current mitigation, not proof of resolved root cause or long-duration reliability.",
+  "limits": [
+    "Only local JMK vs Stormtrooper visual test; no claim all modes/special target components covered",
+    "No target-switch or damage-update live gameplay test in this stage",
+    "Panel base-stat comparison and mastery-specific attributed deltas remain pending",
+    "Faithful missions/actions/opponent-control/AI prediction and priority modification remain incomplete"
+  ]
+}

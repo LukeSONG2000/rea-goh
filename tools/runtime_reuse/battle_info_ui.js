@@ -1,8 +1,8 @@
 'use strict';
 // Presentation only. No battle setters, input commands, account writes or RPCs.
 (()=>{
- const R=RuntimeApi,S=SceneApi,A=R.arg,call=S.invoke,hooks=[],popups=new Map();
- const marker='\n[80DFFF]',stats={shows:0,updates:0,modeGateCalls:0,tutorialDisplays:0,errors:[],last:null};
+ const R=RuntimeApi,S=SceneApi,A=R.arg,call=S.invoke,hooks=[],popups=new Map(),targets=new Map();
+ const marker='\n[80DFFF]',stats={shows:0,updates:0,modeGateCalls:0,tutorialDisplays:0,errors:[],last:null,target:null};
  let stopped=false,gateController=null;
  const list=l=>l.isNull()?[]:S.array(R.readRef(l,'_items')).slice(0,R.readValue(l,'_size','i32'));
  const active=o=>!!R.unbox(call('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(o)),'bool');
@@ -11,21 +11,37 @@
  function safe(fn){try{return fn();}catch(e){const message=String(e);if(!stats.errors.includes(message)){stats.errors.push(message);send({kind:'battle-info-error',error:message,stack:e.stack});}}}
  function hook(type,name,n,callbacks){hooks.push(Interceptor.attach(R.findMethod(R.findClass(type),name,n).readPointer(),callbacks));}
  function setVector(t,name,values){const p=Memory.alloc(4*values.length);values.forEach((v,i)=>p.add(i*4).writeFloat(v));call('UnityEngine.Transform','set_'+name,t,[A.byRef(p)]);}
- function makeLabel(popup){
+ function makeLabel(popup,options={}){
   const template=R.readRef(popup,'_ultimateChargeLabel');
-  const clone=call('UnityEngine.Object','Instantiate',R.nil,[A.ref(S.gameObject(template)),A.ref(S.parent(S.transform(template))),A.value('bool',false)],['UnityEngine.Object','UnityEngine.Transform','System.Boolean']);
-  withString('REA_AbsoluteHealth',name=>call('UnityEngine.Object','set_name',clone,[A.ref(name)]));
+  const clone=call('UnityEngine.Object','Instantiate',R.nil,[A.ref(S.gameObject(template)),A.ref(options.parent||S.parent(S.transform(template))),A.value('bool',false)],['UnityEngine.Object','UnityEngine.Transform','System.Boolean']);
+  withString(options.name||'REA_AbsoluteHealth',name=>call('UnityEngine.Object','set_name',clone,[A.ref(name)]));
   const label=call('UnityEngine.GameObject','GetComponent',clone,[A.ref(S.type('UILabel'))],['System.Type']);
   for(const anchor of ['leftAnchor','rightAnchor','topAnchor','bottomAnchor']){const a=R.readRef(label,anchor);if(!a.isNull())R.writeRef(a,'target',R.nil);}
-  call('UIWidget','set_pivot',label,[A.value('i32',0)]);
-  call('UIWidget','set_width',label,[A.value('i32',450)]);
-  call('UIWidget','set_height',label,[A.value('i32',58)]);
-  call('UILabel','set_fontSize',label,[A.value('i32',20)]);
-  call('UILabel','set_maxLineCount',label,[A.value('i32',2)]);
-  setVector(S.transform(label),'localPosition',[-205,-75,0]);
+  call('UIWidget','set_pivot',label,[A.value('i32',options.pivot||0)]);
+  call('UIWidget','set_width',label,[A.value('i32',options.width||450)]);
+  call('UIWidget','set_height',label,[A.value('i32',110)]);
+  call('UILabel','set_fontSize',label,[A.value('i32',options.font||20)]);
+  call('UILabel','set_maxLineCount',label,[A.value('i32',4)]);
+  setVector(S.transform(label),'localPosition',options.position||[-205,-75,0]);
   const color=Memory.alloc(16);[1,1,1,1].forEach((v,i)=>color.add(i*4).writeFloat(v));call('UIWidget','set_color',label,[A.byRef(color)]);
   call('UnityEngine.GameObject','SetActive',clone,[A.value('bool',true)]);
   return label;
+ }
+ function healthText(unit){
+  const read=n=>R.unbox(call('BattleUnitController','get_'+n,unit),'i32');
+  const pair=(label,a,b)=>label+' '+read(a)+' / '+read(b);
+  return [pair('生命','CurrentHP','MaxHP'),pair('总护盾','CurrentShield','MaxShield'),pair('永久护盾','CurrentPermanentShield','MaxPermanentShield'),pair('临时护盾','CurrentBonusShield','MaxBonusShield')].join('\n');
+ }
+ function renderTarget(view,unit){
+  if(unit.isNull())return;
+  const target=R.readRef(view,'_opponentTargetComponent');if(target.isNull())return;
+  let item=targets.get(target.toString());
+  if(!item){
+   const name=R.readRef(target,'_nameLabel'),transform=S.transform(name),position=S.vector(transform,'localPosition');
+   const label=makeLabel(R.readRef(view,'_effectDetailsPopup'),{parent:S.parent(transform),name:'REA_TargetAbsoluteHealth',pivot:2,width:350,font:18,position:[position[0],position[1],position[2]]});
+   item={target,label,unit};targets.set(target.toString(),item);
+  }
+  item.unit=unit;setText(item.label,healthText(unit));stats.target=healthText(unit);
  }
  function render(popup,unit){
   if(unit.isNull())return;
@@ -36,12 +52,12 @@
    item.scrollPanel=call('UnityEngine.GameObject','GetComponent',S.gameObject(scroll),[A.ref(S.type('UIPanel'))],['System.Type']);
    item.topAnchor=R.readRef(item.scrollPanel,'topAnchor');
    item.topAbsolute=R.readValue(item.topAnchor,'absolute','i32');
-   R.writeValue(item.topAnchor,'absolute','i32',item.topAbsolute-85);
+   R.writeValue(item.topAnchor,'absolute','i32',item.topAbsolute-140);
    call('UIRect','ResetAndUpdateAnchors',item.scrollPanel);
   }
   item.unit=unit;
   const status=readBattleStatus(unit);
-  const text='生命 '+status.hp.toLocaleString('en-US')+' / '+status.maxHp.toLocaleString('en-US')+'\n护盾 '+status.shield.toLocaleString('en-US')+' / '+status.maxShield.toLocaleString('en-US');
+  const text=healthText(unit);
   setText(item.label,text);
   call('UnityEngine.GameObject','SetActive',S.gameObject(item.label),[A.value('bool',true)]);
   const displayed=[];
@@ -102,6 +118,8 @@
     call('BattleBaseView','FilterOpponentAbilityDisplay',this.view,[A.value('bool',true)]);
    });}
   });
+  hook('BattleBaseView','SetOpponentUnitData',1,{onEnter(args){this.view=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>renderTarget(this.view,this.unit));}});
+  hook('BattleTargetComponent','SetHealth',1,{onEnter(args){this.target=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>{const item=targets.get(this.target.toString());if(item&&!this.unit.isNull()){item.unit=this.unit;setText(item.label,healthText(this.unit));stats.target=healthText(this.unit);}});}});
   hook('BattleEffectsPopupView','Show',5,{onEnter(args){this.popup=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>{stats.shows++;render(this.popup,this.unit);});}});
   hook('BattleBaseView','HandleEffectsLongPressed',3,{onEnter(args){this.view=args[0];this.unit=args[1];this.effects=args[2];this.updateOnly=args[3].toInt32()!==0;this.before=stats.shows;},onLeave(){if(!stopped&&!this.updateOnly&&stats.shows===this.before)safe(()=>showEmptyPopup(this.view,this.unit,this.effects));}});
   hook('BattleEffectsPopupView','UpdateHealth',2,{onEnter(args){this.popup=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>render(this.popup,this.unit));}});
@@ -111,6 +129,7 @@
  }).catch(error=>send({kind:'battle-info-error',error:String(error)}));
  globalThis.battleInfoStatus=()=>stats;
  globalThis.battleInfoTestPopup=showEmptyPopup;
+ globalThis.battleInfoTestTarget=renderTarget;
  globalThis.stopBattleInfo=async()=>{
   stopped=true;hooks.forEach(h=>h.detach());
   await R.runOnMainThreadOnce(()=>{
@@ -128,6 +147,8 @@
     call('UITable','Reposition',R.readRef(item.popup,'_effectsTable'));
     setVector(item.table,'localPosition',item.tablePosition);
    });
+   const liveTargets=new Set(S.all('BattleTargetComponent').map(p=>p.toString()));
+   for(const item of targets.values())if(liveTargets.has(item.target.toString()))safe(()=>call('UnityEngine.GameObject','SetActive',S.gameObject(item.label),[A.value('bool',false)]));
    if(gateController)safe(()=>refreshOpponent(R.unbox(call('BattleOpponentAbilityInfoEnabledController','IsEnabled',gateController),'bool')));
   });return stats;
  };
