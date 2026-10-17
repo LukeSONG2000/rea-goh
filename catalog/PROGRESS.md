@@ -212,3 +212,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 private-inventory】visual_gap只读原factory确认私有依赖路径，Ghidra关闭。原PlayerDC.GetInitialData刷新，仅截取InventoryFactory原输入439571字节（非完整响应/凭据/邮箱），默认值补全472853字节。新增isolated_inventory.js：原IDC构造器空库存+私有Unit/Roster/Inventory工厂，复制@Inject引用只改私有_inventoryDC/_unitDOFactory/_rosterDOFactory，不替换全局；原Factory成功还原370单位，两次实测原库存及依赖不变，level/rarity/tier/era一致，单位与7类已检查可变引用不共享。新增可复跑probe_private_inventory.js及白名单Inventory解码，mock capture回归PASS。未声称深层mod/crew/Era/Datacron或全属性已隔离，尚未接实际试玩。报告PRIVATE_INVENTORY_FACTORY_20261018.json；原19440 Home、显示宿主27708实际存活。本轮无开战/购买/拆装/分解。
 
 【Codex/root 2026-10-18 private-inventory-deep】扩展原库存与私有副本只读审计：1347模组对/6711属性对象/8816roll记录/1953槽/69船员，字段一致且受检可变对象不共享，船员指向私有roster；370单位62原计算属性合计22940次exact比较零差异。原GetCalculatedStatValue会写datacron上下文，本探针传各自原有context/index并校验保持不变，本次均null，因此不覆盖实际Datacron。初次Frida bool参数错误计算0次，修正整数0后PASS；非战斗修规则。探针加入idleHome门禁/非空roster条件。报告PRIVATE_INVENTORY_DEEP_AUDIT_20261018.json；Era借用/保存队伍、非空Datacron和实际关卡试玩仍未验证，下一步组装玩家私有小队。原19440、正常宿主41868存活，无开战/消费/拆装/分解。
+
+【Codex/root 2026-10-18 private-squads】认领私有保存小队引用闭包验证及可重用玩家小队入口；先检查原库存工厂生成的小队/成员/状态/Datacron，禁止以Unit复制构造器替代。当前原19440和正常宿主41868存活，上一提交已同步origin。
