@@ -194,3 +194,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 trial-isolation audit】REA确认Unit.GetProto/Squad.GetProto有损，Get(Protos.Unit)会查复用并ApplyTo库存mod，禁止作为隔离clone；BattleData局部UnitDef需完整外层Factory且该函数写全局_pveUnitDefinitionMap。新增仅standalone的转换/双副本验证探针，包含原缓存finally恢复；实际Squad单独转换、外层反射及native ABI调用均system error，未到对象独立性检查，明确PENDING，不接CLI/日常host，不冒称试玩完成。早先缺局部定义导致异常及入口前失败只是诊断假设，native hook未回调不足以定因。未新增战斗/购买/装备操作；显示宿主20084和原19440实测存活、status detached=false/errors空。证据CAPTURED_BATTLE_CONVERSION_AUDIT_20261018.json及logs/high_reuse/native/三份审计。
 
 【Codex/root 2026-10-18 conversion-call-diagnostic】继续认领完整捕获转换的调用故障定位，先验证原生入口/ABI与hook可观测性，不再据hook静默推断错误位置；共享宿主20084及原19440已核存活。
+
+【Codex/root 2026-10-18 campaign-cli】转换调用故障未解，继续完整目标中的原菜单CLI：root接通已实测Home→战役列表→CampaignGameState及原返回Home，写runtime_observer/commands/cli/host；不开放开战/扫荡/购买。
