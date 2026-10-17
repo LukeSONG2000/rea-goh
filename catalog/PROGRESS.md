@@ -147,3 +147,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root vader-complete 2026-10-17】认领用户指定单英雄完整技能/动作/VFX闭环，舰队冻结。battle_gap独占Runtime/Battle+专用tests通用算子，visual_gap唯一Ghidra只读定点语义，effect_export独占原技能序列/动画/VFX解析及新导出配置（先logs），root写BattleDriver/新表现执行器与Unity验收；Git/Unity单写root。原始图/代码不足则PENDING，不造简化规则，不扩散逐英雄适配。
 
 【Codex/root vader-demo 验收扩展 2026-10-17】用户确认阶段交付须有可运行demo，并新增存量bug：角色脚部/骨骼姿态、变体重叠/手腕武器挂接、缺剑刃及粉红VFX。认领通用资产链与Web同源bug修复（viewer仅修bug）；battle_gap只读骨骼动画根因+专用tests，effect_export唯一资产导出者核查variant/attachment，visual_gap独占原shader证据及新增OriginalAbility shader，root继续FSM/Unity门禁/运行demo；舰队冻结，不以替代材质或隐藏全部变体冒充原件。
+
+【Codex/root 2026-10-17 phase4】交付 VADER 主动技能阶段demo：原四主动+unique效果链、原FSM/Animator/动画事件驱动结算与回位、原粒子和两份DXBC shader桥接；Unity native Avatar求值修正旧muscle弧度与RootT→hips错误。四角色40源动画/42语义动画、138597原标量keys读回PASS，共用显隐/手型/附件修复同步Web及公网。真实UI四技能PlayMode PASS；build Succeeded exit0（旧4缺prefab+license计errors5保留）；standalone存活50.8s、manual-ready、异常0。REA新成品SHA eff623b59b6604913c17f85411f433c40af846fa2d19d37990934624f65c5548。入口tools/launch_vader_demo.cmd，种子8；4490合法封锁保留双跑回归。详见VADER_STAGE_DEMO_20261017.json。队长技能/音效/受击遮罩/部分粒子版本差异及其余角色重烘焙仍PENDING，绝不标全英雄/全游戏完成。原E盘只读，零线上RPC/CU/货币/Mod操作。

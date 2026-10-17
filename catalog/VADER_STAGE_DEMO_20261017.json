@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-17",
+  "scope": "Runnable VADER active-skill pipeline and shared animation/visibility repair",
+  "status": "STAGE_DEMO_VERIFIED_NOT_FULL_GAME",
+  "launch": "tools/launch_vader_demo.cmd",
+  "seed": 8,
+  "originalGameAssemblySha256": "12cc254525a58aedea122a2967d0476da05b98ef0c219dc18cfc0b7207538db6",
+  "builtAssemblySha256": "eff623b59b6604913c17f85411f433c40af846fa2d19d37990934624f65c5548",
+  "rea": {
+    "artifactEvidence": "ev_56fd679ad8b67bbc07e4686d1be6e7afef9d27db2761a5c584ca8de930fd8cc7",
+    "summaryEvidence": "ev_1763f6f77b6f10d7fedf7b92f666871323e7e531cc4cb6ada463954e3e4923de",
+    "coverage": "Four selected actual-build CIL types; native original semantics separately from saved Ghidra project, not represented as new REA decompilation."
+  },
+  "implemented": [
+    "Original query-count/context/temporary stat/dispel/immunity/recover/priority-turn operators; four VADER actives and unique startup/removal/turn triggers; unsupported leader explicitly omitted only in training mode.",
+    "Original PlayMaker state/actions, original Animator graph/clips/events, native event-driven settlement and finish, original Culling weapon detach/path/return.",
+    "Original Avatar + scalar curves evaluated by Unity native humanoid engine; old muscle-as-radian/body-position-as-hips exporter bypassed.",
+    "Shared original hierarchy, renderer/object flags, scene prop states, timed hand-form events; no name-based weapon socket reparenting.",
+    "Original particle serialized fields, textures/materials, two custom shader programs recovered from original DXBC; exact builtin resource identities validated.",
+    "Template model library hidden, particle bounds excluded from unit HUD anchors, invisible internal listeners excluded from status widgets."
+  ],
+  "animation": {
+    "characters": [
+      "char_vader_pre",
+      "char_poe_pre",
+      "char_jynerso_pre",
+      "char_rebeltrooper_soldier_pre"
+    ],
+    "sourceClips": 40,
+    "sourceScalarKeysVerified": 138597,
+    "semanticClips": 42,
+    "avatarApproximated": false,
+    "unboundOriginalSharedClipTracks": "Explicitly reported when absent from original Avatar TOS and prefab hierarchy; never rebound by name guesses.",
+    "batchAudit": "747 original character metadata exports, 719 animation GLBs audited; 138/661 standard skeletons flagged by pose heuristic, not a claim of 138 proven defects."
+  },
+  "validation": {
+    "sourceTests": "16 Python tests PASS",
+    "battle": "Vader complete/demo production seeds 8 and 4490 deterministic double runs, area/damage/effect/command suites and offline turn order PASS",
+    "playMode": "Four original FSMs PASS; real UI raycast Merciless -> Force Crush -> Culling -> basic with legal evasion PASS",
+    "assets": "1466 GLBs audit V1=0 V2=0; original variant/attachment gates PASS. V3 stale1443 explicitly remains.",
+    "build": "Succeeded, process exit0, 2210374322 bytes; preexisting four missing-prefab diagnostics plus licensing yield totalErrors5 (not claimed zero).",
+    "standalone": "50.8 seconds alive, ready for manual command, zero exception signatures, own process then stopped",
+    "web": "Actual Chromium original visibility and FISTON/FISTOFF timed events PASS, zero console errors; public HTTP200 and SHA matched JS/native Vader animation"
+  },
+  "remaining": [
+    "Leader effect graph not restored; this is a disclosed training encounter.",
+    "Sound-bank audio playback, original hit FSM/mask, camera shake and full visual parity remain PENDING-ORIGINAL.",
+    "Original AbilityFsmAction enum5 is a native no-op; not repurposed as a hit event.",
+    "Unity6000 renderer-specific fields195, component references34, unresolved references2 and legacy shader program version differences20 remain explicitly recorded.",
+    "Other characters still need native re-bake and visual verification; full-library checks do not mean full-library repair.",
+    "Web character VFX bridge pending; false procedural white glows removed from model viewer rather than presented as originals. Web battle remains frozen preview, not Unity combat parity.",
+    "Fleet remains preview; gun projectile VFX and the rest of the game not completed."
+  ],
+  "safety": "Original E: read-only; no game live API/RPC; no original-game computer use, currencies, stamina or mods touched this stage."
+}
