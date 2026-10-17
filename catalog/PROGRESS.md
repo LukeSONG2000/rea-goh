@@ -182,3 +182,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 battle-cancel-cli】新增battle-cancel直接原CancelSelectUnit；JMK special02进入选友军→取消实测awaitingAbility恢复，turn0/CD0不变，再普攻原终局136/turn1，正式BattleService0，Home/guard/GC PASS。邮箱畸形取消请求回归及种子turn-order PASS，日常显示宿主恢复。REA确认取消不执行完成回调，按钮重复点击只额外取消音效。真实试玩新增body证据：F8F750响应会改账号库存禁止当纯转换；GetProto1D0B430有损不能roundtrip；Squad copy1005180共享Datacron/AbilityDO，cell copy待核。目标保持捕获原proto+原队伍精确隔离，不以库存fixture替代；详见BATTLE_CANCEL_VALIDATION_20261018.json。
 
 【Codex/root 2026-10-18 protobuf-isolation】新增原ProtoBuf.Serializer+NonGeneric.DeepClone包装及scratch原runtime验证，两个encounter/各嵌套UnitState均不共享，seed/targetseed/index/HP/shield保留，改副本HP不影响源PASS；不是实际关卡payload/全字段或试玩完成。无账号读取/线上战斗/货币变动，宿主29132恢复。REA进一步确认SquadCellDO(copy)直接共享UnitDO/BattleUnitState，UnitDO(copy)共享装备/relic/ability并遗漏equippedDatacron+activeStatIndex，禁止视作完整隔离。证据BATTLE_PROTO_CLONE_VALIDATION_20261018.json及logs/high_reuse/native/COPY_ISOLATION_SEMANTICS.txt；下一步原关卡proto捕获与精确队伍隔离仍待完成。
+
+【Codex/root 2026-10-18 capture-continuation】认领 tools/runtime_reuse/battle_capture.js、battle_proto.js及宿主捕获保存/验证；接续真实原关卡proto捕获。当前PID19440与宿主4676存活，Home状态；菜单OnClick调用不等于已导航，尚无自然响应捕获，不以scratch数据冒充关卡。撤回重置卡授权持续有效。
