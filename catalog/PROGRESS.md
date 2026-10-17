@@ -190,3 +190,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 capture-host纠正】上一条及BATTLE_NATURAL_CAPTURE_VALIDATION记录的宿主38100仅启动返回PID，后续核对发现已因中文源码解码错误退出，不能视作恢复成功；Windows PowerShell5 Get-Content默认ANSI导致JS中文字符串损坏。启动脚本改为显式UTF-8读取，重新启动26380，原PID19440及宿主实际存活、status detached=false/errors空、合并源码node --check PASS。真实proto捕获与native回环验证不受此启动失败影响。
 
 【Codex/root 2026-10-18 trial-isolation】认领真实关卡试玩的原factory转换与玩家队伍隔离；root写tools/runtime_reuse相关模块及运行时验证，visual_gap独占Ghidra只读核对Squad/Unit proto转换保真与缓存共享。当前客户端19440、显示宿主26380实际存活，捕获文件保持只读；不将库存fixture替代真实关卡。
+
+【Codex/root 2026-10-18 trial-isolation audit】REA确认Unit.GetProto/Squad.GetProto有损，Get(Protos.Unit)会查复用并ApplyTo库存mod，禁止作为隔离clone；BattleData局部UnitDef需完整外层Factory且该函数写全局_pveUnitDefinitionMap。新增仅standalone的转换/双副本验证探针，包含原缓存finally恢复；实际Squad单独转换、外层反射及native ABI调用均system error，未到对象独立性检查，明确PENDING，不接CLI/日常host，不冒称试玩完成。早先缺局部定义导致异常及入口前失败只是诊断假设，native hook未回调不足以定因。未新增战斗/购买/装备操作；显示宿主20084和原19440实测存活、status detached=false/errors空。证据CAPTURED_BATTLE_CONVERSION_AUDIT_20261018.json及logs/high_reuse/native/三份审计。
