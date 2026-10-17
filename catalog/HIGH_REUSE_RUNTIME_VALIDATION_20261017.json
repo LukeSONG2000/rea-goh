@@ -1,0 +1,290 @@
+{
+  "date": "2026-10-17",
+  "status": "RUNNABLE HIGH-REUSE VALIDATION; NOT FULL GAME",
+  "decision": "Prioritize original native runtime for battle semantics and presentation. Use matching Unity for direct asset/component reuse and inspection. Stop per-hero rule reconstruction.",
+  "original": {
+    "path": "E:/Games/EA Games/SWGoH",
+    "writesByTools": false,
+    "unity": "6000.3.17f1",
+    "revision": "cf0352b38e81",
+    "GameAssemblySHA256": "12cc254525a58aedea122a2967d0476da05b98ef0c219dc18cfc0b7207538db6"
+  },
+  "launch": {
+    "originalRuntime": "tools/launch_original_runtime_demo.cmd",
+    "requirements": "Original supported client running, logged in and at HomeBase. REA npm installation and node/py on PATH. Leave client idle during bounded automatic verification.",
+    "behavior": "Original BattleGameState, original skill selection UI, invoke original basic-attack button handler after 2 seconds, observe terminal state, return Home. Temporary process-local Winsock guard restored before detach.",
+    "headless": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/run_original_probe.ps1 -Mode headless",
+    "components": "tools/launch_original_component_probe.cmd",
+    "componentControls": "1-5 select original character/VFX; R restart; Esc quit; clip buttons select native animation."
+  },
+  "fixture": {
+    "player": [
+      "VADER"
+    ],
+    "opponent": [
+      "STORMTROOPER"
+    ],
+    "seed": 8,
+    "source": "Original loaded inventory UnitDO copied with original constructor; original abilities/stats; custom local training matchup, NOT authentic campaign enemy lineup.",
+    "generalization": "Shared ID-list fixture builder, original engine executes unit-specific content; no hero-specific damage or condition implementations."
+  },
+  "headless": {
+    "first": {
+      "kind": "simulation-probe-complete",
+      "ticks": 251,
+      "error": null,
+      "terminal": true,
+      "callbackObserved": false,
+      "fsmOutcome": 0,
+      "simulationOutcomeDiagnosticOnly": 0,
+      "verifiedVictory": true,
+      "summary": {
+        "units": [
+          {
+            "owner": 0,
+            "hp": 61975,
+            "maxHp": 61975,
+            "shield": 64715
+          },
+          {
+            "owner": 1,
+            "hp": 0,
+            "maxHp": 546,
+            "shield": 0
+          }
+        ],
+        "previousState": 136,
+        "nextState": 0,
+        "terminal": true,
+        "fsmOutcome": 0,
+        "simulationOutcome": 0,
+        "coreBattleStatus": 1,
+        "turns": 1
+      },
+      "healthChanges": [],
+      "attacks": [],
+      "counts": {
+        "SetBattleState": 5,
+        "FsmFinishBattle": 0,
+        "FsmSendBattleFinishRequest": 0,
+        "SimulationDomainFinishBattle": 0,
+        "SaveBattleOutcome": 0,
+        "SendBattleStartRequest": 0,
+        "SendBattleFinishRequest": 0
+      },
+      "trace": [
+        {
+          "kind": "SetBattleState",
+          "tick": 50,
+          "state": 7
+        },
+        {
+          "kind": "SetBattleState",
+          "tick": 100,
+          "state": 8
+        },
+        {
+          "kind": "SetBattleState",
+          "tick": 150,
+          "state": 16
+        },
+        {
+          "kind": "SetBattleState",
+          "tick": 200,
+          "state": 19
+        },
+        {
+          "kind": "SetBattleState",
+          "tick": 250,
+          "state": 44
+        }
+      ],
+      "traceLimit": 300,
+      "serviceCalls": 0,
+      "blockedSocketCalls": {
+        "send": 0,
+        "sendto": 1,
+        "WSASend": 0,
+        "WSASendTo": 0,
+        "connect": 0,
+        "WSAConnect": 0
+      },
+      "cleanup": {
+        "attempted": true,
+        "loopStopped": true,
+        "simulationShutdown": true,
+        "hooksDetached": true,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      }
+    },
+    "second": {
+      "kind": "simulation-probe-complete",
+      "ticks": 251,
+      "error": null,
+      "terminal": true,
+      "callbackObserved": false,
+      "fsmOutcome": 0,
+      "simulationOutcomeDiagnosticOnly": 0,
+      "verifiedVictory": true,
+      "summary": {
+        "units": [
+          {
+            "owner": 0,
+            "hp": 61975,
+            "maxHp": 61975,
+            "shield": 64715
+          },
+          {
+            "owner": 1,
+            "hp": 0,
+            "maxHp": 546,
+            "shield": 0
+          }
+        ],
+        "previousState": 136,
+        "nextState": 0,
+        "terminal": true,
+        "fsmOutcome": 0,
+        "simulationOutcome": 0,
+        "coreBattleStatus": 1,
+        "turns": 1
+      },
+      "healthChanges": [],
+      "attacks": [],
+      "counts": {
+        "SetBattleState": 4,
+        "FsmFinishBattle": 0,
+        "FsmSendBattleFinishRequest": 0,
+        "SimulationDomainFinishBattle": 0,
+        "SaveBattleOutcome": 0,
+        "SendBattleStartRequest": 0,
+        "SendBattleFinishRequest": 0
+      },
+      "trace": [
+        {
+          "kind": "SetBattleState",
+          "tick": 50,
+          "state": 8
+        },
+        {
+          "kind": "SetBattleState",
+          "tick": 100,
+          "state": 16
+        },
+        {
+          "kind": "SetBattleState",
+          "tick": 150,
+          "state": 19
+        },
+        {
+          "kind": "SetBattleState",
+          "tick": 250,
+          "state": 44
+        }
+      ],
+      "traceLimit": 300,
+      "serviceCalls": 0,
+      "blockedSocketCalls": {
+        "send": 0,
+        "sendto": 1,
+        "WSASend": 0,
+        "WSASendTo": 0,
+        "connect": 0,
+        "WSAConnect": 0
+      },
+      "cleanup": {
+        "attempted": true,
+        "loopStopped": true,
+        "simulationShutdown": true,
+        "hooksDetached": true,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      }
+    },
+    "sameSeedSummaryIdentical": true
+  },
+  "visual": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": true,
+    "error": null,
+    "clicked": true,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 1,
+      "currentState": "CampaignGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 2,
+      "sendto": 0,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 1,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": "F:/PPfavorite/Work/goh/logs/high_reuse/original-offline-battle.png",
+      "requested": true,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": true,
+      "foreignTransition": false
+    }
+  },
+  "components": {
+    "bundles": 9,
+    "prefabs": 5,
+    "transforms": 85,
+    "particleSystems": 39,
+    "originalUniqueClips": 11,
+    "bonesMovingPerClip": "12-24",
+    "materialReferences": 35,
+    "supportedOriginalShaders": 7,
+    "missingOriginalMonoInstances": 39,
+    "buildExit": 0,
+    "standaloneSeconds": 25,
+    "errorsOrExceptions": 0,
+    "releaseHasTcpOrUdpListeners": false,
+    "originalBundleHashesUnchanged": true
+  },
+  "limits": [
+    "Warm initialized original client only; cold-start fully offline bootstrap and local account/content persistence not implemented.",
+    "One basic attack and terminal victory validated, not full multi-turn ability/condition/passive coverage.",
+    "Original visual state/UI execution proven; screenshot file not produced, so visual fidelity not signed off.",
+    "Original engine FSM getter reports WIN and enemy HP reaches zero; SaveBattleOutcome/FinishBattle observers did not fire. Do not infer callback behavior or formula correctness from unobserved hooks.",
+    "Matching Unity restores native assets/components, not the 39 missing original game Mono instances; Tron Trail source mesh is null and requires original script generation.",
+    "No complete network-stack isolation claim: six Winsock exports blocked during probe and exact formal battle-start/finish service hooks observed zero calls.",
+    "Original runtime bytecode/native implementation remains required; direct editor project is diagnostic lighting/camera, not original full scene."
+  ],
+  "next": [
+    "Restore cold-start local bootstrap and required initialization contracts without per-hero patches.",
+    "Generalize fixture selection to multiple original units and full original skill buttons, retaining engine turn/condition/status/damage logic.",
+    "Validate original scene/animation/VFX screenshots and multi-turn outcomes before expanding coverage."
+  ],
+  "evidence": [
+    "logs/high_reuse/cli-visual-evidence.json",
+    "logs/high_reuse/cli-headless-seed8-first.json",
+    "logs/high_reuse/cli-headless-evidence.json",
+    "logs/high_reuse/native/ENTRYPOINTS.txt",
+    "logs/high_reuse/components/summary.json",
+    "logs/high_reuse/components/release-network-check.json"
+  ]
+}
