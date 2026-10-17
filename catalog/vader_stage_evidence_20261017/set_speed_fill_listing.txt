@@ -1,0 +1,111 @@
+181bcdb50 PUSH RBX
+181bcdb52 SUB RSP,0x40
+181bcdb56 CMP byte ptr [0x185a3e958],0x0
+181bcdb5d MOV RBX,RCX
+181bcdb60 MOVAPS xmmword ptr [RSP + 0x30],XMM6
+181bcdb65 MOVAPS XMM6,XMM1
+181bcdb68 JNZ 0x181bcdb82
+181bcdb6a LEA RCX,[0x1857a96a0]
+181bcdb71 CALL 0x18035da50
+181bcdb76 OR.LOCK dword ptr [RSP],0x0
+181bcdb7b MOV byte ptr [0x185a3e958],0x1
+181bcdb82 MOV RAX,qword ptr [RBX + 0x88]
+181bcdb89 MOVSS dword ptr [RBX + 0x208],XMM6
+181bcdb91 TEST RAX,RAX
+181bcdb94 JZ 0x181bcdbc3
+181bcdb96 MOV R8,qword ptr [RAX + 0x180]
+181bcdb9d TEST R8,R8
+181bcdba0 JZ 0x181bcdbc3
+181bcdba2 MOV byte ptr [RSP + 0x28],0x0
+181bcdba7 MOV R9,RBX
+181bcdbaa MOV qword ptr [RSP + 0x20],0x0
+181bcdbb3 CALL 0x180037e10
+181bcdbb8 MOVAPS XMM6,xmmword ptr [RSP + 0x30]
+181bcdbbd ADD RSP,0x40
+181bcdbc1 POP RBX
+181bcdbc2 RET
+181bcdbc3 CALL 0x180352450
+181bcdbc8 INT3
+181bcdbc9 INT3
+181bcdbca INT3
+181bcdbcb INT3
+181bcdbcc INT3
+181bcdbcd INT3
+181bcdbce INT3
+181bcdbcf INT3
+181bcdbd0 MOV qword ptr [RSP + 0x8],RBX
+181bcdbd5 PUSH RDI
+181bcdbd6 SUB RSP,0x30
+181bcdbda CMP byte ptr [0x185a3e959],0x0
+181bcdbe1 MOV RDI,RDX
+181bcdbe4 MOV RBX,RCX
+181bcdbe7 JNZ 0x181bcdc01
+181bcdbe9 LEA RCX,[0x1858312e8]
+181bcdbf0 CALL 0x18035da50
+181bcdbf5 OR.LOCK dword ptr [RSP],0x0
+181bcdbfa MOV byte ptr [0x185a3e959],0x1
+181bcdc01 MOV RBX,qword ptr [RBX + 0x158]
+181bcdc08 TEST RBX,RBX
+181bcdc0b JZ 0x181bcdc6f
+181bcdc0d MOV RAX,qword ptr [0x1858312e8]
+181bcdc14 LEA RDX,[RSP + 0x20]
+181bcdc19 MOVUPS XMM0,xmmword ptr [RDI]
+181bcdc1c MOV RCX,qword ptr [RAX + 0x20]
+181bcdc20 MOVAPS xmmword ptr [RSP + 0x20],XMM0
+181bcdc25 MOV R8,qword ptr [RCX + 0xc0]
+181bcdc2c MOV RCX,RBX
+181bcdc2f MOV R8,qword ptr [R8 + 0x108]
+181bcdc36 CALL 0x1832d63e0
+181bcdc3b TEST EAX,EAX
+181bcdc3d JNS 0x181bcdc4c
+181bcdc3f XOR EAX,EAX
+181bcdc41 MOV RBX,qword ptr [RSP + 0x40]
+181bcdc46 ADD RSP,0x30
+181bcdc4a POP RDI
+181bcdc4b RET
+181bcdc4c MOV RCX,qword ptr [RBX + 0x18]
+181bcdc50 TEST RCX,RCX
+181bcdc53 JZ 0x181bcdc6f
+181bcdc55 CMP EAX,dword ptr [RCX + 0x18]
+181bcdc58 JNC 0x181bcdc75
+181bcdc5a MOV RBX,qword ptr [RSP + 0x40]
+181bcdc5f CDQE
+181bcdc61 SHL RAX,0x5
+181bcdc65 MOV EAX,dword ptr [RAX + RCX*0x1 + 0x38]
+181bcdc69 ADD RSP,0x30
+181bcdc6d POP RDI
+181bcdc6e RET
+181bcdc6f CALL 0x180352450
+181bcdc74 INT3
+181bcdc75 CALL 0x180352460
+181bcdc7a INT3
+181bcdc7b INT3
+181bcdc7c INT3
+181bcdc7d INT3
+181bcdc7e INT3
+181bcdc7f INT3
+181bcdc80 MOV qword ptr [RSP + 0x10],RBX
+181bcdc85 PUSH RDI
+181bcdc86 SUB RSP,0x40
+181bcdc8a CMP byte ptr [0x185a3e95a],0x0
+181bcdc91 MOV RDI,RDX
+181bcdc94 MOV RBX,RCX
+181bcdc97 JNZ 0x181bcdce4
+181bcdc99 LEA RCX,[0x1858312d0]
+181bcdca0 CALL 0x18035da50
+181bcdca5 OR.LOCK dword ptr [RSP],0x0
+181bcdcaa LEA RCX,[0x1858312c8]
+181bcdcb1 CALL 0x18035da50
+181bcdcb6 OR.LOCK dword ptr [RSP],0x0
+181bcdcbb LEA RCX,[0x1858312c0]
+181bcdcc2 CALL 0x18035da50
+181bcdcc7 OR.LOCK dword ptr [RSP],0x0
+181bcdccc LEA RCX,[0x1858312b0]
+181bcdcd3 CALL 0x18035da50
+181bcdcd8 OR.LOCK dword ptr [RSP],0x0
+181bcdcdd MOV byte ptr [0x185a3e95a],0x1
+181bcdce4 MOV RCX,qword ptr [RBX + 0x158]
+181bcdceb MOV qword ptr [RSP + 0x50],RSI
+181bcdcf0 TEST RCX,RCX
+181bcdcf3 JZ 0x181bcde1b
+181bcdcf9 MOV RAX,qword ptr [0x1858312c8]

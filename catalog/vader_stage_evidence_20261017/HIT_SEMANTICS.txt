@@ -1,0 +1,34 @@
+2026-10-17 original hit reaction evidence
+
+AbilityFsmAction.OnEnter VA181319A10 is already recovered in ability_fsm_action.c/listing.
+Raw GameAssembly jump table at RVA1319AD0, six uint32 image-relative entries:
+action2 ->181319A7F; 3 ->181319A88; 4 ->181319AB9; 5 ->181319AB9;
+6 ->181319A94; 7 ->181319AA0. AB9 calls Finish directly.
+Therefore original action4/5 are no-ops in THIS shipped native build, despite their
+PlayHitOnAllTargetsStaggered/Synchronized enum names. No target/evasion test exists.
+IAbilityFsmStateAction dump line282284 only exposes apply/finish/stealth/hide-reticle.
+
+PlayHitAction.OnEnter VA18131D830 is a DIFFERENT action class. It obtains TargetGO,
+gets UnitFSMController, calls PlayHit when component exists, then Finish.
+UnitFSMController.PlayHit VA180FE84D0 checks its _unitState interface slot8:
+IsEffectActive(EffectTypeEnum.PARALYSIS=0, PersistentEffectCriteria.ANY=0).
+If true return. Otherwise _playingHit=true and send PlayHit to unit PlayMaker FSM.
+This method does not check evasion and does not directly set Animator triggers.
+UnitFsmControllerNullable.PlayHit VA180FE9CB0 forwards to IUnitFSMController when set.
+Bodies/listings play_hit_action, unit_fsm_play_hit, unit_play_hit are in this folder.
+Ghidra opened existing project read-only and closed without save (hit_run.txt).
+
+Mask: VADER.json character.controllers[0] raw m_Controller.m_LayerArray[1]:
+Hit Reaction m_DefaultWeight=.6000000238418579, override mode0;
+m_BodyMask words 4294967295,4244635647,524287; m_SkeletonMask.m_Data empty.
+Compared with original full body mask FFFFFFFF FFFFFFFF 0007FFFF, only bits56,57
+are disabled. Bits83+ are outside full mask and must not be treated as extra exclusions.
+Original avatar exists at logs/pose_recovery/native_sources/char_vader_pre/
+avatar_4157404850686496600.json (m_Avatar + original typeTree), and native-imported asset
+Assets/OriginalPoseProbe/char_vader_pre/original-avatar.asset.
+Neither avatar bone names nor these bit values alone prove compiled body-mask bit
+semantics. Do not reinterpret 56/57 as HumanBodyBones or Animator AvatarMaskBodyPart
+indices. A transform mask is per-transform; it cannot automatically reproduce a
+per-channel humanoid mask. No exact generic mask mapping is established here.
+For fidelity, preserve original compiled mask via native humanoid controller evaluation
+and bake the evaluated layered result, or establish mask schema before conversion.

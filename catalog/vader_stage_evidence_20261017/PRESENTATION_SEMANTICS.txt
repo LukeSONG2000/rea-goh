@@ -1,0 +1,169 @@
+Original presentation native evidence (2026-10-17)
+Provider: saved Ghidra GameAssembly.dll project, read-only, no analysis/save.
+All three sessions ended PROJECT CLOSED no save (presentation_run.txt,
+presentation_helpers_run.txt, boot_run.txt). These bodies are direct Ghidra,
+not claimed as new REA tool evidence.
+
+1. Position and rotation
+GetAbilityPositionAction.OnEnter 18131C000: call GetAbilityPosition once;
+if !EveryFrame then Finish. OnUpdate calls it again.
+GetAbilityRotationAction.OnEnter 18131C4E0: analogous.
+Action methods 18131C040 / 18131C520 resolve AbilityFSM owner and obtain
+AbilityFsmController source move controller at +28; resolve the specified
+PositionComponent object and its AbilityPositionComponent.
+With component: call GetAbilityPosition/Rotation(source).
+Position without component: EnemyTarget.UnitGO.Position, or zero if target/GO absent.
+Rotation without component: EnemyTarget.UnitGO.EulerRotation (requires valid target/GO).
+The rotation action does NOT default to the caster's rotation.
+
+AbilityPositionComponent 180FD49A0 / 180FD4F40:
+fields +20 AreaOfEffect, +24 UnitComponent.ReferencePoint, +28 UnitTargetType.
+SINGLE(0): GetTargetForSingle 180FD54E0:
+  ALL(0) and ENEMY(2): source.EnemyTarget
+  ALLY(1): first source.GetAffectedAllies(), or source when empty
+  SELF(3): source
+Then target.SourceUnitComponent.FindReferencePointPosition/RotationEulerAngles.
+AVERAGE(4): GetTargetsForAverage 180FD55D0:
+  ALL: source.AffectedTargets; ALLY: GetAffectedAllies;
+  ENEMY: GetAffectedEnemies; SELF: list containing source cast to BattleUnitController.
+For candidates whose UnitGO.ActiveSelf is true and IsOffscreen is false,
+sum reference-point positions or Euler vectors and divide by count.
+If count == 0, use source.AOEMarkers._all world position / world Euler angles.
+ALL(1), FRONT_ROW(2), BACK_ROW(3): use source.AOEMarkers._all/+10,
+_frontRow/+18, _backRow/+20 world transform position/Euler, respectively.
+Component body does not implement FIXED(5)/SINGLE_INDEXED(6); don't invent a branch.
+
+Reference enum: Weapon0 Offhand1 HitArea2 Center3 Head4 Feet5 UIArea6 TargetReticle7.
+UnitComponentNullable.FindReferencePointPosition 180FE6660 and Rotation 180FE6840:
+FindReferencePoint -> existing GO's transform.position / transform.eulerAngles;
+missing reference returns Vector3.zero. Not a root-transform fallback.
+Which underlying UnitComponent reference is selected is delegated to its own
+FindReferencePoint implementation; no guessed bone names are justified by these bodies.
+
+2. DOTween action
+DOTweenAction.OnEnter 180D392B0:
+PerformTween, ID/loop/relative/delay setup, completion callback.
+If !UseCustomEaseCurve: start with EaseType. Nonempty EaseTypeOverride whose
+string is a recognized Ease enum name is parsed and replaces EaseType.
+Else use CustomEaseCurve. CurveTweenInType is merely an FSM string variable,
+whose exported VADER value is OutCirc. DG.Tweening.Ease.OutCirc = 21.
+DOPathAction.PerformTween 180D37590 passes waypoints, Duration, PathType,
+PathMode and resolution literal 10 into DOPath/DOLocalPath, then sets ClosedPath,
+orientation/look-at options. Public Resolution field is not read in this body.
+No evidence here for treating all Ease types as linear.
+
+3. CatmullRom original numerical construction
+FinalizePath 1824A9BE0:
+For open paths controlPoints[0].a = wps[1];
+controlPoints[1].a = 2*wps[last] - wps[last-1].
+For closed paths first = wps[len-2], last = wps[1].
+This asymmetric OPEN start control differs from extrapolating both ends.
+subdivisions = wps.Length * subdivisionsXSegment (DOPath supplies 10).
+GetPoint 1824A9F00: segment=min(floor(perc*(len-1)),len-2),
+t=perc*(len-1)-segment; a=previous wp or first control,
+b=wps[segment], c=wps[segment+1], d=next wp or last control.
+point=.5*(2*b + (-a+c)*t + (2*a-5*b+4*c-d)*t*t
+             + (-a+3*b-3*c+d)*t*t*t).
+Binary constants independently read from original DLL PE section offsets:
+18529F0F0=3, 18529F198=5, 18529F170=4, 18529EE14=.5, 18529EF3C=1.
+SetTimeToLengthTables 1824AA360: sample i=1..subdivisions at i/subdivisions;
+length table is cumulative Euclidean distance from GetPoint(0),
+time table contains corresponding i/subdivisions.
+ConvertToConstantPathPerc 1824AB4B0:
+linear path type returns input unchanged. For 0<perc<1 and positive total length,
+desiredLength=perc*totalLength; find first cumulative length > desiredLength;
+interpolate between previous/current time by interval distance fraction
+(previous length/time zero for first interval). Clamp output to [0,1].
+For nonpositive total length returns input; do not replace by arbitrary path speed.
+Upstream waypoint insertion subsequently recovered: path_change_value.c
+PathPlugin.SetChangeValue 18249BF10 prepends current transform position if supplied
+waypoint count <= decoder.minInputWaypoints OR first point differs on any axis
+using Approximately. CatmullRom getter180C05600 bytes b801000000c3 => minimum1.
+Thus a single supplied destination always gets current position prepended;
+two or more supplied points already starting at current position are not duplicated.
+OriginalAbilityPath.cs implements the recovered OPEN Catmull branch with cached
+sample tables; 19 checks of actual runtime source in OriginalAbilityPathRegression.cs
+passed, plus compilation against real UnityEngine.CoreModule.dll passed.
+Linear and OutCirc easing supported; other recognized easing names explicitly
+rejected until recovered. Closed path/orientation/other path types not claimed.
+
+5. AOE side assignment, closed by original module getters
+Unit.AOEMarkers181BBA350 delegates to unitControllerModule slot10.
+PVE player181CF8400 / PVP player181CF8C90 return
+BattleContext(+10).BattleLayout(+40).EnemyAreaOfEffect (IBattleLayout slot6).
+PVE opponent181CF8020 / PVP opponent181CF8A20 return
+BattleContext(+18).BattleLayout(+40).PlayerAreaOfEffect (slot5).
+IBattleLayout property ordering is dump/cs/il2cpp.cs:283562-283571.
+Therefore player source uses original _enemyAOE markers and opponent source
+uses _playerAOE, not own-side markers. Evidence files player_aoe.c,
+opponent_aoe.c,pvp_player_aoe.c,pvp_opponent_aoe.c.
+
+4. Generic combat helpers recovered in same bounded sessions
+GetAffectedTauntAmount 181A6F4D0 (float ABI in .c is unreliable; listing verified):
+result = supplied affectedAmount;
+foreach applied effect dictionary value:
+  x=effect.Amount;
+  if x>0: result=max(result,x);
+  else if result<=0: result=min(result,x);
+return result.
+PassesHealthCheck 181BB2F80: runtime0 HP>0; runtime1 HP<1; other true.
+No fled/offscreen check in this helper.
+GetValidTargets 181BAECF0: filter _targets by
+_targetingModule.CurrentTargetingTactic.IsTargetValid(target) (lambda181BAFE00).
+Keep all candidates with maximum runtime TAUNT(62) amount; Approximately groups
+ties. If preferredTarget occurs in maximum list, return singleton preferredTarget.
+It does not filter only positive taunt and does not itself check health.
+ApplyUniqueAbilities 181BBF410: iterate _uniqueAbilityContexts in original order;
+pool abilityController; Initialize(ability, UnitMoveType6, owner, context,
+battleContext, isUnique=true); SelectUnitsForAbility; ApplyEffects(false,false,null);
+retain controller in corresponding side collection. No animation/manual command.
+Player/opponent team wrappers and StartEncounter bodies also saved; event/interface
+dispatch labels in StartEncounter remain to be mapped, not inferred from numbers.
+
+6. Final bounded round/startup event evidence
+condition_round_ended_listing.txt 1816B9F40:
+CALL ProcessGroupedCondition(runtime1 END_OF_ROUND / proto2), then tail-jump
+ProcessGroupedCondition(runtime0 ROUND_COUNT / proto1). Exact dispatch order.
+condition_battle_started_listing.txt 1816B9F70: grouped runtime3 / proto4.
+condition_encounter_started_listing.txt 1816B9F80: grouped runtime5 / proto7.
+These two tiny methods have no saved Ghidra function object; complete assembly
+listings prove semantics, so no invented decompilation body was emitted.
+fsm_end_turn_condition.c/listing 1819330F0:
+current = battleContext.CurrentUnit; if current.RemoveOnTurnEnd(+22F), use
+current.TransformedUnit(+230); current.ConditionMet(runtime33 END_OF_TURN / proto32);
+_endOfTurnReached=true; when not shutdown, schedule nextState38(ProcessCooldowns).
+end_round.c/listing 1819334F0: increment TurnCount and side turn count, record,
+invoke RoundEnded delegate(+E8), clear _unitMoveStarted, remove temporary units.
+Metadata EndRound state39 follows ProcessCooldowns38, but exact scheduling
+transition between those states was not decompiled in this final batch.
+All sessions closed without saving; round_events_run.txt confirms closure.
+
+7. Character AnimationEvent dispatch (unit_events_run.txt, closed no save)
+UnitAnimationEventHandler.Start180FE0D80 caches
+gameObject.GetComponentsInChildren<ParticleSystem>(includeInactive:true).
+FindParticleSystem180FE1040 scans this cached list in order; predicate180FE1B40
+requires a live component and particleSystem.name == vfxName (exact UTF-16 equality).
+The string is NOT a transform path; dots/slashes are not parsed. First match wins.
+StartParticleSystem180FE0E40: if found, Simulate(0,true,true,true), then Play(true).
+StopParticleSystem180FE0F50: if found, ParticleSystem.Stop(). Missing name is no-op.
+Original Unity method metadata confirms Simulate18453BC40, Play18453BD90,
+Stop()18453C070. This does not synthesize or activate an absent particle prefab.
+
+UnitSubObjectAnimationEventHandler.Awake1811B8250 builds dictionary from
+serialized _animationEvents (Id -> Actions); PlaySubObjectAnimationEvent1811B83C0
+returns for absent key, otherwise executes original Actions list in order.
+PlayAction1811B8560 uses direct serialized UnitSubObject and Parent references,
+not object-name search. Missing UnitSubObject logs and returns.
+Type1 TRIGGER: UnitSubObject.GetComponent<Animator>().SetTrigger(AnimationValue).
+Type2 CLIP: UnitSubObject.GetComponent<Animation>().Play(AnimationValue,
+PlayMode.StopSameLayer). This is legacy Animation, not Animator.Play.
+Type3 ENABLE / Type4 DISABLE: UnitSubObject.SetActive(true/false).
+Type0 PARENT: assign transform.parent when valid Parent, ClearLocalTransform,
+then apply serialized Position and Quaternion.Euler(Rotation) to local TRS;
+invalid Parent logs warning and retains current parent, still clears local TRS.
+Type5 MATERIAL_ANIMATE calls1811ACD90(go,Duration,true,null,null,YFloor);
+the material animation implementation is not expanded in this batch.
+FISTON/FISTOFF are event dictionary keys; only their serialized actions determine
+whether they mean trigger, clip, enable, disable, etc. Never infer from their names.
+
+2026-10-17 InCirc closure: EaseManager.Evaluate VA 1824B7BC0 case 0x14 computes 1-sqrt(1-(time/duration)^2); original body/listing ease_evaluate.c/ease_evaluate_listing.txt. OriginalAbilityPath now supports numeric20 and enum name InCirc. Actual runtime source numerical regression 23 checks PASS. Ghidra closed without save.

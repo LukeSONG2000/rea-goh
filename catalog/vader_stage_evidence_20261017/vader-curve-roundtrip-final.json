@@ -1,0 +1,606 @@
+[
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_2580195661228689931.json",
+      "pathId": "2580195661228689931",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Saber Catch"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Saber Catch",
+          "originalState": "Special Ability.Saber Catch",
+          "layer": 3,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_spcl_vadersaberthrowcatch",
+          "clipPathId": "2580195661228689931",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": false,
+          "startTime": 0.0,
+          "stopTime": 1.0416667461395264,
+          "events": [],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 2150,
+    "maxAbsoluteError": 6.731744406351936e-08,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_3110049653123613973.json",
+      "pathId": "3110049653123613973",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Saber Channel"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Saber Channel",
+          "originalState": "Special Ability.Saber Channel",
+          "layer": 3,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_spcl_vadersaberthrowchannel",
+          "clipPathId": "3110049653123613973",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": true,
+          "startTime": 0.0,
+          "stopTime": 1.5416667461395264,
+          "events": [],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 3062,
+    "maxAbsoluteError": 4.4064449866709765e-09,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_7939358196875266940.json",
+      "pathId": "7939358196875266940",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Special Ability"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Special Ability",
+          "originalState": "Special Ability 2.Special Ability",
+          "layer": 2,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_spcl_frce_crush",
+          "clipPathId": "7939358196875266940",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": false,
+          "startTime": 0.0,
+          "stopTime": 4.633333206176758,
+          "events": [
+            {
+              "time": 0.7333333492279053,
+              "functionName": "StartParticleSystem",
+              "data": "vfx.vfx_force_vader",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 1.0,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "StartActivationEffect",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            }
+          ],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 11294,
+    "maxAbsoluteError": 6.919798636317864e-07,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_8095517517281013844.json",
+      "pathId": "8095517517281013844",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Idle@0.0"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Idle@0.0",
+          "originalState": "Base Layer.Idle",
+          "layer": 0,
+          "defaultState": true,
+          "stateSpeed": 1.0,
+          "blendThreshold": 0.0,
+          "clipName": "hmn_hurt_idle",
+          "clipPathId": "8095517517281013844",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": true,
+          "startTime": 0.0,
+          "stopTime": 2.0416667461395264,
+          "events": [
+            {
+              "time": 1.0833333730697632,
+              "functionName": "PostAudioEvent",
+              "data": "Play_VO_unit_ambient_breatheHurt_01",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            }
+          ],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 1167,
+    "maxAbsoluteError": 4.713041334980517e-08,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_-7311000309501844792.json",
+      "pathId": "-7311000309501844792",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Idle@1.0",
+        "Homescreen Idle"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Idle@1.0",
+          "originalState": "Base Layer.Idle",
+          "layer": 0,
+          "defaultState": true,
+          "stateSpeed": 1.0,
+          "blendThreshold": 1.0,
+          "clipName": "hmn_homescrn_any01",
+          "clipPathId": "-7311000309501844792",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": true,
+          "startTime": 0.0,
+          "stopTime": 2.1666667461395264,
+          "events": [
+            {
+              "time": 1.25,
+              "functionName": "PostAudioEvent",
+              "data": "Play_VO_unit_ambient_breathe_01",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            }
+          ],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        },
+        {
+          "animationName": "Homescreen Idle",
+          "originalState": "Base Layer.Homescreen Idle",
+          "layer": 0,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_homescrn_any01",
+          "clipPathId": "-7311000309501844792",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": true,
+          "startTime": 0.0,
+          "stopTime": 2.1666667461395264,
+          "events": [
+            {
+              "time": 1.25,
+              "functionName": "PostAudioEvent",
+              "data": "Play_VO_unit_ambient_breathe_01",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            }
+          ],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 4385,
+    "maxAbsoluteError": 2.848722147064109e-08,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_-6692335532157945529.json",
+      "pathId": "-6692335532157945529",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Saber Throw"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Saber Throw",
+          "originalState": "Special Ability.Saber Throw",
+          "layer": 3,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_spcl_vadersaberthrow",
+          "clipPathId": "-6692335532157945529",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": false,
+          "startTime": 0.0,
+          "stopTime": 0.7083333730697632,
+          "events": [
+            {
+              "time": 0.6666666865348816,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "FireProjectile",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            }
+          ],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 1518,
+    "maxAbsoluteError": 1.361334511784662e-07,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_-6234430718897645586.json",
+      "pathId": "-6234430718897645586",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Hit"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Hit",
+          "originalState": "Hit Reaction.Hit",
+          "layer": 1,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_hit_01",
+          "clipPathId": "-6234430718897645586",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": false,
+          "startTime": 0.0,
+          "stopTime": 0.6666667461395264,
+          "events": [],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 1439,
+    "maxAbsoluteError": 5.472816155815963e-08,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_-1537036876507428771.json",
+      "pathId": "-1537036876507428771",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Attack"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Attack",
+          "originalState": "Base Layer.Attack",
+          "layer": 0,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_sbr_atk_vader",
+          "clipPathId": "-1537036876507428771",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": false,
+          "startTime": 0.0,
+          "stopTime": 2.9166669845581055,
+          "events": [
+            {
+              "time": 0.5416666865348816,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "ForwardJump",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 0.875,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "ForwardJumpDone",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 1.0,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "AttackHit",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 1.5833333730697632,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "AttackHitAndApplyDamage",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 2.3333332538604736,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "BackwardJump",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 2.3333332538604736,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "AttackReturn",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            }
+          ],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 5843,
+    "maxAbsoluteError": 1.6340884485543938e-06,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_shared_animationcontainer_-1414035757376003321.json",
+      "pathId": "-1414035757376003321",
+      "sourceBundle": "shared_animationcontainer",
+      "semanticNames": [
+        "Death"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Death",
+          "originalState": "Base Layer.Death",
+          "layer": 0,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_dth_01",
+          "clipPathId": "-1414035757376003321",
+          "sourceBundle": "shared_animationcontainer",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": false,
+          "startTime": 0.0,
+          "stopTime": 0.75,
+          "events": [],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 1631,
+    "maxAbsoluteError": 6.581888101209188e-08,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_char_vader_pre_4878903137681566209.json",
+      "pathId": "4878903137681566209",
+      "sourceBundle": "char_vader_pre",
+      "semanticNames": [
+        "Limit Break 3"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Limit Break 3",
+          "originalState": "Base Layer.Limit Break 3",
+          "layer": 0,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_sbr_massacre_vader",
+          "clipPathId": "4878903137681566209",
+          "sourceBundle": "char_vader_pre",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": false,
+          "startTime": 0.0,
+          "stopTime": 3.033334255218506,
+          "events": [
+            {
+              "time": 0.10000000149011612,
+              "functionName": "StartParticleSystem",
+              "data": "vfx_vader_saber_Glow",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 0.10000000149011612,
+              "functionName": "FireAbilityFSMEvent",
+              "data": "StartActivationEffect",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 0.36666667461395264,
+              "functionName": "PlaySubObjectAnimationEvent",
+              "data": "FISTON",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            },
+            {
+              "time": 1.8666666746139526,
+              "functionName": "PlaySubObjectAnimationEvent",
+              "data": "FISTOFF",
+              "objectReferenceParameter": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "floatParameter": 0.0,
+              "intParameter": 0,
+              "messageOptions": 0
+            }
+          ],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 6233,
+    "maxAbsoluteError": 4.413545440229427e-07,
+    "status": "PASS",
+    "failures": []
+  },
+  {
+    "source": {
+      "file": "clip_char_vader_pre_-3473213669730501561.json",
+      "pathId": "-3473213669730501561",
+      "sourceBundle": "char_vader_pre",
+      "semanticNames": [
+        "Look"
+      ],
+      "semanticBindings": [
+        {
+          "animationName": "Look",
+          "originalState": "Base Layer.Look",
+          "layer": 0,
+          "defaultState": false,
+          "stateSpeed": 1.0,
+          "blendThreshold": null,
+          "clipName": "hmn_sbr_vader_sendbox",
+          "clipPathId": "-3473213669730501561",
+          "sourceBundle": "char_vader_pre",
+          "controllerPointerVerified": true,
+          "status": "EXACT_SOURCE_CLIP",
+          "loopTime": false,
+          "startTime": 0.0,
+          "stopTime": 2.8666677474975586,
+          "events": [],
+          "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+          "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+        }
+      ]
+    },
+    "keys": 1189,
+    "maxAbsoluteError": 7.956506919981621e-08,
+    "status": "PASS",
+    "failures": []
+  }
+]

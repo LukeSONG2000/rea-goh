@@ -1,0 +1,145 @@
+VADER complete-kit dependency recovery. Native bodies from existing saved Ghidra
+project via read-only pyghidra; no save, full autoanalysis, game launch or online API.
+All sessions closed (decompile*_run.txt). No runtime/catalog/git changes.
+
+GRAPH SOURCE: catalog/gamedata ability.json + effect.json, highest tier selected.
+full_graph.json preserves original abilities/tier refs and reachable effects.
+graph.txt summarizes operator coverage. This is normal VADER, not LORDVADER.
+
+SHORTEST DEPENDENCY ORDER
+1 Culling Blade: QUERYCOUNT11 COUNT_ACTIVE_EFFECTS; per-effect result dictionaries
+  and contextIndex[1]; DISPELL5; crit additive MODIFYSTAT8; RECOVER2 SPEED_FILL;
+  KILL/PERFORMMOVE events. Existing DAMAGE remains source*(1+context*contextMult).
+2 Merciless: IMMUNITY6; ordinary QUERYCOUNT; CONTEXTUAL_EXECUTE/SKIP;
+  RECOVER SPEED_FILL PRIORITY scheduling; TAUNT stat; STARTMOVE marker handler
+  lives in uniqueability_vader01, not only specialability_vader03.
+3 Unique: encounter-start/bootup; category-count context speed; tag-instance-removed
+  recovery health+shield; immunity to turn meter reduction and stealth interaction.
+4 Leader: offense stats, conditional damage-directed turn-meter reduction;
+  BLACKBOARDMODIFY21/QUERY22/GREATER_THAN; tag-instance-removed DOT reapplication.
+No BONUSMOVE7 occurs in these maximum-tier closures. Do not implement Vader's
+extra turns by substituting BONUSMOVE; they use RECOVER SPEED_FILL and PRIORITY.
+
+CONTEXT / COUNT
+QueryCount.ApplyToTargets VA18136F1B0, query_count.c:
+  result = NewEffectResult dictionary
+  for target in validTargets:
+    if chanceFailure[target]: result[target]=0; continue
+    if not COUNT_ACTIVE_EFFECTS: result[target]=1; continue
+    result[target]=0
+    for appliedEffect in target.GetAppliedEffects():
+      for tag in appliedEffect.Definition.DescriptiveTags:
+        if effectedTag filter is empty OR contains this tag:
+          result[target] += 1; break
+  context.AddEffectResult(result)
+The count is once per persistent instance, not unique tag and not IsDebuff predicate.
+GetAppliedEffects181A6EB30 collects current effect groups. Culling matches positive
+countable_debuff; no inference needed about query negative filters.
+GetContextValue18136A570 (get_context_float.c temporary float return, rolled back):
+  no explicit indexes => sum values of last result dictionary
+  indexes => sum all values of each indexed dictionary; indices are zero-based.
+GetLastEffectResult181360420 returns last dictionary or shared empty dictionary.
+AggregateContextualValues18136AB50 retains per-target keys rather than only scalar.
+Original DLL VA18529EF3C=0000803f float1.0, independently read from PE sections.
+
+DISPEL
+Dispell.ApplyToTargets1813668E0: skip chance failures. Unless buff/UNRESISTABLE,
+perform target resistance; resisted effect emits original resistance events.
+DISPELL_ALL => maxCount int.MaxValue; otherwise conversion of additive+contextMult*
+context scalar (round helper is in listing; do not silently assume infinite).
+Culling additiveAmountDecimal1000000 => 100, not an unlimited clear.
+Calls Unit.DispelEffect181BC8C20 with effectedTags,sourceEffect,record,maxCount,
+showVfx unless flag0x100, and source owner; optional clear VFX then ClearEffects.
+ClearEffects181A6D400: if maxCount<1 return0; enumerate runtime-type ordered groups
+then their instance lists, select matching DescriptiveTags into a temporary list,
+stop at maxCount. Only AFTER selection, ClearEffect each selected instance.
+No additional immunity check in this clear path. Selection uses original listionary
+tag matcher, not tag substring matching. Type-order matters when only some clear.
+ClearEffect181A6D990 finds that exact instance in its type group, then group overload
+181A6DBC0 removes through181A71B40, finally OnEffectTypeExpired(definition,IsBuff).
+
+HandleEffectRemoved181A71C20, after tag counts are decremented, for EACH tag:
+  if fromDispel:
+    host.EffectTagInstanceDispelled(tag,source)
+    source.Condition(PERSISTENT_EFFECT_DISPELLED_INSTANCE runtime81,target=host,tag)
+  host.EffectTagInstanceRemoved(tag)
+  if remainingTagCount==0 and fromDispel:
+    host.EffectTagDispelled(tag,source)
+    source.Condition(PERSISTENT_EFFECT_DISPELLED runtime80,target=host,tag)
+  if remainingTagCount==0: host.EffectTagRemoved(tag)
+Removing a DOT therefore must still invoke instance-remove events used by leader
+and unique recovery, even during Culling. Do not bypass these with list.Remove.
+
+EVENT TIMING / ENUM CORRECTIONS
+Effect id trigger_extra_turn_self_ENEMYKILLED actually uses proto17=KILL (runtime15).
+Proto19 is ENEMYKILLED. Never infer event type from effect id.
+Merciless vader_multi_turn_handler uses proto35 STARTMOVE (runtime36).
+AttackFinished181BC4F50 fires ATTACK/basic or LIMIT_BREAK/special, THEN PERFORM_MOVE
+runtime8=proto10, THEN clears queued-moves list and sends completion callback.
+Thus Culling's temporary crit buff expires after its damage/effect references.
+NotifyKilled181BC59F0 first sends KILL to killer with killed target/sourceEffect tags,
+then OnUnitKilled callback. Existing apply_attack_damage.c inlines this after HP<=0,
+before requesting death animation. Full downstream death cleanup timing not yet
+proved solely by these methods; do not claim all cleanup has happened before KILL.
+
+RECOVERY / IMMUNITY
+recover_apply181371880 and recover_target181371C10 preserve per-target results.
+SPEED_FILL branch uses game maximum fill, multiplier, additive and context term,
+updates fill and overflow, sends original increase/decrease events, and PRIORITY
+enqueues action in BattleFsmController callback queue. PRIORITY is distinct from
+ordinary gaining100% meter. Further queue consumer/tie ordering remains to prove.
+SetSpeedFill181BCDB50 itself merely writes +208 and dispatches, does not clamp.
+Recovery caller clamps; +20c preserves overflow (see full body/listing).
+Immunity tracker bodies immune_add/remove and persistent_is_immune are available.
+IsImmuneToEffect181A6E500 checks tag's registered immunity slot index>=0. Existence
+of an immunity state does not imply every incoming effect is blocked: consumer
+must check incoming matching tags / recovery type through original module gate.
+
+FSM ACTION BRIDGE
+AbilityFsmAction.OnEnter181319A10: action2 calls IAbilityFsmStateAction slot0
+AbilityApplyEffect; action3 slot1 AbilityFinished;6 stealth;7 reticle; then Finish.
+AbilityFSMController.ApplyEffect180FD2940 calls unit ability ApplyEffects18184B450
+with UI=true, stored showVfx flag and effect-finished callback.
+AbilityFinished180FD2C60 cleans state, checks completion flags and invokes queued
+callback(s) before recycling presentation object. Effect timing is a real FSM event,
+not an arbitrary damage delay or only a hit animation.
+AbilitySpawnVfxAction180FD5730 uses SourceVfx ParticleSystem on source FSM.PlayVfx;
+TargetVfxParent has pre-existing children consumed sequentially for alive affected
+units excluding source. It does not instantiate a parent clone for every target.
+Exact player pooling/cleanup beyond these functions remains a separate dependency.
+
+FOLLOW-UP CONFIRMED DETAILS / CORRECTIONS
+BattleEffectTypeDO.CompareTo180FFB210 orders by RUNTIME Type ascending; if equal,
+Stat ascending except Stat0 sorts AFTER all nonzero stats. Recovery is ignored.
+ClearEffects grouping therefore cannot sort only protobuf type or insertion order.
+
+PersistentEffectTagInstanceRemoved181BC9D10 sends self runtime29=proto51 first;
+PersistentEffectTagRemoved181BC9520 sends self runtime27=proto29 first.
+Host dispelled callbacks181BCA0F0/181BCA110 send runtime83/82 (proto86/85).
+Source side HandleRemoved sends runtime80/81 (proto83/84).
+The additional player/opponent-list loops in TagRemoved/InstanceRemoved have an
+unexpected original behavior: receiver remains SELF, not the iterated list entry.
+This is confirmed in LISTING, not only decompilation:181BC9E1B RBX=RDI(self),
+181BC9EA9 reads current item into RAX but never assigns receiver;181BC9ED2 sets
+RCX=RBX and calls181BCD180. Repeats runtime89/91 by side-list length; whole-tag
+method analogously88/90. Do not describe these bodies as proved per-unit broadcast.
+Do not casually replace this with desired behavior without labeling divergence.
+
+STAT28 ADDITIVE CRIT
+IStatSource.GetCompoundableStatContribution181BCEA70 tail-jumps to persistent
+181A6F040; it sums per-stacking-line aggregated values at+14 for that stat.
+GetPercentAdditivesForStat180FE0280 only treats stats1..11; stat28 returns empty.
+GetAdditivesForStat180FE0480 stat28 also returns empty/default.
+GetCalculatedStatValue180FDE5C0 final switch includes stat28 among FLOAT cases;
+it does NOT truncate to int. Stat28 .25 remains .25. Fixture final-stat values can
+therefore add the original persistent stat28 aggregate without recomputing equipment.
+Default stats outside listed float family are truncated toward zero, not rounded.
+
+LEADER BLACKBOARD (bodies181362370 and181362A80)
+Modify computes delta=oldValue*multiplier+additive+context*contextMultiplier;
+CONTEXT_MAX_MULTIPLIER additionally scales context term by oldValue. Without
+BLACKBOARD_OVERRIDE bit26 calls AddBlackboardValue181BCB090; with it calls
+SetBlackboardValue181BCAFE0. Vader tracker uses ordinary +1/-1 deltas.
+Query compares oldValue to additive+context*contextMultiplier. GREATER_THAN bit28
+returns1 only when oldValue>threshold; Vader's threshold0 tests tracker>0.
+Snapshot/context-event eligibility still belongs to the shared effect gate.
