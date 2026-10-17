@@ -92,7 +92,10 @@ globalThis.RuntimeApi = (() => {
   }
   function writeRef(object,name,value,staticClass) {
     const f=field(staticClass || classOf(object),name);if(!isReference(f))throw Error('Not reference field '+name);
-    const buffer=Memory.alloc(P);buffer.writePointer(value || nil);setField(object,f,buffer);
+    // Unity 6000.3.17f1 libil2cpp/vm/Field.cpp: SetValue/StaticSetValue call
+    // SetValueRaw(..., deref_pointer=false). References are the value itself,
+    // unlike primitive fields which receive an address of their value.
+    setField(object,f,value || nil);
   }
   function writeValue(object,name,kind,value,staticClass) {
     const f=field(staticClass || classOf(object),name);checkValueField(f,kind);

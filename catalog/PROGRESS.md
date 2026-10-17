@@ -159,3 +159,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-17 tavern-luke】认领用户授权原客户端酒馆全部NPC临时替换原农场卢克；REA定位场景角色边界，仅当前进程视觉对象替换，保留恢复入口，原E盘只读，不改账号/库存/货币/Mod。root独占runtime注入与Git。
 
 【Codex/root 2026-10-17 battle-info】用户说明上次为主动关闭并切换需求，暂停tavern-luke（已实例化14/恢复未验收，不能标完成）。认领原客户端长按详情HP/maxHP/护盾/状态回合与全模式目标技能CD显示；root独占runtime只读数据+UI改写，battle_gap只读数据契约，visual_gap唯一Ghidra只读显示门禁。禁止调用技能/推进当前战斗，不改数值/账号/E盘。
+
+【Codex/root battle-info 2026-10-18】原客户端只读战斗数据+UI补丁：长按HP/maxHP、shield/maxShield、原状态事件剩余计数；统一模式显示门禁与onboarding UI分支，冷却值仍由原控件提供。修复writeRef多一级指针导致的早先崩溃，40例回归+原runtime scratch引用/空值读回PASS。针对用户指出文字重叠，修正原滚动面板topAnchor预留85单位而非移动会被约束复位的Table；UILabel自适应高度及行Widget测量，实际窗口截图确认两数值行/两状态行不重叠。本地JMK原模拟域零攻击/零回合/正式BattleService零调用，HP202948/202948、shield254034/254034、保护状态剩余4次自身完整回合；回Home/guard/GC清理PASS。常驻helper启停再启动PASS，当前已启用；入口tools/start_battle_info.cmd、stop_battle_info.cmd。全模式逐项、全部状态/长列表滚动未实测，不标全覆盖；原mastery标记无匹配计时明确报未读取到。详情BATTLE_INFO_UI_VALIDATION_20261018.json。

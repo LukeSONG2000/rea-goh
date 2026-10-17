@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original client presentation only; original installation read-only",
+  "start": "tools/start_battle_info.cmd",
+  "stop": "tools/stop_battle_info.cmd",
+  "supportedGameAssemblySha256": "12cc254525a58aedea122a2967d0476da05b98ef0c219dc18cfc0b7207538db6",
+  "validation": {
+    "kind": "battle-info-validation",
+    "opened": true,
+    "status": {
+      "shows": 1,
+      "updates": 36,
+      "modeGateCalls": 1,
+      "tutorialDisplays": 0,
+      "errors": [],
+      "last": {
+        "health": "生命 202948 / 202948\n护盾 254034 / 254034",
+        "effects": [
+          {
+            "icon": "icon_mastery_up",
+            "suffix": "未读取到计时（原显示标记）",
+            "instances": 0
+          },
+          {
+            "icon": "icon_protection",
+            "suffix": "剩余 4 次自身完整回合完成；另有原移除条件",
+            "instances": 1
+          }
+        ]
+      }
+    }
+  },
+  "simulation": {
+    "attacked": false,
+    "turns": 0,
+    "serviceCalls": 0,
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    }
+  },
+  "visualEvidence": "logs/high_reuse/battle-info-window-only.png",
+  "layoutFix": "Shrink original scroll panel via its top anchor absolute offset by 85; preserve lower boundary and original scrolling. UILabel ResizeHeight + unlimited lines + row widget measured height. Do not shift table transform, which original scroll constraints reset. Restore UI properties on stop.",
+  "referenceBugFix": "il2cpp_field_set_value reference values are passed directly (Unity6000.3.17f1 vm/Field.cpp); old extra indirection caused previous crash. 40 offline regression cases and original main-thread scratch anchor reference/null readback PASS.",
+  "launchStopTest": "Persistent helper install -> stop -> detached without errors -> reinstall PASS",
+  "limitations": [
+    "All-mode visibility patched at original shared mode and onboarding gates; not every mode entered and tested.",
+    "Original mastery marker had no matching persistent instance: explicitly displays timer unavailable rather than inventing a duration.",
+    "The screenshot fixture did not populate unit display name; normal real-user long-press title not verified.",
+    "No test of every status, many-row scrolling, or a full online match.",
+    "Client restart requires starting the helper again; client version is hash-locked."
+  ]
+}
