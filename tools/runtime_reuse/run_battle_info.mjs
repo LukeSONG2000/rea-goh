@@ -1,6 +1,7 @@
 import {processCommands} from './runtime_commands.mjs';
 import {acquireRuntimeSession} from './runtime_session_lock.mjs';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 import path from 'node:path';
 import {createRequire} from 'node:module';
 import {execFileSync} from 'node:child_process';
@@ -16,7 +17,19 @@ session.detached.connect(()=>{detached=true;});
 const save=()=>fs.writeFileSync(statusPath,JSON.stringify({pid:Number(pid),hostPid:process.pid,detached,stop,status:last,messages},null,2));
 try{
  script=await session.createScript(fs.readFileSync(source,'utf8'));
- script.message.connect(m=>{messages.push(m);if(messages.length>100)messages.shift();save();});
+ script.message.connect((m,data)=>{
+  if(m.type==='send'&&m.payload?.kind==='original-battle-proto-captured'){
+   try{
+    if(!data||data.length!==m.payload.bytes||data.length>16*1024*1024)throw Error('Invalid battle capture size');
+    const capturePath=path.join(directory,`battle-proto-${pid}-${process.pid}.pb`);
+    fs.writeFileSync(capturePath,data,{flag:'wx'});
+    const metadata={...m.payload,path:capturePath,sha256:crypto.createHash('sha256').update(data).digest('hex')};
+    fs.writeFileSync(capturePath+'.json',JSON.stringify(metadata,null,2),{flag:'wx'});
+    m={type:'send',payload:metadata};
+   }catch(e){m={type:'send',payload:{kind:'battle-proto-save-error',error:String(e)}};}
+  }
+  messages.push(m);if(messages.length>100)messages.shift();save();
+ });
  await script.load();
  while(!detached&&!stop&&!fs.existsSync(stopPath)){
   await new Promise(resolve=>setTimeout(resolve,1000));

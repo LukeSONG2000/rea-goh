@@ -19,6 +19,9 @@
     R.writeValue(state,'CurrentShield','i64',654321+i);
     add(S.invoke('Protos.BattleEncounter','get_UnitState',encounter),state);add(encounters,encounter);originalStates.push(state);
    }
+   const serialized=serializeOriginalBattleProto(source);
+   if(!serialized.byteLength)throw Error('Empty serialization');
+   result.serializedBytes=serialized.byteLength;
    cloned=cloneOriginalBattleProto(source);const copy=cloned.object;
    const copyEncounters=R.readRef(copy,'_battleEncounter');
    if(copyEncounters.equals(encounters)||R.readValue(copyEncounters,'_size','i32')!==2)throw Error('Encounter list not cloned');

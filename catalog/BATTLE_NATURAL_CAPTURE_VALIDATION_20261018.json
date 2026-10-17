@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-18",
+  "scope": "Natural original light-side campaign BattleData capture and original protobuf file roundtrip; NOT resource-free trial completion",
+  "clientPid": 19440,
+  "assemblySha256": "12cc254525a58aedea122a2967d0476da05b98ef0c219dc18cfc0b7207538db6",
+  "capture": {
+    "kind": "original-battle-proto-captured",
+    "scope": "natural response factory input; BattleData only",
+    "mission": {
+      "_campaignID": "C01L",
+      "_mapId": "M01",
+      "_nodeId": "N01",
+      "_missionId": "Mi01",
+      "difficulty": 1
+    },
+    "overrideRelicTier": 0,
+    "bytes": 12607,
+    "path": "logs\\high_reuse\\battle-proto-19440-42636.pb",
+    "sha256": "d321d26c536e658c327f1fc288822d39ae1b578e5569be5301ca5f3f4e71b831"
+  },
+  "roundtrip": {
+    "kind": "protobuf-probe-complete",
+    "scope": "captured natural BattleData file; original serializer roundtrip only",
+    "passed": true,
+    "encounters": 1,
+    "encounterIndex": 0,
+    "bytes": 12607,
+    "byteIdentical": true
+  },
+  "navigationVerified": [
+    "HomeBaseController.OnCampaignsClicked with observed prop state 3 -> 5 visible unlocked campaign rows",
+    "CampaignsPopupSelectListItem.HandleEnterClicked feature19 -> CampaignGameState",
+    "MissionDetailsComponent.OnSelectMissionClick -> PvePreBattleState",
+    "Original visible support selected; saved squad unchanged by our direct code",
+    "PvePreBattleController.HandleOnBattleButtonClicked -> original summoner warning; after dismissal original button -> BattleGameState"
+  ],
+  "cost": {
+    "displayedEnergy": 6,
+    "energyType": 1,
+    "currencyType": 0,
+    "selectedSquadDatacron": false,
+    "purchaseInvoked": false,
+    "modOrDatacronRemovalInvoked": false,
+    "exactPostBattleEnergyDeltaVerified": false
+  },
+  "result": "Original full-auto progressed battle to visible reward panel; no isolated outcome submission used",
+  "evidence": [
+    "logs/high_reuse/natural-capture-evidence.json",
+    "logs/high_reuse/natural-capture-battle-snapshot.json",
+    "logs/high_reuse/proto-file-roundtrip-evidence.json",
+    "logs/high_reuse/natural-capture-rewards.png"
+  ],
+  "checks": [
+    "test_battle_capture.mjs PASS: mocked callback scope/thread isolation/one-shot/clone cleanup/five-error bound",
+    "test_runtime_commands.mjs PASS",
+    "test_runtime_session_lock.mjs PASS",
+    "demo_turn_order.py deterministic PASS",
+    "node syntax checks PASS"
+  ],
+  "limitations": [
+    "No exact player squad isolation yet; DO copy constructors remain insufficient",
+    "No captured mission replay in isolated domain yet",
+    "This natural battle consumes ordinary energy, so capture is not a free-trial implementation",
+    "Only BattleData persisted, never full response Player/InventoryDelta/auth",
+    "Full mode coverage, enemy control, prediction and configurable AI are incomplete"
+  ],
+  "captureStartCommand": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_battle_info.ps1 -CaptureBattle",
+  "captureDefault": false,
+  "currentHostPid": 38100
+}
