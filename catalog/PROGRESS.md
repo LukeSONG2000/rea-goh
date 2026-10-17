@@ -224,3 +224,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 captured-trial-entry】认领可重复试玩入口：v2捕获双文件完整性/原schema补全/显式保存队伍与快照来源、独占宿主启动及finally恢复；root写tools/runtime_reuse准备器/启动器/视觉auto选项与验证，不改战斗数值或原目录。
 
 【Codex/root 2026-10-18 captured-trial-entry validated】新增prepare_captured_trial.py/start_captured_trial.ps1/run_captured_trial.mjs及CAPTURED_TRIAL.md：显式v2关卡+库存快照、类型/长度/SHA/源码hash/原程序集验证，单宿主锁，正常停显示宿主并finally恢复；默认手动300秒，Auto原基础技+原auto，无画面原模拟。清理不完整保留连接/锁，不冒称成功；此异常保留分支未对实机故障注入。实际headless终态、visual Auto终态、manual15秒不自动点击并安全返回全部PASS，正式BattleService0、guard/GC/Home或loop清理PASS；真实活宿主17312第二附加拒绝。准备器4测试/defaults8/互斥/turn-order同seed PASS。正常宿主38652与原19440存活、Home。报告CAPTURED_TRIAL_ENTRY_VALIDATION_20261018.json。仍只验证捕获1-A+type1，无好友支援；不自动刷新配置，非空Datacron/Era、其它模式/新鲜采集及常驻AI接口集成待完成。
+
+【Codex/root 2026-10-18 trial-ai-bridge】认领试玩独占宿主接入现有snapshot/battle输入CLI：复用BattleInputBridge与命令邮箱，只接本次准确BattleGameState所有权，拒绝导航/跨会话输入；不新增战斗规则。
