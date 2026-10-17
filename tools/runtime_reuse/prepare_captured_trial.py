@@ -34,6 +34,9 @@ def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto):
     modules = ['runtime_api.js', 'unity_scene_api.js', 'offline_socket_guard.js',
                'original_fixture.js', 'battle_proto.js', 'isolated_inventory.js',
                'captured_battle.js', 'captured_trial.js']
+    if mode == 'visual':
+        modules += ['battle_status_reader.js', 'battle_attributes_reader.js',
+                    'battle_input.js', 'runtime_observer.js', 'trial_input.js']
     source = '\n'.join((root / n).read_text(encoding='utf-8-sig') for n in modules)
     for name, value in [('capturedBytes', battle_bytes), ('inventoryBytes', inventory_bytes)]:
         source += '\nglobalThis.' + name + '=new Uint8Array(' + json.dumps(list(value), separators=(',', ':')) + ');\n'
@@ -54,6 +57,7 @@ def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto):
     prefix = Path(prefix)
     js, manifest_path = Path(str(prefix) + '.js'), Path(str(prefix) + '.json')
     manifest = {'schemaVersion': 1, 'mode': mode, 'durationSeconds': duration, 'auto': auto,
+                'battleCli': mode == 'visual',
                 'squadType': squad_type, 'mission': metadata.get('mission'),
                 'battle': battle_info, 'inventory': inventory_info,
                 'snapshotPolicy': 'Use supplied captured snapshot; no automatic account refresh or spending',

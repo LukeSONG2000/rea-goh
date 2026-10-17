@@ -1,6 +1,6 @@
 # 原客户端关卡快照试玩（Captured trial）
 
-在原客户端酒馆运行。当前已验证光明面 1-A、原保存队伍 type 1、无好友支援。
+在原客户端酒馆运行。当前已验证光明面 1-A、原保存队伍 type 1 和 type 9 的操作、无好友支援。
 使用原版资源、技能、战斗状态机和 UI；不提交线上开战/结算请求。
 这是已捕获关卡的试玩入口，尚不能直接试玩任意未捕获活动。
 
@@ -35,6 +35,29 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 终态、回合及退出清理结果。手动会话成功进入并安全返回可为 `valid:true`，
 不等于已经打赢；是否打完看 `terminal`。自动和无画面验证则要求终态成立。
 
+## AI 操作接口
+
+有画面试玩运行期间，在另一个终端使用现有 CLI，`PID` 替换为原游戏进程号：
+
+```powershell
+node tools/runtime_reuse/runtime_cli.mjs snapshot --pid PID
+node tools/runtime_reuse/runtime_cli.mjs battle-target --pid PID --request logs/high_reuse/target.json
+node tools/runtime_reuse/runtime_cli.mjs battle-ability --pid PID --request logs/high_reuse/ability.json
+node tools/runtime_reuse/runtime_cli.mjs battle-unit --pid PID --request logs/high_reuse/unit.json
+node tools/runtime_reuse/runtime_cli.mjs battle-cancel --pid PID --request logs/high_reuse/cancel.json
+```
+
+`snapshot` 返回 `trial:true`、宿主进程号、实时属性和 `input`。每次操作前读取
+最新 `input.token`；释放技能请求为 `{"token":"当前token","index":0}`，
+选择目标/友军为 `{"token":"当前token","targetId":"候选id"}`，取消为
+`{"token":"当前token"}`。目标来自 `input.targets`，技能来自 `input.abilities`，
+等待选友军时使用 `input.selectionCandidates`。不要盲目重试旧 token。
+
+命令发送到试玩的同一个宿主，不新建 Frida 连接；执行前校验准确的原战斗状态
+实例与 context，再调用共用的原 UI 输入桥。试玩中拒绝收藏/战役等导航。
+试玩结束后 CLI 自动恢复日常显示宿主路由。若命令恰逢宿主切换，其 owner
+校验会拒绝执行，应重新读取快照后再决定操作。
+
 仍待完成：新鲜快照采集入口、好友支援、非空 Datacron、Era 借用单位、其他
-活动/有限次数模式、与常驻 AI 操作接口集成。当前截图和确定性验证不代表
-这些范围已通过。
+活动/有限次数模式、终极技能独立 UI、敌方控制和预测。当前截图和确定性验证
+不代表这些范围已通过。

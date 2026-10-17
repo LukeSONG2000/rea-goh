@@ -4,6 +4,8 @@ import crypto from 'node:crypto';
 import {createRequire} from 'node:module';
 import {execFileSync} from 'node:child_process';
 import {acquireRuntimeSession} from './runtime_session_lock.mjs';
+import {processCommands} from './runtime_commands.mjs';
+import {fileURLToPath} from 'node:url';
 const [pidText,manifestPath,output]=process.argv.slice(2),pid=Number(pidText);
 if(!Number.isSafeInteger(pid)||pid<=0||!manifestPath||!output)throw Error('Expected PID manifest.json evidence.json');
 if(fs.existsSync(output))throw Error('Evidence already exists; choose a new output path');
@@ -19,6 +21,12 @@ if(processImage.toLowerCase()!=='e:\\games\\ea games\\swgoh\\swgoh.exe')throw Er
 const assembly=path.join(path.dirname(processImage),'GameAssembly.dll');
 if(crypto.createHash('sha256').update(fs.readFileSync(assembly)).digest('hex')!==expected)throw Error('Original assembly changed');
 const unlock=acquireRuntimeSession(pid);
+const directory=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../logs/high_reuse');
+const statusPath=path.join(directory,`trial-status-${pid}.json`),snapshotPath=path.join(directory,`trial-snapshot-${pid}.json`);
+const owner={pid,hostPid:process.pid};
+const saveStatus=(extra={})=>{
+ const temp=statusPath+'.tmp';fs.writeFileSync(temp,JSON.stringify({...owner,kind:'captured-trial',mode:manifest.mode,battleCli:manifest.battleCli===true,snapshotPath,detached:false,...extra}));fs.renameSync(temp,statusPath);
+};
 let session,script,timer,complete=null;
 const messages=[];
 const persist=(extra={})=>fs.writeFileSync(output,JSON.stringify({pid,manifest:manifestPath,messages,...extra},null,2));
@@ -35,24 +43,40 @@ try{
   });
  });
  await script.load();
+ saveStatus();
  // If native execution hangs, keep the owner/guard alive instead of silently
  // unloading a script while its original battle still holds private objects.
  timer=setInterval(()=>{
   persist({needsAttention:true,reason:'No cleanup completion yet; runtime ownership retained'});
   process.stderr.write('Trial cleanup has not completed; owner retained. Inspect evidence and client before intervention.\n');
  },(manifest.durationSeconds+60)*1000);
- await done;
+ if(manifest.mode==='visual'&&manifest.battleCli===true){
+  while(!complete){
+   await processCommands(directory,owner,async(operation,payload)=>{
+    if(complete||!['battle-ability','battle-target','battle-unit','battle-cancel'].includes(operation))throw Error('Operation unavailable in owned trial');
+    return await script.exports.trialcommand(operation,payload);
+   });
+   if(complete)break;
+   try{
+    const snapshot=await script.exports.snapshot();
+    const temp=snapshotPath+'.tmp';fs.writeFileSync(temp,JSON.stringify({...snapshot,...owner,trial:true,observedAt:new Date().toISOString()}));fs.renameSync(temp,snapshotPath);
+   }catch(e){saveStatus({snapshotError:String(e)});}
+   await new Promise(resolve=>setTimeout(resolve,250));
+  }
+ }else await done;
  clearInterval(timer);
  const cleaned=complete.cleanup?.guardRestored&&complete.cleanup?.gcReleased&&
    (manifest.mode==='visual'?complete.cleanup?.home:complete.cleanup?.loopStopped)&&complete.cleanup?.errors?.length===0;
  if(!cleaned){
   persist({needsAttention:true,reason:'Cleanup incomplete; ownership and script retained'});
+  saveStatus({needsAttention:true,battleCli:false});
   process.stderr.write('Cleanup incomplete; retaining runtime session. Do not start another host.\n');
   await new Promise(()=>{setInterval(()=>{},60000);});
  }
  await new Promise(resolve=>setTimeout(resolve,150));
  await session.detach();session=null;
  persist({detached:true});
+ saveStatus({detached:true,battleCli:false});
  const valid=complete.error===null&&complete.serviceCalls===0&&
    (manifest.mode==='headless'?complete.terminal:
     complete.originalUiObserved&&(!manifest.auto||(complete.clicked&&complete.terminalObserved)));
@@ -61,5 +85,6 @@ try{
 }finally{
  clearInterval(timer);
  if(session)await session.detach();
+ saveStatus({detached:true,battleCli:false});
  unlock();
 }

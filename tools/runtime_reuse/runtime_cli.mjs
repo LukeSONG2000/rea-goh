@@ -22,7 +22,7 @@ if(args.length===1&&args[0]==='capabilities'){
   {name:'battle-cancel',effect:'cancel original pending unit selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token'},result:'selectionCancelled confirms original cancellation'},
   {name:'battle-unit',effect:'complete original pending unit selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',targetId:'snapshot.input.selectionCandidates[].id'},result:'selectionCompleted confirms original selection callback finished'},
   {name:'battle-target',effect:'original target selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',targetId:'snapshot.input.targets[].id'},result:'targetConfirmed checks actual and manual target; repeated selection is a no-op'}
- ],navigation:['campaign-menu','campaign-home','inventory-home','inventory-characters','inventory-ships'],unavailable:['otherActions','trial','aiPrediction','controlOpponent']}));
+ ],navigation:['campaign-menu','campaign-home','inventory-home','inventory-characters','inventory-ships'],trial:{launcher:'start_captured_trial.ps1',scope:'captured snapshots; owned visual trial supports snapshot and battle inputs'},unavailable:['otherActions','uncapturedTrial','aiPrediction','controlOpponent']}));
 }else if(args.length===3&&['snapshot','watch','campaign-menu','campaign-enter','campaign-home','inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel'].includes(args[0])&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
  const pid=Number(args[2]);
  const processPath=execFileSync('powershell.exe',['-NoProfile','-Command',`(Get-Process -Id ${pid} -ErrorAction Stop).Path`],{encoding:'utf8'}).trim();
@@ -32,6 +32,24 @@ if(args.length===1&&args[0]==='capabilities'){
  const npmRoot=execFileSync(process.env.ComSpec||'cmd.exe',['/d','/s','/c','npm root -g'],{encoding:'utf8'}).trim();
  const frida=createRequire(path.join(npmRoot,'rea-agents','package.json'))('frida');
  const directory=path.dirname(fileURLToPath(import.meta.url));
+ const trialStatusPath=path.resolve(directory,`../../logs/high_reuse/trial-status-${pid}.json`);
+ if(fs.existsSync(trialStatusPath)){
+  const status=JSON.parse(fs.readFileSync(trialStatusPath,'utf8'));
+  let alive=false;try{process.kill(status.hostPid,0);alive=true;}catch{}
+  if(status.pid===pid&&!status.detached&&alive){
+   const lock=JSON.parse(fs.readFileSync(path.resolve(directory,`../../logs/high_reuse/runtime-session-${pid}.lock`),'utf8'));
+   if(lock.hostPid!==status.hostPid||lock.gamePid!==pid)throw Error('Trial ownership mismatch');
+   if(!status.battleCli||status.needsAttention)throw Error('Trial input unavailable; inspect trial owner status');
+   if(args[0]==='snapshot'){
+    const cached=JSON.parse(fs.readFileSync(status.snapshotPath,'utf8'));
+    if(cached.pid!==pid||cached.hostPid!==status.hostPid||Date.now()-Date.parse(cached.observedAt)>5000)throw Error('Trial snapshot stale; do not attach another host');
+    console.log(JSON.stringify(cached,null,2));process.exit(0);
+   }
+   if(!['battle-ability','battle-target','battle-unit','battle-cancel'].includes(args[0]))throw Error('Only snapshot and battle inputs are available while trial owns runtime');
+   const result=await submitCommand(path.dirname(trialStatusPath),{pid,hostPid:status.hostPid},args[0],battleRequest);
+   console.log(JSON.stringify(result,null,2));process.exit(result.ok?0:1);
+  }
+ }
  const source=['runtime_api.js','unity_scene_api.js','battle_status_reader.js','battle_attributes_reader.js','battle_input.js','runtime_observer.js'].map(f=>fs.readFileSync(path.join(directory,f),'utf8')).join('\n');
  const statusPath=path.resolve(directory,'../../logs/high_reuse/battle-info-status.json');
  if(fs.existsSync(statusPath)){

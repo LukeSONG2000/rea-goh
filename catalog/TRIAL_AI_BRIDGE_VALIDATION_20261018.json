@@ -1,0 +1,300 @@
+{
+  "status": "existing battle CLI operates inside original captured visual trials",
+  "runs": [
+    {
+      "path": "logs\\high_reuse\\trial-20261018-071002-096-evidence.json",
+      "terminal": true,
+      "lastSnapshot": {
+        "previous": 136,
+        "next": 1,
+        "turns": 5,
+        "currentState": "CampaignGameState"
+      },
+      "serviceCalls": 0,
+      "error": null,
+      "cleanup": {
+        "home": true,
+        "exitedOwnedStates": 1,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      }
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-071241-795-evidence.json",
+      "terminal": false,
+      "lastSnapshot": {
+        "previous": 34,
+        "next": 1,
+        "turns": 0,
+        "currentState": "BattleGameState"
+      },
+      "serviceCalls": 0,
+      "error": null,
+      "cleanup": {
+        "home": true,
+        "exitedOwnedStates": 1,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      }
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-071532-411-evidence.json",
+      "terminal": true,
+      "lastSnapshot": {
+        "previous": 136,
+        "next": 1,
+        "turns": 6,
+        "currentState": "CampaignGameState"
+      },
+      "serviceCalls": 0,
+      "error": null,
+      "cleanup": {
+        "home": true,
+        "exitedOwnedStates": 1,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      }
+    }
+  ],
+  "targetAndAbilityChecks": [
+    {
+      "op": "battle-target",
+      "code": 1,
+      "result": {
+        "id": "d76e4817-53a6-4f98-8658-b395ddfe7940",
+        "ok": false,
+        "dispatched": true,
+        "error": "Error: Target is not in original legal target list"
+      }
+    },
+    {
+      "op": "campaign-home",
+      "code": 1,
+      "result": {
+        "error": "file:///F:/PPfavorite/Work/goh/tools/runtime_reuse/runtime_cli.mjs:48\n   if(!['battle-ability','battle-target','battle-unit','battle-cancel'].includes(args[0]))throw Error('Only snapshot and battle inputs are available while trial owns runtime');\n                                                                                                ^\n\nError: Only snapshot and battle inputs are available while trial owns runtime\n    at file:///F:/PPfavorite/Work/goh/tools/runtime_reuse/runtime_cli.mjs:48:97\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.13.0\n"
+      }
+    },
+    {
+      "op": "battle-target",
+      "code": 0,
+      "result": {
+        "id": "2c675b7a-8750-49d8-99df-d671178dc74a",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "targetConfirmed": true,
+          "targetId": "zi1kQTU9R7is9hJwt4SUCQ",
+          "actualTarget": "zi1kQTU9R7is9hJwt4SUCQ",
+          "manualTarget": "zi1kQTU9R7is9hJwt4SUCQ",
+          "invoked": "BattleTargetingController.SelectManualTarget"
+        }
+      }
+    },
+    {
+      "op": "battle-ability",
+      "code": 0,
+      "result": {
+        "id": "29f24832-d8aa-48b6-ac12-d75e8b3024f2",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "abilityId": "basicability_generalskywalker",
+          "index": 0,
+          "turn": 0,
+          "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+          "resolution": "Original callback invoked; outcome requires subsequent observation"
+        }
+      }
+    },
+    {
+      "op": "battle-ability",
+      "code": 1,
+      "result": {
+        "id": "622e463c-2af7-422a-9bb1-66614617fc00",
+        "ok": false,
+        "dispatched": true,
+        "error": "Error: Stale battle input snapshot"
+      }
+    },
+    {
+      "op": "battle-ability",
+      "code": 0,
+      "result": {
+        "id": "cc3e8645-c38b-4da0-b562-69d87ca4fdc5",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "abilityId": "basicability_hermityoda",
+          "index": 0,
+          "turn": 1,
+          "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+          "resolution": "Original callback invoked; outcome requires subsequent observation"
+        }
+      }
+    },
+    {
+      "op": "battle-ability",
+      "code": 0,
+      "result": {
+        "id": "546c0ff0-7c6b-4b3e-a847-ea8066cb69e3",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "abilityId": "luthen_basicability_rebeltrooper",
+          "index": 0,
+          "turn": 2,
+          "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+          "resolution": "Original callback invoked; outcome requires subsequent observation"
+        }
+      }
+    },
+    {
+      "op": "battle-ability",
+      "code": 0,
+      "result": {
+        "id": "ebf80aba-986c-4f36-916e-b1a7451274fb",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "abilityId": "basicability_luthenrael",
+          "index": 0,
+          "turn": 3,
+          "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+          "resolution": "Original callback invoked; outcome requires subsequent observation"
+        }
+      }
+    },
+    {
+      "op": "battle-ability",
+      "code": 0,
+      "result": {
+        "id": "21a874c3-2f83-4ce1-9750-aaed0a0982a2",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "abilityId": "basicability_monmothma",
+          "index": 0,
+          "turn": 4,
+          "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+          "resolution": "Original callback invoked; outcome requires subsequent observation"
+        }
+      }
+    }
+  ],
+  "allyAndCancelChecks": [
+    {
+      "op": "battle-ability",
+      "code": 0,
+      "result": {
+        "id": "8854175f-6dd6-4610-817d-30506025d9c6",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "abilityId": "wattambor_tech1_ability",
+          "index": 2,
+          "turn": 0,
+          "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+          "resolution": "Original callback invoked; outcome requires subsequent observation"
+        }
+      }
+    },
+    {
+      "op": "battle-cancel",
+      "code": 0,
+      "result": {
+        "id": "a485f143-db95-4cda-bca6-cdfd8b458ad4",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "selectionCancelled": true,
+          "invoked": "BattleManualUnitSelectController.CancelSelectUnit"
+        }
+      }
+    },
+    {
+      "op": "battle-ability",
+      "code": 0,
+      "result": {
+        "id": "82105fd6-d587-4f97-bbe8-b3cc0ab19797",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "abilityId": "wattambor_tech1_ability",
+          "index": 2,
+          "turn": 0,
+          "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+          "resolution": "Original callback invoked; outcome requires subsequent observation"
+        }
+      }
+    },
+    {
+      "op": "battle-unit",
+      "code": 1,
+      "result": {
+        "id": "8105a08b-e744-41fa-acf9-4fb7b7db3343",
+        "ok": false,
+        "dispatched": true,
+        "error": "Error: Unit is not in original selection candidates"
+      }
+    },
+    {
+      "op": "battle-unit",
+      "code": 0,
+      "result": {
+        "id": "81c7280c-181a-4bb8-8cdb-7c0b9352acad",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "inputDispatched": true,
+          "selectionCompleted": true,
+          "targetId": "gxVo_MRvTnOgBpf3Esw3pw",
+          "invoked": "BattleManualUnitSelectController.HandleUnitTapped"
+        }
+      }
+    }
+  ],
+  "appliedTechEffects": [
+    {
+      "unit": "IG12",
+      "effectId": "tech_bonus_move_handler"
+    },
+    {
+      "unit": "IG12",
+      "effectId": "techability1_wattambor_recovery_handler"
+    }
+  ],
+  "scope": "original BattleInputBridge reused; exact owned game state and context gate; navigation rejected; no hero-specific adaptation",
+  "transitionFix": "readRuntimeSnapshot returns Transitioning for null original state; mocked regression passes; exact null-state timing not re-induced after fix",
+  "validation": [
+    "ownership forwarding/rejection regression PASS",
+    "mailbox malformed/expired/wrong owner/no replay PASS",
+    "session lock PASS",
+    "turn order same-seed PASS",
+    "normal-host routing returns Home after trial"
+  ],
+  "limits": [
+    "Ultimate UI, other modes, borrowed support, Datacron and Era remain pending",
+    "Source captures are explicit snapshots, not automatic live refresh",
+    "Second initial type9 run expired before ally test, owner mismatch rejected; retained evidence, rerun with longer duration passed"
+  ],
+  "evidence": [
+    "logs\\high_reuse\\trial-cli-input-evidence.json",
+    "logs\\high_reuse\\trial-cli-ally-expired-evidence.json",
+    "logs\\high_reuse\\trial-cli-ally-evidence.json",
+    "logs\\high_reuse\\trial-cli-after-tech.json",
+    "logs\\high_reuse\\trial-cli-ally-finish-evidence.json",
+    "logs\\high_reuse\\trial-cli-returned-home.json"
+  ]
+}

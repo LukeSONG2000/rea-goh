@@ -3,6 +3,7 @@
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const R=RuntimeApi,S=SceneApi;
  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+ if(state.isNull())return {schemaVersion:1,state:'Transitioning',units:[],scope:'original state transition in progress; no gameplay input'};
  const stateName=R.fullName(R.classOf(state));
  const result={schemaVersion:1,state:stateName,units:[],scope:'observed current client; no gameplay input'};
  if(stateName==='HomeBaseGameState')result.campaignMenu=readCampaignMenu();
