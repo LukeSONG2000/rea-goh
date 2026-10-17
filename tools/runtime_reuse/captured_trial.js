@@ -15,7 +15,6 @@ globalThis.createCapturedTrial=options=>{
  if(matches.length!==1)throw Error('Saved squad selection is missing or ambiguous');
  const player=matches[0],cells=list(R.readRef(player,'_squadCells'));
  if(!cells.length)throw Error('Empty saved squad');
- if(!R.readRef(player,'Datacron').isNull())throw Error('Selected Datacron requires isolation audit');
  if(list(R.readRef(player,'_squadAbilities')).length)throw Error('Selected squad abilities require isolation audit');
  for(const c of cells){const u=R.readRef(c,'Unit');
   if(!u.isNull()&&!units.has(String(u)))throw Error('Selected unit outside private roster');
@@ -26,6 +25,10 @@ globalThis.createCapturedTrial=options=>{
  if(opponent.isNull())throw Error('Captured initial encounter squad missing');
  const mission=call(R.findBound('CampaignDomainController'),'GetMission',[A.ref(missionId)]);
  if(mission.isNull())throw Error('Original mission unavailable');
+ if(!R.readRef(player,'Datacron').isNull()){
+  if(!R.readValue(mission,'IsDatacronAllowed','bool'))throw Error('Original mission does not allow Datacrons; selected squad is preserved and trial rejected');
+  throw Error('Datacron objects audited; this allowed mission mode still requires end-to-end validation');
+ }
  const data=R.newObject(R.findClass('BattleGameState+TransitionData'));
  call(data,'set_CampaignMissionIdentifier',[A.ref(missionId)]);
  call(data,'set_BattleTypeEnum',[A.value('u8',1)]);

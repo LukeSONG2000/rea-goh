@@ -1,0 +1,311 @@
+{
+  "status": "private Datacron combat graph and isolated engine path validated; legitimate supported mission admission remains pending",
+  "scope": {
+    "squadType": 3,
+    "affixes": 9,
+    "nativeModifierComparisons": 620,
+    "nativeEligibilityComparisons": 9,
+    "modePolicy": {
+      "kind": "diagnostic-datacron-before-initialize",
+      "missionAllowsDatacron": false,
+      "activeIndex": 5
+    }
+  },
+  "audit": {
+    "kind": "protobuf-probe-complete",
+    "passed": true,
+    "rows": [
+      {
+        "squadType": 3,
+        "affixes": 9,
+        "modifierComparisons": 620,
+        "activeComparisons": 9,
+        "mechanics": [
+          {
+            "index": 2,
+            "abilityId": "datacron_alignment_generic_035",
+            "abilityObjectShared": false,
+            "abilityDefinitionShared": true,
+            "targetDefinitionShared": true
+          },
+          {
+            "index": 5,
+            "abilityId": "datacron_faction_generic_028",
+            "abilityObjectShared": false,
+            "abilityDefinitionShared": true,
+            "targetDefinitionShared": true
+          },
+          {
+            "index": 8,
+            "abilityId": "datacron_character_princess_leia_001",
+            "abilityObjectShared": false,
+            "abilityDefinitionShared": true,
+            "targetDefinitionShared": true
+          }
+        ]
+      }
+    ],
+    "shared": [],
+    "mismatches": [],
+    "definitionReferences": [
+      "<SetDefinition>k__BackingField",
+      "<TemplateDefinition>k__BackingField"
+    ],
+    "liveInventoryUnchanged": true
+  },
+  "postBattleAudit": {
+    "kind": "protobuf-probe-complete",
+    "passed": true,
+    "rows": [
+      {
+        "squadType": 3,
+        "affixes": 9,
+        "modifierComparisons": 620,
+        "activeComparisons": 9,
+        "mechanics": [
+          {
+            "index": 2,
+            "abilityId": "datacron_alignment_generic_035",
+            "abilityObjectShared": false,
+            "abilityDefinitionShared": true,
+            "targetDefinitionShared": true
+          },
+          {
+            "index": 5,
+            "abilityId": "datacron_faction_generic_028",
+            "abilityObjectShared": false,
+            "abilityDefinitionShared": true,
+            "targetDefinitionShared": true
+          },
+          {
+            "index": 8,
+            "abilityId": "datacron_character_princess_leia_001",
+            "abilityObjectShared": false,
+            "abilityDefinitionShared": true,
+            "targetDefinitionShared": true
+          }
+        ]
+      }
+    ],
+    "shared": [],
+    "mismatches": [],
+    "definitionReferences": [
+      "<SetDefinition>k__BackingField",
+      "<TemplateDefinition>k__BackingField"
+    ],
+    "liveInventoryUnchanged": true
+  },
+  "postBattleInventory": {
+    "kind": "protobuf-probe-complete",
+    "passed": true,
+    "originalDependenciesUnchanged": true,
+    "liveInventoryUnchanged": true,
+    "originalUnits": 370,
+    "privateUnits": 370,
+    "shared": [],
+    "mismatches": [],
+    "equipmentAudit": {
+      "mods": 1347,
+      "stats": 6711,
+      "rolls": 8816,
+      "slots": 1953,
+      "crew": 69
+    },
+    "calculatedStats": {
+      "units": 370,
+      "comparisons": 22940,
+      "datacronContexts": 0
+    }
+  },
+  "diagnosticSimulation": {
+    "terminal": true,
+    "error": null,
+    "serviceCalls": 0,
+    "summary": {
+      "units": [
+        {
+          "baseId": "GLLEIA",
+          "datacronContextPrivate": true,
+          "datacronEffects": [
+            "datacron_alignment_generic_035_bonuses_on_evasion_handler",
+            "datacron_faction_generic_028_handler"
+          ],
+          "owner": 0,
+          "hp": 281177,
+          "maxHp": 281177,
+          "shield": 139667
+        },
+        {
+          "baseId": "R2D2_LEGENDARY",
+          "datacronContextPrivate": true,
+          "datacronEffects": [
+            "datacron_alignment_generic_035_bonuses_on_evasion_handler",
+            "datacron_faction_generic_028_handler"
+          ],
+          "owner": 0,
+          "hp": 245206,
+          "maxHp": 245206,
+          "shield": 95254
+        },
+        {
+          "baseId": "CAPTAINDROGAN",
+          "datacronContextPrivate": true,
+          "datacronEffects": [
+            "datacron_alignment_generic_035_bonuses_on_evasion_handler",
+            "datacron_faction_generic_028_handler"
+          ],
+          "owner": 0,
+          "hp": 128337,
+          "maxHp": 128337,
+          "shield": 181641
+        },
+        {
+          "baseId": "ADMIRALRADDUS",
+          "datacronContextPrivate": true,
+          "datacronEffects": [
+            "datacron_alignment_generic_035_bonuses_on_evasion_handler",
+            "datacron_faction_generic_028_handler"
+          ],
+          "owner": 0,
+          "hp": 116470,
+          "maxHp": 116470,
+          "shield": 112974
+        },
+        {
+          "baseId": "JYNERSO",
+          "datacronContextPrivate": true,
+          "datacronEffects": [
+            "datacron_alignment_generic_035_bonuses_on_evasion_handler",
+            "datacron_faction_generic_028_handler"
+          ],
+          "owner": 0,
+          "hp": 97425,
+          "maxHp": 97425,
+          "shield": 74476
+        },
+        {
+          "baseId": "PVE_OOMCOMMANDBATTLEDROID",
+          "datacronContextPrivate": false,
+          "datacronEffects": [],
+          "owner": 1,
+          "hp": 0,
+          "maxHp": 150,
+          "shield": 0
+        },
+        {
+          "baseId": "PVE_OOMSECURITYBATTLEDROID",
+          "datacronContextPrivate": false,
+          "datacronEffects": [],
+          "owner": 1,
+          "hp": 0,
+          "maxHp": 1,
+          "shield": 0
+        },
+        {
+          "baseId": "PVE_B1BATTLEDROID",
+          "datacronContextPrivate": false,
+          "datacronEffects": [],
+          "owner": 1,
+          "hp": 0,
+          "maxHp": 1,
+          "shield": 0
+        },
+        {
+          "baseId": "PVE_B1BATTLEDROID",
+          "datacronContextPrivate": false,
+          "datacronEffects": [],
+          "owner": 1,
+          "hp": 0,
+          "maxHp": 1,
+          "shield": 0
+        },
+        {
+          "baseId": "PVE_DROIDEKA",
+          "datacronContextPrivate": false,
+          "datacronEffects": [],
+          "owner": 1,
+          "hp": 0,
+          "maxHp": 1,
+          "shield": 0
+        }
+      ],
+      "previousState": 136,
+      "nextState": 0,
+      "terminal": true,
+      "fsmOutcome": 0,
+      "simulationOutcome": 0,
+      "coreBattleStatus": 1,
+      "turns": 1
+    },
+    "cleanup": {
+      "attempted": true,
+      "loopStopped": true,
+      "simulationShutdown": true,
+      "hooksDetached": true,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    }
+  },
+  "publicEntryRejection": {
+    "kind": "simulation-probe-complete",
+    "ticks": 0,
+    "error": "Error: Original mission does not allow Datacrons; selected squad is preserved and trial rejected",
+    "terminal": false,
+    "callbackObserved": false,
+    "fsmOutcome": null,
+    "simulationOutcomeDiagnosticOnly": null,
+    "verifiedVictory": false,
+    "summary": null,
+    "healthChanges": [],
+    "attacks": [],
+    "counts": {
+      "SetBattleState": 0,
+      "FsmFinishBattle": 0,
+      "FsmSendBattleFinishRequest": 0,
+      "SimulationDomainFinishBattle": 0,
+      "SaveBattleOutcome": 0,
+      "SendBattleStartRequest": 0,
+      "SendBattleFinishRequest": 0
+    },
+    "trace": [],
+    "traceLimit": 300,
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 0,
+      "sendto": 0,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 0,
+      "WSAConnect": 0
+    },
+    "cleanup": {
+      "attempted": false,
+      "loopStopped": false,
+      "simulationShutdown": false,
+      "hooksDetached": true,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    }
+  },
+  "publicEntryDetached": true,
+  "lifecycleFix": "A zero-tick rejection with explicit attempted=false and completed hook/guard/GC cleanup can detach. A first false-positive retention was stopped only after verifying cleanup evidence and exact owned node process; rerun now exits automatically.",
+  "limits": [
+    "Diagnostic intentionally bypassed old admission guard in logs only; 1-A original IsDatacronAllowed=false, not legitimate Datacron mission support",
+    "No inventory equipment/removal/reroll APIs called",
+    "Shared original set/template/ability/target definitions kept; no universal whole-graph mutation proof",
+    "Need captured mission/mode originally permitting Datacron for end-to-end product validation",
+    "Friend support/Era/other goal requirements still pending"
+  ],
+  "evidence": [
+    "logs\\high_reuse\\probe-private-datacron-evidence.json",
+    "logs\\high_reuse\\probe-private-datacron-abilities-evidence.json",
+    "logs\\high_reuse\\probe-private-datacron-post-battle-evidence.json",
+    "logs\\high_reuse\\probe-private-inventory-post-datacron-evidence.json",
+    "logs\\high_reuse\\datacron-headless-diagnostic-evidence.json",
+    "logs\\high_reuse\\datacron-headless-context-evidence.json",
+    "logs\\high_reuse\\trial-20261018-073618-191-evidence.json",
+    "logs\\high_reuse\\trial-20261018-073749-038-evidence.json"
+  ]
+}

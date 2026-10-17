@@ -6,6 +6,7 @@ import {execFileSync} from 'node:child_process';
 import {acquireRuntimeSession} from './runtime_session_lock.mjs';
 import {processCommands} from './runtime_commands.mjs';
 import {fileURLToPath} from 'node:url';
+import {trialCleanupComplete} from './trial_lifecycle.mjs';
 const [pidText,manifestPath,output]=process.argv.slice(2),pid=Number(pidText);
 if(!Number.isSafeInteger(pid)||pid<=0||!manifestPath||!output)throw Error('Expected PID manifest.json evidence.json');
 if(fs.existsSync(output))throw Error('Evidence already exists; choose a new output path');
@@ -65,8 +66,7 @@ try{
   }
  }else await done;
  clearInterval(timer);
- const cleaned=complete.cleanup?.guardRestored&&complete.cleanup?.gcReleased&&
-   (manifest.mode==='visual'?complete.cleanup?.home:complete.cleanup?.loopStopped)&&complete.cleanup?.errors?.length===0;
+ const cleaned=trialCleanupComplete(complete,manifest.mode);
  if(!cleaned){
   persist({needsAttention:true,reason:'Cleanup incomplete; ownership and script retained'});
   saveStatus({needsAttention:true,battleCli:false});
