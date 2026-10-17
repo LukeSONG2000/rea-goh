@@ -39,6 +39,15 @@ try{
     if(operation==='battle-cancel')return await script.exports.battlecancel(payload);
     if(operation==='battle-unit')return await script.exports.battleunit(payload);
     if(operation==='battle-target')return await script.exports.battletarget(payload);
+    if(operation.startsWith('campaign-')){
+     const result=await script.exports.campaignnavigate(operation,payload);let after,confirmed=false;
+     for(let i=0;i<10;i++){
+      await new Promise(r=>setTimeout(r,300));after=await script.exports.snapshot();
+      confirmed=operation==='campaign-menu'?after.state==='HomeBaseGameState'&&after.campaignMenu?.length>0:after.state===(operation==='campaign-home'?'HomeBaseGameState':'CampaignGameState');
+      if(confirmed)break;
+     }
+     return {...result,transitionConfirmed:!!confirmed,afterState:after.state,campaignMenu:after.campaignMenu};
+    }
     const home=operation==='inventory-home';
     const result=home?await script.exports.inventoryhome():await script.exports.openinventory(operation==='inventory-characters'?'characters':'ships');
     let after,confirmed=false;

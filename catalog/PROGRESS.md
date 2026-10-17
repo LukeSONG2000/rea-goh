@@ -196,3 +196,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 conversion-call-diagnostic】继续认领完整捕获转换的调用故障定位，先验证原生入口/ABI与hook可观测性，不再据hook静默推断错误位置；共享宿主20084及原19440已核存活。
 
 【Codex/root 2026-10-18 campaign-cli】转换调用故障未解，继续完整目标中的原菜单CLI：root接通已实测Home→战役列表→CampaignGameState及原返回Home，写runtime_observer/commands/cli/host；不开放开战/扫荡/购买。
+
+【Codex/root 2026-10-18 campaign-cli validated】接通campaign-menu/enter/home及snapshot.campaignMenu原入口列表，Home和可见未锁定row门禁，重复menu no-op；原光明面导航多轮+正常启动脚本重启后再一轮闭环PASS，缺menu/feature255拒绝，畸形feature邮箱回归PASS。原奖励页经原Continue退出，最终19440 Home、显示宿主20732实际存活、错误空；未新开战/扫荡/购买/改装备。完整转换system error继续未解：只确认RVA/可执行原prolog/实例类型/byte枚举/依赖有效，traps与RaiseException诊断没有给出原因。不得标免费试玩/隔离完成。详见CAMPAIGN_CLI_VALIDATION_20261018.json。

@@ -1,0 +1,227 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original campaign menu CLI navigation; not battle entry or free trial",
+  "operations": {
+    "campaign-menu": "Home only, opens original campaign popup; existing popup is no-op",
+    "campaign-enter": "JSON feature from snapshot.campaignMenu; only visible unlocked row accepted",
+    "campaign-home": "CampaignGameState only, original HudBaseView home handler"
+  },
+  "receipts": [
+    {
+      "id": "ffef4bf7-c513-4de5-880d-3974fa47b22b",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "campaign-home",
+        "effect": "original menu navigation; no battle start or sweep",
+        "transitionConfirmed": true,
+        "afterState": "HomeBaseGameState",
+        "campaignMenu": []
+      }
+    },
+    {
+      "id": "d67e1bbc-20e7-4319-9acc-9e403051f4a5",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "campaign-menu",
+        "effect": "original menu navigation; no battle start or sweep",
+        "transitionConfirmed": true,
+        "afterState": "HomeBaseGameState",
+        "campaignMenu": [
+          {
+            "feature": 52,
+            "locked": false,
+            "title": "舰队战斗"
+          },
+          {
+            "feature": 43,
+            "locked": false,
+            "title": "改装件战斗"
+          },
+          {
+            "feature": 24,
+            "locked": false,
+            "title": "酒馆战斗"
+          },
+          {
+            "feature": 20,
+            "locked": false,
+            "title": "黑暗面战斗"
+          },
+          {
+            "feature": 19,
+            "locked": false,
+            "title": "光明面战斗"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f9994cb2-cc6a-4eaa-ab8c-4b71d5aa106e",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "noOp": true,
+        "invoked": null,
+        "transitionConfirmed": true,
+        "afterState": "HomeBaseGameState",
+        "campaignMenu": [
+          {
+            "feature": 52,
+            "locked": false,
+            "title": "舰队战斗"
+          },
+          {
+            "feature": 43,
+            "locked": false,
+            "title": "改装件战斗"
+          },
+          {
+            "feature": 24,
+            "locked": false,
+            "title": "酒馆战斗"
+          },
+          {
+            "feature": 20,
+            "locked": false,
+            "title": "黑暗面战斗"
+          },
+          {
+            "feature": 19,
+            "locked": false,
+            "title": "光明面战斗"
+          }
+        ]
+      }
+    },
+    {
+      "id": "8ca17cf0-899a-4902-b72c-5e8777fbae87",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "campaign-enter",
+        "effect": "original menu navigation; no battle start or sweep",
+        "transitionConfirmed": true,
+        "afterState": "CampaignGameState"
+      }
+    },
+    {
+      "id": "8ec08511-eaa7-45ed-8f50-f49f8056d90a",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "campaign-home",
+        "effect": "original menu navigation; no battle start or sweep",
+        "transitionConfirmed": true,
+        "afterState": "HomeBaseGameState",
+        "campaignMenu": []
+      }
+    },
+    {
+      "id": "638d0ed8-c483-4b98-8dbf-56c13d3559e5",
+      "ok": false,
+      "dispatched": true,
+      "error": "Error: Choose a visible unlocked campaign row"
+    },
+    {
+      "id": "3e2a86b9-4d97-4fbc-b622-ab1e30b64e9b",
+      "ok": false,
+      "dispatched": true,
+      "error": "Error: Choose a visible unlocked campaign row"
+    },
+    {
+      "id": "3b87f92c-6059-4c08-813d-767ef4955058",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "campaign-menu",
+        "effect": "original menu navigation; no battle start or sweep",
+        "transitionConfirmed": true,
+        "afterState": "HomeBaseGameState",
+        "campaignMenu": [
+          {
+            "feature": 52,
+            "locked": false,
+            "title": "舰队战斗"
+          },
+          {
+            "feature": 43,
+            "locked": false,
+            "title": "改装件战斗"
+          },
+          {
+            "feature": 24,
+            "locked": false,
+            "title": "酒馆战斗"
+          },
+          {
+            "feature": 20,
+            "locked": false,
+            "title": "黑暗面战斗"
+          },
+          {
+            "feature": 19,
+            "locked": false,
+            "title": "光明面战斗"
+          }
+        ]
+      }
+    },
+    {
+      "id": "937a6448-33c4-421e-b807-df4ff0ea222c",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "campaign-enter",
+        "effect": "original menu navigation; no battle start or sweep",
+        "transitionConfirmed": true,
+        "afterState": "CampaignGameState"
+      }
+    },
+    {
+      "id": "af81a83e-39d5-4c39-a641-2234605c04fd",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "campaign-home",
+        "effect": "original menu navigation; no battle start or sweep",
+        "transitionConfirmed": true,
+        "afterState": "HomeBaseGameState",
+        "campaignMenu": []
+      }
+    }
+  ],
+  "validation": [
+    "Original current reward Continue -> CampaignGameState before tests",
+    "Multiple original menu -> light-side CampaignGameState -> Home loops",
+    "Repeated menu no-op verified",
+    "Missing menu and nonexistent feature255 rejected at runtime without original row callback",
+    "Malformed feature payloads rejected before host execution in mailbox tests",
+    "Normal startup script restart + repeat full loop PASS",
+    "runtime_commands and runtime_session_lock tests PASS; node syntax PASS"
+  ],
+  "untested": [
+    "Locked row runtime scenario: current account rows all unlocked",
+    "Other campaign types not entered",
+    "No mission selection/start/sweep/purchase integration"
+  ],
+  "nativeConversionDiagnosis": {
+    "status": "unresolved system error",
+    "verified": "Factory/proto/mission classes, RVA1D0BFF0, executable original prolog, byte enum and nonnull typed dependencies match",
+    "evidence": [
+      "logs/high_reuse/captured-battle-contract-clean-evidence.json",
+      "logs/high_reuse/captured-battle-traps-evidence.json",
+      "logs/high_reuse/captured-battle-raise-evidence.json"
+    ],
+    "limits": "No assumption that native body entered or that error is caused by data; no independent squad conversion passed"
+  },
+  "final": {
+    "clientPid": 19440,
+    "hostPid": 20732,
+    "state": "HomeBaseGameState",
+    "hostErrors": []
+  },
+  "newBattlesStarted": 0,
+  "purchaseOrEquipmentOperations": 0
+}

@@ -5,6 +5,7 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
  const stateName=R.fullName(R.classOf(state));
  const result={schemaVersion:1,state:stateName,units:[],scope:'observed current client; no gameplay input'};
+ if(stateName==='HomeBaseGameState')result.campaignMenu=readCampaignMenu();
  if(stateName==='MasterInventoryGameState'){
   const controller=R.readRef(state,'_masterInventoryController'),data=R.readRef(controller,'_transitionData');
   result.inventory={type:R.readValue(data,'<Type>k__BackingField','i32'),navigation:R.readValue(data,'<NavType>k__BackingField','i32')};
@@ -51,3 +52,35 @@ rpc.exports.battletarget=request=>RuntimeApi.runOnMainThreadOnce(()=>BattleInput
 rpc.exports.battleunit=request=>RuntimeApi.runOnMainThreadOnce(()=>BattleInputBridge.selectUnit(request));
 
 rpc.exports.battlecancel=request=>RuntimeApi.runOnMainThreadOnce(()=>BattleInputBridge.cancelSelection(request));
+
+globalThis.readCampaignMenu=()=>{
+ const R=RuntimeApi,S=SceneApi;
+ return S.all('CampaignsPopupSelectListItem').filter(p=>R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(p)),'bool')).map(p=>{
+  const d=R.readRef(p,'_renderData');
+  return {feature:R.readValue(d,'<Feature>k__BackingField','u8'),locked:!!R.readValue(d,'<IsLocked>k__BackingField','bool'),title:S.string(R.readRef(d,'<FeatureTitle>k__BackingField'))};
+ });
+};
+rpc.exports.campaignnavigate=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>{
+ const R=RuntimeApi,S=SceneApi,state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+ const stateName=R.fullName(R.classOf(state));
+ const visible=type=>S.all(type).filter(p=>R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(p)),'bool'));
+ if(operation==='campaign-home'){
+  if(stateName!=='CampaignGameState')throw Error('campaign-home requires campaign page');
+  const views=visible('CampaignMissionsView');if(views.length!==1)throw Error('Campaign view must resolve uniquely');
+  S.invoke('HudBaseView','OnHomeButtonClick',views[0]);
+ }else{
+  if(stateName!=='HomeBaseGameState')throw Error('Campaign menu navigation requires Home');
+  if(operation==='campaign-menu'){
+   if(readCampaignMenu().length)return {noOp:true,invoked:null};
+   const props=visible('SelectableCantinaV2Prop').filter(p=>R.readValue(p,'_prop','i32')===9);
+   if(props.length!==1)throw Error('Campaign prop must resolve uniquely');
+   S.invoke('HomeBaseController','OnCampaignsClicked',R.readRef(state,'_homeBaseController'),[R.arg.value('i32',R.readValue(props[0],'_propState','i32'))]);
+  }else if(operation==='campaign-enter'){
+   if(!Number.isInteger(payload?.feature))throw Error('Campaign feature required');
+   const rows=visible('CampaignsPopupSelectListItem').filter(p=>R.readValue(R.readRef(p,'_renderData'),'<Feature>k__BackingField','u8')===payload.feature);
+   if(rows.length!==1||R.readValue(R.readRef(rows[0],'_renderData'),'<IsLocked>k__BackingField','bool'))throw Error('Choose a visible unlocked campaign row');
+   S.invoke('CampaignsPopupSelectListItem','HandleEnterClicked',rows[0]);
+  }else throw Error('Unsupported campaign operation');
+ }
+ return {invoked:operation,effect:'original menu navigation; no battle start or sweep'};
+});

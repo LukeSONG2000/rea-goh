@@ -13,7 +13,7 @@ async function test(extra){
 }
 try{
  assert.equal((await test({})).ok,true);assert.equal(calls,1);
- for(const invalid of [{pid:999},{hostPid:999},{expiresAt:9999},{expiresAt:Infinity},{operation:'purchase'},{operation:'eval'},{operation:'battle-ability'},{operation:'battle-ability',payload:{token:'x',index:-1}},{operation:'battle-ability',payload:{token:'x',index:1.5}}]){
+ for(const invalid of [{pid:999},{hostPid:999},{expiresAt:9999},{expiresAt:Infinity},{operation:'purchase'},{operation:'eval'},{operation:'campaign-enter'},{operation:'campaign-enter',payload:{feature:'19'}},{operation:'campaign-enter',payload:{feature:-1}},{operation:'campaign-enter',payload:{feature:256}},{operation:'campaign-enter',payload:{feature:1.5}},{operation:'battle-ability'},{operation:'battle-ability',payload:{token:'x',index:-1}},{operation:'battle-ability',payload:{token:'x',index:1.5}}]){
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
