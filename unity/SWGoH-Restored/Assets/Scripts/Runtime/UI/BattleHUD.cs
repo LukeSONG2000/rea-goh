@@ -58,7 +58,9 @@ namespace SwgohRestored.Battle
             public Text Label;
             public RectTransform Chip;      // key letter chip (right of bar)
             public Text ChipText;
-            public RectTransform Buffs;     // buff icon slot row (above bar)
+            public RectTransform Buffs;     // actual persistent effects above the bar
+            public Text Protection;
+            public string StatusSignature;
         }
 
         public void EnsureCanvas()
@@ -161,34 +163,23 @@ namespace SwgohRestored.Battle
                 Stretch(chipText.rectTransform);
             }
 
-            // ---- P5 buff icon slots above the bar (original buff icon crops) ----
-            RectTransform buffs = null;
-            if (buffSprites != null && buffSprites.Length > 0)
-            {
-                var buffGo = new GameObject("buffs", typeof(RectTransform));
-                buffGo.transform.SetParent(root.transform, false);
-                buffs = buffGo.GetComponent<RectTransform>();
-                buffs.anchorMin = new Vector2(0, 1); buffs.anchorMax = new Vector2(0, 1);
-                buffs.pivot = new Vector2(0, 0);
-                buffs.anchoredPosition = new Vector2(2, 2);
-                buffs.sizeDelta = new Vector2(70, 18);
-                float bx = 0;
-                for (int i = 0; i < buffSprites.Length; i++)
-                {
-                    var slot = new GameObject("buff" + i, typeof(RectTransform));
-                    slot.transform.SetParent(buffs, false);
-                    var srt = slot.GetComponent<RectTransform>();
-                    srt.anchorMin = new Vector2(0, 0); srt.anchorMax = new Vector2(0, 0);
-                    srt.pivot = new Vector2(0, 0);
-                    srt.anchoredPosition = new Vector2(bx, 0);
-                    srt.sizeDelta = new Vector2(16, 16);
-                    var img = slot.AddComponent<Image>();
-                    var sp = UiKit.LoadWidget(buffSprites[i]);
-                    if (sp != null) { img.sprite = sp; img.color = buffTints != null && i < buffTints.Length ? buffTints[i] : Color.white; }
-                    else img.color = new Color(0.1f, 0.55f, 0.25f, 0.9f);   // PENDING-ORIGINAL fallback
-                    bx += 18;
-                }
-            }
+            // Slots are populated only from actual persistent-effect definitions.
+            // Legacy buffSprites arguments remain API-compatible, but cannot create
+            // fabricated status badges unrelated to the simulator state.
+            var buffGo = new GameObject("persistent-effects", typeof(RectTransform));
+            buffGo.transform.SetParent(root.transform, false);
+            var buffs = buffGo.GetComponent<RectTransform>();
+            buffs.anchorMin = buffs.anchorMax = new Vector2(0, 1);
+            buffs.pivot = Vector2.zero;
+            buffs.anchoredPosition = new Vector2(0, 4);
+            buffs.sizeDelta = new Vector2(180, 26);
+            var protection = NewText(root, "protection", "", 14,
+                new Color(0.7f, 0.86f, 1f), TextAnchor.MiddleCenter);
+            protection.raycastTarget = false;
+            protection.rectTransform.anchorMin = protection.rectTransform.anchorMax = new Vector2(0.5f, 0);
+            protection.rectTransform.pivot = new Vector2(0.5f, 1);
+            protection.rectTransform.anchoredPosition = new Vector2(0, -1);
+            protection.rectTransform.sizeDelta = new Vector2(180, 18);
 
             // ScreenSpaceCamera world size at planeDistance=10 makes 90 canvas
             // units render ~6x oversized -- 0.30 lands the bar near P5's ~9%
@@ -202,8 +193,88 @@ namespace SwgohRestored.Battle
                 Chip = chip,
                 ChipText = chipText,
                 Buffs = buffs,
+                Protection = protection,
             };
+            SetProtection(u.UnitId, u.CurrentShield, u.MaxShield);
             UpdateUnit(u, cam);
+        }
+
+        public void SetProtection(string unitId, double current, double max)
+        {
+            if (!_bars.TryGetValue(unitId, out var bar) || bar.Protection == null) return;
+            bar.Protection.gameObject.SetActive(max > 0 || current > 0);
+            bar.Protection.text = "护盾 Protection " + System.Math.Max(0, current).ToString("0")
+                + " / " + System.Math.Max(0, max).ToString("0");
+        }
+
+        public void SetPersistentStates(string unitId, IReadOnlyList<RawEffect> effects)
+        {
+            if (!_bars.TryGetValue(unitId, out var bar)) return;
+            var definitions = new List<RawEffect>();
+            var counts = new List<int>();
+            var indices = new Dictionary<string, int>();
+            if (effects != null)
+                foreach (var effect in effects)
+                {
+                    if (effect == null) continue;
+                    string key = string.IsNullOrEmpty(effect.persistentIcon) ? effect.id : effect.persistentIcon;
+                    if (indices.TryGetValue(key, out int index)) counts[index]++;
+                    else { indices[key] = definitions.Count; definitions.Add(effect); counts.Add(1); }
+                }
+            var signature = new System.Text.StringBuilder();
+            for (int i = 0; i < definitions.Count; i++)
+                signature.Append(definitions[i].persistentIcon).Append('|').Append(definitions[i].id)
+                    .Append(':').Append(counts[i]).Append(';');
+            string current = signature.ToString();
+            if (bar.StatusSignature == current) return;
+            bar.StatusSignature = current;
+            foreach (Transform child in bar.Buffs)
+            {
+                child.gameObject.SetActive(false);
+                Object.Destroy(child.gameObject);
+            }
+            float x = 0, y = 0;
+            for (int i = 0; i < definitions.Count; i++)
+            {
+                var effect = definitions[i];
+                // This is the existing imported original widget location. A missing
+                // import remains explicit; never substitute another status's image.
+                var sprite = string.IsNullOrEmpty(effect.persistentIcon) ? null
+                    : Resources.Load<Sprite>("BattleStatus/" + effect.persistentIcon)
+                        ?? Resources.Load<Sprite>("UiSprites/widgets/" + effect.persistentIcon);
+                if (sprite == null)
+                {
+                    if (x > 0) { x = 0; y += 28; }
+                    string name = string.IsNullOrEmpty(effect.persistentIcon) ? effect.id : effect.persistentIcon;
+                    var pending = NewText(bar.Buffs, "pending-" + effect.id,
+                        "PENDING-ORIGINAL " + name + " ×" + counts[i], 11, Color.white,
+                        TextAnchor.LowerLeft);
+                    pending.raycastTarget = false;
+                    pending.horizontalOverflow = HorizontalWrapMode.Wrap;
+                    var rt = pending.rectTransform;
+                    rt.anchorMin = rt.anchorMax = Vector2.zero; rt.pivot = Vector2.zero;
+                    rt.anchoredPosition = new Vector2(0, y); rt.sizeDelta = new Vector2(180, 32);
+                    y += 34;
+                    continue;
+                }
+                if (x + 42 > 180) { x = 0; y += 28; }
+                var slot = new GameObject("status-" + effect.id, typeof(RectTransform));
+                slot.transform.SetParent(bar.Buffs, false);
+                var slotRect = (RectTransform)slot.transform;
+                slotRect.anchorMin = slotRect.anchorMax = Vector2.zero; slotRect.pivot = Vector2.zero;
+                slotRect.anchoredPosition = new Vector2(x, y); slotRect.sizeDelta = new Vector2(24, 24);
+                var icon = slot.AddComponent<Image>();
+                icon.sprite = sprite; icon.color = Color.white; icon.preserveAspect = true; icon.raycastTarget = false;
+                var count = NewText(slot.transform, "count", "×" + counts[i], 14, Color.white,
+                    TextAnchor.LowerLeft, FontStyle.Bold);
+                count.raycastTarget = false;
+                count.rectTransform.anchorMin = count.rectTransform.anchorMax = Vector2.zero;
+                count.rectTransform.pivot = Vector2.zero;
+                count.rectTransform.anchoredPosition = new Vector2(22, -2);
+                count.rectTransform.sizeDelta = new Vector2(24, 18);
+                x += 44;
+            }
+            bar.Buffs.sizeDelta = new Vector2(180, y + (x > 0 ? 28 : 0));
         }
 
         static Image CreateImage(Transform parent, Color color)

@@ -1,6 +1,6 @@
 // Incremental command-driven battle presentation. Native manual-selection entry
 // points are documented in the recovery ledger; this Unity bridge is new code.
-// The underlying flattened effect executor remains an incomplete reconstruction.
+// Original ordered effect graphs execute only the recovered operator subset.
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,6 +37,8 @@ namespace SwgohRestored.Battle
         readonly Dictionary<string, Animator> _anims = new();
         readonly Dictionary<string, BattleUnit> _unitsById = new();
         readonly Dictionary<string, double> _replayHp = new();   // HP as replayed
+        readonly Dictionary<string, Dictionary<long, RawEffect>> _replayStates = new();
+        OriginalEffectGraph _originalGraph;
         readonly Dictionary<string, double> _replayShield = new();
         readonly Dictionary<string, OriginalUnitMenu> _originalMenus = new();
         BattleSim _sim;
@@ -132,6 +134,9 @@ namespace SwgohRestored.Battle
                     Vector3? anchor = _rigs.TryGetValue(u.UnitId, out var rig)
                         ? rig.transform.position + Vector3.up * 2.2f : (Vector3?)null;
                     _hud.UpdateUnit(u, Camera.main, frac, alive, anchor);
+                    _hud.SetProtection(u.UnitId, _replayShield.TryGetValue(u.UnitId, out var shield) ? shield : u.CurrentShield, u.MaxShield);
+                    if (_replayStates.TryGetValue(u.UnitId, out var states))
+                        _hud.SetPersistentStates(u.UnitId, states.Values.ToArray());
                 }
         }
 
@@ -233,6 +238,7 @@ namespace SwgohRestored.Battle
             {
                 _replayHp[u.UnitId] = u.MaxHp;
                 _replayShield[u.UnitId] = u.CurrentShield;
+                _replayStates[u.UnitId] = new Dictionary<long, RawEffect>();
                 _hud.TrackUnit(u, Camera.main, ChipLetter(u), onPick: () => SubmitTarget(u));
             }
             BuildP5Chrome(opponent.Count > 0 ? opponent[0] : null);
@@ -244,6 +250,10 @@ namespace SwgohRestored.Battle
             {
                 int firstEvent = _sim.Log.Count;
                 var actor = _sim.PrepareNextTurn();
+                // START_OF_TURN effects are resolved/presented before input.
+                // A unit killed by DOT never receives a skill-selection screen.
+                if (_sim.Log.Count > firstEvent) yield return PresentEvents(firstEvent);
+                firstEvent = _sim.Log.Count;
                 if (actor == null) break;
                 if (actor.Side == 0 && !_autoBattle)
                 {
@@ -397,8 +407,15 @@ namespace SwgohRestored.Battle
                 }
                 else if (ev.Kind == "status_add" || ev.Kind == "status_remove" || ev.Kind == "resist")
                 {
-                    _hud.ShowStatusEvent(ev.TargetUnitId, ev.Kind == "status_add" ? "技能封锁" :
-                        ev.Kind == "status_remove" ? "封锁结束" : "抵抗");
+                    if (_replayStates.TryGetValue(ev.TargetUnitId, out var states))
+                    {
+                        if (ev.Kind == "status_add") states[ev.EffectInstanceId] = _originalGraph.Effects[ev.EffectId];
+                        else if (ev.Kind == "status_remove") states.Remove(ev.EffectInstanceId);
+                    }
+                    string label = ev.EffectType == 4 ? "技能封锁" : ev.EffectType == 8 ? "速度变化" :
+                        ev.EffectIcon == "icon_damage_over_time" ? "持续伤害" : "持续效果";
+                    _hud.ShowStatusEvent(ev.TargetUnitId, ev.Kind == "resist" ? "抵抗" :
+                        label + (ev.Kind == "status_remove" ? "结束" : ""));
                     yield return new WaitForSeconds(0.3f / _speedMult);
                 }
                 else if (ev.Kind == "death")
@@ -458,6 +475,7 @@ namespace SwgohRestored.Battle
                 effects.AddRange(shard.effects);
             }
             var graph = new OriginalEffectGraph(effects, manifest.abilities);
+            _originalGraph = graph;
             var map = new Dictionary<string, List<UnitAbility>>(StringComparer.Ordinal);
             _originalMenus.Clear();
             foreach (var menu in JsonUtilityArray<OriginalUnitMenu>.FromJson(File.ReadAllText(Path.Combine(root, "abilities.json"))))
@@ -504,6 +522,7 @@ namespace SwgohRestored.Battle
                 foreach (var kv in statMap) u.Stats[kv.Key] = kv.Value;
                 u.MaxShield = u.CurrentShield = Math.Max(0, u.GetStat(25));
                 u.Categories.UnionWith(_originalMenus[e.def_id].categoryId ?? Array.Empty<string>());
+                u.SquadPositionPriority = _originalMenus[e.def_id].squadPositionPriority;
                 u.Abilities = abilityMap[e.def_id];
                 foreach (var a in u.Abilities) u.CooldownLeft[a.Id] = 0;
                 _unitsById[u.UnitId] = u;

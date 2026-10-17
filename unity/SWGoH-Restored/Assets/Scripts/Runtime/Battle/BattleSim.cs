@@ -67,6 +67,7 @@ namespace SwgohRestored.Battle
         public int Era;
         public int CombatType = 1;
         public int RelicTier;
+        public int SquadPositionPriority;
         public bool IsEraUnit;
         public double CurrentShield, MaxShield;
         public readonly HashSet<string> Categories = new(StringComparer.Ordinal);
@@ -87,7 +88,21 @@ namespace SwgohRestored.Battle
         public readonly Dictionary<string, int> CooldownLeft = new Dictionary<string, int>();
 
         public bool Alive => !HasFled && CurrentHp > 0;
-        public double GetStat(int s) => Stats.TryGetValue(s, out var v) ? v : 0.0;
+        public bool HasEffectTag(string tag) => PersistentEffects.Any(state =>
+            (state.Definition.descriptiveTag ?? Array.Empty<RawTag>()).Any(t => !t.exclude && t.tag == tag));
+        public double GetInitialStat(int s) => Stats.TryGetValue(s, out var v) ? v : 0.0;
+        public double GetStat(int s)
+        {
+            double value = GetInitialStat(s);
+            if (s != 5) return value; // other stat calculation families remain gated
+            foreach (var group in PersistentEffects.Where(e => e.Definition.type == 8)
+                .GroupBy(e => e.StackingLine ?? "ability-stacking-line"))
+            {
+                value += group.Where(e => e.IsBuff).Select(e => (double)e.Amount).DefaultIfEmpty(0).Max();
+                value += group.Where(e => e.IsDebuff).Select(e => (double)e.Amount).DefaultIfEmpty(0).Min();
+            }
+            return (int)(float)value; // original SPEED calculated-stat integer conversion
+        }
         public double Speed => GetStat(Stat.Speed) < 0 ? 0 : GetStat(Stat.Speed);
     }
 
@@ -160,6 +175,9 @@ namespace SwgohRestored.Battle
         public double Amount;
         public double HpDamage, ShieldDamage;
         public string EffectId;
+        public long EffectInstanceId;
+        public int EffectType;
+        public string EffectIcon;
         public string Note;
         public string AbilityName;   // REAL ability used this turn ("" = v0 basic)
         public string AbilityId;
@@ -363,10 +381,18 @@ namespace SwgohRestored.Battle
         public BattleUnit PrepareNextTurn()
         {
             if (PendingActor != null) return PendingActor;
-            if (CheckEnd(out _)) return null;
-            var actor = ProcessUnitsSpeed();
-            if (actor != null) PrepareTurn(actor);
-            return actor;
+            while (!CheckEnd(out _))
+            {
+                var actor = ProcessUnitsSpeed();
+                if (actor == null) return null;
+                PrepareTurn(actor);
+                if (actor.Alive) return actor;
+                // Native StartUnitTurn only enters selection after START_OF_TURN
+                // conditions if HP>0. A DOT death cannot leave a pending command.
+                PendingActor = null;
+            }
+            foreach (var unit in _units) OriginalConditionEvent(unit, 24);
+            return null;
         }
 
         void PrepareTurn(BattleUnit actor)
@@ -381,6 +407,7 @@ namespace SwgohRestored.Battle
             PendingActor = actor;
             BeginTurn(actor);
             OriginalConditionEvent(actor, -1);
+            if (!actor.Alive) return;
             foreach (var a in actor.Abilities)
                 if (actor.CooldownLeft.TryGetValue(a.Id, out var cd) && cd > 0)
                     actor.CooldownLeft[a.Id] = cd - 1;
@@ -404,9 +431,9 @@ namespace SwgohRestored.Battle
             var actor = PendingActor;
             var ability = index < 0 ? null : actor.Abilities[index];
             if (ability?.OriginalGraph != null)
-                return _units.Where(u => u.Alive && u.Side != actor.Side &&
+                return _units.Where(u => u.Alive &&
                     OriginalCommandReason(actor, ability, u) == null && ability.OriginalReferences.Any(r =>
-                        OriginalTargetMatches(ability.OriginalGraph.Effects[r.id], actor, u))).ToArray();
+                        OriginalTargets(ability.OriginalGraph.Effects[r.id], actor, u).Contains(u))).ToArray();
             bool damage = ability == null || ability.DamageMultiplier > 0 || ability.FlatDamage > 0;
             if (damage) return _units.Where(u => u.Alive && u.Side != actor.Side).ToList();
             if (ability.HealAmount > 0)

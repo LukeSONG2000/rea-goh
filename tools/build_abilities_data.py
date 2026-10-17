@@ -55,10 +55,11 @@ def build_exports(units, skill_rows, ability_rows, effect_rows, loc_cn=None, loc
         if not base_id:
             continue
         # Fail on disagreement instead of choosing an arbitrary rarity variant.
-        signature = (unit.get('categoryId', []), unit.get('skillReference', []))
+        signature = (unit.get('categoryId', []), unit.get('skillReference', []),
+                     unit.get('squadPositionPriority', 0))
         if base_id in unit_signatures:
             if unit_signatures[base_id] != signature:
-                raise ValueError(f'Unit variants disagree on categories/skills: {base_id}')
+                raise ValueError(f'Unit variants disagree on categories/skills/squad priority: {base_id}')
             continue
         unit_signatures[base_id] = signature
         records = []
@@ -91,6 +92,7 @@ def build_exports(units, skill_rows, ability_rows, effect_rows, loc_cn=None, loc
             })
         if records:
             output[base_id] = {'def_id': base_id, 'categoryId': unit.get('categoryId', []),
+                               'squadPositionPriority': unit.get('squadPositionPriority', 0),
                                'abilities': records}
     graph = {'schemaVersion': 2, 'effects': effect_rows, 'abilities': ability_rows}
     return list(output.values()), graph

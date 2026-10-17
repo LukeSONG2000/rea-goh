@@ -33,7 +33,7 @@ namespace SwgohRestored.EditorTools
     public class BattleCommandGateRunner : MonoBehaviour
     {
         const string Output = "F:/PPfavorite/Work/goh/logs/effect_recovery";
-        void Require(bool condition, string message)
+        protected void Require(bool condition, string message)
         {
             if (condition) return;
             Debug.LogError("[CommandGate] FAIL " + message);
@@ -44,7 +44,7 @@ namespace SwgohRestored.EditorTools
         string State(BattleSim sim) => sim.Round + ":" + sim.Log.Count + ":" +
             string.Join(";", sim.Units.Select(u => u.UnitId + ":" + u.CurrentHp + ":" + u.SpeedFill));
 
-        void Click(Button button)
+        protected void Click(Button button)
         {
             Canvas.ForceUpdateCanvases();
             var canvas = button.GetComponentInParent<Canvas>();

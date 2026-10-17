@@ -30,10 +30,10 @@ namespace SwgohRestored.Battle
                 {
                     case "ATTACK_DAMAGE": case "ABILITY_POWER": case "MAX_HEALTH":
                     case "DAMAGE_HEALTH_PERCENTAGE": sources++; break;
-                    case "NO_KILL": case "UNRESISTABLE": break;
+                    case "NO_KILL": case "UNRESISTABLE": case "NO_HEALTH_STEAL": break;
                     // These flags suppress side effects which this supported slice
                     // does not produce. Preserve them in the raw graph.
-                    case "NO_COUNTER_ATTACK": case "NO_HEALTH_STEAL":
+                    case "NO_COUNTER_ATTACK":
                     case "SUPPRESS_VISUALS": case "HIDE_VFX": break;
                     default: return "Unsupported damage parameter: " + flag;
                 }
@@ -109,7 +109,34 @@ namespace SwgohRestored.Battle
                 Turn = Round, Actor = attacker.BaseId, ActorUnitId = attacker.UnitId,
                 ActorSide = ev.ActorSide, Target = target.BaseId, TargetUnitId = target.UnitId, Kind = "death"
             });
+            OriginalHealthSteal(attacker, effect, damage);
             return ev;
+        }
+
+        // Damage.ApplyToTargets 0x181364CA0: stat24 * final pre-cap float damage,
+        // including shield/overkill, truncated once. ApplyHeal 0x181BC6060 rejects
+        // dead recipients; UpdateHealth 0x181BC6900 clamps integer HP to max HP.
+        // Immunity effects and healing-trigger passives remain outside this slice.
+        // Do not substitute descriptiveTag for native IsImmuneToEffect(tag).
+        void OriginalHealthSteal(BattleUnit source, RawEffect effect, float damage)
+        {
+            if (DamageFlag(effect, "NO_HEALTH_STEAL") || !source.Alive) return;
+            float recovery = (float)source.GetStat(24) * damage;
+            if (recovery <= 0f) return;
+            int requested = (int)recovery;
+            double before = source.CurrentHp;
+            int maximum = (int)source.MaxHp;
+            int current = Math.Max(0, Math.Min(maximum, (int)before));
+            source.CurrentHp = Math.Max(0, Math.Min(maximum, current + requested));
+            double actual = source.CurrentHp - before;
+            Log.Add(new BattleEvent {
+                Turn = Round, Actor = source.BaseId, ActorUnitId = source.UnitId,
+                ActorSide = source.Side == 0 ? "player" : "opponent",
+                Target = source.BaseId, TargetUnitId = source.UnitId, Kind = "heal",
+                Amount = actual, Heal = actual, EffectId = effect.id,
+                Note = effect.id + ":health_steal requested=" + requested.ToString(CultureInfo.InvariantCulture)
+                    + " actual=" + actual.ToString(CultureInfo.InvariantCulture)
+            });
         }
 
         public static string ValidateOriginalDamage(BattleUnit attacker, BattleUnit target, RawEffect effect)
@@ -122,6 +149,9 @@ namespace SwgohRestored.Battle
                 return "Ship mitigation constants are not connected to this slice.";
             if (!attacker.IsEraUnit && attacker.RelicTier != target.RelicTier)
                 return "Unequal relic tiers require the original battle relic modifier table.";
+            if (!DamageFlag(effect, "NO_HEALTH_STEAL") && attacker.GetStat(24) > 0
+                && attacker.PersistentEffects.Any(state => state.Definition.type == 6))
+                return "PENDING-ORIGINAL: health-steal immunity tag and immunity matching.";
             return null;
         }
 

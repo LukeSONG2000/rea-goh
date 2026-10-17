@@ -84,6 +84,7 @@ namespace SwgohRestored.Battle
     [Serializable] public class OriginalUnitMenu
     {
         public string def_id;
+        public int squadPositionPriority;
         public string[] categoryId;
         public OriginalAbilityMenu[] abilities;
     }
@@ -108,8 +109,16 @@ namespace SwgohRestored.Battle
 
     public sealed class OriginalPersistentEffect
     {
+        public long InstanceId;
         public RawEffect Definition;
         public BattleUnit Source;
+        public BattleUnit Host;
+        public OriginalEffectGraph Graph;
+        public string AbilityId, AbilityName;
+        public float Amount;
+        public bool IsBuff, IsDebuff;
+        public string StackingLine;
+        public readonly List<OriginalConditionState> Triggers = new();
         public readonly List<OriginalConditionState> Expiration = new();
     }
     public sealed class OriginalConditionState
@@ -117,5 +126,6 @@ namespace SwgohRestored.Battle
         public RawCondition Definition;
         public int MatchedCount;
         public bool SawOwnTurnStart;
+        public bool Reported;
     }
 }

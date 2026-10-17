@@ -85,6 +85,31 @@ public static class OriginalDamageRegression
         Check(!Sim(a,t).OriginalEvaded(a,t,1), "unavoidable bypasses dodge");
         t.Stats[19]=2;
         Check(Sim(a,t).OriginalResisted(a,t), "resistance stats");
-        Console.WriteLine("PASS: native-supported damage, integer HP/shield, penetration, crit families, variance, evasion/resistance, rejection.");
+        a=Unit("a",0); t=Unit("t",1); a.CurrentHp=9000; a.Stats[24]=.257;
+        t.CurrentShield=1000; sim=Sim(a,t); sim.OriginalDamage(a,t,Effect(1));
+        Check(a.CurrentHp==9025 && t.CurrentHp==10000, "health steal includes shield and truncates requested amount");
+        var heal=sim.Log.Find(e=>e.Kind=="heal");
+        Check(heal.ActorUnitId=="a" && heal.TargetUnitId=="a" && heal.Amount==25 && heal.Heal==25,
+            "health steal actual event and identity");
+        a=Unit("a",0); t=Unit("t",1); a.CurrentHp=9990; a.Stats[24]=.5; t.CurrentHp=1;
+        sim=Sim(a,t); sim.OriginalDamage(a,t,Effect(1)); heal=sim.Log.Find(e=>e.Kind=="heal");
+        Check(a.CurrentHp==10000 && heal.Amount==10 && heal.Note.Contains("requested=50 actual=10"),
+            "health steal includes overkill but logs actual capped recovery");
+        a=Unit("a",0); t=Unit("t",1); a.CurrentHp=9000; a.Stats[24]=.5; t.CurrentHp=1;
+        sim=Sim(a,t); sim.OriginalDamage(a,t,noKill);
+        Check(a.CurrentHp==9050 && t.CurrentHp==1, "health steal uses damage before NO_KILL cap");
+        var noSteal=Effect(1); noSteal.param=new[]{"ATTACK_DAMAGE","NO_HEALTH_STEAL"};
+        a=Unit("a",0); t=Unit("t",1); a.CurrentHp=9000; a.Stats[24]=.5;
+        sim=Sim(a,t); sim.OriginalDamage(a,t,noSteal);
+        Check(a.CurrentHp==9000 && !sim.Log.Exists(e=>e.Kind=="heal"), "NO_HEALTH_STEAL suppresses recovery");
+        a=Unit("a",0); t=Unit("t",1); a.CurrentHp=9000; a.Stats[24]=.5; sim=Sim(a,t);
+        sim.OriginalDamage(a,t,Effect(1)); var afterSteal=sim.OriginalDamage(a,t,variance);
+        freshA=Unit("a",0); freshT=Unit("t",1);
+        fresh=Sim(freshA,freshT).OriginalDamage(freshA,freshT,variance);
+        Check(afterSteal.Amount==fresh.Amount && afterSteal.Kind==fresh.Kind, "health steal consumes no RNG");
+        a=Unit("a",0); a.CurrentHp=1; a.Stats[24]=1; t=Unit("t",1); sim=Sim(a,t);
+        sim.OriginalDamage(a,a,Effect(1));
+        Check(a.CurrentHp==0 && !sim.Log.Exists(e=>e.Kind=="heal"), "health steal cannot revive a dead source");
+        Console.WriteLine("PASS: native-supported damage, integer HP/shield, penetration, crit families, variance, evasion/resistance, health steal, rejection.");
     }
 }

@@ -83,6 +83,7 @@ class EffectExportTests(unittest.TestCase):
         for unit in self.menus:
             source = next(u for u in self.raw_units if u['baseId'] == unit['def_id'])
             self.assertEqual(unit['categoryId'], source['categoryId'])
+            self.assertEqual(unit['squadPositionPriority'], source['squadPositionPriority'])
             for ability in unit['abilities']:
                 self.assertFalse(forbidden.intersection(ability))
                 raw = self.abilities[ability['id']]
@@ -119,6 +120,14 @@ class EffectExportTests(unittest.TestCase):
         menus, _ = export.build_exports([unit], [skill], [ability], [])
         self.assertEqual(menus[0]['abilities'][0]['effectReference'], [])
         self.assertEqual(menus[0]['abilities'][0]['selectedTier'], 0)
+
+    def test_variant_squad_priority_disagreement_fails_loudly(self):
+        source = copy.deepcopy(next(u for u in self.raw_units if u['baseId'] == 'VADER'))
+        changed = copy.deepcopy(source)
+        changed['squadPositionPriority'] += 1
+        with self.assertRaisesRegex(ValueError, 'variants disagree'):
+            export.build_exports([source, changed], self.skills, self.raw_abilities,
+                                 self.raw_effects)
 
 
 if __name__ == '__main__':
