@@ -1,0 +1,74 @@
+{
+  "status": "partial: original struct defaults recovered; real mission replay pending",
+  "schemaSource": "il2cpp/dump/cs/il2cpp.cs",
+  "messageTypes": 939,
+  "rules": [
+    "Only existing nested messages are traversed.",
+    "Only omitted fields with original struct DefaultValue metadata are added.",
+    "Explicit zero/negative values, duplicate fields and unknown bytes are retained.",
+    "Legacy DeepClone-corrupted captures are not repaired."
+  ],
+  "runtimeEvidence": {
+    "provider": "REA-installed Frida",
+    "pid": 19440,
+    "messages": [
+      {
+        "type": "send",
+        "payload": {
+          "kind": "protobuf-probe-complete",
+          "rows": [
+            {
+              "name": "Protos.Stat",
+              "original": {
+                "id": 1,
+                "ui": "-1"
+              },
+              "generic": {
+                "id": 0,
+                "ui": "0"
+              },
+              "compiled": {
+                "id": 0,
+                "ui": "0"
+              },
+              "normalized": {
+                "id": 1,
+                "ui": "-1"
+              },
+              "passed": true
+            },
+            {
+              "name": "Protos.BucketItem",
+              "original": {
+                "id": "",
+                "rarity": 1
+              },
+              "generic": {
+                "id": null,
+                "rarity": 0
+              },
+              "compiled": {
+                "id": null,
+                "rarity": 0
+              },
+              "normalized": {
+                "id": "",
+                "rarity": 1
+              },
+              "passed": true
+            }
+          ]
+        }
+      }
+    ],
+    "detached": true
+  },
+  "tests": "8 unit tests passed",
+  "remaining": [
+    "Capture new direct-protobuf-v2 payload",
+    "Validate normalized whole BattleData conversion and complete field fidelity",
+    "Isolate actual player squad and run real mission without resource use"
+  ],
+  "normalHost": 18216,
+  "client": 19440
+}
