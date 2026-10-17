@@ -236,3 +236,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 original-ai-trace】认领原AI被动决策轨迹：仅观察owned隔离战斗自然GetAbilityAIResult/决策节点/原返回技能目标，零额外Evaluate或随机调用，先与同seed无观察运行对照；不修改原AI/共享树。
 
 【Codex/root 2026-10-18 original-ai-trace validated】新增original_ai_trace与试玩-TraceAI/--trace-ai选项：只观察owned context原决策入口/节点/ProcessResult/返回技能目标，128条有界，不额外Evaluate或随机调用、不改共享树。type8捕获1-A两轮4条完整记录精确一致（含2条敌B1），无记录对照及两轮记录均turn5原终态136/next1，正式service0、Home/guard/GC全PASS；不以终局摘要证明全部隐藏状态/RNG相同。树ID回调未触发、headless回调0，公开入口拒绝headless trace。准备器4/生命周期/输入所有权/turn-order同seed回归PASS。报告ORIGINAL_AI_TRACE_VALIDATION_20261018.json；正常宿主38936与原19440存活，CLI确认Home。敌方控制、预测和优先级修改尚未完成，未消费/拆装/分解。
+
+【Codex/root 2026-10-18 enemy-control-route】认领原敌方自动出招与FSM暂停入口验证；先核原方法体，不改线上控制/共享定义，隔离试玩内验证原合法技能入口。
