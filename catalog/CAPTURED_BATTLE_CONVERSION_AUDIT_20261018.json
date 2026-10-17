@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-18",
+  "status": "PENDING-ORIGINAL; native conversion FAILED, not exposed through CLI",
+  "verifiedFindings": [
+    "UnitDO.GetProto omits equipment/mods/relic and definition ID",
+    "UnitDO.Factory.Get(Protos.Unit) may reuse and update live inventory mods",
+    "Squad.GetProto is a selection DTO, not complete combat snapshot",
+    "BattleStartRequest uses that lossy Squad.GetProto",
+    "BattleData.Units contains local definitions: outer BattleData.Factory uses local-first precedence, unlike standalone Squad factory",
+    "Outer factory replaces global GameData._pveUnitDefinitionMap without restoration; experimental wrapper saves/restores it in finally"
+  ],
+  "nativeAttempts": {
+    "standaloneSquad": "system error, no completed conversion",
+    "wholeBattleReflection": "system error",
+    "wholeBattleDirect": "system error at native call; hook silence insufficient to establish entry or cause",
+    "isolationPassed": false,
+    "battleStarted": false
+  },
+  "implemented": [
+    "Standalone conversion wrapper with mission validation, exact RVA check, dependency checks, retained original definition map and finally restoration",
+    "Double conversion probe intended to compare squad/cell/unit identity, mutable fields and isolated scalar mutation; comparison stage NOT reached"
+  ],
+  "evidence": [
+    "logs/high_reuse/native/PLAYER_SQUAD_FACTORY_ISOLATION.txt",
+    "logs/high_reuse/native/PLAYER_PROTO_SOURCE_SEARCH.txt",
+    "logs/high_reuse/native/BATTLEDATA_OUTER_CONVERSION.txt",
+    "logs/high_reuse/captured-squad-evidence2.json",
+    "logs/high_reuse/captured-battle-direct-detail.json",
+    "logs/high_reuse/captured-battle-exception-evidence.json"
+  ],
+  "playerSourceBoundary": "Complete current player protobuf is not present in captured BattleData or request; locked TW/GAC rosters cannot substitute for current inventory. Retained complete inventory payload plus isolated factory dependencies remains a candidate, not verified.",
+  "normalHostRestored": {
+    "pid": 20084,
+    "clientPid": 19440
+  },
+  "noNewBattleOrPurchaseInvoked": true,
+  "remaining": "Working whole captured battle conversion, exact player squad isolation, isolated replay, all other goal items remain incomplete"
+}
