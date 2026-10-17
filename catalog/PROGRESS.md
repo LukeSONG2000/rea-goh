@@ -228,3 +228,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 trial-ai-bridge】认领试玩独占宿主接入现有snapshot/battle输入CLI：复用BattleInputBridge与命令邮箱，只接本次准确BattleGameState所有权，拒绝导航/跨会话输入；不新增战斗规则。
 
 【Codex/root 2026-10-18 trial-ai-bridge validated】试玩prepare包含原共用observer/status/attributes/BattleInputBridge，单宿主runner发布trial状态和快照、处理既有邮箱；CLI优先匹配活试玩owner/lock，四种battle输入仅准确owned BattleGameState/context可用，导航拒绝。type1通过CLI合法选敌/连续技能至原终态，无效目标/重复token拒绝；type9瓦特科技→取消→再施放→无效友军拒绝→有效IG12，实际出现tech_bonus_move_handler/techability1_wattambor_recovery_handler，继续CLI到turn6原终态。type9首轮90秒过期的owner mismatch保留，延长重跑成功。三场正式BattleService0、Home/guard/GC PASS。切场景null状态新增Transitioning快照（mock验证，未人为再造精确瞬态）；原桥所有权/邮箱/互斥/turn-order PASS。报告TRIAL_AI_BRIDGE_VALIDATION_20261018.json，说明已更新；正常显示宿主32300/原19440存活Home。非空Datacron/好友/Era、终极UI、其它模式与敌方AI等完整目标仍待推进，无货币/拆装/分解。
+
+【Codex/root 2026-10-18 datacron-isolation】认领保存小队Datacron原Factory.Get(BattleStat)对象图及词缀/原计算修正审计；原squad-with-units native调用15487C0已定位，先只读验证，不拆装装备、不开放未证实分支。
