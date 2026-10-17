@@ -164,3 +164,7 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 expanded-runtime】继续完整目标：临时护盾/实时属性/精通、AI预测、忠实试玩、操作接口、隔离模拟双边控制。root认领属性reader原runtime验证和共享桥接；先保存已有只读reader与试玩契约调查，不把原库存敌人fixture当关卡试玩。货币/装备变动须明确授权，体力可用。额度仅用户截图6%证据；低于1%使用一张重置卡授权保留，未查询到实时额度/重置调用入口。
 
 【Codex/root expanded-runtime 2026-10-18 step1】新增JSON CLI capabilities/snapshot，原PID32636收藏页实测返回MasterInventoryGameState且无输入/RPC；属性reader原getter契约回归PASS。native body发现DTO displayOnly getter会改datacron上下文，已移除并加禁止调用回归；精通getter更正为系数，不伪称当前贡献。尝试隔离属性验证因原客户端收藏页被Home门禁阻止，未运行reader战斗调用，不标通过。新增试玩/AI静态契约脚本：当前fixture不能冒充真实关卡；原AI决策消耗RNG，预测不得调用live决策。用户新增右上角绝对值与隔离双边控制/AI预测/优先级修改均保持目标，尚待实现验证。完整台账RUNTIME_TOOLS_PROGRESS_20261018.json。
+
+【Codex/root 2026-10-18 authorization更新】用户撤回重置卡授权并关闭开关：禁止使用/重开；全球重置前本周期周额度耗尽可使用已有额度继续，不含购买额度。用户明确授权自由启动/关闭游戏；货币消费和装备拆卸/分解仍需明确授权。此前低于1%重置一次授权已作废。
+
+【Codex/root 2026-10-18 attributes-overlay】新增置顶只读窗口入口tools/start_attribute_overlay.cmd，初始/当前/净变化、总/永久/临时护盾及状态期限，过期或断连清空。原隔离JMK实测永久101823、临时152211、总254034，精通60→75净+15，属性warnings0，零攻击/正式BattleService0，回Home清理PASS。新增CLI inventory-home原UI导航实测及watch。早先持续观察出现frida-agent BEX64 c0000409，不能标稳定；改为脚本生命周期单一dispatcher hook+队列+优雅停止，40引用与100排队/重入/超时测试PASS，新PID41904持续读+并行隔离模拟+退场/停止后仍存活，无新错误观察。根因未完全证实，长时/全模式待验；右上角绝对值等完整目标未完。详见ATTRIBUTE_OVERLAY_VALIDATION_20261018.json。

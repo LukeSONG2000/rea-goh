@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-18",
+  "entry": "tools/start_attribute_overlay.cmd",
+  "cli": [
+    "capabilities",
+    "snapshot --pid PID",
+    "watch --pid PID",
+    "inventory-home --pid PID"
+  ],
+  "validated": {
+    "inventoryHome": "Original OnHomeButtonClick invoked from exact MasterInventoryGameState; HomeBaseGameState confirmed",
+    "protection": {
+      "permanent": 101823,
+      "bonus": 152211,
+      "total": 254034
+    },
+    "mastery": {
+      "initial": 60,
+      "current": 75,
+      "netChange": 15
+    },
+    "attributesEvidence": "logs/high_reuse/attributes-persistent-dispatcher-evidence.json",
+    "overlayScreenshot": "logs/high_reuse/attribute-overlay-window.png",
+    "gameplayInputs": 0,
+    "battleServiceCalls": 0,
+    "cleanup": "Home, socket guard and GC restored"
+  },
+  "stability": {
+    "observedFailure": "Earlier continuous observer caused frida-agent.dll BEX64 c0000409 events; root cause not conclusively proven.",
+    "mitigation": "Persistent dispatcher hook with queued jobs, no repeated callback detach; graceful observer stop sentinel.",
+    "tests": [
+      "40 field-reference regression cases",
+      "100 queued jobs with one hook, nested scheduling, callback error isolation, expired work cancellation",
+      "New process41904 continuous Home observation, concurrent local simulation no attacks, return Home and observer graceful detach; client responsive afterward"
+    ],
+    "notProven": "Long sessions and all modes"
+  },
+  "remaining": [
+    "In-game top-right absolute HP/shields",
+    "In-game popup bonus shield and all live attributes",
+    "Full mode cooldown verification",
+    "Panel baseline stats and mastery-attributed per-stat deltas",
+    "Faithful mission trial beyond inventory-enemy fixture",
+    "Menu purchase/configuration/claim and battle action APIs",
+    "Opponent control, AI prediction and isolated priority changes"
+  ]
+}

@@ -181,18 +181,31 @@ globalThis.RuntimeApi = (() => {
     if(unique.length!==1)throw Error('Bound instance must resolve uniquely: '+name+' matches='+unique.length);
     return unique[0].instance;
   }
+  const mainThreadJobs=new Set();
+  let dispatcherHook=null,dispatching=false;
   function runOnMainThreadOnce(callback,timeoutMs=15000) {
-    // This client has NO MainThreadDispatcher.Update. Its original coroutine
-    // calls ProcessActions, VA18116D220/RVA116D220 (metadata line349149).
-    const method=findMethod(findClass('MainThreadDispatcher'),'ProcessActions',0),address=method.readPointer();
-    if(!address.equals(module.base.add(0x116d220)))throw Error('Dispatcher MethodInfo/RVA mismatch');
-    return new Promise((resolve,reject)=>{
-      let fired=false,hook,timer;
-      hook=Interceptor.attach(address,{onLeave(){
-        if(fired)return;fired=true;hook.detach();clearTimeout(timer);
-        try {resolve(callback());}catch(error){reject(error);}
+    // Keep one interceptor for the script lifetime. Repeated attach/detach from
+    // inside the dispatcher callback is unsuitable for a continuous observer.
+    if(!dispatcherHook){
+      const method=findMethod(findClass('MainThreadDispatcher'),'ProcessActions',0),address=method.readPointer();
+      if(!address.equals(module.base.add(0x116d220)))throw Error('Dispatcher MethodInfo/RVA mismatch');
+      dispatcherHook=Interceptor.attach(address,{onLeave(){
+        if(dispatching)return;dispatching=true;
+        try{
+          for(const job of [...mainThreadJobs]){
+            if(!mainThreadJobs.delete(job))continue;
+            clearTimeout(job.timer);
+            try{job.resolve(job.callback());}catch(error){job.reject(error);}
+          }
+        }finally{dispatching=false;}
       }});
-      timer=setTimeout(()=>{if(!fired){fired=true;hook.detach();reject(Error('Original main-thread dispatcher did not tick'));}},timeoutMs);
+    }
+    return new Promise((resolve,reject)=>{
+      const job={callback,resolve,reject,timer:null};
+      job.timer=setTimeout(()=>{
+        if(mainThreadJobs.delete(job))reject(Error('Original main-thread dispatcher did not tick'));
+      },timeoutMs);
+      mainThreadJobs.add(job);
     });
   }
   return {module,nil,api,classOf,fullName,allClasses,findClass,field,readRef,readValue,writeRef,writeValue,

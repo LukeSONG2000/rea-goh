@@ -7,8 +7,8 @@ import {createRequire} from 'node:module';
 import {execFileSync} from 'node:child_process';
 const args=process.argv.slice(2);
 if(args.length===1&&args[0]==='capabilities'){
- console.log(JSON.stringify({schemaVersion:1,operations:[{name:'snapshot',effect:'read',arguments:['--pid <SWGoH PID>']}],unavailable:['actions','trial','aiPrediction','controlOpponent']}));
-}else if(args.length===3&&args[0]==='snapshot'&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
+ console.log(JSON.stringify({schemaVersion:1,operations:[{name:'snapshot',effect:'read',arguments:['--pid <SWGoH PID>']},{name:'watch',effect:'read',arguments:['--pid <SWGoH PID>']}],navigation:['inventory-home --pid <SWGoH PID>'],unavailable:['otherActions','trial','aiPrediction','controlOpponent']}));
+}else if(args.length===3&&['snapshot','watch','inventory-home'].includes(args[0])&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
  const pid=Number(args[2]);
  const processPath=execFileSync('powershell.exe',['-NoProfile','-Command',`(Get-Process -Id ${pid} -ErrorAction Stop).Path`],{encoding:'utf8'}).trim();
  if(processPath.toLowerCase()!=='e:\\games\\ea games\\swgoh\\swgoh.exe')throw Error('PID must be the supported original client');
@@ -23,9 +23,24 @@ if(args.length===1&&args[0]==='capabilities'){
   const script=await session.createScript(source);
   script.message.connect(m=>{if(m.type==='error')console.error(JSON.stringify(m));});
   await script.load();
-  const result=await script.exports.snapshot();
-  console.log(JSON.stringify(result,null,2));
+  if(args[0]==='inventory-home'){const invoked=await script.exports.inventoryhome();await new Promise(r=>setTimeout(r,1000));const after=await script.exports.snapshot();console.log(JSON.stringify({...invoked,transitionConfirmed:after.state==='HomeBaseGameState',afterState:after.state}));}
+  else if(args[0]==='snapshot')console.log(JSON.stringify(await script.exports.snapshot(),null,2));
+  else {
+   const output=path.resolve(directory,'../../logs/high_reuse/runtime-snapshot.json');
+   fs.mkdirSync(path.dirname(output),{recursive:true});
+   const stopFile=path.resolve(directory,`../../logs/high_reuse/runtime-watch-${process.pid}.stop`);
+   if(fs.existsSync(stopFile))fs.unlinkSync(stopFile);
+   let stop=false;process.on('SIGINT',()=>{stop=true;});process.on('SIGTERM',()=>{stop=true;});
+   session.detached.connect(()=>{stop=true;});
+   while(!stop&&!fs.existsSync(stopFile)){
+    try{
+     const snapshot=await script.exports.snapshot();
+     fs.writeFileSync(output,JSON.stringify({...snapshot,observedAt:new Date().toISOString(),pid}));
+    }catch(e){fs.writeFileSync(output,JSON.stringify({state:'unavailable',observedAt:new Date().toISOString(),error:String(e),units:[]}));break;}
+    await new Promise(resolve=>setTimeout(resolve,1000));
+   }
+  }
  }finally{await session.detach();}
 }else{
- console.error('Usage: node tools/runtime_reuse/runtime_cli.mjs capabilities | snapshot --pid <SWGoH PID>');process.exitCode=2;
+ console.error('Usage: node tools/runtime_reuse/runtime_cli.mjs capabilities | snapshot|watch|inventory-home --pid <SWGoH PID>');process.exitCode=2;
 }

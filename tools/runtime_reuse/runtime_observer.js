@@ -13,8 +13,16 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
   if(unit.isNull()||seen.has(unit.toString())||!R.readRef(unit,'_battleContext').equals(context))continue;
   if(!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(reticle)),'bool'))continue;
   seen.add(unit.toString());
-  result.units.push({sessionKey:unit.toString(),attributes:readBattleAttributes(unit),status:readBattleStatus(unit)});
+  result.units.push({sessionKey:unit.toString(),baseId:S.string(R.readRef(R.readRef(R.readRef(unit,'_unitDO'),'<Definition>k__BackingField'),'BaseId')),attributes:readBattleAttributes(unit),status:readBattleStatus(unit)});
  }
  return result;
 });
-rpc.exports={snapshot:()=>readRuntimeSnapshot()};
+globalThis.inventoryHome=()=>RuntimeApi.runOnMainThreadOnce(()=>{
+ const R=RuntimeApi,S=SceneApi,state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+ if(R.fullName(R.classOf(state))!=='MasterInventoryGameState')throw Error('inventory-home requires the inventory screen');
+ const views=S.all('MasterInventoryView').filter(v=>R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(v)),'bool'));
+ if(views.length!==1)throw Error('Inventory view must resolve uniquely');
+ S.invoke('MasterInventoryView','OnHomeButtonClick',views[0]);
+ return {invoked:'MasterInventoryView.OnHomeButtonClick',effect:'original UI navigation',transitionConfirmed:false};
+});
+rpc.exports={snapshot:()=>readRuntimeSnapshot(),inventoryhome:()=>inventoryHome()};
