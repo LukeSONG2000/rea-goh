@@ -123,3 +123,6 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 - actual build REA复检 ev_6e33e87a9f66819ab3c866bdf313c61bb4142a772d4f31ad455afee2a2873e56，Assembly-CSharp SHA256 54e5d69787c398499b6a308362c05a358929fef36e592abd0ebffa412257d01f。确认 SubmitTarget→TrySubmitCommand 与逐回合RunBattle调用链。详见 BATTLE_RECOVERY_20261017.json。
 - 未完成保真项维持P0：扁平技能导出（包括VADER互斥倍率错误）、完整target/context/trigger/expiry、持续状态/护盾/助攻反击/驱散；场景/NGUI/动画/VFX仍不合原版。不以手动闭环替代完整玩法验收。
 - ZCode CLI 0.16.9已定位，进程局部provider路径修复后调用仍Model creation failed；未取得模型辅助结果，未改全局配置。原版本轮零computer use、零货币/Mod操作、未访问线上API。
+
+## 2026-10-17 原始效果链恢复
+- 【Codex-effect-recovery】认领：维达普攻原始分支/类别条件、效果链无损导出与Unity逐效果执行、持续状态/伤害native证据交叉验证及回归构建。写域 tools/build_abilities_data.py、专用tests、BattleSim/Driver与新增效果模块、StreamingAssets技能数据；主智能体单写git，其他现有改动保留。
