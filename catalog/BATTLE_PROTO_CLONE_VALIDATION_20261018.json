@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-18",
+  "runtimeEvidence": {
+    "provider": "REA-installed Frida",
+    "pid": 19440,
+    "messages": [
+      {
+        "type": "send",
+        "payload": {
+          "kind": "protobuf-probe-complete",
+          "scope": "scratch original protobuf objects; no account or battle data",
+          "passed": true,
+          "encounters": 2,
+          "independentNestedState": true
+        }
+      }
+    ],
+    "detached": true
+  },
+  "implementation": "tools/runtime_reuse/battle_proto.js",
+  "probe": "tools/runtime_reuse/probe_battle_proto.js",
+  "scope": "Original NonGeneric.DeepClone on scratch Protos.BattleData; no account or actual mission payload accessed",
+  "verified": [
+    "BattleSeed, TargetingSeed and EncounterIndex preserved",
+    "Two encounter list objects and nested unit-state lists independently copied",
+    "CurrentHealth and CurrentShield preserved",
+    "Changing clone health leaves source unchanged"
+  ],
+  "notVerified": [
+    "actual mission payload capture",
+    "all protobuf members and extension data",
+    "PlayerSquad and support snapshot isolation",
+    "launching faithful mission replay"
+  ],
+  "nativeCopyAudit": {
+    "source": "logs/high_reuse/native/COPY_ISOLATION_SEMANTICS.txt",
+    "SquadCellDO_copy": "UnitDO and BattleUnitStateDO shared; stat override list copied but elements shared",
+    "UnitDO_copy": "equipment/relic/ability objects shared; equippedDatacron and activeStatIndex omitted",
+    "decision": "Do not use ordinary DO copy constructors as full battle snapshot"
+  }
+}
