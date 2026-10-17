@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-18",
+  "status": "reproducible captured trial entry validated; general objective incomplete",
+  "entry": "tools/runtime_reuse/start_captured_trial.ps1",
+  "runs": [
+    {
+      "path": "logs\\high_reuse\\trial-20261018-070223-231-evidence.json",
+      "kind": "simulation-probe-complete",
+      "terminal": true,
+      "error": null,
+      "serviceCalls": 0,
+      "cleanup": {
+        "attempted": true,
+        "loopStopped": true,
+        "simulationShutdown": true,
+        "hooksDetached": true,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      },
+      "lastSnapshot": null,
+      "detached": true
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-070314-726-evidence.json",
+      "kind": "visual-probe-complete",
+      "terminal": true,
+      "error": null,
+      "serviceCalls": 0,
+      "cleanup": {
+        "home": true,
+        "exitedOwnedStates": 1,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      },
+      "lastSnapshot": {
+        "previous": 136,
+        "next": 1,
+        "turns": 4,
+        "currentState": "CampaignGameState"
+      },
+      "detached": true
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-070447-176-evidence.json",
+      "kind": "visual-probe-complete",
+      "terminal": false,
+      "error": null,
+      "serviceCalls": 0,
+      "cleanup": {
+        "home": true,
+        "exitedOwnedStates": 1,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      },
+      "lastSnapshot": {
+        "previous": 34,
+        "next": 1,
+        "turns": 0,
+        "currentState": "BattleGameState"
+      },
+      "detached": true
+    }
+  ],
+  "checks": {
+    "captureValidationTests": 4,
+    "protobufDefaultTests": 8,
+    "sessionLockTests": "PASS; additionally real live owner 17312 refused before attach",
+    "turnOrder": "same-seed deterministic PASS",
+    "manualMode": "no scripted click; reached original UI then returned Home at deadline",
+    "automaticMode": "original basic then original auto, terminal reached",
+    "displayHostRestoredAfterAllRuns": true
+  },
+  "snapshotPolicy": "explicit supplied inventory snapshot, not refreshed current account",
+  "limits": [
+    "Only captured 1-A and saved squad type1 end-to-end validated",
+    "No borrowed support; reject unsupported external roster references and Datacron",
+    "Manual time-limit sessions are not reported as victories",
+    "No common-host battle CLI while standalone trial owns runtime",
+    "Cleanup-incomplete retention branch not fault-injected in live client",
+    "Remaining full goal still active"
+  ]
+}

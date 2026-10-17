@@ -5,8 +5,8 @@
 // {autoClick:true,maxDurationMs:35000,capturePath:'F:/.../frame.png',fixture:{seed:8}}
 (async()=>{
  const R=RuntimeApi,A=R.arg,call=OriginalFixtureTools.call;
- const options=Object.assign({autoClick:true,maxDurationMs:35000,capturePath:'F:/PPfavorite/Work/goh/logs/high_reuse/original-offline-battle.png'},globalThis.visualProbeOptions||{});
- if(typeof options.autoClick!=='boolean'||!Number.isFinite(options.maxDurationMs)||options.maxDurationMs<=0)throw Error('Invalid visual probe options');
+ const options=Object.assign({autoClick:true,autoAfterClick:false,maxDurationMs:35000,capturePath:'F:/PPfavorite/Work/goh/logs/high_reuse/original-offline-battle.png'},globalThis.visualProbeOptions||{});
+ if(typeof options.autoClick!=='boolean'||typeof options.autoAfterClick!=='boolean'||!Number.isFinite(options.maxDurationMs)||options.maxDurationMs<=0)throw Error('Invalid visual probe options');
  if(options.capturePath!==null&&typeof options.capturePath!=='string')throw Error('capturePath must be a string or null');
  const hooks=[],cleanup={home:false,exitedOwnedStates:0,guardRestored:false,gcReleased:false,errors:[]};
  let f=null,guard=null,entered=null,ownedCampaign=null,exitedOwnBattle=false,campaignExpected=false,foreignTransition=false,returningHome=false;
@@ -131,6 +131,13 @@
      if(index<0)throw Error('Original basic attack button not found');
      call(table,'HandleAbilityButtonClicked',[A.value('i32',index),A.ref(buttons)]);clicked=true;
      send({kind:'original-ui-basic-clicked',index});
+     if(options.autoAfterClick){
+      const auto=R.readRef(f.context,'<BattleAutoController>k__BackingField');
+      if(R.readValue(auto,'<CurrentAutoStatus>k__BackingField','i32')!==0||R.readValue(auto,'<CurrentToggleMode>k__BackingField','i32')!==0)
+       throw Error('Expected original manual/full-only auto control');
+      call(auto,'OnTogglePlayerTurnAuto');
+      send({kind:'original-trial-auto-selected'});
+     }
     }
     if(ownedCampaign&&state.equals(ownedCampaign))shouldStop=true;
    });
