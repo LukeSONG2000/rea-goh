@@ -1,0 +1,562 @@
+{
+  "source": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\env_space_endor_01_pre\\81d64cc51cbb13000000000000000000\\__data",
+  "sourceSha256": "c79bc1bdebca0375cbf54a514fa3cf6176ba93fb6bbb7ccd37152ec0a234ec64",
+  "limitations": [
+    "Original shader programs are not exported; planet MaskTex/cloud/lighting program remains PENDING-ORIGINAL.",
+    "Pass states and saved properties are original serialized evidence; stale material properties do not prove shader usage."
+  ],
+  "materials": [
+    {
+      "name": "end_planet_atmosphere_ring_mat",
+      "pathId": "-8242743556738996038",
+      "shader": "Legacy Shaders/Particles/Additive",
+      "textures": [
+        {
+          "property": "_MainTex",
+          "name": "vfx_gradient_horiz_L",
+          "path": "F:\\PPfavorite\\Work\\goh\\unity\\SWGoH-Restored\\Assets\\Resources\\SpaceMaterials\\textures\\vfx_gradient_horiz_L.png",
+          "resourcePath": "SpaceMaterials/textures/vfx_gradient_horiz_L",
+          "pathId": "6023872178964735519",
+          "scale": {
+            "x": 2.4700000286102295,
+            "y": 1.0
+          },
+          "offset": {
+            "x": 0.009999999776482582,
+            "y": 0.0
+          },
+          "sha256": "349cfda66644afe421691a0c4dd25443e507d51a9031efea1fd572d7fdb38d44"
+        }
+      ],
+      "colors": [
+        {
+          "name": "_Color",
+          "value": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        },
+        {
+          "name": "_EmisColor",
+          "value": {
+            "r": 0.20000000298023224,
+            "g": 0.20000000298023224,
+            "b": 0.20000000298023224,
+            "a": 0.0
+          }
+        },
+        {
+          "name": "_TintColor",
+          "value": {
+            "r": 0.24313725531101227,
+            "g": 0.3490196168422699,
+            "b": 0.5098039507865906,
+            "a": 1.0
+          }
+        }
+      ],
+      "floats": [
+        {
+          "name": "_CameraDepth",
+          "value": 0.0
+        },
+        {
+          "name": "_InvFade",
+          "value": 1.0
+        }
+      ],
+      "passes": [
+        {
+          "srcBlend": 5.0,
+          "dstBlend": 1.0,
+          "srcBlendAlpha": 5.0,
+          "dstBlendAlpha": 1.0,
+          "zWrite": 0.0,
+          "zTest": 4.0,
+          "cull": 0.0,
+          "colorMask": 14.0,
+          "tags": [
+            [
+              "IGNOREPROJECTOR",
+              "true"
+            ],
+            [
+              "PreviewType",
+              "Plane"
+            ],
+            [
+              "QUEUE",
+              "Transparent"
+            ],
+            [
+              "RenderType",
+              "Transparent"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "stars32_mat",
+      "pathId": "-6059172790554393072",
+      "shader": "Custom/Unlit/Texture (No Fog)",
+      "textures": [
+        {
+          "property": "_MainTex",
+          "name": "stars32_tex",
+          "path": "F:\\PPfavorite\\Work\\goh\\unity\\SWGoH-Restored\\Assets\\Resources\\SpaceMaterials\\textures\\stars32_tex.png",
+          "resourcePath": "SpaceMaterials/textures/stars32_tex",
+          "pathId": "-89798876698005294",
+          "scale": {
+            "x": 1.0,
+            "y": 1.0
+          },
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "sha256": "b1a5848d8739823cc1332a9c05262d3ef28db2425393311934e2171ddbc8c179"
+        }
+      ],
+      "colors": [
+        {
+          "name": "_Color",
+          "value": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        },
+        {
+          "name": "_EmisColor",
+          "value": {
+            "r": 0.20000000298023224,
+            "g": 0.20000000298023224,
+            "b": 0.20000000298023224,
+            "a": 0.0
+          }
+        }
+      ],
+      "floats": [
+        {
+          "name": "_Cutoff",
+          "value": 0.5
+        }
+      ],
+      "passes": [
+        {
+          "srcBlend": 1.0,
+          "dstBlend": 0.0,
+          "srcBlendAlpha": 1.0,
+          "dstBlendAlpha": 0.0,
+          "zWrite": 1.0,
+          "zTest": 4.0,
+          "cull": 2.0,
+          "colorMask": 15.0,
+          "tags": [
+            [
+              "RenderType",
+              "Opaque"
+            ]
+          ]
+        },
+        {
+          "srcBlend": 1.0,
+          "dstBlend": 0.0,
+          "srcBlendAlpha": 1.0,
+          "dstBlendAlpha": 0.0,
+          "zWrite": 1.0,
+          "zTest": 4.0,
+          "cull": 2.0,
+          "colorMask": 15.0,
+          "tags": [
+            [
+              "RenderType",
+              "Opaque"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "end_planet_mat",
+      "pathId": "-4840878650988364122",
+      "shader": "Custom/Env/Planet Shader Unlit 2022 (Additive)",
+      "textures": [
+        {
+          "property": "_MainTex",
+          "name": "end_planet_tex",
+          "path": "F:\\PPfavorite\\Work\\goh\\unity\\SWGoH-Restored\\Assets\\Resources\\SpaceMaterials\\textures\\end_planet_tex.png",
+          "resourcePath": "SpaceMaterials/textures/end_planet_tex",
+          "pathId": "-5162844182856189741",
+          "scale": {
+            "x": 1.2999999523162842,
+            "y": 1.0
+          },
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "sha256": "b2a6fe4b909c5557cf38bba975d438e35e0ee2b64f7bc266175cd6a827c3fa19"
+        },
+        {
+          "property": "_MaskTex",
+          "name": "shared_cloud_med_tex",
+          "path": "F:\\PPfavorite\\Work\\goh\\unity\\SWGoH-Restored\\Assets\\Resources\\SpaceMaterials\\textures\\shared_cloud_med_tex.png",
+          "resourcePath": "SpaceMaterials/textures/shared_cloud_med_tex",
+          "pathId": "-4274670003486815054",
+          "scale": {
+            "x": 3.0,
+            "y": 3.0
+          },
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "sha256": "68c07cc521e0ada3b5f8cfcbda77d73ab01c0cb7628829676860d43393aeae46"
+        }
+      ],
+      "colors": [
+        {
+          "name": "_AtmosTint",
+          "value": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        },
+        {
+          "name": "_Color",
+          "value": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        },
+        {
+          "name": "_EmissionColor",
+          "value": {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0
+          }
+        },
+        {
+          "name": "_HoloColor",
+          "value": {
+            "r": 0.25,
+            "g": 0.5,
+            "b": 1.0,
+            "a": 1.0
+          }
+        },
+        {
+          "name": "_LightPoint",
+          "value": {
+            "r": 500.0,
+            "g": 500.0,
+            "b": 800.0,
+            "a": 0.0
+          }
+        },
+        {
+          "name": "_ScrollSpeeds",
+          "value": {
+            "r": 0.004000000189989805,
+            "g": 0.0,
+            "b": 0.019999999552965164,
+            "a": 0.009999999776482582
+          }
+        },
+        {
+          "name": "_Tint",
+          "value": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        }
+      ],
+      "floats": [
+        {
+          "name": "_Alpha",
+          "value": 1.0
+        },
+        {
+          "name": "_AmbientBrightness",
+          "value": -0.07999999821186066
+        },
+        {
+          "name": "_AtmosBrightness",
+          "value": 0.5899999737739563
+        },
+        {
+          "name": "_BumpScale",
+          "value": 1.0
+        },
+        {
+          "name": "_Cutoff",
+          "value": 0.5
+        },
+        {
+          "name": "_DetailNormalMapScale",
+          "value": 1.0
+        },
+        {
+          "name": "_DstBlend",
+          "value": 0.0
+        },
+        {
+          "name": "_EffectBlend",
+          "value": 0.0
+        },
+        {
+          "name": "_GlossMapScale",
+          "value": 1.0
+        },
+        {
+          "name": "_Glossiness",
+          "value": 0.5
+        },
+        {
+          "name": "_GlossyReflections",
+          "value": 1.0
+        },
+        {
+          "name": "_HoloRez",
+          "value": 2.0
+        },
+        {
+          "name": "_Hologram",
+          "value": 0.0
+        },
+        {
+          "name": "_Metallic",
+          "value": 0.0
+        },
+        {
+          "name": "_Mode",
+          "value": 0.0
+        },
+        {
+          "name": "_ObscureEmission",
+          "value": 0.0
+        },
+        {
+          "name": "_OcclusionStrength",
+          "value": 1.0
+        },
+        {
+          "name": "_Parallax",
+          "value": 0.019999999552965164
+        },
+        {
+          "name": "_SmoothnessTextureChannel",
+          "value": 0.0
+        },
+        {
+          "name": "_SpecularHighlights",
+          "value": 1.0
+        },
+        {
+          "name": "_SrcBlend",
+          "value": 1.0
+        },
+        {
+          "name": "_UVSec",
+          "value": 0.0
+        },
+        {
+          "name": "_ZWrite",
+          "value": 1.0
+        }
+      ],
+      "passes": [
+        {
+          "srcBlend": 5.0,
+          "dstBlend": 10.0,
+          "srcBlendAlpha": 5.0,
+          "dstBlendAlpha": 10.0,
+          "zWrite": 1.0,
+          "zTest": 4.0,
+          "cull": 2.0,
+          "colorMask": 15.0,
+          "tags": [
+            [
+              "RenderType",
+              "Geometry"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "end_planet_atmosphere_mat",
+      "pathId": "4532442208885118922",
+      "shader": "Custom/Env/Additive Cull",
+      "textures": [
+        {
+          "property": "_MainTex",
+          "name": "vfx_gradient_horiz_L",
+          "path": "F:\\PPfavorite\\Work\\goh\\unity\\SWGoH-Restored\\Assets\\Resources\\SpaceMaterials\\textures\\vfx_gradient_horiz_L.png",
+          "resourcePath": "SpaceMaterials/textures/vfx_gradient_horiz_L",
+          "pathId": "6023872178964735519",
+          "scale": {
+            "x": 1.0,
+            "y": 0.0
+          },
+          "offset": {
+            "x": 0.029999999329447746,
+            "y": 0.0
+          },
+          "sha256": "349cfda66644afe421691a0c4dd25443e507d51a9031efea1fd572d7fdb38d44"
+        }
+      ],
+      "colors": [
+        {
+          "name": "_Color",
+          "value": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        },
+        {
+          "name": "_EmisColor",
+          "value": {
+            "r": 0.20000000298023224,
+            "g": 0.20000000298023224,
+            "b": 0.20000000298023224,
+            "a": 0.0
+          }
+        },
+        {
+          "name": "_TintColor",
+          "value": {
+            "r": 0.2085770219564438,
+            "g": 0.4437944293022156,
+            "b": 0.801886796951294,
+            "a": 0.4313725531101227
+          }
+        }
+      ],
+      "floats": [
+        {
+          "name": "_InvFade",
+          "value": 1.0
+        }
+      ],
+      "passes": [
+        {
+          "srcBlend": 5.0,
+          "dstBlend": 1.0,
+          "srcBlendAlpha": 5.0,
+          "dstBlendAlpha": 1.0,
+          "zWrite": 0.0,
+          "zTest": 4.0,
+          "cull": 2.0,
+          "colorMask": 14.0,
+          "tags": [
+            [
+              "IGNOREPROJECTOR",
+              "true"
+            ],
+            [
+              "QUEUE",
+              "Transparent"
+            ],
+            [
+              "RenderType",
+              "Transparent"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "bindings": [
+    {
+      "renderer": "planet_fresnel_mesh",
+      "path": "env.env_space_endor_01_pre/Art Assets/Planets/end_planet_pre/planet_body_mesh/planet_fresnel_mesh",
+      "gameObjectPathId": "5954954554995456220",
+      "rendererPathId": "-2940054637149441477",
+      "layer": 0,
+      "enabled": true,
+      "slots": [
+        {
+          "slot": 0,
+          "material": "end_planet_atmosphere_mat",
+          "pathId": "4532442208885118922"
+        }
+      ]
+    },
+    {
+      "renderer": "starSkyBox 1_p",
+      "path": "env.env_space_endor_01_pre/Art Assets/Starfield/starSkyBox 1_p",
+      "gameObjectPathId": "-4309659539122764174",
+      "rendererPathId": "1543709129457573437",
+      "layer": 25,
+      "enabled": true,
+      "slots": [
+        {
+          "slot": 0,
+          "material": "stars32_mat",
+          "pathId": "-6059172790554393072"
+        }
+      ]
+    },
+    {
+      "renderer": "planet_body_mesh",
+      "path": "env.env_space_endor_01_pre/Art Assets/Planets/end_planet_pre/planet_body_mesh",
+      "gameObjectPathId": "3344342034428601137",
+      "rendererPathId": "3742671960122697011",
+      "layer": 0,
+      "enabled": true,
+      "slots": [
+        {
+          "slot": 0,
+          "material": "end_planet_mat",
+          "pathId": "-4840878650988364122"
+        }
+      ]
+    },
+    {
+      "renderer": "starSkyBox 1_p",
+      "path": "env.env_space_endor_01_pre/Art Assets/Starfield/starSkyBox 1_p",
+      "gameObjectPathId": "2277090230778301306",
+      "rendererPathId": "7403020048792096043",
+      "layer": 25,
+      "enabled": true,
+      "slots": [
+        {
+          "slot": 0,
+          "material": "stars32_mat",
+          "pathId": "-6059172790554393072"
+        }
+      ]
+    },
+    {
+      "renderer": "planet_glow_mesh",
+      "path": "env.env_space_endor_01_pre/Art Assets/Planets/end_planet_pre/planet_body_mesh/planet_glow_mesh",
+      "gameObjectPathId": "-1185065120505353149",
+      "rendererPathId": "8134841682492599370",
+      "layer": 0,
+      "enabled": true,
+      "slots": [
+        {
+          "slot": 0,
+          "material": "end_planet_atmosphere_ring_mat",
+          "pathId": "-8242743556738996038"
+        }
+      ]
+    }
+  ]
+}

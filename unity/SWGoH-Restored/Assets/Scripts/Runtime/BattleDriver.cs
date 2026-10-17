@@ -42,6 +42,8 @@ namespace SwgohRestored.Battle
         readonly Dictionary<string, double> _replayShield = new();
         readonly Dictionary<string, OriginalUnitMenu> _originalMenus = new();
         BattleSim _sim;
+        BattleStage _stage;
+        public BattleStage Stage => _stage;
         readonly BattleHUD _hud = new BattleHUD();
         List<UnitEntry> _uiUnits;
         BattleUnit _commander;                                   // enemy team lead
@@ -131,20 +133,35 @@ namespace SwgohRestored.Battle
                     double hp = _replayHp.TryGetValue(u.UnitId, out var h) ? h : u.MaxHp;
                     float frac = u.MaxHp > 0 ? Mathf.Clamp01((float)(hp / u.MaxHp)) : 0f;
                     bool alive = _replayHp.Count == 0 ? u.Alive : hp > 0;
-                    Vector3? anchor = _rigs.TryGetValue(u.UnitId, out var rig)
-                        ? rig.transform.position + Vector3.up * 2.2f : (Vector3?)null;
+                    Vector3? anchor = null;
+                    if (_rigs.TryGetValue(u.UnitId, out var rig))
+                    {
+                        var renderers = rig.GetComponentsInChildren<Renderer>();
+                        if (renderers.Length > 0)
+                        {
+                            var bounds = renderers[0].bounds;
+                            foreach (var renderer in renderers.Skip(1)) bounds.Encapsulate(renderer.bounds);
+                            anchor = new Vector3(bounds.center.x, bounds.max.y, bounds.center.z);
+                        }
+                    }
                     _hud.UpdateUnit(u, Camera.main, frac, alive, anchor);
                     _hud.SetProtection(u.UnitId, _replayShield.TryGetValue(u.UnitId, out var shield) ? shield : u.CurrentShield, u.MaxShield);
+                    _hud.SetTurnMeter(u.UnitId, u == _sim.PendingActor ? GameConstants.UnitSpeedFillMax : u.SpeedFill,
+                        GameConstants.UnitSpeedFillMax);
                     if (_replayStates.TryGetValue(u.UnitId, out var states))
                         _hud.SetPersistentStates(u.UnitId, states.Values.ToArray());
                 }
+            if (_commander != null)
+                _hud.SetCommanderHealth(_replayHp.TryGetValue(_commander.UnitId, out var chp) ? chp : _commander.CurrentHp,
+                    _commander.MaxHp, _replayShield.TryGetValue(_commander.UnitId, out var cs) ? cs : _commander.CurrentShield,
+                    _commander.MaxShield);
         }
 
         void HandleKeys()
         {
-            if (Input.GetKeyDown(KeyCode.B)) ToggleAuto();
-            if (Input.GetKeyDown(KeyCode.V)) ToggleSpeed();
-            if (Input.GetKeyDown(KeyCode.C)) ToggleLock();
+            if (Input.GetKeyDown(KeyCode.C)) ToggleAuto();
+            if (Input.GetKeyDown(KeyCode.B)) ToggleSpeed();
+            if (Input.GetKeyDown(KeyCode.Z)) ToggleLock();
             if (_onSkillPick != null)
             {
                 if (Input.GetKeyDown(KeyCode.Q)) _onSkillPick(0);
@@ -229,6 +246,8 @@ namespace SwgohRestored.Battle
                 Debug.LogError("[BattleDriver] " + failure);
                 yield break;
             }
+            _stage = new GameObject("OriginalBattleStage").AddComponent<BattleStage>();
+            _stage.Assemble(false);
             var player = BuildTeam(roster, PlayerTeam, 0, abilityMap);
             var opponent = BuildTeam(roster, OpponentTeam, 1, abilityMap);
             _uiUnits = UiData.LoadUnits();
@@ -302,7 +321,7 @@ namespace SwgohRestored.Battle
                 actor.CooldownLeft.TryGetValue(ability.Id, out int cooldown);
                 string unsupported = _sim.OriginalUnsupportedReason(ability);
                 _hud.SetSkillAvailability(i, _sim.IsAbilityReady(i) && _sim.GetLegalTargets(i).Count > 0,
-                    ability.Name + (unsupported == null ? "" : " · 待恢复"), cooldown);
+                    ability.Name, cooldown, unsupported);
             }
             _hud.SetTurnText($"{original?.name ?? actor.BaseId} · 等待指令（Q/W/E/R/T/Y）");
             Debug.Log($"[BattleDriver] awaiting command actor={actor.UnitId} events={_sim.Log.Count}");
@@ -325,6 +344,9 @@ namespace SwgohRestored.Battle
         void SubmitTarget(BattleUnit target)
         {
             if (!_waitingForCommand || _selectedSkill == int.MinValue) return;
+            _commander = target;
+            var entry = EntryOf(target.BaseId);
+            _hud.BuildCommander(entry, entry?.name ?? target.BaseId);
             if (!_sim.TrySubmitCommand(_selectedSkill, target, out string error))
             { _hud.SetTurnText(error); return; }
             Debug.Log($"[BattleDriver] command committed skill={_selectedSkill} target={target.UnitId}");
@@ -359,7 +381,7 @@ namespace SwgohRestored.Battle
         string ChipLetter(BattleUnit u)
         {
             // P5: player team uses the Q/W/E/R/T hotkey pool, enemies are plain
-            const string pool = "QWERT";
+            const string pool = "ASDFG";
             return u.Side == 0 ? pool[SlotOf(u) % pool.Length].ToString() : (SlotOf(u) + 1).ToString();
         }
 
@@ -543,10 +565,7 @@ namespace SwgohRestored.Battle
                 return;
             }
             var go = Instantiate(t.gameObject, transform);
-            float x = (side == 0 ? -1 : 1) * TeamGap;
-            float z = (slot - 2) * SlotSpacing;
-            go.transform.position = new Vector3(x, 0, z);
-            go.transform.rotation = Quaternion.LookRotation(side == 0 ? Vector3.right : Vector3.left);
+            _stage.Place(go, side, slot);
             go.name = u.UnitId;        // BattleHUD resolves bars by UnitId
             go.SetActive(true);   // staged prefabs park inactive
             _rigs[u.UnitId] = go;

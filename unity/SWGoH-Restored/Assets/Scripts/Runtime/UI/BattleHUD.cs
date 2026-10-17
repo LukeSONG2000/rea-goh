@@ -1,6 +1,7 @@
-// BattleHUD -- programmatic uGUI overlay for the battle: per-unit health
-// bars (world-to-screen), a bottom action bar echoing the game's skill row,
-// and floating damage numbers.  Built entirely from code (no prefab assets).
+// BattleHUD -- uGUI reconstruction using extracted original atlas sprites.
+// Reticle/control/skill geometry: logs/visual_phase3/reticle-default-layout.json
+// and controls-and-skills.json. NGUI anchors are bridged into uGUI; runtime
+// pixel equivalence still requires the Unity screenshot gate.
 //
 // P5 squad-battle HUD extensions (acceptance: shots/reference/P5.png):
 //   1. top-center battle timer (4:49 countdown, red digits like the original)
@@ -55,11 +56,12 @@ namespace SwgohRestored.Battle
         {
             public RectTransform Root;
             public Image Fill;
-            public Text Label;
+            public Image Protection;
+            public Image TurnMeter;
+            public GameObject ProtectionRoot;
             public RectTransform Chip;      // key letter chip (right of bar)
             public Text ChipText;
             public RectTransform Buffs;     // actual persistent effects above the bar
-            public Text Protection;
             public string StatusSignature;
         }
 
@@ -106,7 +108,13 @@ namespace SwgohRestored.Battle
             var rootGo = new GameObject($"hp_{u.BaseId}", typeof(RectTransform));
             rootGo.transform.SetParent(_canvas.transform, false);
             var root = rootGo.GetComponent<RectTransform>();
-            root.sizeDelta = new Vector2(180, 22);
+            // ORIGINAL-EXTRACTED: battleui_unitmessagereticle_default,
+            // UnitStatusContainer/standard_unit_healthbar: HP 64x10 at y47;
+            // ShieldBar.localScale=(.9,.9,1), localPosition.y=10 beneath
+            // standard_unit_healthbar; UnitStatusContainer/SpeedBar.localScale
+            // =(.75,.75,1), localPosition=(-2,39,0). Foreground is 79x10.
+            // Keep the reticle's local units, rather than the old 180px HP label.
+            root.sizeDelta = new Vector2(64, 10);
 
             var bg = CreateImage(rootGo.transform, new Color(0, 0, 0, 0.6f));
             var bgrt = bg.GetComponent<RectTransform>();
@@ -114,9 +122,10 @@ namespace SwgohRestored.Battle
 
             // original bar art: unit_health_bg frame + tintable unit_health_fill
             var frame = bg.GetComponent<Image>();
-            var healthBg = UiKit.LoadWidget("unit_health_bg");
-            var healthFill = UiKit.LoadWidget("unit_health_fill");
-            if (healthBg != null) { frame.sprite = healthBg; frame.color = Color.white; frame.type = Image.Type.Simple; }
+            var healthBg = Resources.Load<Sprite>("BattleChrome/unit_health_bg");
+            var healthFill = Resources.Load<Sprite>("BattleChrome/unit_health_fill");
+            if (healthBg != null) { frame.sprite = healthBg; frame.color = new Color(1, 1, 1, .6667f); frame.type = Image.Type.Sliced; }
+            bgrt.offsetMin = bgrt.offsetMax = Vector2.zero;
             var targetButton = rootGo.AddComponent<Button>();
             targetButton.targetGraphic = frame;
             targetButton.onClick.AddListener(() => onPick?.Invoke());
@@ -125,22 +134,28 @@ namespace SwgohRestored.Battle
             fillGo.transform.SetParent(root.transform, false);
             var fill = fillGo.AddComponent<Image>();
             fill.sprite = healthFill;
-            fill.color = u.Side == 0 ? new Color(0.30f, 0.80f, 0.35f) : new Color(0.88f, 0.32f, 0.30f);
-            fill.type = Image.Type.Simple;
+            fill.color = new Color(0.0863f, 0.8706f, 0.0863f);
+            fill.type = Image.Type.Sliced;
+            fill.raycastTarget = false;
+            if (healthBg == null || healthFill == null)
+            {
+                frame.color = Color.clear; fill.enabled = false;
+                var missing = NewText(root, "pending-original", "PENDING-ORIGINAL HP", 10, Color.white, TextAnchor.MiddleCenter);
+                missing.raycastTarget = false; Stretch(missing.rectTransform);
+            }
             var frt = fill.GetComponent<RectTransform>();
             frt.anchorMin = new Vector2(0, 0); frt.anchorMax = new Vector2(1, 1);
             frt.pivot = new Vector2(0, 0.5f);
             frt.anchoredPosition = Vector2.zero;
             frt.sizeDelta = Vector2.zero;
+            AddPips(root, 13, -24, 1);
 
-            var labelGo = new GameObject("label", typeof(RectTransform));
-            labelGo.transform.SetParent(root.transform, false);
-            var label = labelGo.AddComponent<Text>();
-            label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            label.fontSize = 18; label.alignment = TextAnchor.MiddleCenter;
-            label.color = Color.white;
-            var lrt = label.GetComponent<RectTransform>();
-            lrt.anchorMin = Vector2.zero; lrt.anchorMax = Vector2.one; lrt.sizeDelta = Vector2.zero;
+            // Original per-unit reticle has no numeric HP label.
+            var protection = MakeMeter(root, "protection", new Vector2(0, 10),
+                new Vector2(66 * .9f, 10 * .9f), new Color(.637f, 1f, .8624f));
+            AddPips((RectTransform)protection.transform.parent, 14, -26, .9f);
+            var turnMeter = MakeMeter(root, "turn-meter", new Vector2(-2, -8),
+                new Vector2(79 * .75f, 10 * .75f), new Color(.1961f, .6275f, 1f));
 
             // ---- P5 key chip (letter marker right of the bar, like A-G in P5) ----
             RectTransform chip = null;
@@ -155,8 +170,8 @@ namespace SwgohRestored.Battle
                 chip.anchoredPosition = new Vector2(3, 0);
                 chip.sizeDelta = new Vector2(24, 24);
                 var chipImg = chipGo.AddComponent<Image>();
-                var keyBg = UiKit.LoadWidget("bg_key");
-                if (keyBg != null) { chipImg.sprite = keyBg; chipImg.type = Image.Type.Sliced; }
+                var keyBg = Resources.Load<Sprite>("BattleChrome/btn_circle_idle");
+                if (keyBg != null) { chipImg.sprite = keyBg; chipImg.type = Image.Type.Simple; }
                 else chipImg.color = new Color(0.05f, 0.10f, 0.16f, 0.9f);   // PENDING-ORIGINAL fallback
                 chipText = NewText(chipGo.transform, "letter", chipLetter, 16, Color.white,
                     TextAnchor.MiddleCenter, FontStyle.Bold);
@@ -171,40 +186,86 @@ namespace SwgohRestored.Battle
             var buffs = buffGo.GetComponent<RectTransform>();
             buffs.anchorMin = buffs.anchorMax = new Vector2(0, 1);
             buffs.pivot = Vector2.zero;
-            buffs.anchoredPosition = new Vector2(0, 4);
-            buffs.sizeDelta = new Vector2(180, 26);
-            var protection = NewText(root, "protection", "", 14,
-                new Color(0.7f, 0.86f, 1f), TextAnchor.MiddleCenter);
-            protection.raycastTarget = false;
-            protection.rectTransform.anchorMin = protection.rectTransform.anchorMax = new Vector2(0.5f, 0);
-            protection.rectTransform.pivot = new Vector2(0.5f, 1);
-            protection.rectTransform.anchoredPosition = new Vector2(0, -1);
-            protection.rectTransform.sizeDelta = new Vector2(180, 18);
+            buffs.anchoredPosition = new Vector2(0, 15);
+            buffs.sizeDelta = new Vector2(90, 29);
 
-            // ScreenSpaceCamera world size at planeDistance=10 makes 90 canvas
-            // units render ~6x oversized -- 0.30 lands the bar near P5's ~9%
-            // screen-width bars.
             root.localScale = Vector3.one;
             _bars[u.UnitId] = new Bar
             {
                 Root = root.GetComponent<RectTransform>(),
                 Fill = fill,
-                Label = label,
                 Chip = chip,
                 ChipText = chipText,
                 Buffs = buffs,
                 Protection = protection,
+                ProtectionRoot = protection.transform.parent.gameObject,
+                TurnMeter = turnMeter,
             };
             SetProtection(u.UnitId, u.CurrentShield, u.MaxShield);
+            SetTurnMeter(u.UnitId, u.SpeedFill);
             UpdateUnit(u, cam);
         }
 
         public void SetProtection(string unitId, double current, double max)
         {
             if (!_bars.TryGetValue(unitId, out var bar) || bar.Protection == null) return;
-            bar.Protection.gameObject.SetActive(max > 0 || current > 0);
-            bar.Protection.text = "护盾 Protection " + System.Math.Max(0, current).ToString("0")
-                + " / " + System.Math.Max(0, max).ToString("0");
+            bar.ProtectionRoot.SetActive(max > 0 || current > 0);
+            SetMeterFraction(bar.Protection, max > 0 ? (float)(current / max) : 0);
+        }
+
+        /// Presentation only: caller supplies the current simulation/replay meter.
+        public void SetTurnMeter(string unitId, double current, double max = 1000)
+        {
+            if (_bars.TryGetValue(unitId, out var bar))
+                SetMeterFraction(bar.TurnMeter, max > 0 ? (float)(current / max) : 0);
+        }
+
+        static void SetMeterFraction(Image fill, float fraction)
+        {
+            if (fill == null) return;
+            fill.rectTransform.anchorMin = Vector2.zero;
+            fill.rectTransform.anchorMax = new Vector2(Mathf.Clamp01(fraction), 1);
+            fill.rectTransform.offsetMin = fill.rectTransform.offsetMax = Vector2.zero;
+        }
+
+        static Image MakeMeter(RectTransform parent, string name, Vector2 position, Vector2 size, Color tint)
+        {
+            var go = new GameObject(name, typeof(RectTransform));
+            go.transform.SetParent(parent, false);
+            var rt = (RectTransform)go.transform;
+            rt.anchorMin = rt.anchorMax = new Vector2(.5f, .5f);
+            rt.anchoredPosition = position; rt.sizeDelta = size;
+            var bg = go.AddComponent<Image>();
+            bg.sprite = Resources.Load<Sprite>("BattleChrome/unit_health_bg");
+            bg.type = Image.Type.Sliced;
+            bg.color = new Color(1, 1, 1, .6667f); bg.raycastTarget = false;
+            var fill = CreateImage(go.transform, tint);
+            fill.name = "fill"; fill.sprite = Resources.Load<Sprite>("BattleChrome/unit_health_fill");
+            fill.type = Image.Type.Sliced;
+            fill.raycastTarget = false;
+            SetMeterFraction(fill, 1);
+            if (bg.sprite == null || fill.sprite == null)
+            {
+                bg.enabled = false; fill.enabled = false;
+                var missing = NewText(go.transform, "pending-original", "PENDING-ORIGINAL " + name,
+                    10, Color.white, TextAnchor.MiddleCenter);
+                missing.raycastTarget = false; Stretch(missing.rectTransform);
+            }
+            return fill;
+        }
+
+        static void AddPips(RectTransform parent, int count, float firstX, float scale)
+        {
+            // Exact serialized black pixel separators from the original reticle.
+            for (int i = 0; i < count; i++)
+            {
+                var pip = CreateImage(parent, new Color(0, 0, 0, .6667f));
+                pip.name = "pip_" + i; pip.raycastTarget = false;
+                var rt = pip.rectTransform;
+                rt.anchorMin = rt.anchorMax = new Vector2(.5f, .5f);
+                rt.sizeDelta = new Vector2(2 * scale, 8 * scale);
+                rt.anchoredPosition = new Vector2((firstX + i * 4) * scale, 0);
+            }
         }
 
         public void SetPersistentStates(string unitId, IReadOnlyList<RawEffect> effects)
@@ -257,7 +318,7 @@ namespace SwgohRestored.Battle
                     y += 34;
                     continue;
                 }
-                if (x + 42 > 180) { x = 0; y += 28; }
+                // Original EffectsGrid cellWidth=30, cellHeight=29, maxPerLine=0.
                 var slot = new GameObject("status-" + effect.id, typeof(RectTransform));
                 slot.transform.SetParent(bar.Buffs, false);
                 var slotRect = (RectTransform)slot.transform;
@@ -265,16 +326,16 @@ namespace SwgohRestored.Battle
                 slotRect.anchoredPosition = new Vector2(x, y); slotRect.sizeDelta = new Vector2(24, 24);
                 var icon = slot.AddComponent<Image>();
                 icon.sprite = sprite; icon.color = Color.white; icon.preserveAspect = true; icon.raycastTarget = false;
-                var count = NewText(slot.transform, "count", "×" + counts[i], 14, Color.white,
-                    TextAnchor.LowerLeft, FontStyle.Bold);
+                var count = NewText(slot.transform, "count", counts[i] > 1 ? counts[i].ToString() : "", 12, Color.white,
+                    TextAnchor.UpperRight, FontStyle.Bold);
                 count.raycastTarget = false;
                 count.rectTransform.anchorMin = count.rectTransform.anchorMax = Vector2.zero;
                 count.rectTransform.pivot = Vector2.zero;
-                count.rectTransform.anchoredPosition = new Vector2(22, -2);
-                count.rectTransform.sizeDelta = new Vector2(24, 18);
-                x += 44;
+                count.rectTransform.anchoredPosition = new Vector2(8, 12);
+                count.rectTransform.sizeDelta = new Vector2(18, 16);
+                x += 30;
             }
-            bar.Buffs.sizeDelta = new Vector2(180, y + (x > 0 ? 28 : 0));
+            bar.Buffs.sizeDelta = new Vector2(Mathf.Max(64, x), y + (x > 0 ? 29 : 0));
         }
 
         static Image CreateImage(Transform parent, Color color)
@@ -336,7 +397,6 @@ namespace SwgohRestored.Battle
             bar.Fill.rectTransform.anchorMin = Vector2.zero;
             bar.Fill.rectTransform.anchorMax = new Vector2(frac, 1);
             bar.Fill.rectTransform.sizeDelta = Vector2.zero;
-            if (bar.Label != null) bar.Label.text = $"{(int)(fracOverride >= 0 ? fracOverride * u.MaxHp : u.CurrentHp)}";
         }
 
         // ------------------------------------------------------------------
@@ -390,9 +450,24 @@ namespace SwgohRestored.Battle
         {
             EnsureCanvas();
             if (_ctl.Count > 0) return;
-            MakeControl("auto", UiKit.LoadWidget("auto_battle"), null, "自动", onAuto, 0);
-            MakeControl("speed", UiKit.LoadWidget("btn_circle_selected"), "2x", "速度", onSpeed, 1);
-            MakeControl("lock", UiKit.LoadWidget("hud_button"), "lock_filled", "锁定", onLock, 2);
+            MakeControl("auto", Resources.Load<Sprite>("BattleChrome/nav_arrow"), null, "自动 C", onAuto, 2);
+            _ctl["auto"].gameObject.AddComponent<OriginalSpriteHorizontalFlip>(); // UISprite.mFlip=1, UV not geometry
+            // Serialized AutoBattleToggle/Background is a separate 60x60
+            // hud_button behind the 72x72 arrow, not the green auto-state overlay.
+            var autoBackground = CreateImage(_ctl["auto"].transform, Color.white);
+            autoBackground.name = "original-auto-background";
+            autoBackground.sprite = UiKit.LoadWidget("hud_button");
+            autoBackground.raycastTarget = false;
+            autoBackground.rectTransform.anchorMin = autoBackground.rectTransform.anchorMax = new Vector2(.5f, .5f);
+            autoBackground.rectTransform.sizeDelta = new Vector2(60, 60);
+            // A parent's graphic renders before its children. Put background on
+            // the same canvas before the arrow instead of covering the arrow.
+            autoBackground.transform.SetParent(_screenCanvas.transform, true);
+            autoBackground.transform.SetSiblingIndex(_ctl["auto"].transform.GetSiblingIndex());
+            MakeControl("speed", UiKit.LoadWidget("hud_button"), "2x", "速度 B", onSpeed, 3);
+            // Preserve ctl_lock / callback API for the driver's camera toggle.
+            // Original icon_collapse belongs to buff collapse, not camera mode.
+            MakeControl("lock", UiKit.LoadWidget("hud_button"), null, "相机 Z", onLock, 1);
         }
 
         void MakeControl(string id, Sprite bg, string overlayIcon, string caption,
@@ -405,11 +480,18 @@ namespace SwgohRestored.Battle
             rt.pivot = new Vector2(0, 1);
             // sized for the 1920x1080 reference space (was tuned against the
             // old default 800x600 scaler -- x1.6 keeps the previous look)
-            rt.anchoredPosition = new Vector2(19 + index * 87, -16);
-            rt.sizeDelta = new Vector2(74, 74);
+            // battleui_view Settings Container: 72x72 controls spaced 72.
+            rt.anchoredPosition = new Vector2(8 + index * 72, -8);
+            rt.sizeDelta = new Vector2(72, 72);
             var img = go.AddComponent<Image>();
             if (bg != null) img.sprite = bg;
-            else img.color = new Color(0.10f, 0.22f, 0.35f, 0.9f);   // PENDING-ORIGINAL fallback
+            else
+            {
+                img.color = Color.clear;
+                var pending = NewText(go.transform, "pending-original", "PENDING-ORIGINAL", 10,
+                    Color.white, TextAnchor.MiddleCenter);
+                pending.raycastTarget = false; Stretch(pending.rectTransform);
+            }
                 if (overlayIcon != null)
                 {
                     if (overlayIcon == "2x")
@@ -425,8 +507,8 @@ namespace SwgohRestored.Battle
                         ic.sprite = UiKit.LoadWidget(overlayIcon);
                         ic.color = Color.white;
                         Stretch(ic.rectTransform);
-                        ic.rectTransform.offsetMin = new Vector2(14, 14);
-                        ic.rectTransform.offsetMax = new Vector2(-14, -14);
+                        ic.rectTransform.offsetMin = Vector2.zero;
+                        ic.rectTransform.offsetMax = Vector2.zero;
                         _ctl[id + "_icon"] = ic;
                     }
                 }
@@ -443,8 +525,8 @@ namespace SwgohRestored.Battle
                 var crt = cap.rectTransform;
                 crt.anchorMin = new Vector2(0, 1); crt.anchorMax = new Vector2(0, 1);
                 crt.pivot = new Vector2(0.5f, 1);
-                crt.anchoredPosition = new Vector2(19 + index * 87 + 37, -94);
-                crt.sizeDelta = new Vector2(96, 29);
+                crt.anchoredPosition = new Vector2(8 + index * 72 + 36, -82);
+                crt.sizeDelta = new Vector2(72, 29);
                 _ctlCap[id] = cap;
         }
 
@@ -463,6 +545,9 @@ namespace SwgohRestored.Battle
         Text _skillTitle;
         readonly List<Button> _skillButtons = new();
         readonly List<Text> _skillCaptions = new();
+        readonly List<Image> _skillIcons = new();
+        readonly List<string> _skillHints = new();
+        Text _skillTooltip;
         RectTransform _targetBar;
 
         public void ShowSkillBar(UnitEntry entry, string actorLabel, System.Action<int> onPick, bool showKeys = true)
@@ -474,16 +559,14 @@ namespace SwgohRestored.Battle
             _skillBar = rootGo.GetComponent<RectTransform>();
             _skillBar.anchorMin = new Vector2(1, 0); _skillBar.anchorMax = new Vector2(1, 0);
             _skillBar.pivot = new Vector2(1, 0);
-            _skillBar.anchoredPosition = new Vector2(-10, 12);
-            // ORIGINAL-EXTRACTED button frames (slim JSON battle_ability_button):
-            // basic 100x100 design sliced battle_btn_attack_sliced, ultimate
-            // 128x128 ability_button_ult_bg -> 150 / 192 canvas; the ultimate
-            // bg sprite was not in the widget harvest -- gold frame stands in
-            // (PENDING-ORIGINAL), documented substitution
+            _skillBar.anchoredPosition = new Vector2(-15, 20);
+            // ORIGINAL-EXTRACTED battle_ability_button: frame100, icon84,
+            // Primary UITable padding.x=4 and bottom-right pivot.
             _skillBar.sizeDelta = new Vector2(500, 230);
 
             _skillTitle = NewText(rootGo.transform, "title", actorLabel, 21,
                 new Color(0.95f, 0.93f, 0.8f), TextAnchor.UpperRight, FontStyle.Bold);
+            _skillTitle.gameObject.SetActive(false); // actor prompt already lives in the turn label
             var trt = _skillTitle.rectTransform;
             trt.anchorMin = new Vector2(0, 1); trt.anchorMax = new Vector2(1, 1);
             trt.pivot = new Vector2(0.5f, 1);
@@ -492,6 +575,7 @@ namespace SwgohRestored.Battle
 
             _skillButtons.Clear();
             _skillCaptions.Clear();
+            _skillIcons.Clear(); _skillHints.Clear();
             float x = 0;
             int key = 0;
             string[] keys = { "Q", "W", "E", "R", "T", "Y" };
@@ -503,14 +587,19 @@ namespace SwgohRestored.Battle
                 brt.anchorMin = new Vector2(0, 0); brt.anchorMax = new Vector2(0, 0);
                 brt.pivot = new Vector2(0, 0);
                 brt.anchoredPosition = new Vector2(x, 0);
-                brt.sizeDelta = new Vector2(150, 150);
-                x += 158;
+                brt.sizeDelta = new Vector2(100, 100);
+                x += 104;
 
                 var frame = btnGo.AddComponent<Image>();
-                bool isBasic = sk.tag != null && sk.tag.Contains("基本");
-                var frameSp = UiKit.LoadWidget(isBasic ? "battle_btn_attack_sliced" : "battle_btn_frame_gold");
+                var frameSp = Resources.Load<Sprite>("BattleChrome/battle_btn_attack_basic_frame");
                 if (frameSp != null) { frame.sprite = frameSp; frame.type = Image.Type.Sliced; }
-                else frame.color = new Color(0.45f, 0.36f, 0.12f, 0.95f);   // PENDING-ORIGINAL fallback
+                else
+                {
+                    frame.color = Color.clear;
+                    var missing = NewText(btnGo.transform, "pending-frame", "PENDING-ORIGINAL frame", 10,
+                        Color.white, TextAnchor.UpperCenter);
+                    Stretch(missing.rectTransform); missing.raycastTarget = false;
+                }
 
                 var iconGo = new GameObject("icon", typeof(RectTransform));
                 iconGo.transform.SetParent(btnGo.transform, false);
@@ -518,8 +607,10 @@ namespace SwgohRestored.Battle
                 icon.sprite = UiKit.LoadIcon(sk.icon);
                 icon.preserveAspect = true;
                 Stretch(icon.rectTransform);
-                icon.rectTransform.offsetMin = new Vector2(16, 16);
-                icon.rectTransform.offsetMax = new Vector2(-16, -16);
+                icon.rectTransform.offsetMin = new Vector2(8, 8);
+                icon.rectTransform.offsetMax = new Vector2(-8, -8);
+                icon.raycastTarget = false;
+                _skillIcons.Add(icon);
 
                 var keyGo = new GameObject("key", typeof(RectTransform));
                 keyGo.transform.SetParent(btnGo.transform, false);
@@ -531,8 +622,8 @@ namespace SwgohRestored.Battle
                 if (showKeys)
                 {
                     var keyBg = keyGo.AddComponent<Image>();
-                    var kbSp = UiKit.LoadWidget("bg_key");
-                    if (kbSp != null) { keyBg.sprite = kbSp; keyBg.type = Image.Type.Sliced; }
+                    var kbSp = Resources.Load<Sprite>("BattleChrome/btn_circle_idle");
+                    if (kbSp != null) { keyBg.sprite = kbSp; keyBg.type = Image.Type.Simple; }
                     else keyBg.color = new Color(0.05f, 0.10f, 0.16f, 0.9f);   // PENDING-ORIGINAL fallback
                     var kt = NewText(keyGo.transform, "k", keys[key], 18, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
                     Stretch(kt.rectTransform);
@@ -542,26 +633,58 @@ namespace SwgohRestored.Battle
                 var button = btnGo.AddComponent<Button>();
                 button.onClick.AddListener(() => onPick?.Invoke(idx));
                 _skillButtons.Add(button);
-                var caption = NewText(btnGo.transform, "caption", sk.name, 18, Color.white, TextAnchor.MiddleCenter);
+                var caption = NewText(btnGo.transform, "caption", "", 32, Color.white, TextAnchor.MiddleCenter);
                 caption.raycastTarget = false;
-                caption.rectTransform.anchorMin = new Vector2(0, 1);
-                caption.rectTransform.anchorMax = Vector2.one;
-                caption.rectTransform.pivot = new Vector2(0.5f, 0);
-                caption.rectTransform.anchoredPosition = Vector2.zero;
-                caption.rectTransform.sizeDelta = new Vector2(0, 48);
+                Stretch(caption.rectTransform);
+                var captionOutline = caption.gameObject.AddComponent<Outline>();
+                captionOutline.effectColor = Color.black; captionOutline.effectDistance = new Vector2(1, -1);
                 _skillCaptions.Add(caption);
+                _skillHints.Add(sk.name);
+                var hover = btnGo.AddComponent<BattleSkillHover>();
+                hover.Enter = () => ShowSkillTooltip(idx);
+                hover.Exit = HideSkillTooltip;
                 key++;
                 if (key >= keys.Length) break;
             }
-            _skillBar.sizeDelta = new Vector2(Mathf.Max(500, x), 270);
+            _skillBar.sizeDelta = new Vector2(Mathf.Max(100, x - 4), 170);
         }
 
-        public void SetSkillAvailability(int index, bool ready, string name, int cooldown)
+        public void SetSkillAvailability(int index, bool ready, string name, int cooldown, string unavailableReason = null)
         {
             if (index < 0 || index >= _skillButtons.Count) return;
             _skillButtons[index].interactable = ready;
-            _skillCaptions[index].text = cooldown > 0 ? $"{name}\n冷却 {cooldown}" : name;
+            bool pending = !string.IsNullOrEmpty(unavailableReason) || (name != null && name.Contains("待恢复"));
+            _skillCaptions[index].text = cooldown > 0 ? cooldown.ToString() : pending ? "待恢复" : "";
+            _skillCaptions[index].fontSize = cooldown > 0 ? 36 : 16;
+            _skillCaptions[index].alignment = cooldown > 0 ? TextAnchor.MiddleCenter : TextAnchor.UpperCenter;
+            _skillIcons[index].color = ready ? Color.white : new Color(.4f, .4f, .4f, 1);
+            _skillHints[index] = name + (cooldown > 0 ? "\n冷却 Cooldown: " + cooldown : "")
+                + (string.IsNullOrEmpty(unavailableReason) ? "" : "\n" + unavailableReason);
         }
+
+        void ShowSkillTooltip(int index)
+        {
+            if (index < 0 || index >= _skillHints.Count) return;
+            if (_skillTooltip == null)
+            {
+                // Command-bridge explanatory text, not a fabricated original popup asset.
+                _skillTooltip = NewText(_screenCanvas.transform, "skill-hover-details", "", 22,
+                    Color.white, TextAnchor.LowerLeft);
+                _skillTooltip.raycastTarget = false;
+                _skillTooltip.horizontalOverflow = HorizontalWrapMode.Wrap;
+                _skillTooltip.verticalOverflow = VerticalWrapMode.Truncate;
+                var outline = _skillTooltip.gameObject.AddComponent<Outline>();
+                outline.effectColor = Color.black; outline.effectDistance = new Vector2(2, -2);
+                var rt = _skillTooltip.rectTransform;
+                rt.anchorMin = rt.anchorMax = new Vector2(1, 0); rt.pivot = new Vector2(1, 0);
+                rt.anchoredPosition = new Vector2(-20, 145); rt.sizeDelta = new Vector2(480, 240);
+            }
+            _skillTooltip.text = _skillHints[index];
+            _skillTooltip.gameObject.SetActive(true);
+            _skillTooltip.transform.SetAsLastSibling();
+        }
+
+        void HideSkillTooltip() { if (_skillTooltip != null) _skillTooltip.gameObject.SetActive(false); }
 
         // Temporary command bridge; target names/icons come from original unit data.
         // PENDING-ORIGINAL: replace this list with the recovered targeting presentation.
@@ -621,6 +744,7 @@ namespace SwgohRestored.Battle
 
         public void HideSkillBar()
         {
+            HideSkillTooltip();
             HideTargets();
             if (_skillBar != null) Object.Destroy(_skillBar.gameObject);
             _skillBar = null;
@@ -631,12 +755,23 @@ namespace SwgohRestored.Battle
         // 5. enemy commander portrait (top-right: portrait + red ring + HP bar)
         // ------------------------------------------------------------------
         Image _cmdrFill;
+        Image _cmdrProtection;
+        Image _cmdrPortrait;
         Text _cmdrName;
 
         public void BuildCommander(UnitEntry entry, string unitName)
         {
             EnsureCanvas();
-            if (_cmdrName != null) return;
+            if (_cmdrName != null)
+            {
+                _cmdrName.text = unitName;
+                if (_cmdrPortrait != null)
+                {
+                    _cmdrPortrait.sprite = UiKit.LoadCircularPortrait(entry != null ? entry.def_id : "", 96);
+                    _cmdrPortrait.color = _cmdrPortrait.sprite != null ? Color.white : Color.clear;
+                }
+                return;
+            }
             var go = new GameObject("commander", typeof(RectTransform));
             go.transform.SetParent(_screenCanvas.transform, false);
             var rt = go.GetComponent<RectTransform>();
@@ -656,6 +791,7 @@ namespace SwgohRestored.Battle
             prt.anchoredPosition = new Vector2(-3, -3);
             prt.sizeDelta = new Vector2(87, 87);
             var port = portGo.AddComponent<Image>();
+            _cmdrPortrait = port;
             var circ = UiKit.LoadCircularPortrait(entry != null ? entry.def_id : "", 96);
             if (circ != null) port.sprite = circ;
             else port.color = new Color(0.35f, 0.10f, 0.10f, 0.9f);   // PENDING-ORIGINAL fallback
@@ -669,47 +805,80 @@ namespace SwgohRestored.Battle
             ring.rectTransform.offsetMin = new Vector2(-6, -6);
             ring.rectTransform.offsetMax = new Vector2(6, 6);
 
-            // name + long HP bar left of the portrait.  ORIGINAL-EXTRACTED
-            // TargetContainer 376x112 carries the bar as a child (HealthBar at
-            // design (60,-10)); HealthBar-Long 768x32 belongs to the
-            // TargetContainer-Boss variant and at full 1152px canvas width it
-            // blankets the timer, so the squad HUD keeps the bar inside the
-            // container like the P5 reference (right edge at the portrait)
-            _cmdrName = NewText(go.transform, "name", unitName, 22,
-                new Color(0.93f, 0.97f, 0.85f), TextAnchor.UpperRight, FontStyle.Bold);
+            // Character TargetContainer uses the child foreground's anchored
+            // geometry (268x32), not the separate boss HealthBar-Long variant.
+            _cmdrName = NewText(go.transform, "name", unitName, 39,
+                Color.white, TextAnchor.MiddleRight);
+            _cmdrName.raycastTarget = false;
+            _cmdrName.horizontalOverflow = HorizontalWrapMode.Wrap;
+            _cmdrName.verticalOverflow = VerticalWrapMode.Truncate;
+            _cmdrName.resizeTextForBestFit = true;
+            _cmdrName.resizeTextMinSize = 20; _cmdrName.resizeTextMaxSize = 39;
+            var nameOutline = _cmdrName.gameObject.AddComponent<Outline>();
+            nameOutline.effectColor = Color.black; nameOutline.effectDistance = new Vector2(1.5f, -1.5f);
             var nrt = _cmdrName.rectTransform;
-            nrt.anchorMin = new Vector2(0, 1); nrt.anchorMax = new Vector2(1, 1);
-            nrt.pivot = new Vector2(1, 1);
-            nrt.anchoredPosition = new Vector2(-99, -6);
-            nrt.sizeDelta = new Vector2(-15, 30);
+            // NameLabel is anchored to the HP background: width252, height30,
+            // left0/right-16/top0/bottom2, font26; same 1.5 header mapping.
+            nrt.anchorMin = nrt.anchorMax = new Vector2(0, 1);
+            nrt.pivot = new Vector2(0, 1);
+            nrt.anchoredPosition = new Vector2(1.5f, -7 * 1.5f);
+            nrt.sizeDelta = new Vector2(252 * 1.5f, 30 * 1.5f);
 
             var barGo = new GameObject("hpbar", typeof(RectTransform));
             barGo.transform.SetParent(go.transform, false);
             var brt = barGo.GetComponent<RectTransform>();
-            brt.anchorMin = new Vector2(1, 1); brt.anchorMax = new Vector2(1, 1);
-            brt.pivot = new Vector2(1, 1);
-            brt.anchoredPosition = new Vector2(-96, -44);
-            brt.sizeDelta = new Vector2(462, 44);
+            brt.anchorMin = brt.anchorMax = new Vector2(0, 1);
+            brt.pivot = new Vector2(0, 1);
+            // Original TargetContainer HP anchors: left1, top-7, size268x32.
+            brt.anchoredPosition = new Vector2(1.5f, -7 * 1.5f);
+            brt.sizeDelta = new Vector2(268 * 1.5f, 32 * 1.5f);
             var barBg = barGo.AddComponent<Image>();
-            var bgSp = UiKit.LoadWidget("progressbar_clipped_bg");
-            if (bgSp != null) { barBg.sprite = bgSp; barBg.color = Color.white; }
-            else barBg.color = new Color(0, 0, 0, 0.65f);   // PENDING-ORIGINAL fallback
+            var bgSp = Resources.Load<Sprite>("BattleChrome/battle_raids_enemy_health_foreground");
+            barBg.sprite = bgSp; barBg.color = bgSp != null ? new Color(0, 0, 0, .2941f) : Color.clear;
 
             var fillGo = new GameObject("fill", typeof(RectTransform));
             fillGo.transform.SetParent(barGo.transform, false);
             _cmdrFill = fillGo.AddComponent<Image>();
-            var fillSp = UiKit.LoadWidget("unit_health_fill");
+            var fillSp = Resources.Load<Sprite>("BattleChrome/battle_raids_enemy_health_foreground");
             if (fillSp != null) _cmdrFill.sprite = fillSp;
-            _cmdrFill.color = new Color(0.35f, 0.85f, 0.38f);
+            _cmdrFill.color = fillSp != null ? Color.white : Color.clear;
+            if (fillSp == null)
+            {
+                var missing = NewText(barGo.transform, "pending-original", "PENDING-ORIGINAL target HP", 12,
+                    Color.white, TextAnchor.MiddleCenter);
+                missing.raycastTarget = false; Stretch(missing.rectTransform);
+            }
             var frt = _cmdrFill.rectTransform;
             frt.anchorMin = Vector2.zero; frt.anchorMax = Vector2.one;
-            frt.offsetMin = new Vector2(3, 3); frt.offsetMax = new Vector2(-3, -3);
+            frt.offsetMin = frt.offsetMax = Vector2.zero;
+            // The original name overlays the health foreground.
+            _cmdrName.transform.SetAsLastSibling();
+
+            // Character Specific Objects/TargetContainer/ShieldBar original
+            // 263x14, tint (.6353,1,.8627). Header retains its existing 1.5
+            // design-to-canvas mapping; NGUI anchors are translated to top-left.
+            _cmdrProtection = MakeMeter(rt, "target-protection", Vector2.zero,
+                new Vector2(263 * 1.5f, 14 * 1.5f), new Color(.6353f, 1f, .8627f));
+            var shieldRoot = (RectTransform)_cmdrProtection.transform.parent;
+            shieldRoot.anchorMin = shieldRoot.anchorMax = new Vector2(0, 1);
+            shieldRoot.pivot = new Vector2(0, 1);
+            shieldRoot.anchoredPosition = new Vector2(1.5f, -38 * 1.5f);
+        }
+
+        public void SetCommanderHealth(double health, double maxHealth, double protection, double maxProtection)
+        {
+            UpdateCommander(maxHealth > 0 ? (float)(health / maxHealth) : 0);
+            if (_cmdrProtection == null) return;
+            _cmdrProtection.transform.parent.gameObject.SetActive(maxProtection > 0 || protection > 0);
+            SetMeterFraction(_cmdrProtection, maxProtection > 0 ? (float)(protection / maxProtection) : 0);
         }
 
         public void UpdateCommander(float frac)
         {
             if (_cmdrFill == null) return;
             frac = Mathf.Clamp01(frac);
+            // Serialized TargetContainer UIProgressBarColorThreshold entries.
+            _cmdrFill.color = frac <= .2f ? Color.red : frac <= .5f ? Color.yellow : Color.green;
             _cmdrFill.rectTransform.anchorMin = Vector2.zero;
             _cmdrFill.rectTransform.anchorMax = new Vector2(frac, 1);
         }
@@ -774,6 +943,35 @@ namespace SwgohRestored.Battle
             rt.localScale = new Vector3(0.30f, 0.30f, 1f);
             go.AddComponent<Floater>();
         }
+    }
+
+    // NGUI instance flip changes UVs, not triangle winding (negative scale can
+    // cull an otherwise clickable uGUI graphic in camera-space canvases).
+    public class OriginalSpriteHorizontalFlip : BaseMeshEffect
+    {
+        public override void ModifyMesh(VertexHelper mesh)
+        {
+            var sprite = GetComponent<Image>().sprite;
+            if (!IsActive() || sprite == null) return;
+            var rect = sprite.textureRect;
+            float sum = (rect.xMin + rect.xMax) / sprite.texture.width;
+            var vertex = new UIVertex();
+            for (int i = 0; i < mesh.currentVertCount; i++)
+            {
+                mesh.PopulateUIVertex(ref vertex, i);
+                vertex.uv0.x = sum - vertex.uv0.x;
+                mesh.SetUIVertex(vertex, i);
+            }
+        }
+    }
+
+    // A separate pointer handler still receives hover on an unavailable Button.
+    public class BattleSkillHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    {
+        public System.Action Enter, Exit;
+        public void OnPointerEnter(PointerEventData eventData) => Enter?.Invoke();
+        public void OnPointerExit(PointerEventData eventData) => Exit?.Invoke();
+        void OnDisable() => Exit?.Invoke();
     }
 
     /// Rises and fades, then self-destructs.

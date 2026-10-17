@@ -831,10 +831,10 @@ class CharacterExporter:
         attrs = {}
         pos = [c for v in h.m_Vertices for c in conv_v3(v)]
         attrs["POSITION"] = g.add_accessor(pos, "float", vc, "VEC3", minmax=True)
-        if len(h.m_Normals) == vc:
+        if h.m_Normals is not None and len(h.m_Normals) == vc:
             nrm = [c for v in h.m_Normals for c in conv_v3(v)]
             attrs["NORMAL"] = g.add_accessor(nrm, "float", vc, "VEC3")
-        if len(h.m_UV0) == vc:
+        if h.m_UV0 is not None and len(h.m_UV0) == vc:
             uv = [c for v in h.m_UV0 for c in (v[0], 1.0 - v[1])]
             attrs["TEXCOORD_0"] = g.add_accessor(uv, "float", vc, "VEC2")
         # Baked vertex colors are NOT albedo paint in this game's character
