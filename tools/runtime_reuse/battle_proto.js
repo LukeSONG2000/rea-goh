@@ -24,17 +24,21 @@ globalThis.serializeOriginalBattleProto=source=>{
  }finally{try{S.invoke('System.IO.Stream','Close',stream);}finally{R.release(handle);}}
 };
 
-globalThis.deserializeOriginalBattleProto=bytes=>{
+globalThis.deserializeOriginalRuntimeProto=(bytes,type)=>{
  const R=RuntimeApi,S=SceneApi;
+ if(!['Protos.BattleData','Protos.Inventory'].includes(type))throw Error('Unsupported runtime proto type');
  if(!(bytes instanceof Uint8Array)||!bytes.length||bytes.length>16*1024*1024)throw Error('Invalid battle proto bytes');
  const array=R.api('array_new','pointer',['pointer','size_t'])(R.findClass('System.Byte'),bytes.length),arrayHandle=R.retain(array);
  const stream=R.api('object_new','pointer',['pointer'])(R.findClass('System.IO.MemoryStream')),streamHandle=R.retain(stream);
  try{
   array.add(32).writeByteArray(bytes);
   S.invoke('System.IO.MemoryStream','.ctor',stream,[R.arg.ref(array)],['System.Byte[]']);
-  const object=S.invoke('ProtoBuf.Serializer+NonGeneric','Deserialize',R.nil,[R.arg.ref(S.type('Protos.BattleData')),R.arg.ref(stream)]);
-  if(object.isNull()||R.fullName(R.classOf(object))!=='Protos.BattleData')throw Error('Original protobuf deserialization failed');
+  const object=S.invoke('ProtoBuf.Serializer+NonGeneric','Deserialize',R.nil,[R.arg.ref(S.type(type)),R.arg.ref(stream)]);
+  if(object.isNull()||R.fullName(R.classOf(object))!==type)throw Error('Original protobuf deserialization failed');
   const handle=R.retain(object);
   return {object,release:()=>R.release(handle)};
  }finally{try{S.invoke('System.IO.Stream','Close',stream);}finally{R.release(streamHandle);R.release(arrayHandle);}}
 };
+
+globalThis.deserializeOriginalBattleProto=bytes=>deserializeOriginalRuntimeProto(bytes,'Protos.BattleData');
+globalThis.deserializeOriginalInventoryProto=bytes=>deserializeOriginalRuntimeProto(bytes,'Protos.Inventory');

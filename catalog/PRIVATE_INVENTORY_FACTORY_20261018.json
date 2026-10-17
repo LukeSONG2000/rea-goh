@@ -1,0 +1,62 @@
+{
+  "status": "370-unit private inventory construction and scoped identity parity passed; full trial isolation unproven",
+  "source": {
+    "kind": "original PlayerDomainController.GetInitialData refresh; capture InventoryDO.Factory input only",
+    "metadata": {
+      "kind": "inventory-proto-captured",
+      "encoding": "direct-protobuf-v2",
+      "bytes": 439571,
+      "sha256": "1ded114601c5969371a9c5bec7763944ecb00d69e0b9c34fe9e2d53193f32202"
+    },
+    "rawInventoryLocation": "logs only, not committed"
+  },
+  "architecture": "Private InventoryDomainController constructor + private Unit/UnitRoster/Inventory factories; only private dependency references changed",
+  "runtimeEvidence": {
+    "provider": "REA-installed Frida",
+    "pid": 19440,
+    "messages": [
+      {
+        "type": "send",
+        "payload": {
+          "kind": "protobuf-probe-complete",
+          "passed": true,
+          "originalDependenciesUnchanged": true,
+          "liveInventoryUnchanged": true,
+          "originalUnits": 370,
+          "privateUnits": 370,
+          "shared": [],
+          "mismatches": []
+        }
+      }
+    ],
+    "detached": true
+  },
+  "verifiedFields": [
+    "CurrentLevel",
+    "CurrentRarity",
+    "CurrentTier",
+    "CurrentEraLevel"
+  ],
+  "identityChecks": [
+    "UnitDO",
+    "statCalculator",
+    "AttackAbility",
+    "LeaderAbility",
+    "Relic",
+    "equipmentSlots",
+    "statModEquipSet",
+    "skills"
+  ],
+  "notYetVerified": [
+    "nested mod stats/slots",
+    "all computed combat stats",
+    "crew links",
+    "Era borrowed-unit references",
+    "external Datacron graph",
+    "actual mission replay with player private squad"
+  ],
+  "staticEvidence": "logs/high_reuse/native/ISOLATED_INVENTORY_FACTORY_PLAN.txt",
+  "client": 19440,
+  "restoredHost": 27708,
+  "state": "HomeBaseGameState"
+}
