@@ -126,3 +126,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 ## 2026-10-17 原始效果链恢复
 - 【Codex-effect-recovery】认领：维达普攻原始分支/类别条件、效果链无损导出与Unity逐效果执行、持续状态/伤害native证据交叉验证及回归构建。写域 tools/build_abilities_data.py、专用tests、BattleSim/Driver与新增效果模块、StreamingAssets技能数据；主智能体单写git，其他现有改动保留。
+`n【Codex/root 2026-10-17】追加认领 BattleDemo.unity 单英雄效果管线验收场景（VADER 镜像），BattleHUD 状态/护盾展示与相关 PlayMode 门禁；其余英雄通过原始数据回归检查泛化，无运行时英雄名称分支。
