@@ -2,7 +2,15 @@
 // Original UI input, on the Unity main thread. No simulator rules or stat writes.
 globalThis.BattleInputBridge=(()=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg;
- let consumed=null;
+ let consumed=null,signature=null,serial=0,token=null;
+ const epoch=Process.id+':'+Date.now();
+ const unitId=unit=>unit.isNull()?null:S.string(R.readRef(R.readRef(unit,'_unitDO'),'Id'));
+ function unitList(list){
+  if(list.isNull())return [];
+  const items=R.readRef(list,'_items'),n=R.readValue(list,'_size','i32');
+  if(n<0||n>64||items.isNull()||n>items.add(24).readU64().toNumber())throw Error('Invalid original target list');
+  return Array.from({length:n},(_,i)=>items.add(32+i*8).readPointer());
+ }
  function inspect(){
   const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
   if(R.fullName(R.classOf(state))!=='BattleGameState')throw Error('Battle input requires BattleGameState');
@@ -31,9 +39,20 @@ globalThis.BattleInputBridge=(()=>{
     buttonState:R.readValue(button,'<CurrentState>k__BackingField','i32'),
     cooldown:R.readValue(ability,'<CooldownCounter>k__BackingField','i32')});
   }
-  const token=JSON.stringify([context.toString(),actor.toString(),turn,previous,next,visible,owner,abilities]);
-  return {table,list,public:{token,turn,previous,next,actor:actor.toString(),abilities,
-   awaitingAbility:previous===34&&next===1&&visible&&owner===0,scope:'current original primary ability table; ultimate and special unit selection pending'}};
+  const selection=R.readRef(context,'<BattleManualUnitSelectController>k__BackingField');
+  const selectingUnit=!selection.isNull()&&!!R.unbox(S.invoke('BattleManualUnitSelectController','get_CurrentlyPerformingUnitSelection',selection),'bool');
+  const awaitingAbility=previous===34&&next===1&&visible&&owner===0&&!selectingUnit;
+  const targeting=actor.isNull()?R.nil:R.readRef(actor,'_targetingController');
+  let targets=[],selectedTarget=null,manualTarget=null;
+  if(awaitingAbility&&!targeting.isNull()){
+   targets=unitList(S.invoke('BattleTargetingController','GetValidTargets',targeting,[A.ref(R.nil)])).map(unit=>({id:unitId(unit),baseId:S.string(R.readRef(R.readRef(R.readRef(unit,'_unitDO'),'<Definition>k__BackingField'),'BaseId'))}));
+   selectedTarget=unitId(S.invoke('BattleTargetingController','GetCurrentTarget',targeting));
+   manualTarget=unitId(S.invoke('BattleTargetingController','get_ManualTarget',targeting));
+  }
+  const currentSignature=JSON.stringify([context.toString(),actor.toString(),turn,previous,next,visible,owner,abilities,targets,selectedTarget,manualTarget,selectingUnit]);
+  if(currentSignature!==signature){signature=currentSignature;token=epoch+':'+(++serial);}
+  return {table,list,targeting,public:{token,turn,previous,next,actor:actor.toString(),abilities,targets,selectedTarget,manualTarget,selectingUnit,
+   awaitingAbility,scope:'current original primary ability table and enemy targets; ultimate and special unit selection pending'}};
  }
  function choose(request){
   if(!request||typeof request.token!=='string'||!Number.isInteger(request.index))throw Error('Expected token and integer index');
@@ -48,5 +67,18 @@ globalThis.BattleInputBridge=(()=>{
   return {inputDispatched:true,abilityId:ability.id,index:ability.index,turn:info.turn,
    invoked:'BattleAbilityTableComponent.HandleAbilityButtonClicked',resolution:'Original callback invoked; outcome requires subsequent observation'};
  }
- return {snapshot:()=>inspect().public,choose};
+ function selectTarget(request){
+  if(!request||typeof request.token!=='string'||typeof request.targetId!=='string')throw Error('Expected token and targetId');
+  const live=inspect(),info=live.public;
+  if(request.token!==info.token)throw Error('Stale battle input snapshot');
+  if(!info.awaitingAbility||consumed===request.token)throw Error('Original battle is not accepting target input');
+  if(!info.targets.some(t=>t.id===request.targetId))throw Error('Target is not in original legal target list');
+  // Native SelectManualTarget toggles an already locked target off.
+  if(info.manualTarget===request.targetId&&info.selectedTarget===request.targetId)return {targetConfirmed:true,inputDispatched:false,alreadySelected:true,targetId:request.targetId};
+  S.invoke('BattleTargetingController','SelectManualTarget',live.targeting,[A.ref(R.string(request.targetId))]);
+  const actual=unitId(S.invoke('BattleTargetingController','GetCurrentTarget',live.targeting));
+  const manual=unitId(S.invoke('BattleTargetingController','get_ManualTarget',live.targeting));
+  return {inputDispatched:true,targetConfirmed:actual===request.targetId&&manual===request.targetId,targetId:request.targetId,actualTarget:actual,manualTarget:manual,invoked:'BattleTargetingController.SelectManualTarget'};
+ }
+ return {snapshot:()=>inspect().public,choose,selectTarget};
 })();

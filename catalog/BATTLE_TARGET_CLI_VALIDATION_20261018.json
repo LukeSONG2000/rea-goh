@@ -1,0 +1,281 @@
+{
+  "date": "2026-10-18",
+  "nativeSources": [
+    "logs/high_reuse/native/select_manual_target.annotated.txt",
+    "logs/high_reuse/native/target_input_valid_targets.annotated.txt",
+    "logs/high_reuse/native/target_get_manual.annotated.txt"
+  ],
+  "receipts": [
+    {
+      "id": "4257518c-2063-4845-a721-96392b7e0aae",
+      "ok": false,
+      "dispatched": true,
+      "error": "Error: Target is not in original legal target list"
+    },
+    {
+      "id": "d2f6891e-f0fc-4059-933d-bb9676ee12ae",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "targetConfirmed": true,
+        "inputDispatched": false,
+        "alreadySelected": true,
+        "targetId": "Z7ODJb78RXm_0_AYC4TAGw"
+      }
+    },
+    {
+      "id": "bfa46628-72d0-4222-8f7b-8543df34627e",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "targetConfirmed": true,
+        "inputDispatched": false,
+        "alreadySelected": true,
+        "targetId": "Z7ODJb78RXm_0_AYC4TAGw"
+      }
+    },
+    {
+      "id": "cc7c638a-241c-46ae-8cd3-de9af8b09997",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "targetConfirmed": true,
+        "targetId": "DhBltes0R9eMNfoACPzG0Q",
+        "actualTarget": "DhBltes0R9eMNfoACPzG0Q",
+        "manualTarget": "DhBltes0R9eMNfoACPzG0Q",
+        "invoked": "BattleTargetingController.SelectManualTarget"
+      }
+    },
+    {
+      "id": "7002dd8d-90c7-4ec1-9075-c12ba76fb0c0",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "abilityId": "basicability_darthvader",
+        "index": 0,
+        "turn": 0,
+        "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+        "resolution": "Original callback invoked; outcome requires subsequent observation"
+      }
+    },
+    {
+      "id": "a23bc54f-7cee-46ca-8b29-b9d4456fcf18",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "abilityId": "basicability_darthvader",
+        "index": 0,
+        "turn": 1,
+        "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+        "resolution": "Original callback invoked; outcome requires subsequent observation"
+      }
+    }
+  ],
+  "before": {
+    "token": "19440:1792265335568:3",
+    "turn": 0,
+    "previous": 34,
+    "next": 1,
+    "actor": "0x28767bac7e0",
+    "abilities": [
+      {
+        "index": 0,
+        "id": "basicability_darthvader",
+        "active": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 1,
+        "id": "specialability_vader02",
+        "active": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 2,
+        "id": "specialability_vader01",
+        "active": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 3,
+        "id": "specialability_vader03",
+        "active": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 4,
+        "id": "leaderability_vader_BASE",
+        "active": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 5,
+        "id": "uniqueability_vader01",
+        "active": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      }
+    ],
+    "targets": [
+      {
+        "id": "Z7ODJb78RXm_0_AYC4TAGw",
+        "baseId": "STORMTROOPER"
+      },
+      {
+        "id": "DhBltes0R9eMNfoACPzG0Q",
+        "baseId": "JEDIKNIGHTCONSULAR"
+      }
+    ],
+    "selectedTarget": "Z7ODJb78RXm_0_AYC4TAGw",
+    "manualTarget": "Z7ODJb78RXm_0_AYC4TAGw",
+    "selectingUnit": false,
+    "awaitingAbility": true,
+    "scope": "current original primary ability table and enemy targets; ultimate and special unit selection pending"
+  },
+  "after": {
+    "token": "19440:1792265335568:4",
+    "turn": 0,
+    "previous": 34,
+    "next": 1,
+    "actor": "0x28767bac7e0",
+    "abilities": [
+      {
+        "index": 0,
+        "id": "basicability_darthvader",
+        "active": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 1,
+        "id": "specialability_vader02",
+        "active": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 2,
+        "id": "specialability_vader01",
+        "active": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 3,
+        "id": "specialability_vader03",
+        "active": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 4,
+        "id": "leaderability_vader_BASE",
+        "active": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 5,
+        "id": "uniqueability_vader01",
+        "active": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      }
+    ],
+    "targets": [
+      {
+        "id": "Z7ODJb78RXm_0_AYC4TAGw",
+        "baseId": "STORMTROOPER"
+      },
+      {
+        "id": "DhBltes0R9eMNfoACPzG0Q",
+        "baseId": "JEDIKNIGHTCONSULAR"
+      }
+    ],
+    "selectedTarget": "DhBltes0R9eMNfoACPzG0Q",
+    "manualTarget": "DhBltes0R9eMNfoACPzG0Q",
+    "selectingUnit": false,
+    "awaitingAbility": true,
+    "scope": "current original primary ability table and enemy targets; ultimate and special unit selection pending"
+  },
+  "completion": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": false,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 2,
+      "currentState": "CampaignGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 2,
+      "sendto": 1,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 0,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": true,
+      "foreignTransition": false
+    }
+  },
+  "validation": "External CLI selected alternate legal target and original engine completed two attacks. Legacy probe autoClick=false means verifiedVisualBattle remains false; external receipts and terminal/cleanup are evaluated separately.",
+  "tests": [
+    "Invalid target rejected",
+    "Already selected target returns confirmed no-op",
+    "Original target switched between two enemies",
+    "Original terminal136 turns2 serviceCalls0 cleanup PASS",
+    "Mailbox invalid target payload rejection PASS",
+    "Runtime session lock PASS",
+    "Original turn-order regression PASS"
+  ],
+  "limitations": [
+    "Taunt filtering uses original GetValidTargets; taunting fixture not tested this round",
+    "Special ally selection and ultimate UI not exposed",
+    "Not a faithful selected mission trial; inventory fixture only",
+    "No screenshot or full-mode coverage claimed"
+  ],
+  "failedAttempt": "logs/high_reuse/target-invalid-fixture-evidence.json: wrong JEDICONSULAR ID rejected before battle, corrected from local catalog to JEDIKNIGHTCONSULAR"
+}

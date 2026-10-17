@@ -17,6 +17,9 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const payload of [null,{token:'x',targetId:''},{token:'x',targetId:42},{token:42,targetId:'unit'}]){
+  const result=await test({operation:'battle-target',payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
+ }
  await processCommands(root,owner,execute,now);assert.equal(calls,1,'Completed requests are not replayed');
  const completed=fs.readdirSync(box).find(f=>JSON.parse(fs.readFileSync(path.join(box,f))).ok);
  const completedId=completed.replace('.result.json','');

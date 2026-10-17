@@ -46,3 +46,4 @@ globalThis.openInventory=kind=>RuntimeApi.runOnMainThreadOnce(()=>{
  }finally{R.release(handle);}
 });
 rpc.exports={...rpc.exports,snapshot:()=>readRuntimeSnapshot(),inventoryhome:()=>inventoryHome(),openinventory:kind=>openInventory(kind),battleability:request=>RuntimeApi.runOnMainThreadOnce(()=>BattleInputBridge.choose(request))};
+rpc.exports.battletarget=request=>RuntimeApi.runOnMainThreadOnce(()=>BattleInputBridge.selectTarget(request));
