@@ -17,7 +17,7 @@ if(Test-Path -LiteralPath $stopPath){Remove-Item -LiteralPath $stopPath}
 $combined=Join-Path $outDir 'battle-info-combined.js'
 $parts=@('runtime_api.js','unity_scene_api.js','battle_status_reader.js','battle_info_ui.js','battle_attributes_reader.js','battle_input.js','runtime_observer.js') | ForEach-Object {Join-Path $PSScriptRoot $_}
 if($CaptureBattle){$parts+=@('battle_proto.js','battle_capture.js') | ForEach-Object {Join-Path $PSScriptRoot $_}}
-Get-Content $parts | Set-Content -Encoding utf8 $combined
+Get-Content -LiteralPath $parts -Encoding utf8 | Set-Content -Encoding utf8 $combined
 $hostScript=Join-Path $PSScriptRoot 'run_battle_info.mjs'
 $arguments=@(('"'+$hostScript+'"'),$targets[0].Id,('"'+$combined+'"'),('"'+$outDir+'"'))
 $helper=Start-Process -FilePath (Get-Command node).Source -ArgumentList $arguments -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $outDir 'battle-info-host.log') -RedirectStandardError (Join-Path $outDir 'battle-info-host-error.log')
