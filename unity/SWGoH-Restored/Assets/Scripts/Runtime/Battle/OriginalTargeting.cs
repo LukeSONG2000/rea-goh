@@ -18,7 +18,17 @@ namespace SwgohRestored.Battle
                     : rule.unitSelect == 2 ? new[] { selected } : _units;
                 foreach (var target in pool)
                 {
-                    if (target == null || !target.Alive || seen.Contains(target)) continue;
+                    if (target == null || target.HasFled || seen.Contains(target)) continue;
+                    // PassesHealthCheck 0x181BB2F80: wire ANY=1 does not inspect
+                    // health, ALIVE=2 requires integer HP>0. Deployment remains
+                    // separate; the currently admitted pool excludes fled units.
+                    if (rule.healthState == 2 && target.CurrentHp < 1) continue;
+                    // BattleEffectModule.IsImmune 0x18136B4B0 tests every
+                    // descriptive tag against the host's counted immunity set.
+                    // Keeping live instances preserves overlapping grants and
+                    // their removal without a second mutable counter cache.
+                    if ((effect.descriptiveTag ?? Array.Empty<RawTag>()).Any(tag =>
+                        target.IsImmuneToEffect(tag.tag))) continue;
                     if ((rule.battleSide == 2 && target.Side != owner.Side) ||
                         (rule.battleSide == 3 && target.Side == owner.Side)) continue;
                     if ((rule.excludeSelf && target == owner) ||

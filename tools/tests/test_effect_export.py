@@ -84,13 +84,23 @@ class EffectExportTests(unittest.TestCase):
             source = next(u for u in self.raw_units if u['baseId'] == unit['def_id'])
             self.assertEqual(unit['categoryId'], source['categoryId'])
             self.assertEqual(unit['squadPositionPriority'], source['squadPositionPriority'])
-            for ability in unit['abilities']:
+            for ability in unit['abilities'] + unit['passives']:
                 self.assertFalse(forbidden.intersection(ability))
                 raw = self.abilities[ability['id']]
                 tier = ability['selectedTier']
                 selected = raw['tier'][tier] if tier >= 0 else raw
                 self.assertEqual(ability['effectReference'], selected['effectReference'])
                 self.assertEqual(ability['abilityType'], raw['abilityType'])
+
+    def test_every_original_skill_is_retained_separate_from_active_menu(self):
+        for unit in self.menus:
+            source = next(u for u in self.raw_units if u['baseId'] == unit['def_id'])
+            self.assertCountEqual([a['skill_id'] for a in unit['abilities'] + unit['passives']],
+                                  [r['skillId'] for r in source['skillReference']])
+            for ability in unit['passives']:
+                self.assertEqual(ability['kind'], ability['skill_id'].split('_', 1)[0])
+                self.assertNotIn(ability['abilityType'], export.ACTIVATED_TYPES)
+        self.assertTrue(self.units['VADER']['passives'])
 
     def test_two_other_heroes_follow_identical_pipeline(self):
         for hero in ('JYNERSO', 'GRANDMOFFTARKIN'):

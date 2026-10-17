@@ -10,15 +10,16 @@ namespace SwgohRestored.Battle
         // damage_apply_to_targets.c (0x181364CA0), and corrected float return
         // logs/effect_recovery/damage_mitigation_float.c (0x181366000).
         // Constants: catalog/game_constants_runtime.json, 2026-10-16 snapshot.
-        // This slice excludes context-driven amounts and damage-modifying
-        // persistent effects; the graph must reject those before execution.
+        // Query-count context is admitted by the graph; damage-modifying
+        // effect callbacks remain gated until their native path is recovered.
         static bool DamageFlag(RawEffect e, string flag) => e.param != null && e.param.Contains(flag);
 
         public static string ValidateOriginalDamage(RawEffect effect)
         {
             if (effect == null || effect.type != 1) return "Expected protobuf DAMAGE effect.";
             if (effect.damageType < 1 || effect.damageType > 3) return "Unknown damage type.";
-            if (effect.contextMultiplierDecimal != 0) return "Context-driven damage is not implemented.";
+            if (effect.contextMultiplierDecimal != 0 && (effect.contextIndex == null || effect.contextIndex.Length == 0))
+                return "Context-driven damage requires explicit validated result slots.";
             if (effect.resultVarianceDecimal < 0) return "Negative variance is unsupported.";
             if (!double.TryParse(effect.additiveAmountDecimal ?? "0", NumberStyles.Float,
                     CultureInfo.InvariantCulture, out var amount) || double.IsNaN(amount) || double.IsInfinity(amount))
@@ -41,10 +42,12 @@ namespace SwgohRestored.Battle
             return sources == 1 ? null : "Damage requires one supported source stat/health-percent parameter.";
         }
 
-        public BattleEvent OriginalDamage(BattleUnit attacker, BattleUnit target, RawEffect effect)
+        public BattleEvent OriginalDamage(BattleUnit attacker, BattleUnit target, RawEffect effect, float? contextValue = null)
         {
             string reason = ValidateOriginalDamage(attacker, target, effect);
             if (reason != null) throw new NotSupportedException(reason);
+            if (effect.contextMultiplierDecimal != 0 && !contextValue.HasValue)
+                throw new NotSupportedException("Missing original activation context.");
 
             float mult = effect.multiplierAmountDecimal / 10000f;
             float flat = (float)(double.Parse(effect.additiveAmountDecimal ?? "0", CultureInfo.InvariantCulture) / 10000.0);
@@ -52,7 +55,7 @@ namespace SwgohRestored.Battle
             if (DamageFlag(effect, "DAMAGE_HEALTH_PERCENTAGE"))
             {
                 // ApplyToTargets replaces ProcessSourceDamage with target max HP.
-                damage = (int)target.MaxHp * mult;
+                damage = (int)target.MaxHp * (mult + (contextValue ?? 0) * effect.contextMultiplierDecimal / 10000f);
             }
             else
             {
@@ -63,6 +66,9 @@ namespace SwgohRestored.Battle
                     ? Math.Max(-0.75f, Math.Min(0.75f, (attacker.Era - target.Era) * 0.075f))
                     : 0f; // live ordinary level modifier is zero; equal relic tiers => zero.
                 damage *= 1f + delta;
+                // 0x181364CA0: context multiplier scales source damage; constant
+                // at 0x18529EF3C is original DLL bytes 0000803f (1.0f).
+                damage *= 1f + (contextValue ?? 0) * effect.contextMultiplierDecimal / 10000f;
             }
 
             bool critical = false;
@@ -88,7 +94,9 @@ namespace SwgohRestored.Battle
                 int variance = (int)(damage * (effect.resultVarianceDecimal / 10000f));
                 damage += _ctx.BattleRandom.NextInt(variance * 2 | 1) - variance;
             }
-            damage = Math.Max(0f, damage);
+            // Same native constant 0x18529EF3C (1.0f) is the final pre-shield
+            // damage floor. NO_KILL may subsequently reduce actual HP loss to 0.
+            damage = Math.Max(1f, damage);
             float penetration = Math.Max(0f, Math.Min(1f, (float)attacker.GetStat(34)));
             float shield = Math.Min(Math.Max(0f, (float)target.CurrentShield), damage - damage * penetration);
             float hp = damage - shield;
@@ -116,11 +124,11 @@ namespace SwgohRestored.Battle
         // Damage.ApplyToTargets 0x181364CA0: stat24 * final pre-cap float damage,
         // including shield/overkill, truncated once. ApplyHeal 0x181BC6060 rejects
         // dead recipients; UpdateHealth 0x181BC6900 clamps integer HP to max HP.
-        // Immunity effects and healing-trigger passives remain outside this slice.
-        // Do not substitute descriptiveTag for native IsImmuneToEffect(tag).
+        // Immunity uses affected tags, not the state's descriptive tags.
         void OriginalHealthSteal(BattleUnit source, RawEffect effect, float damage)
         {
             if (DamageFlag(effect, "NO_HEALTH_STEAL") || !source.Alive) return;
+            if (source.IsImmuneToEffect(GameConstants.HealthRecoveryImmunityTag)) return;
             float recovery = (float)source.GetStat(24) * damage;
             if (recovery <= 0f) return;
             int requested = (int)recovery;
@@ -149,9 +157,6 @@ namespace SwgohRestored.Battle
                 return "Ship mitigation constants are not connected to this slice.";
             if (!attacker.IsEraUnit && attacker.RelicTier != target.RelicTier)
                 return "Unequal relic tiers require the original battle relic modifier table.";
-            if (!DamageFlag(effect, "NO_HEALTH_STEAL") && attacker.GetStat(24) > 0
-                && attacker.PersistentEffects.Any(state => state.Definition.type == 6))
-                return "PENDING-ORIGINAL: health-steal immunity tag and immunity matching.";
             return null;
         }
 

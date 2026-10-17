@@ -62,20 +62,17 @@ def build_exports(units, skill_rows, ability_rows, effect_rows, loc_cn=None, loc
                 raise ValueError(f'Unit variants disagree on categories/skills/squad priority: {base_id}')
             continue
         unit_signatures[base_id] = signature
-        records = []
+        records, passives = [], []
         for reference in unit.get('skillReference') or []:
             sid = reference.get('skillId', '')
             kind = sid.split('_', 1)[0]
-            if kind not in ('basicskill', 'specialskill'):
-                continue
             if sid not in skills:
                 raise ValueError(f'Missing skill {sid} for {base_id}')
             aid = skills[sid].get('abilityReference')
             if not isinstance(aid, str) or aid not in abilities:
                 raise ValueError(f'Missing ability {aid!r} for {sid}')
             ability = abilities[aid]
-            if ability.get('abilityType') not in ACTIVATED_TYPES:
-                continue
+            activated = kind in ('basicskill', 'specialskill') and ability.get('abilityType') in ACTIVATED_TYPES
             tiers = ability.get('tier') or []
             selected_tier = len(tiers) - 1
             selected = tiers[-1] if tiers else ability
@@ -83,17 +80,17 @@ def build_exports(units, skill_rows, ability_rows, effect_rows, loc_cn=None, loc
             refs = selected.get('effectReference', ability.get('effectReference', []))
             names = [loc.get(ability.get('nameKey', '')) for loc in (loc_cn, loc_en)]
             name = next((n for n in names if n and n != 'PLACEHOLDER'), pretty(aid))
-            records.append({
+            (records if activated else passives).append({
                 'id': aid, 'skill_id': sid, 'name': name,
-                'kind': 'basic' if kind == 'basicskill' else 'special',
+                'kind': ('basic' if kind == 'basicskill' else 'special') if activated else kind,
                 'cooldown': ability.get('cooldown', 0),
                 'abilityType': ability['abilityType'],
                 'selectedTier': selected_tier, 'effectReference': refs,
             })
-        if records:
+        if records or passives:
             output[base_id] = {'def_id': base_id, 'categoryId': unit.get('categoryId', []),
                                'squadPositionPriority': unit.get('squadPositionPriority', 0),
-                               'abilities': records}
+                               'abilities': records, 'passives': passives}
     graph = {'schemaVersion': 2, 'effects': effect_rows, 'abilities': ability_rows}
     return list(output.values()), graph
 
@@ -119,8 +116,9 @@ def main():
     # Manifest is written last; readers use only its named shards.
     outputs.append((GRAPH_OUT, manifest))
     for path, data in outputs:
-        with open(path, 'w', encoding='utf-8') as stream:
-            json.dump(data, stream, ensure_ascii=False, separators=(',', ':'))
+        encoded = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
+        if not path.exists() or path.read_text(encoding='utf-8') != encoded:
+            path.write_text(encoded, encoding='utf-8')
     print(f'Exported {len(menus)} unique units / '
           f"{sum(len(u['abilities']) for u in menus)} menu abilities; "
           f"preserved {len(graph['abilities'])} original abilities / "

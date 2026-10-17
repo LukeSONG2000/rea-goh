@@ -105,7 +105,9 @@ public static class OriginalEffectRegression
 
     static void UnsupportedIsAtomic()
     {
-        var vader = Unit("VADER", "vader", 0, 300);
+        // Vader's four active graphs are now supported. Retain a real graph
+        // rejection fixture from Traya instead of assuming Vader stays pending.
+        var vader = Unit("DARTHTRAYA", "unsupported-actor", 0, 300);
         var target = Unit("SNOWTROOPER", "target", 1, 200);
         var sim = new BattleSim(new[] { vader }, new[] { target }, 4490);
         sim.PrepareNextTurn();

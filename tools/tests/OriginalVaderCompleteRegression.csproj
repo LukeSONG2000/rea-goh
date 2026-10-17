@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>../../logs/vader-complete-regression/obj/</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>../../logs/vader-complete-regression/obj/</MSBuildProjectExtensionsPath>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <BaseOutputPath>../../logs/vader-complete-regression/bin/</BaseOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../unity/SWGoH-Restored/Assets/Scripts/Runtime/Battle/*.cs" />
+    <Compile Include="OriginalVaderCompleteRegression.cs" />
+  </ItemGroup>
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>

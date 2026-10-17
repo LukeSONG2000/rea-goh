@@ -36,6 +36,7 @@ namespace SwgohRestored.Battle
     public static class GameConstants
     {
         public static float UnitSpeedFillMax = 1000.0f;     // +0x24B4 (ctor 100.0f)
+        public const string HealthRecoveryImmunityTag = "health_steal_recovery"; // runtime instance-walk config
         public static float CritRatingMod = 2400.0f;        // +0x2308 / +0x22F0
         public static float CritChanceLevelDeltaMax = 0.15f;// +0x22F8 / +0x22E0
         public static float DamageModLevelDeltaMax = 0.0f;  // +0x2340 (config-set zero)
@@ -85,23 +86,46 @@ namespace SwgohRestored.Battle
         // skillReference -> abilityReference -> tier[-1].effectReference
         // -> effect.json walk as game/abilities.py v1)
         public List<UnitAbility> Abilities = new List<UnitAbility>();
+        public List<UnitAbility> Passives = new List<UnitAbility>();
+        public bool IsLeader;
         public readonly Dictionary<string, int> CooldownLeft = new Dictionary<string, int>();
 
         public bool Alive => !HasFled && CurrentHp > 0;
         public bool HasEffectTag(string tag) => PersistentEffects.Any(state =>
             (state.Definition.descriptiveTag ?? Array.Empty<RawTag>()).Any(t => !t.exclude && t.tag == tag));
+        public bool IsImmuneToEffect(string tag) => PersistentEffects.Any(state => state.Definition.type == 6 &&
+            (state.Definition.effectedTag ?? Array.Empty<RawTag>()).Any(t => !t.exclude && t.tag == tag));
         public double GetInitialStat(int s) => Stats.TryGetValue(s, out var v) ? v : 0.0;
+        public float GetPersistentTauntAmount()
+        {
+            // GetAffectedTauntAmount 0x181A6F4D0: any positive takes priority;
+            // otherwise the most negative wins. It is not a sum of taunts.
+            float result = 0;
+            foreach (var state in PersistentEffects.Where(e => e.Definition.type == 8 &&
+                (e.Definition.param ?? Array.Empty<string>()).Contains("TAUNT")))
+            {
+                float amount = state.Amount;
+                if (amount > 0 ? amount > result : result <= 0 && amount < result) result = amount;
+            }
+            return result;
+        }
         public double GetStat(int s)
         {
             double value = GetInitialStat(s);
-            if (s != 5) return value; // other stat calculation families remain gated
-            foreach (var group in PersistentEffects.Where(e => e.Definition.type == 8)
+            if (s == 62) return (float)value + GetPersistentTauntAmount();
+            var stat = BattleSim.OriginalModifierStats.FirstOrDefault(pair => pair.Value == s);
+            if (stat.Key == null) return value; // other stat calculation families remain gated
+            string flag = stat.Key;
+            foreach (var group in PersistentEffects.Where(e => e.Definition.type == 8 &&
+                (e.Definition.param ?? Array.Empty<string>()).Contains(flag))
                 .GroupBy(e => e.StackingLine ?? "ability-stacking-line"))
             {
                 value += group.Where(e => e.IsBuff).Select(e => (double)e.Amount).DefaultIfEmpty(0).Max();
                 value += group.Where(e => e.IsDebuff).Select(e => (double)e.Amount).DefaultIfEmpty(0).Min();
             }
-            return (int)(float)value; // original SPEED calculated-stat integer conversion
+            // GetCalculatedStatValue 0x180FDE5C0 retains float for 16/28/29;
+            // default integer family includes speed, physical and special damage.
+            return s == 5 || s == 6 || s == 7 ? (int)(float)value : (float)value;
         }
         public double Speed => GetStat(Stat.Speed) < 0 ? 0 : GetStat(Stat.Speed);
     }
@@ -182,6 +206,7 @@ namespace SwgohRestored.Battle
         public string AbilityName;   // REAL ability used this turn ("" = v0 basic)
         public string AbilityId;
         public double Heal;
+        public double ShieldHeal;
     }
 
     /// BattleUnitsController turn loop + DamageModule pipeline (headless port).
@@ -431,9 +456,25 @@ namespace SwgohRestored.Battle
             var actor = PendingActor;
             var ability = index < 0 ? null : actor.Abilities[index];
             if (ability?.OriginalGraph != null)
-                return _units.Where(u => u.Alive &&
+            {
+                var candidates = _units.Where(u => u.Alive &&
                     OriginalCommandReason(actor, ability, u) == null && ability.OriginalReferences.Any(r =>
                         OriginalTargets(ability.OriginalGraph.Effects[r.id], actor, u).Contains(u))).ToArray();
+                bool selectedEnemy = ability.OriginalReferences.Any(r =>
+                    ability.OriginalGraph.Effects[r.id].target.Any(t => t.unitSelect == 2 && t.battleSide == 3));
+                if (selectedEnemy) candidates = candidates.Where(u => u.Side != actor.Side).ToArray();
+                // GetValidTargets 0x181BAECF0 retains every highest TAUNT rank
+                // among IsTargetValid (living, not fled) targets. Current taunt
+                // capability admits integer ranks only, so exact equality agrees
+                // with the original Approximately comparison.
+                var enemies = candidates.Where(u=>u.Side!=actor.Side).ToArray();
+                if(enemies.Length>0)
+                {
+                    float maximum=enemies.Max(u=>u.GetPersistentTauntAmount());
+                    candidates=candidates.Where(u=>u.Side==actor.Side || u.GetPersistentTauntAmount()==maximum).ToArray();
+                }
+                return candidates;
+            }
             bool damage = ability == null || ability.DamageMultiplier > 0 || ability.FlatDamage > 0;
             if (damage) return _units.Where(u => u.Alive && u.Side != actor.Side).ToList();
             if (ability.HealAmount > 0)
@@ -470,6 +511,10 @@ namespace SwgohRestored.Battle
             else if (used != null) ExecuteAbility(actor, used, foes, target);
             else LegacyBasic(actor, foes);
             OriginalConditionEvent(actor, 32);
+            // Native EndTurnConditionMet precedes EndRound; OnRoundEnded dispatches
+            // END_OF_ROUND (wire 2) then ROUND_COUNT (wire 1). A round is one move.
+            // ROUND_COUNT listeners remain unsupported by the graph validator.
+            foreach (var unit in _units) OriginalConditionEvent(unit, 2);
             if (CheckEnd(out _)) foreach (var unit in _units) OriginalConditionEvent(unit, 24);
             PendingActor = null;
             error = null;

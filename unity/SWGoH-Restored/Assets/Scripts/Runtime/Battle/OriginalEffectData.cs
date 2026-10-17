@@ -87,6 +87,7 @@ namespace SwgohRestored.Battle
         public int squadPositionPriority;
         public string[] categoryId;
         public OriginalAbilityMenu[] abilities;
+        public OriginalAbilityMenu[] passives;
     }
 
     public sealed class OriginalEffectGraph
