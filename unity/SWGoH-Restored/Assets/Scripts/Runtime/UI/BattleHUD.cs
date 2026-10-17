@@ -277,8 +277,10 @@ namespace SwgohRestored.Battle
             if (effects != null)
                 foreach (var effect in effects)
                 {
-                    if (effect == null) continue;
-                    string key = string.IsNullOrEmpty(effect.persistentIcon) ? effect.id : effect.persistentIcon;
+                    // Internal listeners and stat modifiers have no original
+                    // persistentIcon; they are not visible status widgets.
+                    if (effect == null || string.IsNullOrEmpty(effect.persistentIcon)) continue;
+                    string key = effect.persistentIcon;
                     if (indices.TryGetValue(key, out int index)) counts[index]++;
                     else { indices[key] = definitions.Count; definitions.Add(effect); counts.Add(1); }
                 }

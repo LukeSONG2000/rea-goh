@@ -1,0 +1,4453 @@
+{
+  "schemaVersion": 1,
+  "bundle": "char_chirpa_pre",
+  "source": {
+    "bundle": "char_chirpa_pre",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_chirpa_pre\\d4f76e643cc501000000000000000000\\__data",
+    "sha256": "ae2b5cfaea1bf3b3967cdeff115660d28ab0990d94360428b494af6e73369aed"
+  },
+  "gameObjects": [
+    {
+      "pathId": "-7913758104930180400",
+      "name": "Left_ballJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8085014481468923663",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7913758104930180400
+        },
+        "m_LocalRotation": {
+          "x": -1.4532350878226907e-09,
+          "y": -1.045099740082378e-08,
+          "z": -0.3744693994522095,
+          "w": 0.9272392988204956
+        },
+        "m_LocalPosition": {
+          "x": -0.08877173066139221,
+          "y": 0.03185948356986046,
+          "z": 1.4901168299275014e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7549321283227289726
+        }
+      }
+    },
+    {
+      "pathId": "-7015340449020280355",
+      "name": "Right_ankleJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6080851855300908624",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7015340449020280355
+        },
+        "m_LocalRotation": {
+          "x": 0.7950206995010376,
+          "y": 0.5995786786079407,
+          "z": 0.06712394207715988,
+          "w": 0.06278515607118607
+        },
+        "m_LocalPosition": {
+          "x": 0.2015935778617859,
+          "y": -0.030666325241327286,
+          "z": 2.980236146754578e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5318839686439984362
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -6637029950606180250
+        }
+      }
+    },
+    {
+      "pathId": "-6994408326425386686",
+      "name": "Left_wpnJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7669407558928127362",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6994408326425386686
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": -0.08805680274963379,
+          "y": -4.163336342344337e-17,
+          "z": -4.649058915617843e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2937084092580727679
+        }
+      }
+    },
+    {
+      "pathId": "-6812104946990508704",
+      "name": "Left_ankleJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7549321283227289726",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6812104946990508704
+        },
+        "m_LocalRotation": {
+          "x": 0.9217355847358704,
+          "y": 0.3759112060070038,
+          "z": 0.08731196820735931,
+          "w": 0.03835231810808182
+        },
+        "m_LocalPosition": {
+          "x": -0.2015935778617859,
+          "y": 0.030666368082165718,
+          "z": -1.4901171851988693e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8085014481468923663
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 1201785598551332005
+        }
+      }
+    },
+    {
+      "pathId": "-6448066490313945067",
+      "name": "Right_wrstJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7598466495717497148",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6448066490313945067
+        },
+        "m_LocalRotation": {
+          "x": -0.02277013473212719,
+          "y": 0.004396462347358465,
+          "z": -0.0009944468038156629,
+          "w": 0.9997305870056152
+        },
+        "m_LocalPosition": {
+          "x": 0.21073178946971893,
+          "y": -7.97912321104377e-07,
+          "z": -1.1576325960049871e-06
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -175706579044682950
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8165747320726722652
+        }
+      }
+    },
+    {
+      "pathId": "-6294699463841593009",
+      "name": "Left_elbwJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4138265680281164753",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6294699463841593009
+        },
+        "m_LocalRotation": {
+          "x": -0.1499171406030655,
+          "y": 0.13519242405891418,
+          "z": -0.030902540311217308,
+          "w": 0.9789243936538696
+        },
+        "m_LocalPosition": {
+          "x": -0.2410791516304016,
+          "y": -2.048908953611317e-08,
+          "z": 1.819799644309228e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7144622683655257091
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8550802233516346794
+        }
+      }
+    },
+    {
+      "pathId": "-5685581058927370886",
+      "name": "ewok_chirpa_mesh_shadow",
+      "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "-5265173286392316540",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5685581058927370886
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1812135863431758562
+        }
+      }
+    },
+    {
+      "pathId": "-5470822730573747302",
+      "name": "Right_elbwJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8165747320726722652",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5470822730573747302
+        },
+        "m_LocalRotation": {
+          "x": 0.03594636917114258,
+          "y": 0.18315204977989197,
+          "z": -0.002488076686859131,
+          "w": 0.9824240803718567
+        },
+        "m_LocalPosition": {
+          "x": 0.24108116328716278,
+          "y": 1.142737346526701e-06,
+          "z": 1.5766382643889187e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -7598466495717497148
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2667476926641678698
+        }
+      }
+    },
+    {
+      "pathId": "-5350373236479790267",
+      "name": "Left_wpn_offsetJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2937084092580727679",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5350373236479790267
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7669407558928127362
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7144622683655257091
+        }
+      }
+    },
+    {
+      "pathId": "-5144860020998046730",
+      "name": "swd_chirpa_mesh",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2590094282683611162",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5144860020998046730
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": -4.371138828673793e-08
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.12399999797344208
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4407955526494466607
+        }
+      }
+    },
+    {
+      "pathId": "-4629850410666679009",
+      "name": "Right_hipJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "325847662126547988",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4629850410666679009
+        },
+        "m_LocalRotation": {
+          "x": 0.11140481382608414,
+          "y": 0.1208428144454956,
+          "z": -0.0149649353697896,
+          "w": -0.986286997795105
+        },
+        "m_LocalPosition": {
+          "x": 0.022335365414619446,
+          "y": -0.009015396237373352,
+          "z": 0.0939999595284462
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -6637029950606180250
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 180282218162347969
+        }
+      }
+    },
+    {
+      "pathId": "-4165340421990986184",
+      "name": "Right_kneeJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6637029950606180250",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4165340421990986184
+        },
+        "m_LocalRotation": {
+          "x": -0.9623289108276367,
+          "y": -0.23706310987472534,
+          "z": -0.03352827578783035,
+          "w": 0.12884102761745453
+        },
+        "m_LocalPosition": {
+          "x": 0.19194155931472778,
+          "y": -0.005438551306724548,
+          "z": -1.4901173628345532e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -6080851855300908624
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 325847662126547988
+        }
+      }
+    },
+    {
+      "pathId": "-3487243828015571776",
+      "name": "neckJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-835659456128061100",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -3487243828015571776
+        },
+        "m_LocalRotation": {
+          "x": -0.9626603126525879,
+          "y": 0.015428662300109863,
+          "z": 0.013364933431148529,
+          "w": 0.2699415683746338
+        },
+        "m_LocalPosition": {
+          "x": -0.2477160543203354,
+          "y": -0.004555613733828068,
+          "z": -1.4901164746561335e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4580860743718136918
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7508708357315343826
+        }
+      }
+    },
+    {
+      "pathId": "-3061124318550857566",
+      "name": "ewok_mesh_shadow",
+      "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "5562327938532572899",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -3061124318550857566
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1812135863431758562
+        }
+      }
+    },
+    {
+      "pathId": "-2407692734225342388",
+      "name": "Left_hipJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6066802412141638033",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2407692734225342388
+        },
+        "m_LocalRotation": {
+          "x": 0.11644301563501358,
+          "y": -0.27534347772598267,
+          "z": 0.9471124410629272,
+          "w": 0.11664068698883057
+        },
+        "m_LocalPosition": {
+          "x": 0.02233540266752243,
+          "y": -0.00901542603969574,
+          "z": -0.09399997442960739
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1201785598551332005
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 180282218162347969
+        }
+      }
+    },
+    {
+      "pathId": "-1914521901753605789",
+      "name": "headJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4580860743718136918",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1914521901753605789
+        },
+        "m_LocalRotation": {
+          "x": 0.45483818650245667,
+          "y": -0.530251145362854,
+          "z": 0.49735593795776367,
+          "w": 0.5143861770629883
+        },
+        "m_LocalPosition": {
+          "x": -0.06542389839887619,
+          "y": -0.0032580315601080656,
+          "z": 1.3038509827367761e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -835659456128061100
+        }
+      }
+    },
+    {
+      "pathId": "-1601889100375361246",
+      "name": "spine1JNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4593642711053620046",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1601889100375361246
+        },
+        "m_LocalRotation": {
+          "x": 0.08948169648647308,
+          "y": -0.05766194686293602,
+          "z": -0.021786058321595192,
+          "w": 0.9940792322158813
+        },
+        "m_LocalPosition": {
+          "x": -0.07423467934131622,
+          "y": -0.0032664313912391663,
+          "z": 5.587935447692871e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7508708357315343826
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 180282218162347969
+        }
+      }
+    },
+    {
+      "pathId": "-1499567126615094321",
+      "name": "swd_chirpa_mesh_shadow",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "2363775657688228067",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1499567126615094321
+        },
+        "m_LocalRotation": {
+          "x": -1.6562003679609916e-07,
+          "y": 1.0,
+          "z": 2.0702668734884355e-07,
+          "w": 4.896099312645674e-07
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.12400034815073013
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4407955526494466607
+        }
+      }
+    },
+    {
+      "pathId": "-1364520403445770350",
+      "name": "ewok_mesh",
+      "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4901470382545650380",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1364520403445770350
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1812135863431758562
+        }
+      }
+    },
+    {
+      "pathId": "-1037242223052194700",
+      "name": "Right_clavJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4857897255641981122",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1037242223052194700
+        },
+        "m_LocalRotation": {
+          "x": 0.4848300814628601,
+          "y": 0.36679384112358093,
+          "z": -0.5217812061309814,
+          "w": 0.5984534025192261
+        },
+        "m_LocalPosition": {
+          "x": -0.1692899465560913,
+          "y": -0.010823446325957775,
+          "z": -0.035000015050172806
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2667476926641678698
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7508708357315343826
+        }
+      }
+    },
+    {
+      "pathId": "-392575032766983324",
+      "name": "spine2JNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7508708357315343826",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -392575032766983324
+        },
+        "m_LocalRotation": {
+          "x": 0.9946250319480896,
+          "y": 0.09223446249961853,
+          "z": -0.010647095739841461,
+          "w": 0.04583139717578888
+        },
+        "m_LocalPosition": {
+          "x": -0.12766119837760925,
+          "y": -0.00025346886832267046,
+          "z": 1.4901173628345532e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 2494690765593745216
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -835659456128061100
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4857897255641981122
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4593642711053620046
+        }
+      }
+    },
+    {
+      "pathId": "665463890562073921",
+      "name": "pelvicJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "180282218162347969",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 665463890562073921
+        },
+        "m_LocalRotation": {
+          "x": 0.6279939413070679,
+          "y": -0.6250890493392944,
+          "z": 0.3593386709690094,
+          "w": -0.2928532660007477
+        },
+        "m_LocalPosition": {
+          "x": 0.036864764988422394,
+          "y": 0.43819743394851685,
+          "z": -0.027542486786842346
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6066802412141638033
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 325847662126547988
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4593642711053620046
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1812135863431758562
+        }
+      }
+    },
+    {
+      "pathId": "3488810395710966312",
+      "name": "weapon_tip",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/weapon_tip",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-708670224078454390",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3488810395710966312
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": -0.4650000035762787
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4407955526494466607
+        }
+      }
+    },
+    {
+      "pathId": "3681064497554160253",
+      "name": "Right_wpnJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4407955526494466607",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3681064497554160253
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": 0.0880567878484726,
+          "y": -5.407456455941428e-07,
+          "z": 2.1035233999100456e-07
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2590094282683611162
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2363775657688228067
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -708670224078454390
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -175706579044682950
+        }
+      }
+    },
+    {
+      "pathId": "3779851657154215483",
+      "name": "Left_kneeJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1201785598551332005",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3779851657154215483
+        },
+        "m_LocalRotation": {
+          "x": -0.9844452738761902,
+          "y": -0.1746305227279663,
+          "z": 0.019043752923607826,
+          "w": 0.0030001404229551554
+        },
+        "m_LocalPosition": {
+          "x": -0.19194157421588898,
+          "y": 0.0054386090487241745,
+          "z": 2.9802322387695312e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -7549321283227289726
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 6066802412141638033
+        }
+      }
+    },
+    {
+      "pathId": "5180794130989735395",
+      "name": "ewok_chirpa_mesh",
+      "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1209753403190682672",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5180794130989735395
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1812135863431758562
+        }
+      }
+    },
+    {
+      "pathId": "5396600250837234946",
+      "name": "Right_wpn_offsetJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-175706579044682950",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5396600250837234946
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": -5.551115123125783e-17,
+          "y": 2.220446049250313e-16,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -4407955526494466607
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7598466495717497148
+        }
+      }
+    },
+    {
+      "pathId": "5688318697267426422",
+      "name": "Left_shldrJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8550802233516346794",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5688318697267426422
+        },
+        "m_LocalRotation": {
+          "x": 0.054757822304964066,
+          "y": 0.0866568386554718,
+          "z": 0.5877283811569214,
+          "w": 0.8025382161140442
+        },
+        "m_LocalPosition": {
+          "x": -0.13134793937206268,
+          "y": -0.00016008187958505005,
+          "z": -0.003232595743611455
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4138265680281164753
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 2494690765593745216
+        }
+      }
+    },
+    {
+      "pathId": "5736973789158591449",
+      "name": "Right_ballJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5318839686439984362",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5736973789158591449
+        },
+        "m_LocalRotation": {
+          "x": 3.908017376375028e-08,
+          "y": 1.4019597927017458e-08,
+          "z": -0.37446996569633484,
+          "w": 0.9272390604019165
+        },
+        "m_LocalPosition": {
+          "x": 0.0887717455625534,
+          "y": -0.031859491020441055,
+          "z": -1.490117895741605e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -6080851855300908624
+        }
+      }
+    },
+    {
+      "pathId": "6775096435240739033",
+      "name": "Left_clavJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "2494690765593745216",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6775096435240739033
+        },
+        "m_LocalRotation": {
+          "x": -0.3701888918876648,
+          "y": 0.45833370089530945,
+          "z": 0.5915179252624512,
+          "w": 0.5504516363143921
+        },
+        "m_LocalPosition": {
+          "x": -0.16928993165493011,
+          "y": -0.010823461227118969,
+          "z": 0.034999992698431015
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8550802233516346794
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7508708357315343826
+        }
+      }
+    },
+    {
+      "pathId": "7396643609227583637",
+      "name": "Left_wrstJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7144622683655257091",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7396643609227583637
+        },
+        "m_LocalRotation": {
+          "x": -0.028410669416189194,
+          "y": 0.004658827092498541,
+          "z": -0.0020744858775287867,
+          "w": 0.99958336353302
+        },
+        "m_LocalPosition": {
+          "x": -0.21073348820209503,
+          "y": 2.753220051943117e-08,
+          "z": -9.313230187046884e-10
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2937084092580727679
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 4138265680281164753
+        }
+      }
+    },
+    {
+      "pathId": "7405448452942180356",
+      "name": "unit.char_chirpa_pre",
+      "hierarchyPath": "unit.char_chirpa_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1812135863431758562",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7405448452942180356
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1209753403190682672
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4901470382545650380
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 180282218162347969
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5562327938532572899
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5265173286392316540
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    },
+    {
+      "pathId": "8781435092033710236",
+      "name": "Right_shldrJNT",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2667476926641678698",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8781435092033710236
+        },
+        "m_LocalRotation": {
+          "x": 0.19744613766670227,
+          "y": 0.1294952630996704,
+          "z": 0.47651275992393494,
+          "w": 0.8468657732009888
+        },
+        "m_LocalPosition": {
+          "x": 0.13134793937206268,
+          "y": 0.00016012685955502093,
+          "z": 0.0032326015643775463
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8165747320726722652
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4857897255641981122
+        }
+      }
+    }
+  ],
+  "renderers": [
+    {
+      "pathId": "-7148315508332119853",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -3061124318550857566
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 1,
+            "m_PathID": -8587867788662160608
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 2,
+          "m_PathID": 5057210482656646357
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -7549321283227289726
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8085014481468923663
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2494690765593745216
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4138265680281164753
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6066802412141638033
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1201785598551332005
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8550802233516346794
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7144622683655257091
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6080851855300908624
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5318839686439984362
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4857897255641981122
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8165747320726722652
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 325847662126547988
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6637029950606180250
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2667476926641678698
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7598466495717497148
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -835659456128061100
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 180282218162347969
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4593642711053620046
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7508708357315343826
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 180282218162347969
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.02453044056892395,
+            "y": -0.004697620868682861,
+            "z": -0.0026445388793945312
+          },
+          "m_Extent": {
+            "x": 0.5337594747543335,
+            "y": 0.24650311470031738,
+            "z": 0.5290595293045044
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-3061124318550857566",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8587867788662160608",
+          "fileId": 1,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "5057210482656646357",
+          "fileId": 2,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-7549321283227289726",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-8085014481468923663",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "2494690765593745216",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "4138265680281164753",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "6066802412141638033",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "1201785598551332005",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-8550802233516346794",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "7144622683655257091",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-6080851855300908624",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "5318839686439984362",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "-4857897255641981122",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "-8165747320726722652",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "325847662126547988",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "-6637029950606180250",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "-2667476926641678698",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "-7598466495717497148",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "-835659456128061100",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "180282218162347969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "-4593642711053620046",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "7508708357315343826",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "180282218162347969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "-5918794388083598837",
+      "type": "MeshRenderer",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1499567126615094321
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 2,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 1,
+            "m_PathID": -8587867788662160608
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_AdditionalVertexStreams": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_EnlightenVertexStream": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-1499567126615094321",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8587867788662160608",
+          "fileId": 1,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_AdditionalVertexStreams",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_EnlightenVertexStream",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-610621136177788561",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1364520403445770350
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1980862300470259273
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 2,
+          "m_PathID": 5057210482656646357
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -7549321283227289726
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8085014481468923663
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2494690765593745216
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4138265680281164753
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6066802412141638033
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1201785598551332005
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8550802233516346794
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7144622683655257091
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6080851855300908624
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5318839686439984362
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4857897255641981122
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8165747320726722652
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 325847662126547988
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6637029950606180250
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2667476926641678698
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7598466495717497148
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -835659456128061100
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 180282218162347969
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4593642711053620046
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7508708357315343826
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 180282218162347969
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.02453044056892395,
+            "y": -0.004697620868682861,
+            "z": -0.0026445388793945312
+          },
+          "m_Extent": {
+            "x": 0.5337594747543335,
+            "y": 0.24650311470031738,
+            "z": 0.5290595293045044
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-1364520403445770350",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "1980862300470259273",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "5057210482656646357",
+          "fileId": 2,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-7549321283227289726",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-8085014481468923663",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "2494690765593745216",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "4138265680281164753",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "6066802412141638033",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "1201785598551332005",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-8550802233516346794",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "7144622683655257091",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-6080851855300908624",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "5318839686439984362",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "-4857897255641981122",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "-8165747320726722652",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "325847662126547988",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "-6637029950606180250",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "-2667476926641678698",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "-7598466495717497148",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "-835659456128061100",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "180282218162347969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "-4593642711053620046",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "7508708357315343826",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "180282218162347969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "162420597836212758",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5180794130989735395
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8731956928535560502
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 2,
+          "m_PathID": -3904354238083406558
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 2494690765593745216
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4138265680281164753
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6066802412141638033
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8550802233516346794
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4857897255641981122
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8165747320726722652
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 325847662126547988
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6637029950606180250
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2667476926641678698
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4580860743718136918
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -835659456128061100
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 180282218162347969
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4593642711053620046
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7508708357315343826
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 180282218162347969
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": -0.29243478178977966,
+            "y": 0.0339396595954895,
+            "z": -0.02544763684272766
+          },
+          "m_Extent": {
+            "x": 0.4394332468509674,
+            "y": 0.26960015296936035,
+            "z": 0.36677005887031555
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "5180794130989735395",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8731956928535560502",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-3904354238083406558",
+          "fileId": 2,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "2494690765593745216",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "4138265680281164753",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "6066802412141638033",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-8550802233516346794",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-4857897255641981122",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-8165747320726722652",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "325847662126547988",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "-6637029950606180250",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-2667476926641678698",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "4580860743718136918",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "-835659456128061100",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "180282218162347969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "-4593642711053620046",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "7508708357315343826",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "180282218162347969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "3236524024413287372",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5685581058927370886
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 1,
+            "m_PathID": -8587867788662160608
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 2,
+          "m_PathID": -3904354238083406558
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 2494690765593745216
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4138265680281164753
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6066802412141638033
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8550802233516346794
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4857897255641981122
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8165747320726722652
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 325847662126547988
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6637029950606180250
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2667476926641678698
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4580860743718136918
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -835659456128061100
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 180282218162347969
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4593642711053620046
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7508708357315343826
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 180282218162347969
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": -0.29243478178977966,
+            "y": 0.0339396595954895,
+            "z": -0.02544763684272766
+          },
+          "m_Extent": {
+            "x": 0.4394332468509674,
+            "y": 0.26960015296936035,
+            "z": 0.36677005887031555
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-5685581058927370886",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8587867788662160608",
+          "fileId": 1,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-3904354238083406558",
+          "fileId": 2,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "2494690765593745216",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "4138265680281164753",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "6066802412141638033",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-8550802233516346794",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-4857897255641981122",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-8165747320726722652",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "325847662126547988",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "-6637029950606180250",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-2667476926641678698",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "4580860743718136918",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "-835659456128061100",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "180282218162347969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "-4593642711053620046",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "7508708357315343826",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "180282218162347969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "6947968316304370636",
+      "type": "MeshRenderer",
+      "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5144860020998046730
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 2,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -4465405117235266404
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_AdditionalVertexStreams": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_EnlightenVertexStream": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-5144860020998046730",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-4465405117235266404",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_AdditionalVertexStreams",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_EnlightenVertexStream",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "pathId": "-4858756789290892852",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_chirpa_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7405448452942180356
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": 6907970109121684514
+        },
+        "m_Name": "",
+        "_hologramVFX": [],
+        "_persistentHologramVFX": [],
+        "_materializeVFX": [],
+        "_stealthVFX": [],
+        "_locked": [],
+        "_propStates": [],
+        "_unitReferenceAreas": {
+          "_head": {
+            "m_FileID": 0,
+            "m_PathID": -1914521901753605789
+          },
+          "_center": {
+            "m_FileID": 0,
+            "m_PathID": -392575032766983324
+          },
+          "_hitAreas": [],
+          "_weapon": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 3488810395710966312
+            }
+          ],
+          "_offhand": [
+            {
+              "m_FileID": 0,
+              "m_PathID": -6994408326425386686
+            }
+          ],
+          "_feet": {
+            "m_FileID": 0,
+            "m_PathID": 5736973789158591449
+          },
+          "_uiArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_opponentUIArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_targetReticle": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_genericAreas": []
+        },
+        "_mainRenderer": {
+          "m_FileID": 0,
+          "m_PathID": -610621136177788561
+        },
+        "_weaponRenderer": {
+          "m_FileID": 0,
+          "m_PathID": 6947968316304370636
+        },
+        "_suppressDeathSequence": 0,
+        "_boundsSizeOverride": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "_unitRendererElements": [
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 162420597836212758
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 3236524024413287372
+            }
+          },
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -610621136177788561
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -7148315508332119853
+            }
+          },
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 6947968316304370636
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -5918794388083598837
+            }
+          }
+        ],
+        "_effectTimelines": []
+      },
+      "class": "UnitComponent",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "7405448452942180356",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "6907970109121684514",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._head",
+          "pathId": "-1914521901753605789",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._center",
+          "pathId": "-392575032766983324",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._weapon[0]",
+          "pathId": "3488810395710966312",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/weapon_tip"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._offhand[0]",
+          "pathId": "-6994408326425386686",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._feet",
+          "pathId": "5736973789158591449",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._uiArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._opponentUIArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._targetReticle",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_mainRenderer",
+          "pathId": "-610621136177788561",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh"
+        },
+        {
+          "fieldPath": "_weaponRenderer",
+          "pathId": "6947968316304370636",
+          "fileId": 0,
+          "type": "MeshRenderer",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].MainRenderer",
+          "pathId": "162420597836212758",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].ShadowRenderer",
+          "pathId": "3236524024413287372",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh_shadow"
+        },
+        {
+          "fieldPath": "_unitRendererElements[1].MainRenderer",
+          "pathId": "-610621136177788561",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[1].ShadowRenderer",
+          "pathId": "-7148315508332119853",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh_shadow"
+        },
+        {
+          "fieldPath": "_unitRendererElements[2].MainRenderer",
+          "pathId": "6947968316304370636",
+          "fileId": 0,
+          "type": "MeshRenderer",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[2].ShadowRenderer",
+          "pathId": "-5918794388083598837",
+          "fileId": 0,
+          "type": "MeshRenderer",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh_shadow"
+        }
+      ]
+    },
+    {
+      "pathId": "4136459778119187509",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_chirpa_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7405448452942180356
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": -4085762018415572245
+        },
+        "m_Name": "",
+        "_childPrefabs": [
+          "prefab.char_damage"
+        ]
+      },
+      "class": "BattleUnitChildPrefabLoader",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "7405448452942180356",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chirpa_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "-4085762018415572245",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        }
+      ]
+    }
+  ],
+  "constraints": [],
+  "glbAudit": [
+    {
+      "file": "extracted/char_chirpa_pre/char_chirpa_pre.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-7913758104930180400",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7015340449020280355",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6994408326425386686",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6812104946990508704",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6448066490313945067",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6294699463841593009",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5685581058927370886",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh_shadow",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5470822730573747302",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5350373236479790267",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5144860020998046730",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4629850410666679009",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4165340421990986184",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3487243828015571776",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3061124318550857566",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh_shadow",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2407692734225342388",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1914521901753605789",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1601889100375361246",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1499567126615094321",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh_shadow",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1364520403445770350",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1037242223052194700",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-392575032766983324",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "665463890562073921",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3488810395710966312",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/weapon_tip",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3681064497554160253",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3779851657154215483",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5180794130989735395",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5396600250837234946",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5688318697267426422",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5736973789158591449",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6775096435240739033",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7396643609227583637",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7405448452942180356",
+          "hierarchyPath": "unit.char_chirpa_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8781435092033710236",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    },
+    {
+      "file": "extracted/char_chirpa_pre/char_chirpa_pre.anim.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-7913758104930180400",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7015340449020280355",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6994408326425386686",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6812104946990508704",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6448066490313945067",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6294699463841593009",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5685581058927370886",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh_shadow",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5470822730573747302",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5350373236479790267",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5144860020998046730",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4629850410666679009",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4165340421990986184",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3487243828015571776",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3061124318550857566",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh_shadow",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2407692734225342388",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1914521901753605789",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1601889100375361246",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1499567126615094321",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_chirpa_mesh_shadow",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1364520403445770350",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_mesh",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1037242223052194700",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-392575032766983324",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "665463890562073921",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3488810395710966312",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/weapon_tip",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3681064497554160253",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3779851657154215483",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5180794130989735395",
+          "hierarchyPath": "unit.char_chirpa_pre/ewok_chirpa_mesh",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5396600250837234946",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5688318697267426422",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5736973789158591449",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6775096435240739033",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7396643609227583637",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7405448452942180356",
+          "hierarchyPath": "unit.char_chirpa_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8781435092033710236",
+          "hierarchyPath": "unit.char_chirpa_pre/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Authored initial state is not a substitute for original spawn/presentation transitions.",
+    "Missing GLB event targets need original geometry restored, not a guessed replacement.",
+    "GLB node identity matches require complete original hierarchy paths; ambiguous mappings remain pending."
+  ],
+  "clips": [
+    {
+      "animationName": "Idle@1.0",
+      "originalState": "Base Layer.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 1.0,
+      "clipName": "hmn_homescrn_any01",
+      "clipPathId": "-7311000309501844792",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 2.1666667461395264,
+      "events": [
+        {
+          "time": 1.25,
+          "functionName": "PostAudioEvent",
+          "data": "Play_VO_unit_ambient_breathe_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Idle@0.0",
+      "originalState": "Base Layer.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 0.0,
+      "clipName": "hmn_hurt_idle",
+      "clipPathId": "8095517517281013844",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 2.0416667461395264,
+      "events": [
+        {
+          "time": 1.0833333730697632,
+          "functionName": "PostAudioEvent",
+          "data": "Play_VO_unit_ambient_breatheHurt_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Attack",
+      "originalState": "Base Layer.Attack",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_sbr_var02_atk",
+      "clipPathId": "-3658143203926252365",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.1666667461395264,
+      "events": [
+        {
+          "time": 0.5833333134651184,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "AttackHitAndApplyDamage",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.4166666269302368,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "AttackReturn",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Run",
+      "originalState": "Base Layer.Run",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_sbr_var01_run",
+      "clipPathId": "8329005646469379661",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 0.6666667461395264,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_human_stepCloak_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.3333333432674408,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_human_stepCloak_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Death",
+      "originalState": "Base Layer.Death",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_dth_01",
+      "clipPathId": "-1414035757376003321",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 0.75,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Homescreen Idle",
+      "originalState": "Base Layer.Homescreen Idle",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_pst_var02_idle",
+      "clipPathId": "-9041368429829579794",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 2.125000476837158,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Hit",
+      "originalState": "Hit Reaction.Hit",
+      "layer": 1,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_hit_01",
+      "clipPathId": "-6234430718897645586",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 0.6666667461395264,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Special Ability",
+      "originalState": "Special Ability.Special Ability",
+      "layer": 2,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_spcl_overheadcheer",
+      "clipPathId": "5953392411624120400",
+      "sourceBundle": "char_chirpa_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.9000003337860107,
+      "events": [
+        {
+          "time": 0.5,
+          "functionName": "PostAudioEvent",
+          "data": "Play_ANM_foley_cloth_rustle",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.0666667222976685,
+          "functionName": "StartParticleSystem",
+          "data": "vfx.vfx_muzzle_Red",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.5,
+          "functionName": "StartParticleSystem",
+          "data": "vfx.vfx_muzzle_Red",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Leader Ability",
+      "originalState": "Leader Ability.Leader Ability",
+      "layer": 3,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_spcl_throwobjectoverhead",
+      "clipPathId": "3813441171321684078",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.4666668176651,
+      "events": [
+        {
+          "time": 0.4000000059604645,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "StartActivationEffect",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Special Ability 2",
+      "originalState": "Special Ability 2.Special Ability 2",
+      "layer": 4,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_spcl_chargegesture",
+      "clipPathId": "960735517554563484",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.8000001907348633,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    }
+  ],
+  "sharedAnimationSource": {
+    "bundle": "shared_animationcontainer",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\79ff98634f7a2e000000000000000000\\__data",
+    "sha256": "87c7b8b0d4e698890495aa94b85f33b655d92be20517464d1e2db80b38b529bc"
+  }
+}

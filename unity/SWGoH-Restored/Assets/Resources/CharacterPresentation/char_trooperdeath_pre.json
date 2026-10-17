@@ -1,0 +1,5617 @@
+{
+  "schemaVersion": 1,
+  "bundle": "char_trooperdeath_pre",
+  "source": {
+    "bundle": "char_trooperdeath_pre",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_trooperdeath_pre\\fc1f7e4f9ca203000000000000000000\\__data",
+    "sha256": "db53ff976eff5e1d5a709bc23e5fa620e45de024708225c74624b3e403483acb"
+  },
+  "gameObjects": [
+    {
+      "pathId": "-9001844743952244443",
+      "name": "Right_clavJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-739769196977928944",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -9001844743952244443
+        },
+        "m_LocalRotation": {
+          "x": 0.49648404121398926,
+          "y": 0.4483005106449127,
+          "z": -0.5273796916007996,
+          "w": 0.5238329768180847
+        },
+        "m_LocalPosition": {
+          "x": -0.22575420141220093,
+          "y": -0.007752938196063042,
+          "z": -0.03500005975365639
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -4676676577941734086
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -127471429218025260
+        }
+      }
+    },
+    {
+      "pathId": "-8973693318449812509",
+      "name": "headJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5317297989010788856",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8973693318449812509
+        },
+        "m_LocalRotation": {
+          "x": 0.45128223299980164,
+          "y": -0.5475209951400757,
+          "z": 0.47451889514923096,
+          "w": 0.5209578275680542
+        },
+        "m_LocalPosition": {
+          "x": -0.08697711676359177,
+          "y": -2.2351745343485163e-08,
+          "z": 2.7939684343891713e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8951002808703295380
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7260597918291117063
+        }
+      }
+    },
+    {
+      "pathId": "-7151958299544151677",
+      "name": "flash",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/flash",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3780055623638189844",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7151958299544151677
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.05299999937415123,
+          "y": 0.0,
+          "z": -0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8225207064723134301
+        }
+      }
+    },
+    {
+      "pathId": "-6881274820860935097",
+      "name": "pelvicJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3659958421498413178",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6881274820860935097
+        },
+        "m_LocalRotation": {
+          "x": -0.5935056209564209,
+          "y": 0.6866113543510437,
+          "z": -0.265186071395874,
+          "w": 0.32556453347206116
+        },
+        "m_LocalPosition": {
+          "x": 0.05608012527227402,
+          "y": 0.9790898561477661,
+          "z": -0.013727470301091671
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -826582818766786606
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3504506251526647257
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7689929218674707058
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1971348835192253131
+        }
+      }
+    },
+    {
+      "pathId": "-6422217247672452699",
+      "name": "Left_clavJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8842975910109810111",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6422217247672452699
+        },
+        "m_LocalRotation": {
+          "x": -0.4483005404472351,
+          "y": 0.4964841306209564,
+          "z": 0.5238329768180847,
+          "w": 0.5273795127868652
+        },
+        "m_LocalPosition": {
+          "x": -0.22575417160987854,
+          "y": -0.0077529530972242355,
+          "z": 0.034999970346689224
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -4221326735744210286
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -127471429218025260
+        }
+      }
+    },
+    {
+      "pathId": "-6377944995883494823",
+      "name": "Right_wrstJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4851198674168802807",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6377944995883494823
+        },
+        "m_LocalRotation": {
+          "x": -0.08060040324926376,
+          "y": 0.03333589434623718,
+          "z": 0.30962204933166504,
+          "w": 0.9468508958816528
+        },
+        "m_LocalPosition": {
+          "x": 0.24999801814556122,
+          "y": -1.0012884104071418e-06,
+          "z": -1.3839454595654388e-06
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2292515090603349817
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 4714145923077190706
+        }
+      }
+    },
+    {
+      "pathId": "-6246434170794180059",
+      "name": "Right_elbwJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4714145923077190706",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6246434170794180059
+        },
+        "m_LocalRotation": {
+          "x": 0.0361420139670372,
+          "y": 0.710246205329895,
+          "z": 0.14087119698524475,
+          "w": 0.6887666583061218
+        },
+        "m_LocalPosition": {
+          "x": 0.28600215911865234,
+          "y": 1.3858086731488584e-06,
+          "z": -1.7152717024515596e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4851198674168802807
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4676676577941734086
+        }
+      }
+    },
+    {
+      "pathId": "-6022659846156050091",
+      "name": "spine1JNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7689929218674707058",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6022659846156050091
+        },
+        "m_LocalRotation": {
+          "x": -0.02349141612648964,
+          "y": 0.0005573522648774087,
+          "z": -0.06885650008916855,
+          "w": 0.9973498582839966
+        },
+        "m_LocalPosition": {
+          "x": -0.0988585352897644,
+          "y": 7.450581485102248e-09,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -127471429218025260
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3659958421498413178
+        }
+      }
+    },
+    {
+      "pathId": "-5856327215955235810",
+      "name": "Left_wrstJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3953435444825022698",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5856327215955235810
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.2500000298023224,
+          "y": 2.342858707038431e-08,
+          "z": 1.3387762010097504e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -7149421031252341492
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8628090262460579535
+        }
+      }
+    },
+    {
+      "pathId": "-4823076769388727946",
+      "name": "neckJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7260597918291117063",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4823076769388727946
+        },
+        "m_LocalRotation": {
+          "x": -0.9231716394424438,
+          "y": 0.08284173905849457,
+          "z": -0.0430603101849556,
+          "w": 0.37287700176239014
+        },
+        "m_LocalPosition": {
+          "x": -0.331489235162735,
+          "y": -8.940694584680386e-08,
+          "z": -6.70552182668871e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5317297989010788856
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -127471429218025260
+        }
+      }
+    },
+    {
+      "pathId": "-4150693811527021826",
+      "name": "eye_R",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_R",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-436692422576353611",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4150693811527021826
+        },
+        "m_LocalRotation": {
+          "x": -0.8528193235397339,
+          "y": -0.0020496246870607138,
+          "z": 0.07462166994810104,
+          "w": 0.5168429613113403
+        },
+        "m_LocalPosition": {
+          "x": -0.04320000112056732,
+          "y": 0.10130000114440918,
+          "z": -0.03660000115633011
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8225207064723134301
+        }
+      }
+    },
+    {
+      "pathId": "-2771805680558962301",
+      "name": "Left_kneeJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8275065879807037505",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2771805680558962301
+        },
+        "m_LocalRotation": {
+          "x": -0.9844764471054077,
+          "y": -0.1717667281627655,
+          "z": 0.015276797115802765,
+          "w": -0.032695889472961426
+        },
+        "m_LocalPosition": {
+          "x": -0.4111265540122986,
+          "y": 5.960464477539063e-08,
+          "z": 4.190951941041021e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5157929469511689517
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -826582818766786606
+        }
+      }
+    },
+    {
+      "pathId": "-2392786924326453110",
+      "name": "vfx_Enoch_decay",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8225207064723134301",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2392786924326453110
+        },
+        "m_LocalRotation": {
+          "x": -0.5,
+          "y": 0.5,
+          "z": 0.5,
+          "w": -0.5
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": -0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -436692422576353611
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6836950156230023021
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2801605729139184996
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3780055623638189844
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3550008790219973384
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8951002808703295380
+        }
+      }
+    },
+    {
+      "pathId": "-1322212132054687280",
+      "name": "Left_wpnJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8832903335505935367",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1322212132054687280
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.13174587488174438,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": -0.08805680274963379,
+          "y": -4.163336342344337e-17,
+          "z": -4.649058915617843e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7149421031252341492
+        }
+      }
+    },
+    {
+      "pathId": "-571631814061051392",
+      "name": "Left_ankleJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5157929469511689517",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -571631814061051392
+        },
+        "m_LocalRotation": {
+          "x": 0.9068912267684937,
+          "y": 0.41584905982017517,
+          "z": 0.058487702161073685,
+          "w": 0.034599669277668
+        },
+        "m_LocalPosition": {
+          "x": -0.4230000674724579,
+          "y": 5.960462345910855e-08,
+          "z": -6.332992796842518e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -5496520092839895793
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8275065879807037505
+        }
+      }
+    },
+    {
+      "pathId": "-525615393113404714",
+      "name": "Left_wpn_offsetJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7149421031252341492",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -525615393113404714
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.13174587488174438,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8832903335505935367
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3953435444825022698
+        }
+      }
+    },
+    {
+      "pathId": "111893527758582678",
+      "name": "Left_ballJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-5496520092839895793",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 111893527758582678
+        },
+        "m_LocalRotation": {
+          "x": 7.484949549052544e-08,
+          "y": 1.3444348212487967e-07,
+          "z": -0.3744736909866333,
+          "w": 0.9272375106811523
+        },
+        "m_LocalPosition": {
+          "x": -0.11951993405818939,
+          "y": 2.2351734685344127e-08,
+          "z": 7.450580596923828e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5157929469511689517
+        }
+      }
+    },
+    {
+      "pathId": "116029679287986195",
+      "name": "vfx_Enoch_decay_master",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8951002808703295380",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 116029679287986195
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8225207064723134301
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5317297989010788856
+        }
+      }
+    },
+    {
+      "pathId": "397636923277936777",
+      "name": "Right_ballJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1834412004867859510",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 397636923277936777
+        },
+        "m_LocalRotation": {
+          "x": 1.866688137397432e-08,
+          "y": 2.7229781096593797e-08,
+          "z": -0.37447822093963623,
+          "w": 0.9272357821464539
+        },
+        "m_LocalPosition": {
+          "x": 0.11951993405818939,
+          "y": 7.450582373280668e-09,
+          "z": -3.725290653733282e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5472766892663667155
+        }
+      }
+    },
+    {
+      "pathId": "549028489095751898",
+      "name": "Right_kneeJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8746935072094329352",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 549028489095751898
+        },
+        "m_LocalRotation": {
+          "x": -0.9805846810340881,
+          "y": -0.1512635201215744,
+          "z": -0.02603491209447384,
+          "w": 0.1220458596944809
+        },
+        "m_LocalPosition": {
+          "x": 0.41112658381462097,
+          "y": 2.9802322387695312e-08,
+          "z": -5.774198541530495e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5472766892663667155
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3504506251526647257
+        }
+      }
+    },
+    {
+      "pathId": "584351184369762658",
+      "name": "neck_wisps",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/neck_wisps",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2801605729139184996",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 584351184369762658
+        },
+        "m_LocalRotation": {
+          "x": 0.04626109078526497,
+          "y": 0.7055919170379639,
+          "z": -0.04626112058758736,
+          "w": 0.7055919766426086
+        },
+        "m_LocalPosition": {
+          "x": 0.09200000017881393,
+          "y": -0.013000000268220901,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8225207064723134301
+        }
+      }
+    },
+    {
+      "pathId": "2112638180660698234",
+      "name": "trooperdeath_mesh_shadow",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "-7100849646601115132",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2112638180660698234
+        },
+        "m_LocalRotation": {
+          "x": -0.7071068286895752,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 0.009999999776482582,
+          "y": 0.009999999776482582,
+          "z": 0.009999999776482582
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1971348835192253131
+        }
+      }
+    },
+    {
+      "pathId": "3312069757878939401",
+      "name": "spine2JNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-127471429218025260",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3312069757878939401
+        },
+        "m_LocalRotation": {
+          "x": 0.9982002377510071,
+          "y": -0.059281885623931885,
+          "z": 0.002446613274514675,
+          "w": 0.008723314851522446
+        },
+        "m_LocalPosition": {
+          "x": -0.17100295424461365,
+          "y": -2.9802322387695312e-08,
+          "z": 3.4226101064405157e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8842975910109810111
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7260597918291117063
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -739769196977928944
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7689929218674707058
+        }
+      }
+    },
+    {
+      "pathId": "3851969680585323637",
+      "name": "trooperdeath_mesh",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-839881658444186687",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3851969680585323637
+        },
+        "m_LocalRotation": {
+          "x": -0.7071068286895752,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 0.009999999776482582,
+          "y": 0.009999999776482582,
+          "z": 0.009999999776482582
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1971348835192253131
+        }
+      }
+    },
+    {
+      "pathId": "4266593093228450751",
+      "name": "bakgnd_shadow",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/bakgnd_shadow",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3550008790219973384",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4266593093228450751
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.05299999937415123,
+          "y": 0.0,
+          "z": -0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8225207064723134301
+        }
+      }
+    },
+    {
+      "pathId": "4944406042869797888",
+      "name": "Left_shldrJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4221326735744210286",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4944406042869797888
+        },
+        "m_LocalRotation": {
+          "x": 0.21341301500797272,
+          "y": -0.07838793098926544,
+          "z": 0.6510056853294373,
+          "w": 0.7242251038551331
+        },
+        "m_LocalPosition": {
+          "x": -0.16197220981121063,
+          "y": 3.81478457711637e-08,
+          "z": 6.912159733474255e-10
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8628090262460579535
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8842975910109810111
+        }
+      }
+    },
+    {
+      "pathId": "5060149099617765859",
+      "name": "Left_elbwJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8628090262460579535",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5060149099617765859
+        },
+        "m_LocalRotation": {
+          "x": -0.26638004183769226,
+          "y": 0.6794525980949402,
+          "z": 0.19924236834049225,
+          "w": 0.6539788842201233
+        },
+        "m_LocalPosition": {
+          "x": -0.28600001335144043,
+          "y": 1.5859770385873162e-08,
+          "z": -6.075045466680251e-10
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3953435444825022698
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4221326735744210286
+        }
+      }
+    },
+    {
+      "pathId": "5711450693212315769",
+      "name": "Right_hipJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3504506251526647257",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5711450693212315769
+        },
+        "m_LocalRotation": {
+          "x": 0.06073308363556862,
+          "y": 0.03888585418462753,
+          "z": 0.10737882554531097,
+          "w": -0.9915993213653564
+        },
+        "m_LocalPosition": {
+          "x": 0.04877680540084839,
+          "y": -0.01252296008169651,
+          "z": 0.09399999678134918
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8746935072094329352
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3659958421498413178
+        }
+      }
+    },
+    {
+      "pathId": "6172956687585271420",
+      "name": "eye_L",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_L",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6836950156230023021",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6172956687585271420
+        },
+        "m_LocalRotation": {
+          "x": -0.4849461615085602,
+          "y": -0.006565958261489868,
+          "z": -0.029928550124168396,
+          "w": 0.8740071654319763
+        },
+        "m_LocalPosition": {
+          "x": -0.04190000146627426,
+          "y": 0.09809999912977219,
+          "z": 0.037700001150369644
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8225207064723134301
+        }
+      }
+    },
+    {
+      "pathId": "6548356283982394665",
+      "name": "Right_ankleJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5472766892663667155",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6548356283982394665
+        },
+        "m_LocalRotation": {
+          "x": 0.8583114147186279,
+          "y": 0.5041609406471252,
+          "z": 0.045699577778577805,
+          "w": 0.08387377113103867
+        },
+        "m_LocalPosition": {
+          "x": 0.4230000674724579,
+          "y": 5.960464477539063e-08,
+          "z": 8.195637946073475e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1834412004867859510
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8746935072094329352
+        }
+      }
+    },
+    {
+      "pathId": "6559805793776927550",
+      "name": "Right_wpn_offsetJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2292515090603349817",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6559805793776927550
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.13174587488174438,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": -5.551115123125783e-17,
+          "y": 2.220446049250313e-16,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8048628371875139969
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 4851198674168802807
+        }
+      }
+    },
+    {
+      "pathId": "6943652087405319021",
+      "name": "unit.char_trooperdeath_pre",
+      "hierarchyPath": "unit.char_trooperdeath_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-9118568475671424337",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6943652087405319021
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1971348835192253131
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    },
+    {
+      "pathId": "7234736209318501378",
+      "name": "weapon_ref_area",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre/weapon_ref_area",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6884751697015815222",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7234736209318501378
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 5.599999904632568,
+          "z": 41.20000076293945
+        },
+        "m_LocalScale": {
+          "x": 100.0,
+          "y": 100.0,
+          "z": 100.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7963546918114999791
+        }
+      }
+    },
+    {
+      "pathId": "7513978346658765051",
+      "name": "Scaler",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1971348835192253131",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7513978346658765051
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0800000429153442,
+          "y": 1.0800000429153442,
+          "z": 1.0800000429153442
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3659958421498413178
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -839881658444186687
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7100849646601115132
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -9118568475671424337
+        }
+      }
+    },
+    {
+      "pathId": "7806242472365900609",
+      "name": "rfl_trooperdeath_pre_shadow",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "-2136953646287980826",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7806242472365900609
+        },
+        "m_LocalRotation": {
+          "x": -0.41522255539894104,
+          "y": 0.5391923785209656,
+          "z": -0.42477041482925415,
+          "w": 0.5970193147659302
+        },
+        "m_LocalPosition": {
+          "x": -0.012000000104308128,
+          "y": -0.009999999776482582,
+          "z": -0.03999999910593033
+        },
+        "m_LocalScale": {
+          "x": 0.009999999776482582,
+          "y": 0.009999999776482582,
+          "z": 0.009999999776482582
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8048628371875139969
+        }
+      }
+    },
+    {
+      "pathId": "7869383039655347839",
+      "name": "Right_shldrJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4676676577941734086",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7869383039655347839
+        },
+        "m_LocalRotation": {
+          "x": 0.25849080085754395,
+          "y": 0.16237080097198486,
+          "z": 0.508873462677002,
+          "w": 0.8049013018608093
+        },
+        "m_LocalPosition": {
+          "x": 0.16197222471237183,
+          "y": -9.313229298868464e-09,
+          "z": 7.450581485102248e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4714145923077190706
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -739769196977928944
+        }
+      }
+    },
+    {
+      "pathId": "8126523225015926968",
+      "name": "rfl_trooperdeath_pre",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7963546918114999791",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8126523225015926968
+        },
+        "m_LocalRotation": {
+          "x": -0.41522255539894104,
+          "y": 0.5391923785209656,
+          "z": -0.42477041482925415,
+          "w": 0.5970193147659302
+        },
+        "m_LocalPosition": {
+          "x": -0.012000000104308128,
+          "y": -0.009999999776482582,
+          "z": -0.03999999910593033
+        },
+        "m_LocalScale": {
+          "x": 0.009999999776482582,
+          "y": 0.009999999776482582,
+          "z": 0.009999999776482582
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6884751697015815222
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8048628371875139969
+        }
+      }
+    },
+    {
+      "pathId": "8706009017114548245",
+      "name": "Right_wpnJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8048628371875139969",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8706009017114548245
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.13174587488174438,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": 0.0880567878484726,
+          "y": -5.407456455941428e-07,
+          "z": 2.1035233999100456e-07
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7963546918114999791
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2136953646287980826
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2292515090603349817
+        }
+      }
+    },
+    {
+      "pathId": "8947796348533294359",
+      "name": "Left_hipJNT",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-826582818766786606",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8947796348533294359
+        },
+        "m_LocalRotation": {
+          "x": 0.11059356480836868,
+          "y": -0.29787832498550415,
+          "z": 0.9306483268737793,
+          "w": 0.1814701110124588
+        },
+        "m_LocalPosition": {
+          "x": 0.04877680540084839,
+          "y": -0.01252296008169651,
+          "z": -0.09399999678134918
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8275065879807037505
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3659958421498413178
+        }
+      }
+    }
+  ],
+  "renderers": [
+    {
+      "pathId": "-6762693586496361538",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/bakgnd_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4266593093228450751
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1062390467093332193
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": 2.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": true,
+        "m_ApplyActiveColorSpace": true,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "4266593093228450751",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/bakgnd_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-1062390467093332193",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-4598969833053531221",
+      "type": "MeshRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8126523225015926968
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 2,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1723848503980883832
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_AdditionalVertexStreams": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_EnlightenVertexStream": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "8126523225015926968",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-1723848503980883832",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_AdditionalVertexStreams",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_EnlightenVertexStream",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-2757839123662370644",
+      "type": "MeshRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7806242472365900609
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 2,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 2,
+            "m_PathID": -8587867788662160608
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_AdditionalVertexStreams": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_EnlightenVertexStream": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "7806242472365900609",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8587867788662160608",
+          "fileId": 2,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_AdditionalVertexStreams",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_EnlightenVertexStream",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-2284478810440541067",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3851969680585323637
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6126019798960194074
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -7970985752529988722
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3659958421498413178
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7689929218674707058
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -127471429218025260
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7260597918291117063
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5317297989010788856
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8842975910109810111
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4221326735744210286
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8628090262460579535
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7149421031252341492
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8832903335505935367
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -739769196977928944
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4676676577941734086
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4714145923077190706
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4851198674168802807
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2292515090603349817
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8048628371875139969
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -826582818766786606
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8275065879807037505
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5157929469511689517
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5496520092839895793
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3504506251526647257
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8746935072094329352
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5472766892663667155
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1834412004867859510
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": -3659958421498413178
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.1312657594680786,
+            "y": -0.028356119990348816,
+            "z": -0.003004699945449829
+          },
+          "m_Extent": {
+            "x": 0.9812604188919067,
+            "y": 0.2965582013130188,
+            "z": 0.5997647047042847
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "3851969680585323637",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "6126019798960194074",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-7970985752529988722",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-3659958421498413178",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-7689929218674707058",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-127471429218025260",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-7260597918291117063",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "5317297989010788856",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-8842975910109810111",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-4221326735744210286",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "8628090262460579535",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-7149421031252341492",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "-8832903335505935367",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "-739769196977928944",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "-4676676577941734086",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "4714145923077190706",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "4851198674168802807",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "-2292515090603349817",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "8048628371875139969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "-826582818766786606",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "8275065879807037505",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "5157929469511689517",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "-5496520092839895793",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[20]",
+          "pathId": "-3504506251526647257",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[21]",
+          "pathId": "-8746935072094329352",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[22]",
+          "pathId": "5472766892663667155",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[23]",
+          "pathId": "-1834412004867859510",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "-3659958421498413178",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "-1439565401614425778",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_L",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6172956687585271420
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3821609671978472850
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 1.0,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": -10.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 2,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": true,
+        "m_ApplyActiveColorSpace": true,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "6172956687585271420",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_L"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "3821609671978472850",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-1022637178017412375",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2112638180660698234
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 2,
+            "m_PathID": -8587867788662160608
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -7970985752529988722
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3659958421498413178
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7689929218674707058
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -127471429218025260
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7260597918291117063
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5317297989010788856
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8842975910109810111
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4221326735744210286
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8628090262460579535
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7149421031252341492
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8832903335505935367
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -739769196977928944
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4676676577941734086
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4714145923077190706
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4851198674168802807
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2292515090603349817
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8048628371875139969
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -826582818766786606
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8275065879807037505
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5157929469511689517
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5496520092839895793
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3504506251526647257
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8746935072094329352
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5472766892663667155
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1834412004867859510
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": -3659958421498413178
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.1312657594680786,
+            "y": -0.028356119990348816,
+            "z": -0.003004699945449829
+          },
+          "m_Extent": {
+            "x": 0.9812604188919067,
+            "y": 0.2965582013130188,
+            "z": 0.5997647047042847
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "2112638180660698234",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8587867788662160608",
+          "fileId": 2,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-7970985752529988722",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-3659958421498413178",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-7689929218674707058",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-127471429218025260",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-7260597918291117063",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "5317297989010788856",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-8842975910109810111",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-4221326735744210286",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "8628090262460579535",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-7149421031252341492",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "-8832903335505935367",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "-739769196977928944",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "-4676676577941734086",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "4714145923077190706",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "4851198674168802807",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "-2292515090603349817",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "8048628371875139969",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "-826582818766786606",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "8275065879807037505",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "5157929469511689517",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "-5496520092839895793",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[20]",
+          "pathId": "-3504506251526647257",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[21]",
+          "pathId": "-8746935072094329352",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[22]",
+          "pathId": "5472766892663667155",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[23]",
+          "pathId": "-1834412004867859510",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "-3659958421498413178",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "1542934469620999865",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/flash",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7151958299544151677
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3504454706859777491
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": -20.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": true,
+        "m_ApplyActiveColorSpace": true,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-7151958299544151677",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/flash"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-3504454706859777491",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "2606735675196677586",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2392786924326453110
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8308402369294867413
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": 0.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": true,
+        "m_ApplyActiveColorSpace": true,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-2392786924326453110",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "8308402369294867413",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "4956332189170679774",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/neck_wisps",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 584351184369762658
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8490850931065893604
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": -5.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": true,
+        "m_ApplyActiveColorSpace": true,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "584351184369762658",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/neck_wisps"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "8490850931065893604",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "6476149579674467528",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_R",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4150693811527021826
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3821609671978472850
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 1.0,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": -10.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 2,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": true,
+        "m_ApplyActiveColorSpace": true,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-4150693811527021826",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_R"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "3821609671978472850",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "pathId": "-8719266526582942147",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_trooperdeath_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6943652087405319021
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": -4085762018415572245
+        },
+        "m_Name": "",
+        "_childPrefabs": [
+          "prefab.char_damage"
+        ]
+      },
+      "class": "BattleUnitChildPrefabLoader",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "6943652087405319021",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "-4085762018415572245",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "695234305745233417",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_trooperdeath_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6943652087405319021
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": 6907970109121684514
+        },
+        "m_Name": "",
+        "_hologramVFX": [],
+        "_persistentHologramVFX": [],
+        "_materializeVFX": [],
+        "_stealthVFX": [],
+        "_locked": [],
+        "_propStates": [],
+        "_unitReferenceAreas": {
+          "_head": {
+            "m_FileID": 0,
+            "m_PathID": -8973693318449812509
+          },
+          "_center": {
+            "m_FileID": 0,
+            "m_PathID": 3312069757878939401
+          },
+          "_hitAreas": [
+            {
+              "m_FileID": 0,
+              "m_PathID": -2771805680558962301
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": 5711450693212315769
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": 5060149099617765859
+            }
+          ],
+          "_weapon": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 7234736209318501378
+            }
+          ],
+          "_offhand": [
+            {
+              "m_FileID": 0,
+              "m_PathID": -1322212132054687280
+            }
+          ],
+          "_feet": {
+            "m_FileID": 0,
+            "m_PathID": 397636923277936777
+          },
+          "_uiArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_opponentUIArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_targetReticle": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_genericAreas": []
+        },
+        "_mainRenderer": {
+          "m_FileID": 0,
+          "m_PathID": -2284478810440541067
+        },
+        "_weaponRenderer": {
+          "m_FileID": 0,
+          "m_PathID": -4598969833053531221
+        },
+        "_suppressDeathSequence": 0,
+        "_boundsSizeOverride": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "_unitRendererElements": [
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -4598969833053531221
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -2757839123662370644
+            }
+          },
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -2284478810440541067
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -1022637178017412375
+            }
+          }
+        ],
+        "_effectTimelines": []
+      },
+      "class": "UnitComponent",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "6943652087405319021",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "6907970109121684514",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._head",
+          "pathId": "-8973693318449812509",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._center",
+          "pathId": "3312069757878939401",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[0]",
+          "pathId": "-2771805680558962301",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[1]",
+          "pathId": "5711450693212315769",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[2]",
+          "pathId": "5060149099617765859",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._weapon[0]",
+          "pathId": "7234736209318501378",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre/weapon_ref_area"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._offhand[0]",
+          "pathId": "-1322212132054687280",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._feet",
+          "pathId": "397636923277936777",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._uiArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._opponentUIArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._targetReticle",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_mainRenderer",
+          "pathId": "-2284478810440541067",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh"
+        },
+        {
+          "fieldPath": "_weaponRenderer",
+          "pathId": "-4598969833053531221",
+          "fileId": 0,
+          "type": "MeshRenderer",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre"
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].MainRenderer",
+          "pathId": "-4598969833053531221",
+          "fileId": 0,
+          "type": "MeshRenderer",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre"
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].ShadowRenderer",
+          "pathId": "-2757839123662370644",
+          "fileId": 0,
+          "type": "MeshRenderer",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre_shadow"
+        },
+        {
+          "fieldPath": "_unitRendererElements[1].MainRenderer",
+          "pathId": "-2284478810440541067",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[1].ShadowRenderer",
+          "pathId": "-1022637178017412375",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh_shadow"
+        }
+      ]
+    },
+    {
+      "pathId": "7162852515564911351",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_trooperdeath_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6943652087405319021
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": 4529141531353518334
+        },
+        "m_Name": "",
+        "_unitPresentations": [
+          {
+            "Location": 1,
+            "Position": {
+              "x": 0.0,
+              "y": 0.949999988079071,
+              "z": -6.0
+            },
+            "Rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "Scale": 0.949999988079071
+          }
+        ]
+      },
+      "class": "CharacterUnitPresentation",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "6943652087405319021",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_trooperdeath_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "4529141531353518334",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        }
+      ]
+    }
+  ],
+  "constraints": [],
+  "glbAudit": [
+    {
+      "file": "extracted/char_trooperdeath_pre/char_trooperdeath_pre.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-9001844743952244443",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8973693318449812509",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7151958299544151677",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/flash",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6881274820860935097",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6422217247672452699",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6377944995883494823",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6246434170794180059",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6022659846156050091",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5856327215955235810",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4823076769388727946",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4150693811527021826",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_R",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2771805680558962301",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2392786924326453110",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1322212132054687280",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-571631814061051392",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-525615393113404714",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "111893527758582678",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "116029679287986195",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "397636923277936777",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "549028489095751898",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "584351184369762658",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/neck_wisps",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "2112638180660698234",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh_shadow",
+          "nodes": [
+            {
+              "index": 38,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3312069757878939401",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3851969680585323637",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh",
+          "nodes": [
+            {
+              "index": 37,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4266593093228450751",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/bakgnd_shadow",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4944406042869797888",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5060149099617765859",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5711450693212315769",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6172956687585271420",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_L",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6548356283982394665",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6559805793776927550",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6943652087405319021",
+          "hierarchyPath": "unit.char_trooperdeath_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7234736209318501378",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre/weapon_ref_area",
+          "nodes": [
+            {
+              "index": 35,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7513978346658765051",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7806242472365900609",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre_shadow",
+          "nodes": [
+            {
+              "index": 36,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7869383039655347839",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8126523225015926968",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre",
+          "nodes": [
+            {
+              "index": 34,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8706009017114548245",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+          "nodes": [
+            {
+              "index": 33,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8947796348533294359",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    },
+    {
+      "file": "extracted/char_trooperdeath_pre/char_trooperdeath_pre.anim.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-9001844743952244443",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8973693318449812509",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7151958299544151677",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/flash",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6881274820860935097",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6422217247672452699",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6377944995883494823",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6246434170794180059",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6022659846156050091",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5856327215955235810",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4823076769388727946",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4150693811527021826",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_R",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2771805680558962301",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2392786924326453110",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1322212132054687280",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-571631814061051392",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-525615393113404714",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "111893527758582678",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "116029679287986195",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "397636923277936777",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "549028489095751898",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "584351184369762658",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/neck_wisps",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "2112638180660698234",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh_shadow",
+          "nodes": [
+            {
+              "index": 38,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3312069757878939401",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3851969680585323637",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/trooperdeath_mesh",
+          "nodes": [
+            {
+              "index": 37,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4266593093228450751",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/bakgnd_shadow",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4944406042869797888",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5060149099617765859",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5711450693212315769",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6172956687585271420",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT/vfx_Enoch_decay_master/vfx_Enoch_decay/eye_L",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6548356283982394665",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6559805793776927550",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6943652087405319021",
+          "hierarchyPath": "unit.char_trooperdeath_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7234736209318501378",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre/weapon_ref_area",
+          "nodes": [
+            {
+              "index": 35,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7513978346658765051",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7806242472365900609",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre_shadow",
+          "nodes": [
+            {
+              "index": 36,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7869383039655347839",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8126523225015926968",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_trooperdeath_pre",
+          "nodes": [
+            {
+              "index": 34,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8706009017114548245",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+          "nodes": [
+            {
+              "index": 33,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8947796348533294359",
+          "hierarchyPath": "unit.char_trooperdeath_pre/Scaler/pelvicJNT/Left_hipJNT",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Authored initial state is not a substitute for original spawn/presentation transitions.",
+    "Missing GLB event targets need original geometry restored, not a guessed replacement.",
+    "GLB node identity matches require complete original hierarchy paths; ambiguous mappings remain pending."
+  ],
+  "clips": [
+    {
+      "animationName": "Idle@1.0",
+      "originalState": "Base Layer.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 1.0,
+      "clipName": "hmn_rfl_idle_phasma",
+      "clipPathId": "5594456781169429352",
+      "sourceBundle": "char_trooperdeath_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 2.633333444595337,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Idle@0.0",
+      "originalState": "Base Layer.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 0.0,
+      "clipName": "hmn_hurt_idle",
+      "clipPathId": "8095517517281013844",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 2.0416667461395264,
+      "events": [
+        {
+          "time": 1.0833333730697632,
+          "functionName": "PostAudioEvent",
+          "data": "Play_VO_unit_ambient_breatheHurt_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Attack",
+      "originalState": "Base Layer.Attack",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_rfl_atk_phasma",
+      "clipPathId": "7330182633273711520",
+      "sourceBundle": "char_trooperdeath_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.566666841506958,
+      "events": [
+        {
+          "time": 0.6333333253860474,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.9666666388511658,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Run",
+      "originalState": "Base Layer.Run",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_sbr_var01_run",
+      "clipPathId": "8329005646469379661",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 0.6666667461395264,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_human_stepCloak_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.3333333432674408,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_human_stepCloak_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Death",
+      "originalState": "Base Layer.Death",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_dth_01",
+      "clipPathId": "-1414035757376003321",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 0.75,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Homescreen Idle",
+      "originalState": "Base Layer.Homescreen Idle",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_homescrn_any01",
+      "clipPathId": "-7311000309501844792",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 2.1666667461395264,
+      "events": [
+        {
+          "time": 1.25,
+          "functionName": "PostAudioEvent",
+          "data": "Play_VO_unit_ambient_breathe_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Hit",
+      "originalState": "Hit Reaction.Hit",
+      "layer": 1,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_hit_01",
+      "clipPathId": "-6234430718897645586",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 0.6666667461395264,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Special Ability",
+      "originalState": "Special Ability.Special Ability",
+      "layer": 2,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_spcl_grenadethrow",
+      "clipPathId": "596391343961692909",
+      "sourceBundle": "shared_animationcontainer",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.7333334684371948,
+      "events": [
+        {
+          "time": 0.7333333492279053,
+          "functionName": "DisableGenericReferencePoint",
+          "data": "grenade",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.800000011920929,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.800000011920929,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.800000011920929,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.800000011920929,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.5,
+          "functionName": "EnableGenericReferencePoint",
+          "data": "grenade",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Special Ability 2",
+      "originalState": "Special Ability 2.Special Ability 2",
+      "layer": 3,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "hmn_rfl_atk04",
+      "clipPathId": "9086669875482598064",
+      "sourceBundle": "char_trooperdeath_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.0833330154418945,
+      "events": [
+        {
+          "time": 0.75,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.9166666865348816,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.0833333730697632,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    }
+  ],
+  "sharedAnimationSource": {
+    "bundle": "shared_animationcontainer",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\79ff98634f7a2e000000000000000000\\__data",
+    "sha256": "87c7b8b0d4e698890495aa94b85f33b655d92be20517464d1e2db80b38b529bc"
+  }
+}

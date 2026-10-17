@@ -1,0 +1,5676 @@
+{
+  "schemaVersion": 1,
+  "bundle": "char_vader_cinematic_pre",
+  "source": {
+    "bundle": "char_vader_cinematic_pre",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_vader_cinematic_pre\\27feab7f0f5904000000000000000000\\__data",
+    "sha256": "0ce15539e11cfeff146ab0faad24e5fa8317d5226763b304c18b809783cf6387"
+  },
+  "gameObjects": [
+    {
+      "pathId": "-8721563532659119168",
+      "name": "Left_ballJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6762914150203334873",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8721563532659119168
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.37446922063827515,
+          "w": 0.9272393584251404
+        },
+        "m_LocalPosition": {
+          "x": -0.11951989680528641,
+          "y": -8.097832671917511e-18,
+          "z": -5.330881792279336e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4976546447511938416
+        }
+      }
+    },
+    {
+      "pathId": "-8156750088807380645",
+      "name": "cape_mid_JNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4086897961165819829",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8156750088807380645
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.041196875274181366,
+          "w": 0.9991510510444641
+        },
+        "m_LocalPosition": {
+          "x": -0.4332982897758484,
+          "y": -2.220446049250313e-16,
+          "z": -2.185751976777471e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 172535528259242120
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7490136172040600873
+        }
+      }
+    },
+    {
+      "pathId": "-8118263824858691687",
+      "name": "vader_shadow_mesh",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_shadow_mesh",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "6203453380989375424",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8118263824858691687
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1823485115083009490
+        }
+      }
+    },
+    {
+      "pathId": "-7796847347876440095",
+      "name": "grp_geo",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4170278072387864120",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7796847347876440095
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1823485115083009490
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 6802871229769359264
+        }
+      }
+    },
+    {
+      "pathId": "-7688307037685653690",
+      "name": "Right_ballJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-675934160594745615",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7688307037685653690
+        },
+        "m_LocalRotation": {
+          "x": 1.9540108198157213e-08,
+          "y": -7.891348907662632e-09,
+          "z": -0.37446922063827515,
+          "w": 0.9272393584251404
+        },
+        "m_LocalPosition": {
+          "x": 0.11951989680528641,
+          "y": -2.4286130318036524e-17,
+          "z": 6.800116025829084e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3490499015027863484
+        }
+      }
+    },
+    {
+      "pathId": "-7347381956440526323",
+      "name": "Left_clavJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4239963211061786878",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7347381956440526323
+        },
+        "m_LocalRotation": {
+          "x": -0.4524464011192322,
+          "y": 0.492736279964447,
+          "z": 0.5193970799446106,
+          "w": 0.5317234396934509
+        },
+        "m_LocalPosition": {
+          "x": -0.22575409710407257,
+          "y": -0.007752894889563322,
+          "z": 0.03500000014901161
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8436731781502976641
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2955491169109078763
+        }
+      }
+    },
+    {
+      "pathId": "-6919873411596706945",
+      "name": "Right_hipJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3456264093503187522",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6919873411596706945
+        },
+        "m_LocalRotation": {
+          "x": -0.09839644283056259,
+          "y": 0.005272959358990192,
+          "z": -0.07788436114788055,
+          "w": 0.9920808672904968
+        },
+        "m_LocalPosition": {
+          "x": 0.048776790499687195,
+          "y": -0.01252294983714819,
+          "z": 0.09399999678134918
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3721735961173844488
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 6886777222794630111
+        }
+      }
+    },
+    {
+      "pathId": "-6587302882320307463",
+      "name": "vfx.vfx_swd_saber_chld_red_pre",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3170802997192501588",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6587302882320307463
+        },
+        "m_LocalRotation": {
+          "x": -0.7071068286895752,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.08209999650716782
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -7058974001094446260
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7813588989749417309
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7638378928399109526
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8497373931854672037
+        }
+      }
+    },
+    {
+      "pathId": "-5840584706700656873",
+      "name": "Right_elbwJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5511550196512167323",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5840584706700656873
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.30070579051971436,
+          "z": -0.0,
+          "w": 0.9537169337272644
+        },
+        "m_LocalPosition": {
+          "x": 0.28600209951400757,
+          "y": 1.3287069577927468e-06,
+          "z": 4.5588528713505754e-15
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2409327607976134804
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 2992704121065596662
+        }
+      }
+    },
+    {
+      "pathId": "-5375776581205962395",
+      "name": "Right_wpnJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6939235686519712830",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5375776581205962395
+        },
+        "m_LocalRotation": {
+          "x": -7.604453747981439e-16,
+          "y": -6.549235984159793e-16,
+          "z": -0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": 0.0880567878484726,
+          "y": -5.407456455941428e-07,
+          "z": 2.1035233999100456e-07
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8497373931854672037
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 2747843732869713664
+        }
+      }
+    },
+    {
+      "pathId": "-4915320437460481293",
+      "name": "Left_ankleJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4976546447511938416",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4915320437460481293
+        },
+        "m_LocalRotation": {
+          "x": 0.8912593722343445,
+          "y": 0.45316630601882935,
+          "z": -0.005629406776279211,
+          "w": 0.01628834195435047
+        },
+        "m_LocalPosition": {
+          "x": -0.4230000078678131,
+          "y": -3.361200111761455e-17,
+          "z": 6.626209706194833e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6762914150203334873
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7788519851077147093
+        }
+      }
+    },
+    {
+      "pathId": "-4876429567763059799",
+      "name": "DarthVader",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1823485115083009490",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4876429567763059799
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1524316583912521473
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6203453380989375424
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 4170278072387864120
+        }
+      }
+    },
+    {
+      "pathId": "-4809991118708363938",
+      "name": "Right_kneeJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3721735961173844488",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4809991118708363938
+        },
+        "m_LocalRotation": {
+          "x": 0.990013062953949,
+          "y": 0.08058568090200424,
+          "z": 0.0065218620002269745,
+          "w": -0.11548880487680435
+        },
+        "m_LocalPosition": {
+          "x": 0.4111264944076538,
+          "y": -4.0939468739096727e-16,
+          "z": 1.3877789462175682e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3490499015027863484
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3456264093503187522
+        }
+      }
+    },
+    {
+      "pathId": "-4808090595515589111",
+      "name": "vader_lefthand_mesh",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_lefthand_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6496311106968163978",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4808090595515589111
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3068806818963632953
+        }
+      }
+    },
+    {
+      "pathId": "-4272106473444546834",
+      "name": "cape_low_JNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT/cape_low_JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "172535528259242120",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4272106473444546834
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.0521472729742527,
+          "w": 0.9986394047737122
+        },
+        "m_LocalPosition": {
+          "x": -0.4066865146160126,
+          "y": 4.440892098500626e-16,
+          "z": -2.914334910245444e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 4086897961165819829
+        }
+      }
+    },
+    {
+      "pathId": "-2698357485647820034",
+      "name": "Left_hipJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "301135670746425048",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2698357485647820034
+        },
+        "m_LocalRotation": {
+          "x": -0.005272959358990192,
+          "y": -0.09839644283056259,
+          "z": 0.9920808672904968,
+          "w": 0.07788436114788055
+        },
+        "m_LocalPosition": {
+          "x": 0.048776790499687195,
+          "y": -0.01252294983714819,
+          "z": -0.09399999678134918
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -7788519851077147093
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 6886777222794630111
+        }
+      }
+    },
+    {
+      "pathId": "-2586790149187562485",
+      "name": "Inner_Glow",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Inner_Glow",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7813588989749417309",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2586790149187562485
+        },
+        "m_LocalRotation": {
+          "x": 0.7071068286895752,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3170802997192501588
+        }
+      }
+    },
+    {
+      "pathId": "-2489196177151249784",
+      "name": "neckJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7140394606641830023",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2489196177151249784
+        },
+        "m_LocalRotation": {
+          "x": 0.9947844743728638,
+          "y": -0.10199935734272003,
+          "z": -6.245659475125525e-18,
+          "w": 6.091297812091902e-17
+        },
+        "m_LocalPosition": {
+          "x": -0.33148908615112305,
+          "y": 2.706168887221615e-16,
+          "z": -6.892618773463052e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2148737911407723192
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2955491169109078763
+        }
+      }
+    },
+    {
+      "pathId": "-2345167472041907206",
+      "name": "Left_kneeJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7788519851077147093",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2345167472041907206
+        },
+        "m_LocalRotation": {
+          "x": 0.990013062953949,
+          "y": 0.08058568090200424,
+          "z": 0.0065218620002269745,
+          "w": -0.11548880487680435
+        },
+        "m_LocalPosition": {
+          "x": -0.4111264944076538,
+          "y": 2.2332280411221765e-16,
+          "z": 1.1082090218133247e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -4976546447511938416
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 301135670746425048
+        }
+      }
+    },
+    {
+      "pathId": "-1679045566034632941",
+      "name": "swd_vader_mesh_shadow",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/swd_vader_mesh_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "-7838612317877202192",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1679045566034632941
+        },
+        "m_LocalRotation": {
+          "x": -4.2840827774170975e-08,
+          "y": 1.6623703302798276e-08,
+          "z": 5.9604619906394873e-08,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8497373931854672037
+        }
+      }
+    },
+    {
+      "pathId": "-317185752480112321",
+      "name": "Tron Trail",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Tron Trail",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7638378928399109526",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -317185752480112321
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -1.1549999713897705,
+          "z": -0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3170802997192501588
+        }
+      }
+    },
+    {
+      "pathId": "589225466201670686",
+      "name": "Left_shldrJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8436731781502976641",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 589225466201670686
+        },
+        "m_LocalRotation": {
+          "x": 0.024993835017085075,
+          "y": 0.04625505954027176,
+          "z": 0.44738155603408813,
+          "w": 0.8927964568138123
+        },
+        "m_LocalPosition": {
+          "x": -0.16197219491004944,
+          "y": -6.661338147750939e-16,
+          "z": -7.632783294297951e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -6101658400502582087
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4239963211061786878
+        }
+      }
+    },
+    {
+      "pathId": "682836386906020914",
+      "name": "vader_leftfist_mesh",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_leftfist_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7678641507417307238",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 682836386906020914
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3068806818963632953
+        }
+      }
+    },
+    {
+      "pathId": "1281117926514943272",
+      "name": "pelvicJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6886777222794630111",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1281117926514943272
+        },
+        "m_LocalRotation": {
+          "x": -0.46596643328666687,
+          "y": 0.5318602323532104,
+          "z": -0.46596643328666687,
+          "w": 0.5318602323532104
+        },
+        "m_LocalPosition": {
+          "x": -1.5407439555097887e-33,
+          "y": 0.9819999933242798,
+          "z": -0.02500000037252903
+        },
+        "m_LocalScale": {
+          "x": 1.000000238418579,
+          "y": 1.000000238418579,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 301135670746425048
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3456264093503187522
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8700347946385227010
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3068806818963632953
+        }
+      }
+    },
+    {
+      "pathId": "1483286243835102665",
+      "name": "Right_wpn_offsetJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "2747843732869713664",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1483286243835102665
+        },
+        "m_LocalRotation": {
+          "x": -7.247620472522476e-16,
+          "y": -6.563167029164166e-16,
+          "z": 0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": 7.815408054057116e-08,
+          "y": -1.5214382642625424e-08,
+          "z": 3.5066204162603754e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6939235686519712830
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2409327607976134804
+        }
+      }
+    },
+    {
+      "pathId": "1811478962691241234",
+      "name": "vader_cinematic_mesh",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_cinematic_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1524316583912521473",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1811478962691241234
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1823485115083009490
+        }
+      }
+    },
+    {
+      "pathId": "2885800644507143690",
+      "name": "Outer_Glow",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Outer_Glow",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7058974001094446260",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2885800644507143690
+        },
+        "m_LocalRotation": {
+          "x": 0.7071068286895752,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.009999999776482582,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3170802997192501588
+        }
+      }
+    },
+    {
+      "pathId": "3349007288504730573",
+      "name": "grp_character",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6802871229769359264",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3349007288504730573
+        },
+        "m_LocalRotation": {
+          "x": 2.1855694143368964e-08,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4170278072387864120
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3068806818963632953
+        }
+      }
+    },
+    {
+      "pathId": "3415019463689461346",
+      "name": "unit.char_vader_cinematic_pre",
+      "hierarchyPath": "unit.char_vader_cinematic_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2828662290447058653",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3415019463689461346
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3068806818963632953
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    },
+    {
+      "pathId": "3457035259800126176",
+      "name": "Left_wpn_offsetJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6692699409459320317",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3457035259800126176
+        },
+        "m_LocalRotation": {
+          "x": -7.453164134481164e-16,
+          "y": -1.5550367652824768e-15,
+          "z": 0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": -2.3939124460525818e-08,
+          "y": 1.5214498105819985e-08,
+          "z": -1.7972409338540274e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1533195639129090079
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1747378119806475110
+        }
+      }
+    },
+    {
+      "pathId": "3675107950536820271",
+      "name": "Left_wpnJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1533195639129090079",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3675107950536820271
+        },
+        "m_LocalRotation": {
+          "x": -6.728124048663981e-16,
+          "y": -1.5345591085078937e-15,
+          "z": -0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": -0.08805680274963379,
+          "y": 1.5543122344752192e-15,
+          "z": 1.1657341758564144e-15
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -6692699409459320317
+        }
+      }
+    },
+    {
+      "pathId": "4470553535151348482",
+      "name": "swd_vader_mesh",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8497373931854672037",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4470553535151348482
+        },
+        "m_LocalRotation": {
+          "x": -4.470347292340193e-08,
+          "y": 0.9810587167739868,
+          "z": -4.2840827774170975e-08,
+          "w": 0.19371062517166138
+        },
+        "m_LocalPosition": {
+          "x": 0.010300000198185444,
+          "y": -0.011099999770522118,
+          "z": -0.015399999916553497
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3170802997192501588
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7838612317877202192
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 6939235686519712830
+        }
+      }
+    },
+    {
+      "pathId": "5069365440484957831",
+      "name": "Left_elbwJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6101658400502582087",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5069365440484957831
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.30070579051971436,
+          "z": -0.0,
+          "w": 0.9537169337272644
+        },
+        "m_LocalPosition": {
+          "x": -0.28600001335144043,
+          "y": -6.661338147750939e-16,
+          "z": 3.469446951953614e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1747378119806475110
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8436731781502976641
+        }
+      }
+    },
+    {
+      "pathId": "6310444595169444057",
+      "name": "headJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2148737911407723192",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6310444595169444057
+        },
+        "m_LocalRotation": {
+          "x": 0.4611223340034485,
+          "y": -0.5360654592514038,
+          "z": 0.4611223340034485,
+          "w": 0.5360654592514038
+        },
+        "m_LocalPosition": {
+          "x": -0.08697701245546341,
+          "y": 0.0,
+          "z": 1.723561004482649e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7140394606641830023
+        }
+      }
+    },
+    {
+      "pathId": "6583811437547357068",
+      "name": "spine1JNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8700347946385227010",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6583811437547357068
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.06297589838504791,
+          "w": 0.9980150461196899
+        },
+        "m_LocalPosition": {
+          "x": -0.09885848313570023,
+          "y": 2.7755578924351364e-17,
+          "z": 2.1950989522631977e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2955491169109078763
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 6886777222794630111
+        }
+      }
+    },
+    {
+      "pathId": "6921028011286869926",
+      "name": "Scaler",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3068806818963632953",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6921028011286869926
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.100000023841858,
+          "y": 1.100000023841858,
+          "z": 1.100000023841858
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6802871229769359264
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6886777222794630111
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7678641507417307238
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6496311106968163978
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2828662290447058653
+        }
+      }
+    },
+    {
+      "pathId": "7012451273133545999",
+      "name": "Right_ankleJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3490499015027863484",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7012451273133545999
+        },
+        "m_LocalRotation": {
+          "x": 0.8912593722343445,
+          "y": 0.45316630601882935,
+          "z": -0.005629406776279211,
+          "w": 0.01628834195435047
+        },
+        "m_LocalPosition": {
+          "x": 0.4230000078678131,
+          "y": 1.8041120179691854e-16,
+          "z": 5.551115123125783e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -675934160594745615
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3721735961173844488
+        }
+      }
+    },
+    {
+      "pathId": "7211462865806282234",
+      "name": "spine2JNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2955491169109078763",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7211462865806282234
+        },
+        "m_LocalRotation": {
+          "x": 0.9995474219322205,
+          "y": -0.030082980170845985,
+          "z": -1.8420514012264813e-18,
+          "w": 6.120462877001542e-17
+        },
+        "m_LocalPosition": {
+          "x": -0.17100289463996887,
+          "y": -9.020562075079397e-17,
+          "z": 3.647586914311809e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7490136172040600873
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4239963211061786878
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7140394606641830023
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7873322369654518184
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8700347946385227010
+        }
+      }
+    },
+    {
+      "pathId": "7930820483123253849",
+      "name": "Right_shldrJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "2992704121065596662",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7930820483123253849
+        },
+        "m_LocalRotation": {
+          "x": 0.024993835017085075,
+          "y": 0.04625505954027176,
+          "z": 0.44738155603408813,
+          "w": 0.8927964568138123
+        },
+        "m_LocalPosition": {
+          "x": 0.16197219491004944,
+          "y": -8.881784197001252e-16,
+          "z": -3.8163919780212206e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5511550196512167323
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7873322369654518184
+        }
+      }
+    },
+    {
+      "pathId": "8119252851946270475",
+      "name": "Right_wrstJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2409327607976134804",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8119252851946270475
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.24999800324440002,
+          "y": -9.710763606562978e-07,
+          "z": -1.3656130022354773e-06
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 2747843732869713664
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5511550196512167323
+        }
+      }
+    },
+    {
+      "pathId": "8572612895892174442",
+      "name": "cape_top_JNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7490136172040600873",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8572612895892174442
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.9976168870925903,
+          "w": 0.06899700313806534
+        },
+        "m_LocalPosition": {
+          "x": -0.18255789577960968,
+          "y": -0.15762540698051453,
+          "z": -4.223254989811963e-17
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4086897961165819829
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2955491169109078763
+        }
+      }
+    },
+    {
+      "pathId": "8585868606870099542",
+      "name": "Left_wrstJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1747378119806475110",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8585868606870099542
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.2500000298023224,
+          "y": -4.256435204297304e-08,
+          "z": -5.820766091346741e-11
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -6692699409459320317
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -6101658400502582087
+        }
+      }
+    },
+    {
+      "pathId": "8812061855525803442",
+      "name": "Right_clavJNT",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7873322369654518184",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8812061855525803442
+        },
+        "m_LocalRotation": {
+          "x": 0.4927363395690918,
+          "y": 0.45244643092155457,
+          "z": -0.5317234992980957,
+          "w": 0.5193970799446106
+        },
+        "m_LocalPosition": {
+          "x": -0.22575409710407257,
+          "y": -0.007752894889563322,
+          "z": -0.03500000014901161
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 2992704121065596662
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2955491169109078763
+        }
+      }
+    }
+  ],
+  "renderers": [
+    {
+      "pathId": "-8748083567163041571",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_shadow_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8118263824858691687
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -754578122671530131
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -1969326647620298968
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6886777222794630111
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8700347946385227010
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2955491169109078763
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7140394606641830023
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2148737911407723192
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4239963211061786878
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8436731781502976641
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6101658400502582087
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1747378119806475110
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6692699409459320317
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1533195639129090079
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7873322369654518184
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2992704121065596662
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5511550196512167323
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2409327607976134804
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2747843732869713664
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6939235686519712830
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7490136172040600873
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4086897961165819829
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 172535528259242120
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 301135670746425048
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7788519851077147093
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4976546447511938416
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6762914150203334873
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3456264093503187522
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3721735961173844488
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3490499015027863484
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -675934160594745615
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 6886777222794630111
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.09987807273864746,
+            "y": -0.002383604645729065,
+            "z": -0.011574983596801758
+          },
+          "m_Extent": {
+            "x": 1.0062941312789917,
+            "y": 0.35670381784439087,
+            "z": 0.6197964549064636
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-8118263824858691687",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_shadow_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-754578122671530131",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-1969326647620298968",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "6886777222794630111",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-8700347946385227010",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-2955491169109078763",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "7140394606641830023",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-2148737911407723192",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-4239963211061786878",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-8436731781502976641",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "-6101658400502582087",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-1747378119806475110",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "-6692699409459320317",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "-1533195639129090079",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "7873322369654518184",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "2992704121065596662",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "5511550196512167323",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "-2409327607976134804",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "2747843732869713664",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "6939235686519712830",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "7490136172040600873",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "4086897961165819829",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "172535528259242120",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT/cape_low_JNT"
+        },
+        {
+          "fieldPath": "m_Bones[20]",
+          "pathId": "301135670746425048",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[21]",
+          "pathId": "-7788519851077147093",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[22]",
+          "pathId": "-4976546447511938416",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[23]",
+          "pathId": "6762914150203334873",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[24]",
+          "pathId": "3456264093503187522",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[25]",
+          "pathId": "-3721735961173844488",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[26]",
+          "pathId": "-3490499015027863484",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[27]",
+          "pathId": "-675934160594745615",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "6886777222794630111",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "-1171492413987382364",
+      "type": "MeshRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Tron Trail",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -317185752480112321
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 2,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3048582023939034800
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_AdditionalVertexStreams": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_EnlightenVertexStream": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-317185752480112321",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Tron Trail"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-3048582023939034800",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_AdditionalVertexStreams",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_EnlightenVertexStream",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-439336020743854843",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6587302882320307463
+        },
+        "m_Enabled": false,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": 0.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": false,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-6587302882320307463",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "4129685852685530950",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_cinematic_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1811478962691241234
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8891630151327382319
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -8869750446130647293
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6886777222794630111
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8700347946385227010
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2955491169109078763
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7140394606641830023
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2148737911407723192
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4239963211061786878
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8436731781502976641
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6101658400502582087
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1747378119806475110
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6692699409459320317
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1533195639129090079
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7873322369654518184
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2992704121065596662
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5511550196512167323
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2409327607976134804
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2747843732869713664
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6939235686519712830
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7490136172040600873
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4086897961165819829
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 172535528259242120
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 301135670746425048
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7788519851077147093
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4976546447511938416
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6762914150203334873
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3456264093503187522
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3721735961173844488
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3490499015027863484
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -675934160594745615
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 6886777222794630111
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.09587797522544861,
+            "y": 0.009859994053840637,
+            "z": 0.03758779168128967
+          },
+          "m_Extent": {
+            "x": 1.011576771736145,
+            "y": 0.354272723197937,
+            "z": 0.574357271194458
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "1811478962691241234",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_cinematic_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "8891630151327382319",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-8869750446130647293",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "6886777222794630111",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-8700347946385227010",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-2955491169109078763",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "7140394606641830023",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-2148737911407723192",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-4239963211061786878",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-8436731781502976641",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "-6101658400502582087",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-1747378119806475110",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "-6692699409459320317",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "-1533195639129090079",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "7873322369654518184",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "2992704121065596662",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "5511550196512167323",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "-2409327607976134804",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "2747843732869713664",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "6939235686519712830",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "7490136172040600873",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "4086897961165819829",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "172535528259242120",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT/cape_low_JNT"
+        },
+        {
+          "fieldPath": "m_Bones[20]",
+          "pathId": "301135670746425048",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[21]",
+          "pathId": "-7788519851077147093",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[22]",
+          "pathId": "-4976546447511938416",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[23]",
+          "pathId": "6762914150203334873",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[24]",
+          "pathId": "3456264093503187522",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[25]",
+          "pathId": "-3721735961173844488",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[26]",
+          "pathId": "-3490499015027863484",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[27]",
+          "pathId": "-675934160594745615",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "6886777222794630111",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "4411698694715502939",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Outer_Glow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2885800644507143690
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8123568442440241729
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 1,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.10000000149011612,
+        "m_LengthScale": -7.300000190734863,
+        "m_SortingFudge": -4.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "2885800644507143690",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Outer_Glow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8123568442440241729",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "4828474254872902275",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Inner_Glow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2586790149187562485
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8123568442440241729
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 1,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.10000000149011612,
+        "m_LengthScale": -30.0,
+        "m_SortingFudge": -5.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-2586790149187562485",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Inner_Glow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8123568442440241729",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "6243744361774594034",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_lefthand_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4808090595515589111
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8891630151327382319
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -2270160387886152797
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8436731781502976641
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6101658400502582087
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1747378119806475110
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6692699409459320317
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1533195639129090079
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": -8436731781502976641
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": -0.5691100358963013,
+            "y": -0.030628621578216553,
+            "z": 0.18325823545455933
+          },
+          "m_Extent": {
+            "x": 0.1315927505493164,
+            "y": 0.07570600509643555,
+            "z": 0.12145864963531494
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-4808090595515589111",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_lefthand_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "8891630151327382319",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-2270160387886152797",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-8436731781502976641",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-6101658400502582087",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-1747378119806475110",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-6692699409459320317",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-1533195639129090079",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "-8436731781502976641",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "6294448979730662599",
+      "type": "MeshRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4470553535151348482
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 2,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3287247553773498981
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_AdditionalVertexStreams": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_EnlightenVertexStream": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "4470553535151348482",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-3287247553773498981",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_AdditionalVertexStreams",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_EnlightenVertexStream",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "6458842277505130067",
+      "type": "MeshRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/swd_vader_mesh_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1679045566034632941
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 2,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 2,
+            "m_PathID": -8587867788662160608
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_AdditionalVertexStreams": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_EnlightenVertexStream": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-1679045566034632941",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/swd_vader_mesh_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8587867788662160608",
+          "fileId": 2,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_AdditionalVertexStreams",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_EnlightenVertexStream",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "6788157275023461228",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_leftfist_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 682836386906020914
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8891630151327382319
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -2107972762950306197
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8436731781502976641
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6101658400502582087
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1747378119806475110
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6692699409459320317
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1533195639129090079
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": -8436731781502976641
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": -0.5447892546653748,
+            "y": -0.008851006627082825,
+            "z": 0.18321506679058075
+          },
+          "m_Extent": {
+            "x": 0.107646644115448,
+            "y": 0.07476360350847244,
+            "z": 0.10055007040500641
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "682836386906020914",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_leftfist_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "8891630151327382319",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-2107972762950306197",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-8436731781502976641",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-6101658400502582087",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-1747378119806475110",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-6692699409459320317",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-1533195639129090079",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "-8436731781502976641",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "pathId": "6004349314322111240",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_vader_cinematic_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3415019463689461346
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": -4085762018415572245
+        },
+        "m_Name": "",
+        "_childPrefabs": [
+          "prefab.char_damage"
+        ]
+      },
+      "class": "BattleUnitChildPrefabLoader",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "3415019463689461346",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "-4085762018415572245",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "8628962540444765935",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_vader_cinematic_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3415019463689461346
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": 6907970109121684514
+        },
+        "m_Name": "",
+        "_hologramVFX": [],
+        "_persistentHologramVFX": [],
+        "_materializeVFX": [],
+        "_stealthVFX": [],
+        "_locked": [],
+        "_propStates": [],
+        "_unitReferenceAreas": {
+          "_head": {
+            "m_FileID": 0,
+            "m_PathID": 6310444595169444057
+          },
+          "_center": {
+            "m_FileID": 0,
+            "m_PathID": 7211462865806282234
+          },
+          "_hitAreas": [
+            {
+              "m_FileID": 0,
+              "m_PathID": -2345167472041907206
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": -6919873411596706945
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": 5069365440484957831
+            }
+          ],
+          "_weapon": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 4470553535151348482
+            }
+          ],
+          "_offhand": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 3675107950536820271
+            }
+          ],
+          "_feet": {
+            "m_FileID": 0,
+            "m_PathID": -7688307037685653690
+          },
+          "_uiArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_opponentUIArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_targetReticle": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_genericAreas": []
+        },
+        "_mainRenderer": {
+          "m_FileID": 0,
+          "m_PathID": 4129685852685530950
+        },
+        "_weaponRenderer": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "_suppressDeathSequence": 0,
+        "_boundsSizeOverride": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "_unitRendererElements": [
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 4129685852685530950
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -8748083567163041571
+            }
+          },
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 6294448979730662599
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 6458842277505130067
+            }
+          },
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 6788157275023461228
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            }
+          },
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 6243744361774594034
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            }
+          }
+        ],
+        "_effectTimelines": []
+      },
+      "class": "UnitComponent",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "3415019463689461346",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "6907970109121684514",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._head",
+          "pathId": "6310444595169444057",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._center",
+          "pathId": "7211462865806282234",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[0]",
+          "pathId": "-2345167472041907206",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[1]",
+          "pathId": "-6919873411596706945",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[2]",
+          "pathId": "5069365440484957831",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._weapon[0]",
+          "pathId": "4470553535151348482",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._offhand[0]",
+          "pathId": "3675107950536820271",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._feet",
+          "pathId": "-7688307037685653690",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._uiArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._opponentUIArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._targetReticle",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_mainRenderer",
+          "pathId": "4129685852685530950",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_cinematic_mesh"
+        },
+        {
+          "fieldPath": "_weaponRenderer",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].MainRenderer",
+          "pathId": "4129685852685530950",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_cinematic_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].ShadowRenderer",
+          "pathId": "-8748083567163041571",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_shadow_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[1].MainRenderer",
+          "pathId": "6294448979730662599",
+          "fileId": 0,
+          "type": "MeshRenderer",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[1].ShadowRenderer",
+          "pathId": "6458842277505130067",
+          "fileId": 0,
+          "type": "MeshRenderer",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/swd_vader_mesh_shadow"
+        },
+        {
+          "fieldPath": "_unitRendererElements[2].MainRenderer",
+          "pathId": "6788157275023461228",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_leftfist_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[2].ShadowRenderer",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitRendererElements[3].MainRenderer",
+          "pathId": "6243744361774594034",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_lefthand_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[3].ShadowRenderer",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    }
+  ],
+  "constraints": [],
+  "glbAudit": [
+    {
+      "file": "extracted/char_vader_cinematic_pre/char_vader_cinematic_pre.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-8721563532659119168",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8156750088807380645",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8118263824858691687",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_shadow_mesh",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7796847347876440095",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7688307037685653690",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7347381956440526323",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6919873411596706945",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6587302882320307463",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre",
+          "nodes": [
+            {
+              "index": 36,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5840584706700656873",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5375776581205962395",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+          "nodes": [
+            {
+              "index": 34,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4915320437460481293",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4876429567763059799",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4809991118708363938",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4808090595515589111",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_lefthand_mesh",
+          "nodes": [
+            {
+              "index": 42,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4272106473444546834",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT/cape_low_JNT",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2698357485647820034",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2586790149187562485",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Inner_Glow",
+          "nodes": [
+            {
+              "index": 38,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2489196177151249784",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2345167472041907206",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1679045566034632941",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/swd_vader_mesh_shadow",
+          "nodes": [
+            {
+              "index": 40,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-317185752480112321",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Tron Trail",
+          "nodes": [
+            {
+              "index": 39,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "589225466201670686",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "682836386906020914",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_leftfist_mesh",
+          "nodes": [
+            {
+              "index": 41,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1281117926514943272",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1483286243835102665",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 33,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1811478962691241234",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_cinematic_mesh",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "2885800644507143690",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Outer_Glow",
+          "nodes": [
+            {
+              "index": 37,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3349007288504730573",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3415019463689461346",
+          "hierarchyPath": "unit.char_vader_cinematic_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3457035259800126176",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3675107950536820271",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4470553535151348482",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh",
+          "nodes": [
+            {
+              "index": 35,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5069365440484957831",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6310444595169444057",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6583811437547357068",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6921028011286869926",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7012451273133545999",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7211462865806282234",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7930820483123253849",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8119252851946270475",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8572612895892174442",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8585868606870099542",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8812061855525803442",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    },
+    {
+      "file": "extracted/char_vader_cinematic_pre/char_vader_cinematic_pre.anim.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-8721563532659119168",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8156750088807380645",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8118263824858691687",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_shadow_mesh",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7796847347876440095",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7688307037685653690",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7347381956440526323",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6919873411596706945",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6587302882320307463",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre",
+          "nodes": [
+            {
+              "index": 36,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5840584706700656873",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5375776581205962395",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+          "nodes": [
+            {
+              "index": 34,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4915320437460481293",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4876429567763059799",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4809991118708363938",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4808090595515589111",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_lefthand_mesh",
+          "nodes": [
+            {
+              "index": 42,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4272106473444546834",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT/cape_mid_JNT/cape_low_JNT",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2698357485647820034",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2586790149187562485",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Inner_Glow",
+          "nodes": [
+            {
+              "index": 38,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2489196177151249784",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2345167472041907206",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1679045566034632941",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/swd_vader_mesh_shadow",
+          "nodes": [
+            {
+              "index": 40,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-317185752480112321",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Tron Trail",
+          "nodes": [
+            {
+              "index": 39,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "589225466201670686",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "682836386906020914",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/vader_leftfist_mesh",
+          "nodes": [
+            {
+              "index": 41,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1281117926514943272",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1483286243835102665",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 33,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1811478962691241234",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character/grp_geo/DarthVader/vader_cinematic_mesh",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "2885800644507143690",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh/vfx.vfx_swd_saber_chld_red_pre/Outer_Glow",
+          "nodes": [
+            {
+              "index": 37,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3349007288504730573",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/grp_character",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3415019463689461346",
+          "hierarchyPath": "unit.char_vader_cinematic_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3457035259800126176",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3675107950536820271",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4470553535151348482",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_vader_mesh",
+          "nodes": [
+            {
+              "index": 35,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5069365440484957831",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6310444595169444057",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6583811437547357068",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6921028011286869926",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7012451273133545999",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7211462865806282234",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7930820483123253849",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8119252851946270475",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8572612895892174442",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/cape_top_JNT",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8585868606870099542",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8812061855525803442",
+          "hierarchyPath": "unit.char_vader_cinematic_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Authored initial state is not a substitute for original spawn/presentation transitions.",
+    "Missing GLB event targets need original geometry restored, not a guessed replacement.",
+    "GLB node identity matches require complete original hierarchy paths; ambiguous mappings remain pending."
+  ],
+  "clips": [
+    {
+      "animationName": "Anim SH01 and SH02",
+      "originalState": "Base Layer.Anim SH01 and SH02",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "cin_hmn_vader_tier08_sh01_sh02",
+      "clipPathId": "-5278699486603870843",
+      "sourceBundle": "char_vader_cinematic_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 3.75,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Anim SH03",
+      "originalState": "Base Layer.Anim SH03",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "cin_hmn_vader_tier08_cuthand",
+      "clipPathId": "3567255360882900688",
+      "sourceBundle": "char_vader_cinematic_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.4000000953674316,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Anim SH04",
+      "originalState": "Base Layer.Anim SH04",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "cin_hmn_vader_tier08_idle_transition",
+      "clipPathId": "-6522438750424340511",
+      "sourceBundle": "char_vader_cinematic_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 3.833333730697632,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Anim SH05",
+      "originalState": "Base Layer.Anim SH05",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "cin_hmn_vader_tier08_outro",
+      "clipPathId": "-790749298159881167",
+      "sourceBundle": "char_vader_cinematic_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 5.4333343505859375,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    }
+  ],
+  "sharedAnimationSource": {
+    "bundle": "shared_animationcontainer",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\79ff98634f7a2e000000000000000000\\__data",
+    "sha256": "87c7b8b0d4e698890495aa94b85f33b655d92be20517464d1e2db80b38b529bc"
+  }
+}

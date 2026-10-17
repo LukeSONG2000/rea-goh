@@ -88,6 +88,7 @@
 <script src="/viewer/vendor/GLTFLoader.js"></script>
 <script src="/viewer/vendor/OrbitControls.js"></script>
 <script src="/viewer/vendor/particles.js"></script>
+<script src="/viewer/original-character-state.js"></script>
 <script>
 'use strict';
 // ---------- three setup ----------
@@ -209,16 +210,7 @@ function placeFighter(g, slot, side){
 // vs open hand, hidden blades).  Hide those meshes so only the authored-
 // active subset renders, exactly like the game's default outfit.
 function applyAuthoredVisibility(root){
-  root.traverse(o=>{
-    if (!o.isMesh) return;
-    for (let p = o; p; p = p.parent){
-      const u = p.userData;
-      if (u && u.gltfExtensions && u.gltfExtensions.SWGOH_active === false){
-        o.visible = false;
-        break;
-      }
-    }
-  });
+  OriginalCharacterState.authored(root);
 }
 function findClip(clips, kw, exclude){
   const hit = clips.filter(c=>c.name && c.name.toLowerCase().includes(kw)
@@ -258,6 +250,8 @@ function addFighter(u, slot, side){
       m.traverse(o=>{ if(o.isMesh){ o.material.side = THREE.DoubleSide;
                                     o.frustumCulled = false; } });
       applyAuthoredVisibility(m);
+      OriginalCharacterState.attach(m, u.folder, 'battle');
+      OriginalCharacterState.bindClipEvents(gltf);
       const g = new THREE.Group();
       g.add(m);
       // ground clamp: drop the rig so its lowest point sits on y=0
@@ -607,6 +601,7 @@ renderer.setAnimationLoop(()=>{
   const dt = clock.getDelta();
   fighters.forEach(f=>{
     if (f.mixer) f.mixer.update(dt);
+    if (f.model) f.model.userData.originalCharacterState?.update(f.cur);
     if (f.vfxLayer) f.vfxLayer.update(dt, clock.elapsedTime);
     if (arenaVfx) arenaVfx.update(dt, clock.elapsedTime);
     if (f.flash > 0){

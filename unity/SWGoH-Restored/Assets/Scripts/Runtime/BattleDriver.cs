@@ -19,7 +19,7 @@ namespace SwgohRestored.Battle
         [Header("Teams (def_ids) -- leave empty for the default duel")]
         public string[] PlayerTeam = { "VADER" };
         public string[] OpponentTeam = { "VADER", "VADER" };
-        public long Seed = 4490;
+        public long Seed = 8; // Explicit demo encounter seed; original rules/stats unchanged.
 
         [Header("Stage")]
         public float SlotSpacing = 2.2f;
@@ -60,6 +60,9 @@ namespace SwgohRestored.Battle
         IReadOnlyList<BattleUnit> _legalTargets = Array.Empty<BattleUnit>();
         public bool WaitingForCommand => _waitingForCommand;
         public BattleSim Simulation => _sim;
+        public OriginalAbilityPresentation ActivePresentation { get; private set; }
+        public string PresentationFailure { get; private set; }
+        readonly Dictionary<string, Newtonsoft.Json.Linq.JObject> _presentationData = new();
         bool _replayActive;
         float _replayStart;
         const float BattleSeconds = 4f * 60 + 49;   // 4:49
@@ -77,6 +80,9 @@ namespace SwgohRestored.Battle
 
         void Start()
         {
+            // Imported scene instances are templates, not combatants. Reimporting
+            // a GLB can restore its authored active state; hide the whole library.
+            if (CharacterPrefabRoot) CharacterPrefabRoot.SetActive(false);
             // statics don't survive the play-mode domain reload -- the batch
             // harness signals us with a marker file instead.  One-shot: consume
             // it so a shipped player never self-captures + quits on a stale marker.
@@ -136,7 +142,9 @@ namespace SwgohRestored.Battle
                     Vector3? anchor = null;
                     if (_rigs.TryGetValue(u.UnitId, out var rig))
                     {
-                        var renderers = rig.GetComponentsInChildren<Renderer>();
+                        // Particle bounds can span the arena; bars track the body.
+                        var renderers = rig.GetComponentsInChildren<Renderer>()
+                            .Where(r => r.enabled && (r is SkinnedMeshRenderer || r is MeshRenderer)).ToArray();
                         if (renderers.Length > 0)
                         {
                             var bounds = renderers[0].bounds;
@@ -261,6 +269,13 @@ namespace SwgohRestored.Battle
                 _hud.TrackUnit(u, Camera.main, ChipLetter(u), onPick: () => SubmitTarget(u));
             }
             BuildP5Chrome(opponent.Count > 0 ? opponent[0] : null);
+            if (!_sim.TryInitializeOriginalPassives(out var passiveFailure, allowUnsupportedForTraining: true))
+            {
+                _hud.SetTurnText("原始被动初始化失败：" + passiveFailure);
+                yield break;
+            }
+            foreach (var ev in _sim.Log) ApplyReplayEvent(ev);
+            gameObject.AddComponent<OriginalTrainingNotice>();
 
             _replayStart = Time.time;
             _replayActive = true;
@@ -397,6 +412,49 @@ namespace SwgohRestored.Battle
         IEnumerator PresentEvents(int start)
         {
             int end = _sim.Log.Count;
+            int turn = -1;
+            for (int n = start; n < end; n++) if (_sim.Log[n].Kind == "turn") { turn = n; break; }
+            if (turn >= 0)
+            {
+                var command = _sim.Log[turn];
+                _unitsById.TryGetValue(command.ActorUnitId ?? "", out var unit);
+                if (unit != null && !_presentationData.ContainsKey(unit.BaseId))
+                    _presentationData[unit.BaseId] = OriginalAbilityPresentation.Load(unit.BaseId);
+                var data = unit != null ? _presentationData[unit.BaseId] : null;
+                if (data != null && data["abilities"].Any(a => (string)a["id"] == command.AbilityId))
+                {
+                    for (int n = start; n < turn; n++) ApplyReplayEvent(_sim.Log[n]);
+                    _lastActorRig = RigOf(command.ActorUnitId);
+                    _hud.SetTurnText($"第{command.Turn}回合 · {EntryOf(unit.BaseId)?.name ?? unit.BaseId} · {command.AbilityName}");
+                    var anim = _anims[command.ActorUnitId];
+                    var receiver = anim.GetComponent<OriginalAbilityAnimationEvents>();
+                    ActivePresentation = new GameObject("OriginalAbilityFSM").AddComponent<OriginalAbilityPresentation>();
+                    receiver.Active = ActivePresentation;
+                    ActivePresentation.BindAreaMarkers(data, _stage, unit.Side);
+                    ActivePresentation.AffectedUnits = _sim.Log.Skip(turn + 1).Take(end - turn - 1)
+                        .Where(e => e.TargetUnitId != null && e.Kind != "status_remove")
+                        .Select(e => RigOf(e.TargetUnitId)?.transform).Where(t => t != null).Distinct().ToArray();
+                    var target = RigOf(command.TargetUnitId);
+                    bool evaded = _sim.Log.Skip(turn + 1).Take(end - turn - 1).Any(e => e.Kind == "evade" && e.TargetUnitId == command.TargetUnitId);
+                    ActivePresentation.Begin(data, command.AbilityId, _lastActorRig.transform, target ? target.transform : _lastActorRig.transform,
+                        anim, evaded, () => { for (int n = turn + 1; n < end; n++) ApplyReplayEvent(_sim.Log[n]); });
+                    while (!ActivePresentation.Finished && ActivePresentation.Failure == null)
+                    {
+                        ActivePresentation.PlaybackSpeed = _speedMult; anim.speed = _speedMult;
+                        yield return null;
+                    }
+                    if (ActivePresentation.Failure != null)
+                    {
+                        PresentationFailure = ActivePresentation.Failure;
+                        _hud.SetTurnText("原始动作链待恢复，已暂停：" + PresentationFailure);
+                        // No guessed hit timestamp or substitute action on failure.
+                        while (true) yield return null;
+                    }
+                    receiver.Active = null;
+                    Destroy(ActivePresentation.gameObject); ActivePresentation = null;
+                    yield break;
+                }
+            }
             for (int i = start; i < end; i++)
             {
                 var ev = _sim.Log[i];
@@ -449,6 +507,35 @@ namespace SwgohRestored.Battle
             }
         }
 
+        void ApplyReplayEvent(BattleEvent ev)
+        {
+            string id = ev.TargetUnitId;
+            if (id == null || !_unitsById.TryGetValue(id, out var unit)) return;
+            if (ev.Kind == "damage" || ev.Kind == "crit" || ev.Kind == "heal")
+            {
+                _replayHp[id] = ev.Kind == "heal" ? Math.Min(unit.MaxHp, _replayHp[id] + ev.Amount) : Math.Max(0, _replayHp[id] - ev.HpDamage);
+                if (ev.Kind != "heal") _replayShield[id] = Math.Max(0, _replayShield[id] - ev.ShieldDamage);
+                else _replayShield[id] = Math.Min(unit.MaxShield, _replayShield[id] + ev.ShieldHeal);
+                if (unit == _commander) _hud.UpdateCommander((float)(_replayHp[id] / unit.MaxHp));
+                if (ev.Kind == "heal" || ev.HpDamage > 0) _hud.ShowDamage(id, ev.Kind == "heal" ? ev.Amount : ev.HpDamage, ev.Kind == "crit", Camera.main, ev.Kind == "heal");
+                if (ev.ShieldDamage > 0) _hud.ShowShieldDamage(id, ev.ShieldDamage, Camera.main);
+            }
+            else if (ev.Kind == "status_add" || ev.Kind == "status_remove" || ev.Kind == "resist")
+            {
+                if (_replayStates.TryGetValue(id, out var states))
+                {
+                    if (ev.Kind == "status_add") states[ev.EffectInstanceId] = _originalGraph.Effects[ev.EffectId];
+                    else if (ev.Kind == "status_remove") states.Remove(ev.EffectInstanceId);
+                }
+                if (ev.Kind == "resist") _hud.ShowStatusEvent(id, "抵抗");
+            }
+            else if (ev.Kind == "death")
+            {
+                _replayHp[id] = 0;
+                if (_anims.TryGetValue(id, out var anim) && anim) anim.SetTrigger("Death");
+            }
+        }
+
         List<RosterEntry> LoadRoster()
         {
             var path = Path.Combine(Application.streamingAssetsPath, "roster.json");
@@ -483,7 +570,10 @@ namespace SwgohRestored.Battle
         Dictionary<string, List<UnitAbility>> LoadAbilities()
         {
             string root = Application.streamingAssetsPath;
-            var manifest = JsonUtility.FromJson<RawEffectManifest>(File.ReadAllText(Path.Combine(root, "battle_effects.json")));
+            // RawEffect contains recursive original payload fields. Unity's inline
+            // serializer imposes a depth limit even for empty branches; preserve
+            // the actual JSON tree and null/empty distinctions with Newtonsoft.
+            var manifest = Newtonsoft.Json.JsonConvert.DeserializeObject<RawEffectManifest>(File.ReadAllText(Path.Combine(root, "battle_effects.json")));
             if (manifest == null || manifest.schemaVersion != 2 || manifest.abilities == null ||
                 manifest.effectFiles == null || manifest.effectFiles.Length == 0)
                 throw new InvalidDataException("Expected original effect graph manifest schema 2.");
@@ -492,7 +582,7 @@ namespace SwgohRestored.Battle
             {
                 if (string.IsNullOrEmpty(filename) || Path.GetFileName(filename) != filename)
                     throw new InvalidDataException("Invalid original effect shard name.");
-                var shard = JsonUtility.FromJson<RawEffectShard>(File.ReadAllText(Path.Combine(root, filename)));
+                var shard = Newtonsoft.Json.JsonConvert.DeserializeObject<RawEffectShard>(File.ReadAllText(Path.Combine(root, filename)));
                 if (shard?.effects == null) throw new InvalidDataException("Invalid original effect shard " + filename);
                 effects.AddRange(shard.effects);
             }
@@ -500,7 +590,7 @@ namespace SwgohRestored.Battle
             _originalGraph = graph;
             var map = new Dictionary<string, List<UnitAbility>>(StringComparer.Ordinal);
             _originalMenus.Clear();
-            foreach (var menu in JsonUtilityArray<OriginalUnitMenu>.FromJson(File.ReadAllText(Path.Combine(root, "abilities.json"))))
+            foreach (var menu in Newtonsoft.Json.JsonConvert.DeserializeObject<OriginalUnitMenu[]>(File.ReadAllText(Path.Combine(root, "abilities.json"))))
             {
                 if (menu.abilities == null || menu.abilities.Any(a => a.effectReference == null))
                     throw new InvalidDataException("Missing original effect references for " + menu.def_id);
@@ -546,6 +636,8 @@ namespace SwgohRestored.Battle
                 u.Categories.UnionWith(_originalMenus[e.def_id].categoryId ?? Array.Empty<string>());
                 u.SquadPositionPriority = _originalMenus[e.def_id].squadPositionPriority;
                 u.Abilities = abilityMap[e.def_id];
+                u.IsLeader = slot == 0;
+                u.Passives = (_originalMenus[e.def_id].passives ?? Array.Empty<OriginalAbilityMenu>()).Select(_originalGraph.Bind).ToList();
                 foreach (var a in u.Abilities) u.CooldownLeft[a.Id] = 0;
                 _unitsById[u.UnitId] = u;
                 SpawnRig(e.folder, side, slot, u);
@@ -558,7 +650,9 @@ namespace SwgohRestored.Battle
         void SpawnRig(string folder, int side, int slot, BattleUnit u)
         {
             if (CharacterPrefabRoot == null || string.IsNullOrEmpty(folder)) return;
-            var t = CharacterPrefabRoot.transform.Find(folder);
+            // The static and animated GLB are separate source exports. Prefer the
+            // original curve-bearing rig, not the identically shaped static mesh.
+            var t = CharacterPrefabRoot.transform.Find(folder + ".anim") ?? CharacterPrefabRoot.transform.Find(folder);
             if (t == null)
             {
                 Debug.LogWarning($"rig not imported: {folder}");
@@ -570,6 +664,14 @@ namespace SwgohRestored.Battle
             go.SetActive(true);   // staged prefabs park inactive
             _rigs[u.UnitId] = go;
             _anims[u.UnitId] = go.GetComponentInChildren<Animator>();
+            if (!_presentationData.ContainsKey(u.BaseId)) _presentationData[u.BaseId] = OriginalAbilityPresentation.Load(u.BaseId);
+            go.AddComponent<OriginalCharacterPresentation>().Initialize(folder, _presentationData[u.BaseId]);
+            var originalController = Resources.Load<RuntimeAnimatorController>("AbilityPresentation/" + u.BaseId + "Animator");
+            if (originalController && _anims[u.UnitId])
+            {
+                _anims[u.UnitId].runtimeAnimatorController = originalController;
+                _anims[u.UnitId].gameObject.AddComponent<OriginalAbilityAnimationEvents>();
+            }
         }
 
         GameObject RigOf(string unitId) =>

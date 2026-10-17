@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "bundle": "char_damage",
+  "source": {
+    "bundle": "char_damage",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_damage\\9a2b1f051d0600000000000000000000\\__data",
+    "sha256": "5239b817fb2d1d3570a70263cd07d1bad73890f87e44a944d9c1fe76585f829a"
+  },
+  "gameObjects": [
+    {
+      "pathId": "-8807659525635087834",
+      "name": "prefab.char_damage",
+      "hierarchyPath": "prefab.char_damage",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2581531416158239767",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8807659525635087834
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    }
+  ],
+  "renderers": [],
+  "components": [],
+  "constraints": [],
+  "glbAudit": [
+    {
+      "file": "extracted/char_damage/char_damage.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-8807659525635087834",
+          "hierarchyPath": "prefab.char_damage",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Authored initial state is not a substitute for original spawn/presentation transitions.",
+    "Missing GLB event targets need original geometry restored, not a guessed replacement.",
+    "GLB node identity matches require complete original hierarchy paths; ambiguous mappings remain pending."
+  ],
+  "clips": [],
+  "sharedAnimationSource": {
+    "bundle": "shared_animationcontainer",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\79ff98634f7a2e000000000000000000\\__data",
+    "sha256": "87c7b8b0d4e698890495aa94b85f33b655d92be20517464d1e2db80b38b529bc"
+  }
+}

@@ -1,0 +1,5881 @@
+{
+  "schemaVersion": 1,
+  "bundle": "char_chewbacca_ot_speederbike_pre",
+  "source": {
+    "bundle": "char_chewbacca_ot_speederbike_pre",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_chewbacca_ot_speederbike_pre\\87da27bacc3d0b000000000000000000\\__data",
+    "sha256": "a5e4c5793a1cbe07be6ceccf83685f0f973173ff86f9c0178a5cc736fe85ecbc"
+  },
+  "gameObjects": [
+    {
+      "pathId": "-8822479774038162145",
+      "name": "headJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2215659051621293720",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8822479774038162145
+        },
+        "m_LocalRotation": {
+          "x": 0.45675361156463623,
+          "y": -0.5397928953170776,
+          "z": 0.4567534327507019,
+          "w": 0.5397926568984985
+        },
+        "m_LocalPosition": {
+          "x": -0.08697697520256042,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 2441130613169709059
+        }
+      }
+    },
+    {
+      "pathId": "-8805720991915397084",
+      "name": "left_upperHandleJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT/left_upperHandleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1525562593747291586",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8805720991915397084
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.09322137385606766,
+          "y": 0.30093273520469666,
+          "z": -0.1388920396566391
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3023663884475549328
+        }
+      }
+    },
+    {
+      "pathId": "-7837769388108722369",
+      "name": "neckJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "2441130613169709059",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7837769388108722369
+        },
+        "m_LocalRotation": {
+          "x": 0.9458903074264526,
+          "y": -0.13288110494613647,
+          "z": -0.04029666259884834,
+          "w": -0.29327523708343506
+        },
+        "m_LocalPosition": {
+          "x": -0.33148902654647827,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2215659051621293720
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4190778931899147862
+        }
+      }
+    },
+    {
+      "pathId": "-7576293361920424302",
+      "name": "right_upperHandleJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT/right_upperHandleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-5968719492772392148",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7576293361920424302
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0932219997048378,
+          "y": -0.30093228816986084,
+          "z": 0.13889190554618835
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -9075958085340202377
+        }
+      }
+    },
+    {
+      "pathId": "-7342858926657291177",
+      "name": "Right_wpn_offsetJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8191108822007036735",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7342858926657291177
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.13174587488174438,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": -5.551115123125783e-17,
+          "y": 2.220446049250313e-16,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -6854555189960320612
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5772400413594320601
+        }
+      }
+    },
+    {
+      "pathId": "-7178266071067184885",
+      "name": "otchewbacca_mesh_shadow",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "-5585534779206670812",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7178266071067184885
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 9113505419235142205
+        }
+      }
+    },
+    {
+      "pathId": "-6996216246874913426",
+      "name": "left_backFlapJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_backFlapJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8863936674367205959",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6996216246874913426
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.2849683463573456,
+          "y": 0.02967813052237034,
+          "z": -0.9546465277671814
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8188979733682691534
+        }
+      }
+    },
+    {
+      "pathId": "-6242162391816488799",
+      "name": "otchewbacca_mesh",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8411510097792310215",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6242162391816488799
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 9113505419235142205
+        }
+      }
+    },
+    {
+      "pathId": "-5651309249507513818",
+      "name": "Left_wrstJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4744812206281527901",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5651309249507513818
+        },
+        "m_LocalRotation": {
+          "x": -0.4827461540699005,
+          "y": -0.0240405835211277,
+          "z": 0.44290482997894287,
+          "w": 0.7551247477531433
+        },
+        "m_LocalPosition": {
+          "x": -0.2500000298023224,
+          "y": -2.5436747819185257e-08,
+          "z": 6.548361852765083e-11
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4267780280134966883
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 2974412869002131970
+        }
+      }
+    },
+    {
+      "pathId": "-5636479013085426824",
+      "name": "spine2JNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4190778931899147862",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5636479013085426824
+        },
+        "m_LocalRotation": {
+          "x": 0.9883302450180054,
+          "y": 0.0460360161960125,
+          "z": -0.05171969160437584,
+          "w": 0.13568030297756195
+        },
+        "m_LocalPosition": {
+          "x": -0.17100292444229126,
+          "y": -1.4901161193847656e-08,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8151020142713105737
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2441130613169709059
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3067674671314328966
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3910981466387336667
+        }
+      }
+    },
+    {
+      "pathId": "-5008532282914782158",
+      "name": "bike_hit_area_root_pre",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3551723272344817000",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5008532282914782158
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -5348886380252301908
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4641327046985261348
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8548145349996407499
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8188979733682691534
+        }
+      }
+    },
+    {
+      "pathId": "-4889758558748817695",
+      "name": "right_lowerHandleJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-9075958085340202377",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4889758558748817695
+        },
+        "m_LocalRotation": {
+          "x": 1.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": -6.123234262925839e-17
+        },
+        "m_LocalPosition": {
+          "x": 0.18607200682163239,
+          "y": 0.0616622157394886,
+          "z": 0.658200204372406
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -5968719492772392148
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8188979733682691534
+        }
+      }
+    },
+    {
+      "pathId": "-4695891168724191413",
+      "name": "unit.char_chewbacca_ot_speederbike_pre",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7876630877553514268",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4695891168724191413
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 9113505419235142205
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    },
+    {
+      "pathId": "-3766452995971070317",
+      "name": "speederbike_74z_shadowmesh",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_shadowmesh",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "4834984228704131151",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -3766452995971070317
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -123603029967985642
+        }
+      }
+    },
+    {
+      "pathId": "-3667047585093386715",
+      "name": "Left_shldrJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1906998212493563379",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -3667047585093386715
+        },
+        "m_LocalRotation": {
+          "x": 0.030031215399503708,
+          "y": 0.21200138330459595,
+          "z": 0.5719256401062012,
+          "w": 0.7918677926063538
+        },
+        "m_LocalPosition": {
+          "x": -0.16197222471237183,
+          "y": 1.095759216696024e-08,
+          "z": 1.775333657860756e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 2974412869002131970
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8151020142713105737
+        }
+      }
+    },
+    {
+      "pathId": "-3327889157880594797",
+      "name": "Left_clavJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8151020142713105737",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -3327889157880594797
+        },
+        "m_LocalRotation": {
+          "x": -0.48219576478004456,
+          "y": 0.5536831021308899,
+          "z": 0.49243873357772827,
+          "w": 0.4673611521720886
+        },
+        "m_LocalPosition": {
+          "x": -0.22575406730175018,
+          "y": -0.0077528804540634155,
+          "z": 0.03500000014901161
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1906998212493563379
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4190778931899147862
+        }
+      }
+    },
+    {
+      "pathId": "-1972923844266828719",
+      "name": "Left_hipJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7372509356911652820",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1972923844266828719
+        },
+        "m_LocalRotation": {
+          "x": 0.07007534056901932,
+          "y": -0.14110907912254333,
+          "z": 0.9582039713859558,
+          "w": 0.23879466950893402
+        },
+        "m_LocalPosition": {
+          "x": 0.04877680912613869,
+          "y": -0.012522954493761063,
+          "z": -0.09399999678134918
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8154354133720048790
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 1796831769654386951
+        }
+      }
+    },
+    {
+      "pathId": "-1954196261827037314",
+      "name": "Left_kneeJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8154354133720048790",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1954196261827037314
+        },
+        "m_LocalRotation": {
+          "x": 0.9163677096366882,
+          "y": 0.3926619589328766,
+          "z": 0.03928978741168976,
+          "w": -0.06740301847457886
+        },
+        "m_LocalPosition": {
+          "x": -0.41112661361694336,
+          "y": 5.960464477539063e-08,
+          "z": 4.563480615615845e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -5810988846755755960
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7372509356911652820
+        }
+      }
+    },
+    {
+      "pathId": "-1818572408539592750",
+      "name": "Right_ballJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5485530312495910818",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1818572408539592750
+        },
+        "m_LocalRotation": {
+          "x": 2.7900128429791948e-08,
+          "y": 1.385751691174164e-08,
+          "z": -0.3744695484638214,
+          "w": 0.9272392392158508
+        },
+        "m_LocalPosition": {
+          "x": 0.11951996386051178,
+          "y": 3.725290298461914e-08,
+          "z": -8.940696716308594e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1822020103907621410
+        }
+      }
+    },
+    {
+      "pathId": "-1815604868015503262",
+      "name": "Right_kneeJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4176566180231721078",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1815604868015503262
+        },
+        "m_LocalRotation": {
+          "x": 0.9208880066871643,
+          "y": 0.38782286643981934,
+          "z": 0.00201310939155519,
+          "w": -0.03942841663956642
+        },
+        "m_LocalPosition": {
+          "x": 0.41112661361694336,
+          "y": 5.960464477539063e-08,
+          "z": -4.936009645462036e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1822020103907621410
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8795797117109146145
+        }
+      }
+    },
+    {
+      "pathId": "-1773802052275596620",
+      "name": "Left_ballJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3159448459877441276",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1773802052275596620
+        },
+        "m_LocalRotation": {
+          "x": 1.4532411940493262e-09,
+          "y": -1.935133120412047e-08,
+          "z": -0.37446942925453186,
+          "w": 0.9272393584251404
+        },
+        "m_LocalPosition": {
+          "x": -0.11951993405818939,
+          "y": 1.4901161193847656e-08,
+          "z": 1.4901161193847656e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -5810988846755755960
+        }
+      }
+    },
+    {
+      "pathId": "-1633174596046616037",
+      "name": "Right_elbwJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6951793886865690577",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1633174596046616037
+        },
+        "m_LocalRotation": {
+          "x": 0.02644973434507847,
+          "y": 0.7620063424110413,
+          "z": 0.2088344544172287,
+          "w": 0.6124010682106018
+        },
+        "m_LocalPosition": {
+          "x": 0.28600212931632996,
+          "y": 1.3113021850585938e-06,
+          "z": 7.088942766131368e-10
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5772400413594320601
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2187194116935602180
+        }
+      }
+    },
+    {
+      "pathId": "-1310648360003577127",
+      "name": "Right_shldrJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2187194116935602180",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1310648360003577127
+        },
+        "m_LocalRotation": {
+          "x": 0.21798276901245117,
+          "y": 0.24409635365009308,
+          "z": 0.36431822180747986,
+          "w": 0.8718789219856262
+        },
+        "m_LocalPosition": {
+          "x": 0.16197222471237183,
+          "y": -9.313225746154785e-09,
+          "z": 3.725290298461914e-09
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 6951793886865690577
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3067674671314328966
+        }
+      }
+    },
+    {
+      "pathId": "-996893915758883839",
+      "name": "Scaler",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "9113505419235142205",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -996893915758883839
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0800000429153442,
+          "y": 1.0800000429153442,
+          "z": 1.0800000429153442
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8411510097792310215
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5585534779206670812
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1796831769654386951
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -123603029967985642
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7876630877553514268
+        }
+      }
+    },
+    {
+      "pathId": "718651279037010918",
+      "name": "speederbike_74z_mesh",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-123603029967985642",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 718651279037010918
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8188979733682691534
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8695413367217257374
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4834984228704131151
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 9113505419235142205
+        }
+      }
+    },
+    {
+      "pathId": "964050798791347430",
+      "name": "spine1JNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3910981466387336667",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 964050798791347430
+        },
+        "m_LocalRotation": {
+          "x": 0.11378570646047592,
+          "y": 0.0074105532839894295,
+          "z": 0.0018716193735599518,
+          "w": 0.9934759736061096
+        },
+        "m_LocalPosition": {
+          "x": -0.0988585352897644,
+          "y": 7.450580596923828e-09,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -4190778931899147862
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 1796831769654386951
+        }
+      }
+    },
+    {
+      "pathId": "1144845413651565368",
+      "name": "Right_ankleJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1822020103907621410",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1144845413651565368
+        },
+        "m_LocalRotation": {
+          "x": 0.8376310467720032,
+          "y": 0.541843056678772,
+          "z": 0.05681368336081505,
+          "w": 0.03940325602889061
+        },
+        "m_LocalPosition": {
+          "x": 0.423000305891037,
+          "y": 1.7881393432617188e-07,
+          "z": 1.9371509552001953e-07
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5485530312495910818
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 4176566180231721078
+        }
+      }
+    },
+    {
+      "pathId": "1377015209713266349",
+      "name": "left_lowerHandleJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3023663884475549328",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1377015209713266349
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.18607230484485626,
+          "y": 0.06166226044297218,
+          "z": 0.6582003235816956
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1525562593747291586
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8188979733682691534
+        }
+      }
+    },
+    {
+      "pathId": "2348623152814196760",
+      "name": "Right_hipJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8795797117109146145",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2348623152814196760
+        },
+        "m_LocalRotation": {
+          "x": -0.21574124693870544,
+          "y": -0.10228349268436432,
+          "z": -0.2174454629421234,
+          "w": 0.9464203119277954
+        },
+        "m_LocalPosition": {
+          "x": 0.04877680912613869,
+          "y": -0.012522954493761063,
+          "z": 0.09399999678134918
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4176566180231721078
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 1796831769654386951
+        }
+      }
+    },
+    {
+      "pathId": "3406354337683686866",
+      "name": "Left_wpnJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7332821458268707394",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3406354337683686866
+        },
+        "m_LocalRotation": {
+          "x": -0.45141106843948364,
+          "y": -0.2674136459827423,
+          "z": 0.06855806708335876,
+          "w": 0.8485386967658997
+        },
+        "m_LocalPosition": {
+          "x": -0.08805680274963379,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 4267780280134966883
+        }
+      }
+    },
+    {
+      "pathId": "3725790191454170112",
+      "name": "Right_wrstJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5772400413594320601",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3725790191454170112
+        },
+        "m_LocalRotation": {
+          "x": -0.12456518411636353,
+          "y": -0.002393782138824463,
+          "z": -0.13251151144504547,
+          "w": 0.9833201766014099
+        },
+        "m_LocalPosition": {
+          "x": 0.2499980330467224,
+          "y": -9.454088285565376e-07,
+          "z": -1.3690441846847534e-06
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8191108822007036735
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 6951793886865690577
+        }
+      }
+    },
+    {
+      "pathId": "3800882270107334436",
+      "name": "Left_elbwJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "2974412869002131970",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3800882270107334436
+        },
+        "m_LocalRotation": {
+          "x": -0.552212655544281,
+          "y": 0.3879495859146118,
+          "z": 0.18363280594348907,
+          "w": 0.7147274613380432
+        },
+        "m_LocalPosition": {
+          "x": -0.2860000431537628,
+          "y": 2.8067006496712565e-09,
+          "z": 6.800891516611784e-10
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -4744812206281527901
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1906998212493563379
+        }
+      }
+    },
+    {
+      "pathId": "4823683986475204794",
+      "name": "pelvicJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1796831769654386951",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4823683986475204794
+        },
+        "m_LocalRotation": {
+          "x": -0.37708616256713867,
+          "y": 0.3794642388820648,
+          "z": -0.588584840297699,
+          "w": 0.6061193943023682
+        },
+        "m_LocalPosition": {
+          "x": -0.009952550753951073,
+          "y": 0.9054562449455261,
+          "z": -0.08296255767345428
+        },
+        "m_LocalScale": {
+          "x": 1.000000238418579,
+          "y": 1.000000238418579,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7372509356911652820
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8795797117109146145
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3910981466387336667
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 9113505419235142205
+        }
+      }
+    },
+    {
+      "pathId": "5172608078587815648",
+      "name": "Right_wpnJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6854555189960320612",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5172608078587815648
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.13174588978290558,
+          "w": 0.9912835359573364
+        },
+        "m_LocalPosition": {
+          "x": 0.0880567878484726,
+          "y": -5.40745588750724e-07,
+          "z": 2.103522973584404e-07
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1425013877397258154
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8191108822007036735
+        }
+      }
+    },
+    {
+      "pathId": "5597850851605536017",
+      "name": "Left_ankleJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-5810988846755755960",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5597850851605536017
+        },
+        "m_LocalRotation": {
+          "x": 0.8368123173713684,
+          "y": 0.53915935754776,
+          "z": 0.06059642136096954,
+          "w": 0.07335153967142105
+        },
+        "m_LocalPosition": {
+          "x": -0.42300018668174744,
+          "y": 1.1920928955078125e-07,
+          "z": -8.568167686462402e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3159448459877441276
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8154354133720048790
+        }
+      }
+    },
+    {
+      "pathId": "5786401491023217855",
+      "name": "weapon_ref_area",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre/weapon_ref_area",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1111322644588738787",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5786401491023217855
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.052000001072883606,
+          "z": 0.4790000021457672
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1425013877397258154
+        }
+      }
+    },
+    {
+      "pathId": "5825161740644791417",
+      "name": "speederbike_74z_mesh",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8695413367217257374",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5825161740644791417
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -123603029967985642
+        }
+      }
+    },
+    {
+      "pathId": "5976208542533158243",
+      "name": "rfl_chewbacca_pre",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre",
+      "activeSelf": false,
+      "layer": 0,
+      "transformPathId": "-1425013877397258154",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5976208542533158243
+        },
+        "m_LocalRotation": {
+          "x": -0.5,
+          "y": 0.5,
+          "z": -0.5,
+          "w": 0.5
+        },
+        "m_LocalPosition": {
+          "x": 0.13689999282360077,
+          "y": -0.005100000184029341,
+          "z": -0.05480000004172325
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1111322644588738787
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -6854555189960320612
+        }
+      }
+    },
+    {
+      "pathId": "6016686879480766453",
+      "name": "right_backFlapJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_backFlapJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "2841171935438294284",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6016686879480766453
+        },
+        "m_LocalRotation": {
+          "x": 1.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": -6.123234262925839e-17
+        },
+        "m_LocalPosition": {
+          "x": 0.28496798872947693,
+          "y": 0.02967812679708004,
+          "z": -0.9546428322792053
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8188979733682691534
+        }
+      }
+    },
+    {
+      "pathId": "6489639702856035703",
+      "name": "weapon_ref",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/weapon_ref",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3637295732511265265",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6489639702856035703
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.1419214904308319,
+          "z": 1.1476871967315674
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8188979733682691534
+        }
+      }
+    },
+    {
+      "pathId": "6674897123144171841",
+      "name": "HitArea3",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea3",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8548145349996407499",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6674897123144171841
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.0070000141859054565,
+          "z": 1.869999885559082
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3551723272344817000
+        }
+      }
+    },
+    {
+      "pathId": "7661165336566832309",
+      "name": "rootJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8188979733682691534",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7661165336566832309
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": -0.03607851639389992,
+          "z": -0.4896871745586395
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8863936674367205959
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3023663884475549328
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2841171935438294284
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -9075958085340202377
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3637295732511265265
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3551723272344817000
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -123603029967985642
+        }
+      }
+    },
+    {
+      "pathId": "8351589402157372471",
+      "name": "Left_wpn_offsetJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4267780280134966883",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8351589402157372471
+        },
+        "m_LocalRotation": {
+          "x": 0.42795294523239136,
+          "y": 0.05687679350376129,
+          "z": 0.11883604526519775,
+          "w": 0.8941473364830017
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7332821458268707394
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4744812206281527901
+        }
+      }
+    },
+    {
+      "pathId": "9058075548681400169",
+      "name": "HitArea1",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea1",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-5348886380252301908",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 9058075548681400169
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.3089999854564667,
+          "y": 0.1159999817609787,
+          "z": -0.9160000085830688
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3551723272344817000
+        }
+      }
+    },
+    {
+      "pathId": "9120364358299208836",
+      "name": "HitArea2",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea2",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4641327046985261348",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 9120364358299208836
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.24699999392032623,
+          "y": -0.07000000029802322,
+          "z": -0.25999999046325684
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3551723272344817000
+        }
+      }
+    },
+    {
+      "pathId": "9190837471099896881",
+      "name": "Right_clavJNT",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3067674671314328966",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 9190837471099896881
+        },
+        "m_LocalRotation": {
+          "x": 0.5458688735961914,
+          "y": 0.5615431070327759,
+          "z": -0.4729706048965454,
+          "w": 0.4037269055843353
+        },
+        "m_LocalPosition": {
+          "x": -0.22575406730175018,
+          "y": -0.0077528804540634155,
+          "z": -0.03500000014901161
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2187194116935602180
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -4190778931899147862
+        }
+      }
+    }
+  ],
+  "renderers": [
+    {
+      "pathId": "-930898212767108542",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_shadowmesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -3766452995971070317
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1972418001511963522
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 4531216579201221957
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8188979733682691534
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3023663884475549328
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1525562593747291586
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8863936674367205959
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -9075958085340202377
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5968719492772392148
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2841171935438294284
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 8188979733682691534
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.0,
+            "y": 0.04813957214355469,
+            "z": 0.530722975730896
+          },
+          "m_Extent": {
+            "x": 0.3535327911376953,
+            "y": 0.48026371002197266,
+            "z": 1.6638447046279907
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-3766452995971070317",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_shadowmesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "1972418001511963522",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "4531216579201221957",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "8188979733682691534",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-3023663884475549328",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "1525562593747291586",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT/left_upperHandleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-8863936674367205959",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_backFlapJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-9075958085340202377",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-5968719492772392148",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT/right_upperHandleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "2841171935438294284",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_backFlapJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "8188979733682691534",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "-379916881637316463",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7178266071067184885
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1972418001511963522
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -5843004471508690203
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1796831769654386951
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3910981466387336667
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4190778931899147862
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2441130613169709059
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2215659051621293720
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8151020142713105737
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1906998212493563379
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2974412869002131970
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4744812206281527901
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4267780280134966883
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7332821458268707394
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3067674671314328966
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2187194116935602180
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6951793886865690577
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5772400413594320601
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8191108822007036735
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6854555189960320612
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7372509356911652820
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8154354133720048790
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5810988846755755960
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3159448459877441276
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8795797117109146145
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4176566180231721078
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1822020103907621410
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5485530312495910818
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 1796831769654386951
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.09881842136383057,
+            "y": -0.009736940264701843,
+            "z": 0.0011438727378845215
+          },
+          "m_Extent": {
+            "x": 1.062619924545288,
+            "y": 0.33141398429870605,
+            "z": 0.6965799927711487
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-7178266071067184885",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "1972418001511963522",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-5843004471508690203",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "1796831769654386951",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-3910981466387336667",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-4190778931899147862",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "2441130613169709059",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-2215659051621293720",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "8151020142713105737",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-1906998212493563379",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "2974412869002131970",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-4744812206281527901",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "4267780280134966883",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "7332821458268707394",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "3067674671314328966",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "-2187194116935602180",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "6951793886865690577",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "5772400413594320601",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "-8191108822007036735",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "-6854555189960320612",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "7372509356911652820",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "-8154354133720048790",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "-5810988846755755960",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[20]",
+          "pathId": "-3159448459877441276",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[21]",
+          "pathId": "8795797117109146145",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[22]",
+          "pathId": "4176566180231721078",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[23]",
+          "pathId": "-1822020103907621410",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[24]",
+          "pathId": "5485530312495910818",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "1796831769654386951",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "4447156143842362109",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6242162391816488799
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4582422330943337553
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -5843004471508690203
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1796831769654386951
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3910981466387336667
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4190778931899147862
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2441130613169709059
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2215659051621293720
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8151020142713105737
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1906998212493563379
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2974412869002131970
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4744812206281527901
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4267780280134966883
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7332821458268707394
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3067674671314328966
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2187194116935602180
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6951793886865690577
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5772400413594320601
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8191108822007036735
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6854555189960320612
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7372509356911652820
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8154354133720048790
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5810988846755755960
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3159448459877441276
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8795797117109146145
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4176566180231721078
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1822020103907621410
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5485530312495910818
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 1796831769654386951
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.09881842136383057,
+            "y": -0.009736940264701843,
+            "z": 0.0011438727378845215
+          },
+          "m_Extent": {
+            "x": 1.062619924545288,
+            "y": 0.33141398429870605,
+            "z": 0.6965799927711487
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-6242162391816488799",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "4582422330943337553",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-5843004471508690203",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "1796831769654386951",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-3910981466387336667",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-4190778931899147862",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "2441130613169709059",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-2215659051621293720",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "8151020142713105737",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-1906998212493563379",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "2974412869002131970",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "-4744812206281527901",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "4267780280134966883",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "7332821458268707394",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "3067674671314328966",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "-2187194116935602180",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "6951793886865690577",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "5772400413594320601",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "-8191108822007036735",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "-6854555189960320612",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "7372509356911652820",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "-8154354133720048790",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "-5810988846755755960",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[20]",
+          "pathId": "-3159448459877441276",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT"
+        },
+        {
+          "fieldPath": "m_Bones[21]",
+          "pathId": "8795797117109146145",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT"
+        },
+        {
+          "fieldPath": "m_Bones[22]",
+          "pathId": "4176566180231721078",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT"
+        },
+        {
+          "fieldPath": "m_Bones[23]",
+          "pathId": "-1822020103907621410",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[24]",
+          "pathId": "5485530312495910818",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "1796831769654386951",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "7849986293735082450",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5825161740644791417
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8682944406525587329
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 5066301569665522325
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8188979733682691534
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3023663884475549328
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1525562593747291586
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8863936674367205959
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -9075958085340202377
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5968719492772392148
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2841171935438294284
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": 8188979733682691534
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.0,
+            "y": 0.03622227907180786,
+            "z": 0.5347703695297241
+          },
+          "m_Extent": {
+            "x": 0.3535327911376953,
+            "y": 0.4850224256515503,
+            "z": 1.6685892343521118
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "5825161740644791417",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8682944406525587329",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "5066301569665522325",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "8188979733682691534",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-3023663884475549328",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "1525562593747291586",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT/left_upperHandleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-8863936674367205959",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_backFlapJNT"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-9075958085340202377",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-5968719492772392148",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT/right_upperHandleJNT"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "2841171935438294284",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_backFlapJNT"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "8188979733682691534",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT"
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "pathId": "935392688140195624",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4695891168724191413
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": 4529141531353518334
+        },
+        "m_Name": "",
+        "_unitPresentations": [
+          {
+            "Location": 1,
+            "Position": {
+              "x": 0.0,
+              "y": 0.949999988079071,
+              "z": -6.0
+            },
+            "Rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "Scale": 0.9200000166893005
+          }
+        ]
+      },
+      "class": "CharacterUnitPresentation",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-4695891168724191413",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "4529141531353518334",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "4110750204500388997",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4695891168724191413
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": -6234530345940484834
+        },
+        "m_Name": "",
+        "_animationEvents": [
+          {
+            "Id": "RifleToBack",
+            "Actions": [
+              {
+                "Type": 0,
+                "UnitSubObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 5976208542533158243
+                },
+                "Parent": {
+                  "m_FileID": 0,
+                  "m_PathID": -5636479013085426824
+                },
+                "Position": {
+                  "x": -0.3146238923072815,
+                  "y": -0.17867030203342438,
+                  "z": -0.0850503072142601
+                },
+                "Rotation": {
+                  "x": 20.13796043395996,
+                  "y": 58.37405014038086,
+                  "z": -8.6343994140625
+                },
+                "AnimationValue": "",
+                "Duration": 0.0,
+                "YFloor": 0.0
+              }
+            ]
+          },
+          {
+            "Id": "RifleToHand",
+            "Actions": [
+              {
+                "Type": 0,
+                "UnitSubObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 5976208542533158243
+                },
+                "Parent": {
+                  "m_FileID": 0,
+                  "m_PathID": 5172608078587815648
+                },
+                "Position": {
+                  "x": 0.13689999282360077,
+                  "y": -0.005100000184029341,
+                  "z": -0.05480000004172325
+                },
+                "Rotation": {
+                  "x": 0.0,
+                  "y": 90.0,
+                  "z": -90.0
+                },
+                "AnimationValue": "",
+                "Duration": 0.0,
+                "YFloor": 0.0
+              }
+            ]
+          }
+        ]
+      },
+      "class": "UnitSubObjectAnimationEventHandler",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-4695891168724191413",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "-6234530345940484834",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_animationEvents[0].Actions[0].UnitSubObject",
+          "pathId": "5976208542533158243",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre"
+        },
+        {
+          "fieldPath": "_animationEvents[0].Actions[0].Parent",
+          "pathId": "-5636479013085426824",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "_animationEvents[1].Actions[0].UnitSubObject",
+          "pathId": "5976208542533158243",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre"
+        },
+        {
+          "fieldPath": "_animationEvents[1].Actions[0].Parent",
+          "pathId": "5172608078587815648",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT"
+        }
+      ]
+    },
+    {
+      "pathId": "8542126143011685656",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4695891168724191413
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": 6907970109121684514
+        },
+        "m_Name": "",
+        "_hologramVFX": [],
+        "_persistentHologramVFX": [],
+        "_materializeVFX": [],
+        "_stealthVFX": [],
+        "_locked": [],
+        "_propStates": [],
+        "_unitReferenceAreas": {
+          "_head": {
+            "m_FileID": 0,
+            "m_PathID": -8822479774038162145
+          },
+          "_center": {
+            "m_FileID": 0,
+            "m_PathID": -5636479013085426824
+          },
+          "_hitAreas": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 9058075548681400169
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": 9120364358299208836
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": 6674897123144171841
+            }
+          ],
+          "_weapon": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 6489639702856035703
+            }
+          ],
+          "_offhand": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 3406354337683686866
+            }
+          ],
+          "_feet": {
+            "m_FileID": 0,
+            "m_PathID": -1818572408539592750
+          },
+          "_uiArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_opponentUIArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_targetReticle": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_genericAreas": [
+            {
+              "Name": "Rifle",
+              "ReferencePoint": {
+                "m_FileID": 0,
+                "m_PathID": 5976208542533158243
+              }
+            },
+            {
+              "Name": "speederbike_shadow",
+              "ReferencePoint": {
+                "m_FileID": 0,
+                "m_PathID": -3766452995971070317
+              }
+            },
+            {
+              "Name": "speederbike_unit_shadow",
+              "ReferencePoint": {
+                "m_FileID": 0,
+                "m_PathID": -7178266071067184885
+              }
+            }
+          ]
+        },
+        "_mainRenderer": {
+          "m_FileID": 0,
+          "m_PathID": 4447156143842362109
+        },
+        "_weaponRenderer": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "_suppressDeathSequence": 0,
+        "_boundsSizeOverride": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "_unitRendererElements": [
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 4447156143842362109
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -379916881637316463
+            }
+          }
+        ],
+        "_effectTimelines": []
+      },
+      "class": "UnitComponent",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-4695891168724191413",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "6907970109121684514",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._head",
+          "pathId": "-8822479774038162145",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._center",
+          "pathId": "-5636479013085426824",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[0]",
+          "pathId": "9058075548681400169",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea1"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[1]",
+          "pathId": "9120364358299208836",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea2"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[2]",
+          "pathId": "6674897123144171841",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea3"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._weapon[0]",
+          "pathId": "6489639702856035703",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/weapon_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._offhand[0]",
+          "pathId": "3406354337683686866",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._feet",
+          "pathId": "-1818572408539592750",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._uiArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._opponentUIArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._targetReticle",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._genericAreas[0].ReferencePoint",
+          "pathId": "5976208542533158243",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._genericAreas[1].ReferencePoint",
+          "pathId": "-3766452995971070317",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_shadowmesh"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._genericAreas[2].ReferencePoint",
+          "pathId": "-7178266071067184885",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh_shadow"
+        },
+        {
+          "fieldPath": "_mainRenderer",
+          "pathId": "4447156143842362109",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh"
+        },
+        {
+          "fieldPath": "_weaponRenderer",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].MainRenderer",
+          "pathId": "4447156143842362109",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].ShadowRenderer",
+          "pathId": "-379916881637316463",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh_shadow"
+        }
+      ]
+    }
+  ],
+  "constraints": [],
+  "glbAudit": [
+    {
+      "file": "extracted/char_chewbacca_ot_speederbike_pre/char_chewbacca_ot_speederbike_pre.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-8822479774038162145",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8805720991915397084",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT/left_upperHandleJNT",
+          "nodes": [
+            {
+              "index": 35,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7837769388108722369",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7576293361920424302",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT/right_upperHandleJNT",
+          "nodes": [
+            {
+              "index": 38,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7342858926657291177",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7178266071067184885",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh_shadow",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6996216246874913426",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_backFlapJNT",
+          "nodes": [
+            {
+              "index": 33,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6242162391816488799",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5651309249507513818",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5636479013085426824",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5008532282914782158",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre",
+          "nodes": [
+            {
+              "index": 40,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4889758558748817695",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT",
+          "nodes": [
+            {
+              "index": 37,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4695891168724191413",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3766452995971070317",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_shadowmesh",
+          "nodes": [
+            {
+              "index": 45,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3667047585093386715",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3327889157880594797",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1972923844266828719",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1954196261827037314",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1818572408539592750",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1815604868015503262",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1773802052275596620",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1633174596046616037",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1310648360003577127",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-996893915758883839",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "718651279037010918",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "964050798791347430",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1144845413651565368",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1377015209713266349",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT",
+          "nodes": [
+            {
+              "index": 34,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "2348623152814196760",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3406354337683686866",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3725790191454170112",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3800882270107334436",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4823683986475204794",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5172608078587815648",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5597850851605536017",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5786401491023217855",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre/weapon_ref_area",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5825161740644791417",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_mesh",
+          "nodes": [
+            {
+              "index": 44,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5976208542533158243",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": true
+        },
+        {
+          "sourcePathId": "6016686879480766453",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_backFlapJNT",
+          "nodes": [
+            {
+              "index": 36,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6489639702856035703",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/weapon_ref",
+          "nodes": [
+            {
+              "index": 39,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6674897123144171841",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea3",
+          "nodes": [
+            {
+              "index": 43,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7661165336566832309",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8351589402157372471",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "9058075548681400169",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea1",
+          "nodes": [
+            {
+              "index": 41,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "9120364358299208836",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea2",
+          "nodes": [
+            {
+              "index": 42,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "9190837471099896881",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    },
+    {
+      "file": "extracted/char_chewbacca_ot_speederbike_pre/char_chewbacca_ot_speederbike_pre.anim.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-8822479774038162145",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT/headJNT",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8805720991915397084",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT/left_upperHandleJNT",
+          "nodes": [
+            {
+              "index": 35,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7837769388108722369",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/neckJNT",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7576293361920424302",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT/right_upperHandleJNT",
+          "nodes": [
+            {
+              "index": 38,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7342858926657291177",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7178266071067184885",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh_shadow",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6996216246874913426",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_backFlapJNT",
+          "nodes": [
+            {
+              "index": 33,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6242162391816488799",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/otchewbacca_mesh",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5651309249507513818",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5636479013085426824",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5008532282914782158",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre",
+          "nodes": [
+            {
+              "index": 40,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4889758558748817695",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_lowerHandleJNT",
+          "nodes": [
+            {
+              "index": 37,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4695891168724191413",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3766452995971070317",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_shadowmesh",
+          "nodes": [
+            {
+              "index": 45,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3667047585093386715",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3327889157880594797",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1972923844266828719",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1954196261827037314",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1818572408539592750",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT/Right_ballJNT",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1815604868015503262",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1773802052275596620",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT/Left_ballJNT",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1633174596046616037",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1310648360003577127",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-996893915758883839",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "718651279037010918",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "964050798791347430",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1144845413651565368",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT/Right_kneeJNT/Right_ankleJNT",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1377015209713266349",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/left_lowerHandleJNT",
+          "nodes": [
+            {
+              "index": 34,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "2348623152814196760",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Right_hipJNT",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3406354337683686866",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT/Left_wpnJNT",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3725790191454170112",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3800882270107334436",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4823683986475204794",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5172608078587815648",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5597850851605536017",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/Left_hipJNT/Left_kneeJNT/Left_ankleJNT",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5786401491023217855",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre/weapon_ref_area",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5825161740644791417",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/speederbike_74z_mesh",
+          "nodes": [
+            {
+              "index": 44,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5976208542533158243",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/rfl_chewbacca_pre",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": true
+        },
+        {
+          "sourcePathId": "6016686879480766453",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/right_backFlapJNT",
+          "nodes": [
+            {
+              "index": 36,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6489639702856035703",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/weapon_ref",
+          "nodes": [
+            {
+              "index": 39,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6674897123144171841",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea3",
+          "nodes": [
+            {
+              "index": 43,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7661165336566832309",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8351589402157372471",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Left_clavJNT/Left_shldrJNT/Left_elbwJNT/Left_wrstJNT/Left_wpn_offsetJNT",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "9058075548681400169",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea1",
+          "nodes": [
+            {
+              "index": 41,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "9120364358299208836",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/speederbike_74z_mesh/rootJNT/bike_hit_area_root_pre/HitArea2",
+          "nodes": [
+            {
+              "index": 42,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "9190837471099896881",
+          "hierarchyPath": "unit.char_chewbacca_ot_speederbike_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Authored initial state is not a substitute for original spawn/presentation transitions.",
+    "Missing GLB event targets need original geometry restored, not a guessed replacement.",
+    "GLB node identity matches require complete original hierarchy paths; ambiguous mappings remain pending."
+  ],
+  "clips": [
+    {
+      "animationName": "Idle@0.0",
+      "originalState": "Base Layer.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 0.0,
+      "clipName": "speederbike_idleA",
+      "clipPathId": "2102714192253631566",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 3.3000001907348633,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Idle@1.0",
+      "originalState": "Base Layer.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 1.0,
+      "clipName": "speederbike_idleB",
+      "clipPathId": "-9156862048927682638",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 3.9666669368743896,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Shot",
+      "originalState": "Base Layer.Shot",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_shot",
+      "clipPathId": "-8346045082817438859",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.9000015258789062,
+      "events": [
+        {
+          "time": 0.6333333253860474,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Death",
+      "originalState": "Base Layer.Death",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_death",
+      "clipPathId": "8311672153378298781",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 0.5,
+      "events": [
+        {
+          "time": 0.03333333507180214,
+          "functionName": "PostAudioEvent",
+          "data": "Play_ANM_SW_vehicle_speederbike_death_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "ShootBehind@0.0",
+      "originalState": "Base Layer.ShootBehind",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": 0.0,
+      "clipName": "speederbike_enemy_shot_left",
+      "clipPathId": "7419591893522971649",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.4000015258789062,
+      "events": [
+        {
+          "time": 0.13333334028720856,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "PARENTPISTOLLEFT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.23333333432674408,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "ENABLEPISTOL",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.3333333432674408,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_handling_pistol_aim_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.2000000476837158,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 2.0,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "DISABLEPISTOL",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "ShootBehind@1.0",
+      "originalState": "Base Layer.ShootBehind",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": 1.0,
+      "clipName": "speederbike_enemy_shot_right",
+      "clipPathId": "-8381080655148880422",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.4000015258789062,
+      "events": [
+        {
+          "time": 0.13333334028720856,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "PARENTPISTOLRIGHT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.23333333432674408,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "ENABLEPISTOL",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.36666667461395264,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_handling_pistol_aim_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.2000000476837158,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 2.0,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "DISABLEPISTOL",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "GrenadeThrow@0.0",
+      "originalState": "Base Layer.GrenadeThrow",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": 0.0,
+      "clipName": "speederbike_enemy_grenade",
+      "clipPathId": "-1738191792357382761",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 3.033336639404297,
+      "events": [
+        {
+          "time": 0.4333333373069763,
+          "functionName": "get_AutoRotate",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.5,
+          "functionName": "PostAudioEvent",
+          "data": "Play_WPN_explo_grenade_arm_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.5,
+          "functionName": "PostAudioEvent",
+          "data": "Play_WPN_explo_grenade_throw_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "GrenadeThrow@1.0",
+      "originalState": "Base Layer.GrenadeThrow",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": 1.0,
+      "clipName": "speederbike_enemy_grenade",
+      "clipPathId": "-1738191792357382761",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 3.033336639404297,
+      "events": [
+        {
+          "time": 0.4333333373069763,
+          "functionName": "get_AutoRotate",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.5,
+          "functionName": "PostAudioEvent",
+          "data": "Play_WPN_explo_grenade_arm_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.5,
+          "functionName": "PostAudioEvent",
+          "data": "Play_WPN_explo_grenade_throw_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Double Shot",
+      "originalState": "Base Layer.Double Shot",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_doubleshot",
+      "clipPathId": "-7888232749541444713",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.9000015258789062,
+      "events": [
+        {
+          "time": 0.46666666865348816,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6000000238418579,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "LaserSpray",
+      "originalState": "Base Layer.LaserSpray",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_spray",
+      "clipPathId": "-6420402610391826936",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.7333335876464844,
+      "events": [
+        {
+          "time": 0.375,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.5,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6666666865348816,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.875,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.0,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Buff",
+      "originalState": "Base Layer.Buff",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_buff",
+      "clipPathId": "5024106712533800749",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.7666664123535156,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Jam",
+      "originalState": "Base Layer.Jam",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_jam",
+      "clipPathId": "53516508394322909",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.633333206176758,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Repair",
+      "originalState": "Base Layer.Repair",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_enemy_repair",
+      "clipPathId": "1781398222423487539",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.23333740234375,
+      "events": [
+        {
+          "time": 0.4000000059604645,
+          "functionName": "PostAudioEvent",
+          "data": "Play_VFX_ability_speederbike_repairInitiate_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Branch Shot",
+      "originalState": "Base Layer.Branch Shot",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_enemy_branchshot",
+      "clipPathId": "-3044208954416224488",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.7000007629394531,
+      "events": [
+        {
+          "time": 0.06666667014360428,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "PARENTPISTOLRIGHT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.13333334028720856,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "ENABLEPISTOL",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.1666666716337204,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_handling_pistol_aim_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.800000011920929,
+          "functionName": "StartParticleSystem",
+          "data": "vfx_blasterShot_red",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.4333332777023315,
+          "functionName": "PlaySubObjectAnimationEvent",
+          "data": "DISABLEPISTOL",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "SideswipeLeft",
+      "originalState": "Base Layer.SideswipeLeft",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_swipeleft",
+      "clipPathId": "4527152867440984492",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.366668701171875,
+      "events": [
+        {
+          "time": 0.6000000238418579,
+          "functionName": "PostAudioEvent",
+          "data": "Play_WPN_melee_fistMetal_impact_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "SideswipeRight",
+      "originalState": "Base Layer.SideswipeRight",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_swiperight",
+      "clipPathId": "8065446971720436282",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.3666667938232422,
+      "events": [
+        {
+          "time": 0.8666666746139526,
+          "functionName": "PostAudioEvent",
+          "data": "Play_WPN_melee_fistMetal_impact_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Die Left",
+      "originalState": "Base Layer.Die Left",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_enemy_dth_left",
+      "clipPathId": "-2933065268775073599",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.0,
+      "events": [
+        {
+          "time": 0.03333333507180214,
+          "functionName": "PostAudioEvent",
+          "data": "Play_ANM_SW_vehicle_speederbike_engineVeer_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Die Right",
+      "originalState": "Base Layer.Die Right",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_enemy_dth_right",
+      "clipPathId": "-5318150173649375851",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.0666694641113281,
+      "events": [
+        {
+          "time": 0.03333333507180214,
+          "functionName": "PostAudioEvent",
+          "data": "Play_ANM_SW_vehicle_speederbike_engineVeer_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Run",
+      "originalState": "Base Layer.Run",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_run",
+      "clipPathId": "1707529613554242837",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 0.8000011444091797,
+      "events": [
+        {
+          "time": 0.03333333507180214,
+          "functionName": "PostAudioEvent",
+          "data": "Play_ANM_SW_vehicle_speederbike_gears_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.23333333432674408,
+          "functionName": "PostAudioEvent",
+          "data": "Play_ANM_SW_vehicle_speederbike_accelerate_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "RunReturn",
+      "originalState": "Base Layer.RunReturn",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_run_return",
+      "clipPathId": "5468903073458945978",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 0.5333328247070312,
+      "events": [
+        {
+          "time": 0.03333333507180214,
+          "functionName": "PostAudioEvent",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "DodgeLeft",
+      "originalState": "Base Layer.DodgeLeft",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_dodgeleft",
+      "clipPathId": "-4801256749592926758",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.233334541320801,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "DodgeRight",
+      "originalState": "Base Layer.DodgeRight",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_dodgeright",
+      "clipPathId": "6018962576855674275",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.133334159851074,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "DodgeUp",
+      "originalState": "Base Layer.DodgeUp",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_dodgeup",
+      "clipPathId": "-9006178622834865235",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.5666675567626953,
+      "events": [
+        {
+          "time": 0.13333334028720856,
+          "functionName": "PostAudioEvent",
+          "data": "Play_ANM_SW_vehicle_speederbike_accelerate_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Hit",
+      "originalState": "Hit Reaction.Hit",
+      "layer": 1,
+      "defaultState": false,
+      "stateSpeed": 3.0,
+      "blendThreshold": null,
+      "clipName": "speederbike_spray",
+      "clipPathId": "-6420402610391826936",
+      "sourceBundle": "char_chewbacca_ot_speederbike_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 2.7333335876464844,
+      "events": [
+        {
+          "time": 0.375,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.5,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6666666865348816,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.875,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.0,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    }
+  ],
+  "sharedAnimationSource": {
+    "bundle": "shared_animationcontainer",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\79ff98634f7a2e000000000000000000\\__data",
+    "sha256": "87c7b8b0d4e698890495aa94b85f33b655d92be20517464d1e2db80b38b529bc"
+  }
+}

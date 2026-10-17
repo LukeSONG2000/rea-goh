@@ -1,0 +1,1938 @@
+{
+  "schemaVersion": 1,
+  "bundle": "char_sith_turret_pre",
+  "source": {
+    "bundle": "char_sith_turret_pre",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_sith_turret_pre\\50d1cbf9707801000000000000000000\\__data",
+    "sha256": "fca6456c1afe0ee896af8a0ac52d0d48214f41872911365f74f3cf12a3581f20"
+  },
+  "gameObjects": [
+    {
+      "pathId": "-9103154066389936416",
+      "name": "feet_ref",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/feet_ref",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2579605094387140319",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -9103154066389936416
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.03999999910593033,
+          "z": 0.4269999861717224
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3023496411351914981
+        }
+      }
+    },
+    {
+      "pathId": "-8657540999120480504",
+      "name": "barrel_bottom",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8158401944825926799",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8657540999120480504
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.2088165283203125,
+          "z": 1.023992896080017
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5799881487769799648
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3758636601003862387
+        }
+      }
+    },
+    {
+      "pathId": "-8514258443232407439",
+      "name": "base",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2002252233265603276",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8514258443232407439
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0628042221069336,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3758636601003862387
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8228132973184482906
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1438453929866547672
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3023496411351914981
+        }
+      }
+    },
+    {
+      "pathId": "-6748876176961930941",
+      "name": "weapon_ref",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top/weapon_ref",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1882716496667399171",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6748876176961930941
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.0010000000474974513,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -6395667999981343505
+        }
+      }
+    },
+    {
+      "pathId": "-4072741444900883502",
+      "name": "root",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3023496411351914981",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4072741444900883502
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2002252233265603276
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2579605094387140319
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2678977868794298643
+        }
+      }
+    },
+    {
+      "pathId": "-3842196958365110914",
+      "name": "offhand_ref",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom/offhand_ref",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5799881487769799648",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -3842196958365110914
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8158401944825926799
+        }
+      }
+    },
+    {
+      "pathId": "-818580408035661570",
+      "name": "turret",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3758636601003862387",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -818580408035661570
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.3615579605102539,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8158401944825926799
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6395667999981343505
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2002252233265603276
+        }
+      }
+    },
+    {
+      "pathId": "3189425704423889133",
+      "name": "head_ref",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/head_ref",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8228132973184482906",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3189425704423889133
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.6850000023841858,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2002252233265603276
+        }
+      }
+    },
+    {
+      "pathId": "3704450107209420560",
+      "name": "Scaler",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2678977868794298643",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3704450107209420560
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.05700000002980232,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3023496411351914981
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1376387607846709083
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5146727832042323857
+        }
+      }
+    },
+    {
+      "pathId": "3942074448860261948",
+      "name": "sith_turret_mesh",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1376387607846709083",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3942074448860261948
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 9053156896690736500
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2678977868794298643
+        }
+      }
+    },
+    {
+      "pathId": "4024955208287659104",
+      "name": "sith_turret_mesh_shadow",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh/sith_turret_mesh_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "9053156896690736500",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4024955208287659104
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 1376387607846709083
+        }
+      }
+    },
+    {
+      "pathId": "5541503939112459974",
+      "name": "barrel_top",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6395667999981343505",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 5541503939112459974
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.2792510986328125,
+          "z": 1.1425704956054688
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1882716496667399171
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3758636601003862387
+        }
+      }
+    },
+    {
+      "pathId": "6841855772458479952",
+      "name": "center_ref",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/center_ref",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1438453929866547672",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6841855772458479952
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.35199999809265137,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -2002252233265603276
+        }
+      }
+    },
+    {
+      "pathId": "8909551054825690243",
+      "name": "unit.char_sith_turret_pre",
+      "hierarchyPath": "unit.char_sith_turret_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5146727832042323857",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8909551054825690243
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 2.440000057220459
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2678977868794298643
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    }
+  ],
+  "renderers": [
+    {
+      "pathId": "-8901947227612447857",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh/sith_turret_mesh_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4024955208287659104
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 1,
+            "m_PathID": -8587867788662160608
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -2155619796033056466
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3023496411351914981
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2002252233265603276
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3758636601003862387
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6395667999981343505
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8158401944825926799
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": -3023496411351914981
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.0,
+            "y": 0.4402594566345215,
+            "z": 0.2639446258544922
+          },
+          "m_Extent": {
+            "x": 0.6146812438964844,
+            "y": 0.504366397857666,
+            "z": 0.8786258697509766
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "4024955208287659104",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh/sith_turret_mesh_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8587867788662160608",
+          "fileId": 1,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-2155619796033056466",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-3023496411351914981",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-2002252233265603276",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "3758636601003862387",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-6395667999981343505",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-8158401944825926799",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "-3023496411351914981",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root"
+        }
+      ]
+    },
+    {
+      "pathId": "-6445486035125904696",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3942074448860261948
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4720206951024235346
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -2155619796033056466
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3023496411351914981
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2002252233265603276
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3758636601003862387
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6395667999981343505
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8158401944825926799
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": -3023496411351914981
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.0,
+            "y": 0.4402594566345215,
+            "z": 0.2639446258544922
+          },
+          "m_Extent": {
+            "x": 0.6146812438964844,
+            "y": 0.504366397857666,
+            "z": 0.8786258697509766
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "3942074448860261948",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "4720206951024235346",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-2155619796033056466",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-3023496411351914981",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "-2002252233265603276",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "3758636601003862387",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "-6395667999981343505",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "-8158401944825926799",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "-3023496411351914981",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root"
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "pathId": "1731308141141866690",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_sith_turret_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8909551054825690243
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": -4085762018415572245
+        },
+        "m_Name": "",
+        "_childPrefabs": [
+          "prefab.char_damage"
+        ]
+      },
+      "class": "BattleUnitChildPrefabLoader",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "8909551054825690243",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "-4085762018415572245",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "7466994201177240139",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_sith_turret_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8909551054825690243
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": 6907970109121684514
+        },
+        "m_Name": "",
+        "_hologramVFX": [],
+        "_persistentHologramVFX": [],
+        "_materializeVFX": [],
+        "_stealthVFX": [],
+        "_locked": [],
+        "_propStates": [],
+        "_unitReferenceAreas": {
+          "_head": {
+            "m_FileID": 0,
+            "m_PathID": 3189425704423889133
+          },
+          "_center": {
+            "m_FileID": 0,
+            "m_PathID": 6841855772458479952
+          },
+          "_hitAreas": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 3189425704423889133
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": 6841855772458479952
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": -9103154066389936416
+            }
+          ],
+          "_weapon": [
+            {
+              "m_FileID": 0,
+              "m_PathID": -6748876176961930941
+            }
+          ],
+          "_offhand": [
+            {
+              "m_FileID": 0,
+              "m_PathID": -3842196958365110914
+            }
+          ],
+          "_feet": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_uiArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_opponentUIArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_targetReticle": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_genericAreas": []
+        },
+        "_mainRenderer": {
+          "m_FileID": 0,
+          "m_PathID": -6445486035125904696
+        },
+        "_weaponRenderer": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "_suppressDeathSequence": 0,
+        "_boundsSizeOverride": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "_unitRendererElements": [
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -6445486035125904696
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": -8901947227612447857
+            }
+          }
+        ],
+        "_effectTimelines": []
+      },
+      "class": "UnitComponent",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "8909551054825690243",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "6907970109121684514",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._head",
+          "pathId": "3189425704423889133",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/head_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._center",
+          "pathId": "6841855772458479952",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/center_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[0]",
+          "pathId": "3189425704423889133",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/head_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[1]",
+          "pathId": "6841855772458479952",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/center_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[2]",
+          "pathId": "-9103154066389936416",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/feet_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._weapon[0]",
+          "pathId": "-6748876176961930941",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top/weapon_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._offhand[0]",
+          "pathId": "-3842196958365110914",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom/offhand_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._feet",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._uiArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._opponentUIArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._targetReticle",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_mainRenderer",
+          "pathId": "-6445486035125904696",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh"
+        },
+        {
+          "fieldPath": "_weaponRenderer",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].MainRenderer",
+          "pathId": "-6445486035125904696",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].ShadowRenderer",
+          "pathId": "-8901947227612447857",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh/sith_turret_mesh_shadow"
+        }
+      ]
+    }
+  ],
+  "constraints": [],
+  "glbAudit": [
+    {
+      "file": "extracted/char_sith_turret_pre/char_sith_turret_pre.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-9103154066389936416",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/feet_ref",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8657540999120480504",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8514258443232407439",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6748876176961930941",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top/weapon_ref",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4072741444900883502",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3842196958365110914",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom/offhand_ref",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-818580408035661570",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3189425704423889133",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/head_ref",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3704450107209420560",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3942074448860261948",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4024955208287659104",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh/sith_turret_mesh_shadow",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5541503939112459974",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6841855772458479952",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/center_ref",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8909551054825690243",
+          "hierarchyPath": "unit.char_sith_turret_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    },
+    {
+      "file": "extracted/char_sith_turret_pre/char_sith_turret_pre.anim.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-9103154066389936416",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/feet_ref",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8657540999120480504",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8514258443232407439",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6748876176961930941",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top/weapon_ref",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4072741444900883502",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-3842196958365110914",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_bottom/offhand_ref",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-818580408035661570",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3189425704423889133",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/head_ref",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3704450107209420560",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3942074448860261948",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4024955208287659104",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/sith_turret_mesh/sith_turret_mesh_shadow",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "5541503939112459974",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/turret/barrel_top",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6841855772458479952",
+          "hierarchyPath": "unit.char_sith_turret_pre/Scaler/root/base/center_ref",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8909551054825690243",
+          "hierarchyPath": "unit.char_sith_turret_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Authored initial state is not a substitute for original spawn/presentation transitions.",
+    "Missing GLB event targets need original geometry restored, not a guessed replacement.",
+    "GLB node identity matches require complete original hierarchy paths; ambiguous mappings remain pending."
+  ],
+  "clips": [
+    {
+      "animationName": "Idle@0.0",
+      "originalState": "Base Layer.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 0.0,
+      "clipName": "gen_sithturret_anim_idle",
+      "clipPathId": "-2228559052164527698",
+      "sourceBundle": "char_sith_turret_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 3.000000238418579,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Idle@1.0",
+      "originalState": "Base Layer.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 1.0,
+      "clipName": "gen_sithturret_anim_idle",
+      "clipPathId": "-2228559052164527698",
+      "sourceBundle": "char_sith_turret_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 3.000000238418579,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "LimitBreak",
+      "originalState": "Base Layer.LimitBreak",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_sithturret_anim_shot",
+      "clipPathId": "-6952249710279923361",
+      "sourceBundle": "char_sith_turret_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.0,
+      "events": [
+        {
+          "time": 0.5,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "LimitBreak2",
+      "originalState": "Base Layer.LimitBreak2",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_sithturret_anim_shot",
+      "clipPathId": "-6952249710279923361",
+      "sourceBundle": "char_sith_turret_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.0,
+      "events": [
+        {
+          "time": 0.5,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "LimitBreak3",
+      "originalState": "Base Layer.LimitBreak3",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_sithturret_anim_shot",
+      "clipPathId": "-6952249710279923361",
+      "sourceBundle": "char_sith_turret_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.0,
+      "events": [
+        {
+          "time": 0.5,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "LimitBreak4",
+      "originalState": "Base Layer.LimitBreak4",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_sithturret_anim_repeater",
+      "clipPathId": "1865218303833725811",
+      "sourceBundle": "char_sith_turret_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.5,
+      "events": [
+        {
+          "time": 0.3333333432674408,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.5,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6666666865348816,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.8333333134651184,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.0,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.1666666269302368,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "LimitBreak5",
+      "originalState": "Base Layer.LimitBreak5",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_sithturret_anim_shot",
+      "clipPathId": "-6952249710279923361",
+      "sourceBundle": "char_sith_turret_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.0,
+      "events": [
+        {
+          "time": 0.5,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Attack",
+      "originalState": "Base Layer.Attack",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_sithturret_anim_shot",
+      "clipPathId": "-6952249710279923361",
+      "sourceBundle": "char_sith_turret_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.0,
+      "events": [
+        {
+          "time": 0.5,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    }
+  ],
+  "sharedAnimationSource": {
+    "bundle": "shared_animationcontainer",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\79ff98634f7a2e000000000000000000\\__data",
+    "sha256": "87c7b8b0d4e698890495aa94b85f33b655d92be20517464d1e2db80b38b529bc"
+  }
+}

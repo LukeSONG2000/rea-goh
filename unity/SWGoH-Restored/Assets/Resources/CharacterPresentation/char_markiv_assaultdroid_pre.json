@@ -1,0 +1,5770 @@
+{
+  "schemaVersion": 1,
+  "bundle": "char_markiv_assaultdroid_pre",
+  "source": {
+    "bundle": "char_markiv_assaultdroid_pre",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_markiv_assaultdroid_pre\\7dda5fe1046303000000000000000000\\__data",
+    "sha256": "e0648ac0b68d197689147cbad7c1c26b50baaee88f24a4ec820c96f679cf08e2"
+  },
+  "gameObjects": [
+    {
+      "pathId": "-8361665132432188449",
+      "name": "leg_front_l_03",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1716389938300659189",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8361665132432188449
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.3042007088661194,
+          "z": 0.0,
+          "w": 0.9526079893112183
+        },
+        "m_LocalPosition": {
+          "x": -0.5726326704025269,
+          "y": -5.56106048106663e-17,
+          "z": 1.6653345369377348e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7508583684640058962
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 847839995483228251
+        }
+      }
+    },
+    {
+      "pathId": "-8099861927815512959",
+      "name": "markiv_assaultdroid_mesh_shadow",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh/markiv_assaultdroid_mesh_shadow",
+      "activeSelf": true,
+      "layer": 21,
+      "transformPathId": "3303822340010146619",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8099861927815512959
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -5522980550737816856
+        }
+      }
+    },
+    {
+      "pathId": "-7550141411887929645",
+      "name": "Glow_Grnd",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/Glow_Grnd",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6897768657781866310",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7550141411887929645
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.25200000405311584
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1186906060251544520
+        }
+      }
+    },
+    {
+      "pathId": "-7113639608853259677",
+      "name": "vfx_laser_scope_aim",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1186906060251544520",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7113639608853259677
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.12200000137090683,
+          "z": 0.09700000286102295
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 7869707405103025503
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6897768657781866310
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -5219266576352939209
+        }
+      }
+    },
+    {
+      "pathId": "-6524312260119390986",
+      "name": "dotted_lines_in",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_in",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3720347041860462467",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6524312260119390986
+        },
+        "m_LocalRotation": {
+          "x": 0.7071068286895752,
+          "y": 0.0,
+          "z": 0.0,
+          "w": -0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.05000000074505806,
+          "z": 0.23499999940395355
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7125616610768178963
+        }
+      }
+    },
+    {
+      "pathId": "-6380735420070681760",
+      "name": "vfx_godray",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/vfx_godray",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7869707405103025503",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6380735420070681760
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": -0.0020000000949949026,
+          "z": 0.1860000044107437
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1186906060251544520
+        }
+      }
+    },
+    {
+      "pathId": "-6024654591622115052",
+      "name": "weapon_ref",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up/weapon_ref",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "758478309456563291",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6024654591622115052
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.0002428591251373291,
+          "z": 0.48600003123283386
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7107413286885093755
+        }
+      }
+    },
+    {
+      "pathId": "-5366022619040569342",
+      "name": "Center Marker",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Center Marker",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4190380700361370396",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5366022619040569342
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.04699999839067459,
+          "z": -0.23499999940395355
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "-5198851873652233118",
+      "name": "leg_front_l_01",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6210389835667831923",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -5198851873652233118
+        },
+        "m_LocalRotation": {
+          "x": 0.3312339186668396,
+          "y": 0.33290374279022217,
+          "z": -0.624971330165863,
+          "w": 0.6235944032669067
+        },
+        "m_LocalPosition": {
+          "x": -0.3841190040111542,
+          "y": -0.058465272188186646,
+          "z": 0.34613746404647827
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 847839995483228251
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "-4672668104785652255",
+      "name": "leg_back_r_01",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1082616790867260101",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -4672668104785652255
+        },
+        "m_LocalRotation": {
+          "x": 0.4567476212978363,
+          "y": 0.45601439476013184,
+          "z": -0.539612352848053,
+          "w": 0.540602445602417
+        },
+        "m_LocalPosition": {
+          "x": 0.47153499722480774,
+          "y": 0.05878325179219246,
+          "z": -0.316625714302063
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3765583831251936883
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "-2927908232421840225",
+      "name": "leg_back_r_02",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "3765583831251936883",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -2927908232421840225
+        },
+        "m_LocalRotation": {
+          "x": 4.815517631888911e-17,
+          "y": -0.34354081749916077,
+          "z": -1.1510590124078784e-16,
+          "w": 0.9391377568244934
+        },
+        "m_LocalPosition": {
+          "x": 0.5600003004074097,
+          "y": -1.1102230246251565e-16,
+          "z": 1.8683178382161714e-07
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -6549582788261814946
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1082616790867260101
+        }
+      }
+    },
+    {
+      "pathId": "-1858330744025870515",
+      "name": "weapon_ref",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down/weapon_ref",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2452251776290996681",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1858330744025870515
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.003000000026077032,
+          "z": 0.48600003123283386
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 1850517879996431486
+        }
+      }
+    },
+    {
+      "pathId": "-1445450709030323154",
+      "name": "root",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-5072211444700588828",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1445450709030323154
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5612637332704311642
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3731681063671333387
+        }
+      }
+    },
+    {
+      "pathId": "-1426616711242642363",
+      "name": "markiv_assaultdroid_mesh",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-5522980550737816856",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1426616711242642363
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3303822340010146619
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3731681063671333387
+        }
+      }
+    },
+    {
+      "pathId": "-1424595960074174656",
+      "name": "turret_up",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7107413286885093755",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1424595960074174656
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.1745872050523758,
+          "z": 0.2564972937107086
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 758478309456563291
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -5219266576352939209
+        }
+      }
+    },
+    {
+      "pathId": "-1218154902011526082",
+      "name": "leg_front_r_01",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "2682375467273508380",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1218154902011526082
+        },
+        "m_LocalRotation": {
+          "x": 0.6249714493751526,
+          "y": 0.6235945820808411,
+          "z": 0.3312337100505829,
+          "w": -0.33290350437164307
+        },
+        "m_LocalPosition": {
+          "x": 0.3841190040111542,
+          "y": -0.05846574902534485,
+          "z": 0.34613728523254395
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1307193651957708643
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "-926690295056106255",
+      "name": "leg_back_r_03",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6549582788261814946",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -926690295056106255
+        },
+        "m_LocalRotation": {
+          "x": 1.0464855282876537e-18,
+          "y": -0.16205289959907532,
+          "z": -5.840139556495385e-18,
+          "w": 0.9867821335792542
+        },
+        "m_LocalPosition": {
+          "x": 0.5199973583221436,
+          "y": -5.551115123125783e-17,
+          "z": 2.299451580256573e-06
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -4135343694770360349
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 3765583831251936883
+        }
+      }
+    },
+    {
+      "pathId": "-890706349928143924",
+      "name": "glow",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/glow",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-2836282559182776167",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -890706349928143924
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.12000000476837158,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7125616610768178963
+        }
+      }
+    },
+    {
+      "pathId": "-812792212474482394",
+      "name": "unit.char_markiv_assaultdroid_pre",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7658933203010729201",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -812792212474482394
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 0.800000011920929,
+          "y": 0.800000011920929,
+          "z": 0.800000011920929
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3731681063671333387
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    },
+    {
+      "pathId": "-744850648130052171",
+      "name": "Feet Marker",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Feet Marker",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1114926672106530283",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -744850648130052171
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.5699999928474426,
+          "z": 0.8769999742507935
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "-320723774978488867",
+      "name": "leg_back_l_02",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "8158972238324354823",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -320723774978488867
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.34354180097579956,
+          "z": 0.0,
+          "w": 0.9391373991966248
+        },
+        "m_LocalPosition": {
+          "x": -0.5600000023841858,
+          "y": 0.0,
+          "z": -2.220446049250313e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3396734079272491798
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5786261380509490034
+        }
+      }
+    },
+    {
+      "pathId": "-283013110842459926",
+      "name": "leg_front_r_04",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03/leg_front_r_04",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-5359372539320085193",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -283013110842459926
+        },
+        "m_LocalRotation": {
+          "x": 0.6917316913604736,
+          "y": 0.6917316913604736,
+          "z": -0.14665359258651733,
+          "w": -0.14665359258651733
+        },
+        "m_LocalPosition": {
+          "x": 0.4339574873447418,
+          "y": 1.6653345369377348e-16,
+          "z": -1.2728662568406435e-06
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -8645261670868568790
+        }
+      }
+    },
+    {
+      "pathId": "-273726994321384950",
+      "name": "dotted_lines_out",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_out",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "4989670904075371681",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -273726994321384950
+        },
+        "m_LocalRotation": {
+          "x": 0.7071068286895752,
+          "y": -0.0,
+          "z": -1.736250958991568e-26,
+          "w": -0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": 5.0306533569931255e-14,
+          "y": 0.04999998211860657,
+          "z": 0.23499999940395355
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0000004768371582,
+          "z": 1.0000004768371582
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7125616610768178963
+        }
+      }
+    },
+    {
+      "pathId": "831286555669129650",
+      "name": "turret",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-5219266576352939209",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 831286555669129650
+        },
+        "m_LocalRotation": {
+          "x": -0.0036660286132246256,
+          "y": 0.19719377160072327,
+          "z": 0.0006245708791539073,
+          "w": 0.9803575277328491
+        },
+        "m_LocalPosition": {
+          "x": -0.0,
+          "y": 0.32995036244392395,
+          "z": -0.2381567656993866
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 1850517879996431486
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7107413286885093755
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -7125616610768178963
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1186906060251544520
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "1156027076639845603",
+      "name": "Head Marker",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Head Marker",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7393464819288678544",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1156027076639845603
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.40799999237060547,
+          "z": -0.09200000017881393
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "1399541760603511273",
+      "name": "leg_back_l_01",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5786261380509490034",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1399541760603511273
+        },
+        "m_LocalRotation": {
+          "x": -0.5396122336387634,
+          "y": -0.5406022667884827,
+          "z": -0.456747829914093,
+          "w": 0.45601457357406616
+        },
+        "m_LocalPosition": {
+          "x": -0.47153472900390625,
+          "y": 0.05878344923257828,
+          "z": -0.3166256248950958
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 8158972238324354823
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "1702149323276203617",
+      "name": "base",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "5612637332704311642",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 1702149323276203617
+        },
+        "m_LocalRotation": {
+          "x": 0.02866244688630104,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.9995891451835632
+        },
+        "m_LocalPosition": {
+          "x": -0.0021103268954902887,
+          "y": 0.7083718776702881,
+          "z": 0.1217217966914177
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5786261380509490034
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1082616790867260101
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6210389835667831923
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2682375467273508380
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5219266576352939209
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7393464819288678544
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4190380700361370396
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1114926672106530283
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3215992582001006359
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -5072211444700588828
+        }
+      }
+    },
+    {
+      "pathId": "3237422330468380116",
+      "name": "tiles",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/tiles",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "6252261846282317804",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3237422330468380116
+        },
+        "m_LocalRotation": {
+          "x": -0.7071068286895752,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": -0.15000000596046448,
+          "z": -0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -7125616610768178963
+        }
+      }
+    },
+    {
+      "pathId": "3621824000068975840",
+      "name": "leg_back_r_04",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03/leg_back_r_04",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-4135343694770360349",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3621824000068975840
+        },
+        "m_LocalRotation": {
+          "x": 0.7071003317832947,
+          "y": 0.7071003317832947,
+          "z": 0.003023619530722499,
+          "w": 0.003023619530722499
+        },
+        "m_LocalPosition": {
+          "x": 0.37782570719718933,
+          "y": 1.1102230246251565e-16,
+          "z": 1.1689371604006737e-06
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -6549582788261814946
+        }
+      }
+    },
+    {
+      "pathId": "4590963210373486255",
+      "name": "Scaler",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3731681063671333387",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4590963210373486255
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -5522980550737816856
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5072211444700588828
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 7658933203010729201
+        }
+      }
+    },
+    {
+      "pathId": "4721438840353219909",
+      "name": "leg_front_r_02",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-1307193651957708643",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4721438840353219909
+        },
+        "m_LocalRotation": {
+          "x": 3.5894285175274534e-19,
+          "y": 0.7100192904472351,
+          "z": 3.5599209171261556e-19,
+          "w": 0.7041822671890259
+        },
+        "m_LocalPosition": {
+          "x": 0.5738745927810669,
+          "y": -1.1102230246251565e-16,
+          "z": 2.1344065714856697e-07
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -8645261670868568790
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 2682375467273508380
+        }
+      }
+    },
+    {
+      "pathId": "6108349029284145872",
+      "name": "leg_back_l_04",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03/leg_back_l_04",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-6181901585155439705",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6108349029284145872
+        },
+        "m_LocalRotation": {
+          "x": 0.7071003317832947,
+          "y": 0.7071003317832947,
+          "z": 0.003023619530722499,
+          "w": 0.003023619530722499
+        },
+        "m_LocalPosition": {
+          "x": -0.3778253197669983,
+          "y": -1.1102230246251565e-16,
+          "z": 5.889130960667899e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -3396734079272491798
+        }
+      }
+    },
+    {
+      "pathId": "6153593043565631926",
+      "name": "leg_front_l_04",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03/leg_front_l_04",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "7508583684640058962",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6153593043565631926
+        },
+        "m_LocalRotation": {
+          "x": 0.6917316913604736,
+          "y": 0.6917316913604736,
+          "z": -0.14665359258651733,
+          "w": -0.14665359258651733
+        },
+        "m_LocalPosition": {
+          "x": -0.43395814299583435,
+          "y": 6.2300560266237426e-09,
+          "z": 4.263259612002912e-08
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1716389938300659189
+        }
+      }
+    },
+    {
+      "pathId": "6166773999394484742",
+      "name": "UI Marker",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/UI Marker",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3215992582001006359",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6166773999394484742
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.39899998903274536,
+          "z": -0.09200000017881393
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5612637332704311642
+        }
+      }
+    },
+    {
+      "pathId": "6465370094812757754",
+      "name": "vfx_miv_buff",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-7125616610768178963",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6465370094812757754
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 3720347041860462467
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 4989670904075371681
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 6252261846282317804
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -2836282559182776167
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -5219266576352939209
+        }
+      }
+    },
+    {
+      "pathId": "6828991806559986519",
+      "name": "leg_front_l_02",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "847839995483228251",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6828991806559986519
+        },
+        "m_LocalRotation": {
+          "x": 8.65948384106571e-17,
+          "y": 0.7100192308425903,
+          "z": -8.65948384106571e-17,
+          "w": 0.7041823267936707
+        },
+        "m_LocalPosition": {
+          "x": -0.5738740563392639,
+          "y": -4.3632321474294117e-17,
+          "z": 2.1510571102112408e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1716389938300659189
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -6210389835667831923
+        }
+      }
+    },
+    {
+      "pathId": "7329633632316895837",
+      "name": "turret_down",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "1850517879996431486",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7329633632316895837
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": -8.282690012933885e-20,
+          "y": 0.07064437866210938,
+          "z": 0.2564972937107086
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2452251776290996681
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -5219266576352939209
+        }
+      }
+    },
+    {
+      "pathId": "7793963191003562541",
+      "name": "leg_front_r_03",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-8645261670868568790",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 7793963191003562541
+        },
+        "m_LocalRotation": {
+          "x": -1.0378257951343514e-17,
+          "y": 0.30420053005218506,
+          "z": 1.442521329022409e-16,
+          "w": 0.952608048915863
+        },
+        "m_LocalPosition": {
+          "x": 0.5726361870765686,
+          "y": 1.1102230246251565e-16,
+          "z": 2.5384217678947607e-06
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -5359372539320085193
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": -1307193651957708643
+        }
+      }
+    },
+    {
+      "pathId": "8575918199872654834",
+      "name": "leg_back_l_03",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03",
+      "activeSelf": true,
+      "layer": 0,
+      "transformPathId": "-3396734079272491798",
+      "rawTransform": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 8575918199872654834
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": -0.16205261647701263,
+          "z": 0.0,
+          "w": 0.9867821335792542
+        },
+        "m_LocalPosition": {
+          "x": -0.5199999809265137,
+          "y": 0.0,
+          "z": -2.220446049250313e-16
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -6181901585155439705
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 8158972238324354823
+        }
+      }
+    }
+  ],
+  "renderers": [
+    {
+      "pathId": "-5653637815527973117",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/tiles",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 3237422330468380116
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1594543300574529741
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 1,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.20000000298023224,
+        "m_LengthScale": 1.0,
+        "m_SortingFudge": -20.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "3237422330468380116",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/tiles"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-1594543300574529741",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-3845965030215147082",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/glow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -890706349928143924
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2022692813268205402
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": -12.670000076293945,
+        "m_SortingFudge": 0.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-890706349928143924",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/glow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-2022692813268205402",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-1550265423920998274",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/Glow_Grnd",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7550141411887929645
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 105349163178601528
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 0,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 4.0,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": 1.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-7550141411887929645",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/Glow_Grnd"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "105349163178601528",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "-128508498023374826",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -7113639608853259677
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 2,
+            "m_PathID": 8463998322035844783
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 1,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.10000000149011612,
+        "m_LengthScale": -70.0,
+        "m_SortingFudge": 0.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-7113639608853259677",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "8463998322035844783",
+          "fileId": 2,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "239041955825435937",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh/markiv_assaultdroid_mesh_shadow",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -8099861927815512959
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 1,
+            "m_PathID": -8587867788662160608
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -3736677408928112104
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -5072211444700588828
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5612637332704311642
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5219266576352939209
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5786261380509490034
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8158972238324354823
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3396734079272491798
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6181901585155439705
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6210389835667831923
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 847839995483228251
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1716389938300659189
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7508583684640058962
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1082616790867260101
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3765583831251936883
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6549582788261814946
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4135343694770360349
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2682375467273508380
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1307193651957708643
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8645261670868568790
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5359372539320085193
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1850517879996431486
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7107413286885093755
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": -5072211444700588828
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.0,
+            "y": 0.4696774482727051,
+            "z": -0.0309942364692688
+          },
+          "m_Extent": {
+            "x": 0.6023635864257812,
+            "y": 0.5072665214538574,
+            "z": 1.3420934677124023
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-8099861927815512959",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh/markiv_assaultdroid_mesh_shadow"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-8587867788662160608",
+          "fileId": 1,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-3736677408928112104",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-5072211444700588828",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "5612637332704311642",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-5219266576352939209",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "5786261380509490034",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "8158972238324354823",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-3396734079272491798",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-6181901585155439705",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03/leg_back_l_04"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "-6210389835667831923",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "847839995483228251",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "-1716389938300659189",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "7508583684640058962",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03/leg_front_l_04"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "-1082616790867260101",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "3765583831251936883",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "-6549582788261814946",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "-4135343694770360349",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03/leg_back_r_04"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "2682375467273508380",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "-1307193651957708643",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "-8645261670868568790",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "-5359372539320085193",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03/leg_front_r_04"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "1850517879996431486",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down"
+        },
+        {
+          "fieldPath": "m_Bones[20]",
+          "pathId": "7107413286885093755",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "-5072211444700588828",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root"
+        }
+      ]
+    },
+    {
+      "pathId": "1844215736855671792",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/vfx_godray",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6380735420070681760
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -2371801669485591959
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 1,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.10000000149011612,
+        "m_LengthScale": -10.0,
+        "m_SortingFudge": 0.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-6380735420070681760",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/vfx_godray"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-2371801669485591959",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "5169626184222888031",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_out",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -273726994321384950
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3628353510500651369
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 4,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 1.0,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": -12.670000076293945,
+        "m_SortingFudge": 0.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 2,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 3,
+          "m_PathID": 10202
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-273726994321384950",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_out"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-3628353510500651369",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "10202",
+          "fileId": 3,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "5586284306140765938",
+      "type": "SkinnedMeshRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -1426616711242642363
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 1,
+        "m_ReceiveShadows": 1,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 1,
+        "m_ReflectionProbeUsage": 1,
+        "m_RayTracingMode": 3,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -1680515701706958918
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_Quality": 0,
+        "m_UpdateWhenOffscreen": false,
+        "m_SkinnedMotionVectors": true,
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": -3736677408928112104
+        },
+        "m_Bones": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -5072211444700588828
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5612637332704311642
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5219266576352939209
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5786261380509490034
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8158972238324354823
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -3396734079272491798
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6181901585155439705
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6210389835667831923
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 847839995483228251
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1716389938300659189
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7508583684640058962
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1082616790867260101
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 3765583831251936883
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -6549582788261814946
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -4135343694770360349
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 2682375467273508380
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -1307193651957708643
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -8645261670868568790
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": -5359372539320085193
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 1850517879996431486
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 7107413286885093755
+          }
+        ],
+        "m_BlendShapeWeights": [],
+        "m_RootBone": {
+          "m_FileID": 0,
+          "m_PathID": -5072211444700588828
+        },
+        "m_AABB": {
+          "m_Center": {
+            "x": 0.0,
+            "y": 0.4696774482727051,
+            "z": -0.0309942364692688
+          },
+          "m_Extent": {
+            "x": 0.6023635864257812,
+            "y": 0.5072665214538574,
+            "z": 1.3420934677124023
+          }
+        },
+        "m_DirtyAABB": false
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-1426616711242642363",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-1680515701706958918",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "-3736677408928112104",
+          "fileId": 0,
+          "type": "Mesh",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Bones[0]",
+          "pathId": "-5072211444700588828",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root"
+        },
+        {
+          "fieldPath": "m_Bones[1]",
+          "pathId": "5612637332704311642",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base"
+        },
+        {
+          "fieldPath": "m_Bones[2]",
+          "pathId": "-5219266576352939209",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret"
+        },
+        {
+          "fieldPath": "m_Bones[3]",
+          "pathId": "5786261380509490034",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01"
+        },
+        {
+          "fieldPath": "m_Bones[4]",
+          "pathId": "8158972238324354823",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02"
+        },
+        {
+          "fieldPath": "m_Bones[5]",
+          "pathId": "-3396734079272491798",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03"
+        },
+        {
+          "fieldPath": "m_Bones[6]",
+          "pathId": "-6181901585155439705",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03/leg_back_l_04"
+        },
+        {
+          "fieldPath": "m_Bones[7]",
+          "pathId": "-6210389835667831923",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01"
+        },
+        {
+          "fieldPath": "m_Bones[8]",
+          "pathId": "847839995483228251",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02"
+        },
+        {
+          "fieldPath": "m_Bones[9]",
+          "pathId": "-1716389938300659189",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03"
+        },
+        {
+          "fieldPath": "m_Bones[10]",
+          "pathId": "7508583684640058962",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03/leg_front_l_04"
+        },
+        {
+          "fieldPath": "m_Bones[11]",
+          "pathId": "-1082616790867260101",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01"
+        },
+        {
+          "fieldPath": "m_Bones[12]",
+          "pathId": "3765583831251936883",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02"
+        },
+        {
+          "fieldPath": "m_Bones[13]",
+          "pathId": "-6549582788261814946",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03"
+        },
+        {
+          "fieldPath": "m_Bones[14]",
+          "pathId": "-4135343694770360349",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03/leg_back_r_04"
+        },
+        {
+          "fieldPath": "m_Bones[15]",
+          "pathId": "2682375467273508380",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01"
+        },
+        {
+          "fieldPath": "m_Bones[16]",
+          "pathId": "-1307193651957708643",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02"
+        },
+        {
+          "fieldPath": "m_Bones[17]",
+          "pathId": "-8645261670868568790",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03"
+        },
+        {
+          "fieldPath": "m_Bones[18]",
+          "pathId": "-5359372539320085193",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03/leg_front_r_04"
+        },
+        {
+          "fieldPath": "m_Bones[19]",
+          "pathId": "1850517879996431486",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down"
+        },
+        {
+          "fieldPath": "m_Bones[20]",
+          "pathId": "7107413286885093755",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up"
+        },
+        {
+          "fieldPath": "m_RootBone",
+          "pathId": "-5072211444700588828",
+          "fileId": 0,
+          "type": "Transform",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root"
+        }
+      ]
+    },
+    {
+      "pathId": "5642911643839286065",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_in",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -6524312260119390986
+        },
+        "m_Enabled": true,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": -3628353510500651369
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 4,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 1.0,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": -12.670000076293945,
+        "m_SortingFudge": 0.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 2,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 3,
+          "m_PathID": 10202
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": true,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-6524312260119390986",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_in"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "-3628353510500651369",
+          "fileId": 0,
+          "type": "Material",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "10202",
+          "fileId": 3,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    },
+    {
+      "pathId": "7665508558099345531",
+      "type": "ParticleSystemRenderer",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 6465370094812757754
+        },
+        "m_Enabled": false,
+        "m_CastShadows": 0,
+        "m_ReceiveShadows": 0,
+        "m_DynamicOccludee": 1,
+        "m_StaticShadowCaster": 0,
+        "m_MotionVectors": 1,
+        "m_LightProbeUsage": 0,
+        "m_ReflectionProbeUsage": 0,
+        "m_RayTracingMode": 0,
+        "m_RayTraceProcedural": 0,
+        "m_RayTracingAccelStructBuildFlagsOverride": 0,
+        "m_RayTracingAccelStructBuildFlags": 1,
+        "m_SmallMeshCulling": 1,
+        "m_ForceMeshLod": -1,
+        "m_MeshLodSelectionBias": 0.0,
+        "m_RenderingLayerMask": 1,
+        "m_RendererPriority": 0,
+        "m_LightmapIndex": 65535,
+        "m_LightmapIndexDynamic": 65535,
+        "m_LightmapTilingOffset": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_LightmapTilingOffsetDynamic": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 0.0,
+          "w": 0.0
+        },
+        "m_Materials": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        ],
+        "m_StaticBatchInfo": {
+          "firstSubMesh": 0,
+          "subMeshCount": 0
+        },
+        "m_StaticBatchRoot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_ProbeAnchor": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_LightProbeVolumeOverride": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_SortingLayerID": 0,
+        "m_SortingLayer": 0,
+        "m_SortingOrder": 0,
+        "m_MaskInteraction": 0,
+        "m_RenderMode": 2,
+        "m_MeshDistribution": 0,
+        "m_SortMode": 0,
+        "m_MinParticleSize": 0.0,
+        "m_MaxParticleSize": 0.5,
+        "m_CameraVelocityScale": 0.0,
+        "m_VelocityScale": 0.0,
+        "m_LengthScale": 2.0,
+        "m_SortingFudge": 0.0,
+        "m_NormalDirection": 1.0,
+        "m_ShadowBias": 0.0,
+        "m_RenderAlignment": 0,
+        "m_Pivot": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_Flip": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_EnableGPUInstancing": false,
+        "m_ApplyActiveColorSpace": false,
+        "m_AllowRoll": true,
+        "m_FreeformStretching": false,
+        "m_RotateWithStretchDirection": true,
+        "m_UseCustomVertexStreams": false,
+        "m_VertexStreams": [
+          0,
+          1,
+          3,
+          4,
+          5
+        ],
+        "m_UseCustomTrailVertexStreams": false,
+        "m_TrailVertexStreams": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "m_Mesh": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh1": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh2": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_Mesh3": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_MeshWeighting": 1.0,
+        "m_MeshWeighting1": 1.0,
+        "m_MeshWeighting2": 1.0,
+        "m_MeshWeighting3": 1.0
+      },
+      "enabled": false,
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "6465370094812757754",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff"
+        },
+        {
+          "fieldPath": "m_Materials[0]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Materials[1]",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_StaticBatchRoot",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_ProbeAnchor",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_LightProbeVolumeOverride",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh1",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh2",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "m_Mesh3",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "pathId": "-3165848805594995736",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -812792212474482394
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": 6907970109121684514
+        },
+        "m_Name": "",
+        "_hologramVFX": [],
+        "_persistentHologramVFX": [],
+        "_materializeVFX": [],
+        "_stealthVFX": [],
+        "_locked": [],
+        "_propStates": [],
+        "_unitReferenceAreas": {
+          "_head": {
+            "m_FileID": 0,
+            "m_PathID": 1156027076639845603
+          },
+          "_center": {
+            "m_FileID": 0,
+            "m_PathID": -5366022619040569342
+          },
+          "_hitAreas": [
+            {
+              "m_FileID": 0,
+              "m_PathID": 1156027076639845603
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": -744850648130052171
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": -5366022619040569342
+            }
+          ],
+          "_weapon": [
+            {
+              "m_FileID": 0,
+              "m_PathID": -1858330744025870515
+            },
+            {
+              "m_FileID": 0,
+              "m_PathID": -6024654591622115052
+            }
+          ],
+          "_offhand": [],
+          "_feet": {
+            "m_FileID": 0,
+            "m_PathID": -744850648130052171
+          },
+          "_uiArea": {
+            "m_FileID": 0,
+            "m_PathID": 6166773999394484742
+          },
+          "_opponentUIArea": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_targetReticle": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "_genericAreas": []
+        },
+        "_mainRenderer": {
+          "m_FileID": 0,
+          "m_PathID": 5586284306140765938
+        },
+        "_weaponRenderer": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "_suppressDeathSequence": 0,
+        "_boundsSizeOverride": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "_unitRendererElements": [
+          {
+            "MainRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 5586284306140765938
+            },
+            "ShadowRenderer": {
+              "m_FileID": 0,
+              "m_PathID": 239041955825435937
+            }
+          }
+        ],
+        "_effectTimelines": []
+      },
+      "class": "UnitComponent",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-812792212474482394",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "6907970109121684514",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._head",
+          "pathId": "1156027076639845603",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Head Marker"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._center",
+          "pathId": "-5366022619040569342",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Center Marker"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[0]",
+          "pathId": "1156027076639845603",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Head Marker"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[1]",
+          "pathId": "-744850648130052171",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Feet Marker"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._hitAreas[2]",
+          "pathId": "-5366022619040569342",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Center Marker"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._weapon[0]",
+          "pathId": "-1858330744025870515",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down/weapon_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._weapon[1]",
+          "pathId": "-6024654591622115052",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up/weapon_ref"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._feet",
+          "pathId": "-744850648130052171",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Feet Marker"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._uiArea",
+          "pathId": "6166773999394484742",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/UI Marker"
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._opponentUIArea",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitReferenceAreas._targetReticle",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_mainRenderer",
+          "pathId": "5586284306140765938",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh"
+        },
+        {
+          "fieldPath": "_weaponRenderer",
+          "pathId": "0",
+          "fileId": 0,
+          "type": null,
+          "hierarchyPath": null
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].MainRenderer",
+          "pathId": "5586284306140765938",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh"
+        },
+        {
+          "fieldPath": "_unitRendererElements[0].ShadowRenderer",
+          "pathId": "239041955825435937",
+          "fileId": 0,
+          "type": "SkinnedMeshRenderer",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh/markiv_assaultdroid_mesh_shadow"
+        }
+      ]
+    },
+    {
+      "pathId": "9020077096671053034",
+      "type": "MonoBehaviour",
+      "hierarchyPath": "unit.char_markiv_assaultdroid_pre",
+      "raw": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": -812792212474482394
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 0,
+          "m_PathID": -4085762018415572245
+        },
+        "m_Name": "",
+        "_childPrefabs": [
+          "prefab.char_damage"
+        ]
+      },
+      "class": "BattleUnitChildPrefabLoader",
+      "referenceBindings": [
+        {
+          "fieldPath": "m_GameObject",
+          "pathId": "-812792212474482394",
+          "fileId": 0,
+          "type": "GameObject",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre"
+        },
+        {
+          "fieldPath": "m_Script",
+          "pathId": "-4085762018415572245",
+          "fileId": 0,
+          "type": "MonoScript",
+          "hierarchyPath": null
+        }
+      ]
+    }
+  ],
+  "constraints": [],
+  "glbAudit": [
+    {
+      "file": "extracted/char_markiv_assaultdroid_pre/char_markiv_assaultdroid_pre.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-8361665132432188449",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8099861927815512959",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh/markiv_assaultdroid_mesh_shadow",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7550141411887929645",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/Glow_Grnd",
+          "nodes": [
+            {
+              "index": 34,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7113639608853259677",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6524312260119390986",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_in",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6380735420070681760",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/vfx_godray",
+          "nodes": [
+            {
+              "index": 33,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6024654591622115052",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up/weapon_ref",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5366022619040569342",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Center Marker",
+          "nodes": [
+            {
+              "index": 36,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5198851873652233118",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4672668104785652255",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2927908232421840225",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1858330744025870515",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down/weapon_ref",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1445450709030323154",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1426616711242642363",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1424595960074174656",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1218154902011526082",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-926690295056106255",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-890706349928143924",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/glow",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-812792212474482394",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-744850648130052171",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Feet Marker",
+          "nodes": [
+            {
+              "index": 37,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-320723774978488867",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-283013110842459926",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03/leg_front_r_04",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-273726994321384950",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_out",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "831286555669129650",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1156027076639845603",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Head Marker",
+          "nodes": [
+            {
+              "index": 35,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1399541760603511273",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1702149323276203617",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3237422330468380116",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/tiles",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3621824000068975840",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03/leg_back_r_04",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4590963210373486255",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4721438840353219909",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6108349029284145872",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03/leg_back_l_04",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6153593043565631926",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03/leg_front_l_04",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6166773999394484742",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/UI Marker",
+          "nodes": [
+            {
+              "index": 38,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6465370094812757754",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6828991806559986519",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7329633632316895837",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7793963191003562541",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8575918199872654834",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    },
+    {
+      "file": "extracted/char_markiv_assaultdroid_pre/char_markiv_assaultdroid_pre.anim.glb",
+      "bindings": [
+        {
+          "sourcePathId": "-8361665132432188449",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03",
+          "nodes": [
+            {
+              "index": 16,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-8099861927815512959",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh/markiv_assaultdroid_mesh_shadow",
+          "nodes": [
+            {
+              "index": 3,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7550141411887929645",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/Glow_Grnd",
+          "nodes": [
+            {
+              "index": 34,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-7113639608853259677",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim",
+          "nodes": [
+            {
+              "index": 32,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6524312260119390986",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_in",
+          "nodes": [
+            {
+              "index": 28,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6380735420070681760",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_laser_scope_aim/vfx_godray",
+          "nodes": [
+            {
+              "index": 33,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-6024654591622115052",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up/weapon_ref",
+          "nodes": [
+            {
+              "index": 26,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5366022619040569342",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Center Marker",
+          "nodes": [
+            {
+              "index": 36,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-5198851873652233118",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01",
+          "nodes": [
+            {
+              "index": 14,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-4672668104785652255",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01",
+          "nodes": [
+            {
+              "index": 10,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-2927908232421840225",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02",
+          "nodes": [
+            {
+              "index": 11,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1858330744025870515",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down/weapon_ref",
+          "nodes": [
+            {
+              "index": 24,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1445450709030323154",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root",
+          "nodes": [
+            {
+              "index": 4,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1426616711242642363",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/markiv_assaultdroid_mesh",
+          "nodes": [
+            {
+              "index": 2,
+              "hasMesh": true,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1424595960074174656",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_up",
+          "nodes": [
+            {
+              "index": 25,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-1218154902011526082",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01",
+          "nodes": [
+            {
+              "index": 18,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-926690295056106255",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03",
+          "nodes": [
+            {
+              "index": 12,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-890706349928143924",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/glow",
+          "nodes": [
+            {
+              "index": 31,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-812792212474482394",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre",
+          "nodes": [
+            {
+              "index": 0,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-744850648130052171",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Feet Marker",
+          "nodes": [
+            {
+              "index": 37,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-320723774978488867",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02",
+          "nodes": [
+            {
+              "index": 7,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-283013110842459926",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03/leg_front_r_04",
+          "nodes": [
+            {
+              "index": 21,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "-273726994321384950",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/dotted_lines_out",
+          "nodes": [
+            {
+              "index": 29,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "831286555669129650",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret",
+          "nodes": [
+            {
+              "index": 22,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1156027076639845603",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/Head Marker",
+          "nodes": [
+            {
+              "index": 35,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1399541760603511273",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01",
+          "nodes": [
+            {
+              "index": 6,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "1702149323276203617",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base",
+          "nodes": [
+            {
+              "index": 5,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3237422330468380116",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff/tiles",
+          "nodes": [
+            {
+              "index": 30,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "3621824000068975840",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_r_01/leg_back_r_02/leg_back_r_03/leg_back_r_04",
+          "nodes": [
+            {
+              "index": 13,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4590963210373486255",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler",
+          "nodes": [
+            {
+              "index": 1,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "4721438840353219909",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02",
+          "nodes": [
+            {
+              "index": 19,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6108349029284145872",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03/leg_back_l_04",
+          "nodes": [
+            {
+              "index": 9,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6153593043565631926",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02/leg_front_l_03/leg_front_l_04",
+          "nodes": [
+            {
+              "index": 17,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6166773999394484742",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/UI Marker",
+          "nodes": [
+            {
+              "index": 38,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6465370094812757754",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/vfx_miv_buff",
+          "nodes": [
+            {
+              "index": 27,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "6828991806559986519",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_l_01/leg_front_l_02",
+          "nodes": [
+            {
+              "index": 15,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7329633632316895837",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/turret/turret_down",
+          "nodes": [
+            {
+              "index": 23,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "7793963191003562541",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_front_r_01/leg_front_r_02/leg_front_r_03",
+          "nodes": [
+            {
+              "index": 20,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        },
+        {
+          "sourcePathId": "8575918199872654834",
+          "hierarchyPath": "unit.char_markiv_assaultdroid_pre/Scaler/root/base/leg_back_l_01/leg_back_l_02/leg_back_l_03",
+          "nodes": [
+            {
+              "index": 8,
+              "hasMesh": false,
+              "activeExtension": null,
+              "rendererEnabledExtension": null
+            }
+          ],
+          "status": "EXACT",
+          "eventTarget": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Authored initial state is not a substitute for original spawn/presentation transitions.",
+    "Missing GLB event targets need original geometry restored, not a guessed replacement.",
+    "GLB node identity matches require complete original hierarchy paths; ambiguous mappings remain pending."
+  ],
+  "clips": [
+    {
+      "animationName": "Idle@0.0",
+      "originalState": "Hit.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 0.0,
+      "clipName": "gen_markiv_idle",
+      "clipPathId": "3231132209197127439",
+      "sourceBundle": "char_markiv_assaultdroid_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 4.5333333015441895,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Idle@1.0",
+      "originalState": "Hit.Idle",
+      "layer": 0,
+      "defaultState": true,
+      "stateSpeed": 1.0,
+      "blendThreshold": 1.0,
+      "clipName": "gen_markiv_idle",
+      "clipPathId": "3231132209197127439",
+      "sourceBundle": "char_markiv_assaultdroid_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": true,
+      "startTime": 0.0,
+      "stopTime": 4.5333333015441895,
+      "events": [],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Attack",
+      "originalState": "Hit.Attack",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_markiv_blast",
+      "clipPathId": "7006841957450293704",
+      "sourceBundle": "char_markiv_assaultdroid_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.8333334922790527,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_servoBody_extend_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6333333253860474,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.8333333134651184,
+          "functionName": "FireAbilityFSMEvent",
+          "data": "FireProjectile",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.1666666269302368,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_servoBody_recede_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Death",
+      "originalState": "Hit.Death",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_markiv_death",
+      "clipPathId": "-8587500746347543879",
+      "sourceBundle": "char_markiv_assaultdroid_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.7333335876464844,
+      "events": [
+        {
+          "time": 0.6666666865348816,
+          "functionName": "PostAudioEvent",
+          "data": "Play_VO_droidSmall_death_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Limit Break 2",
+      "originalState": "Hit.Limit Break 2",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_markiv_repair",
+      "clipPathId": "4913547407584963650",
+      "sourceBundle": "char_markiv_assaultdroid_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 3.9333343505859375,
+      "events": [
+        {
+          "time": 0.03333333507180214,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepLoose_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.1666666716337204,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepSharp_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.3333333432674408,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepLoose_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4000000059604645,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepSharp_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.46666666865348816,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepLoose_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6000000238418579,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepSharp_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.7666666507720947,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepLoose_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.800000011920929,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepSharp_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.9333333373069763,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_servoArms_turn_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.2333333492279053,
+          "functionName": "PostAudioEvent",
+          "data": "Play_VFX_ability_mech_repairInitiate_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.3333333730697632,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_servoBody_drop_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.600000023841858,
+          "functionName": "StartParticleSystem",
+          "data": "vfx_miv_buff",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 2.0,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_servoBody_contract_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 2.799999952316284,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_servoArms_lock_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Limit Break",
+      "originalState": "Hit.Limit Break",
+      "layer": 0,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_markiv_scan",
+      "clipPathId": "-1579735260413603711",
+      "sourceBundle": "char_markiv_assaultdroid_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.9666671752929688,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_servoBody_extend_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.03333333507180214,
+          "functionName": "StartParticleSystem",
+          "data": "vfx_laser_scope_aim",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.2999999523162842,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_servoBody_recede_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    },
+    {
+      "animationName": "Hit",
+      "originalState": "Hit Reaction.Hit",
+      "layer": 1,
+      "defaultState": false,
+      "stateSpeed": 1.0,
+      "blendThreshold": null,
+      "clipName": "gen_markiv_hit",
+      "clipPathId": "7709026967945943802",
+      "sourceBundle": "char_markiv_assaultdroid_pre",
+      "controllerPointerVerified": true,
+      "status": "EXACT_SOURCE_CLIP",
+      "loopTime": false,
+      "startTime": 0.0,
+      "stopTime": 1.0333337783813477,
+      "events": [
+        {
+          "time": 0.10000000149011612,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepLoose_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4000000059604645,
+          "functionName": "PostAudioEvent",
+          "data": "Play_FOL_movement_droid_stepSharp_01",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "timeBasis": "Original AnimationClip event time; not inferred from semantic names.",
+      "aliasMappingSource": "catalog/char_anim_states.json + export_animation_v2 semantic naming"
+    }
+  ],
+  "sharedAnimationSource": {
+    "bundle": "shared_animationcontainer",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\79ff98634f7a2e000000000000000000\\__data",
+    "sha256": "87c7b8b0d4e698890495aa94b85f33b655d92be20517464d1e2db80b38b529bc"
+  }
+}

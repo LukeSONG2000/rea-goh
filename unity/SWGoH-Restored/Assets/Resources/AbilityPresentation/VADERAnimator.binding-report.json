@@ -1,0 +1,122 @@
+{
+  "sourceControllerPathId": "-4872922921350995422",
+  "sourceBundle": {
+    "bundle": "char_vader_pre",
+    "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_vader_pre\\8f2eef5618ac03000000000000000000\\__data",
+    "sha256": "302a31135036b2142a86cdf6946ff5a3cb991109caf4da4822849730bde0fba6"
+  },
+  "states": 14,
+  "transitions": 18,
+  "parameters": 17,
+  "clips": 12,
+  "events": 16,
+  "bindings": [
+    {
+      "semanticClip": "Idle@0.0",
+      "originalName": "hmn_hurt_idle",
+      "originalPathId": "8095517517281013844",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/0_0_Idle_0_0.anim",
+      "events": 1
+    },
+    {
+      "semanticClip": "Idle@1.0",
+      "originalName": "hmn_homescrn_any01",
+      "originalPathId": "-7311000309501844792",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/0_0_Idle_1_0.anim",
+      "events": 1
+    },
+    {
+      "semanticClip": "Attack",
+      "originalName": "hmn_sbr_atk_vader",
+      "originalPathId": "-1537036876507428771",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/0_1_Attack.anim",
+      "events": 6
+    },
+    {
+      "semanticClip": "Homescreen Idle",
+      "originalName": "hmn_homescrn_any01",
+      "originalPathId": "-7311000309501844792",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/0_2_Homescreen_Idle.anim",
+      "events": 1
+    },
+    {
+      "semanticClip": "Death",
+      "originalName": "hmn_dth_01",
+      "originalPathId": "-1414035757376003321",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/0_3_Death.anim",
+      "events": 0
+    },
+    {
+      "semanticClip": "Limit Break 3",
+      "originalName": "hmn_sbr_massacre_vader",
+      "originalPathId": "4878903137681566209",
+      "sourceBundle": "char_vader_pre",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/0_4_Limit_Break_3.anim",
+      "events": 4
+    },
+    {
+      "semanticClip": "Look",
+      "originalName": "hmn_sbr_vader_sendbox",
+      "originalPathId": "-3473213669730501561",
+      "sourceBundle": "char_vader_pre",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/0_5_Look.anim",
+      "events": 0
+    },
+    {
+      "semanticClip": "Hit",
+      "originalName": "hmn_hit_01",
+      "originalPathId": "-6234430718897645586",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/1_1_Hit.anim",
+      "events": 0
+    },
+    {
+      "semanticClip": "Special Ability",
+      "originalName": "hmn_spcl_frce_crush",
+      "originalPathId": "7939358196875266940",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/2_1_Special_Ability.anim",
+      "events": 2
+    },
+    {
+      "semanticClip": "Saber Throw",
+      "originalName": "hmn_spcl_vadersaberthrow",
+      "originalPathId": "-6692335532157945529",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/3_1_Saber_Throw.anim",
+      "events": 1
+    },
+    {
+      "semanticClip": "Saber Channel",
+      "originalName": "hmn_spcl_vadersaberthrowchannel",
+      "originalPathId": "3110049653123613973",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/3_2_Saber_Channel.anim",
+      "events": 0
+    },
+    {
+      "semanticClip": "Saber Catch",
+      "originalName": "hmn_spcl_vadersaberthrowcatch",
+      "originalPathId": "2580195661228689931",
+      "sourceBundle": "shared_animationcontainer",
+      "asset": "Assets/Resources/AbilityPresentation/VADERClips/3_3_Saber_Catch.anim",
+      "events": 0
+    }
+  ],
+  "pendingOriginal": [
+    {
+      "layer": "Hit Reaction",
+      "reason": "PENDING-ORIGINAL compiled humanoid body mask on exported generic rig",
+      "bodyMask": {
+        "word0": 4294967295,
+        "word1": 4244635647,
+        "word2": 524287
+      }
+    }
+  ]
+}

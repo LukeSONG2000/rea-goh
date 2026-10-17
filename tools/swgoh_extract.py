@@ -26,7 +26,8 @@ Per-object state honored from the source prefab (BUGS.md P5/P8):
   * Materials the engine blends as effects (particle/additive shaders, glow /
     trail / beam / vfx names, mostly-black+white gradient textures) are
     exported with alphaMode BLEND + an emissive term instead of opaque slabs.
-  * Renderers with m_Enabled = 0 are skipped -- the engine never draws them.
+  * Disabled renderer geometry is retained with SWGOH_renderer_enabled=false;
+    visibility can change through the original presentation events.
   * Real VFX playback (particle emission, trails, sabers) is a separate
     future system; see tools/export_char_vfx.py for the point-sprite stopgap.
 """
@@ -484,140 +485,15 @@ class CharacterExporter:
         return out
 
     def _plan_attachments(self, root_tkey):
-        """Classify props the engine does not render where they are authored
-        (all truth from serialized state; BUGS.md P3②/P6/+1):
+        """Preserve serialized Transform parents and all visibility variants.
 
-        * inactive GO without any skin bone in its subtree -> pruned
-          (m_IsActive is the outfit/loadout truth: raid-Grievous sabers,
-          leia's R2-D2 companion, fist/hand mesh variants);
-        * renderer-bearing subtree OUTSIDE the bone container with a
-          same-named counterpart inside -> runtime staging duplicate, pruned
-          (leia princess root-level blaster copy);
-        * renderer-bearing subtree OUTSIDE the bone container whose name
-          shares a token with a socket under a hand joint -> re-parented
-          onto that socket post-walk, authored world pose preserved
-          expressed in the socket's rest space (jedimaster_staff rifle
-          RIFLE_CONSTRAINT/RIFLE_MOVER -> RIFLE_LEFT_HAND).
+        Runtime attachment changes require original action/constraint metadata.
+        Name-token/socket similarity is not evidence of a parent relationship.
+        No inactive weapon is assumed to spawn merely because siblings are off.
         """
         self._survey_hierarchy()
-        if root_tkey is None:
-            root_tkey = self.root_tkeys[0] if self.root_tkeys else None
-        if root_tkey is None:
-            return
-        parent_src = {}
-        for tk, chs in self.children_of.items():
-            for c in chs:
-                parent_src[c] = tk
-
-        def chain_of(tk):
-            out = []
-            while tk is not None:
-                out.append(tk)
-                tk = parent_src.get(tk)
-            return out
-
-        # inside = descendants of the bone-bearing containers (Scaler, or the
-        # mesh node itself on rigs without a Scaler)
-        inside = set()
-        containers = [c for c in self.children_of.get(root_tkey, ())
-                      if self._has_skin_bone(c)]
-        if not containers and self._has_skin_bone(root_tkey):
-            containers = [root_tkey]
-        for c in containers:
-            inside.update(self._descendants(c))
-        inside_names = {self.go_info[t][0] for t in inside if t in self.go_info}
-        renderers = self._renderer_tkeys()
-
-        # Weapon joints carry the character's loadout.  A renderer-bearing
-        # GO the prefab serialized INACTIVE under a hand/weapon joint is a
-        # spawned weapon (Grievous's four sabers are inactive in every
-        # bundle -- the game enables them on spawn): keep it stamped
-        # inactive UNLESS the joint already parents an active weapon (then
-        # the inactive one is an unselected loadout variant -- jedimaster
-        # Obi-Wan's spare swd_anakin_mesh next to his active saber).
-        def hand_joint_ancestor(tk):
-            for a in chain_of(tk)[:-1]:
-                an = self.go_info.get(a, ("", ""))[0].lower()
-                if ("wpn" in an or "wrst" in an or "weapon" in an or
-                        "hand" in an) and "jnt" in an:
-                    return a
-            return None
-
-        for t in renderers & inside:
-            name_t, active_t = self.go_info.get(t, ("", True))
-            if active_t:
-                continue
-            j = hand_joint_ancestor(t)
-            if j is None:
-                continue
-            # shadow-caster duplicates don't count as the joint's weapon
-            siblings = [c for c in self.children_of.get(j, ())
-                        if c in renderers
-                        and not any(p in self.go_info.get(c, ("", ""))[0]
-                                    for p in SKIP_GO_NAME_PARTS)]
-            if not any(self.go_info.get(c, ("", False))[1] for c in siblings):
-                self.spawned_props.update(self._descendants(t))
-
-        # only transforms that belong to THIS prefab's graph; dependency
-        # packs bring their own renderers whose chains never reach the root
-        staged = sorted(
-            (t for t in renderers
-             if t not in inside and root_tkey in chain_of(t)),
-            key=lambda t: len(chain_of(t)))          # top-down
-        handled = set()
-
-        for prop in staged:
-            if prop in handled:
-                continue
-            name, active = self.go_info.get(prop, ("", True))
-            subtree = self._descendants(prop)
-            if not active:
-                continue
-            # 1) duplicate of an in-skeleton counterpart -> prune the whole
-            #    staging subtree (the in-skeleton instance is the rendered one)
-            if name in inside_names:
-                for t in subtree:
-                    if t not in inside:
-                        self.prune_tkeys.add(t)
-                handled.update(subtree)
-                self.report["dropped_staging"].append(
-                    f"{name} (duplicate of in-skeleton {name})")
-                continue
-            # 2) socket match under a hand joint -> re-parent post-walk
-            tokens = set()
-            for a in chain_of(prop):
-                aname = self.go_info.get(a, ("", ""))[0]
-                for tok in aname.replace("_", " ").split():
-                    tok = "".join(ch for ch in tok.lower() if ch.isalpha())
-                    if len(tok) >= 3:
-                        tokens.add(tok)
-            sockets = []
-            for t in inside:
-                sname, sactive = self.go_info.get(t, ("", True))
-                low = sname.lower()
-                if not any(tok in low for tok in tokens):
-                    continue
-                tchain = chain_of(t)
-                tchain_names = [self.go_info.get(a, ("", ""))[0].lower()
-                                for a in tchain]
-                if low.endswith("hand"):
-                    rank = 0
-                elif any(k in n for n in tchain_names
-                         for k in ("wrst", "wpn", "wrist")):
-                    rank = 1
-                else:
-                    continue
-                ntok = sum(1 for tok in tokens if tok in low)
-                sockets.append((rank, not sactive, -ntok, t))
-            if sockets:
-                sockets.sort()
-                socket = sockets[0][-1]
-                self.staged_parent[prop] = socket
-                handled.update(subtree)
-                self.report.setdefault("reattach_planned", []).append(
-                    f"{name} -> {self.go_info[socket][0]}")
-            else:
-                self.report.setdefault("staged_unattached", []).append(name)
+        self.report["attachment_policy"] = "ORIGINAL_TRANSFORM_PARENTS; runtime actions/constraints require metadata playback"
+        self.report["variant_policy"] = "PRESERVE_ALL_ORIGINAL_NODES_AND_GEOMETRY_WITH_ACTIVE_AND_RENDERER_FLAGS"
 
     def _apply_pending_reparents(self):
         """Move staged props onto their sockets, preserving the authored
@@ -1070,19 +946,10 @@ class CharacterExporter:
         return best
 
     def walk(self, transform, parent=None, chain_active=True):
-        """Depth-first: create glTF nodes for the whole hierarchy.
+        """Keep the complete authored hierarchy, including inactive variants.
 
-        Honors the serialized state and the attachment plan from
-        _plan_attachments:
-
-        * subtrees marked in prune_tkeys are skipped wholesale;
-        * an inactive GO whose subtree holds neither skin bones nor a staged
-          prop is dropped together with its subtree (m_IsActive is the
-          outfit/loadout truth -- BUGS.md P5/P6/+1);
-        * inactive GOs kept only for skinning are stamped with the
-          SWGOH_active extension so viewers start them hidden;
-        * staged props keep their natural parenting here and are moved onto
-          their hand sockets afterwards (_apply_pending_reparents).
+        Initial visibility is metadata, never a reason to discard geometry
+        that a later original animation/presentation event can activate.
         """
         tkey = rkey(transform.object_reader)
         if tkey in self.node_of:
@@ -1101,16 +968,6 @@ class CharacterExporter:
         has_staged = tkey in self.staged_parent or any(
             self._has_staged(c) for c in self.children_of.get(tkey, ()))
         spawned_here = tkey in self.spawned_props
-        if not active_chain and not has_bone and not has_staged \
-                and not spawned_here:
-            # P5/P6/+1: what the engine renders at load is the serialized
-            # m_IsActive state; a GO that is off (or sits under an off
-            # parent) without skin bones, a runtime-attached prop or a
-            # spawned weapon stays out of the scene graph entirely.
-            self.prune_tkeys.add(tkey)
-            self.subtree_bone[tkey] = False
-            self.report["dropped_inactive"].append(name)
-            return None
         lp = transform.m_LocalPosition
         lr = transform.m_LocalRotation
         ls = transform.m_LocalScale
@@ -1164,7 +1021,7 @@ class CharacterExporter:
         for ch in transform.m_Children:
             ct = self.deref(ch)
             if ct is not None:
-                gltf_parent = idx if node_visible else parent
+                gltf_parent = idx
                 c = self.walk(ct, parent=gltf_parent, chain_active=active_chain)
                 if c is not None:
                     children.append(c)
@@ -1312,11 +1169,8 @@ class CharacterExporter:
             node_idx = self.node_of.get(treader) if treader is not None else None
             if node_idx is None:
                 continue
-            # P3/P6: a GO the prefab serialized inactive is not rendered --
-            # nodes kept only for skinning get no mesh either.
-            if node_idx in self.inactive_kept:
-                self.report.setdefault("inactive_skipped", []).append(name)
-                continue
+            # Keep inactive variant geometry: original events may enable it.
+            # Runtime visibility uses SWGOH_active, independently of renderer state.
             # P8a: renderers owned by (or nested under) a ParticleSystem are
             # simulated effects -- never export them as static meshes.
             if rkey(go) in particle_gos:
@@ -1329,10 +1183,8 @@ class CharacterExporter:
                 self.report.setdefault("particle_excluded", []).append(name + " (vfx-named)")
                 continue
             for _, r in rs:
-                # a renderer the prefab disabled is not rendered by the engine
-                if not getattr(r, "m_Enabled", 1):
-                    self.report.setdefault("renderer_disabled_skipped", []).append(name)
-                    continue
+                # Disabled renderers retain geometry for original transitions.
+                renderer_enabled = bool(getattr(r, "m_Enabled", 1))
                 rtype = type(r).__name__
                 if rtype == "SkinnedMeshRenderer":
                     mesh = self.deref(r.m_Mesh)
@@ -1376,6 +1228,9 @@ class CharacterExporter:
                 if mesh_idx is None:
                     continue
                 nd = self.g.nodes[node_idx]
+                nd.setdefault("extensions", {})["SWGOH_renderer_enabled"] = renderer_enabled
+                if "SWGOH_renderer_enabled" not in self.g.extensionsUsed:
+                    self.g.extensionsUsed.append("SWGOH_renderer_enabled")
                 nd["mesh"] = mesh_idx
                 if skin_idx is not None:
                     nd["skin"] = skin_idx
