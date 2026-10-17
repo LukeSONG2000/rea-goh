@@ -21,7 +21,8 @@ try{
  while(!detached&&!stop&&!fs.existsSync(stopPath)){
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
-   await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async operation=>{
+   await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
+    if(operation==='battle-ability')return await script.exports.battleability(payload);
     const home=operation==='inventory-home';
     const result=home?await script.exports.inventoryhome():await script.exports.openinventory(operation==='inventory-characters'?'characters':'ships');
     let after,confirmed=false;

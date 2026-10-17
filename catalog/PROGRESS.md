@@ -172,3 +172,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 target-header】长按面板及右上目标区新增生命/总护盾/永久护盾/临时护盾四行原getter绝对值；JMK与Stormtrooper隔离原UI截图确认不重叠，零攻击/回合/正式BattleService，回Home/guard/GC清理PASS。记录02:34:30再次frida-agent BEX64，dispatcher单改不足；本次改UI+observer单一宿主，悬浮窗只读JSON，CLI snapshot用fresh cache，互斥锁拒绝第二观察宿主。不能宣称长期崩溃已根治或全模式验收；详见BATTLE_HEADER_VALIDATION_20261018.json。
 
 【Codex/root 2026-10-18 inventory-cli】共享宿主命令邮箱接通原角色/舰船收藏与返回酒馆：原TransitionData+StateController入口保留feature lock，实际type1/nav8与type2/nav10两轮闭环；最终PID19440 Home，宿主40468存活、错误日志空。请求绑定game/host PID、截止时间、白名单，先claim再执行，重复完成ID不重放；未确认目标页返回失败，超时不盲重试。单宿主锁及邮箱回归PASS，酒馆误调用inventory-home原门禁拒绝。无购买/装备操作，不宣称其他菜单/忠实试玩/AI预测或长期稳定已完成。证据INVENTORY_CLI_VALIDATION_20261018.json。
+
+【Codex/root 2026-10-18 battle-input-cli】新增通用BattleInputBridge读取原技能列表及短期状态token，CLI battle-ability经共享宿主调用原HandleAbilityButtonClicked；原被动/禁用/隐藏门禁保留，过期/无效index/重复token拒绝。第一次验证纠正Idle枚举0→原1，保留失败证据。修正后直接模块及完整CLI两轮VADER普攻原终局136/turn1、正式BattleService0、回Home/guard/GC全通过；完整CLI关闭probe自动点击，legacy verifiedVisualBattle因此false，按外部回执+原终局独立验收，不掩盖。恢复日常宿主36580。REA同SHA选目标原SelectManualTarget与嘲讽候选契约已获，接口待接；全部技能/终极/选友军/模式/忠实关卡试玩/AI目标未完。详见BATTLE_INPUT_CLI_VALIDATION_20261018.json。

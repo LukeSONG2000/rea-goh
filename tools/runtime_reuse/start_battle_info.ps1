@@ -14,7 +14,7 @@ if(Test-Path -LiteralPath $statusPath){
 $stopPath=Join-Path $outDir 'battle-info.stop'
 if(Test-Path -LiteralPath $stopPath){Remove-Item -LiteralPath $stopPath}
 $combined=Join-Path $outDir 'battle-info-combined.js'
-$parts=@('runtime_api.js','unity_scene_api.js','battle_status_reader.js','battle_info_ui.js','battle_attributes_reader.js','runtime_observer.js') | ForEach-Object {Join-Path $PSScriptRoot $_}
+$parts=@('runtime_api.js','unity_scene_api.js','battle_status_reader.js','battle_info_ui.js','battle_attributes_reader.js','battle_input.js','runtime_observer.js') | ForEach-Object {Join-Path $PSScriptRoot $_}
 Get-Content $parts | Set-Content -Encoding utf8 $combined
 $hostScript=Join-Path $PSScriptRoot 'run_battle_info.mjs'
 $arguments=@(('"'+$hostScript+'"'),$targets[0].Id,('"'+$combined+'"'),('"'+$outDir+'"'))

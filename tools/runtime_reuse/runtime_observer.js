@@ -10,6 +10,7 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
   result.inventory={type:R.readValue(data,'<Type>k__BackingField','i32'),navigation:R.readValue(data,'<NavType>k__BackingField','i32')};
  }
  if(stateName!=='BattleGameState')return result;
+ try{result.input=BattleInputBridge.snapshot();}catch(e){result.input={unavailable:true,error:String(e)};}
  const context=R.readRef(R.readRef(state,'_battleController'),'_battleContext');
  const seen=new Set();
  for(const reticle of S.all('BattleMessageReticle')){
@@ -44,4 +45,4 @@ globalThis.openInventory=kind=>RuntimeApi.runOnMainThreadOnce(()=>{
  return {invoked:'StateController.EnterState',effect:'original inventory navigation',kind,transitionConfirmed:false};
  }finally{R.release(handle);}
 });
-rpc.exports={...rpc.exports,snapshot:()=>readRuntimeSnapshot(),inventoryhome:()=>inventoryHome(),openinventory:kind=>openInventory(kind)};
+rpc.exports={...rpc.exports,snapshot:()=>readRuntimeSnapshot(),inventoryhome:()=>inventoryHome(),openinventory:kind=>openInventory(kind),battleability:request=>RuntimeApi.runOnMainThreadOnce(()=>BattleInputBridge.choose(request))};

@@ -17,21 +17,22 @@ export async function processCommands(directory,owner,execute,now=Date.now){
    const r=JSON.parse(fs.readFileSync(claimed,'utf8'));
    if(r.id!==id||r.pid!==owner.pid||r.hostPid!==owner.hostPid)throw Error('Command owner mismatch');
    if(!Number.isFinite(r.expiresAt)||r.expiresAt<now()||r.expiresAt>now()+30000)throw Error('Command expired or invalid deadline');
-   if(!['inventory-home','inventory-characters','inventory-ships'].includes(r.operation))throw Error('Operation unavailable; not authorized by this interface');
+   if(!['inventory-home','inventory-characters','inventory-ships','battle-ability'].includes(r.operation))throw Error('Operation unavailable; not authorized by this interface');
+   if(r.operation==='battle-ability'&&(!r.payload||typeof r.payload.token!=='string'||r.payload.token.length>3000||!Number.isInteger(r.payload.index)||r.payload.index<0||r.payload.index>63))throw Error('Invalid battle ability request');
    // Claim happens before invocation. A crash leaves .running, never an auto retry.
-   response.dispatched=true;response.result=await execute(r.operation);
-   response.ok=response.result?.transitionConfirmed===true;
-   if(!response.ok)response.error='Navigation dispatched but destination not confirmed; inspect current state before retrying.';
+   response.dispatched=true;response.result=await execute(r.operation,r.payload);
+   response.ok=r.operation==='battle-ability'?response.result?.inputDispatched===true:response.result?.transitionConfirmed===true;
+   if(!response.ok)response.error='Operation dispatched but not confirmed; inspect current state before retrying.';
   }catch(e){response.error=String(e);}
   const result=path.join(mailbox,id+'.result.json'),temp=result+'.tmp';
   fs.writeFileSync(temp,JSON.stringify(response));fs.renameSync(temp,result);
   fs.unlinkSync(claimed);
  }
 }
-export async function submitCommand(directory,owner,operation){
+export async function submitCommand(directory,owner,operation,payload){
  const mailbox=path.join(directory,'commands');fs.mkdirSync(mailbox,{recursive:true});
  const id=crypto.randomUUID(),request=path.join(mailbox,id+'.request.json');
- fs.writeFileSync(request+'.tmp',JSON.stringify({id,...owner,operation,expiresAt:Date.now()+10000}));fs.renameSync(request+'.tmp',request);
+ fs.writeFileSync(request+'.tmp',JSON.stringify({id,...owner,operation,payload,expiresAt:Date.now()+10000}));fs.renameSync(request+'.tmp',request);
  const result=path.join(mailbox,id+'.result.json');
  const end=Date.now()+25000;
  while(Date.now()<end){

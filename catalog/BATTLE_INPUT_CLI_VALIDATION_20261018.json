@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-18",
+  "nativeSource": "logs/high_reuse/native/ui_ability_table_click.annotated.txt",
+  "nativeRva": "0xFA4D60",
+  "cliReceipt": {
+    "id": "c597c341-2c75-4b69-a44e-0d8e0ef50d65",
+    "ok": true,
+    "dispatched": true,
+    "result": {
+      "inputDispatched": true,
+      "abilityId": "basicability_darthvader",
+      "index": 0,
+      "turn": 0,
+      "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+      "resolution": "Original callback invoked; outcome requires subsequent observation"
+    }
+  },
+  "directValidation": [
+    {
+      "type": "send",
+      "payload": {
+        "kind": "battle-input-snapshot",
+        "snapshot": {
+          "token": "[\"0x28727e66a80\",\"0x287b79baa80\",0,34,1,true,0,[{\"index\":0,\"id\":\"basicability_darthvader\",\"active\":true,\"abilityType\":0,\"buttonState\":0,\"cooldown\":0},{\"index\":1,\"id\":\"specialability_vader02\",\"active\":true,\"abilityType\":0,\"buttonState\":0,\"cooldown\":0},{\"index\":2,\"id\":\"specialability_vader01\",\"active\":true,\"abilityType\":0,\"buttonState\":0,\"cooldown\":0},{\"index\":3,\"id\":\"specialability_vader03\",\"active\":true,\"abilityType\":0,\"buttonState\":0,\"cooldown\":0},{\"index\":4,\"id\":\"leaderability_vader_BASE\",\"active\":true,\"abilityType\":1,\"buttonState\":0,\"cooldown\":0},{\"index\":5,\"id\":\"uniqueability_vader01\",\"active\":true,\"abilityType\":1,\"buttonState\":0,\"cooldown\":0}]]",
+          "turn": 0,
+          "previous": 34,
+          "next": 1,
+          "actor": "0x287b79baa80",
+          "abilities": [
+            {
+              "index": 0,
+              "id": "basicability_darthvader",
+              "active": true,
+              "abilityType": 0,
+              "buttonState": 0,
+              "cooldown": 0
+            },
+            {
+              "index": 1,
+              "id": "specialability_vader02",
+              "active": true,
+              "abilityType": 0,
+              "buttonState": 0,
+              "cooldown": 0
+            },
+            {
+              "index": 2,
+              "id": "specialability_vader01",
+              "active": true,
+              "abilityType": 0,
+              "buttonState": 0,
+              "cooldown": 0
+            },
+            {
+              "index": 3,
+              "id": "specialability_vader03",
+              "active": true,
+              "abilityType": 0,
+              "buttonState": 0,
+              "cooldown": 0
+            },
+            {
+              "index": 4,
+              "id": "leaderability_vader_BASE",
+              "active": true,
+              "abilityType": 1,
+              "buttonState": 0,
+              "cooldown": 0
+            },
+            {
+              "index": 5,
+              "id": "uniqueability_vader01",
+              "active": true,
+              "abilityType": 1,
+              "buttonState": 0,
+              "cooldown": 0
+            }
+          ],
+          "awaitingAbility": true,
+          "scope": "current original primary ability table; ultimate and special unit selection pending"
+        }
+      }
+    },
+    {
+      "type": "send",
+      "payload": {
+        "kind": "battle-input-rejected",
+        "error": "Error: Stale battle input snapshot"
+      }
+    },
+    {
+      "type": "send",
+      "payload": {
+        "kind": "battle-input-rejected",
+        "error": "Error: Original ability button unavailable"
+      }
+    },
+    {
+      "type": "send",
+      "payload": {
+        "kind": "battle-input-dispatched",
+        "result": {
+          "inputDispatched": true,
+          "abilityId": "basicability_darthvader",
+          "index": 0,
+          "turn": 0,
+          "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+          "resolution": "Original callback invoked; outcome requires subsequent observation"
+        }
+      }
+    },
+    {
+      "type": "send",
+      "payload": {
+        "kind": "battle-input-repeat-rejected",
+        "error": "Error: Stale battle input snapshot"
+      }
+    },
+    {
+      "type": "send",
+      "payload": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 1,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 2,
+          "sendto": 1,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 0,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      }
+    }
+  ],
+  "sharedHostCompletion": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": false,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 1,
+      "currentState": "CampaignGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 2,
+      "sendto": 1,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 0,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": true,
+      "foreignTransition": false
+    }
+  },
+  "interpretation": "Shared-host probe autoClick=false deliberately; its legacy verifiedVisualBattle flag requires its own click. CLI receipt plus observed original terminal136, turn1, serviceCalls0 and cleanup prove this external command path.",
+  "scope": "Primary player ability table: original callbacks and button states, no rule substitution",
+  "limitations": [
+    "Target selection native contract inspected but CLI not yet exposed",
+    "Ultimate and special ally-selection continuation pending",
+    "Only original VADER basic isolated fixture tested end-to-end; not all abilities/modes",
+    "No screenshot claimed this round",
+    "Fixture enemies are inventory-derived, not a faithful selected mission trial",
+    "Original live client long-term host stability still unproven"
+  ]
+}
