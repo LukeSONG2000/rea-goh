@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "requiredVersion": "6000.3.17f1",
+  "bundles": [
+    {
+      "id": "shared_resourcecontainer",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_resourcecontainer\\d7d0e53b7ea352000000000000000000\\__data",
+      "sha256": "85017d272c8039686080ad12aec6bf1ddd76671480cbf1d8f3077e120a8526f8",
+      "cab": "CAB-ce44cf6c2f620770f26c1d1a4b37aa28",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [
+        "Library/unity default resources",
+        "Resources/unity_builtin_extra"
+      ],
+      "prefabs": []
+    },
+    {
+      "id": "shared_uicontainer",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_uicontainer\\9ac05f7a2e157b000000000000000000\\__data",
+      "sha256": "0598c612dc75e0a1846892202b808b70cd92d15d755ca603efb5279e53fb2276",
+      "cab": "CAB-5c7f37f29e1798d2d3bdc65696be32ac",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [],
+      "prefabs": []
+    },
+    {
+      "id": "shared_shadercontainer",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_shadercontainer\\545292bca82101000000000000000000\\__data",
+      "sha256": "f249000e859d77d01423b7c3b3afa8f51357e7848860dfecf703906926ab8e5e",
+      "cab": "CAB-c797b49c2536db1be4a521e6ac1ee947",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [
+        "archive:/CAB-ce44cf6c2f620770f26c1d1a4b37aa28/CAB-ce44cf6c2f620770f26c1d1a4b37aa28",
+        "archive:/CAB-5c7f37f29e1798d2d3bdc65696be32ac/CAB-5c7f37f29e1798d2d3bdc65696be32ac"
+      ],
+      "prefabs": []
+    },
+    {
+      "id": "shared_animationcontainer",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\shared_animationcontainer\\79ff98634f7a2e000000000000000000\\__data",
+      "sha256": "87c7b8b0d4e698890495aa94b85f33b655d92be20517464d1e2db80b38b529bc",
+      "cab": "CAB-a9c7a4e1290c491a6f9463783fb7ed19",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [],
+      "prefabs": []
+    },
+    {
+      "id": "char_vader_pre",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\char_vader_pre\\8f2eef5618ac03000000000000000000\\__data",
+      "sha256": "302a31135036b2142a86cdf6946ff5a3cb991109caf4da4822849730bde0fba6",
+      "cab": "CAB-cf63cea789c9a86446540c58f86856b6",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [
+        "archive:/CAB-ce44cf6c2f620770f26c1d1a4b37aa28/CAB-ce44cf6c2f620770f26c1d1a4b37aa28",
+        "archive:/CAB-c797b49c2536db1be4a521e6ac1ee947/CAB-c797b49c2536db1be4a521e6ac1ee947",
+        "archive:/CAB-a9c7a4e1290c491a6f9463783fb7ed19/CAB-a9c7a4e1290c491a6f9463783fb7ed19"
+      ],
+      "prefabs": [
+        "assets/resourcestobundle/base/unit/character/vader/unit.char_vader_pre.prefab"
+      ]
+    },
+    {
+      "id": "ability_char_saber_jumpstrikesingle_basic",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\ability_char_saber_jumpstrikesingle_basic\\5d75ac4b978d00000000000000000000\\__data",
+      "sha256": "491691a058cbaa7ba7cbc02caa3d2f9ef9a2afe8bdc4f8e7f8c9cbff0c0098fd",
+      "cab": "CAB-7a131eda74c1e80af838e3ca7b1ad5f4",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [
+        "Library/unity default resources",
+        "archive:/CAB-c797b49c2536db1be4a521e6ac1ee947/CAB-c797b49c2536db1be4a521e6ac1ee947",
+        "archive:/CAB-ce44cf6c2f620770f26c1d1a4b37aa28/CAB-ce44cf6c2f620770f26c1d1a4b37aa28"
+      ],
+      "prefabs": [
+        "assets/resourcestobundle/base/prefabs/abilities/prefab.ability_char_saber_jumpstrikesingle_basic.prefab"
+      ]
+    },
+    {
+      "id": "ability_char_force_crush_aoe_lb2",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\ability_char_force_crush_aoe_lb2\\fb04c3f5247800000000000000000000\\__data",
+      "sha256": "15427e71c05d12809599610915a8a12b09e0fdde5c22a24f91e7a8c6928230a6",
+      "cab": "CAB-eb51ba2cf12d9d77e3bc6898d7b65c30",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [
+        "archive:/CAB-c797b49c2536db1be4a521e6ac1ee947/CAB-c797b49c2536db1be4a521e6ac1ee947",
+        "archive:/CAB-ce44cf6c2f620770f26c1d1a4b37aa28/CAB-ce44cf6c2f620770f26c1d1a4b37aa28",
+        "Library/unity default resources"
+      ],
+      "prefabs": [
+        "assets/resourcestobundle/base/prefabs/abilities/prefab.ability_char_force_crush_aoe_lb2.prefab"
+      ]
+    },
+    {
+      "id": "ability_char_saber_projectile_singletarget",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\ability_char_saber_projectile_singletarget\\32c6fbc36c7900000000000000000000\\__data",
+      "sha256": "5107a550b77c33c984975b5240bbcf8977ad889c90c9222800042c52eddef292",
+      "cab": "CAB-726e58727b545961fb946b0779d8324a",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [
+        "archive:/CAB-c797b49c2536db1be4a521e6ac1ee947/CAB-c797b49c2536db1be4a521e6ac1ee947",
+        "archive:/CAB-ce44cf6c2f620770f26c1d1a4b37aa28/CAB-ce44cf6c2f620770f26c1d1a4b37aa28"
+      ],
+      "prefabs": [
+        "assets/resourcestobundle/base/prefabs/abilities/prefab.ability_char_saber_projectile_singletarget.prefab"
+      ]
+    },
+    {
+      "id": "ability_char_buff_merciless_lb3",
+      "path": "C:\\Users\\PPfavorite\\AppData\\LocalLow\\Unity\\Electronic Arts_SWGoH\\ability_char_buff_merciless_lb3\\2f271ed0c60101000000000000000000\\__data",
+      "sha256": "03d91a584b4a352d581f6d5d3e4f7511d4e61741a3b4e2690b1d1124baf21a37",
+      "cab": "CAB-4103eb292b822f8e99ecad5d3e029505",
+      "version": "6000.3.17f1",
+      "targetPlatform": 19,
+      "dependencies": [
+        "archive:/CAB-c797b49c2536db1be4a521e6ac1ee947/CAB-c797b49c2536db1be4a521e6ac1ee947",
+        "archive:/CAB-ce44cf6c2f620770f26c1d1a4b37aa28/CAB-ce44cf6c2f620770f26c1d1a4b37aa28"
+      ],
+      "prefabs": [
+        "assets/resourcestobundle/base/prefabs/abilities/prefab.ability_char_buff_merciless_lb3.prefab"
+      ]
+    }
+  ]
+}
