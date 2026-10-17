@@ -139,3 +139,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root visual-phase3 2026-10-17】认领：用户小队/舰队截图仅验收，恢复本地原始相机/站位/HUD表现。root写BattleDriver及新增表现配置/验收；visual_gap只读相机/阵型/舰队资源，effect_export只读原UI prefab/atlas；Git/Unity单写root。运行时效果规则保持原图，不以截图造规则。
 
 【Codex/root visual-phase3】追加认领新tools/export_battle_presentation.py和Resources/BattlePresentation/BattleChrome原始配置与精确UI裁片，effect_export独占实现；visual_gap唯一导出者写extracted/ship_*新舰船原件（不覆盖已导出的角色）；root写场景装配与Unity验收。
+
+【Codex/root visual-phase3】追加认领tools/swgoh_extract.py缺失normal/UV通道判空修复（原星空mesh因None被漏导），非四件套；visual_gap在logs隔离目录重导单个Endor环境、核对原材质blend/cull/zwrite并导出原texture。root负责桥接材质，未恢复原shader数学项明确PENDING-ORIGINAL。
