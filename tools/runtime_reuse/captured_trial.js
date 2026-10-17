@@ -8,7 +8,7 @@ globalThis.createCapturedTrial=options=>{
  const state=R.findBound('StateController'),current=R.readRef(state,'<CurrentState>k__BackingField');
  if(R.fullName(R.classOf(current))!=='HomeBaseGameState')throw Error('Idle Home required');
  if(!R.readRef(R.findBound('BattleDomainController'),'<CurrentBattleState>k__BackingField').isNull())throw Error('Live battle exists');
- if(options.flags!==7||!Number.isInteger(options.squadType))throw Error('Explicit headless flags 7 and saved squad type required');
+ if(![6,7].includes(options.flags)||!Number.isInteger(options.squadType))throw Error('Explicit simulation flags 6/7 and saved squad type required');
  const source=deserializeOriginalInventoryProto(options.inventoryBytes),built=buildPrivateInventory(source.object);
  const roster=R.readRef(built.inventory,'_unitRoster'),units=new Set(list(R.readRef(roster,'_units')).map(String));
  const matches=list(R.readRef(roster,'_characterSquads')).filter(s=>R.readValue(s,'SquadType','u8')===options.squadType);
@@ -32,12 +32,12 @@ globalThis.createCapturedTrial=options=>{
  call(data,'set_CombatTypeEnum',[A.value('u8',0)]);
  call(data,'set_PlayerBattleSquad',[A.ref(player)]);
  call(data,'set_OpponentBattleSquad',[A.ref(opponent)]);
- const context=call(OriginalFixtureTools.inject('BattleContext+Factory'),'Get',[A.ref(data),A.value('i32',7)]);
+ const context=call(OriginalFixtureTools.inject('BattleContext+Factory'),'Get',[A.ref(data),A.value('i32',options.flags)]);
  call(data,'set_BattleContext',[A.ref(context)]);
  const domain=call(context,'get_BattleDomainController');
  if(R.fullName(R.classOf(domain))!=='BattleDomainSimulationController')throw Error('Expected original simulation domain');
  const simulation=R.newObject(R.findClass('BattleSimulationController'));
- call(simulation,'set_HeadlessMode',[A.value('bool',true)]);
+ call(simulation,'set_HeadlessMode',[A.value('bool',(options.flags&1)!==0)]);
  call(context,'set_BattleController',[A.ref(simulation)]);
  call(battleData,'set_PlayerSquad',[A.ref(player)]);
  call(domain,'set_BattleData',[A.ref(battleData)]);

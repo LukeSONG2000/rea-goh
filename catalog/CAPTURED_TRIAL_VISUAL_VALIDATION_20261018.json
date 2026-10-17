@@ -1,0 +1,134 @@
+{
+  "status": "captured mission original visual trial validated; not yet general CLI product",
+  "definitionComparison": {
+    "units": 5,
+    "statsPerUnit": 62,
+    "allEqual": true,
+    "mapRestored": true,
+    "hp": [
+      {
+        "id": "PVE_OOMCOMMANDBATTLEDROID:ONBOARDING",
+        "originalDefinition": 150,
+        "convertedDefinition": 150,
+        "nativeCalculated": 150
+      },
+      {
+        "id": "PVE_OOMSECURITYBATTLEDROID:ONBOARDING",
+        "originalDefinition": 0,
+        "convertedDefinition": 0,
+        "nativeCalculated": 1
+      },
+      {
+        "id": "PVE_B1BATTLEDROID:ONBOARDING",
+        "originalDefinition": 0,
+        "convertedDefinition": 0,
+        "nativeCalculated": 1
+      },
+      {
+        "id": "PVE_B1BATTLEDROID:ONBOARDING",
+        "originalDefinition": 0,
+        "convertedDefinition": 0,
+        "nativeCalculated": 1
+      },
+      {
+        "id": "PVE_DROIDEKA:ONBOARDING",
+        "originalDefinition": 0,
+        "convertedDefinition": 0,
+        "nativeCalculated": 1
+      }
+    ]
+  },
+  "conclusion": "HP1 is original computed result for zero-health definitions already present in original GameData; no value correction applied. Independent natural live battle-stat capture still not performed.",
+  "visual": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": true,
+    "error": null,
+    "clicked": true,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 4,
+      "currentState": "CampaignGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 4805,
+      "sendto": 2,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 2,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": "F:/PPfavorite/Work/goh/logs/high_reuse/captured-trial-visual.png",
+      "requested": true,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": true,
+      "foreignTransition": false
+    }
+  },
+  "screenshot": {
+    "path": "logs\\high_reuse\\captured-trial-window-verified.png",
+    "source": "Win32 PrintWindow when original frame request arrived",
+    "visuallyReviewed": true,
+    "sha256": "dc315bafe2ec3a98de210a47f8bbebd8a852a47ccf4dbeec508debcdf57189a0",
+    "unityCaptureScreenshotFailed": true
+  },
+  "postVisualInventoryAudit": {
+    "kind": "protobuf-probe-complete",
+    "passed": true,
+    "originalDependenciesUnchanged": true,
+    "liveInventoryUnchanged": true,
+    "originalUnits": 370,
+    "privateUnits": 370,
+    "shared": [],
+    "mismatches": [],
+    "equipmentAudit": {
+      "mods": 1347,
+      "stats": 6711,
+      "rolls": 8816,
+      "slots": 1953,
+      "crew": 69
+    },
+    "calculatedStats": {
+      "units": 370,
+      "comparisons": 22940,
+      "datacronContexts": 0
+    }
+  },
+  "scope": {
+    "mission": "C01L/M01/N01/Mi01/difficulty1",
+    "player": "saved type1 private inventory squad, no borrowed support",
+    "actions": "one original basic button then original auto toggle",
+    "pending": [
+      "General trial CLI with capture freshness/ownership/lifecycle gates",
+      "Non-null Datacron and Era/borrowed support",
+      "Other mission types and finite-attempt battles",
+      "Enemy-control/prediction/decision-tree editing",
+      "Remaining full objective UI and operations coverage"
+    ]
+  },
+  "evidence": [
+    "logs\\high_reuse\\probe-captured-stats-evidence.json",
+    "logs\\high_reuse\\probe-private-inventory-post-trial-evidence.json",
+    "logs\\high_reuse\\probe-captured-trial-visual-evidence.json",
+    "logs\\high_reuse\\probe-captured-trial-visual-auto-evidence.json",
+    "logs\\high_reuse\\probe-captured-trial-visual-frame-evidence.json",
+    "logs\\high_reuse\\probe-private-inventory-post-visual-evidence.json"
+  ]
+}
