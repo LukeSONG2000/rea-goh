@@ -62,6 +62,7 @@
   await R.runOnMainThreadOnce(()=>{
    guard=installOfflineSocketGuard(); // covers fixture, entry, polling and exit
    f=createOriginalFixture(Object.assign({},options.fixture||{},{flags:6}));send(originalFixtureDiagnostics(f));
+   if(options.traceAI)globalThis.trialAITrace=installOriginalAITrace(f.context);
    const loop=R.newObject(R.findClass('UnityGameLoop'));
    const injector=R.readRef(R.nil,'_instance',R.findClass('Injector'));
    R.invoke(R.findMethod(R.findClass('Injector'),'Inject',1),injector,[A.ref(loop)]);
@@ -171,6 +172,8 @@
    if(!cleanup.home)cleanup.errors.push('Home restoration not confirmed; GC handles retained');
   }catch(exception){cleanup.errors.push('state cleanup: '+String(exception));}
   finally{
+   try{if(globalThis.trialAITrace){trialAITrace.stop();send(trialAITrace.snapshot());}}
+   catch(exception){cleanup.errors.push('AI trace cleanup: '+String(exception));}
    for(const listener of hooks)try{listener.detach();}catch(exception){cleanup.errors.push('detach: '+String(exception));}
    try{if(guard){guard.restore();cleanup.guardRestored=true;}}catch(exception){cleanup.errors.push('guard restore: '+String(exception));}
    // No release while a live original state may still depend on fixture objects.

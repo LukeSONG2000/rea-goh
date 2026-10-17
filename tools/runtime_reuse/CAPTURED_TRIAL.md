@@ -35,6 +35,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 终态、回合及退出清理结果。手动会话成功进入并安全返回可为 `valid:true`，
 不等于已经打赢；是否打完看 `terminal`。自动和无画面验证则要求终态成立。
 
+有画面试玩可附加 `-TraceAI`（准备器对应 `--trace-ai`），在同一宿主记录
+本场原 AI 自然执行的决策节点、结果标签、最终技能和目标。结束证据中的
+`original-ai-trace` 包含 `rows/errors/dropped`；最多保留 128 次决策，每次
+最多 128 个节点及结果。手动操作、没有发生 AI 决策时允许零记录。
+该选项不额外执行决策树或随机调用，不修改优先级，不是出招前预测。
+无画面循环尚未捕获到这些回调，故拒绝与 headless 组合。
+原树 ID 回调在当前验证中未触发，缺失的 `treeId` 不代表没有使用决策树。
+返回的 allyTargets/enemyTargets 是原 AI 返回列表，不应直接解释为最终受击者。
+
 ## AI 操作接口
 
 有画面试玩运行期间，在另一个终端使用现有 CLI，`PID` 替换为原游戏进程号：

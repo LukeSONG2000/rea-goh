@@ -20,7 +20,9 @@ def read_capture(path, kind):
     return data, meta, {'path': str(path.resolve()), 'sha256': digest, 'bytes': len(data)}
 
 
-def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto):
+def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto, trace_ai=False):
+    if trace_ai and mode != 'visual':
+        raise ValueError('AI tracing requires the original visual loop')
     if mode not in ('headless', 'visual') or not 0 <= squad_type <= 255:
         raise ValueError('Explicit mode and saved squad type byte required')
     if not 15 <= duration <= 600 or (auto and mode != 'visual'):
@@ -37,6 +39,8 @@ def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto):
     if mode == 'visual':
         modules += ['battle_status_reader.js', 'battle_attributes_reader.js',
                     'battle_input.js', 'runtime_observer.js', 'trial_input.js']
+    if trace_ai:
+        modules += ['original_ai_trace.js']
     source = '\n'.join((root / n).read_text(encoding='utf-8-sig') for n in modules)
     for name, value in [('capturedBytes', battle_bytes), ('inventoryBytes', inventory_bytes)]:
         source += '\nglobalThis.' + name + '=new Uint8Array(' + json.dumps(list(value), separators=(',', ':')) + ');\n'
@@ -50,14 +54,14 @@ def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto):
     source += 'globalThis.originalFixtureDiagnostics=()=>(' + json.dumps(diagnostic) + ');\n'
     if mode == 'visual':
         source += 'globalThis.visualProbeOptions=' + json.dumps({
-            'autoClick': auto, 'autoAfterClick': auto,
+            'autoClick': auto, 'autoAfterClick': auto, 'traceAI': trace_ai,
             'maxDurationMs': duration * 1000, 'capturePath': None}) + ';\n'
     source += (root / ('probe_visual.js' if mode == 'visual' else 'probe_simulation.js')).read_text(encoding='utf-8-sig')
     source_bytes = source.encode('utf-8')
     prefix = Path(prefix)
     js, manifest_path = Path(str(prefix) + '.js'), Path(str(prefix) + '.json')
     manifest = {'schemaVersion': 1, 'mode': mode, 'durationSeconds': duration, 'auto': auto,
-                'battleCli': mode == 'visual',
+                'battleCli': mode == 'visual', 'traceAI': trace_ai,
                 'squadType': squad_type, 'mission': metadata.get('mission'),
                 'battle': battle_info, 'inventory': inventory_info,
                 'snapshotPolicy': 'Use supplied captured snapshot; no automatic account refresh or spending',
@@ -83,5 +87,6 @@ if __name__ == '__main__':
     parser.add_argument('--mode', choices=['headless', 'visual'], default='visual')
     parser.add_argument('--duration', type=int, default=300)
     parser.add_argument('--auto', action='store_true')
+    parser.add_argument('--trace-ai', action='store_true')
     a = parser.parse_args()
-    print(json.dumps(prepare(a.battle, a.inventory, a.dump, a.output_prefix, a.squad_type, a.mode, a.duration, a.auto), ensure_ascii=False))
+    print(json.dumps(prepare(a.battle, a.inventory, a.dump, a.output_prefix, a.squad_type, a.mode, a.duration, a.auto, a.trace_ai), ensure_ascii=False))

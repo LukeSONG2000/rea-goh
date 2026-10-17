@@ -38,6 +38,8 @@ class CaptureIntegrityTests(unittest.TestCase):
             read_capture(self.file, 'inventory-proto-captured')
 
     def test_invalid_configuration_precedes_file_access(self):
+        with self.assertRaisesRegex(ValueError, 'visual loop'):
+            prepare('missing', 'missing', 'missing', 'missing', 8, 'headless', 60, False, True)
         for squad, mode, duration, auto in [(256, 'visual', 60, False), (1, 'visual', 0, False), (1, 'headless', 60, True)]:
             with self.assertRaises(ValueError):
                 prepare('missing', 'missing', 'missing', 'missing', squad, mode, duration, auto)

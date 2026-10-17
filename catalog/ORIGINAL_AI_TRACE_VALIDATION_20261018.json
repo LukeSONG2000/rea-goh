@@ -1,0 +1,1533 @@
+{
+  "date": "2026-10-18",
+  "scope": "Passive original AI tracing in owned captured visual trial",
+  "evidence": [
+    {
+      "path": "logs\\high_reuse\\ai-visual-baseline-evidence.json",
+      "sha256": "b4885d87382a5485cf76f2e6e6604aef2ddebd52fa11d9a3debba709918b2305"
+    },
+    {
+      "path": "logs\\high_reuse\\ai-visual-observed-evidence.json",
+      "sha256": "c16d7f13bba24454114547ccb2fe22abd2ddbfc2a3eb94db9c75dcba1f2989ba"
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-075123-566-evidence.json",
+      "sha256": "4548cbd17631c22355727c85916b60c0579a5a20a035791d3bb457a79ec52dc1"
+    }
+  ],
+  "sameTerminalSummary": true,
+  "exactRepeatedTraceEquality": true,
+  "completion": [
+    {
+      "kind": "visual-probe-complete",
+      "verifiedVisualBattle": true,
+      "error": null,
+      "clicked": true,
+      "terminalObserved": true,
+      "lastSnapshot": {
+        "previous": 136,
+        "next": 1,
+        "turns": 5,
+        "currentState": "CampaignGameState"
+      },
+      "serviceCalls": 0,
+      "blockedSocketCalls": {
+        "send": 0,
+        "sendto": 1,
+        "WSASend": 0,
+        "WSASendTo": 0,
+        "connect": 3,
+        "WSAConnect": 0
+      },
+      "capture": {
+        "path": null,
+        "requested": false,
+        "verified": false,
+        "error": null,
+        "beforeStamp": null
+      },
+      "cleanup": {
+        "home": true,
+        "exitedOwnedStates": 1,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      },
+      "originalUiObserved": true,
+      "screenshotVerified": false,
+      "ownership": {
+        "exitedOwnBattle": true,
+        "campaignExpected": true,
+        "foreignTransition": false
+      }
+    },
+    {
+      "kind": "visual-probe-complete",
+      "verifiedVisualBattle": true,
+      "error": null,
+      "clicked": true,
+      "terminalObserved": true,
+      "lastSnapshot": {
+        "previous": 136,
+        "next": 1,
+        "turns": 5,
+        "currentState": "CampaignGameState"
+      },
+      "serviceCalls": 0,
+      "blockedSocketCalls": {
+        "send": 806,
+        "sendto": 1,
+        "WSASend": 0,
+        "WSASendTo": 0,
+        "connect": 0,
+        "WSAConnect": 0
+      },
+      "capture": {
+        "path": null,
+        "requested": false,
+        "verified": false,
+        "error": null,
+        "beforeStamp": null
+      },
+      "cleanup": {
+        "home": true,
+        "exitedOwnedStates": 1,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      },
+      "originalUiObserved": true,
+      "screenshotVerified": false,
+      "ownership": {
+        "exitedOwnBattle": true,
+        "campaignExpected": true,
+        "foreignTransition": false
+      }
+    },
+    {
+      "kind": "visual-probe-complete",
+      "verifiedVisualBattle": true,
+      "error": null,
+      "clicked": true,
+      "terminalObserved": true,
+      "lastSnapshot": {
+        "previous": 136,
+        "next": 1,
+        "turns": 5,
+        "currentState": "CampaignGameState"
+      },
+      "serviceCalls": 0,
+      "blockedSocketCalls": {
+        "send": 66,
+        "sendto": 1,
+        "WSASend": 0,
+        "WSASendTo": 0,
+        "connect": 2,
+        "WSAConnect": 0
+      },
+      "capture": {
+        "path": null,
+        "requested": false,
+        "verified": false,
+        "error": null,
+        "beforeStamp": null
+      },
+      "cleanup": {
+        "home": true,
+        "exitedOwnedStates": 1,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": []
+      },
+      "originalUiObserved": true,
+      "screenshotVerified": false,
+      "ownership": {
+        "exitedOwnBattle": true,
+        "campaignExpected": true,
+        "foreignTransition": false
+      }
+    }
+  ],
+  "trace": {
+    "kind": "original-ai-trace",
+    "scope": "observed original decisions; not a pre-turn prediction",
+    "rows": [
+      {
+        "sequence": 1,
+        "actor": {
+          "baseId": "KELLERANBEQ",
+          "owner": 0
+        },
+        "chance": 100,
+        "nodes": [
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 5,
+            "target": 0,
+            "parameters": [
+              ""
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 3,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 8,
+            "target": 0,
+            "parameters": [
+              ""
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 1,
+            "parameters": [
+              "30"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 1,
+            "target": 1,
+            "parameters": [
+              "70"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 1,
+            "parameters": [
+              "30"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 1,
+            "target": 1,
+            "parameters": [
+              "70"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 0,
+            "parameters": [
+              "50"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 2,
+            "parameters": [
+              "25"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 2,
+            "parameters": [
+              "ai_target_lock"
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 1,
+            "parameters": [
+              "clearable_debuff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 0,
+            "parameters": [
+              "clearable_debuff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 4,
+            "target": 2,
+            "parameters": [
+              "1"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 2,
+            "parameters": [
+              "clearable_buff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 2,
+            "parameters": [
+              "110"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 2,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          }
+        ],
+        "results": [
+          {
+            "abilityTag": "ultimate_priority",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "priority",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "aoe",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "damage",
+            "selectBasic": false,
+            "target": 0
+          }
+        ],
+        "result": {
+          "abilityId": "specialability_kelleranbeq01",
+          "enemyTargets": [
+            {
+              "baseId": "PVE_OOMSECURITYBATTLEDROID",
+              "owner": 1
+            }
+          ],
+          "allyTargets": [
+            {
+              "baseId": "KELLERANBEQ",
+              "owner": 0
+            }
+          ]
+        }
+      },
+      {
+        "sequence": 2,
+        "actor": {
+          "baseId": "PVE_B1BATTLEDROID",
+          "owner": 1
+        },
+        "chance": 70,
+        "nodes": [
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 5,
+            "target": 0,
+            "parameters": [
+              ""
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 3,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 8,
+            "target": 0,
+            "parameters": [
+              ""
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 1,
+            "parameters": [
+              "30"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 1,
+            "target": 1,
+            "parameters": [
+              "70"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 1,
+            "parameters": [
+              "30"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 1,
+            "target": 1,
+            "parameters": [
+              "70"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 0,
+            "parameters": [
+              "50"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 2,
+            "parameters": [
+              "25"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 2,
+            "parameters": [
+              "ai_target_lock"
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 1,
+            "parameters": [
+              "clearable_debuff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 0,
+            "parameters": [
+              "clearable_debuff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 4,
+            "target": 2,
+            "parameters": [
+              "1"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 2,
+            "parameters": [
+              "clearable_buff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 2,
+            "parameters": [
+              "110"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 2,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 1,
+            "parameters": [
+              "1"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          }
+        ],
+        "results": [
+          {
+            "abilityTag": "ultimate_priority",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "revive",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "enemy_dispel",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "damage",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "default_special",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": true,
+            "target": 0
+          }
+        ],
+        "result": {
+          "abilityId": "basicability_b1battledroid_ONBOARDING",
+          "enemyTargets": [
+            {
+              "baseId": "KELLERANBEQ",
+              "owner": 0
+            }
+          ],
+          "allyTargets": [
+            {
+              "baseId": "PVE_OOMCOMMANDBATTLEDROID",
+              "owner": 1
+            },
+            {
+              "baseId": "PVE_OOMSECURITYBATTLEDROID",
+              "owner": 1
+            },
+            {
+              "baseId": "PVE_B1BATTLEDROID",
+              "owner": 1
+            },
+            {
+              "baseId": "PVE_B1BATTLEDROID",
+              "owner": 1
+            },
+            {
+              "baseId": "PVE_DROIDEKA",
+              "owner": 1
+            }
+          ]
+        }
+      },
+      {
+        "sequence": 3,
+        "actor": {
+          "baseId": "PVE_B1BATTLEDROID",
+          "owner": 1
+        },
+        "chance": 70,
+        "nodes": [
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 5,
+            "target": 0,
+            "parameters": [
+              ""
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 3,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 8,
+            "target": 0,
+            "parameters": [
+              ""
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 1,
+            "parameters": [
+              "30"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 1,
+            "target": 1,
+            "parameters": [
+              "70"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 1,
+            "parameters": [
+              "30"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 1,
+            "target": 1,
+            "parameters": [
+              "70"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 0,
+            "parameters": [
+              "50"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 2,
+            "parameters": [
+              "25"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 2,
+            "parameters": [
+              "ai_target_lock"
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 1,
+            "parameters": [
+              "clearable_debuff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 0,
+            "parameters": [
+              "clearable_debuff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 4,
+            "target": 2,
+            "parameters": [
+              "1"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 2,
+            "parameters": [
+              "clearable_buff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 2,
+            "parameters": [
+              "110"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 2,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 1,
+            "parameters": [
+              "1"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          }
+        ],
+        "results": [
+          {
+            "abilityTag": "ultimate_priority",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "priority",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "revive",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "damage",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "taunt",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "default_special",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": true,
+            "target": 0
+          }
+        ],
+        "result": {
+          "abilityId": "basicability_b1battledroid_ONBOARDING",
+          "enemyTargets": [
+            {
+              "baseId": "KELLERANBEQ",
+              "owner": 0
+            }
+          ],
+          "allyTargets": [
+            {
+              "baseId": "PVE_OOMCOMMANDBATTLEDROID",
+              "owner": 1
+            },
+            {
+              "baseId": "PVE_OOMSECURITYBATTLEDROID",
+              "owner": 1
+            },
+            {
+              "baseId": "PVE_B1BATTLEDROID",
+              "owner": 1
+            },
+            {
+              "baseId": "PVE_B1BATTLEDROID",
+              "owner": 1
+            },
+            {
+              "baseId": "PVE_DROIDEKA",
+              "owner": 1
+            }
+          ]
+        }
+      },
+      {
+        "sequence": 4,
+        "actor": {
+          "baseId": "KELLERANBEQ",
+          "owner": 0
+        },
+        "chance": 100,
+        "nodes": [
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 0,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 5,
+            "target": 0,
+            "parameters": [
+              ""
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 3,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 8,
+            "target": 0,
+            "parameters": [
+              ""
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 1,
+            "parameters": [
+              "30"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 1,
+            "target": 1,
+            "parameters": [
+              "70"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 1,
+            "parameters": [
+              "30"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 1,
+            "target": 1,
+            "parameters": [
+              "70"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 0,
+            "parameters": [
+              "50"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 2,
+            "parameters": [
+              "25"
+            ],
+            "modifier": 2,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 2,
+            "parameters": [
+              "ai_target_lock"
+            ],
+            "modifier": 1,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 1,
+            "parameters": [
+              "clearable_debuff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 0,
+            "parameters": [
+              "clearable_debuff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 4,
+            "target": 2,
+            "parameters": [
+              "1"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 3,
+            "target": 2,
+            "parameters": [
+              "clearable_buff"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 0,
+            "target": 2,
+            "parameters": [
+              "110"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          },
+          {
+            "type": 2,
+            "target": 2,
+            "parameters": [
+              "0"
+            ],
+            "modifier": 0,
+            "chance": 0,
+            "negate": false
+          }
+        ],
+        "results": [
+          {
+            "abilityTag": "ultimate_priority",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "priority",
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": null,
+            "selectBasic": false,
+            "target": 0
+          },
+          {
+            "abilityTag": "damage",
+            "selectBasic": false,
+            "target": 0
+          }
+        ],
+        "result": {
+          "abilityId": "specialability_kelleranbeq02",
+          "enemyTargets": [
+            {
+              "baseId": "PVE_DROIDEKA",
+              "owner": 1
+            }
+          ],
+          "allyTargets": [
+            {
+              "baseId": "KELLERANBEQ",
+              "owner": 0
+            }
+          ]
+        }
+      }
+    ],
+    "errors": [],
+    "dropped": 0
+  },
+  "limits": [
+    "One captured mission and saved squad type 8 only",
+    "Terminal summary equality does not prove equality of all hidden state or RNG streams",
+    "No pre-turn prediction, enemy manual control, or priority modification yet",
+    "Tree ID hook did not fire; tree ID remains unverified",
+    "Headless native invocation produced zero trace rows; public trace flag restricted to visual mode"
+  ],
+  "checks": [
+    "prepare tests 4 PASS",
+    "trial lifecycle PASS",
+    "trial input ownership PASS",
+    "demo_turn_order same-seed PASS"
+  ],
+  "normalDisplayRestoredHostPid": 38936
+}

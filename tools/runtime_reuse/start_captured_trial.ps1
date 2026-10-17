@@ -4,7 +4,8 @@ param(
  [Parameter(Mandatory=$true)][ValidateRange(0,255)][int]$SquadType,
  [ValidateSet('visual','headless')][string]$Mode='visual',
  [ValidateRange(15,600)][int]$Duration=300,
- [switch]$Auto
+ [switch]$Auto,
+ [switch]$TraceAI
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -17,6 +18,7 @@ $battlePath=(Resolve-Path -LiteralPath $Battle).Path
 $inventoryPath=(Resolve-Path -LiteralPath $Inventory).Path
 $prepare=@((Join-Path $PSScriptRoot 'prepare_captured_trial.py'),'--battle',$battlePath,'--inventory',$inventoryPath,'--dump',(Join-Path $repo 'il2cpp/dump/cs/il2cpp.cs'),'--output-prefix',$prefix,'--squad-type',$SquadType,'--mode',$Mode,'--duration',$Duration)
 if($Auto){$prepare+='--auto'}
+if($TraceAI){$prepare+='--trace-ai'}
 & py @prepare
 if($LASTEXITCODE -ne 0){throw 'Trial preparation failed; original client untouched'}
 & node --check ($prefix+'.js')
