@@ -1,0 +1,51 @@
+{
+  "status": "private legacy roster deep mod/crew and no-datacron calculated stats checks passed",
+  "runtimeEvidence": {
+    "provider": "REA-installed Frida",
+    "pid": 19440,
+    "messages": [
+      {
+        "type": "send",
+        "payload": {
+          "kind": "protobuf-probe-complete",
+          "passed": true,
+          "originalDependenciesUnchanged": true,
+          "liveInventoryUnchanged": true,
+          "originalUnits": 370,
+          "privateUnits": 370,
+          "shared": [],
+          "mismatches": [],
+          "equipmentAudit": {
+            "mods": 1347,
+            "stats": 6711,
+            "rolls": 8816,
+            "slots": 1953,
+            "crew": 69
+          },
+          "calculatedStats": {
+            "units": 370,
+            "comparisons": 22940,
+            "datacronContexts": 0
+          }
+        }
+      }
+    ],
+    "detached": true
+  },
+  "scope": [
+    "370 live roster units vs private reconstruction",
+    "1347 equipped/inventory mod pairs,6711 mod stats,8816 roll records",
+    "1953 equipment slots and69 crew references into private roster",
+    "62 original calculated stats per unit,22940 exact float comparisons",
+    "original datacron context passed unchanged to getter and checked after each unit"
+  ],
+  "limits": [
+    "No non-null Datacron context present; not validated",
+    "Era borrowed-unit graph and saved squads not certified",
+    "Battle states/effects not exercised by these inventory checks",
+    "Actual resource-free mission replay remains pending"
+  ],
+  "firstAttempt": "logs/high_reuse/probe-private-inventory-stats-evidence.json: Frida bool required integer; zero calculations; corrected to0",
+  "normalHost": 41868,
+  "client": 19440
+}
