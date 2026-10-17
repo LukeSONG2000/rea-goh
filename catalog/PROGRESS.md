@@ -157,3 +157,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root high-reuse runtime 2026-10-17】完成可运行验证：原客户端Simulation domain（模拟域）离线seed8双跑原FSM终态136/Outcome WIN，VADER对STORMTROOPER HP546→0，结果一致；原BattleGameState带画面流程真实进入手动技能态34，调用原普攻按钮HandleAbilityButtonClicked，原终态136后自动回Home，正式BattleService start/finish调用0，临时socket guard/GC清理全PASS。入口tools/launch_original_runtime_demo.cmd，REA安装内Frida宿主等完成消息再detach；原E盘只读，无货币/Mod操作。匹配Unity组件预览Release构建exit0/25s无异常/TCP UDP监听0。边界：warm已登录客户端，不是cold完全离线；只验证一次普攻/胜负，原截图未生成不得标视觉验收，SaveBattleOutcome回调未观察不得猜；原Mono缺39仍PENDING。决定主线保留原runtime并恢复本地启动/数据契约，同版Unity直接资源复用，停止逐英雄规则补丁。详见HIGH_REUSE_RUNTIME_VALIDATION_20261017.json。
 
 【Codex/root 2026-10-17 tavern-luke】认领用户授权原客户端酒馆全部NPC临时替换原农场卢克；REA定位场景角色边界，仅当前进程视觉对象替换，保留恢复入口，原E盘只读，不改账号/库存/货币/Mod。root独占runtime注入与Git。
+
+【Codex/root 2026-10-17 battle-info】用户说明上次为主动关闭并切换需求，暂停tavern-luke（已实例化14/恢复未验收，不能标完成）。认领原客户端长按详情HP/maxHP/护盾/状态回合与全模式目标技能CD显示；root独占runtime只读数据+UI改写，battle_gap只读数据契约，visual_gap唯一Ghidra只读显示门禁。禁止调用技能/推进当前战斗，不改数值/账号/E盘。
