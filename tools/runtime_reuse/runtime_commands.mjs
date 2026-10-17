@@ -17,12 +17,13 @@ export async function processCommands(directory,owner,execute,now=Date.now){
    const r=JSON.parse(fs.readFileSync(claimed,'utf8'));
    if(r.id!==id||r.pid!==owner.pid||r.hostPid!==owner.hostPid)throw Error('Command owner mismatch');
    if(!Number.isFinite(r.expiresAt)||r.expiresAt<now()||r.expiresAt>now()+30000)throw Error('Command expired or invalid deadline');
-   if(!['inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit'].includes(r.operation))throw Error('Operation unavailable; not authorized by this interface');
+   if(!['inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel'].includes(r.operation))throw Error('Operation unavailable; not authorized by this interface');
    if(['battle-target','battle-unit'].includes(r.operation)&&(!r.payload||typeof r.payload.token!=='string'||r.payload.token.length>3000||typeof r.payload.targetId!=='string'||!r.payload.targetId.length||r.payload.targetId.length>256))throw Error('Invalid battle target request');
    if(r.operation==='battle-ability'&&(!r.payload||typeof r.payload.token!=='string'||r.payload.token.length>3000||!Number.isInteger(r.payload.index)||r.payload.index<0||r.payload.index>63))throw Error('Invalid battle ability request');
+   if(r.operation==='battle-cancel'&&(!r.payload||typeof r.payload.token!=='string'||!r.payload.token.length||r.payload.token.length>3000))throw Error('Invalid cancellation request');
    // Claim happens before invocation. A crash leaves .running, never an auto retry.
    response.dispatched=true;response.result=await execute(r.operation,r.payload);
-   response.ok=r.operation==='battle-unit'?response.result?.selectionCompleted===true:r.operation==='battle-target'?response.result?.targetConfirmed===true:r.operation==='battle-ability'?response.result?.inputDispatched===true:response.result?.transitionConfirmed===true;
+   response.ok=r.operation==='battle-cancel'?response.result?.selectionCancelled===true:r.operation==='battle-unit'?response.result?.selectionCompleted===true:r.operation==='battle-target'?response.result?.targetConfirmed===true:r.operation==='battle-ability'?response.result?.inputDispatched===true:response.result?.transitionConfirmed===true;
    if(!response.ok)response.error='Operation dispatched but not confirmed; inspect current state before retrying.';
   }catch(e){response.error=String(e);}
   const result=path.join(mailbox,id+'.result.json'),temp=result+'.tmp';

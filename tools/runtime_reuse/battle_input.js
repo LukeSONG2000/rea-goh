@@ -93,5 +93,14 @@ globalThis.BattleInputBridge=(()=>{
   S.invoke('BattleManualUnitSelectController','HandleUnitTapped',live.selection,[A.ref(R.string(request.targetId))]);
   return {inputDispatched:true,selectionCompleted:!R.unbox(S.invoke('BattleManualUnitSelectController','get_CurrentlyPerformingUnitSelection',live.selection),'bool'),targetId:request.targetId,invoked:'BattleManualUnitSelectController.HandleUnitTapped'};
  }
- return {snapshot:()=>inspect().public,choose,selectTarget,selectUnit};
+ function cancelSelection(request){
+  if(!request||typeof request.token!=='string')throw Error('Expected token');
+  const live=inspect(),info=live.public;
+  if(request.token!==info.token)throw Error('Stale battle input snapshot');
+  if(!info.selectingUnit||consumed===request.token)throw Error('No pending original unit selection');
+  consumed=request.token;
+  S.invoke('BattleManualUnitSelectController','CancelSelectUnit',live.selection);
+  return {inputDispatched:true,selectionCancelled:!R.unbox(S.invoke('BattleManualUnitSelectController','get_CurrentlyPerformingUnitSelection',live.selection),'bool'),invoked:'BattleManualUnitSelectController.CancelSelectUnit'};
+ }
+ return {snapshot:()=>inspect().public,choose,selectTarget,selectUnit,cancelSelection};
 })();

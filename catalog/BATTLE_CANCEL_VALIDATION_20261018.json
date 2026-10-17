@@ -1,0 +1,267 @@
+{
+  "date": "2026-10-18",
+  "operation": "battle-cancel",
+  "nativeEntry": "BattleManualUnitSelectController.CancelSelectUnit RVA1A66850",
+  "receipts": [
+    {
+      "id": "bd04be29-cd4d-4e7d-b645-c45209d40ef9",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "abilityId": "specialability_jedimasterkenobi02",
+        "index": 2,
+        "turn": 0,
+        "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+        "resolution": "Original callback invoked; outcome requires subsequent observation"
+      }
+    },
+    {
+      "id": "82a16994-3bae-45dc-b09b-3d2d8f01738e",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "selectionCancelled": true,
+        "invoked": "BattleManualUnitSelectController.CancelSelectUnit"
+      }
+    },
+    {
+      "id": "c0e2621d-db04-46d4-bbb7-d3ebd906660f",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "inputDispatched": true,
+        "abilityId": "basicability_jedimasterkenobi",
+        "index": 0,
+        "turn": 0,
+        "invoked": "BattleAbilityTableComponent.HandleAbilityButtonClicked",
+        "resolution": "Original callback invoked; outcome requires subsequent observation"
+      }
+    }
+  ],
+  "before": {
+    "token": "19440:1792266236206:3",
+    "turn": 0,
+    "previous": 34,
+    "next": 1,
+    "actor": "0x287b74f3d20",
+    "abilities": [
+      {
+        "index": 0,
+        "id": "basicability_jedimasterkenobi",
+        "active": true,
+        "ready": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 1,
+        "id": "specialability_jedimasterkenobi01",
+        "active": true,
+        "ready": true,
+        "abilityType": 3,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 2,
+        "id": "specialability_jedimasterkenobi02",
+        "active": true,
+        "ready": true,
+        "abilityType": 3,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 3,
+        "id": "ultimateability_jedimasterkenobi",
+        "active": true,
+        "ready": false,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 4,
+        "id": "leaderability_jedimasterkenobi",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 5,
+        "id": "uniqueability_jedimasterkenobi01",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 6,
+        "id": "uniqueability_galacticlegend01",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      }
+    ],
+    "targets": [
+      {
+        "id": "Z7ODJb78RXm_0_AYC4TAGw",
+        "baseId": "STORMTROOPER"
+      }
+    ],
+    "selectedTarget": "Z7ODJb78RXm_0_AYC4TAGw",
+    "manualTarget": "Z7ODJb78RXm_0_AYC4TAGw",
+    "selectingUnit": false,
+    "selectionCandidates": [],
+    "awaitingAbility": true,
+    "scope": "original primary ability table, enemy targets and pending unit selection; ultimate UI pending"
+  },
+  "after": {
+    "token": "19440:1792266236206:5",
+    "turn": 0,
+    "previous": 34,
+    "next": 1,
+    "actor": "0x287b74f3d20",
+    "abilities": [
+      {
+        "index": 0,
+        "id": "basicability_jedimasterkenobi",
+        "active": true,
+        "ready": true,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 1,
+        "id": "specialability_jedimasterkenobi01",
+        "active": true,
+        "ready": true,
+        "abilityType": 3,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 2,
+        "id": "specialability_jedimasterkenobi02",
+        "active": true,
+        "ready": true,
+        "abilityType": 3,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 3,
+        "id": "ultimateability_jedimasterkenobi",
+        "active": true,
+        "ready": false,
+        "abilityType": 0,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 4,
+        "id": "leaderability_jedimasterkenobi",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 5,
+        "id": "uniqueability_jedimasterkenobi01",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      },
+      {
+        "index": 6,
+        "id": "uniqueability_galacticlegend01",
+        "active": true,
+        "ready": true,
+        "abilityType": 1,
+        "buttonState": 0,
+        "cooldown": 0
+      }
+    ],
+    "targets": [
+      {
+        "id": "Z7ODJb78RXm_0_AYC4TAGw",
+        "baseId": "STORMTROOPER"
+      }
+    ],
+    "selectedTarget": "Z7ODJb78RXm_0_AYC4TAGw",
+    "manualTarget": "Z7ODJb78RXm_0_AYC4TAGw",
+    "selectingUnit": false,
+    "selectionCandidates": [],
+    "awaitingAbility": true,
+    "scope": "original primary ability table, enemy targets and pending unit selection; ultimate UI pending"
+  },
+  "completion": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": false,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 1,
+      "currentState": "CampaignGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 2,
+      "sendto": 1,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 1,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": true,
+      "foreignTransition": false
+    }
+  },
+  "validation": "Cancel restored ability-ready state with turn0 and cooldown0; external CLI basic then reached original terminal136/turn1. Probe autoClick=false so its legacy verifiedVisualBattle flag is not used.",
+  "trialCopyFindings": {
+    "responseCallback": "F8F750 updates account/inventory before factory; never invoke as pure conversion",
+    "getProto": "1D0B430 reconstructs limited encounter/unit data and loses original fields; not lossless serialization",
+    "squadCopy": "1005180 allocates cells/list but shares datacron and AbilityDO; cell copy still to inspect",
+    "required": "Retain original Protos.BattleData; fresh original serializer clone plus separately isolated exact player squad and transition",
+    "evidence": "logs/high_reuse/native/CANCEL_AND_COPY_SEMANTICS.txt"
+  },
+  "pending": [
+    "real mission trial payload capture and deep isolation",
+    "ultimate UI and full-mode coverage",
+    "AI prediction, enemy control and remaining menus"
+  ]
+}

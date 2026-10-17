@@ -17,6 +17,9 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const payload of [null,{}, {token:42},{token:''}]){
+  const result=await test({operation:'battle-cancel',payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
+ }
  for(const payload of [null,{token:'x',targetId:''},{token:'x',targetId:42},{token:42,targetId:'unit'}]){
   const result=await test({operation:'battle-target',payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
   const selection=await test({operation:'battle-unit',payload});assert.equal(selection.ok,false);assert.equal(selection.dispatched,false);
