@@ -1,5 +1,5 @@
-// BattleSim -- selected decoded turn/numeric routines plus a limited effect executor.
-// This is not the full client FSM, targeting evaluator or persistent-effect system.
+// BattleSim -- decoded turn/numeric routines and an original effect graph interpreter.
+// Capability validation rejects graphs beyond the recovered subset before mutation.
 // Source of truth: il2cpp/offline/battle.py (which cites, per method, the
 // Ghidra-decompiled GameAssembly.dll function it came from).  Constants were
 // extracted from GameConstants..ctor machine code; RNG from JavaRandom..ctor.
@@ -24,7 +24,7 @@ namespace SwgohRestored.Battle
         public const int AbilityCritNegateRating = 23;
         public const int CritPercentAdditive = 28;
         public const int MaxShield = 25;
-        public const int ShieldPenetration = 34;   // 0..1 fraction routed to shields
+        public const int ShieldPenetration = 34;   // 0..1 attacker fraction bypassing shields
         public const int CritNegatePercentAdditive = 40;
         public const int Mastery = 61;
     }
@@ -65,6 +65,12 @@ namespace SwgohRestored.Battle
         public int Side;                // 0 player, 1 opponent
         public int Level = 85;
         public int Era;
+        public int CombatType = 1;
+        public int RelicTier;
+        public bool IsEraUnit;
+        public double CurrentShield, MaxShield;
+        public readonly HashSet<string> Categories = new(StringComparer.Ordinal);
+        public readonly List<OriginalPersistentEffect> PersistentEffects = new();
         public Dictionary<int, double> Stats = new Dictionary<int, double>();
         public double CurrentHp = 1.0;
         public double MaxHp = 1.0;
@@ -85,9 +91,8 @@ namespace SwgohRestored.Battle
         public double Speed => GetStat(Stat.Speed) < 0 ? 0 : GetStat(Stat.Speed);
     }
 
-    /// Compact executable ability (the v1 sim slice of an ability row:
-    /// DAMAGE effects sum mult+flat, RECOVER effects sum mult+flat; per-effect
-    /// targeting kept for damage/heal separately).
+    /// Production abilities bind original ordered references. Flat fields below
+    /// remain only for legacy offline fixtures, never the production data loader.
     public class UnitAbility
     {
         public string Id;
@@ -95,6 +100,9 @@ namespace SwgohRestored.Battle
         public string Name;
         public string Kind;              // "basic" | "special"
         public int Cooldown;
+        public OriginalEffectGraph OriginalGraph;
+        public RawEffectReference[] OriginalReferences;
+        public int OriginalTier;
         public double DamageMultiplier;
         public double FlatDamage;
         public int DamageType;           // 1 UNMITIGABLE, 2 ATTACK_DAMAGE, 3 ABILITY_POWER
@@ -139,6 +147,7 @@ namespace SwgohRestored.Battle
         }
     }
 
+    [Serializable]
     public class BattleEvent
     {
         public int Turn;
@@ -149,6 +158,8 @@ namespace SwgohRestored.Battle
         public string Kind;          // "turn" | "damage" | "crit" | "death"
         public string Target;
         public double Amount;
+        public double HpDamage, ShieldDamage;
+        public string EffectId;
         public string Note;
         public string AbilityName;   // REAL ability used this turn ("" = v0 basic)
         public string AbilityId;
@@ -156,7 +167,7 @@ namespace SwgohRestored.Battle
     }
 
     /// BattleUnitsController turn loop + DamageModule pipeline (headless port).
-    public class BattleSim
+    public partial class BattleSim
     {
         readonly BattleContext _ctx;
         readonly List<BattleUnit> _units;
@@ -345,16 +356,10 @@ namespace SwgohRestored.Battle
             return true;
         }
 
-        /// Turn loop with the REAL ability pipeline (engine.py v1 lite tree):
-        /// per-owner cooldown tick at turn start -> team-heal special when an
-        /// ally is hurt -> damage special -> basic; effects run the decoded
-        /// damage pipeline (chance roll -> caster stat x mult + flat ->
-        /// ProcessSourceDamage -> crit -> mitigation).  Units without a baked
-        /// chain keep the v0 flat-ATK basic.
         // Offline command bridge, not a reconstruction of the original FSM.
         // Original manual records: dump/cs/il2cpp.cs LogPlayerManualSelectRecord /
         // LogPlayerManualAbilityRecord (0x181BA7E60 / 0x181BA7F70).
-        // Full BattleTargetingRuleEvaluator and persistent effects remain pending.
+        // OriginalEffects implements a validated subset of targeting/lifecycle.
         public BattleUnit PrepareNextTurn()
         {
             if (PendingActor != null) return PendingActor;
@@ -375,6 +380,7 @@ namespace SwgohRestored.Battle
                 throw new ArgumentException("Actor must be a living battle unit.", nameof(actor));
             PendingActor = actor;
             BeginTurn(actor);
+            OriginalConditionEvent(actor, -1);
             foreach (var a in actor.Abilities)
                 if (actor.CooldownLeft.TryGetValue(a.Id, out var cd) && cd > 0)
                     actor.CooldownLeft[a.Id] = cd - 1;
@@ -386,7 +392,10 @@ namespace SwgohRestored.Battle
             if (actor == null || !actor.Alive) return false;
             if (index == -1) return actor.Abilities.Count == 0;
             if (index < 0 || index >= actor.Abilities.Count) return false;
-            return !actor.CooldownLeft.TryGetValue(actor.Abilities[index].Id, out var cd) || cd <= 0;
+            var ability = actor.Abilities[index];
+            if (ability.OriginalGraph != null && OriginalUnsupportedReason(ability) != null) return false;
+            if (ability.Kind == "special" && actor.PersistentEffects.Any(e => e.Definition.type == 4)) return false;
+            return !actor.CooldownLeft.TryGetValue(ability.Id, out var cd) || cd <= 0;
         }
 
         public IReadOnlyList<BattleUnit> GetLegalTargets(int index)
@@ -394,6 +403,10 @@ namespace SwgohRestored.Battle
             if (!IsAbilityReady(index)) return Array.Empty<BattleUnit>();
             var actor = PendingActor;
             var ability = index < 0 ? null : actor.Abilities[index];
+            if (ability?.OriginalGraph != null)
+                return _units.Where(u => u.Alive && u.Side != actor.Side &&
+                    OriginalCommandReason(actor, ability, u) == null && ability.OriginalReferences.Any(r =>
+                        OriginalTargetMatches(ability.OriginalGraph.Effects[r.id], actor, u))).ToArray();
             bool damage = ability == null || ability.DamageMultiplier > 0 || ability.FlatDamage > 0;
             if (damage) return _units.Where(u => u.Alive && u.Side != actor.Side).ToList();
             if (ability.HealAmount > 0)
@@ -426,8 +439,11 @@ namespace SwgohRestored.Battle
             });
             var foes = _units.Where(u => u.Side != actor.Side && u.Alive)
                 .OrderBy(u => u == target ? 0 : 1).ThenBy(u => u.CurrentHp).ToList();
-            if (used != null) ExecuteAbility(actor, used, foes, target);
+            if (used?.OriginalGraph != null) ExecuteOriginalAbility(actor, used, target);
+            else if (used != null) ExecuteAbility(actor, used, foes, target);
             else LegacyBasic(actor, foes);
+            OriginalConditionEvent(actor, 32);
+            if (CheckEnd(out _)) foreach (var unit in _units) OriginalConditionEvent(unit, 24);
             PendingActor = null;
             error = null;
             return true;
@@ -460,6 +476,9 @@ namespace SwgohRestored.Battle
         UnitAbility PickAbility(BattleUnit actor)
         {
             if (actor.Abilities.Count == 0) return null;
+            if (actor.Abilities.Any(a => a.OriginalGraph != null))
+                return actor.Abilities.FirstOrDefault(a => a.Kind == "basic" &&
+                    IsAbilityReady(actor.Abilities.IndexOf(a)) && GetLegalTargets(actor.Abilities.IndexOf(a)).Count > 0);
             const double healUrge = 0.55;
             bool hurt = _units.Any(u => u.Side == actor.Side && u.Alive
                                         && u.CurrentHp < healUrge * u.MaxHp);

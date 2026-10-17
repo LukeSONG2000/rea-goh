@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>../../logs/effect_recovery/regression/obj/</BaseIntermediateOutputPath>
+    <BaseOutputPath>../../logs/effect_recovery/regression/bin/</BaseOutputPath>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="OriginalEffectRegression.cs" />
+    <Compile Include="../../unity/SWGoH-Restored/Assets/Scripts/Runtime/Battle/*.cs" />
+  </ItemGroup>
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>

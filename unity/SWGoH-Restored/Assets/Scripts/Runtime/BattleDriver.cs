@@ -17,8 +17,8 @@ namespace SwgohRestored.Battle
     public class BattleDriver : MonoBehaviour
     {
         [Header("Teams (def_ids) -- leave empty for the default duel")]
-        public string[] PlayerTeam = { "JYNERSO", "CASSIANANDOR", "K2SO" };
-        public string[] OpponentTeam = { "VADER", "GRANDMOFFTARKIN", "DARTHTRAYA" };
+        public string[] PlayerTeam = { "VADER" };
+        public string[] OpponentTeam = { "VADER", "VADER" };
         public long Seed = 4490;
 
         [Header("Stage")]
@@ -37,6 +37,8 @@ namespace SwgohRestored.Battle
         readonly Dictionary<string, Animator> _anims = new();
         readonly Dictionary<string, BattleUnit> _unitsById = new();
         readonly Dictionary<string, double> _replayHp = new();   // HP as replayed
+        readonly Dictionary<string, double> _replayShield = new();
+        readonly Dictionary<string, OriginalUnitMenu> _originalMenus = new();
         BattleSim _sim;
         readonly BattleHUD _hud = new BattleHUD();
         List<UnitEntry> _uiUnits;
@@ -216,8 +218,12 @@ namespace SwgohRestored.Battle
 
         IEnumerator RunBattle()
         {
-            var roster = LoadRoster();
-            var abilityMap = LoadAbilities();
+            if (!TryLoadBattleData(out var roster, out var abilityMap, out var failure))
+            {
+                _hud.SetTurnText("原始战斗数据加载失败，战斗已停止");
+                Debug.LogError("[BattleDriver] " + failure);
+                yield break;
+            }
             var player = BuildTeam(roster, PlayerTeam, 0, abilityMap);
             var opponent = BuildTeam(roster, OpponentTeam, 1, abilityMap);
             _uiUnits = UiData.LoadUnits();
@@ -226,6 +232,7 @@ namespace SwgohRestored.Battle
             foreach (var u in player.Concat(opponent))
             {
                 _replayHp[u.UnitId] = u.MaxHp;
+                _replayShield[u.UnitId] = u.CurrentShield;
                 _hud.TrackUnit(u, Camera.main, ChipLetter(u), onPick: () => SubmitTarget(u));
             }
             BuildP5Chrome(opponent.Count > 0 ? opponent[0] : null);
@@ -249,7 +256,11 @@ namespace SwgohRestored.Battle
                 EndManualInput();
                 // Only this committed action exists; no later turn is precomputed.
                 yield return PresentEvents(firstEvent);
-                foreach (var unit in _sim.Units) _replayHp[unit.UnitId] = unit.CurrentHp;
+                foreach (var unit in _sim.Units)
+                {
+                    _replayHp[unit.UnitId] = unit.CurrentHp;
+                    _replayShield[unit.UnitId] = unit.CurrentShield;
+                }
             }
             EndManualInput();
             _replayActive = false;
@@ -279,7 +290,9 @@ namespace SwgohRestored.Battle
             {
                 var ability = actor.Abilities[i];
                 actor.CooldownLeft.TryGetValue(ability.Id, out int cooldown);
-                _hud.SetSkillAvailability(i, _sim.IsAbilityReady(i) && _sim.GetLegalTargets(i).Count > 0, ability.Name, cooldown);
+                string unsupported = _sim.OriginalUnsupportedReason(ability);
+                _hud.SetSkillAvailability(i, _sim.IsAbilityReady(i) && _sim.GetLegalTargets(i).Count > 0,
+                    ability.Name + (unsupported == null ? "" : " · 待恢复"), cooldown);
             }
             _hud.SetTurnText($"{original?.name ?? actor.BaseId} · 等待指令（Q/W/E/R/T/Y）");
             Debug.Log($"[BattleDriver] awaiting command actor={actor.UnitId} events={_sim.Log.Count}");
@@ -369,13 +382,24 @@ namespace SwgohRestored.Battle
                     if (id != null && _unitsById.TryGetValue(id, out var target))
                     {
                         double old = _replayHp[id];
-                        _replayHp[id] = ev.Kind == "heal" ? Math.Min(target.MaxHp, old + ev.Amount) : Math.Max(0, old - ev.Amount);
+                        _replayHp[id] = ev.Kind == "heal" ? Math.Min(target.MaxHp, old + ev.Amount) : Math.Max(0, old - ev.HpDamage);
+                        if (ev.Kind != "heal")
+                            _replayShield[id] = Math.Max(0, _replayShield[id] - ev.ShieldDamage);
                         if (target == _commander) _hud.UpdateCommander((float)(_replayHp[id] / target.MaxHp));
                         var go = RigOf(id);
                         if (go && ev.Kind != "heal") { StartCoroutine(Flash(go)); PlayClip(id, "Hit"); }
-                        _hud.ShowDamage(id, ev.Amount, ev.Kind == "crit", Camera.main, ev.Kind == "heal");
+                        if (ev.Kind == "heal" || ev.HpDamage > 0)
+                            _hud.ShowDamage(id, ev.Kind == "heal" ? ev.Amount : ev.HpDamage,
+                                ev.Kind == "crit", Camera.main, ev.Kind == "heal");
+                        if (ev.ShieldDamage > 0) _hud.ShowShieldDamage(id, ev.ShieldDamage, Camera.main);
                     }
                     yield return new WaitForSeconds(0.35f / _speedMult);
+                }
+                else if (ev.Kind == "status_add" || ev.Kind == "status_remove" || ev.Kind == "resist")
+                {
+                    _hud.ShowStatusEvent(ev.TargetUnitId, ev.Kind == "status_add" ? "技能封锁" :
+                        ev.Kind == "status_remove" ? "封锁结束" : "抵抗");
+                    yield return new WaitForSeconds(0.3f / _speedMult);
                 }
                 else if (ev.Kind == "death")
                 {
@@ -393,58 +417,57 @@ namespace SwgohRestored.Battle
             return JsonUtilityArray<RosterEntry>.FromJson(json);
         }
 
-        // ---- REAL ability chains (STEP 4) --------------------------------
-        // StreamingAssets/abilities.json is baked by tools/build_abilities_data.py
-        // from catalog/gamedata through the decoded chain (skillReference ->
-        // abilityReference -> tier[-1].effectReference -> effect.json -- the
-        // game/abilities.py v1 walk).
-        [Serializable]
-        class AbilityRec
+        bool TryLoadBattleData(out List<RosterEntry> roster,
+            out Dictionary<string, List<UnitAbility>> abilities, out string failure)
         {
-            public string id, skill_id, name, kind;
-            public int cooldown;
-            public double damageMultiplier, flatDamage, healAmount, chance;
-            public int damageType, dmgSide, dmgSelect, healSide, healSelect;
-        }
-
-        [Serializable]
-        class UnitAbilityRec { public string def_id; public AbilityRec[] abilities; }
-
-        Dictionary<string, List<UnitAbility>> LoadAbilities()
-        {
-            var map = new Dictionary<string, List<UnitAbility>>();
+            roster = null;
+            abilities = null;
             try
             {
-                var path = Path.Combine(Application.streamingAssetsPath, "abilities.json");
-                foreach (var ua in JsonUtilityArray<UnitAbilityRec>.FromJson(File.ReadAllText(path)))
+                roster = LoadRoster();
+                abilities = LoadAbilities();
+                foreach (var id in PlayerTeam.Concat(OpponentTeam))
                 {
-                    var list = new List<UnitAbility>();
-                    foreach (var a in ua.abilities ?? new AbilityRec[0])
-                        list.Add(new UnitAbility
-                        {
-                            Id = a.id,
-                            SkillId = a.skill_id,
-                            Name = a.name,
-                            Kind = a.kind,
-                            Cooldown = a.cooldown,
-                            DamageMultiplier = a.damageMultiplier,
-                            FlatDamage = a.flatDamage,
-                            DamageType = a.damageType,
-                            HealAmount = a.healAmount,
-                            Chance = a.chance,
-                            DmgSide = a.dmgSide,
-                            DmgSelect = a.dmgSelect,
-                            HealSide = a.healSide,
-                            HealSelect = a.healSelect,
-                        });
-                    map[ua.def_id] = list;
+                    if (!roster.Any(r => r.def_id == id) || !abilities.TryGetValue(id, out var list) || list.Count == 0)
+                        throw new InvalidDataException("Missing original roster/ability menu for " + id);
                 }
-                Debug.Log($"[BattleDriver] ability chains loaded for {map.Count} units");
+                failure = null;
+                return true;
             }
             catch (Exception ex)
             {
-                Debug.LogWarning($"[BattleDriver] abilities.json unavailable ({ex.Message}) -- sim falls back to v0 basic");
+                failure = ex.Message;
+                return false;
             }
+        }
+
+        Dictionary<string, List<UnitAbility>> LoadAbilities()
+        {
+            string root = Application.streamingAssetsPath;
+            var manifest = JsonUtility.FromJson<RawEffectManifest>(File.ReadAllText(Path.Combine(root, "battle_effects.json")));
+            if (manifest == null || manifest.schemaVersion != 2 || manifest.abilities == null ||
+                manifest.effectFiles == null || manifest.effectFiles.Length == 0)
+                throw new InvalidDataException("Expected original effect graph manifest schema 2.");
+            var effects = new List<RawEffect>();
+            foreach (string filename in manifest.effectFiles)
+            {
+                if (string.IsNullOrEmpty(filename) || Path.GetFileName(filename) != filename)
+                    throw new InvalidDataException("Invalid original effect shard name.");
+                var shard = JsonUtility.FromJson<RawEffectShard>(File.ReadAllText(Path.Combine(root, filename)));
+                if (shard?.effects == null) throw new InvalidDataException("Invalid original effect shard " + filename);
+                effects.AddRange(shard.effects);
+            }
+            var graph = new OriginalEffectGraph(effects, manifest.abilities);
+            var map = new Dictionary<string, List<UnitAbility>>(StringComparer.Ordinal);
+            _originalMenus.Clear();
+            foreach (var menu in JsonUtilityArray<OriginalUnitMenu>.FromJson(File.ReadAllText(Path.Combine(root, "abilities.json"))))
+            {
+                if (menu.abilities == null || menu.abilities.Any(a => a.effectReference == null))
+                    throw new InvalidDataException("Missing original effect references for " + menu.def_id);
+                _originalMenus.Add(menu.def_id, menu);
+                map.Add(menu.def_id, menu.abilities.Select(graph.Bind).ToList());
+            }
+            Debug.Log($"[BattleDriver] original graph: {effects.Count} effects, {manifest.abilities.Length} abilities, {map.Count} unit menus");
             return map;
         }
 
@@ -479,11 +502,10 @@ namespace SwgohRestored.Battle
                     CurrentHp = hpStat,
                 };
                 foreach (var kv in statMap) u.Stats[kv.Key] = kv.Value;
-                if (abilityMap != null && abilityMap.TryGetValue(e.def_id, out var ab))
-                {
-                    u.Abilities = ab;
-                    foreach (var a in ab) u.CooldownLeft[a.Id] = 0;
-                }
+                u.MaxShield = u.CurrentShield = Math.Max(0, u.GetStat(25));
+                u.Categories.UnionWith(_originalMenus[e.def_id].categoryId ?? Array.Empty<string>());
+                u.Abilities = abilityMap[e.def_id];
+                foreach (var a in u.Abilities) u.CooldownLeft[a.Id] = 0;
                 _unitsById[u.UnitId] = u;
                 SpawnRig(e.folder, side, slot, u);
                 list.Add(u);

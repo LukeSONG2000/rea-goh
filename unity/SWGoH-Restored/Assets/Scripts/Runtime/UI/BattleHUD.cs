@@ -663,6 +663,27 @@ namespace SwgohRestored.Battle
             _turnLabel.text = s;
         }
 
+        public void ShowShieldDamage(string unitId, double amount, Camera cam)
+            => ShowStatusEvent(unitId, "护盾 −" + (int)amount);
+
+        public void ShowStatusEvent(string unitId, string label)
+        {
+            if (!_bars.TryGetValue(unitId, out var bar)) return;
+            var go = new GameObject("status-event", typeof(RectTransform));
+            go.transform.SetParent(_canvas.transform, false);
+            var text = go.AddComponent<Text>();
+            text.font = UiKit.FontCjk();
+            text.fontSize = 18;
+            text.color = new Color(0.6f, 0.8f, 1f);
+            text.alignment = TextAnchor.MiddleCenter;
+            text.text = label;
+            var rt = (RectTransform)go.transform;
+            rt.position = bar.Root.position + new Vector3(0, 13f, 0);
+            rt.sizeDelta = new Vector2(180, 30);
+            rt.localScale = new Vector3(0.3f, 0.3f, 1f);
+            go.AddComponent<Floater>();
+        }
+
         public void ShowDamage(string unitId, double amount, bool crit, Camera cam, bool heal = false)
         {
             if (!_bars.TryGetValue(unitId, out var bar)) return;

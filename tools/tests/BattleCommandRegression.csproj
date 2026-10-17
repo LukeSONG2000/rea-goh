@@ -11,8 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BattleCommandRegression.cs" />
-    <Compile Include="../../unity/SWGoH-Restored/Assets/Scripts/Runtime/Battle/BattleSim.cs" />
-    <Compile Include="../../unity/SWGoH-Restored/Assets/Scripts/Runtime/Battle/JavaRandom.cs" />
+    <Compile Include="../../unity/SWGoH-Restored/Assets/Scripts/Runtime/Battle/*.cs" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 </Project>

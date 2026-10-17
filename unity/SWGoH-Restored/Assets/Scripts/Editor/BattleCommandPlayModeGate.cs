@@ -32,7 +32,7 @@ namespace SwgohRestored.EditorTools
 
     public class BattleCommandGateRunner : MonoBehaviour
     {
-        const string Output = "F:/PPfavorite/Work/goh/logs/rea_gap_review";
+        const string Output = "F:/PPfavorite/Work/goh/logs/effect_recovery";
         void Require(bool condition, string message)
         {
             if (condition) return;
@@ -103,6 +103,14 @@ namespace SwgohRestored.EditorTools
             Click(targetButton);
             Require(!driver.WaitingForCommand && sim.Round == round + 1, "button must commit exactly once");
             Require(sim.Log.Skip(first).Any(e => e.Kind == "turn" && e.TargetUnitId == target.UnitId && e.AbilityId == actor.Abilities[skill].Id), "UI selected wrong skill/target");
+            var hits = sim.Log.Skip(first).Where(e => e.Kind == "damage" || e.Kind == "crit").ToArray();
+            Require(actor.Abilities[skill].OriginalGraph != null, "production must bind original graph");
+            Require(hits.Length == 1 && hits[0].EffectId == "basicability_vader_damage_u05",
+                "Vader ordinary branch must execute exactly one original damage effect");
+            Require(hits[0].ShieldDamage > 0 && hits[0].HpDamage == 0,
+                "original protection absorbs damage without reducing HP");
+            File.WriteAllText(Output + "/pilot-command-events.json", JsonUtility.ToJson(new EventTrace {
+                events = sim.Log.Skip(first).ToArray() }, true));
             // Double click must not commit another turn while the action is presented.
             targetButton.onClick.Invoke();
             Require(sim.Round == round + 1, "double click committed extra turn");
@@ -128,5 +136,7 @@ namespace SwgohRestored.EditorTools
             File.WriteAllText(Output + "/command-playmode-pass.txt", "PASS: UI raycast + pointer clicks; waiting; skill and target; double click; auto on/off.");
             EditorApplication.Exit(0);
         }
+
+        [System.Serializable] public class EventTrace { public BattleEvent[] events; }
     }
 }

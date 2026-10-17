@@ -127,3 +127,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 ## 2026-10-17 原始效果链恢复
 - 【Codex-effect-recovery】认领：维达普攻原始分支/类别条件、效果链无损导出与Unity逐效果执行、持续状态/伤害native证据交叉验证及回归构建。写域 tools/build_abilities_data.py、专用tests、BattleSim/Driver与新增效果模块、StreamingAssets技能数据；主智能体单写git，其他现有改动保留。
 `n【Codex/root 2026-10-17】追加认领 BattleDemo.unity 单英雄效果管线验收场景（VADER 镜像），BattleHUD 状态/护盾展示与相关 PlayMode 门禁；其余英雄通过原始数据回归检查泛化，无运行时英雄名称分支。
+
+【Codex/root 2026-10-17】完成单英雄原始效果管线首段：VADER 普攻四引用保持原序，互斥类别分支倍率6.482→3.241；通用DAMAGE/CURSE解释器恢复逐效果chance、技能内闪避缓存、独立状态实例、FULLTURN/DEATH/ENDENCOUNTER过期和基础/特殊技能门禁，修正角色减伤及护盾分账。完整导出6732 abilities/63035 effects，751菜单技能（301单位），未知图禁用而不折叠。SNOWTROOPER普攻无需英雄适配复用；20回合seed4490双跑hash ef47a580543af1371013d2a5241b107dcfcdb75928297c0d11b08ef30a676f4d。导出7测试、伤害/图/命令回归、demo_turn_order、Unity实际pointer PlayMode、build exit0和玩家15秒存活全部通过。REA成品SHA bc8d6880ccdd47378565a2940e10dca7b16eabcc506daa2f13eecf5c9a62cc0e。证据/范围：catalog/EFFECT_PIPELINE_PILOT_20261017.json。PENDING-ORIGINAL：完整Vader特殊技、被动/吸血/反击、DOT触发、驱散/context/额外回合、舰船/遗物差及原版AI和视觉；这是普攻管线样板，不是完整英雄或全量战斗完成。下一扩展单位是通用效果算子，不是英雄专用代码。
