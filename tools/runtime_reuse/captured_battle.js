@@ -45,6 +45,15 @@ globalThis.convertCapturedBattle=(bytes,metadata)=>{
    const buffer=Memory.alloc(16384);
    R.api('format_exception','void',['pointer','pointer','int'])(ex,buffer,16384);
    error.originalException=buffer.readUtf8String();
+   // Preserve original exception evidence before releasing temporary objects.
+   // native_trace_ips in this client stores module-relative PCs, not absolute pointers.
+   error.originalTrace=[];
+   try{const trace=R.readRef(ex,'native_trace_ips');if(!trace.isNull()){
+    const length=Math.min(Number(trace.add(24).readU64()),128);
+    for(let i=0;i<length;i++)error.originalTrace.push(String(trace.add(32+i*8).readPointer()));
+   }}catch(diagnostic){error.traceError=String(diagnostic);}
+   try{error.originalParameter=S.string(R.readRef(ex,'_paramName'));}catch(_){}
+
    throw error;
   }
   globalThis.captureConversionPhase='native-function-returned';

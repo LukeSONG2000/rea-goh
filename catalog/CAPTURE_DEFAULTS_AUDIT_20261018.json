@@ -1,0 +1,43 @@
+{
+  "status": "PENDING-ORIGINAL",
+  "originalFailure": {
+    "type": "ArgumentNullException",
+    "parameter": "str",
+    "nativeRvas": [
+      "0xcb2cee",
+      "0x1af063e",
+      "0x1d0dd37",
+      "0x1d0c523"
+    ],
+    "path": "PooledString.Share <- BucketItemDO.Factory.Get <- TranslateBucketItemList <- BattleDataDO.Factory.Get"
+  },
+  "findings": [
+    "First decoded completion reward Type=6 has null Id.",
+    "Original BucketItem(int) constructor produces empty-string Id, value size48.",
+    "Compiled GameSerializer deserialization alone still raises same error.",
+    "Diagnostic-only constructor-default restoration on temporary reward crosses first failure; no repair shipped."
+  ],
+  "nextFailure": {
+    "type": "ArgumentOutOfRangeException",
+    "parameter": "index",
+    "nativeRvas": [
+      "0x3aeda4c",
+      "0x100d881",
+      "0x101dd51",
+      "0x1d0c96e"
+    ],
+    "path": "StatDefinitionTranslator.TranslateStatDefinition <- UnitDefinitionDO.Factory.Get <- BattleDataDO.Factory.Get"
+  },
+  "evidence": [
+    "logs/high_reuse/captured-battle-trace-evidence.json",
+    "logs/high_reuse/captured-battle-game-serializer-evidence.json",
+    "logs/high_reuse/captured-battle-constructor-default-trace.json"
+  ],
+  "limitations": [
+    "Wire roundtrip does not prove semantic clone fidelity.",
+    "No complete conversion or isolated mission replay yet.",
+    "Original source before earlier generic DeepClone was not retained; must validate future capture preservation."
+  ],
+  "hostRestored": 38160,
+  "clientPid": 19440
+}
