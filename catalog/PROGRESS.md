@@ -220,3 +220,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 captured-hp-audit】认领真实关卡敌方HP疑点：逐层核对原wire/当前原GameData局部定义/转换后Unit统计，保持不改数值；接续战后原库存复核。当前19440和10552实际存活。
 
 【Codex/root 2026-10-18 captured-trial-visual】查清HP疑点：wire四敌无HP项，当前原GameData原始定义HP0；五敌62项定义与转换全部一致，原Unit.GetCalculatedStatValue返回150/1/1/1/1，未改数值。新增只读probe_captured_stats，未独立重抓自然战斗属性基线。captured_trial支持原flags6视觉分支：首次单技能后停turn1按deadline返回；后两次原按钮+原auto均turn4终态136、正式BattleService0、Home/guard/GC恢复PASS。Unity CaptureScreenshot未落盘，改在frame事件通过Win32 PrintWindow取得实际战斗画面并已目视（原场景/模型/技能栏/武器特效），截图logs/high_reuse/captured-trial-window-verified.png。头less后及视觉后原库存复核均370单位22940属性/1347mod/6711stat/8816roll/1953slot/69crew零差异。本轮未消费/拆装装备；正常宿主26380恢复。报告CAPTURED_TRIAL_VISUAL_VALIDATION_20261018.json；通用CLI试玩生命周期/数据新鲜度、非空Datacron/Era/好友支援/其它模式及完整目标仍待完成。
+
+【Codex/root 2026-10-18 captured-trial-entry】认领可重复试玩入口：v2捕获双文件完整性/原schema补全/显式保存队伍与快照来源、独占宿主启动及finally恢复；root写tools/runtime_reuse准备器/启动器/视觉auto选项与验证，不改战斗数值或原目录。
