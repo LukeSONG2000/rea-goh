@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-18",
+  "goalRequirements": [
+    "all-mode cooldown visibility",
+    "popup and top-right absolute HP/permanent and bonus protection",
+    "effect expiration counts",
+    "live/initial/panel stats and mastery changes",
+    "faithful resource-free mission trials",
+    "AI-friendly menu and battle action API with explicit spending authorization",
+    "isolated opponent control, AI prediction and decision-tree priority changes"
+  ],
+  "deliveredThisStep": {
+    "cli": "node tools/runtime_reuse/runtime_cli.mjs snapshot --pid 32636",
+    "runtimeObservation": {
+      "state": "MasterInventoryGameState",
+      "units": [],
+      "readOnly": true
+    },
+    "attributeReader": "Original initial/current stat getters and independent total/permanent/bonus protection getters; runtime battle validation pending",
+    "regression": "Original getters contract PASS; forbidden mutating display getter never called; runtime_api 40 regressions PASS"
+  },
+  "criticalFindings": {
+    "displayGetter": "UnitDO.GetCalculatedStatValue mutates equipped datacron context even when displayOnlyValue=true; removed from reader before any successful battle invocation. Collection-state gate prevented attempted fixture.",
+    "mastery": "GetMasteryContribution FDFF40 returns coefficient, not applied contribution. Exposed as masteryCoefficient; attributed delta remains null.",
+    "trial": "Existing inventory-enemy fixture is engine demonstration only. Faithful trial requires original complete matching BattleData, encounters, modifiers and mode inputs.",
+    "ai": "Original decision consumes RNG; no live invocation for prediction. Priorities are graph branches, not a general priority integer."
+  },
+  "notYetVerified": [
+    "battle runtime attribute reader",
+    "full mode CD coverage",
+    "top-right absolute health additions",
+    "live display integration of extra stats",
+    "faithful mission replay/trial",
+    "menu and battle action execution API",
+    "future AI prediction and isolated opponent controls/priority edits"
+  ]
+}
