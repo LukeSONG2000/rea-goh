@@ -137,3 +137,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root phase2 2026-10-17】完成通用ALL/SELF/SELECTED目标、持续触发APPLYEFFECT/DOT、SPEED原始叠加线及吸血；VADER原力碾压1.102群伤+三独立DOT+减速按原图执行，PHASMA同解释器回归，无英雄专用适配。所有触发先于过期、tag仅0→1触发、逐目标chance/RNG与SquadPositionPriority已由native函数交叉核验。HUD接真实状态/护盾与三份原atlas32x32裁片。算子校验覆盖10单位11主动技能，不代表完整kit。导出8测试、伤害/基础/群攻/命令、demo与seed双跑、真实UI点击PlayMode全部PASS；build exit0/Succeeded但保留现有4处缺prefab与许可诊断(totalErrors5)，玩家15秒存活无异常。REA新程序集SHA899d47b9c92ebec676c358c1d47fea972148f9054a67a541fe1392395de4915f，证据ev_3d1adaf4a47ccca0b785ff9d0212d0e615e9b47bee391d8d723646db53c61f13。详见EFFECT_PIPELINE_PHASE2_20261017.json（含native正文/纠正语义/追踪/验证）。PENDING-ORIGINAL仍包括完整Vader、被动/免疫/反击助攻、context/驱散/额外回合、AI、全游戏与视觉；下一步按通用算子推进，不逐英雄造规则。原版零CU/零线上RPC/零货币或Mod操作。
 
 【Codex/root visual-phase3 2026-10-17】认领：用户小队/舰队截图仅验收，恢复本地原始相机/站位/HUD表现。root写BattleDriver及新增表现配置/验收；visual_gap只读相机/阵型/舰队资源，effect_export只读原UI prefab/atlas；Git/Unity单写root。运行时效果规则保持原图，不以截图造规则。
+
+【Codex/root visual-phase3】追加认领新tools/export_battle_presentation.py和Resources/BattlePresentation/BattleChrome原始配置与精确UI裁片，effect_export独占实现；visual_gap唯一导出者写extracted/ship_*新舰船原件（不覆盖已导出的角色）；root写场景装配与Unity验收。
