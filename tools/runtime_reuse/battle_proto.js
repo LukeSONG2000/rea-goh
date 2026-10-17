@@ -1,5 +1,7 @@
 'use strict';
-// Original protobuf cloning only. This does not clone BattleDataDO or enter battles.
+// Original protobuf APIs. This does not clone BattleDataDO or enter battles.
+// WARNING: DeepClone drops struct defaults (Stat id1/ui-1 ->0/0, BucketItem id empty ->null).
+// Not a semantically faithful clone; capture must serialize the original input directly.
 globalThis.cloneOriginalBattleProto=source=>{
  const R=RuntimeApi,S=SceneApi;
  if(source.isNull()||R.fullName(R.classOf(source))!=='Protos.BattleData')throw Error('Expected original Protos.BattleData');

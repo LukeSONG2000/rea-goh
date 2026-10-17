@@ -1,0 +1,55 @@
+{
+  "status": "PENDING-ORIGINAL: legacy capture semantically corrupted",
+  "verifiedRuntime": {
+    "kind": "protobuf-probe-complete",
+    "rows": [
+      {
+        "name": "Protos.Stat",
+        "original": {
+          "id": 1,
+          "ui": "-1"
+        },
+        "generic": {
+          "id": 0,
+          "ui": "0"
+        },
+        "compiled": {
+          "id": 0,
+          "ui": "0"
+        }
+      },
+      {
+        "name": "Protos.BucketItem",
+        "original": {
+          "id": "",
+          "rarity": 1
+        },
+        "generic": {
+          "id": null,
+          "rarity": 0
+        },
+        "compiled": {
+          "id": null,
+          "rarity": 0
+        }
+      }
+    ]
+  },
+  "statFailure": {
+    "function": "StatDefinitionTranslator.TranslateStatDefinition",
+    "nativeEvidence": "logs/high_reuse/native/stat_definition_translate.c",
+    "behavior": "Allocates62stat slots; translates proto id then subtracts1 before indexing. Invalid proto id0 from generic clone leads to invalid index."
+  },
+  "captureChange": "v2 serializes original callback input directly, removes prior DeepClone. Does not claim deserialization preserves struct defaults.",
+  "validation": [
+    "test_battle_capture.mjs PASS: original input identity, no clone, callback/thread scope, bounded failure",
+    "Live scratch constructors + generic/compiled DeepClone show identical default loss in both codecs."
+  ],
+  "remaining": [
+    "Implement and validate schema-correct default-preserving decoder/clone",
+    "Capture new natural payload using v2; old file may contain explicit zero values produced by old DeepClone and cannot serve as faithful source",
+    "Verify full original conversion/player isolation/mission replay"
+  ],
+  "clientPid": 19440,
+  "hostPid": 40644
+}
