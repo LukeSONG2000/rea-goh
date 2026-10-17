@@ -214,3 +214,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 private-inventory-deep】扩展原库存与私有副本只读审计：1347模组对/6711属性对象/8816roll记录/1953槽/69船员，字段一致且受检可变对象不共享，船员指向私有roster；370单位62原计算属性合计22940次exact比较零差异。原GetCalculatedStatValue会写datacron上下文，本探针传各自原有context/index并校验保持不变，本次均null，因此不覆盖实际Datacron。初次Frida bool参数错误计算0次，修正整数0后PASS；非战斗修规则。探针加入idleHome门禁/非空roster条件。报告PRIVATE_INVENTORY_DEEP_AUDIT_20261018.json；Era借用/保存队伍、非空Datacron和实际关卡试玩仍未验证，下一步组装玩家私有小队。原19440、正常宿主41868存活，无开战/消费/拆装/分解。
 
 【Codex/root 2026-10-18 private-squads】认领私有保存小队引用闭包验证及可重用玩家小队入口；先检查原库存工厂生成的小队/成员/状态/Datacron，禁止以Unit复制构造器替代。当前原19440和正常宿主41868存活，上一提交已同步origin。
+
+【Codex/root 2026-10-18 captured-trial-first-run】原库存26保存小队144成员零外部Unit引用，type3携Datacron未深审，不能宣称全小队隔离。新增standalone captured_trial.js，从私有库存原保存type1五人队（不借用好友）+真实v2光明1-A捕获构建原simulation上下文；同seed两次原FSM终态136/next0/胜利、summary一致、正式BattleService start/finish计0、网络guard和loop/GC清理PASS。敌人MaxHP为150/1/1/1/1存在保真疑点；仅logs对照延长原局部定义map作用域至全战斗仍完全相同，map恢复PASS，不能按终态成功宣称试玩保真。原回合确定性回归PASS。报告CAPTURED_TRIAL_FIRST_RUN_20261018.json；待原真实敌方属性基线/战后原库存数值复核、支援/Datacron、画面与CLI，不上线试玩。正常宿主10552及原19440实际存活，无购买/拆装/分解。
