@@ -216,3 +216,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 private-squads】认领私有保存小队引用闭包验证及可重用玩家小队入口；先检查原库存工厂生成的小队/成员/状态/Datacron，禁止以Unit复制构造器替代。当前原19440和正常宿主41868存活，上一提交已同步origin。
 
 【Codex/root 2026-10-18 captured-trial-first-run】原库存26保存小队144成员零外部Unit引用，type3携Datacron未深审，不能宣称全小队隔离。新增standalone captured_trial.js，从私有库存原保存type1五人队（不借用好友）+真实v2光明1-A捕获构建原simulation上下文；同seed两次原FSM终态136/next0/胜利、summary一致、正式BattleService start/finish计0、网络guard和loop/GC清理PASS。敌人MaxHP为150/1/1/1/1存在保真疑点；仅logs对照延长原局部定义map作用域至全战斗仍完全相同，map恢复PASS，不能按终态成功宣称试玩保真。原回合确定性回归PASS。报告CAPTURED_TRIAL_FIRST_RUN_20261018.json；待原真实敌方属性基线/战后原库存数值复核、支援/Datacron、画面与CLI，不上线试玩。正常宿主10552及原19440实际存活，无购买/拆装/分解。
+
+【Codex/root 2026-10-18 captured-hp-audit】认领真实关卡敌方HP疑点：逐层核对原wire/当前原GameData局部定义/转换后Unit统计，保持不改数值；接续战后原库存复核。当前19440和10552实际存活。
