@@ -287,3 +287,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 skill-currency-read validated】原GetCurrencyQuantity枚举参数i32实时读currencyOwned，失败null+currencyError。维达普攻等级2-8原货币类型1余额415387857、均原upgradeAvailable=false（已获得），不依据足够余额放行；类型0返回0保留原语义不称可消费钱包。mock实时零余额/保留原条件+mailbox回归PASS，实机原关闭/Back/Home最终Home。报告SKILL_CURRENCY_VALIDATION_20261018.json；宿主30396，无升级购买拆装。独立钱包UI对照/未满级可升级报价/授权消费入口仍待。
 【Codex/root 2026-10-18 unmaxed-skill-validation】认领未满级技能真实报价/原锁定条件覆盖，选现有收藏低等级单位，只导航读取不升级。
 【Codex/root 2026-10-18 unmaxed-skill-validation validated】50级VEERS普攻原显示1级，弹窗默认selected tier0/显示2/upgradeStatus2，费用700信用点+3 ability_mat_A，原allowUpgrade=true。发现后续3-8级upgradeAvailable同样true但upgradeStatus0(LOCKED)，已文档明确布尔值不能单独放行；原四枚举核元数据。不执行升级，关闭后原skills与进入前精确相等，最终Home。报告UNMAXED_SKILL_VALIDATION_20261018.json；不足材料样本与实际升级事务仍未验证，无消费拆装。
+【Codex/root 2026-10-18 skill-level-navigation】认领原AbilityLevelButtonClicked等级切换CLI，以当前unit/skill/tier核验和原选中等级回读确认，不执行升级；root写运行时与tests。
