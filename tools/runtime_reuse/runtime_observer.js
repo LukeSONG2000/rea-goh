@@ -15,7 +15,14 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  try{result.input=BattleInputBridge.snapshot();}catch(e){result.input={unavailable:true,error:String(e)};}
  const context=R.readRef(R.readRef(state,'_battleController'),'_battleContext');
  const seen=new Set();
- for(const reticle of S.all('BattleMessageReticle')){
+ // Read this battle view's original handles, not every loaded Unity object.
+ const view=S.invoke('BattleContext','get_BattleView',context);
+ const handles=R.readRef(view,'_unitReticles');
+ const items=R.readRef(handles,'_items'),count=R.readValue(handles,'_size','i32');
+ if(count<0||count>256||(items.isNull()?count!==0:count>items.add(24).readU64().toNumber()))throw Error('Battle reticle handle list bounds invalid');
+ for(let index=0;index<count;index++){
+  const handle=items.add(32+index*8).readPointer();if(handle.isNull())continue;
+  const reticle=R.readRef(handle,'Reticle');if(reticle.isNull())continue;
   const unit=S.invoke('BattleMessageReticle','get_TargetUnit',reticle);
   if(unit.isNull()||seen.has(unit.toString())||!R.readRef(unit,'_battleContext').equals(context))continue;
   if(!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(reticle)),'bool'))continue;

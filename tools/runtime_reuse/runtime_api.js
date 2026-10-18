@@ -10,21 +10,27 @@ globalThis.RuntimeApi = (() => {
     if (!cache.has(key)) cache.set(key, new NativeFunction(module.getExportByName('il2cpp_' + name), result, args));
     return cache.get(key);
   }
+  // Metadata is immutable within this IL2CPP script session. Cache successful
+  // resolutions only; never cache instances, mutable field values or results.
+  const classCache=new Map(),fieldCache=new Map(),methodCache=new Map(),nameCache=new Map();
+  const referenceCache=new Map(),valueTypeCache=new Map(),flagsCache=new Map(),arityCache=new Map();
   const utf = text => Memory.allocUtf8String(text);
   const number = value => typeof value === 'number' ? value : value.toNumber();
   function required(pointer, description) { if (!pointer || pointer.isNull()) throw Error(description + ' is null'); return pointer; }
   const classOf = object => api('object_get_class','pointer',['pointer'])(required(object,'object'));
   function fullName(klass) {
     required(klass,'class');
+    const key=klass.toString();if(nameCache.has(key))return nameCache.get(key);
     const name = api('class_get_name','pointer',['pointer'])(klass).readUtf8String();
     const outer = api('class_get_declaring_type','pointer',['pointer'])(klass);
-    if (!outer.isNull()) return fullName(outer) + '+' + name;
+    if (!outer.isNull()){const value=fullName(outer)+'+'+name;nameCache.set(key,value);return value;}
     const ns = api('class_get_namespace','pointer',['pointer'])(klass).readUtf8String();
-    return ns ? ns + '.' + name : name;
+    const value=ns?ns+'.'+name:name;nameCache.set(key,value);return value;
   }
   let classes;
   function allClasses(refresh = false) {
     if (classes && !refresh) return classes;
+    classCache.clear();
     const count = Memory.alloc(P), domain = api('domain_get','pointer',[])();
     const assemblies = api('domain_get_assemblies','pointer',['pointer','pointer'])(domain,count);
     const rows = [];
@@ -40,27 +46,37 @@ globalThis.RuntimeApi = (() => {
     classes = rows; return rows;
   }
   function findClass(name, imageName) {
+    const key=JSON.stringify([name.replace(/\//g,'+'),imageName||null]);
+    if(classCache.has(key))return classCache.get(key);
     const matches = allClasses().filter(c=>c.name===name.replace(/\//g,'+') && (!imageName || c.imageName===imageName));
     if (matches.length!==1) throw Error('Class must resolve uniquely: '+name+' matches='+matches.length);
-    return matches[0].klass;
+    classCache.set(key,matches[0].klass);return matches[0].klass;
   }
   function field(klass, name) {
+    const key=JSON.stringify([klass.toString(),name]);if(fieldCache.has(key))return fieldCache.get(key);
     for (let c=klass;!c.isNull();c=api('class_get_parent','pointer',['pointer'])(c)) {
       const f=api('class_get_field_from_name','pointer',['pointer','pointer'])(c,utf(name));
-      if (!f.isNull()) return f;
+      if (!f.isNull()){fieldCache.set(key,f);return f;}
     }
     throw Error('Field absent: '+fullName(klass)+'.'+name);
   }
   function fieldType(f) { return api('field_get_type','pointer',['pointer'])(f); }
   function isReference(f) {
+    const key=f.toString();if(referenceCache.has(key))return referenceCache.get(key);
+    const value=computeIsReference(f);referenceCache.set(key,value);return value;
+  }
+  function computeIsReference(f) {
     const type=fieldType(f),kind=api('type_get_type','int',['pointer'])(type);
     if ([0x0e,0x12,0x14,0x1c,0x1d].includes(kind)) return true;
     if (kind===0x15) return !api('class_is_valuetype','bool',['pointer'])(api('class_from_type','pointer',['pointer'])(type));
     return false;
   }
+  function fieldFlags(f){
+    const key=f.toString();if(!flagsCache.has(key))flagsCache.set(key,api('field_get_flags','uint',['pointer'])(f));return flagsCache.get(key);
+  }
   function fieldBuffer(object, f, bytes) {
     const buffer=Memory.alloc(bytes);
-    const flags=api('field_get_flags','uint',['pointer'])(f);
+    const flags=fieldFlags(f);
     if (flags & 0x10) api('field_static_get_value','void',['pointer','pointer'])(f,buffer);
     else api('field_get_value','void',['pointer','pointer','pointer'])(required(object,'field owner'),f,buffer);
     return buffer;
@@ -75,19 +91,21 @@ globalThis.RuntimeApi = (() => {
     i64:[8,'readS64','writeS64'],u64:[8,'readU64','writeU64'],f32:[4,'readFloat','writeFloat'],f64:[8,'readDouble','writeDouble']};
   function primitive(kind) { if (!primitives[kind]) throw Error('Unknown primitive '+kind); return primitives[kind]; }
   function checkValueField(f, kind) {
+    const key=JSON.stringify([f.toString(),kind]);if(valueTypeCache.has(key))return;
     if(isReference(f)) throw Error('Cannot interpret a managed reference as '+kind);
     let type=fieldType(f),c=api('class_from_type','pointer',['pointer'])(type);
     if(api('class_is_enum','bool',['pointer'])(c)) type=api('class_enum_basetype','pointer',['pointer'])(c);
     const code=api('type_get_type','int',['pointer'])(type);
     const mapped={2:'bool',4:'i8',5:'u8',6:'i16',7:'u16',8:'i32',9:'u32',10:'i64',11:'u64',12:'f32',13:'f64'};
     if(mapped[code]!==kind) throw Error('Field primitive mismatch: native type='+code+' requested='+kind);
+    valueTypeCache.set(key,true);
   }
   function readValue(object,name,kind,staticClass) {
     const f=field(staticClass || classOf(object),name);checkValueField(f,kind);
     const p=primitive(kind),value=fieldBuffer(object,f,p[0])[p[1]]();return kind==='bool'?value!==0:value;
   }
   function setField(object,f,buffer) {
-    if(api('field_get_flags','uint',['pointer'])(f)&0x10) api('field_static_set_value','void',['pointer','pointer'])(f,buffer);
+    if(fieldFlags(f)&0x10) api('field_static_set_value','void',['pointer','pointer'])(f,buffer);
     else api('field_set_value','void',['pointer','pointer','pointer'])(required(object,'field owner'),f,buffer);
   }
   function writeRef(object,name,value,staticClass) {
@@ -102,6 +120,8 @@ globalThis.RuntimeApi = (() => {
     const p=primitive(kind),buffer=Memory.alloc(p[0]);buffer[p[2]](kind==='bool'?(value?1:0):value);setField(object,f,buffer);
   }
   function findMethod(klass,name,count,parameterTypes) {
+    const key=JSON.stringify([klass.toString(),name,count??null,parameterTypes??null]);
+    if(methodCache.has(key))return methodCache.get(key);
     const candidates=[],it=Memory.alloc(P);it.writePointer(nil);
     let m;
     while(!(m=api('class_get_methods','pointer',['pointer','pointer'])(klass,it)).isNull()) {
@@ -111,12 +131,13 @@ globalThis.RuntimeApi = (() => {
       candidates.push(m);
     }
     if(candidates.length!==1)throw Error('Method must resolve uniquely '+fullName(klass)+'.'+name+' matches='+candidates.length);
-    return candidates[0];
+    methodCache.set(key,candidates[0]);return candidates[0];
   }
   const arg={ref:value=>({kind:'ref',value:value||nil}),value:(kind,value)=>({kind,value}),
     byRef:address=>({kind:'byRef',value:address})};
   function invoke(method,object,args=[]) {
-    if(api('method_get_param_count','uint',['pointer'])(method)!==args.length)throw Error('Invocation argument count mismatch');
+    const key=method.toString();if(!arityCache.has(key))arityCache.set(key,api('method_get_param_count','uint',['pointer'])(method));
+    if(arityCache.get(key)!==args.length)throw Error('Invocation argument count mismatch');
     const params=Memory.alloc(Math.max(1,args.length)*P),keep=[];
     args.forEach((a,i)=>{
       if(a.kind==='ref'||a.kind==='byRef')params.add(i*P).writePointer(a.value);
@@ -176,6 +197,25 @@ globalThis.RuntimeApi = (() => {
     return rows;
   }
   function findBound(name) {
+    // Ask the existing Type -> binding dictionary directly. Read the current
+    // injector, dictionary and instance on every call, including scene changes.
+    // Interface-bound implementations retain the original fallback below.
+    let klass;
+    try{klass=findClass(name);}catch(error){if(!String(error).includes('Class must resolve uniquely:'))throw error;}
+    if(klass){
+      const injector=readRef(nil,'_instance',findClass('Injector'));
+      const binder=readRef(required(injector,'Injector instance'),'_binder');
+      const dictionary=readRef(binder,'_typeMap');
+      const type=api('type_get_object','pointer',['pointer'])(api('class_get_type','pointer',['pointer'])(klass));
+      const output=Memory.alloc(P);output.writePointer(nil);
+      const found=unbox(invoke(findMethod(classOf(dictionary),'TryGetValue',2),dictionary,[arg.ref(type),arg.byRef(output)]),'bool');
+      if(found){
+        const binding=output.readPointer();
+        if(!binding.isNull()){
+          const instance=readRef(binding,'_instance');if(!instance.isNull())return instance;
+        }
+      }
+    }
     const rows=bindings(),exact=rows.filter(r=>r.boundType===name),found=exact.length?exact:rows.filter(r=>r.instanceType===name);
     const unique=[...new Map(found.map(r=>[r.instance.toString(),r])).values()];
     if(unique.length!==1)throw Error('Bound instance must resolve uniquely: '+name+' matches='+unique.length);

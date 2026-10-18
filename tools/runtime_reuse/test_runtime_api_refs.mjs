@@ -11,6 +11,7 @@ function harness(code=source){
   let address=0x1000;
   class Pointer {
     constructor(value,bytes){this.value=value;this.bytes=bytes;}
+    toString(){return '0x'+this.value.toString(16);}
     isNull(){return this.value===0;}
     writePointer(value){this.storedPointer=value;return this;}
     readPointer(){return this.storedPointer;}
@@ -35,6 +36,7 @@ function harness(code=source){
     field_get_type:f=>f,
     type_get_type:t=>t.kind,
     field_get_flags:f=>f.flags,
+    field_get_value:(object,f,buffer)=>{assert.equal(object,owner);buffer.writeS32(f.current);},
     class_from_type:t=>t,
     class_is_enum:()=>false,
     class_is_valuetype:()=>false,
@@ -53,6 +55,14 @@ function harness(code=source){
 }
 
 const h=harness();
+// Stable field metadata must not turn live values into a stale snapshot.
+h.fields.get('integer').current=100;
+assert.equal(h.api.readValue(h.owner,'integer','i32'),100);
+h.fields.get('integer').current=27;
+assert.equal(h.api.readValue(h.owner,'integer','i32'),27);
+assert.throws(()=>h.api.readValue(h.owner,'integer','f32'),/primitive mismatch/);
+assert.equal(h.api.readValue(h.owner,'integer','i32'),27);
+
 let assertions=0;
 for(const isStatic of [false,true]){
   const owner=isStatic?null:h.owner,klass=isStatic?h.klass:undefined;

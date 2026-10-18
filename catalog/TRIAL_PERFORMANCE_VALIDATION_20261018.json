@@ -1,0 +1,538 @@
+{
+  "date": "2026-10-18",
+  "scope": "Same private captured-inventory Kelleran vs Vader duel, original runtime and unmodified stats. Not an online mission and not a GPU benchmark.",
+  "rootCause": "250ms host polling repeatedly scanned metadata, all injector bindings, and globally loaded Unity objects on the original main thread; measured snapshot blocking dominated periodic stalls.",
+  "fix": [
+    "Script-session immutable metadata caches; values/results are never cached.",
+    "Native existing dictionary TryGetValue resolves exact binding; reread current injector/dictionary/instance, original interface fallback remains.",
+    "Read current BattleBaseView._unitReticles handles instead of Resources.FindObjectsOfTypeAll; same live context/active/duplicate filters."
+  ],
+  "measurement": "Identical bounded Date.now dispatcher intervals and callback timing in diagnostic generated scripts. Measures CPU dispatcher cadence, not GPU present time. Steady window excludes first 5s and final 1s by elapsed dispatcher intervals; all-frame results retained.",
+  "cases": {
+    "baseline": {
+      "evidence": "logs\\high_reuse\\perf-baseline-evidence.json",
+      "snapshots": {
+        "count": 110,
+        "meanMs": 223.855,
+        "p50Ms": 218,
+        "p95Ms": 288,
+        "p99Ms": 302,
+        "maxMs": 326,
+        "over50ms": 110
+      },
+      "dispatcherIntervalsAll": {
+        "count": 5097,
+        "meanMs": 10.694,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 224,
+        "maxMs": 331,
+        "over50ms": 110
+      },
+      "dispatcherIntervalsSteady": {
+        "count": 4496,
+        "meanMs": 10.79,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 227,
+        "maxMs": 331,
+        "over50ms": 98
+      },
+      "steadyDurationSeconds": 48.511,
+      "jobs": {
+        "count": 332,
+        "meanMs": 75.928,
+        "p50Ms": 3,
+        "p95Ms": 240,
+        "p99Ms": 291,
+        "maxMs": 326,
+        "over50ms": 110
+      },
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 9,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 6240,
+          "sendto": 4,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 1,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "detached": true
+    },
+    "old-nopoll": {
+      "evidence": "logs\\high_reuse\\perf-old-nopoll-evidence.json",
+      "snapshots": {
+        "count": 0
+      },
+      "dispatcherIntervalsAll": {
+        "count": 6317,
+        "meanMs": 5.946,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 7,
+        "maxMs": 357,
+        "over50ms": 1
+      },
+      "dispatcherIntervalsSteady": {
+        "count": 5359,
+        "meanMs": 5.889,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 7,
+        "maxMs": 16,
+        "over50ms": 0
+      },
+      "steadyDurationSeconds": 31.559,
+      "jobs": {
+        "count": 182,
+        "meanMs": 2.242,
+        "p50Ms": 2,
+        "p95Ms": 3,
+        "p99Ms": 5,
+        "maxMs": 6,
+        "over50ms": 0
+      },
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 10,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 3098,
+          "sendto": 3,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 3,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "detached": true
+    },
+    "cached": {
+      "evidence": "logs\\high_reuse\\perf-cached-evidence.json",
+      "snapshots": {
+        "count": 122,
+        "meanMs": 67.189,
+        "p50Ms": 66,
+        "p95Ms": 76,
+        "p99Ms": 103,
+        "maxMs": 177,
+        "over50ms": 122
+      },
+      "dispatcherIntervalsAll": {
+        "count": 5635,
+        "meanMs": 7.351,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 70,
+        "maxMs": 445,
+        "over50ms": 123
+      },
+      "dispatcherIntervalsSteady": {
+        "count": 4860,
+        "meanMs": 7.288,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 70,
+        "maxMs": 106,
+        "over50ms": 106
+      },
+      "steadyDurationSeconds": 35.421,
+      "jobs": {
+        "count": 310,
+        "meanMs": 26.655,
+        "p50Ms": 1,
+        "p95Ms": 72,
+        "p99Ms": 91,
+        "maxMs": 177,
+        "over50ms": 122
+      },
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 10,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 6379,
+          "sendto": 3,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 3,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "detached": true
+    },
+    "bound-segment": {
+      "evidence": "logs\\high_reuse\\perf-bound-segment-evidence.json",
+      "snapshots": {
+        "count": 126,
+        "meanMs": 31.619,
+        "p50Ms": 30,
+        "p95Ms": 38,
+        "p99Ms": 40,
+        "maxMs": 148,
+        "over50ms": 1
+      },
+      "dispatcherIntervalsAll": {
+        "count": 5764,
+        "meanMs": 6.572,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 34,
+        "maxMs": 386,
+        "over50ms": 2
+      },
+      "dispatcherIntervalsSteady": {
+        "count": 4912,
+        "meanMs": 6.489,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 34,
+        "maxMs": 44,
+        "over50ms": 0
+      },
+      "steadyDurationSeconds": 31.872,
+      "jobs": {
+        "count": 308,
+        "meanMs": 13.062,
+        "p50Ms": 1,
+        "p95Ms": 35,
+        "p99Ms": 39,
+        "maxMs": 148,
+        "over50ms": 1
+      },
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 10,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 6256,
+          "sendto": 3,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 1,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "detached": true
+    },
+    "handles-trace": {
+      "evidence": "logs\\high_reuse\\perf-handles-trace-evidence.json",
+      "snapshots": {
+        "count": 131,
+        "meanMs": 18.13,
+        "p50Ms": 16,
+        "p95Ms": 24,
+        "p99Ms": 53,
+        "maxMs": 137,
+        "over50ms": 2
+      },
+      "dispatcherIntervalsAll": {
+        "count": 6012,
+        "meanMs": 6.279,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 20,
+        "maxMs": 403,
+        "over50ms": 3
+      },
+      "dispatcherIntervalsSteady": {
+        "count": 5129,
+        "meanMs": 6.19,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 20,
+        "maxMs": 36,
+        "over50ms": 0
+      },
+      "steadyDurationSeconds": 31.748,
+      "jobs": {
+        "count": 315,
+        "meanMs": 7.644,
+        "p50Ms": 1,
+        "p95Ms": 21,
+        "p99Ms": 27,
+        "maxMs": 137,
+        "over50ms": 2
+      },
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 10,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 5899,
+          "sendto": 3,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 2,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "detached": true
+    },
+    "handles-trace-verify": {
+      "evidence": "logs\\high_reuse\\perf-handles-trace-verify-evidence.json",
+      "snapshots": {
+        "count": 132,
+        "meanMs": 17.25,
+        "p50Ms": 15,
+        "p95Ms": 23,
+        "p99Ms": 83,
+        "maxMs": 145,
+        "over50ms": 2
+      },
+      "dispatcherIntervalsAll": {
+        "count": 6027,
+        "meanMs": 6.261,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 19,
+        "maxMs": 368,
+        "over50ms": 3
+      },
+      "dispatcherIntervalsSteady": {
+        "count": 5129,
+        "meanMs": 6.185,
+        "p50Ms": 6,
+        "p95Ms": 7,
+        "p99Ms": 19,
+        "maxMs": 86,
+        "over50ms": 1
+      },
+      "steadyDurationSeconds": 31.725,
+      "jobs": {
+        "count": 314,
+        "meanMs": 7.363,
+        "p50Ms": 1,
+        "p95Ms": 20,
+        "p99Ms": 24,
+        "maxMs": 145,
+        "over50ms": 2
+      },
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 10,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 4210,
+          "sendto": 3,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 0,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "detached": true
+    }
+  },
+  "snapshotEquivalence": {
+    "kind": "snapshot-equivalence",
+    "equal": true,
+    "units": 2,
+    "warnings": [],
+    "inputError": null
+  },
+  "originalAi": {
+    "rows": 9,
+    "priorBaselineMatches": true,
+    "twoOptimizedRunsIdentical": true,
+    "errors": []
+  },
+  "excludedDiagnostic": {
+    "path": "logs/high_reuse/perf-cached-segment-evidence.json",
+    "reason": "First segmentation inserted a timer into BattleInputBridge with undefined parts; snapshot input unavailable. Corrected instrumentation in bound-segment. Excluded from comparative conclusions."
+  },
+  "limitations": [
+    "Two-unit duel only; large squads/summons remain to be stress-tested.",
+    "Transient startup/scene-exit spikes remain (all-frame maxima retained); zero >50ms steady intervals is not a claim of zero stalls in all modes.",
+    "Baseline 60s deadline stopped at turn9; improved trials reached native turn10 terminal. No claim of identical baseline wall-time or full hidden RNG states."
+  ],
+  "files": {
+    "tools/runtime_reuse/runtime_api.js": "2141ff11dba6cf6cc883b179b486339d624b9e0a6d60a979c2f655aaed84e8a9",
+    "tools/runtime_reuse/runtime_observer.js": "5582201a2b1862367e5a7ddf39de9c8decc6e52d15a4ef57b0077638e71394fd",
+    "logs/high_reuse/profile_trial.py": "f3e95f150628fb4314904c952a46371eacad9b680f5dbf30e3e3e6a0acedddcb"
+  }
+}
