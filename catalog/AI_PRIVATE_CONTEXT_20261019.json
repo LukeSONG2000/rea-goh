@@ -1,0 +1,25 @@
+{
+  "scope": "Private native AI infrastructure assembly; not full prediction isolation",
+  "implementation": {
+    "cloned": ["BattleContext", "BattleAbilityAIController", "BattleTargetingRuleEvaluator"],
+    "privateBindings": ["five original JavaRandom copies", "fresh original BattleUnitControllerListPool", "controller._battleContext", "controller._targetingRuleEvaluator", "evaluator._battleContext"],
+    "stillShared": ["units and stat/effect controllers", "game data and decision tree", "targeting tactic", "remaining BattleContext services and pools"],
+    "readyForEvaluation": false,
+    "lifetime": "Retain clones and owned dependencies; release all on disposal or partial construction failure"
+  },
+  "liveEvidence": "logs/high_reuse/trial-20261019-023217-822-evidence.json",
+  "baseline": "logs/high_reuse/trial-20261019-022641-862-evidence.json",
+  "live": {
+    "privateBindings": true,
+    "originalReferencesAndSeedsUnchanged": true,
+    "allOriginalAiRowsAndSeedsEqualBaseline": true,
+    "decisionGraphsEqualBaseline": true,
+    "traceErrors": [],
+    "nativeTerminal": true,
+    "serviceCalls": 0,
+    "homeGuardDefinitionsGcCleanup": true,
+    "restoredDisplayHost": 10672
+  },
+  "tests": ["original object writes rejected by test harness", "foreign evaluator identity rejected", "partial field-binding failure releases all handles", "pool and random regression", "graph and priority regression", "turn-order double-run identical hashes"],
+  "limitations": ["No extra AI evaluation invoked", "No transitive heap-isolation claim", "readyForEvaluation flag describes status, not a security boundary; callers must not evaluate until remaining dependencies are isolated or proven read-only"]
+}

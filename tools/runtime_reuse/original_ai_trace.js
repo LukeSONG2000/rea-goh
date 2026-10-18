@@ -32,6 +32,7 @@ globalThis.copyOriginalAIRandomStreams=context=>{
   }
  }catch(error){dispose();throw error;}
  return {dispose,state(){requireOpen();return Object.fromEntries(names.map(n=>[n,String(R.readValue(streams[n],'_seed','i64'))]));},
+  stream(name){requireOpen();if(!Object.hasOwn(streams,name))throw Error('Invalid private random stream');return streams[name];},
   nextInt(name,bound){requireOpen();if(!Object.hasOwn(streams,name)||!Number.isInteger(bound)||bound<1||bound>2147483647)throw Error('Invalid private random draw');return R.unbox(S.invoke('JavaRandom','nextInt',streams[name],[R.arg.value('i32',bound)]),'i32');}};
 };
 
@@ -100,6 +101,54 @@ globalThis.verifyOriginalAITargetPool=context=>{
   return {originalUnchanged,reuseConfirmed,empty,capacity:privatePool.capacity,scope:'Original private pool borrow/return only; not AI prediction'};
  }finally{privatePool?.dispose();}
 };
+// Infrastructure only: units, stat calculators, game data and other context
+// services remain shared. Do not evaluate this controller until audited.
+globalThis.createOriginalAIInfrastructure=sourceController=>{
+ const R=RuntimeApi,S=SceneApi,handles=[];let random,pool,disposed=false;
+ const source=R.readRef(sourceController,'_battleContext');
+ const sourceEvaluator=R.readRef(sourceController,'_targetingRuleEvaluator');
+ if(source.isNull()||sourceEvaluator.isNull()||!R.readRef(sourceEvaluator,'_battleContext').equals(source))throw Error('AI evaluator/context identity mismatch');
+ function clone(p){const q=S.invoke('System.Object','MemberwiseClone',p);
+  if(q.isNull()||q.equals(p)||!R.classOf(q).equals(R.classOf(p)))throw Error('Independent same-type clone required');
+  handles.push(R.retain(q));return q;}
+ function dispose(){if(disposed)return;disposed=true;
+  try{pool?.dispose();}finally{try{random?.dispose();}finally{for(const h of handles)R.release(h);}}}
+ try{
+  const context=clone(source),controller=clone(sourceController),evaluator=clone(sourceEvaluator);
+  random=copyOriginalAIRandomStreams(source);pool=createOriginalAITargetPool(source);
+  for(const name of Object.keys(random.state()))R.writeRef(context,'<'+name+'>k__BackingField',random.stream(name));
+  R.writeRef(context,'BattleUnitControllerListPool',pool.pool);
+  R.writeRef(evaluator,'_battleContext',context);
+  R.writeRef(controller,'_battleContext',context);
+  R.writeRef(controller,'_targetingRuleEvaluator',evaluator);
+  return {context,controller,evaluator,random,pool,dispose,readyForEvaluation:false};
+ }catch(e){dispose();throw e;}
+};
+globalThis.verifyOriginalAIInfrastructure=sourceController=>{
+ const R=RuntimeApi,source=R.readRef(sourceController,'_battleContext');
+ const evaluator=R.readRef(sourceController,'_targetingRuleEvaluator');
+ const pool=R.readRef(source,'BattleUnitControllerListPool'),before=readOriginalAIRandomState(source);
+ const names=Object.keys(before),originalStreams=names.map(n=>R.readRef(source,'<'+n+'>k__BackingField'));
+ let copy;
+ try{
+  copy=createOriginalAIInfrastructure(sourceController);
+  const privateBindings=R.readRef(copy.controller,'_battleContext').equals(copy.context)&&
+   R.readRef(copy.controller,'_targetingRuleEvaluator').equals(copy.evaluator)&&
+   R.readRef(copy.evaluator,'_battleContext').equals(copy.context)&&
+   R.readRef(copy.context,'BattleUnitControllerListPool').equals(copy.pool.pool)&&
+   names.every((n,i)=>!R.readRef(copy.context,'<'+n+'>k__BackingField').equals(originalStreams[i]));
+  for(const n of names)copy.random.nextInt(n,100);
+  const list=copy.pool.borrow();copy.pool.giveBack(list);
+  const originalUnchanged=JSON.stringify(before)===JSON.stringify(readOriginalAIRandomState(source))&&
+   R.readRef(sourceController,'_battleContext').equals(source)&&
+   R.readRef(sourceController,'_targetingRuleEvaluator').equals(evaluator)&&
+   R.readRef(evaluator,'_battleContext').equals(source)&&
+   R.readRef(source,'BattleUnitControllerListPool').equals(pool)&&
+   names.every((n,i)=>R.readRef(source,'<'+n+'>k__BackingField').equals(originalStreams[i]));
+  if(!privateBindings||!originalUnchanged)throw Error('Private AI infrastructure verification failed');
+  return {privateBindings,originalUnchanged,readyForEvaluation:false,scope:'Private context/RNG/pool/evaluator bindings; remaining services shared; no AI evaluation'};
+ }finally{copy?.dispose();}
+};
 globalThis.readOriginalAITree=tree=>{
  const R=RuntimeApi,S=SceneApi,indices=new Map(),nodes=[];
  const ref=(p,f)=>R.readRef(p,f),value=(p,f,t)=>R.readValue(p,f,t);
@@ -130,7 +179,7 @@ globalThis.readOriginalAITree=tree=>{
 
 globalThis.installOriginalAITrace=context=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg,rows=[],errors=[],hooks=[],active=new Map(),trees=new Map();let serial=0,dropped=0;
- let randomCopyAudit=null,targetPoolAudit=null,auditAttempted=false;
+ let randomCopyAudit=null,targetPoolAudit=null,infrastructureAudit=null,auditAttempted=false;
  const ref=(p,f)=>R.readRef(p,f),text=p=>S.string(p);
  const owns=p=>!p.isNull()&&ref(p,'_battleContext').equals(context);
  const call=(p,n,args=[])=>R.invoke(R.findMethod(R.classOf(p),n,args.length),p,args);
@@ -147,7 +196,7 @@ globalThis.installOriginalAITrace=context=>{
    this.row.randomBefore=readOriginalAIRandomState(context);
    // Streams are initialized by original battle entry, not fixture allocation.
    // Audit at the first real evaluator entry, before its original body runs.
-   if(!auditAttempted){auditAttempted=true;randomCopyAudit=inspect(()=>verifyOriginalAIRandomCopies(context));targetPoolAudit=inspect(()=>verifyOriginalAITargetPool(context));}
+   if(!auditAttempted){auditAttempted=true;randomCopyAudit=inspect(()=>verifyOriginalAIRandomCopies(context));targetPoolAudit=inspect(()=>verifyOriginalAITargetPool(context));infrastructureAudit=inspect(()=>verifyOriginalAIInfrastructure(args[0]));}
    active.set(this.thread,this.row);rows.push(this.row);
    // Native 16A2EC0 reads context.GameDataDomainController._abilityDecisionTreeDO
    // directly, bypassing the GetAbilityDecisionTree call site.
@@ -186,5 +235,5 @@ globalThis.installOriginalAITrace=context=>{
   });}
  });
  let stopped=false;
- return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
+ return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
 };
