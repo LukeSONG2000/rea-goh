@@ -555,11 +555,15 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  if(['CharacterDetailsState','ShipDetailsState'].includes(stateName))result.detail=InventoryBridge.detail(state);
  if(stateName!=='BattleGameState')return result;
  try{result.input=BattleInputBridge.snapshot();}catch(e){result.input={unavailable:true,error:String(e)};}
- const context=R.readRef(R.readRef(state,'_battleController'),'_battleContext');
+ const pending=stage=>({...result,battleReady:false,loadingStage:stage,input:{unavailable:true,reason:'Original battle view is not ready'}});
+ const controller=R.readRef(state,'_battleController');if(controller.isNull())return pending('controller');
+ const context=R.readRef(controller,'_battleContext');if(context.isNull())return pending('context');
  const seen=new Set();
  // Read this battle view's original handles, not every loaded Unity object.
  const view=S.invoke('BattleContext','get_BattleView',context);
+ if(view.isNull())return pending('view');
  const handles=R.readRef(view,'_unitReticles');
+ if(handles.isNull())return pending('reticles');
  const items=R.readRef(handles,'_items'),count=R.readValue(handles,'_size','i32');
  if(count<0||count>256||(items.isNull()?count!==0:count>items.add(24).readU64().toNumber()))throw Error('Battle reticle handle list bounds invalid');
  for(let index=0;index<count;index++){
@@ -571,6 +575,7 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
   seen.add(unit.toString());
   result.units.push({sessionKey:unit.toString(),baseId:S.string(R.readRef(R.readRef(R.readRef(unit,'_unitDO'),'<Definition>k__BackingField'),'BaseId')),attributes:readBattleAttributes(unit),status:readBattleStatus(unit)});
  }
+ result.battleReady=true;
  return result;
 });
 globalThis.inventoryHome=()=>RuntimeApi.runOnMainThreadOnce(()=>{

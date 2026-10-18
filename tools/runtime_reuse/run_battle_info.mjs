@@ -1,4 +1,5 @@
 import {processCommands} from './runtime_commands.mjs';
+import {readSnapshotOrUnavailable} from './runtime_poll.mjs';
 import {acquireRuntimeSession} from './runtime_session_lock.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -104,8 +105,8 @@ try{
     return {...result,transitionConfirmed:confirmed,afterState:after.state,inventory:after.inventory};
    });
    last=await script.exports.status();save();
-   const snapshot=await script.exports.snapshot();
-   fs.writeFileSync(path.join(directory,'runtime-snapshot.json'),JSON.stringify({...snapshot,pid:Number(pid),observedAt:new Date().toISOString()}));}
+   const snapshot=await readSnapshotOrUnavailable(()=>script.exports.snapshot(),Number(pid));
+   fs.writeFileSync(path.join(directory,'runtime-snapshot.json'),JSON.stringify(snapshot));}
  }
  if(!detached){last=await script.exports.stop();save();}
 }finally{
