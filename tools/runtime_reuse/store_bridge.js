@@ -64,7 +64,23 @@ globalThis.StoreBridge=(()=>{
   const buttons=[['single','_singlePurchaseButton'],['singleCentered','_singlePurchaseButtonCentered'],['multiple','_multiPurchaseButton'],['ok','_OKButtonCentered']].map(([slot,f])=>buttonStatus(v,slot,f));
   return {readConfirmed:true,id:str(item,'Id'),title:label('_packTitle'),description:label('_descriptionLabel'),fromTab:R.readValue(v,'_fromLocation','i32'),maxPurchaseAmount:R.readValue(v,'_maxPurchaseAmount','i32'),freeButtonShown:R.readValue(v,'_showFreeBuyButton','bool'),nativeFreePurchase:!!R.unbox(S.invoke('StorePackDetailsView','IsFreePurchase',v),'bool'),giftState:R.readValue(v,'_giftState','i32'),giftable:val(item,'Giftable','bool'),showBuyConfirmation:val(item,'ShowBuyConfirmation','bool'),currentOffer:currentOffer.isNull()?null:offer(currentOffer,formatter),buttons,offers:list(R.readRef(item,field('AllOffers'))).map(o=>offer(o,formatter)),scope:'Original detail display and raw button state; hidden text is not a payable quote, enabled does not authorize purchase'};
  }
+ let submission=null;
  function execute(op,p={}){
+  if(op==='store-claim-status')return {readConfirmed:true,submission,settlementConfirmed:false};
+  if(op==='store-claim-free'){
+   if(submission)throw Error('Prior store submission requires reconciliation');
+   if(typeof p.itemId!=='string'||!p.itemId.length||p.itemId.length>256||p.quantity!==1||p.expectedCost!==0)throw Error('Explicit item, quantity one and zero cost required');
+   const {v,item}=details(),info=detailStatus();
+   if(info.id!==p.itemId||val(item,'ItemType')!==0||info.giftable||info.giftState!==0||!info.nativeFreePurchase||!info.freeButtonShown||info.maxPurchaseAmount<1)throw Error('Current standard free non-gift pack required');
+   // Limit this first execution route to the audited in-game ally-point pack.
+   if(!info.currentOffer||info.currentOffer.currencyType!==5||info.currentOffer.requiresProductPricing)throw Error('Unsupported free store currency route');
+   const visible=info.buttons.filter(b=>b.present&&b.active&&b.targetActive&&['single','singleCentered'].includes(b.slot));
+   if(visible.length!==1||!visible[0].enabled)throw Error('Unique active enabled single-purchase button required');
+   submission={itemId:p.itemId,quantity:1,expectedCost:0,submittedAt:Date.now(),nativeReturned:false,error:null};
+   try{S.invoke('StorePackDetailsView','PurchasePackClicked',v);submission.nativeReturned=true;}
+   catch(e){submission.error=String(e);throw e;}
+   return {claimDispatched:true,submission,settlementConfirmed:false};
+  }
   if(op==='store-list')return status();
   if(op==='store-details')return detailStatus();
   if(op==='store-details-back'){const {c}=details();S.invoke('FixedStoreController','OnBackClickedStoreDetailsView',c);return {navigationDispatched:true};}

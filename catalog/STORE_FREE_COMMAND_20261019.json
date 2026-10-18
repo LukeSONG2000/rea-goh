@@ -1,0 +1,10 @@
+{
+ "operations":["store-claim-free","store-claim-status"],
+ "request":{"itemId":"current store-details.id","quantity":1,"expectedCost":0},
+ "scope":"Original standard non-gift ally-point free pack only; paid/real-money/other currency routes refused",
+ "guards":["Exact current item identity and standard PACK type","Native IsFreePurchase and freeButtonShown both true","Giftable false and giftState zero","Current Offer currency 5 without external product ID","Exactly one visible active enabled single button","Session submission latched before PurchasePackClicked","Exclusive wx/fsync store-free.pending.json before runtime dispatch; retained on exception/restart","No automatic retry or settlement claim"],
+ "tests":["Bridge original callback exactly once and guard rejection PASS","Native exception retains submission PASS","Durable claim visible before callback PASS","Malformed request rejected before durable write PASS","Success/exception then new owner/request refused PASS","Truncated durable record refused PASS","Original result linked by status PASS","Runtime commands/loading and sweep durable regression PASS","CLI/host syntax PASS"],
+ "live":{"pid":32088,"hostPid":5184,"emptyStatusRead":true,"claimExecuted":false},
+ "limitations":["Real free claim not yet exercised","Reward view and inventory settlement reader pending","Durable guard intentionally remains even after a runtime precondition rejection; no automated reconcile/release yet","Only one pending free-store operation allowed across host restarts"],
+ "evidence":["logs/high_reuse/store-free-status-empty.json"]
+}
