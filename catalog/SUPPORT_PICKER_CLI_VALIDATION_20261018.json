@@ -1,0 +1,68 @@
+{
+  "scope": "Native PVE support selection and squad-page navigation; no battle launched",
+  "commands": {
+    "prebattle-supports": "Read current original support rows; playerId is opaque selection identity",
+    "prebattle-support-select": {
+      "request": {
+        "eventId": "current event",
+        "missionId": "current mission",
+        "playerId": "one current support identity"
+      },
+      "callback": "BattleSupportSelectView.OnSelectButtonClicked(System.String)",
+      "confirmation": "Current same-event/mission squad view active and support view no longer active"
+    }
+  },
+  "nativeEvidence": [
+    "logs/high_reuse/native/support_view_selected.c",
+    "logs/high_reuse/native/support_controller_selected.c",
+    "logs/high_reuse/native/prebattle_ally_selected.c"
+  ],
+  "runtime": {
+    "pid": 32088,
+    "hostPid": 7868,
+    "event": "challenge_XP",
+    "mission": "DIFF06",
+    "supportCount": 15,
+    "missionEntryPhase": "support",
+    "afterSelectionPhase": "squad",
+    "backToEvents": true,
+    "finalState": "HomeBaseGameState"
+  },
+  "evidence": [
+    {
+      "path": "logs\\high_reuse\\support-cli-mission.json",
+      "sha256": "7d2b3f371bdaee5013d7cb46050033dbeb0a70be51f2c4730b01c72ea01ac77f"
+    },
+    {
+      "path": "logs\\high_reuse\\support-cli-list-v2.json",
+      "sha256": "aa8d3a3e0803f93a2d143516f1c646dc13fd28a83554561222c9600a5549d9a1"
+    },
+    {
+      "path": "logs\\high_reuse\\support-cli-selected.json",
+      "sha256": "79f526979c9bb47734bc9b8291d7afc7f7cd916b5105e6d968b84591c300c490"
+    },
+    {
+      "path": "logs\\high_reuse\\support-cli-back.json",
+      "sha256": "7574bf0ec1bbb3ae10c9f9119c361c6b5e987a59741e2b1ab1f3258680d4de95"
+    },
+    {
+      "path": "logs\\high_reuse\\support-cli-squad.png",
+      "sha256": "b20123299976701362f6074818cff3927ea203b8911c1ae8673f6c904b81309c"
+    }
+  ],
+  "tests": [
+    "inventory bridge: phase, stale mission, missing/duplicate support, view ownership, original callback PASS",
+    "command mailbox: schema, read acknowledgement, selection acknowledgement and no replay PASS",
+    "runtime loading PASS",
+    "observer/host/CLI syntax PASS"
+  ],
+  "correctedFailures": [
+    "First request rejected before dispatch while new host was starting",
+    "Initial support read returned rows but acknowledgement lacked readConfirmed operation classification; fixed and reread passed"
+  ],
+  "limitations": [
+    "Tested one challenge mission only",
+    "Does not implement support-page cancellation or automatic battle start",
+    "Confirmation verifies original squad-page transition; no separate runtime selected-support identity readback yet"
+  ]
+}

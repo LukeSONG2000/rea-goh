@@ -17,6 +17,9 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const payload of [null,{}, {eventId:'e',missionId:'m',playerId:''},{eventId:'e',missionId:'m',playerId:42}]){
+  const result=await test({operation:'prebattle-support-select',payload});assert.equal(result.dispatched,false);
+ }
  for(const payload of [null,{}, {questId:'q',tab:1,subTab:0},{questId:'',tab:2,subTab:1},{questId:'q',tab:3,subTab:1}]){
   const result=await test({operation:'objectives-claim',payload});assert.equal(result.dispatched,false);
  }
@@ -59,6 +62,8 @@ try{
   ['events-missions',undefined,{readConfirmed:true,missions:[]}],
   ['events-mission-select',{eventId:'event',missionId:'mission'},{transitionConfirmed:true}],
   ['prebattle-back',undefined,{transitionConfirmed:true}],
+  ['prebattle-supports',undefined,{readConfirmed:true,supports:[]}],
+  ['prebattle-support-select',{eventId:'e',missionId:'m',playerId:'p'},{transitionConfirmed:true}],
   ['events-open',{eventId:'event',instanceId:'instance'},{transitionConfirmed:true}],
   ['events-missions-back',undefined,{transitionConfirmed:true}],
   ['objectives-claim-status',undefined,{readConfirmed:true,claims:[]}],

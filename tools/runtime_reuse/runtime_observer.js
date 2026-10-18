@@ -524,17 +524,41 @@ globalThis.EventsBridge=(()=>{
 
 globalThis.PreBattleBridge=(()=>{
  const R=RuntimeApi,S=SceneApi;
+ const active=v=>!v.isNull()&&!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(v)),'bool');
  function current(){
   const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
   if(R.fullName(R.classOf(state))!=='PvePreBattleState')throw Error('PVE prebattle required');
   const controller=R.readRef(state,'_featureController');
-  const view=S.invoke('PreBattleController','get_PreBattleView',controller);
-  if(view.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(view)),'bool'))throw Error('Prebattle view not ready');
+  if(controller.isNull())throw Error('Prebattle controller not ready');
   return controller;
  }
- function status(){try{const c=current(),mission=R.readRef(c,'_campaignMissionIdentifier');return {ready:true,eventId:S.string(R.readRef(c,'_eventId')),instanceId:S.string(R.readRef(c,'_eventInstanceId')),missionId:mission.isNull()?null:S.string(S.invoke('CampaignElementIdentifierDO','get_MissionID',mission))};}catch(error){return {ready:false,error:String(error)};}}
- function back(){const c=current();S.invoke('PreBattleController','HandlePreBattleViewBackClicked',c);return {expectedState:'EventsParentGameState'};}
- return {status,back};
+ function status(){try{
+  const c=current(),mission=R.readRef(c,'_campaignMissionIdentifier');
+  const supportSelectionRequired=active(R.readRef(c,'_battleSupportSelectView'));
+  const ready=!supportSelectionRequired&&active(S.invoke('PreBattleController','get_PreBattleView',c));
+  return {ready,supportSelectionRequired,phase:supportSelectionRequired?'support':ready?'squad':'loading',eventId:S.string(R.readRef(c,'_eventId')),instanceId:S.string(R.readRef(c,'_eventInstanceId')),missionId:mission.isNull()?null:S.string(S.invoke('CampaignElementIdentifierDO','get_MissionID',mission))};
+ }catch(error){return {ready:false,error:String(error)};}}
+ function support(operation,payload){
+  const c=current(),state=status();
+  if(!state.supportSelectionRequired)throw Error('Support selection view required');
+  const view=R.readRef(c,'_battleSupportSelectView'),controller=R.readRef(c,'_battleSupportSelectController');
+  if(controller.isNull()||!view.equals(R.readRef(controller,'_view')))throw Error('Support view ownership mismatch');
+  const list=R.readRef(view,'_battleSupportData');if(list.isNull())throw Error('Support list not ready');
+  const n=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
+  if(n<0||n>2048||(items.isNull()?n!==0:n>items.add(24).readU64().toNumber()))throw Error('Support list bounds invalid');
+  const rows=Array.from({length:n},(_,i)=>items.add(32+8*i).readPointer());
+  const str=(r,k)=>S.string(R.readRef(r,'<'+k+'>k__BackingField'));
+  if(operation==='prebattle-supports')return {...state,readConfirmed:true,supports:rows.map(r=>({playerId:str(r,'PlayerId'),unitName:str(r,'UnitName'),supportTitle:str(r,'SupportTitle'),isAlly:!!R.readValue(r,'<IsAlly>k__BackingField','bool')}))};
+  if(operation!=='prebattle-support-select')throw Error('Unsupported support operation');
+  if(!payload||['eventId','missionId','playerId'].some(k=>typeof payload[k]!=='string'||!payload[k].length||payload[k].length>256))throw Error('Support and mission identity required');
+  if(payload.eventId!==state.eventId||payload.missionId!==state.missionId)throw Error('Current mission changed');
+  const matches=rows.filter(r=>str(r,'PlayerId')===payload.playerId);
+  if(matches.length!==1)throw Error('Expected unique current support');
+  S.invoke('BattleSupportSelectView','OnSelectButtonClicked',view,[R.arg.ref(R.readRef(matches[0],'<PlayerId>k__BackingField'))],['System.String']);
+  return {expectedState:'PvePreBattleState',eventId:state.eventId,missionId:state.missionId,supportSelectionDispatched:true};
+ }
+ function back(){const c=current();if(!status().ready)throw Error('Prebattle view not ready');S.invoke('PreBattleController','HandlePreBattleViewBackClicked',c);return {expectedState:'EventsParentGameState'};}
+ return {status,back,support};
 })();
 
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
@@ -651,3 +675,4 @@ rpc.exports.questclaimdispose=()=>RuntimeApi.runOnMainThreadOnce(()=>QuestClaimT
 rpc.exports.eventscommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>EventsBridge.execute(operation,payload));
 
 rpc.exports.prebattleback=()=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.back());
+rpc.exports.prebattlesupport=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.support(operation,payload));
