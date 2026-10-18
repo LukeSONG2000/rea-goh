@@ -35,13 +35,13 @@ try{
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
-    if(operation.startsWith('objectives-')){
+    if(operation==='events-back'||operation.startsWith('objectives-')){
      const result=await script.exports.objectivescommand(operation,payload);
      if(['objectives-claim-status','objectives-list','objectives-claim'].includes(operation))return result;
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
-      confirmed=after.state===result.expectedState&&(operation==='objectives-home'||after.objectives?.ready===true)&&(result.tab===undefined||(after.objectives?.tab===result.tab&&after.objectives?.subTab===result.subTab));
+      confirmed=operation==='events-back'?(after.state!==result.fromState&&after.state!=='Transitioning'):after.state===result.expectedState&&(['objectives-home','objectives-go','events-back'].includes(operation)||after.objectives?.ready===true)&&(result.tab===undefined||(after.objectives?.tab===result.tab&&after.objectives?.subTab===result.subTab));
       if(confirmed)break;
      }
      return {...result,transitionConfirmed:confirmed,afterState:after.state};

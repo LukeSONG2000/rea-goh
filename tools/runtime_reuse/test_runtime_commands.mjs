@@ -53,6 +53,8 @@ try{
  }
  for(const [operation,payload,result] of [
   ['objectives-open',undefined,{transitionConfirmed:true}],
+  ['objectives-go',{questId:'q',tab:2,subTab:1},{transitionConfirmed:true}],
+  ['events-back',undefined,{transitionConfirmed:true}],
   ['objectives-claim-status',undefined,{readConfirmed:true,claims:[]}],
   ['objectives-claim',{questId:'q',tab:2,subTab:1},{claimDispatched:true,rewardConfirmed:false}],
   ['objectives-achievements',undefined,{transitionConfirmed:true}],

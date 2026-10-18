@@ -156,6 +156,7 @@ assert.throws(()=>objectives.execute('objectives-list'),/Objectives page/);
 const quest=obj('QuestSlatRenderData',{'<Id>k__BackingField':'daily-test','<Description>k__BackingField':'Original quest',
  '<ProgressText>k__BackingField':'3/3','<CurrentProgress>k__BackingField':3,'<TargetProgress>k__BackingField':3,
  '<ReadyForClaim>k__BackingField':true,'<ClaimDisabled>k__BackingField':true,'<ClaimDisabledMessageKey>k__BackingField':'LOCKED'});
+quest.fields['<ActionLink>k__BackingField']=nil;quest.fields['<HasLink>k__BackingField']=false;
 const dailyData=obj('Data',{ActiveQuests:list([quest]),TotalQuests:1,CompletedQuests:0,AllDailiesClaimable:false,AllDailiesCompleted:false});
 const objectiveController=obj('ObjectivesController',{_view:obj('ObjectivesView'),_dailyQuestSubController:obj('Sub',{_renderData:dailyData,_dailyQuestSubView:obj('DailyView')})});
 state=obj('ObjectivesGameState',{_objectivesController:objectiveController});
@@ -208,4 +209,14 @@ assert.throws(()=>objectives.execute('objectives-claim',{questId:'other',tab:2,s
 const failureInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>{if(method==='HandleClaimButtonClicked')throw Error('uncertain native failure');return failureInvoke(type,method,owner,args,types);};
 assert.throws(()=>objectives.execute('objectives-claim',{questId:'other',tab:2,subTab:1}),/uncertain native failure/);
 assert.throws(()=>objectives.execute('objectives-claim',{questId:'other',tab:2,subTab:1}),/already submitted/);
+const goRequest={questId:'other',tab:2,subTab:1};
+assert.throws(()=>objectives.execute('objectives-go',goRequest),/verified internal/);
+const questLink=obj('ActionLinkDO',{'<ActionLinkType>k__BackingField':0,'<Location>k__BackingField':23});
+quest.fields['<ActionLink>k__BackingField']=questLink;quest.fields['<HasLink>k__BackingField']=true;
+const goInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='IsValid'?true:goInvoke(type,method,owner,args,types);
+assert.equal(objectives.execute('objectives-go',goRequest).expectedState,'EventsParentGameState');assert.equal(calls.at(-1).method,'HandleGoButtonClicked');assert.equal(calls.at(-1).args[0].value,questLink);
+questLink.fields['<ActionLinkType>k__BackingField']=1;assert.throws(()=>objectives.execute('objectives-go',goRequest),/verified internal/);
+questLink.fields['<ActionLinkType>k__BackingField']=0;questLink.fields['<Location>k__BackingField']=59;assert.throws(()=>objectives.execute('objectives-go',goRequest),/verified internal/);
+const eventController=obj('EventsParentController');state=obj('EventsParentGameState',{_eventsParentController:eventController});
+objectives.execute('events-back');assert.equal(calls.at(-1).object,eventController);
 console.log('PASS inventory, inbox, objectives bridges: original callbacks, live fields and guards.');

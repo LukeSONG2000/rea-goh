@@ -359,6 +359,11 @@ globalThis.ObjectivesBridge=(()=>{
   return {controller,objectives};
  }
  function execute(operation,payload){
+  if(operation==='events-back'){
+   const current=state();if(R.fullName(R.classOf(current))!=='EventsParentGameState')throw Error('Events page required');
+   S.invoke('FeatureController','OnBackButtonClicked',R.readRef(current,'_eventsParentController'));
+   return {fromState:'EventsParentGameState',backDispatched:true};
+  }
   if(operation==='objectives-claim-status')return QuestClaimTracker.status();
   if(operation==='objectives-open'){
    const current=state();if(R.fullName(R.classOf(current))!=='HomeBaseGameState')throw Error('Open objectives from Home');
@@ -380,7 +385,7 @@ globalThis.ObjectivesBridge=(()=>{
    S.invoke('ObjectivesView','TabClicked',live.objectives,[R.arg.value('i64',R.unbox(location,'i64')),R.arg.ref(null)]);
    return {expectedState:'ObjectivesGameState',tab,subTab};
   }
-  if(!['objectives-list','objectives-claim'].includes(operation))throw Error('Unsupported objectives command');
+  if(!['objectives-list','objectives-claim','objectives-go'].includes(operation))throw Error('Unsupported objectives command');
   const tab=R.readValue(live.controller,'_currentTabType','i32'),subTab=R.readValue(live.controller,'_currentSubTabType','i32');
   const achievements=tab===3;
   if(!achievements&&(tab!==2||subTab!==1))throw Error('Current objectives tab is not supported for reading');
@@ -395,17 +400,27 @@ globalThis.ObjectivesBridge=(()=>{
    const row=items.add(32+i*8).readPointer();rows.push(row);
    const text=name=>S.string(R.readRef(row,'<'+name+'>k__BackingField'));
    const value=(name,type)=>R.readValue(row,'<'+name+'>k__BackingField',type);
-   quests.push({id:text('Id'),description:text('Description'),progressText:text('ProgressText'),
+   const link=R.readRef(row,'<ActionLink>k__BackingField');
+   const actionLink=link.isNull()?null:{type:R.readValue(link,'<ActionLinkType>k__BackingField','i32'),location:R.readValue(link,'<Location>k__BackingField','i32')};
+   quests.push({hasLink:!!value('HasLink','bool'),actionLink,id:text('Id'),description:text('Description'),progressText:text('ProgressText'),
     currentProgress:String(value('CurrentProgress','i64')),targetProgress:String(value('TargetProgress','i64')),
     readyForClaim:!!value('ReadyForClaim','bool'),claimDisabled:!!value('ClaimDisabled','bool'),
     claimDisabledMessageKey:text('ClaimDisabledMessageKey'),
     claimRequirementMet:!!R.unbox(S.invoke('QuestSlatRenderData','get_ClaimRequirementMet',row),'bool')});
   }
-  if(operation==='objectives-claim'){
+  if(['objectives-claim','objectives-go'].includes(operation)){
    if(typeof payload?.questId!=='string'||!payload.questId.length||payload.questId.length>256||payload.tab!==tab||payload.subTab!==subTab)throw Error('Claim request must match current objectives tab and quest ID');
    const matches=quests.map((q,i)=>({q,i})).filter(x=>x.q.id===payload.questId);
    if(matches.length!==1)throw Error('Claim requires a unique current quest');
    const {q,i}=matches[0];
+   if(operation==='objectives-go'){
+    if(!q.hasLink||q.actionLink?.type!==0||![12,23,35].includes(q.actionLink.location))throw Error('Quest link is not a verified internal event navigation');
+    if(R.readValue(sub,'_wasShutDown','bool')||!R.readRef(sub,'_transitionToken').isNull())throw Error('Original quest controller is busy or shut down');
+    const link=R.readRef(rows[i],'<ActionLink>k__BackingField');
+    if(!R.unbox(S.invoke('ActionLinkDO','IsValid',link),'bool'))throw Error('Original quest link invalid');
+    S.invoke(achievements?'ObjectivesAchievementsSubController':'ObjectivesDailyQuestSubController','HandleGoButtonClicked',sub,[R.arg.ref(link)],['ActionLinkDO']);
+    return {expectedState:'EventsParentGameState',questId:q.id,location:q.actionLink.location};
+   }
    if(!q.readyForClaim||q.claimDisabled||!q.claimRequirementMet)throw Error('Original quest is not eligible for claim');
    if(R.readValue(sub,'_wasShutDown','bool')||!R.readRef(sub,'_transitionToken').isNull())throw Error('Original quest controller is busy or shut down');
    const key=JSON.stringify([tab,subTab,q.id]);

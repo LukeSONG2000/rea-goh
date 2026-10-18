@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original task Go navigation to event/challenge state; no battle or sweep yet",
+  "nativeEvidence": {
+    "dailyGo": "0x187FE80 checks original link validity and calls DeepLinkHandler.TransitionTo",
+    "achievementGo": "0x1876FF0",
+    "dispatcher": "0x15C6310 cases 12/23/35 call 0x15CA640 with event screen modes 1/2/4",
+    "eventTransition": "0x15CA640 retains original feature checks, then EventsNavigationController.EnterEventsState (0x15E7490/0x15E75E0)",
+    "provider": "Local read-only PyGhidra project, closed without saving"
+  },
+  "live": {
+    "pid": 32088,
+    "hostPid": 32908,
+    "navigation": {
+      "expectedState": "EventsParentGameState",
+      "questId": "daily_complete_challenge_battle_level_85",
+      "location": 23,
+      "transitionConfirmed": true,
+      "afterState": "EventsParentGameState"
+    },
+    "back": {
+      "fromState": "EventsParentGameState",
+      "backDispatched": true,
+      "transitionConfirmed": true,
+      "afterState": "ObjectivesGameState"
+    },
+    "finalState": "HomeBaseGameState",
+    "unsupportedStoreDestinationRejected": true
+  },
+  "correction": {
+    "initial": "Assumed original Events Back returned Home; observed Objectives instead and receipt correctly failed",
+    "fixed": "Renamed interface events-back, confirm actual departure from events state; native callbacks unchanged"
+  },
+  "validation": [
+    "Exact task identity, active subview and unique ID",
+    "Original ActionLink object passed to original Go handler",
+    "External/unverified destinations rejected",
+    "Mailbox navigation receipt tests",
+    "Claim tracker and bridge regressions plus syntax checks"
+  ],
+  "limitations": [
+    "Only character challenge link live-tested; event and ship challenge routes have native evidence only",
+    "Entering event state does not prove challenge list loaded or battle complete",
+    "No resource-consuming action or real reward claim performed"
+  ]
+}

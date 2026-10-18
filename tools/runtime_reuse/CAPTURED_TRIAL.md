@@ -268,3 +268,16 @@ Records are saved to `logs/high_reuse/quest-claims-<host PID>.json` on orderly h
 shutdown; native hooks and retained callback objects are released. A new session
 does not merge old records or reinterpret pending claims as failures.
 
+`objectives-go --pid <PID> --request <JSON file>` uses the same
+`questId/tab/subTab` identity as claim. It rereads the current task's original
+ActionLink, requires HasLink and original IsValid, and invokes the original
+HandleGoButtonClicked. Current supported destinations are internal EVENTS (12),
+TRIALS (23), SHIP_TRIALS (35), whose native route opens EventsParentGameState.
+Other destinations and external links are rejected; the command does not start
+a battle, sweep, purchase, or apply equipment. The task list now exposes hasLink
+and actionLink type/location without raw URLs or link parameters.
+`events-back --pid <PID>` invokes the original Events Back callback and reports
+the resulting state. It follows the original navigation history: entering from
+Objectives returned to Objectives in live validation, then objectives-home
+returned to the cantina. Event-state confirmation is not subview render validation.
+
