@@ -461,3 +461,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 sweep-durable】认领扫荡跨host持久提交防重及回执关联，root独占runtime_commands/tests；纯本地mock，不消费。
 
 【Codex/root 2026-10-19 sweep-durable implemented】runtime_commands在confirm原生分发前wx+fsync持久pending，不随异常/重启/新UUID消失；receipt关联原command result，畸形关卡/数量/资源先拒绝。纯本地mock成功/异常后新host拒绝、写入中断记录拒绝、原调用前已有记录、回执关联PASS；commands/campaign/loading回归PASS。普通host428已加载，实机空receipt读成功，无真实pending文件/消费。报告SWEEP_DURABLE_20261019.json。仍待明确消费授权；结算后解除保护生命周期未实现，不删除记录以重试。
+【Codex/root 2026-10-19 sweep-rewards】认领扫荡控制器所属奖励视图只读明细，root独占runtime/tests；不确认扫荡。
