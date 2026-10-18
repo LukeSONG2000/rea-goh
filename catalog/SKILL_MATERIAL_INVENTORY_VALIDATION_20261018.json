@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-18",
+  "skillId": "basicskill_VADER",
+  "materials": [
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_A",
+      "label": "16307/3",
+      "quantityRaw": 3,
+      "ownedQuantity": 16307
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_B",
+      "label": "16091/4",
+      "quantityRaw": 4,
+      "ownedQuantity": 16091
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_A",
+      "label": "16307/4",
+      "quantityRaw": 4,
+      "ownedQuantity": 16307
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_C",
+      "label": "11792/4",
+      "quantityRaw": 4,
+      "ownedQuantity": 11792
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_B",
+      "label": "16091/5",
+      "quantityRaw": 5,
+      "ownedQuantity": 16091
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_A",
+      "label": "16307/5",
+      "quantityRaw": 5,
+      "ownedQuantity": 16307
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_B",
+      "label": "16091/7",
+      "quantityRaw": 7,
+      "ownedQuantity": 16091
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_A",
+      "label": "16307/7",
+      "quantityRaw": 7,
+      "ownedQuantity": 16307
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_C",
+      "label": "11792/5",
+      "quantityRaw": 5,
+      "ownedQuantity": 11792
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_A",
+      "label": "16307/10",
+      "quantityRaw": 10,
+      "ownedQuantity": 16307
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_B",
+      "label": "16091/9",
+      "quantityRaw": 9,
+      "ownedQuantity": 16091
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_C",
+      "label": "11792/6",
+      "quantityRaw": 6,
+      "ownedQuantity": 11792
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_A",
+      "label": "16307/16",
+      "quantityRaw": 16,
+      "ownedQuantity": 16307
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_B",
+      "label": "16091/13",
+      "quantityRaw": 13,
+      "ownedQuantity": 16091
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_C",
+      "label": "11792/9",
+      "quantityRaw": 9,
+      "ownedQuantity": 11792
+    },
+    {
+      "itemType": 7,
+      "renderType": "MaterialsItemRenderData",
+      "id": "ability_mat_D",
+      "label": "275/5",
+      "quantityRaw": 5,
+      "ownedQuantity": 275
+    }
+  ],
+  "validation": "Original InventoryDomainController.GetCraftingMaterialQuantity(System.String) equals every sampled original UI label numerator",
+  "finalState": "HomeBaseGameState",
+  "tests": [
+    "live 4 distinct material IDs",
+    "mock zero stock/live change/non-material null",
+    "existing navigation and mailbox regressions"
+  ],
+  "limitations": [
+    "No complete actionable upgrade quote",
+    "Other item types return unknown ownedQuantity",
+    "No purchase or upgrade executed"
+  ]
+}

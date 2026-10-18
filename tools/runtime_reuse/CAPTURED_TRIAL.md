@@ -215,3 +215,4 @@ basic and Ghost crew skill multi-level popups; single-level popup behavior is
 implemented but not yet live-validated.
 多级弹窗 `detail.skillPopup.levels` 和 `selectedLevel` 提供原等级文本、描述、冷却、条件锁定、upgradeStatus/upgradeAvailable及货币费用枚举。`tier`仍为内部值；已获得等级的费用只是UI配方值，不代表下一次可购买报价。材料列表尚未解码，所有等级明确返回 `costComplete:false`，不能据此批准完整消费。
 等级对象新增 `materials`：原 itemType/renderType/id/label/quantityRaw。RecipeData 是值类型 KeyValuePair 列表，使用原 get_Item 装箱读取，不能当对象指针数组。维达普攻各等级 quantityRaw 与原 label 的需求分母吻合；尚未独立核对库存持有数，继续保留 costComplete:false。
+材料条目 `ownedQuantity` 现直接调用原 InventoryDomainController.GetCraftingMaterialQuantity(string) 实时读取，仅对原 MATERIAL 类型有效。其他类型返回 null，读取异常返回 inventoryError；零表示确实读到零，不表示未知。原 UI label 与库存交叉验证通过不等于当前等级可升级，仍应读取原 upgradeAvailable 与解锁条件。

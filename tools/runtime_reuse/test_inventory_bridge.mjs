@@ -88,7 +88,15 @@ R.findMethod=(klass,name,arity)=>{assert.equal(klass,'Recipe');assert.equal(name
 R.arg.value=(kind,value)=>({kind,value});
 R.invoke=(method,owner,args)=>{assert.equal(method,'recipe-indexer');assert.equal(owner,recipe);assert.equal(args[0].value,0);return pair;};
 level.fields['<RecipeData>k__BackingField']=recipe;
+const invokeBeforeInventory=S.invoke;let ownedQuantity=17;
+S.invoke=(type,method,owner,args,types)=>{
+ if(method==='GetCraftingMaterialQuantity'){assert.equal(owner,inventory);assert.equal(args[0].value,'ability_mat_A');assert.equal(types[0],'System.String');return ownedQuantity;}
+ return invokeBeforeInventory(type,method,owner,args,types);
+};
 assert.equal(bridge.detail(state).skillPopup.selectedLevel.materials[0].id,'ability_mat_A');
+assert.equal(bridge.detail(state).skillPopup.selectedLevel.materials[0].ownedQuantity,17);
+ownedQuantity=0;assert.equal(bridge.detail(state).skillPopup.selectedLevel.materials[0].ownedQuantity,0,'zero stock is a live value');
+pair.fields.key=2;assert.equal(bridge.detail(state).skillPopup.selectedLevel.materials[0].ownedQuantity,null,'other item types are not material stock');pair.fields.key=7;
 assert.equal(bridge.detail(state).skillPopup.selectedLevel.materials[0].quantityRaw,3);
 material.fields['<Quantity>k__BackingField']=4;assert.equal(bridge.detail(state).skillPopup.selectedLevel.materials[0].quantityRaw,4);
 recipe.fields._size=129;assert.match(bridge.detail(state).skillPopupError,/recipe bound/);recipe.fields._size=1;

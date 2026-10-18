@@ -91,9 +91,15 @@ globalThis.InventoryBridge=(()=>{
   for(let i=0;i<count;i++){
    const pair=R.invoke(get,recipe,[R.arg.value('i32',i)]),tile=R.readRef(pair,'value');
    if(tile.isNull())throw Error('Null skill recipe tile');
-   rows.push({itemType:R.readValue(pair,'key','u8'),renderType:R.fullName(R.classOf(tile)),
-    id:S.string(R.readRef(tile,'ID')),label:S.string(R.readRef(tile,'<LabelString>k__BackingField')),
-    quantityRaw:R.readValue(tile,'<Quantity>k__BackingField','i32')});
+   const itemType=R.readValue(pair,'key','u8'),id=R.readRef(tile,'ID');
+   const row={itemType,renderType:R.fullName(R.classOf(tile)),
+    id:S.string(id),label:S.string(R.readRef(tile,'<LabelString>k__BackingField')),
+    quantityRaw:R.readValue(tile,'<Quantity>k__BackingField','i32'),ownedQuantity:null};
+   // ItemTypeEnum.MATERIAL. Other recipe item types require their own inventory getter.
+   if(itemType===7)try{
+    row.ownedQuantity=R.unbox(S.invoke('InventoryDomainController','GetCraftingMaterialQuantity',R.findBound('InventoryDomainController'),[R.arg.ref(id)],['System.String']),'i32');
+   }catch(error){row.inventoryError=String(error);}
+   rows.push(row);
   }
   return rows;
  }
