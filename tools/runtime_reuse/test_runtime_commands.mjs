@@ -28,6 +28,7 @@ try{
   const result=await test({operation:'prebattle-support-select',payload});assert.equal(result.dispatched,false);
  }
  const campaignPayload={eventId:null,missionId:'Mi01',playerId:'p',missionIdentity:{CampaignID:'C01L',MapID:'M01',NodeID:'N01',MissionID:'Mi01',Difficulty:1}};
+ for(const payload of [undefined,{}, {missionIdentity:{...campaignPayload.missionIdentity,Difficulty:-1}}, {missionIdentity:{...campaignPayload.missionIdentity,NodeID:''}}])assert.equal((await test({operation:'campaign-prebattle',payload})).dispatched,false);
  assert.equal((await test({operation:'prebattle-support-select',payload:campaignPayload})).ok,true);
  for(const missionIdentity of [undefined,{}, {...campaignPayload.missionIdentity,MapID:''},{...campaignPayload.missionIdentity,Difficulty:256},{...campaignPayload.missionIdentity,MissionID:'Mi02'}]){
   assert.equal((await test({operation:'prebattle-support-select',payload:{...campaignPayload,missionIdentity}})).dispatched,false);
@@ -71,6 +72,8 @@ try{
   ['objectives-open',undefined,{transitionConfirmed:true}],
   ['objectives-go',{questId:'q',tab:2,subTab:1},{transitionConfirmed:true}],
   ['events-back',undefined,{transitionConfirmed:true}],
+  ['campaign-mission',undefined,{readConfirmed:true}],
+  ['campaign-prebattle',{missionIdentity:campaignPayload.missionIdentity},{transitionConfirmed:true}],
   ['events-list',undefined,{readConfirmed:true,events:[]}],
   ['events-missions',undefined,{readConfirmed:true,missions:[]}],
   ['events-mission-select',{eventId:'event',missionId:'mission'},{transitionConfirmed:true}],

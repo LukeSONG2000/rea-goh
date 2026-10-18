@@ -85,6 +85,17 @@ try{
     if(operation==='battle-cancel')return await script.exports.battlecancel(payload);
     if(operation==='battle-unit')return await script.exports.battleunit(payload);
     if(operation==='battle-target')return await script.exports.battletarget(payload);
+    if(['campaign-mission','campaign-prebattle'].includes(operation)){
+     const result=await script.exports.campaignmission(operation,payload);
+     if(operation==='campaign-mission')return result;
+     let after,confirmed=false;
+     for(let i=0;i<30;i++){
+      await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
+      confirmed=after.state===result.expectedState&&(after.prebattle?.ready||after.prebattle?.supportSelectionRequired)&&['CampaignID','MapID','NodeID','MissionID','Difficulty'].every(k=>after.prebattle.missionIdentity?.[k]===result.expectedMissionIdentity[k]);
+      if(confirmed)break;
+     }
+     return {...result,transitionConfirmed:!!confirmed,afterState:after.state,prebattle:after.prebattle};
+    }
     if(operation.startsWith('campaign-')){
      const result=await script.exports.campaignnavigate(operation,payload);let after,confirmed=false;
      for(let i=0;i<10;i++){

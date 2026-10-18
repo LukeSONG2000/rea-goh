@@ -400,3 +400,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 campaign-squad-cli validated】prebattle-remove/add兼容普通战役null eventId，强制完整关卡键，与支援共用native requireMission；host回读带完整missionIdentity与slot/unit核对。光明1-A真实第1槽HERMITYODA移除→null→原InventoryUnitTapped加回，wholeSquadRestored/supportRestored均true，未开战/消费。原support/mandatory/重复/empty-slot/所属view守卫保留。桥接各键错配/命令层畸形拒绝/回读及loading测试PASS，syntax/diff PASS。报告CAMPAIGN_SQUAD_CLI_20261018.json；回Home，原32088普通host22088。地图关卡选择仍需原UI一次点击，待封装。
 
 【Codex/root 2026-10-18 campaign-mission-cli】认领原地图关卡详情到选队CLI，root独占只读Ghidra及运行时接口；仅原选择回调，不扫荡/刷新/购买/线上开战。
+
+【Codex/root 2026-10-18 campaign-mission-cli end-to-end】新增campaign-mission读取当前详情与按钮/锁/允许单位；campaign-prebattle五键匹配+活动view与mission对象一致后调用原MissionDetailsController.HandleOnSelectMissionClicked，原要求检查及PvePreBattle过渡保留。只读Ghidra核1ace9d0/1acf590并关闭。实机错Node=N02拒绝，正确进入support并全键回读；随后全CLI选COMMANDERLUKESKYWALKER支援→无Inventory参数CurrentSelection试玩，原terminal/turn5/serviceCalls0，六名当前队员实际读到，Home/guard/定义表/GC清理无错。证据trial-20261018-231934-707，本轮零computer use。新桥接/命令层/身份回读/加载及syntax/diff测试PASS。普通host33184、原32088/Home。报告CAMPAIGN_MISSION_CLI_20261018.json；当前详情关卡可进入，任意地图/难度/节点切换仍待接口，不宣称任意未捕获战斗可试玩。

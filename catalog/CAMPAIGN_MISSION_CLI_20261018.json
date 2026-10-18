@@ -1,0 +1,47 @@
+{
+  "scope": "Current original map mission detail to prebattle, then end-to-end current-selection trial via CLI",
+  "commands": {
+    "campaign-mission": "Read current detail's full missionIdentity, lock, enabled and allowed-unit state",
+    "campaign-prebattle": "Request {missionIdentity: <campaign-mission result>}; invoke original selected mission callback and confirm exact prebattle destination"
+  },
+  "nativeEvidence": {
+    "callback": "MissionDetailsController.HandleOnSelectMissionClicked RVA 0x1ACE9D0",
+    "path": "Original campaign requirement check then original transition to PvePreBattleState; not combat start",
+    "files": ["logs/high_reuse/native/mission_select_clicked.c", "logs/high_reuse/native/mission_enter_prebattle.c"],
+    "ghidra": "read-only existing project, closed without save"
+  },
+  "liveValidation": {
+    "mission": "C01L/M01/N01/Mi01 difficulty 1",
+    "wrongNodeRejected": true,
+    "supportStepConfirmed": true,
+    "support": "COMMANDERLUKESKYWALKER",
+    "currentSelectionTrial": "logs/high_reuse/trial-20261018-231934-707-evidence.json",
+    "inventoryFileRequiredOrUsed": false,
+    "observedPlayerUnits": ["ZEBS3","LUTHENRAEL","MONMOTHMA","GENERALSKYWALKER","COMMANDERLUKESKYWALKER","HERMITYODA"],
+    "terminal": true,
+    "turns": 5,
+    "battleServiceCalls": 0,
+    "cleanup": "Home, original definitions, socket guard and GC restored; no errors",
+    "computerUseThisRun": false,
+    "restoredHostPid": 33184,
+    "gamePid": 32088
+  },
+  "evidence": [
+    "logs/high_reuse/campaign-mission-current.json",
+    "logs/high_reuse/campaign-prebattle-rejected.json",
+    "logs/high_reuse/campaign-prebattle-entered.json",
+    "logs/high_reuse/campaign-mission-selected.json"
+  ],
+  "tests": [
+    "test_campaign_mission.mjs PASS: full identity, ownership, locked/disabled/no eligible unit, exact callback and destination confirmation",
+    "test_runtime_commands.mjs PASS: new operations, malformed identity rejection, no replay",
+    "test_inventory_bridge.mjs and test_prebattle_confirmation.mjs PASS",
+    "test_runtime_loading.mjs PASS",
+    "syntax and diff checks PASS"
+  ],
+  "remaining": [
+    "This selects the mission currently shown in original detail; arbitrary map, difficulty and node navigation still needs interfaces",
+    "Only existing captured 1-A enemies verified for current-selection trial",
+    "Sweeps, store purchases and broader all-mode HUD validation remain outside this completed step"
+  ]
+}

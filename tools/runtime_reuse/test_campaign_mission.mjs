@@ -1,0 +1,44 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const text=fs.readFileSync(new URL('./runtime_observer.js',import.meta.url),'utf8');
+const source=text.slice(text.indexOf('globalThis.CampaignMissionBridge='),text.indexOf('globalThis.PreBattleBridge='));
+const nil={isNull:()=>true};
+const obj=(type,fields={})=>({type,fields,isNull:()=>false,equals(o){return o===this;},active:true});
+const identity={CampaignID:'C01L',MapID:'M01',NodeID:'N01',MissionID:'Mi01',Difficulty:1};
+const mission=obj('Mission',{'<CampaignElementDO>k__BackingField':obj('Element',{'<ElementIdentifierDO>k__BackingField':obj('Id')})});
+const target=obj('UIButton'),button=obj('SmartButton',{_buttonTarget:target});target.enabled=true;
+const component=obj('Component',{_mission:mission,_selectMissionButton:button,_missionLocked:false,_userHasAtLeastOneAllowedUnit:true});
+const details=obj('Details',{_missionDetailsComponent:component,_selectedMission:mission,_selectedMissionIsLocked:false});
+let state=obj('CampaignGameState',{_campaignController:obj('Campaign',{_missionsDetailsController:details})});
+const stateController=obj('StateController'),calls=[];
+const ctx=vm.createContext({RuntimeApi:{nil,findBound:()=>stateController,readRef:(o,k)=>o===stateController?state:o.fields[k]??nil,readValue:(o,k)=>o.fields[k],unbox:x=>x,classOf:o=>o.type,fullName:x=>x,arg:{ref:x=>x}},SceneApi:{string:x=>x,gameObject:x=>x,invoke:(type,method,o,args)=>{
+ if(method==='get_activeInHierarchy')return o.active;
+ if(method==='get_isEnabled')return o.enabled;
+ if(type==='CampaignElementIdentifierDO')return identity[method.slice(4)];
+ calls.push({type,method,o,args});return nil;
+}}});
+vm.runInContext(source,ctx);const bridge=ctx.CampaignMissionBridge;
+assert.equal(bridge.execute('campaign-mission').missionIdentity.MapID,'M01');
+const payload={missionIdentity:{...identity}};
+for(const key of Object.keys(identity))assert.throws(()=>bridge.execute('campaign-prebattle',{missionIdentity:{...identity,[key]:key==='Difficulty'?2:'wrong'}}),/mission changed/);
+assert.equal(calls.length,0);
+for(const [object,key,value] of [[details.fields,'_selectedMissionIsLocked',true],[component.fields,'_missionLocked',true],[component.fields,'_userHasAtLeastOneAllowedUnit',false],[button,'active',false],[target,'enabled',false]]){
+ const old=object[key];object[key]=value;assert.throws(()=>bridge.execute('campaign-prebattle',payload),/unavailable/);object[key]=old;
+}
+component.fields._mission=obj('Other');assert.throws(()=>bridge.execute('campaign-prebattle',payload),/ownership/);component.fields._mission=mission;
+assert.equal(calls.length,0);assert.equal(bridge.execute('campaign-prebattle',payload).selectionDispatched,true);
+assert.equal(calls.length,1);assert.equal(calls[0].method,'HandleOnSelectMissionClicked');assert.equal(calls[0].o,details);assert.equal(calls[0].args[0],mission);
+state=obj('BattleGameState');assert.throws(()=>bridge.execute('campaign-mission'),/campaign map/);
+const host=fs.readFileSync(new URL('./run_battle_info.mjs',import.meta.url),'utf8');
+const checkLine=host.split('\n').find(line=>line.trim().startsWith('confirmed=after.state===result.expectedState&&')&&line.includes('expectedMissionIdentity'));
+assert.ok(checkLine);
+const result={expectedState:'PvePreBattleState',expectedMissionIdentity:identity};
+const after={state:'PvePreBattleState',prebattle:{ready:false,supportSelectionRequired:true,missionIdentity:{...identity}}};
+const confirmation=vm.createContext({result,after,confirmed:false});
+const check=()=>{vm.runInContext(checkLine,confirmation);return !!confirmation.confirmed;};
+assert.equal(check(),true);
+after.prebattle.supportSelectionRequired=false;assert.equal(check(),false,'Loading is not selection completion');
+after.prebattle.ready=true;assert.equal(check(),true);
+after.prebattle.missionIdentity.NodeID='N02';assert.equal(check(),false,'Wrong destination mission cannot confirm');
+console.log('Campaign mission PASS: current ownership, full identity, original availability, exact native selection callback');

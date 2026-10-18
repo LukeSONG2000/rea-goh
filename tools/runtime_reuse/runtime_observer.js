@@ -648,6 +648,40 @@ globalThis.EventsBridge=(()=>{
  return {execute,status};
 })();
 
+globalThis.CampaignMissionBridge=(()=>{
+ const R=RuntimeApi,S=SceneApi;
+ const active=o=>!o.isNull()&&!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(o)),'bool');
+ function current(){
+  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+  if(state.isNull()||R.fullName(R.classOf(state))!=='CampaignGameState')throw Error('Original campaign map required');
+  const campaign=R.readRef(state,'_campaignController'),details=R.readRef(campaign,'_missionsDetailsController');
+  if(details.isNull())throw Error('Mission details not ready');
+  const component=R.readRef(details,'_missionDetailsComponent'),mission=R.readRef(details,'_selectedMission');
+  if(component.isNull()||mission.isNull()||!mission.equals(R.readRef(component,'_mission')))throw Error('Current mission detail ownership mismatch');
+  const element=R.readRef(mission,'<CampaignElementDO>k__BackingField'),id=R.readRef(element,'<ElementIdentifierDO>k__BackingField');
+  if(id.isNull())throw Error('Mission identifier unavailable');
+  const missionIdentity={};
+  for(const name of ['CampaignID','MapID','NodeID','MissionID'])missionIdentity[name]=S.string(S.invoke('CampaignElementIdentifierDO','get_'+name,id));
+  missionIdentity.Difficulty=R.unbox(S.invoke('CampaignElementIdentifierDO','get_Difficulty',id),'u8');
+  const button=R.readRef(component,'_selectMissionButton'),target=button.isNull()?R.nil:R.readRef(button,'_buttonTarget');
+  const locked=!!R.readValue(details,'_selectedMissionIsLocked','bool')||!!R.readValue(component,'_missionLocked','bool');
+  const enabled=active(component)&&active(button)&&!target.isNull()&&!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool');
+  return {details,mission,public:{readConfirmed:true,missionIdentity,locked,enabled,hasAllowedUnit:!!R.readValue(component,'_userHasAtLeastOneAllowedUnit','bool'),scope:'Current original map mission details; selection enters prebattle, not combat'}};
+ }
+ function execute(operation,payload){
+  const live=current(),info=live.public;
+  if(operation==='campaign-mission')return info;
+  if(operation!=='campaign-prebattle')throw Error('Unsupported campaign mission operation');
+  const id=payload?.missionIdentity;
+  if(!id||['CampaignID','MapID','NodeID','MissionID'].some(k=>typeof id[k]!=='string'||!id[k].length||id[k].length>256)||!Number.isInteger(id.Difficulty)||id.Difficulty<0||id.Difficulty>255)throw Error('Full campaign mission identity required');
+  if(['CampaignID','MapID','NodeID','MissionID','Difficulty'].some(k=>id[k]!==info.missionIdentity[k]))throw Error('Current campaign mission changed');
+  if(info.locked||!info.enabled||!info.hasAllowedUnit)throw Error('Original mission selection unavailable');
+  S.invoke('MissionDetailsController','HandleOnSelectMissionClicked',live.details,[R.arg.ref(live.mission)],['CampaignNodeMissionDO']);
+  return {expectedState:'PvePreBattleState',expectedMissionIdentity:info.missionIdentity,selectionDispatched:true};
+ }
+ return {execute};
+})();
+
 globalThis.PreBattleBridge=(()=>{
  const R=RuntimeApi,S=SceneApi;
  const active=v=>!v.isNull()&&!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(v)),'bool');
@@ -863,3 +897,4 @@ rpc.exports.eventscommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()
 rpc.exports.prebattleback=()=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.back());
 rpc.exports.prebattlesupport=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.support(operation,payload));
 rpc.exports.prebattleedit=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.edit(operation,payload));
+rpc.exports.campaignmission=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>CampaignMissionBridge.execute(operation,payload));
