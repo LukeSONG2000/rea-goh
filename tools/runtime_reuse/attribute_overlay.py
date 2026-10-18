@@ -1,7 +1,7 @@
 """Read-only desktop display for runtime_cli watch; no game input or API calls."""
 import argparse
 import json
-import subprocess
+import ctypes
 import tkinter as tk
 from tkinter import ttk
 from pathlib import Path
@@ -25,11 +25,41 @@ def mastery_text(attributes):
             lines.append(f"{LABELS.get(stat['id'],stat['name'])}：{number(stat.get('masteryPreModifierTerm'))}（全部因素净变化 {number(stat.get('netBattleDelta'))}）")
     return '\n\n'.join(lines)
 
-def main():
-    parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--pid', type=int, required=True)
-    args=parser.parse_args()
-    if args.pid<=0: parser.error('pid must be positive')
+def process_alive(pid):
+    if not isinstance(pid,int) or pid<=0: return False
+    kernel=ctypes.WinDLL('kernel32',use_last_error=True)
+    kernel.OpenProcess.restype=ctypes.c_void_p
+    kernel.CloseHandle.argtypes=[ctypes.c_void_p]
+    kernel.GetExitCodeProcess.argtypes=[ctypes.c_void_p,ctypes.POINTER(ctypes.c_ulong)]
+    handle=kernel.OpenProcess(0x1000,False,pid)
+    if not handle: return False
+    try:
+        code=ctypes.c_ulong()
+        return bool(kernel.GetExitCodeProcess(handle,ctypes.byref(code))) and code.value==259
+    finally: kernel.CloseHandle(handle)
+
+def read_snapshot(pid,directory=SNAPSHOT.parent,now=None,alive=process_alive):
+    def read(name): return json.loads((directory/name).read_text(encoding='utf-8-sig'))
+    lock=read(f'runtime-session-{pid}.lock')
+    host=lock.get('hostPid')
+    if lock.get('gamePid')!=pid or not alive(host): raise ValueError('等待运行中的数据宿主')
+    trial_path=directory/f'trial-status-{pid}.json'
+    trial=read(trial_path.name) if trial_path.exists() else {}
+    if trial.get('hostPid')==host:
+        status=trial
+        snapshot=f'trial-snapshot-{pid}.json'
+    else:
+        status=read('battle-info-status.json')
+        snapshot='runtime-snapshot.json'
+    if status.get('pid')!=pid or status.get('hostPid')!=host or status.get('detached') or status.get('needsAttention'):
+        raise ValueError('数据宿主正在切换或等待处理；旧数据已隐藏')
+    data=read(snapshot)
+    age=((now or datetime.now(timezone.utc))-datetime.fromisoformat(data['observedAt'].replace('Z','+00:00'))).total_seconds()
+    if data.get('pid')!=pid or data.get('hostPid')!=host or not 0<=age<=5:
+        raise ValueError('等待新读数（旧数据已隐藏）')
+    return data
+
+def create_window(pid,snapshot_reader=read_snapshot):
     window=tk.Tk(); window.title('SWGoH 实时属性 · 只读')
     window.geometry(f'650x650+{max(0,window.winfo_screenwidth()-680)}+80')
     window.attributes('-topmost',True)
@@ -44,8 +74,14 @@ def main():
         table.heading(col,text=title);table.column(col,width=150 if col=='name' else 130,anchor='w' if col=='name' else 'e')
     scroll=ttk.Scrollbar(frame,orient='vertical',command=table.yview);table.configure(yscrollcommand=scroll.set)
     scroll.pack(side='right',fill='y');table.pack(fill='both',expand=True)
-    effects=tk.Text(tabs,wrap='word',height=12);tabs.add(effects,text='状态期限')
-    mastery=tk.Text(tabs,wrap='word',height=12);tabs.add(mastery,text='精通变化')
+    def text_tab(title):
+        frame=ttk.Frame(tabs);tabs.add(frame,text=title)
+        text=tk.Text(frame,wrap='word',height=12,padx=10,pady=8)
+        bar=ttk.Scrollbar(frame,orient='vertical',command=text.yview);text.configure(yscrollcommand=bar.set)
+        bar.pack(side='right',fill='y');text.pack(fill='both',expand=True)
+        return text,frame
+    effects,effects_frame=text_tab('状态期限')
+    mastery,mastery_frame=text_tab('精通变化')
     ttk.Label(window,text='净变化包含全部战斗因素；不等同于精通单独贡献。面板基础值尚未验证。',wraplength=620).pack(fill='x',padx=12,pady=8)
     keys=[]
     def clear(message):
@@ -55,9 +91,7 @@ def main():
     def refresh():
         nonlocal keys
         try:
-            data=json.loads(SNAPSHOT.read_text(encoding='utf-8-sig'))
-            age=(datetime.now(timezone.utc)-datetime.fromisoformat(data['observedAt'].replace('Z','+00:00'))).total_seconds()
-            if data.get('pid')!=args.pid or age>5: raise ValueError('等待新读数（旧数据已隐藏）')
+            data=snapshot_reader(pid)
             units=data.get('units',[])
             if not units: clear('当前无战斗单位：'+data.get('state','未知页面'))
             else:
@@ -78,5 +112,13 @@ def main():
         window.after(1000,refresh)
     def close():
         window.destroy()
-    window.protocol('WM_DELETE_WINDOW',close);refresh();window.mainloop()
+    window.protocol('WM_DELETE_WINDOW',close);refresh()
+    return window,{'tabs':tabs,'mastery':mastery,'mastery_frame':mastery_frame,'effects':effects,'effects_frame':effects_frame,'refresh':refresh,'status':status}
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--pid',type=int,required=True)
+    args=parser.parse_args()
+    if args.pid<=0: parser.error('pid must be positive')
+    window,_=create_window(args.pid);window.mainloop()
 if __name__=='__main__': main()

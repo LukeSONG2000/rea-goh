@@ -106,7 +106,7 @@ try{
    });
    last=await script.exports.status();save();
    const snapshot=await readSnapshotOrUnavailable(()=>script.exports.snapshot(),Number(pid));
-   fs.writeFileSync(path.join(directory,'runtime-snapshot.json'),JSON.stringify(snapshot));}
+   fs.writeFileSync(path.join(directory,'runtime-snapshot.json'),JSON.stringify({...snapshot,hostPid:process.pid}));}
  }
  if(!detached){last=await script.exports.stop();save();}
 }finally{
