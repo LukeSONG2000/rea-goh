@@ -396,3 +396,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 campaign-support-cli validated】普通战役prebattle-support-select显式null eventId可用，强制完整CampaignID/MapID/NodeID/MissionID/Difficulty；snapshot输出完整键，native派发前与host完成回读均匹配。Back普通关卡预期CampaignGameState，活动仍Events。光明1-A实测错MapID=M02原回调前拒绝，正确请求选中JARJARBINKS具体实例并transitionConfirmed，Back回Campaign再Home；无战斗/消费。桥接/命令防重放/回读/加载测试及syntax/diff PASS。报告CAMPAIGN_SUPPORT_CLI_20261018.json。原32088、host39064。仍需原UI点地图关卡进入选队，普通关卡编辑接口null eventId另待接同样身份规则。
 
 【Codex/root 2026-10-18 campaign-squad-cli】认领普通战役阵容增删null eventId兼容，复用完整关卡身份校验，实机移除/复原同一队员；root独占命令桥接和宿主，无开战消费。
+
+【Codex/root 2026-10-18 campaign-squad-cli validated】prebattle-remove/add兼容普通战役null eventId，强制完整关卡键，与支援共用native requireMission；host回读带完整missionIdentity与slot/unit核对。光明1-A真实第1槽HERMITYODA移除→null→原InventoryUnitTapped加回，wholeSquadRestored/supportRestored均true，未开战/消费。原support/mandatory/重复/empty-slot/所属view守卫保留。桥接各键错配/命令层畸形拒绝/回读及loading测试PASS，syntax/diff PASS。报告CAMPAIGN_SQUAD_CLI_20261018.json；回Home，原32088普通host22088。地图关卡选择仍需原UI一次点击，待封装。

@@ -1,0 +1,38 @@
+{
+  "scope": "Ordinary campaign squad editing via original UI callbacks",
+  "changes": [
+    "prebattle-remove and prebattle-add accept explicit null eventId with complete missionIdentity",
+    "Native support and squad editing share full mission identity checks; host confirms mission and slot identity",
+    "Retains original roster eligibility, view/editor ownership, mandatory/support slot restrictions, duplicate and selected empty-slot checks"
+  ],
+  "live": {
+    "mission": "C01L/M01/N01/Mi01 difficulty 1",
+    "slot": 1,
+    "unit": "HERMITYODA",
+    "sequence": ["original occupied slot", "original removal callback", "empty slot confirmed", "original roster selection callback", "same unit restored to original slot"],
+    "wholeSquadRestored": true,
+    "supportRestored": true,
+    "battleStarted": false,
+    "finalState": "HomeBaseGameState",
+    "hostPid": 22088
+  },
+  "evidence": [
+    "logs/high_reuse/campaign-edit-before.json",
+    "logs/high_reuse/campaign-edit-removed.json",
+    "logs/high_reuse/campaign-edit-empty-roster.json",
+    "logs/high_reuse/campaign-edit-restored.json",
+    "logs/high_reuse/campaign-edit-verification.json"
+  ],
+  "tests": [
+    "test_inventory_bridge.mjs PASS: current campaign edit, all mission key mismatches, existing original callback and eligibility guards",
+    "test_runtime_commands.mjs PASS: ordinary campaign add/remove admitted, malformed identities rejected before dispatch, no replay",
+    "test_prebattle_confirmation.mjs PASS",
+    "test_runtime_loading.mjs PASS",
+    "runtime_observer.js syntax and diff checks PASS"
+  ],
+  "remaining": [
+    "Campaign map mission selection still uses original UI click",
+    "No additional live fleet or event squad edit regression in this run",
+    "This does not cover equipment, mods, datacrons, purchases or sweep actions"
+  ]
+}

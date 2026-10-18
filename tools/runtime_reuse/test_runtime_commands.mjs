@@ -31,6 +31,7 @@ try{
  assert.equal((await test({operation:'prebattle-support-select',payload:campaignPayload})).ok,true);
  for(const missionIdentity of [undefined,{}, {...campaignPayload.missionIdentity,MapID:''},{...campaignPayload.missionIdentity,Difficulty:256},{...campaignPayload.missionIdentity,MissionID:'Mi02'}]){
   assert.equal((await test({operation:'prebattle-support-select',payload:{...campaignPayload,missionIdentity}})).dispatched,false);
+  for(const operation of ['prebattle-remove','prebattle-add'])assert.equal((await test({operation,payload:{...campaignPayload,unitId:'u',cellIndex:1,missionIdentity}})).dispatched,false);
  }
  for(const payload of [null,{}, {questId:'q',tab:1,subTab:0},{questId:'',tab:2,subTab:1},{questId:'q',tab:3,subTab:1}]){
   const result=await test({operation:'objectives-claim',payload});assert.equal(result.dispatched,false);
@@ -78,6 +79,8 @@ try{
   ['prebattle-roster',undefined,{readConfirmed:true,roster:[]}],
   ['prebattle-remove',{eventId:'e',missionId:'m',unitId:'u',cellIndex:1},{transitionConfirmed:true}],
   ['prebattle-add',{eventId:'e',missionId:'m',unitId:'u',cellIndex:1},{transitionConfirmed:true}],
+  ['prebattle-remove',{...campaignPayload,unitId:'u',cellIndex:1},{transitionConfirmed:true}],
+  ['prebattle-add',{...campaignPayload,unitId:'u',cellIndex:1},{transitionConfirmed:true}],
   ['prebattle-support-select',{eventId:'e',missionId:'m',playerId:'p'},{transitionConfirmed:true}],
   ['events-open',{eventId:'event',instanceId:'instance'},{transitionConfirmed:true}],
   ['events-missions-back',undefined,{transitionConfirmed:true}],

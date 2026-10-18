@@ -310,6 +310,18 @@ assert.throws(()=>ctx.PreBattleBridge.edit('prebattle-add',addRequest),/empty sl
 editor.fields._indexEditing=3;assert.throws(()=>ctx.PreBattleBridge.edit('prebattle-add',addRequest),/empty slot/);editor.fields._indexEditing=1;
 ctx.PreBattleBridge.edit('prebattle-add',addRequest);assert.equal(calls.at(-1).method,'InventoryUnitTapped');assert.equal(calls.at(-1).args[0].value,editRow);
 assert.throws(()=>ctx.PreBattleBridge.edit('prebattle-add',{...addRequest,unitId:'missing'}),/unique current roster/);
+preController.fields._eventId=null;
+const campaignEdit={...editRequest,eventId:null,missionIdentity:{...fullMission}};
+for(const operation of ['prebattle-remove','prebattle-add']){
+ editableCell.fields.Unit=operation==='prebattle-remove'?owned:nil;
+ const request={...campaignEdit,unitId:operation==='prebattle-remove'?editRequest.unitId:addRequest.unitId};
+ assert.throws(()=>ctx.PreBattleBridge.edit(operation,{...request,missionIdentity:undefined}),/Full campaign/);
+ for(const key of Object.keys(fullMission))assert.throws(()=>ctx.PreBattleBridge.edit(operation,{...request,missionIdentity:{...fullMission,[key]:key==='Difficulty'?2:'different'}}),/mission changed/);
+ const result=ctx.PreBattleBridge.edit(operation,request);
+ assert.equal(result.expectedMissionIdentity.CampaignID,'C01L');
+ assert.equal(calls.at(-1).method,operation==='prebattle-remove'?'HandleOnSquadSlotTapped':'InventoryUnitTapped');
+}
+preController.fields._eventId='challenge';
 editor.fields._view=nil;assert.throws(()=>ctx.PreBattleBridge.edit('prebattle-roster'),/ownership mismatch/);
 state=obj('HomeBaseGameState');assert.equal(ctx.PreBattleBridge.status().ready,false);assert.throws(()=>ctx.PreBattleBridge.support('prebattle-supports'),/PVE prebattle/);
 console.log('PASS inventory, inbox, objectives bridges: original callbacks, live fields and guards.');
