@@ -402,3 +402,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 campaign-mission-cli】认领原地图关卡详情到选队CLI，root独占只读Ghidra及运行时接口；仅原选择回调，不扫荡/刷新/购买/线上开战。
 
 【Codex/root 2026-10-18 campaign-mission-cli end-to-end】新增campaign-mission读取当前详情与按钮/锁/允许单位；campaign-prebattle五键匹配+活动view与mission对象一致后调用原MissionDetailsController.HandleOnSelectMissionClicked，原要求检查及PvePreBattle过渡保留。只读Ghidra核1ace9d0/1acf590并关闭。实机错Node=N02拒绝，正确进入support并全键回读；随后全CLI选COMMANDERLUKESKYWALKER支援→无Inventory参数CurrentSelection试玩，原terminal/turn5/serviceCalls0，六名当前队员实际读到，Home/guard/定义表/GC清理无错。证据trial-20261018-231934-707，本轮零computer use。新桥接/命令层/身份回读/加载及syntax/diff测试PASS。普通host33184、原32088/Home。报告CAMPAIGN_MISSION_CLI_20261018.json；当前详情关卡可进入，任意地图/难度/节点切换仍待接口，不宣称任意未捕获战斗可试玩。
+【Codex/root 2026-10-18 live-arena-retest】用户再次明确授权一场真实小队竞技场，消耗原次数并原结算；root认领运行时复测，敌方主动普攻/我方原AI，不购买次数/清冷却，不改原目录。
