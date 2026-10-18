@@ -1,0 +1,88 @@
+{
+  "scope": "Native PVE prebattle readback; no battle started",
+  "eventId": "challenge_XP",
+  "missionId": "DIFF06",
+  "selectedSupportPlayerMatchesRequest": true,
+  "selectedSupportMatchesSupportCell": true,
+  "selectedSupportBaseId": "HK47",
+  "cells": [
+    {
+      "index": 0,
+      "type": 0,
+      "baseId": "BASTILASHAN",
+      "selectable": true,
+      "mandatory": false
+    },
+    {
+      "index": 1,
+      "type": 2,
+      "baseId": "ANAKINKNIGHT",
+      "selectable": true,
+      "mandatory": false
+    },
+    {
+      "index": 2,
+      "type": 2,
+      "baseId": "GRANDMASTERYODA",
+      "selectable": true,
+      "mandatory": false
+    },
+    {
+      "index": 3,
+      "type": 2,
+      "baseId": "AHSOKATANO",
+      "selectable": true,
+      "mandatory": false
+    },
+    {
+      "index": 4,
+      "type": 2,
+      "baseId": "JOLEEBINDO",
+      "selectable": true,
+      "mandatory": false
+    },
+    {
+      "index": 5,
+      "type": 1,
+      "baseId": "HK47",
+      "selectable": true,
+      "mandatory": false
+    }
+  ],
+  "originalEnum": {
+    "0": "LEADER",
+    "1": "SUPPORT",
+    "2": "DEFAULT",
+    "3": "COMMANDER",
+    "4": "REINFORCEMENT"
+  },
+  "nativeEvidence": {
+    "setter": "logs/high_reuse/native/prebattle_ally_selected.c: writes BattleSupportDO to controller offset 0x168",
+    "metadata": "il2cpp/dump/cs/il2cpp.cs: PreBattleController._battleSupportDO/_currentSquad; SquadDO._squadCells; SquadCellDO; BattleSupportDO"
+  },
+  "evidence": [
+    {
+      "path": "logs\\high_reuse\\support-readback-list.json",
+      "sha256": "74a235c71e1113b4557db022498e387c6d722007e06858cc6339f4012e0cdc60"
+    },
+    {
+      "path": "logs\\high_reuse\\support-readback-selected.json",
+      "sha256": "c5900b46ed478a05f640e2031fde72fa8bed947850f30dbd297ccaca96f3a284"
+    },
+    {
+      "path": "logs\\high_reuse\\support-readback-squad.png",
+      "sha256": "9e07ac0fc6bebcf88cd7d3bbadd4cbf38cd93acb4981d0d23c25a0e34956e8a4"
+    }
+  ],
+  "tests": [
+    "Actual host confirmation expression: wrong identity, wrong mission, loading and support phase rejected PASS",
+    "Native bridge: empty slots, current unit updates, support identity and original cells PASS",
+    "Command mailbox PASS",
+    "Runtime loading PASS"
+  ],
+  "finalState": "HomeBaseGameState",
+  "limitations": [
+    "PVE challenge only; no fleet/PVP prebattle readback yet",
+    "Squad editing and support cancellation remain unfinished"
+  ]
+}

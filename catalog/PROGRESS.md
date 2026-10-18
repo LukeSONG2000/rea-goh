@@ -342,3 +342,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 【Codex/root 2026-10-18 live-arena-basic validated】按用户明确授权真实小队竞技场对Yegs(#338)，我方原Leia/R2/Drogan/Raddus/Jyn自动AI。新增显式-LiveArenaBasic仅PvpPreBattle下一原squad PVP上下文，原enemy DoMove转原CanPerformMove+PerformManualMove(0,0)+完成回调；被动协攻反击保留、不碰结算。实机敌方6次主动输入全原basic/0/0、我方13次原AI，fallback0/errors0。原结算报告345→338，匹配页同；次数4→3截图，水晶7286不变，拒绝结算后好友请求。SC_Exit自动解除且恢复普通host1296；HUD加载/对局/返回存活errors0，右上绝对值与图标gap16无重叠。未重验长按。live-scope/原enemy gate/HUD lifecycle/loading测试PASS，报告LIVE_ARENA_BASIC_VALIDATION_20261018.json及logs实拍。原32088存活；未购买次数/清冷却/改装备或原目录。
 【Codex/root 2026-10-18 prebattle-readback】恢复原目标，root认领原选队阵容槽位及支援身份只读回读，增强支援选择成功判定；不消耗战斗次数，不修改装备。
+
+【Codex/root 2026-10-18 prebattle-readback validated】snapshot.prebattle新增原selectedSupport(playerId/unitId/baseId)及squadCells(原索引/类型/可选/必选/单位或null)。原HandleOnAllySelected写0x168已有native证据核对。支援选择成功改为同关卡选队ready且原selectedSupport.playerId匹配请求；实机challenge_XP/DIFF06选HK47，身份匹配且原SUPPORT槽5同unitId，其他5槽读回Bastila/Anakin/GMY/Ahsoka/Jolee。原Back→Events→Objectives→Home通过；无开战扣次。实际host确认表达式错身份/旧关卡/加载/支援中间页测试、bridge空槽及实时变化、mailbox/loading/语法PASS。报告PREBATTLE_READBACK_VALIDATION_20261018.json；原32088/host35588。尚未选队编辑/支援取消/全模式。

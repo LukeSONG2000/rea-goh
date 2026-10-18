@@ -525,6 +525,21 @@ globalThis.EventsBridge=(()=>{
 globalThis.PreBattleBridge=(()=>{
  const R=RuntimeApi,S=SceneApi;
  const active=v=>!v.isNull()&&!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(v)),'bool');
+ function unitIdentity(unit){
+  if(unit.isNull())return null;
+  const definition=R.readRef(unit,'<Definition>k__BackingField');
+  return {unitId:S.string(R.readRef(unit,'Id')),baseId:definition.isNull()?null:S.string(R.readRef(definition,'BaseId'))};
+ }
+ function squadCells(c){
+  const squad=R.readRef(c,'_currentSquad');if(squad.isNull())return null;
+  const list=R.readRef(squad,'_squadCells');if(list.isNull())return null;
+  const n=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
+  if(n<0||n>64||(items.isNull()?n!==0:n>items.add(24).readU64().toNumber()))throw Error('Squad cell bounds invalid');
+  return Array.from({length:n},(_,i)=>{
+   const cell=items.add(32+8*i).readPointer();
+   return {cellIndex:R.readValue(cell,'CellIndex','i32'),unitType:R.readValue(cell,'SquadUnitType','u8'),selectable:!!R.readValue(cell,'Selectable','bool'),mandatory:!!R.readValue(cell,'IsMandatory','bool'),unit:unitIdentity(R.readRef(cell,'Unit'))};
+  });
+ }
  function current(){
   const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
   if(R.fullName(R.classOf(state))!=='PvePreBattleState')throw Error('PVE prebattle required');
@@ -536,7 +551,9 @@ globalThis.PreBattleBridge=(()=>{
   const c=current(),mission=R.readRef(c,'_campaignMissionIdentifier');
   const supportSelectionRequired=active(R.readRef(c,'_battleSupportSelectView'));
   const ready=!supportSelectionRequired&&active(S.invoke('PreBattleController','get_PreBattleView',c));
-  return {ready,supportSelectionRequired,phase:supportSelectionRequired?'support':ready?'squad':'loading',eventId:S.string(R.readRef(c,'_eventId')),instanceId:S.string(R.readRef(c,'_eventInstanceId')),missionId:mission.isNull()?null:S.string(S.invoke('CampaignElementIdentifierDO','get_MissionID',mission))};
+  const support=R.readRef(c,'_battleSupportDO');
+  const selectedSupport=support.isNull()?null:{playerId:S.string(R.readRef(support,'_playerId')),unit:unitIdentity(R.readRef(support,'<SupportUnit>k__BackingField'))};
+  return {ready,supportSelectionRequired,phase:supportSelectionRequired?'support':ready?'squad':'loading',selectedSupport,squadCells:ready?squadCells(c):null,eventId:S.string(R.readRef(c,'_eventId')),instanceId:S.string(R.readRef(c,'_eventInstanceId')),missionId:mission.isNull()?null:S.string(S.invoke('CampaignElementIdentifierDO','get_MissionID',mission))};
  }catch(error){return {ready:false,error:String(error)};}}
  function support(operation,payload){
   const c=current(),state=status();
@@ -555,7 +572,7 @@ globalThis.PreBattleBridge=(()=>{
   const matches=rows.filter(r=>str(r,'PlayerId')===payload.playerId);
   if(matches.length!==1)throw Error('Expected unique current support');
   S.invoke('BattleSupportSelectView','OnSelectButtonClicked',view,[R.arg.ref(R.readRef(matches[0],'<PlayerId>k__BackingField'))],['System.String']);
-  return {expectedState:'PvePreBattleState',eventId:state.eventId,missionId:state.missionId,supportSelectionDispatched:true};
+  return {expectedState:'PvePreBattleState',eventId:state.eventId,missionId:state.missionId,expectedSupportPlayerId:payload.playerId,supportSelectionDispatched:true};
  }
  function back(){const c=current();if(!status().ready)throw Error('Prebattle view not ready');S.invoke('PreBattleController','HandlePreBattleViewBackClicked',c);return {expectedState:'EventsParentGameState'};}
  return {status,back,support};

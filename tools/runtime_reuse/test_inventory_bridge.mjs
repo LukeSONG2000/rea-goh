@@ -246,9 +246,16 @@ assert.throws(()=>eventsBridge.execute('events-mission-select',missionRequest),/
 const selectInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='MaxAttemptsReached'?false:selectInvoke(type,method,owner,args,types);
 const missionSelected=eventsBridge.execute('events-mission-select',missionRequest);assert.equal(missionSelected.expectedState,'PvePreBattleState');assert.equal(calls.at(-1).method,'MissionSelected');assert.equal(calls.at(-1).args[0].value,missionRow);
 missionFields['<ProgressStatus>k__BackingField']=1;assert.throws(()=>eventsBridge.execute('events-mission-select',missionRequest),/locked/);missionFields['<ProgressStatus>k__BackingField']=5;
-const preView=obj('PreBattleView'),preController=obj('PvePreBattleController',{_battleSupportSelectView:nil,_eventId:'challenge',_eventInstanceId:'instance',_campaignMissionIdentifier:obj('Identifier')});state=obj('PvePreBattleState',{_featureController:preController});
+const preView=obj('PreBattleView'),preController=obj('PvePreBattleController',{_battleSupportSelectView:nil,_battleSupportDO:nil,_currentSquad:nil,_eventId:'challenge',_eventInstanceId:'instance',_campaignMissionIdentifier:obj('Identifier')});state=obj('PvePreBattleState',{_featureController:preController});
 const preInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='get_PreBattleView'?preView:method==='get_MissionID'?'mission':preInvoke(type,method,owner,args,types);
 assert.equal(ctx.PreBattleBridge.status().missionId,'mission');ctx.PreBattleBridge.back();assert.equal(calls.at(-1).method,'HandlePreBattleViewBackClicked');
+const supportUnit=obj('UnitDO',{Id:'support-unit','<Definition>k__BackingField':obj('Definition',{BaseId:'ORIGINAL_SUPPORT'})});
+preController.fields._battleSupportDO=obj('BattleSupportDO',{_playerId:'support-player','<SupportUnit>k__BackingField':supportUnit});
+preController.fields._currentSquad=obj('SquadDO',{_squadCells:list([obj('SquadCellDO',{CellIndex:5,SquadUnitType:2,Selectable:false,IsMandatory:true,Unit:supportUnit}),obj('SquadCellDO',{CellIndex:1,SquadUnitType:0,Selectable:true,IsMandatory:false,Unit:nil})])});
+assert.equal(ctx.PreBattleBridge.status().selectedSupport.unit.baseId,'ORIGINAL_SUPPORT');
+assert.equal(ctx.PreBattleBridge.status().squadCells[0].cellIndex,5);
+assert.equal(ctx.PreBattleBridge.status().squadCells[1].unit,null,'Empty original slot remains empty');
+supportUnit.fields.Id='updated-unit';assert.equal(ctx.PreBattleBridge.status().selectedSupport.unit.unitId,'updated-unit','Read current native value, not cached selection');
 const supportRow=obj('SupportRow',{'<PlayerId>k__BackingField':'support-player','<UnitName>k__BackingField':'Original unit','<SupportTitle>k__BackingField':'Original title','<IsAlly>k__BackingField':true});
 const supportView=obj('SupportView',{_battleSupportData:list([supportRow])});supportView.equals=other=>other===supportView;
 preController.fields._battleSupportSelectView=supportView;

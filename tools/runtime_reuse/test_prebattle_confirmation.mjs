@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const source=fs.readFileSync(new URL('./run_battle_info.mjs',import.meta.url),'utf8');
+const statement=source.split('\n').find(line=>line.trim().startsWith("confirmed=operation==='prebattle-back'?"));
+assert.ok(statement);
+const result={expectedState:'PvePreBattleState',eventId:'e',missionId:'m',expectedSupportPlayerId:'chosen'};
+const after={state:'PvePreBattleState',prebattle:{ready:true,supportSelectionRequired:false,eventId:'e',missionId:'m',selectedSupport:{playerId:'chosen'}}};
+const ctx=vm.createContext({operation:'prebattle-support-select',result,after,confirmed:false});
+const check=()=>{vm.runInContext(statement,ctx);return ctx.confirmed;};
+assert.equal(check(),true);
+after.prebattle.selectedSupport.playerId='other';assert.equal(check(),false,'A correct destination alone does not confirm selection');
+after.prebattle.selectedSupport=null;assert.equal(check(),false);
+after.prebattle.selectedSupport={playerId:'chosen'};after.prebattle.missionId='stale';assert.equal(check(),false);
+after.prebattle.missionId='m';after.prebattle.ready=false;after.prebattle.supportSelectionRequired=true;assert.equal(check(),false,'Support page is not completed selection');
+ctx.operation='events-mission-select';assert.equal(check(),true,'Mission navigation can legitimately stop at support step');
+after.prebattle.supportSelectionRequired=false;assert.equal(check(),false,'Loading is not completion');
+console.log('PASS native prebattle confirmation: selected identity, mission, phase and loading');
