@@ -497,3 +497,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 overlay-refresh-layout】认领悬浮窗精通/状态刷新保留滚动及窄窗换行，root独占overlay/tests，不改游戏。
 【Codex/root 2026-10-19 overlay-refresh-layout verified】修复精通/状态每秒重填导致滚动重置；不变文本不重写，变化保留可见文本位置/末尾跟随，切角色回顶，无单位/失效清空。状态/生命/说明随窗宽换行，最小420x480，先分配底部说明再扩展页签，解决窄窗说明被挤掉。真实Tk420x520/650x650历史读数+明确标记长文本夹具，滚动/刷新/切角色/Home测试通过；截图人工核无重叠，4单测PASS。报告OVERLAY_REFRESH_LAYOUT_20261019.json。首次测试暴露换行重算后比例恢复跳动，改文本anchor后通过；全DPI未验。
 【Codex/root 2026-10-19 target-null-clear】认领右上角空目标残留清理，root独占battle_info_ui/tests；不修改战斗或CD规则。
+【Codex/root 2026-10-19 target-null-clear verified】右上角renderTarget/SetHealth遇空单位清空标签并替换旧unit，定时刷新不再复用旧目标；非战斗/不可见时清空status.target。新增实际函数VM回归覆盖旧目标→空→新目标、定时器无旧读数、无标签/空状态；health/layout/lifecycle/loading全PASS。重启已确认属主helper至38704，原客户端32088 Home，9hooks/errors空/target null。未触发战斗或消费；真实战斗切换目标画面仍待验收。

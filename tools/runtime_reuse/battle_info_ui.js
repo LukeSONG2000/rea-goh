@@ -82,13 +82,14 @@
  }
  function refreshCurrentTarget(){
   const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
-  if(state.isNull()||R.fullName(R.classOf(state))!=='BattleGameState')return;
+  if(state.isNull()||R.fullName(R.classOf(state))!=='BattleGameState'){stats.target=null;return;}
   const controller=R.readRef(state,'_battleController');if(controller.isNull())return;
   const context=R.readRef(controller,'_battleContext');if(context.isNull())return;
   const view=call('BattleContext','get_BattleView',context);
   if(view.isNull())return;
   const target=R.readRef(view,'_opponentTargetComponent'),item=targets.get(target.toString());
-  if(!item||!item.view.equals(view)||!active(target))return;
+  if(!item||!item.view.equals(view)||!active(target)){stats.target=null;return;}
+  if(item.unit.isNull()){setText(item.label,'');stats.target=null;return;}
   const text=healthText(item.unit);setText(item.label,text);stats.target=text;
   for(const row of stats.healthAnomalies)if(!row.deferred&&row.key.startsWith(item.unit.toString()+':')){
    row.deferred={observedAt:Date.now(),text};
@@ -96,17 +97,22 @@
   }
   layoutTarget(item);
  }
+ function updateTargetItem(item,unit){
+  item.unit=unit;
+  if(unit.isNull()){setText(item.label,'');stats.target=null;return;}
+  const text=healthText(unit);setText(item.label,text);stats.target=text;
+ }
  function renderTarget(view,unit){
-  if(unit.isNull())return;
   const target=R.readRef(view,'_opponentTargetComponent');if(target.isNull())return;
   let item=targets.get(target.toString());
+  if(unit.isNull()){if(item)updateTargetItem(item,unit);else stats.target=null;return;}
   if(!item){
    const name=R.readRef(target,'_nameLabel'),transform=S.transform(name),position=S.vector(transform,'localPosition');
    const label=makeLabel(R.readRef(view,'_effectDetailsPopup'),{parent:S.parent(transform),name:'REA_TargetAbsoluteHealth',pivot:2,width:350,font:18,position:[position[0],position[1],position[2]]});
    item={target,label,unit,view};targets.set(target.toString(),item);
   }
   layoutTarget(item);
-  item.unit=unit;const text=healthText(unit);setText(item.label,text);stats.target=text;
+  updateTargetItem(item,unit);
  }
  function render(popup,unit){
   if(unit.isNull())return;
@@ -193,7 +199,7 @@
    });}
   });
   hook('BattleBaseView','SetOpponentUnitData',1,{onEnter(args){this.view=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>renderTarget(this.view,this.unit));}});
-  hook('BattleTargetComponent','SetHealth',1,{onEnter(args){this.target=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>{const item=targets.get(this.target.toString());if(item&&!this.unit.isNull()){item.unit=this.unit;const text=healthText(this.unit);setText(item.label,text);stats.target=text;}});}});
+  hook('BattleTargetComponent','SetHealth',1,{onEnter(args){this.target=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>{const item=targets.get(this.target.toString());if(item)updateTargetItem(item,this.unit);});}});
   hook('BattleEffectsPopupView','Show',5,{onEnter(args){this.popup=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>{stats.shows++;render(this.popup,this.unit);});}});
   hook('BattleBaseView','HandleEffectsLongPressed',3,{onEnter(args){this.view=args[0];this.unit=args[1];this.effects=args[2];this.updateOnly=args[3].toInt32()!==0;this.before=stats.shows;},onLeave(){if(!stopped&&!this.updateOnly&&stats.shows===this.before)safe(()=>showEmptyPopup(this.view,this.unit,this.effects));}});
   hook('BattleEffectsPopupView','UpdateHealth',2,{onEnter(args){this.popup=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>render(this.popup,this.unit));}});
