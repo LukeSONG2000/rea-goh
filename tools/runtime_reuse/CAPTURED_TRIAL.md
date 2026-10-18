@@ -37,11 +37,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 
 有画面试玩可附加 `-TraceAI`（准备器对应 `--trace-ai`），在同一宿主记录
 本场原 AI 自然执行的决策节点、结果标签、最终技能和目标。结束证据中的
-`original-ai-trace` 包含 `rows/errors/dropped`；最多保留 128 次决策，每次
+`original-ai-trace` 包含 `rows/trees/errors/dropped`；最多保留 128 次决策，每次
 最多 128 个节点及结果。手动操作、没有发生 AI 决策时允许零记录。
 该选项不额外执行决策树或随机调用，不修改优先级，不是出招前预测。
 无画面循环尚未捕获到这些回调，故拒绝与 headless 组合。
-原树 ID 回调在当前验证中未触发，缺失的 `treeId` 不代表没有使用决策树。
+当前二进制直接从 context 的 GameDataDomainController 读取 `_abilityDecisionTreeDO`，
+并不调用取树方法。记录器读取同一字段，保存完整成功/失败分支和结果标签；
+`rows[].treeGraph` 对应 `trees[]`，`rows[].nodes[].nodeIndex` 对应树的节点索引。
+节点索引是该图内编号，不是优先级数值；原分支顺序才决定实际求值路径。
+图最多 512 节点，每节点最多 64 参数，超界记录错误而不伪装完整结果。
+目前实测 `default` 树 20 个节点。图读取不调用条件求值器，也不改共享树。
 返回的 allyTargets/enemyTargets 是原 AI 返回列表，不应直接解释为最终受击者。
 
 ## 敌方控制验证 demo
