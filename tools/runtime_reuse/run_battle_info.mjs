@@ -60,7 +60,12 @@ try{
     }
     if(operation.startsWith('store-')){
      const result=await script.exports.storecommand(operation,payload);
-     if(operation==='store-list')return result;
+     if(['store-list','store-details'].includes(operation))return result;
+     if(operation==='store-item'){
+      let detail=null,lastError=null;
+      for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,250));try{detail=await script.exports.storecommand('store-details');if(detail.id===result.expectedItemId)break;}catch(e){lastError=String(e);}}
+      return {...result,transitionConfirmed:detail?.id===result.expectedItemId,detail,error:detail?null:lastError};
+     }
      let after=null,lastError=null;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));

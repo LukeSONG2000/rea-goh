@@ -468,3 +468,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 【Codex/root 2026-10-19 store-tabs native+live】store-list新增原accordion页签Label/StoreLocation/Locked，store-tab选择唯一现有未锁页签原HandleButtonClick，same-tab幂等，host核目标tab与商品ready。原nav/controller回调只读Ghidra留证。实机4页签，切水晶tab2读5商品成功并返回Home，host17496，无购买刷新。missing/locked/noop/原回调mock及store/commands/loading PASS。报告STORE_TABS_20261019.json；其余页签未实测，货运商店和购买仍待。
 【Codex/root 2026-10-19 store-details】认领原商品详情导航与读取，root独占store bridge/Ghidra，无购买。
+
+【Codex/root 2026-10-19 store-details native+live】新增store-item/details/details-back：当前唯一未锁PACK原OnShowDetailsClicked，拒绝PurchaseItemOnTransition；读原title/description/maxPurchase/freeButton/AllOffers，原返回回调，host核商品ID。实机青铜premium-pack-silver详情成功，freeButton=true且paid offer250 SOCIAL并存，明确不当成最终按钮消耗；返回catalog及Home，host21480，无领取购买。原show/details/back源码留证，unknown/待购买拒绝/原item回调mock、commands/loading PASS。报告STORE_DETAILS_20261019.json；仅青铜详情实测，特殊/web/级联商品及购买仍待。

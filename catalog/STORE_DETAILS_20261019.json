@@ -1,0 +1,63 @@
+{
+  "scope": "Standard pack original detail navigation/read/back; no purchase",
+  "operations": [
+    "store-item",
+    "store-details",
+    "store-details-back"
+  ],
+  "nativeEvidence": [
+    "OnShowDetailsClicked 0x181c4b950 saves original tab/scroll and invokes ShowDetails",
+    "ShowDetails 0x181c4bab0 has multiple product-specific routes; bridge currently admits PACK=0 only",
+    "OnBackClickedStoreDetailsView 0x181c4b660 restores original source tab"
+  ],
+  "live": {
+    "pid": 32088,
+    "hostPid": 21480,
+    "detail": {
+      "readConfirmed": true,
+      "id": "premium-pack-silver",
+      "title": "青铜数据卡",
+      "description": "每天获得10个[f0ff23]免费[-]物品和/或角色！\n\n使用盟友点数领取一个物品或一名角色。",
+      "fromTab": 0,
+      "maxPurchaseAmount": 1,
+      "freeButtonShown": true,
+      "offers": [
+        {
+          "formattedPrice": "250",
+          "priceSource": "original-currency-formatter",
+          "priceConfirmed": true,
+          "priceError": null,
+          "currencyType": 5,
+          "rawPrice": 250,
+          "productId": "",
+          "webProductId": "",
+          "costKey": null,
+          "requiresProductPricing": false
+        }
+      ],
+      "scope": "Original detail display and offers; no purchase authorization"
+    },
+    "returnedToCatalog": true,
+    "returnedHome": true,
+    "purchaseInvocations": 0
+  },
+  "validation": [
+    "unknown item rejected",
+    "pending purchase transition rejected",
+    "exact original item callback",
+    "live item ID confirmed",
+    "store/commands/loading PASS"
+  ],
+  "limitations": [
+    "Only bronze pack real detail flow verified",
+    "Free button state and paid offer coexist; offers are not final button cost",
+    "Other special/web/cascading product routes unsupported",
+    "No purchase or currency debit tested"
+  ],
+  "evidence": [
+    "logs/high_reuse/store-details-open.json",
+    "logs/high_reuse/store-details-read.json",
+    "logs/high_reuse/store-details-back.json",
+    "logs/high_reuse/store-details-home.json"
+  ]
+}

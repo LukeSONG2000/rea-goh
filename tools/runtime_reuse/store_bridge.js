@@ -39,12 +39,35 @@ globalThis.StoreBridge=(()=>{
   const rows=render.map(d=>{
    const index=val(d,'ItemIndex');if(index<0||index>=items.length||seen.has(index))throw Error('Store item mapping invalid');seen.add(index);
    const item=items[index];if(item.isNull())throw Error('Null store item');
-   return {itemIndex:index,id:str(item,'Id'),nameKey:str(d,'NameKey'),quantity:val(d,'Quantity'),possiblePurchases:val(d,'PossiblePurchases'),maxPurchaseLimit:val(d,'MaxPurchaseLimit'),maxPurchasePerTransaction:val(item,'MaxPurchasePerTransaction'),locked:val(d,'IsLocked','bool'),freeOffer:val(d,'IsFreeOffer','bool'),showPrice:val(d,'ShowPrice','bool'),overrideDisplayPrice:str(d,'OverrideDisplayPrice'),offers:array(R.readRef(d,field('Offers'))).map(o=>offer(o,formatter))};
+   return {itemIndex:index,id:str(item,'Id'),itemType:val(item,'ItemType'),nameKey:str(d,'NameKey'),quantity:val(d,'Quantity'),possiblePurchases:val(d,'PossiblePurchases'),maxPurchaseLimit:val(d,'MaxPurchaseLimit'),maxPurchasePerTransaction:val(item,'MaxPurchasePerTransaction'),locked:val(d,'IsLocked','bool'),freeOffer:val(d,'IsFreeOffer','bool'),showPrice:val(d,'ShowPrice','bool'),overrideDisplayPrice:str(d,'OverrideDisplayPrice'),offers:array(R.readRef(d,field('Offers'))).map(o=>offer(o,formatter))};
   });
   return {readConfirmed:true,storeTab:R.readValue(v,'_currentStoreTab','i32'),items:rows,tabs:tabs(v).map(({button,...row})=>row),purchaseAuthorized:false,note:'Original offer formatting; fallback prices remain unconfirmed. Per-item overrideDisplayPrice may override offer text; this is not a checkout authorization. PossiblePurchases is the original eligibility count, not physical stock.'};
  }
+ function details(){
+  const state=current();if(name(state)!=='StoreState')throw Error('Store state unavailable');
+  const c=R.readRef(state,'_fixedStoreController'),v=R.readRef(c,'_storePackDetailsView');
+  if(v.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(v)),'bool'))throw Error('Store details not visible');
+  const item=R.readRef(v,'_storeItem');if(item.isNull())throw Error('Store detail item missing');
+  return {c,v,item};
+ }
+ function detailStatus(){
+  const {v,item}=details(),formatter=R.readRef(v,'_storeOfferPriceFormatter');
+  const label=n=>S.string(S.invoke('UILabel','get_text',R.readRef(v,n)));
+  return {readConfirmed:true,id:str(item,'Id'),title:label('_packTitle'),description:label('_descriptionLabel'),fromTab:R.readValue(v,'_fromLocation','i32'),maxPurchaseAmount:R.readValue(v,'_maxPurchaseAmount','i32'),freeButtonShown:R.readValue(v,'_showFreeBuyButton','bool'),offers:list(R.readRef(item,field('AllOffers'))).map(o=>offer(o,formatter)),scope:'Original detail display and offers; no purchase authorization'};
+ }
  function execute(op,p={}){
   if(op==='store-list')return status();
+  if(op==='store-details')return detailStatus();
+  if(op==='store-details-back'){const {c}=details();S.invoke('FixedStoreController','OnBackClickedStoreDetailsView',c);return {navigationDispatched:true};}
+  if(op==='store-item'){
+   if(typeof p.itemId!=='string'||!p.itemId.length||p.itemId.length>256)throw Error('Explicit store item ID required');
+   const {c,v}=live(),info=status(),rows=info.items.filter(r=>r.id===p.itemId);
+   if(rows.length!==1||rows[0].locked||rows[0].itemType!==0)throw Error('Unique unlocked standard pack required; other detail flows pending');
+   if(R.readValue(R.readRef(c,'_transitionData'),'PurchaseItemOnTransition','bool'))throw Error('Store transition has pending purchase');
+   const item=list(R.readRef(v,'_storeItemData'))[rows[0].itemIndex];
+   S.invoke('FixedStoreController','OnShowDetailsClicked',c,[A.ref(item)],['StoreItemDO']);
+   return {navigationDispatched:true,expectedItemId:p.itemId};
+  }
   if(op==='store-open'){
    const state=current();if(name(state)!=='HomeBaseGameState')throw Error('Open store from Home');
    S.invoke('HomeBaseController','OpenStore',R.readRef(state,'_homeBaseController'),[A.value('i32',0)],['StoreLocation']);
