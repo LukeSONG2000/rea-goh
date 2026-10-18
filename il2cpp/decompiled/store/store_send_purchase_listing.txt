@@ -1,0 +1,35 @@
+181c7f990 MOV qword ptr [RSP + 0x10],RBP
+181c7f995 MOV qword ptr [RSP + 0x18],RSI
+181c7f99a PUSH RDI
+181c7f99b SUB RSP,0x30
+181c7f99f CMP byte ptr [RCX + 0xc8],0x0
+181c7f9a6 MOV RDI,R9
+181c7f9a9 MOV ESI,R8D
+181c7f9ac MOV RBP,RDX
+181c7f9af JNZ 0x181c7f9fb
+181c7f9b1 CMP qword ptr [RCX + 0x2b0],0x0
+181c7f9b9 JZ 0x181c7f9fb
+181c7f9bb MOV RAX,qword ptr [RCX]
+181c7f9be MOV qword ptr [RSP + 0x40],RBX
+181c7f9c3 MOV RBX,qword ptr [RCX + 0x2b0]
+181c7f9ca MOV RDX,qword ptr [RAX + 0x470]
+181c7f9d1 CALL qword ptr [RAX + 0x468]
+181c7f9d7 MOV RCX,qword ptr [RBX + 0x28]
+181c7f9db MOV R8D,ESI
+181c7f9de MOV qword ptr [RSP + 0x28],RCX
+181c7f9e3 MOVZX R9D,AL
+181c7f9e7 MOV RCX,qword ptr [RBX + 0x40]
+181c7f9eb MOV RDX,RBP
+181c7f9ee MOV qword ptr [RSP + 0x20],RDI
+181c7f9f3 CALL qword ptr [RBX + 0x18]
+181c7f9f6 MOV RBX,qword ptr [RSP + 0x40]
+181c7f9fb MOV RBP,qword ptr [RSP + 0x48]
+181c7fa00 MOV RSI,qword ptr [RSP + 0x50]
+181c7fa05 ADD RSP,0x30
+181c7fa09 POP RDI
+181c7fa0a RET
+181c7fa0b INT3
+181c7fa0c INT3
+181c7fa0d INT3
+181c7fa0e INT3
+181c7fa0f INT3

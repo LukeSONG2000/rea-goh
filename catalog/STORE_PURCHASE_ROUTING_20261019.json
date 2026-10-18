@@ -1,0 +1,8 @@
+{
+ "scope":"Original store purchase dispatch audit and read-only free predicate",
+ "native":{"singleRva":"1ca28b0","multipleRva":"1ca2940","isFreeRva":"1ca3920","sendRva":"1c7f990","freePredicate":"view._showFreeBuyButton && item.IsFreeOffer","singleQuantity":1,"multipleQuantity":"view._maxPurchaseAmount","send":"Original base request event receives virtual IsFreePurchase result; handlers do not prove settlement","project":"existing read-only Ghidra program, closed without save"},
+ "live":{"pid":32088,"hostPid":33176,"itemId":"premium-pack-silver","freeButtonShown":true,"nativeFreePurchase":true,"giftState":0,"purchaseInvoked":false},
+ "tests":["store mocks PASS including free label flag true with native predicate false","runtime loading PASS","native IsFreePurchase invoked successfully in visible Bronze details"],
+ "limitations":["Purchase event subscriber and settlement require further audit","Native free predicate is current state, not a durable zero-cost authorization","Only Bronze detail live verified"],
+ "evidence":["logs/high_reuse/store-free-detail.json","logs/high_reuse/store-free-home.json"]
+}

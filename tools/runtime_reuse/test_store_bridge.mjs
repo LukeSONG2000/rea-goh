@@ -54,8 +54,9 @@ const nil={isNull:()=>true};
 const label=(text,active=true)=>ptr({text,active});
 const button=ptr({active:true,_buttonTarget:ptr({active:true,enabled:false}),_labels:list([label('Free'),label('stale hidden',false),nil]),_currentState:2,_hasEnoughForCost:true,_costLabel:label('250',false),_originalCostDiscountLabel:nil,_discountPercentLabel:nil,_discountCostLabel:nil});
 const detailItem=item('A');detailItem['<AllOffers>k__BackingField']=list([offer]);
-controller._storePackDetailsView=ptr({active:true,_storeItem:detailItem,_storeOfferPriceFormatter:ptr({}),_packTitle:label('Bronze'),_descriptionLabel:label('Description'),_fromLocation:0,_maxPurchaseAmount:1,_showFreeBuyButton:true,_singlePurchaseButton:button,_singlePurchaseButtonCentered:nil,_multiPurchaseButton:nil,_OKButtonCentered:nil});
-const oldInvoke=S.invoke;S.invoke=(t,m,o,...rest)=>m==='get_text'?o.text:m==='get_isEnabled'?o.enabled:oldInvoke(t,m,o,...rest);
+controller._storePackDetailsView=ptr({active:true,_storeItem:detailItem,_storeOfferPriceFormatter:ptr({}),_packTitle:label('Bronze'),_descriptionLabel:label('Description'),_fromLocation:0,_maxPurchaseAmount:1,_showFreeBuyButton:true,_giftState:0,_singlePurchaseButton:button,_singlePurchaseButtonCentered:nil,_multiPurchaseButton:nil,_OKButtonCentered:nil});
+const oldInvoke=S.invoke;S.invoke=(t,m,o,...rest)=>m==='IsFreePurchase'?o._showFreeBuyButton && o._storeItem.freeOffer:m==='get_text'?o.text:m==='get_isEnabled'?o.enabled:oldInvoke(t,m,o,...rest);
+detailItem.freeOffer=true;
 const beforeRead=calls.length;
 const detail=bridge.execute('store-details');
 assert.equal(detail.buttons[0].labels[0].text,'Free');
@@ -69,3 +70,10 @@ button._buttonTarget=nil;button._labels=nil;
 assert.equal(bridge.execute('store-details').buttons[0].enabled,null);
 assert.equal(bridge.execute('store-details').buttons[0].labels.length,0);
 console.log('PASS detail buttons: hidden text, absent references, disabled target, read-only getters');
+
+assert.equal(detail.nativeFreePurchase,true);
+detailItem.freeOffer=false;
+assert.equal(bridge.execute('store-details').nativeFreePurchase,false);
+assert.equal(bridge.execute('store-details').freeButtonShown,true);
+console.log('PASS native free predicate exposed separately from visible flag');
+
