@@ -1,0 +1,131 @@
+181acebf0 PUSH RBX
+181acebf2 PUSH RSI
+181acebf3 PUSH RDI
+181acebf4 SUB RSP,0x40
+181acebf8 CMP byte ptr [0x185a3e32e],0x0
+181acebff MOV RSI,RDX
+181acec02 MOV RBX,RCX
+181acec05 JNZ 0x181acec41
+181acec07 LEA RCX,[0x18580d858]
+181acec0e CALL 0x18035da50
+181acec13 OR.LOCK dword ptr [RSP],0x0
+181acec18 LEA RCX,[0x1858181f8]
+181acec1f CALL 0x18035da50
+181acec24 OR.LOCK dword ptr [RSP],0x0
+181acec29 LEA RCX,[0x1858181f0]
+181acec30 CALL 0x18035da50
+181acec35 OR.LOCK dword ptr [RSP],0x0
+181acec3a MOV byte ptr [0x185a3e32e],0x1
+181acec41 MOV RDI,qword ptr [RBX + 0x70]
+181acec45 MOV qword ptr [RSP + 0x70],R14
+181acec4a MOV qword ptr [RSP + 0x78],R15
+181acec4f TEST RDI,RDI
+181acec52 JZ 0x181acedf2
+181acec58 CMP byte ptr [0x185a3ac3a],0x0
+181acec5f MOV qword ptr [RSP + 0x60],RBP
+181acec64 MOV qword ptr [RSP + 0x68],R12
+181acec69 JNZ 0x181acec83
+181acec6b LEA RCX,[0x185788a00]
+181acec72 CALL 0x18035da50
+181acec77 OR.LOCK dword ptr [RSP],0x0
+181acec7c MOV byte ptr [0x185a3ac3a],0x1
+181acec83 MOV qword ptr [RSP + 0x30],0x88
+181acec8c LEA RDX,[RSP + 0x30]
+181acec91 XOR R15D,R15D
+181acec94 MOV RCX,RDI
+181acec97 MOV qword ptr [RSP + 0x38],R15
+181acec9c MOVAPS XMM0,xmmword ptr [RSP + 0x30]
+181aceca1 MOVDQA xmmword ptr [RSP + 0x30],XMM0
+181aceca7 CALL 0x18001f4d0
+181acecac MOV RCX,qword ptr [0x18580d858]
+181acecb3 MOV R14,qword ptr [RBX + 0xa8]
+181acecba CALL 0x1803a51b0
+181acecbf MOV RCX,qword ptr [0x1858181f0]
+181acecc6 LEA RBP,[0x180006440]
+181aceccd MOV RDI,RAX
+181acecd0 MOV RAX,qword ptr [RCX + 0x8]
+181acecd4 MOV qword ptr [RDI + 0x10],RAX
+181acecd8 MOV qword ptr [RDI + 0x28],RCX
+181acecdc MOV qword ptr [RDI + 0x20],RBX
+181acece0 MOVZX EDX,byte ptr [RCX + 0x52]
+181acece4 MOV qword ptr [RDI + 0x40],RDI
+181acece8 TEST byte ptr [RCX + 0x4c],0x10
+181acecec JZ 0x181acecf7
+181acecee TEST DL,DL
+181acecf0 JNZ 0x181acecf7
+181acecf2 MOV RAX,RBP
+181acecf5 JMP 0x181acecfb
+181acecf7 MOV qword ptr [RDI + 0x40],RBX
+181acecfb MOV qword ptr [RDI + 0x18],RAX
+181acecff LEA R12,[0x1800063e0]
+181aced06 MOV qword ptr [RDI + 0x38],R12
+181aced0a MOV RCX,qword ptr [0x18580d858]
+181aced11 CALL 0x1803a51b0
+181aced16 MOV RCX,qword ptr [0x1858181f8]
+181aced1d MOV RDX,qword ptr [RCX + 0x8]
+181aced21 MOV qword ptr [RAX + 0x10],RDX
+181aced25 MOV qword ptr [RAX + 0x28],RCX
+181aced29 MOV qword ptr [RAX + 0x20],RBX
+181aced2d MOVZX R8D,byte ptr [RCX + 0x52]
+181aced32 MOV qword ptr [RAX + 0x40],RAX
+181aced36 TEST byte ptr [RCX + 0x4c],0x10
+181aced3a JZ 0x181aced41
+181aced3c TEST R8B,R8B
+181aced3f JZ 0x181aced48
+181aced41 MOV RBP,RDX
+181aced44 MOV qword ptr [RAX + 0x40],RBX
+181aced48 MOV qword ptr [RAX + 0x18],RBP
+181aced4c MOV RBP,qword ptr [RSP + 0x60]
+181aced51 MOV qword ptr [RAX + 0x38],R12
+181aced55 MOV R12,qword ptr [RSP + 0x68]
+181aced5a TEST R14,R14
+181aced5d JZ 0x181acedf2
+181aced63 MOV qword ptr [RSP + 0x28],R15
+181aced68 MOV R9,RAX
+181aced6b MOV R8,RDI
+181aced6e MOV byte ptr [RSP + 0x20],0x1
+181aced73 MOV RDX,RSI
+181aced76 MOV RCX,R14
+181aced79 CALL 0x18164dbe0
+181aced7e TEST RSI,RSI
+181aced81 JZ 0x181acedf2
+181aced83 MOV RDX,qword ptr [RSI + 0xe8]
+181aced8a TEST RDX,RDX
+181aced8d JZ 0x181acedf2
+181aced8f MOV RCX,qword ptr [RBX + 0x58]
+181aced93 TEST RCX,RCX
+181aced96 JZ 0x181acedf2
+181aced98 MOV RAX,qword ptr [0x185a33e80]
+181aced9f XOR R9D,R9D
+181aceda2 MOV RDX,qword ptr [RDX + 0x10]
+181aceda6 MOV R8,qword ptr [RAX + 0xb8]
+181acedad MOV R8,qword ptr [R8]
+181acedb0 CALL 0x1813aaa30
+181acedb5 MOV R9,qword ptr [RSI + 0xe8]
+181acedbc TEST R9,R9
+181acedbf JZ 0x181acedf2
+181acedc1 MOV RCX,qword ptr [RBX + 0x50]
+181acedc5 TEST RCX,RCX
+181acedc8 JZ 0x181acedf2
+181acedca MOV R9,qword ptr [R9 + 0x10]
+181acedce MOVZX R8D,AL
+181acedd2 MOVZX EDX,byte ptr [RSI + 0x21]
+181acedd6 MOV qword ptr [RSP + 0x20],R15
+181aceddb CALL 0x1818dc0c0
+181acede0 MOV R15,qword ptr [RSP + 0x78]
+181acede5 MOV R14,qword ptr [RSP + 0x70]
+181acedea ADD RSP,0x40
+181acedee POP RDI
+181acedef POP RSI
+181acedf0 POP RBX
+181acedf1 RET
+181acedf2 CALL 0x180352450
+181acedf7 INT3
+181acedf8 INT3
+181acedf9 INT3
+181acedfa INT3
+181acedfb INT3
+181acedfc INT3
+181acedfd INT3
+181acedfe INT3
+181acedff INT3

@@ -110,9 +110,18 @@ try{
     if(operation==='battle-cancel')return await script.exports.battlecancel(payload);
     if(operation==='battle-unit')return await script.exports.battleunit(payload);
     if(operation==='battle-target')return await script.exports.battletarget(payload);
-    if(['campaign-mission','campaign-prebattle'].includes(operation)){
+    if(['campaign-sweep-preview','campaign-sweep-status','campaign-sweep-close','campaign-mission','campaign-prebattle'].includes(operation)){
      const result=await script.exports.campaignmission(operation,payload);
-     if(operation==='campaign-mission')return result;
+     if(['campaign-mission','campaign-sweep-status'].includes(operation))return result;
+     if(['campaign-sweep-preview','campaign-sweep-close'].includes(operation)){
+      let preview=null,confirmed=false;
+      for(let i=0;i<30;i++){
+       await new Promise(r=>setTimeout(r,250));preview=await script.exports.campaignmission('campaign-sweep-status',{});
+       confirmed=operation==='campaign-sweep-close'?!preview.visible:preview.visible&&['CampaignID','MapID','NodeID','MissionID','Difficulty'].every(k=>preview.missionIdentity?.[k]===result.expectedMissionIdentity[k]);
+       if(confirmed)break;
+      }
+      return {...result,transitionConfirmed:confirmed,preview};
+     }
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();

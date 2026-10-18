@@ -1,0 +1,65 @@
+{
+  "scope": "Original single campaign sweep preview/cancel, not execution",
+  "operations": [
+    "campaign-sweep-preview",
+    "campaign-sweep-status",
+    "campaign-sweep-close"
+  ],
+  "nativeEvidence": {
+    "detailsCallback": "0x181acebf0 sets battleType 1",
+    "missionOverload": "0x18164dbe0",
+    "targetOverload": "0x18164dc70 initializes single target",
+    "costLabels": "0x181652f60 multiplies cost quantity by selected count; ticket count multiplied by mission count only in per-mission mode"
+  },
+  "guards": [
+    "exact current mission identity",
+    "positive energy entry cost",
+    "original eligible visible enabled button",
+    "computed maximum greater than one to exclude immediate-spend branch",
+    "no duplicate active preview",
+    "reject multi-mission status"
+  ],
+  "live": {
+    "pid": 32088,
+    "hostPid": 14656,
+    "preview": {
+      "readConfirmed": true,
+      "visible": true,
+      "missionIdentity": {
+        "CampaignID": "C01L",
+        "MapID": "M01",
+        "NodeID": "N01",
+        "MissionID": "Mi01",
+        "Difficulty": 1
+      },
+      "count": 24,
+      "maxSweepCount": 24,
+      "ticketCost": 24,
+      "entryCost": {
+        "id": "PVE",
+        "itemType": 8,
+        "perAttempt": 6,
+        "total": 144
+      },
+      "scope": "Original confirmation window quantities; no redemption dispatched"
+    },
+    "closed": true,
+    "returnedHome": true,
+    "ticketsAfter": 154286,
+    "affordableAttemptsAfter": 24,
+    "confirmationInvocations": 0
+  },
+  "tests": [
+    "preview original callback and cancellation",
+    "currency and one-count preview refusal",
+    "duplicate visible preview refusal",
+    "cost/ticket count read",
+    "campaign regression and runtime loading"
+  ],
+  "limitations": [
+    "No count selection or execution yet",
+    "Preview guarded to supported energy-cost ordinary campaign only",
+    "Snapshot values do not guarantee future checkout; revalidation required",
+    "Use-target C includes tail-called Initialize; bounded listing retained"
+  ]
+}

@@ -670,6 +670,19 @@ globalThis.CampaignMissionBridge=(()=>{
  }
  function execute(operation,payload){
   const live=current(),info=live.public;
+  if(['campaign-sweep-status','campaign-sweep-close'].includes(operation)){
+   const g=R.readRef(live.details,'_grindTicketController'),v=R.readRef(g,'_missionGrindTicketView');
+   const visible=active(v);
+   if(operation==='campaign-sweep-close'){
+    if(!visible)throw Error('Sweep preview not visible');
+    S.invoke('MissionGrindTicketView','OnBackClick',v);return {navigationDispatched:true};
+   }
+   if(!visible)return {readConfirmed:true,visible:false};
+   const count=R.readValue(v,'_currentTicketCount','i32'),max=R.readValue(v,'_maxTicketCount','i32'),missions=R.readValue(v,'_numUniqueMissions','i32'),perMission=R.readValue(v,'_isMaxTicketsPerMission','bool'),cost=R.readRef(v,'_costPerTicket');
+   if(count<1||count>max||missions!==1)throw Error('Unexpected sweep preview count or multi-mission');
+   const quantity=cost.isNull()?0:R.readValue(cost,'<Quantity>k__BackingField','i32');
+   return {readConfirmed:true,visible:true,missionIdentity:info.missionIdentity,count,maxSweepCount:max,ticketCost:perMission?count*missions:count,entryCost:cost.isNull()?null:{id:S.string(R.readRef(cost,'<ID>k__BackingField')),itemType:R.readValue(cost,'<ItemType>k__BackingField','u8'),perAttempt:quantity,total:quantity*count},scope:'Original confirmation window quantities; no redemption dispatched'};
+  }
   if(operation==='campaign-mission'){
    const button=R.readRef(live.component,'_useTicketsButton'),target=button.isNull()?R.nil:R.readRef(button,'_buttonTarget');
    const cost=R.readRef(live.component,'_missionEntryCost'),cd=R.readRef(live.component,'_cooldownRenderData');
@@ -691,10 +704,20 @@ globalThis.CampaignMissionBridge=(()=>{
    }catch(e){quoteError=String(e);}
    return {...info,sweep:{buttonVisible:active(live.component)&&active(button),buttonEnabled:!target.isNull()&&!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool'),entryCost,cooldown,eligibility,limits,maxSweepCount,quoteError,ticketCost:null,executionAuthorized:false,scope:'Current original UI conditions only; entryCost is per mission, not a complete sweep quote. Entry can execute immediately without a confirmation dialog.'}};
   }
-  if(operation!=='campaign-prebattle')throw Error('Unsupported campaign mission operation');
+  if(!['campaign-prebattle','campaign-sweep-preview'].includes(operation))throw Error('Unsupported campaign mission operation');
   const id=payload?.missionIdentity;
   if(!id||['CampaignID','MapID','NodeID','MissionID'].some(k=>typeof id[k]!=='string'||!id[k].length||id[k].length>256)||!Number.isInteger(id.Difficulty)||id.Difficulty<0||id.Difficulty>255)throw Error('Full campaign mission identity required');
   if(['CampaignID','MapID','NodeID','MissionID','Difficulty'].some(k=>id[k]!==info.missionIdentity[k]))throw Error('Current campaign mission changed');
+  if(operation==='campaign-sweep-preview'){
+   const q=execute('campaign-mission',{}).sweep;
+   // Native Initialize can auto-spend when its maximum is one and cost is null.
+   // Admit only a positive-cost, multi-attempt ordinary campaign into preview.
+   if(info.locked||!q.buttonVisible||!q.buttonEnabled||q.quoteError||!q.eligibility||q.maxSweepCount<=1||!q.entryCost||q.entryCost.quantity<=0||q.entryCost.itemType!==8)throw Error('Safe energy-cost sweep preview unavailable');
+   const g=R.readRef(live.details,'_grindTicketController');
+   if(active(R.readRef(g,'_missionGrindTicketView')))throw Error('Sweep preview already open');
+   S.invoke('MissionDetailsController','HandleOnUseTicketsClicked',live.details,[R.arg.ref(live.mission)],['CampaignNodeMissionDO']);
+   return {navigationDispatched:true,expectedMissionIdentity:info.missionIdentity};
+  }
   if(info.locked||!info.enabled||!info.hasAllowedUnit)throw Error('Original mission selection unavailable');
   S.invoke('MissionDetailsController','HandleOnSelectMissionClicked',live.details,[R.arg.ref(live.mission)],['CampaignNodeMissionDO']);
   return {expectedState:'PvePreBattleState',expectedMissionIdentity:info.missionIdentity,selectionDispatched:true};
