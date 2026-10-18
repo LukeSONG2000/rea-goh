@@ -1,0 +1,48 @@
+{
+  "scope": "Original store navigation and visible catalog read; no purchase or refresh commands",
+  "operations": [
+    "store-open",
+    "store-list",
+    "store-back"
+  ],
+  "nativeEvidence": {
+    "homeOpen": "0x18173bfa0",
+    "setupItems": "0x181c971d0",
+    "itemButton": "0x181c98b00",
+    "findings": [
+      "Home open builds original transition without setting PurchaseItemOnTransition",
+      "Render list is sorted after construction; use ItemIndex to map original item",
+      "Premium-currency button can call purchase flow; not invoked by reader"
+    ]
+  },
+  "live": {
+    "pid": 32088,
+    "hostPid": 41832,
+    "items": 48,
+    "offers": 46,
+    "itemsRequiringProductPricing": 17,
+    "opened": true,
+    "read": true,
+    "returnedHome": true,
+    "purchaseInvocations": 0,
+    "initialBackFailure": "Concrete StorePackAccordionView has no declared OnBackClick; corrected to original HudBaseView inherited callback"
+  },
+  "validation": [
+    "sorted item mapping and invalid indexes",
+    "busy/inactive/wrong-state guards",
+    "external pricing explicitly unresolved",
+    "no purchase operation",
+    "runtime loading and calendar regression"
+  ],
+  "limitations": [
+    "Only Packs entry; reads currently visible accordion tab",
+    "No purchase execution or definitive localized product quote yet",
+    "No shipment store integration",
+    "PossiblePurchases is native eligibility count, not physical stock"
+  ],
+  "evidence": [
+    "logs/high_reuse/store-open.json",
+    "logs/high_reuse/store-list.json",
+    "logs/high_reuse/store-back-fixed.json"
+  ]
+}
