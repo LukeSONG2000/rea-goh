@@ -1,0 +1,340 @@
+{
+  "scope": "Original private PVP simulation, HUD regression, 1402x819",
+  "complete": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": false,
+    "terminalObserved": false,
+    "lastSnapshot": {
+      "previous": 34,
+      "next": 1,
+      "turns": 47,
+      "currentState": "BattleGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 46806,
+      "sendto": 20,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 18,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": false,
+      "campaignExpected": false,
+      "foreignTransition": false
+    }
+  },
+  "hud": {
+    "shows": 0,
+    "updates": 0,
+    "modeGateCalls": 1,
+    "tutorialDisplays": 0,
+    "errors": [],
+    "healthAnomalies": [
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":201899,\"MaxHP\":201899,\"CurrentShield\":140147,\"MaxShield\":151423,\"CurrentPermanentShield\":76032,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":64115,\"MaxBonusShield\":151424}",
+        "values": {
+          "CurrentHP": 201899,
+          "MaxHP": 201899,
+          "CurrentShield": 140147,
+          "MaxShield": 151423,
+          "CurrentPermanentShield": 76032,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 64115,
+          "MaxBonusShield": 151424
+        },
+        "observedAt": 1792311204262,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":201899,\"MaxHP\":201899,\"CurrentShield\":121902,\"MaxShield\":151423,\"CurrentPermanentShield\":76032,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":45870,\"MaxBonusShield\":151424}",
+        "values": {
+          "CurrentHP": 201899,
+          "MaxHP": 201899,
+          "CurrentShield": 121902,
+          "MaxShield": 151423,
+          "CurrentPermanentShield": 76032,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 45870,
+          "MaxBonusShield": 151424
+        },
+        "observedAt": 1792311205221,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":201899,\"MaxHP\":201899,\"CurrentShield\":108346,\"MaxShield\":151423,\"CurrentPermanentShield\":76032,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":32314,\"MaxBonusShield\":151424}",
+        "values": {
+          "CurrentHP": 201899,
+          "MaxHP": 201899,
+          "CurrentShield": 108346,
+          "MaxShield": 151423,
+          "CurrentPermanentShield": 76032,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 32314,
+          "MaxBonusShield": 151424
+        },
+        "observedAt": 1792311216414,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":201899,\"MaxHP\":201899,\"CurrentShield\":94903,\"MaxShield\":151423,\"CurrentPermanentShield\":76032,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":18871,\"MaxBonusShield\":151424}",
+        "values": {
+          "CurrentHP": 201899,
+          "MaxHP": 201899,
+          "CurrentShield": 94903,
+          "MaxShield": 151423,
+          "CurrentPermanentShield": 76032,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 18871,
+          "MaxBonusShield": 151424
+        },
+        "observedAt": 1792311216419,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":201899,\"MaxHP\":201899,\"CurrentShield\":82054,\"MaxShield\":151423,\"CurrentPermanentShield\":76032,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":6022,\"MaxBonusShield\":151424}",
+        "values": {
+          "CurrentHP": 201899,
+          "MaxHP": 201899,
+          "CurrentShield": 82054,
+          "MaxShield": 151423,
+          "CurrentPermanentShield": 76032,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 6022,
+          "MaxBonusShield": 151424
+        },
+        "observedAt": 1792311216424,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":201899,\"MaxHP\":201899,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 201899,
+          "MaxHP": 201899,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311218434,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":183836,\"MaxHP\":201899,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 183836,
+          "MaxHP": 201899,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311232377,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":173056,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 173056,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311236661,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":151236,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 151236,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311236666,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":133737,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 133737,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311237255,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":127763,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 127763,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311237273,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":105765,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 105765,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311237661,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":90488,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 90488,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311237669,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":64530,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 64530,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311244091,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":20447,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 20447,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311253016,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      },
+      {
+        "key": "0x271a5056d20:{\"CurrentHP\":1730,\"MaxHP\":173056,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":56608,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+        "values": {
+          "CurrentHP": 1730,
+          "MaxHP": 173056,
+          "CurrentShield": 0,
+          "MaxShield": -1,
+          "CurrentPermanentShield": 56608,
+          "MaxPermanentShield": -1,
+          "CurrentBonusShield": 0,
+          "MaxBonusShield": 0
+        },
+        "observedAt": 1792311258087,
+        "unitType": "BattleUnitController",
+        "maxShieldStat": -1,
+        "unitId": "2Ejg-awETh6vXk5pTXb3Qg"
+      }
+    ],
+    "last": null,
+    "target": "生命 73250 / 203513\n总护盾 0 / -1\n永久护盾 0 / -1\n临时护盾 0 / 0"
+  },
+  "enemyCommands": 18,
+  "enemyAllBasic": true,
+  "findings": [
+    "Dense arena layout still overlaps; previous PVE-only screenshot did not prove general fix",
+    "MAX_SHIELD=-1 reproduced while CurrentHP=MaxHP=201899; death-only hypothesis contradicted",
+    "Original unit type BattleUnitController; native GetStatValue(25)=-1 agrees with MaxPermanentShield=-1 in same callback",
+    "No display error in this run; clean timeout after 47 turns, terminal not reached"
+  ],
+  "next": "Compare callback-time values with deferred main-thread values; capture post-layout control bounds",
+  "evidence": "logs/high_reuse/arena-hud-regression-v1-evidence.json",
+  "screenshot": "logs/high_reuse/arena-hud-regression-start.png"
+}
