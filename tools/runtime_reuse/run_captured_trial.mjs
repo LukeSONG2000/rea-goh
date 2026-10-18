@@ -7,6 +7,7 @@ import {acquireRuntimeSession} from './runtime_session_lock.mjs';
 import {processCommands} from './runtime_commands.mjs';
 import {fileURLToPath} from 'node:url';
 import {trialCleanupComplete} from './trial_lifecycle.mjs';
+import {validatePredictionTrace} from './prediction_validation.mjs';
 const [pidText,manifestPath,output]=process.argv.slice(2),pid=Number(pidText);
 if(!Number.isSafeInteger(pid)||pid<=0||!manifestPath||!output)throw Error('Expected PID manifest.json evidence.json');
 if(fs.existsSync(output))throw Error('Evidence already exists; choose a new output path');
@@ -86,11 +87,12 @@ try{
  await session.detach();session=null;
  persist({detached:true});
  saveStatus({detached:true,battleCli:false});
- const valid=complete.error===null&&complete.serviceCalls===0&&
+ const predictionValid=manifest.experimentalPrediction===true?validatePredictionTrace(messages.find(m=>m.payload?.kind==='original-ai-trace')?.payload):null;
+ const valid=predictionValid!==false&&complete.error===null&&complete.serviceCalls===0&&
    (manifest.mode==='headless'?complete.terminal:
     complete.originalUiObserved&&(!manifest.auto||(complete.clicked&&complete.terminalObserved)));
  if(!valid)process.exitCode=1;
- process.stdout.write(JSON.stringify({mode:manifest.mode,valid,terminal:complete.terminal??complete.terminalObserved,cleanup:complete.cleanup,evidence:output})+'\n');
+ process.stdout.write(JSON.stringify({mode:manifest.mode,valid,predictionValid,terminal:complete.terminal??complete.terminalObserved,cleanup:complete.cleanup,evidence:output})+'\n');
 }finally{
  clearInterval(timer);
  if(session)await session.detach();

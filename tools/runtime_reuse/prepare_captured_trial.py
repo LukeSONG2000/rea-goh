@@ -20,7 +20,11 @@ def read_capture(path, kind):
     return data, meta, {'path': str(path.resolve()), 'sha256': digest, 'bytes': len(data)}
 
 
-def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto, trace_ai=False, enemy_basic_demo=False, enemy_control=False, ai_priority_order=None, current_selection=False):
+def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto, trace_ai=False, enemy_basic_demo=False, enemy_control=False, ai_priority_order=None, current_selection=False, experimental_prediction=False):
+    if experimental_prediction:
+        if mode != 'visual' or enemy_basic_demo or enemy_control or ai_priority_order is not None:
+            raise ValueError('Prediction experiment requires an unmodified visual AI trial')
+        trace_ai = True
     if current_selection and mode != 'visual':
         raise ValueError('Current selection requires visual trial')
     if ai_priority_order is not None:
@@ -74,14 +78,14 @@ def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto, t
     source += 'globalThis.originalFixtureDiagnostics=f=>Object.assign(' + json.dumps(diagnostic) + ',{selectedSquad:f.selection?.selection,selectedSupport:f.selection?.support});\n'
     if mode == 'visual':
         source += 'globalThis.visualProbeOptions=' + json.dumps({
-            'autoClick': auto, 'autoAfterClick': auto, 'traceAI': trace_ai, 'enemyBasicDemo': enemy_basic_demo, 'enemyControl': enemy_control,
+            'autoClick': auto, 'autoAfterClick': auto, 'traceAI': trace_ai, 'experimentalPrediction': experimental_prediction, 'enemyBasicDemo': enemy_basic_demo, 'enemyControl': enemy_control,
             'aiPriorityOrder': ai_priority_order, 'maxDurationMs': duration * 1000, 'capturePath': None}) + ';\n'
     source += (root / ('probe_visual.js' if mode == 'visual' else 'probe_simulation.js')).read_text(encoding='utf-8-sig')
     source_bytes = source.encode('utf-8')
     prefix = Path(prefix)
     js, manifest_path = Path(str(prefix) + '.js'), Path(str(prefix) + '.json')
     manifest = {'schemaVersion': 1, 'mode': mode, 'durationSeconds': duration, 'auto': auto,
-                'informationDisplay': mode == 'visual', 'currentSelection': current_selection,
+                'informationDisplay': mode == 'visual', 'currentSelection': current_selection, 'experimentalPrediction': experimental_prediction,
                 'aiPriorityOrder': ai_priority_order, 'battleCli': mode == 'visual', 'traceAI': trace_ai, 'enemyBasicDemo': enemy_basic_demo, 'enemyControl': enemy_control,
                 'squadType': squad_type, 'mission': metadata.get('mission'),
                 'battle': battle_info, 'inventory': inventory_info,
@@ -110,8 +114,9 @@ if __name__ == '__main__':
     parser.add_argument('--auto', action='store_true')
     parser.add_argument('--current-selection', action='store_true', help='Use current matching PVE selection with support; visual only')
     parser.add_argument('--trace-ai', action='store_true')
+    parser.add_argument('--experimental-prediction', action='store_true')
     parser.add_argument('--enemy-basic-demo', action='store_true')
     parser.add_argument('--enemy-control', action='store_true')
     parser.add_argument('--ai-priority-order', help='JSON file containing a complete original node-index permutation; isolated enemy only')
     a = parser.parse_args()
-    print(json.dumps(prepare(a.battle, a.inventory, a.dump, a.output_prefix, a.squad_type, a.mode, a.duration, a.auto, a.trace_ai, a.enemy_basic_demo, a.enemy_control, json.loads(Path(a.ai_priority_order).read_text(encoding='utf-8-sig')) if a.ai_priority_order else None, a.current_selection), ensure_ascii=False))
+    print(json.dumps(prepare(a.battle, a.inventory, a.dump, a.output_prefix, a.squad_type, a.mode, a.duration, a.auto, a.trace_ai, a.enemy_basic_demo, a.enemy_control, json.loads(Path(a.ai_priority_order).read_text(encoding='utf-8-sig')) if a.ai_priority_order else None, a.current_selection, a.experimental_prediction), ensure_ascii=False))

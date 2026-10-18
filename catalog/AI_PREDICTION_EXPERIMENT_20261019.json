@@ -1,0 +1,23 @@
+{
+  "scope": "Experimental native AI-result prediction immediately before the original evaluator body, owned offline visual trial only",
+  "entry": "start_captured_trial.ps1 -ExperimentalPrediction; enables TraceAI; rejects headless/enemy-control/enemy-basic-demo/priority overrides",
+  "method": "Copy original infrastructure and graph plus AI input containers; invoke original GetAbilityAIResult on private controller; record ability and ordered target-list object identities; dispose original result; compare against immediately following original evaluator return",
+  "verification": "Original five random seeds unchanged across private evaluation; private final seeds match real evaluator final seeds; original full trace and graph match no-prediction baseline",
+  "runs": [
+    {"evidence":"logs/high_reuse/trial-20261019-024848-288-evidence.json","predictions":4,"allMatched":true,"originalRandomUnchanged":true,"privateFinalRandomMatched":true},
+    {"evidence":"logs/high_reuse/trial-20261019-025205-644-evidence.json","predictions":4,"allMatched":true,"originalRandomUnchanged":true,"privateFinalRandomMatched":true,"predictionValid":true,"elapsedMs":[50,4,5,4]}
+  ],
+  "baseline":"logs/high_reuse/trial-20261019-024246-579-evidence.json",
+  "skills": ["specialability_kelleranbeq01","basicability_b1battledroid_ONBOARDING","basicability_b1battledroid_ONBOARDING","specialability_kelleranbeq02"],
+  "completion": {"bothNativeTerminal":true,"serviceCalls":0,"cleanupComplete":true,"restoredDisplayHost":24820},
+  "validation": ["native repeat matches baseline", "prediction validator rejects missing/partial/mismatch/RNG-change/error/disposal-error traces", "prepare rejects incompatible modes and enables tracing", "input/context/pool/graph/random/priority regressions", "turn-order double run identical hashes"],
+  "limits": [
+    "Not a forecast one turn in advance; input Chance and candidate sets already exist at evaluator entry",
+    "Target lists are original AI-result candidate lists; later targeting-tactic final selection is not predicted",
+    "Only this captured battle tested; enemy choices here are basic attacks; player uses two distinct specials",
+    "Unit/ability elements, stat scratch and other transitive services remain shared; replay equivalence is sampled evidence, not a full heap read-only proof",
+    "Maximum 32 predictions per trial; stops further predictions after failure/mismatch, never rolls back original RNG; validator rejects incomplete coverage",
+    "Performance samples are wall-clock observations, not a frame-rate guarantee; first prediction includes setup overhead",
+    "Ordinary trace and live display host do not enable prediction; infrastructure readiness flag remains false for general use"
+  ]
+}

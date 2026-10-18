@@ -7,6 +7,7 @@ param(
  [switch]$Auto,
  [switch]$CurrentSelection,
  [switch]$TraceAI,
+ [switch]$ExperimentalPrediction,
  [switch]$EnemyBasicDemo,
  [switch]$EnemyControl,
  [string]$AiPriorityOrder
@@ -27,6 +28,7 @@ if(!$CurrentSelection){
 if($Auto){$prepare+='--auto'}
 if($CurrentSelection){$prepare+='--current-selection'}
 if($TraceAI){$prepare+='--trace-ai'}
+if($ExperimentalPrediction){$prepare+='--experimental-prediction'}
 if($EnemyBasicDemo){$prepare+='--enemy-basic-demo'}
 if($EnemyControl){$prepare+='--enemy-control'}
 if($AiPriorityOrder){$prepare+=@('--ai-priority-order',(Resolve-Path -LiteralPath $AiPriorityOrder).Path)}

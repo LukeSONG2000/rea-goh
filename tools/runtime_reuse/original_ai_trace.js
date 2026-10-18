@@ -1,6 +1,6 @@
 'use strict';
-// Observe original decisions only. Never invokes an extra decision evaluator or
-// advances an original random stream. The copy audit advances private clones.
+// Passive by default. Explicit owned-trial experimentalPrediction also invokes
+// the original evaluator on private infrastructure; never roll back live RNG.
 // Snapshot the original graph without evaluating conditions or advancing RNG.
 globalThis.readOriginalAIRandomState=context=>{
  const result={};
@@ -256,14 +256,40 @@ globalThis.readOriginalAITree=tree=>{
   indexOf:node=>indices.get(node.toString())??null};
 };
 
-globalThis.installOriginalAITrace=context=>{
+globalThis.installOriginalAITrace=(context,options={})=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg,rows=[],errors=[],hooks=[],active=new Map(),trees=new Map();let serial=0,dropped=0;
+ const predictions=[];let predictionFailed=false;
  let randomCopyAudit=null,targetPoolAudit=null,infrastructureAudit=null,graphCopyAudit=null,inputCopyAudit=null,auditAttempted=false;
  const ref=(p,f)=>R.readRef(p,f),text=p=>S.string(p);
  const owns=p=>!p.isNull()&&ref(p,'_battleContext').equals(context);
  const call=(p,n,args=[])=>R.invoke(R.findMethod(R.classOf(p),n,args.length),p,args);
  function unit(p){if(p.isNull())return null;const u=ref(p,'_unitDO');return {baseId:text(ref(ref(u,'<Definition>k__BackingField'),'BaseId')),owner:R.unbox(call(p,'get_Owner'),'i32')};}
  function targets(p){if(p.isNull())return [];const n=R.readValue(p,'_size','i32'),items=ref(p,'_items');if(n<0||n>64)throw Error('AI target list bounds');return Array.from({length:n},(_,i)=>unit(items.add(32+i*8).readPointer()));}
+ function resultView(value){if(value.isNull())return null;const ability=ref(value,'Ability');return {abilityId:ability.isNull()?null:text(call(ref(ability,'<AbilityDO>k__BackingField'),'get_Id')),enemyTargets:targets(ref(value,'EnemyTargets')),allyTargets:targets(ref(value,'AllyTargets'))};}
+ function resultIdentity(value){if(value.isNull())return null;const result={ability:ref(value,'Ability').toString()};
+  for(const f of ['EnemyTargets','AllyTargets']){const list=ref(value,f);if(list.isNull()){result[f]=[];continue;}const size=R.readValue(list,'_size','i32');if(size<0||size>64)throw Error('Prediction target bounds');const items=ref(list,'_items');result[f]=Array.from({length:size},(_,i)=>items.add(32+i*8).readPointer().toString());}return result;}
+ function predict(controller,input,sequence){
+  const record={sequence,scope:'Experimental immediate AI-entry prediction; shared units and stat scratch',matched:null};predictions.push(record);
+  let infrastructure,inputs,value,handle,disposeMethod;
+  const before=readOriginalAIRandomState(context),started=Date.now();
+  try{
+   const resultClass=R.findClass('BattleAbilityAIResult');
+   try{disposeMethod=R.findMethod(resultClass,'System.IDisposable.Dispose',0);}catch(e){disposeMethod=R.findMethod(resultClass,'Dispose',0);}
+   infrastructure=createOriginalAIInfrastructure(controller);inputs=copyOriginalAIInputs(input);
+   value=R.invoke(R.findMethod(R.classOf(infrastructure.controller),'GetAbilityAIResult',1,['BattleAbilityAIContext']),infrastructure.controller,[A.ref(inputs.context)]);
+   if(!value.isNull())handle=R.retain(value);
+   record.result=resultView(value);record.identity=resultIdentity(value);
+   record.privateRandomAfter=readOriginalAIRandomState(infrastructure.context);
+  }catch(e){predictionFailed=true;record.error=String(e);}
+  finally{
+   try{if(value&&!value.isNull())R.invoke(disposeMethod,value,[]);}catch(e){predictionFailed=true;record.cleanupError=String(e);}
+   finally{if(handle)R.release(handle);try{inputs?.dispose();}finally{infrastructure?.dispose();}}
+   record.originalRandomUnchanged=JSON.stringify(before)===JSON.stringify(readOriginalAIRandomState(context));
+   record.elapsedMs=Date.now()-started;
+   if(!record.originalRandomUnchanged)predictionFailed=true;
+  }
+  return record;
+ }
  function inspect(fn){try{return fn();}catch(e){if(errors.length<10)errors.push(String(e));return null;}}
  function hook(name,count,types,handlers){try{hooks.push(Interceptor.attach(R.findMethod(R.findClass('BattleAbilityAIController'),name,count,types).readPointer(),handlers));}catch(e){for(const h of hooks)h.detach();throw e;}}
  hook('GetAbilityAIResult',1,['BattleAbilityAIContext'],{
@@ -288,14 +314,14 @@ globalThis.installOriginalAITrace=context=>{
    }
    const record=trees.get(key);this.row.treeId=record.graph.id;this.row.treeGraph=Array.from(trees.keys()).indexOf(key);
    this.row.evaluateBasic=record.graph.evaluateBasic;
+   if(options.experimentalPrediction===true&&!predictionFailed&&predictions.length<32)this.prediction=predict(args[0],args[1],this.row.sequence);
 
   });},
   onLeave(value){if(!this.row)return;inspect(()=>{
    this.row.randomAfter=readOriginalAIRandomState(context);
    this.row.randomChanged=Object.keys(this.row.randomBefore).filter(k=>this.row.randomBefore[k]!==this.row.randomAfter[k]);
-   if(value.isNull()){this.row.result=null;return;}
-   const ability=ref(value,'Ability');
-   this.row.result={abilityId:ability.isNull()?null:text(call(ref(ability,'<AbilityDO>k__BackingField'),'get_Id')),enemyTargets:targets(ref(value,'EnemyTargets')),allyTargets:targets(ref(value,'AllyTargets'))};
+   this.row.result=resultView(value);
+   if(this.prediction&&!this.prediction.error){this.prediction.matched=JSON.stringify(this.prediction.identity)===JSON.stringify(resultIdentity(value));this.prediction.randomAfterMatched=JSON.stringify(this.prediction.privateRandomAfter)===JSON.stringify(this.row.randomAfter);if(!this.prediction.matched||!this.prediction.randomAfterMatched)predictionFailed=true;}
   });if(this.previous)active.set(this.thread,this.previous);else active.delete(this.thread);}
  });
  hook('GetAbilityDecisionTree',1,['BattleAbilityAIContext'],{
@@ -315,5 +341,5 @@ globalThis.installOriginalAITrace=context=>{
   });}
  });
  let stopped=false;
- return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit,graphCopyAudit,inputCopyAudit}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
+ return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; optional experimental immediate-entry prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit,graphCopyAudit,inputCopyAudit,predictions,predictionFailed}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
 };

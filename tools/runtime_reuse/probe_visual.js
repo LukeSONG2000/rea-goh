@@ -64,7 +64,7 @@
    guard=installOfflineSocketGuard(); // covers fixture, entry, polling and exit
    f=createOriginalFixture(Object.assign({},options.fixture||{},{flags:6}));send(originalFixtureDiagnostics(f));
    if(options.aiPriorityOrder)globalThis.trialAIPriority=installOriginalAIPriority(f.context,options.aiPriorityOrder);
-   if(options.traceAI)globalThis.trialAITrace=installOriginalAITrace(f.context);
+   if(options.traceAI)globalThis.trialAITrace=installOriginalAITrace(f.context,{experimentalPrediction:options.experimentalPrediction===true});
    if(options.enemyBasicDemo||options.enemyControl)enemyGate=installEnemyInputGate(f.context);
    const loop=R.newObject(R.findClass('UnityGameLoop'));
    const injector=R.readRef(R.nil,'_instance',R.findClass('Injector'));
