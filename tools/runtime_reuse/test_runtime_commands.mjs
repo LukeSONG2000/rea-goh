@@ -57,6 +57,8 @@ try{
   ['events-back',undefined,{transitionConfirmed:true}],
   ['events-list',undefined,{readConfirmed:true,events:[]}],
   ['events-missions',undefined,{readConfirmed:true,missions:[]}],
+  ['events-mission-select',{eventId:'event',missionId:'mission'},{transitionConfirmed:true}],
+  ['prebattle-back',undefined,{transitionConfirmed:true}],
   ['events-open',{eventId:'event',instanceId:'instance'},{transitionConfirmed:true}],
   ['events-missions-back',undefined,{transitionConfirmed:true}],
   ['objectives-claim-status',undefined,{readConfirmed:true,claims:[]}],

@@ -297,3 +297,5 @@ Challenge interfaces:
 
 These commands do not launch battles, sweep, refresh attempts or purchase energy.
 
+
+Mission selection: events-mission-select accepts eventId/missionId from the current mission list. It invokes original selection without pressing Battle. The original support picker can intervene: receipt remains unconfirmed until support is selected; do not replay the command. prebattle-back works once the actual prebattle view is active. Live demo confirmed identity/back after a manual support selection; automatic support selection remains pending.

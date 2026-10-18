@@ -459,6 +459,21 @@ globalThis.EventsBridge=(()=>{
  }
  function execute(operation,payload){
   const c=context();
+  if(operation==='events-mission-select'){
+   if(typeof payload?.eventId!=='string'||!payload.eventId.length||typeof payload?.missionId!=='string'||!payload.missionId.length)throw Error('Mission identity required');
+   const current=execute('events-missions');
+   if(current.eventId!==payload.eventId)throw Error('Current event changed');
+   const matches=current.missions.filter(m=>m.id===payload.missionId);
+   if(matches.length!==1)throw Error('Expected unique current mission');
+   const mission=matches[0];
+   if(![2,3,4,5,6].includes(mission.progressStatus)||!mission.hasMetUnitRequirements)throw Error('Original mission locked or requirements unmet');
+   if(mission.currencyAmount!==0)throw Error('Currency-cost mission requires separate authorization');
+   if(mission.cooldown===null||mission.cooldown.active||mission.cooldown.maxAttemptsReached)throw Error('Mission attempt/cooldown unavailable or exhausted');
+   const rows=list(R.readRef(c.missions,'_missions'));
+   const row=rows.find(r=>S.string(R.readRef(r,'<Id>k__BackingField'))===payload.missionId);
+   S.invoke('EventsMissionView','MissionSelected',c.missions,[R.arg.ref(row)],['CampaignMapMissionsListItemRendererData']);
+   return {expectedState:'PvePreBattleState',eventId:current.eventId,missionId:payload.missionId};
+  }
   if(operation==='events-missions'){
    if(!active(c.missions))throw Error('Event missions not active');
    const event=R.readRef(c.sub,'_event');if(event.isNull())throw Error('Current event unavailable');
@@ -507,6 +522,21 @@ globalThis.EventsBridge=(()=>{
  return {execute,status};
 })();
 
+globalThis.PreBattleBridge=(()=>{
+ const R=RuntimeApi,S=SceneApi;
+ function current(){
+  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+  if(R.fullName(R.classOf(state))!=='PvePreBattleState')throw Error('PVE prebattle required');
+  const controller=R.readRef(state,'_featureController');
+  const view=S.invoke('PreBattleController','get_PreBattleView',controller);
+  if(view.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(view)),'bool'))throw Error('Prebattle view not ready');
+  return controller;
+ }
+ function status(){try{const c=current(),mission=R.readRef(c,'_campaignMissionIdentifier');return {ready:true,eventId:S.string(R.readRef(c,'_eventId')),instanceId:S.string(R.readRef(c,'_eventInstanceId')),missionId:mission.isNull()?null:S.string(S.invoke('CampaignElementIdentifierDO','get_MissionID',mission))};}catch(error){return {ready:false,error:String(error)};}}
+ function back(){const c=current();S.invoke('PreBattleController','HandlePreBattleViewBackClicked',c);return {expectedState:'EventsParentGameState'};}
+ return {status,back};
+})();
+
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const R=RuntimeApi,S=SceneApi;
  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
@@ -514,6 +544,7 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const stateName=R.fullName(R.classOf(state));
  const result={schemaVersion:1,state:stateName,units:[],scope:'observed current client; no gameplay input'};
  if(stateName==='HomeBaseGameState')result.campaignMenu=readCampaignMenu();
+ if(stateName==='PvePreBattleState')result.prebattle=PreBattleBridge.status();
  if(stateName==='EventsParentGameState')result.events=EventsBridge.status();
  if(stateName==='ObjectivesGameState')result.objectives=ObjectivesBridge.status();
  if(stateName==='InboxGameState')result.inbox=InboxBridge.status();
@@ -613,3 +644,5 @@ rpc.exports.objectivescommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnc
 rpc.exports.questclaimdispose=()=>RuntimeApi.runOnMainThreadOnce(()=>QuestClaimTracker.dispose());
 
 rpc.exports.eventscommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>EventsBridge.execute(operation,payload));
+
+rpc.exports.prebattleback=()=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.back());

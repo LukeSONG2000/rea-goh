@@ -239,4 +239,14 @@ missionFields['<CurrencyAmount>k__BackingField']=50;assert.equal(eventsBridge.ex
 missionFields['<CooldownRenderDataObject>k__BackingField']=obj('Cooldown',{'<HasCoolDown>k__BackingField':true,'<CoolDownActive>k__BackingField':false,'<MaxAttempts>k__BackingField':3,'<CurrentAttemptCount>k__BackingField':3,'<CanBuyRefresh>k__BackingField':true});
 const missionInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='MaxAttemptsReached'?true:missionInvoke(type,method,owner,args,types);
 assert.equal(eventsBridge.execute('events-missions').missions[0].cooldown.maxAttemptsReached,true);
+const missionRequest={eventId:'challenge',missionId:'mission'};
+assert.throws(()=>eventsBridge.execute('events-mission-select',{...missionRequest,eventId:'stale'}),/event changed/);
+assert.throws(()=>eventsBridge.execute('events-mission-select',missionRequest),/Currency-cost/);missionFields['<CurrencyAmount>k__BackingField']=0;
+assert.throws(()=>eventsBridge.execute('events-mission-select',missionRequest),/exhausted/);
+const selectInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='MaxAttemptsReached'?false:selectInvoke(type,method,owner,args,types);
+const missionSelected=eventsBridge.execute('events-mission-select',missionRequest);assert.equal(missionSelected.expectedState,'PvePreBattleState');assert.equal(calls.at(-1).method,'MissionSelected');assert.equal(calls.at(-1).args[0].value,missionRow);
+missionFields['<ProgressStatus>k__BackingField']=1;assert.throws(()=>eventsBridge.execute('events-mission-select',missionRequest),/locked/);missionFields['<ProgressStatus>k__BackingField']=5;
+const preView=obj('PreBattleView'),preController=obj('PvePreBattleController',{_eventId:'challenge',_eventInstanceId:'instance',_campaignMissionIdentifier:obj('Identifier')});state=obj('PvePreBattleState',{_featureController:preController});
+const preInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='get_PreBattleView'?preView:method==='get_MissionID'?'mission':preInvoke(type,method,owner,args,types);
+assert.equal(ctx.PreBattleBridge.status().missionId,'mission');ctx.PreBattleBridge.back();assert.equal(calls.at(-1).method,'HandlePreBattleViewBackClicked');
 console.log('PASS inventory, inbox, objectives bridges: original callbacks, live fields and guards.');

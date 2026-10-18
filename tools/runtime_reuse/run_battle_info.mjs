@@ -35,16 +35,16 @@ try{
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
-    if(['events-missions','events-list','events-open','events-missions-back'].includes(operation)){
-     const result=await script.exports.eventscommand(operation,payload);
+    if(['prebattle-back','events-mission-select','events-missions','events-list','events-open','events-missions-back'].includes(operation)){
+     const result=operation==='prebattle-back'?await script.exports.prebattleback():await script.exports.eventscommand(operation,payload);
      if(['events-list','events-missions'].includes(operation))return result;
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
-      confirmed=after.state===result.expectedState&&(result.listExpected?after.events?.listActive:after.events?.missionsActive&&after.events?.eventId===result.eventId);
+      confirmed=operation==='prebattle-back'?after.state===result.expectedState:operation==='events-mission-select'?after.state===result.expectedState&&after.prebattle?.ready&&after.prebattle.eventId===result.eventId&&after.prebattle.missionId===result.missionId:after.state===result.expectedState&&(result.listExpected?after.events?.listActive:after.events?.missionsActive&&after.events?.eventId===result.eventId);
       if(confirmed)break;
      }
-     return {...result,transitionConfirmed:!!confirmed,afterState:after.state,events:after.events};
+     return {...result,transitionConfirmed:!!confirmed,afterState:after.state,events:after.events,prebattle:after.prebattle};
     }
     if(operation==='events-back'||operation.startsWith('objectives-')){
      const result=await script.exports.objectivescommand(operation,payload);
