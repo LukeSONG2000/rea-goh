@@ -1,0 +1,590 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original enemy activated skill CLI, private captured inventory Kelleran versus Vader custom duel; not original captured mission opponents",
+  "runs": [
+    {
+      "evidence": "logs\\high_reuse\\enemy-special-vader-v2-evidence.json",
+      "sha256": "411dbd7203c215e7acc1ec0bedbfad791fe1df256d58f05110f41a9e5b96a07d",
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 10,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 6936,
+          "sendto": 3,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 3,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "manualSpecial": [
+        {
+          "event": "manual-special",
+          "token": "enemy:19440:1",
+          "abilityId": "specialability_vader02",
+          "moveType": 1,
+          "index": 0,
+          "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+          "actualTarget": "6MPxxx4ST0uP_DfGN4Kqng"
+        }
+      ],
+      "gateErrors": [],
+      "nextTurnAbilities": [
+        {
+          "moveType": 0,
+          "index": 0,
+          "id": "basicability_darthvader",
+          "allyTargetingRuleId": "",
+          "cooldown": 0,
+          "ready": true,
+          "canPerform": true,
+          "supported": true
+        },
+        {
+          "moveType": 1,
+          "index": 0,
+          "id": "specialability_vader02",
+          "allyTargetingRuleId": "",
+          "cooldown": 4,
+          "ready": false,
+          "canPerform": false,
+          "supported": true
+        },
+        {
+          "moveType": 1,
+          "index": 1,
+          "id": "specialability_vader01",
+          "allyTargetingRuleId": "",
+          "cooldown": 0,
+          "ready": true,
+          "canPerform": true,
+          "supported": true
+        },
+        {
+          "moveType": 1,
+          "index": 2,
+          "id": "specialability_vader03",
+          "allyTargetingRuleId": "",
+          "cooldown": 0,
+          "ready": true,
+          "canPerform": true,
+          "supported": true
+        }
+      ],
+      "effects": [
+        {
+          "effectId": "generic_dot_all_physical_SOT02",
+          "conditions": [
+            {
+              "conditionType": 23,
+              "conditionValue": "2",
+              "kind": "event-count",
+              "remaining": 2,
+              "requiredCount": 2,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "eventName": "自身回合开始",
+              "text": "剩余 2 次自身回合开始"
+            },
+            {
+              "conditionType": 19,
+              "conditionValue": "1",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            },
+            {
+              "conditionType": 22,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            }
+          ]
+        },
+        {
+          "effectId": "generic_dot_all_physical_SOT02",
+          "conditions": [
+            {
+              "conditionType": 23,
+              "conditionValue": "2",
+              "kind": "event-count",
+              "remaining": 2,
+              "requiredCount": 2,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "eventName": "自身回合开始",
+              "text": "剩余 2 次自身回合开始"
+            },
+            {
+              "conditionType": 19,
+              "conditionValue": "1",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            },
+            {
+              "conditionType": 22,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            }
+          ]
+        },
+        {
+          "effectId": "generic_dot_all_physical_SOT02",
+          "conditions": [
+            {
+              "conditionType": 23,
+              "conditionValue": "2",
+              "kind": "event-count",
+              "remaining": 2,
+              "requiredCount": 2,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "eventName": "自身回合开始",
+              "text": "剩余 2 次自身回合开始"
+            },
+            {
+              "conditionType": 19,
+              "conditionValue": "1",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            },
+            {
+              "conditionType": 22,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            }
+          ]
+        },
+        {
+          "effectId": "specialability_vader01_speeddown_BASE",
+          "conditions": [
+            {
+              "conditionType": 54,
+              "conditionValue": "2",
+              "kind": "event-count",
+              "remaining": 2,
+              "requiredCount": 2,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "eventName": "自身完整回合完成",
+              "text": "剩余 2 次自身完整回合完成"
+            },
+            {
+              "conditionType": 19,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            },
+            {
+              "conditionType": 22,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            }
+          ]
+        }
+      ],
+      "specialReceipts": [
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:1",
+            "moveType": 1,
+            "index": 0
+          },
+          "code": 0,
+          "stdout": "{\n  \"id\": \"69d016f5-9d70-4b92-a4c4-2df5f4166ba3\",\n  \"ok\": true,\n  \"dispatched\": true,\n  \"result\": {\n    \"started\": true,\n    \"token\": \"enemy:19440:1\",\n    \"abilityId\": \"specialability_vader02\",\n    \"moveType\": 1,\n    \"index\": 0,\n    \"selectedTarget\": \"6MPxxx4ST0uP_DfGN4Kqng\",\n    \"actualTarget\": \"6MPxxx4ST0uP_DfGN4Kqng\"\n  }\n}\n",
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:2",
+            "moveType": 1,
+            "index": 0
+          },
+          "code": 1,
+          "stdout": "{\n  \"id\": \"4e608d74-2365-49ab-94e9-2e02139ccbb0\",\n  \"ok\": false,\n  \"dispatched\": true,\n  \"error\": \"Error: Original CanPerformMove/readiness rejected ability\"\n}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "evidence": "logs\\high_reuse\\enemy-special-vader-v3-evidence.json",
+      "sha256": "0dfae6e4e8e96316581a12771b7c9b1df4bd959949c63922a272ed729f708174",
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 10,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 6958,
+          "sendto": 4,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 4,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "manualSpecial": [
+        {
+          "event": "manual-special",
+          "token": "enemy:19440:1",
+          "abilityId": "specialability_vader02",
+          "moveType": 1,
+          "index": 0,
+          "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+          "actualTarget": "6MPxxx4ST0uP_DfGN4Kqng"
+        }
+      ],
+      "gateErrors": [],
+      "nextTurnAbilities": [
+        {
+          "moveType": 0,
+          "index": 0,
+          "id": "basicability_darthvader",
+          "allyTargetingRuleId": "",
+          "abilityType": 0,
+          "cooldown": 0,
+          "ready": true,
+          "canPerform": true,
+          "supported": true
+        },
+        {
+          "moveType": 1,
+          "index": 0,
+          "id": "specialability_vader02",
+          "allyTargetingRuleId": "",
+          "abilityType": 0,
+          "cooldown": 4,
+          "ready": false,
+          "canPerform": false,
+          "supported": true
+        },
+        {
+          "moveType": 1,
+          "index": 1,
+          "id": "specialability_vader01",
+          "allyTargetingRuleId": "",
+          "abilityType": 0,
+          "cooldown": 0,
+          "ready": true,
+          "canPerform": true,
+          "supported": true
+        },
+        {
+          "moveType": 1,
+          "index": 2,
+          "id": "specialability_vader03",
+          "allyTargetingRuleId": "",
+          "abilityType": 0,
+          "cooldown": 0,
+          "ready": true,
+          "canPerform": true,
+          "supported": true
+        }
+      ],
+      "effects": [
+        {
+          "effectId": "generic_dot_all_physical_SOT02",
+          "conditions": [
+            {
+              "conditionType": 23,
+              "conditionValue": "2",
+              "kind": "event-count",
+              "remaining": 2,
+              "requiredCount": 2,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "eventName": "自身回合开始",
+              "text": "剩余 2 次自身回合开始"
+            },
+            {
+              "conditionType": 19,
+              "conditionValue": "1",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            },
+            {
+              "conditionType": 22,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            }
+          ]
+        },
+        {
+          "effectId": "generic_dot_all_physical_SOT02",
+          "conditions": [
+            {
+              "conditionType": 23,
+              "conditionValue": "2",
+              "kind": "event-count",
+              "remaining": 2,
+              "requiredCount": 2,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "eventName": "自身回合开始",
+              "text": "剩余 2 次自身回合开始"
+            },
+            {
+              "conditionType": 19,
+              "conditionValue": "1",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            },
+            {
+              "conditionType": 22,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            }
+          ]
+        },
+        {
+          "effectId": "generic_dot_all_physical_SOT02",
+          "conditions": [
+            {
+              "conditionType": 23,
+              "conditionValue": "2",
+              "kind": "event-count",
+              "remaining": 2,
+              "requiredCount": 2,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "eventName": "自身回合开始",
+              "text": "剩余 2 次自身回合开始"
+            },
+            {
+              "conditionType": 19,
+              "conditionValue": "1",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            },
+            {
+              "conditionType": 22,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            }
+          ]
+        },
+        {
+          "effectId": "specialability_vader01_speeddown_BASE",
+          "conditions": [
+            {
+              "conditionType": 54,
+              "conditionValue": "2",
+              "kind": "event-count",
+              "remaining": 2,
+              "requiredCount": 2,
+              "observedCount": 0,
+              "valueParsedAsCount": true,
+              "reported": false,
+              "eventName": "自身完整回合完成",
+              "text": "剩余 2 次自身完整回合完成"
+            },
+            {
+              "conditionType": 19,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            },
+            {
+              "conditionType": 22,
+              "conditionValue": "",
+              "kind": "non-turn-condition",
+              "remaining": null,
+              "requiredCount": 1,
+              "observedCount": 0,
+              "valueParsedAsCount": false,
+              "reported": false,
+              "reason": "Not a supported turn/action expiration counter"
+            }
+          ]
+        }
+      ],
+      "specialReceipts": [
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:1",
+            "moveType": 1,
+            "index": 0
+          },
+          "code": 0,
+          "stdout": "{\n  \"id\": \"e9c4d091-8016-4521-9d31-d053dd9ef515\",\n  \"ok\": true,\n  \"dispatched\": true,\n  \"result\": {\n    \"started\": true,\n    \"token\": \"enemy:19440:1\",\n    \"abilityId\": \"specialability_vader02\",\n    \"moveType\": 1,\n    \"index\": 0,\n    \"selectedTarget\": \"6MPxxx4ST0uP_DfGN4Kqng\",\n    \"actualTarget\": \"6MPxxx4ST0uP_DfGN4Kqng\"\n  }\n}\n",
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:2",
+            "moveType": 1,
+            "index": 0
+          },
+          "code": 1,
+          "stdout": "{\n  \"id\": \"ebdceeae-b452-45d7-9119-08ac8070e634\",\n  \"ok\": false,\n  \"dispatched\": true,\n  \"error\": \"Error: Original CanPerformMove/readiness rejected ability\"\n}\n",
+          "stderr": ""
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Ally selection and ultimate skill UI pending",
+    "No full deterministic RNG equivalence claimed from terminal summary",
+    "No screenshot verification in these runs",
+    "No all-mode certification"
+  ],
+  "normalDisplayHost": 13872,
+  "tests": [
+    "enemy_input_gate",
+    "trial_input",
+    "runtime_commands",
+    "trial_lifecycle",
+    "demo_turn_order same-seed internal double run"
+  ]
+}

@@ -7,10 +7,11 @@ rpc.exports.trialcommand=(operation,request)=>RuntimeApi.runOnMainThreadOnce(()=
  if(!state.equals(probe.entered))throw Error('Current state is not the owned trial');
  const context=R.readRef(R.readRef(state,'_battleController'),'_battleContext');
  if(!context.equals(probe.fixture.context))throw Error('Trial context ownership mismatch');
- if(['enemy-basic','enemy-resume','enemy-target'].includes(operation)){
+ if(['enemy-basic','enemy-resume','enemy-target','enemy-ability'].includes(operation)){
   if(!probe.enemyGate)throw Error('Explicit enemy control not enabled for this trial');
   if(!request||typeof request.token!=='string')throw Error('Expected enemy input token');
   if(operation==='enemy-target')return probe.enemyGate.selectTarget(request);
+  if(operation==='enemy-ability')return probe.enemyGate.chooseAbility(request);
   return operation==='enemy-basic'?probe.enemyGate.chooseBasic(request.token):probe.enemyGate.resume(request.token);
  }
  const actions={'battle-ability':BattleInputBridge.choose,'battle-target':BattleInputBridge.selectTarget,

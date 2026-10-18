@@ -11,6 +11,22 @@ globalThis.installEnemyInputGate=context=>{
  const actor=()=>call(context,'get_CurrentUnit');
  const fsm=()=>call(context,'get_BattleFsmController');
  const unitId=p=>p.isNull()?null:S.string(R.readRef(R.readRef(p,'_unitDO'),'Id'));
+ function abilities(){
+  const list=R.readRef(pending.unit,'_limitBreakAbilityContexts');
+  const n=R.readValue(list,'_size','i32'),items=S.array(R.readRef(list,'_items'));
+  if(n<0||n>64||n>items.length)throw Error('Original special ability list bounds');
+  return [{ability:R.readRef(pending.unit,'_attackAbilityContext'),moveType:0,index:0},
+   ...items.slice(0,n).map((ability,index)=>({ability,moveType:1,index}))].filter(x=>!x.ability.isNull()).map(x=>{
+    const data=R.readRef(x.ability,'<AbilityDO>k__BackingField');
+    const allyTargetingRuleId=S.string(call(data,'get_AllyTargetingRuleId'));
+    const abilityType=R.unbox(call(data,'get_AbilityType'),'u8');
+    return {...x,id:S.string(call(data,'get_Id')),allyTargetingRuleId,abilityType,
+     cooldown:R.readValue(x.ability,'<CooldownCounter>k__BackingField','i32'),
+     ready:!!R.unbox(call(x.ability,'get_IsAbilityReady'),'bool'),
+     canPerform:!!R.unbox(call(pending.unit,'CanPerformMove',[A.value('i32',x.moveType),A.value('i32',x.index),A.value('bool',false)]),'bool'),
+     supported:abilityType===0&&!allyTargetingRuleId};
+   });
+ }
  function targeting(){
   const controller=R.readRef(pending.unit,'_targetingController');
   const list=call(controller,'GetValidTargets',[A.ref(R.nil)]);
@@ -23,6 +39,7 @@ globalThis.installEnemyInputGate=context=>{
   if(!pending)return {pending:false};
   const targetInfo=targeting();
   return {pending:true,token:pending.token,expiresAt:pending.expiresAt,actor:unitId(pending.unit),
+   abilities:abilities().map(({ability,...info})=>info),
    targets:targetInfo.targets,selectedTarget:targetInfo.selectedTarget,manualTarget:targetInfo.manualTarget,
    owner:R.unbox(call(pending.unit,'get_Owner'),'i32'),
    turn:R.readValue(fsm(),'<TurnCount>k__BackingField','i32'),
@@ -84,25 +101,29 @@ globalThis.installEnemyInputGate=context=>{
    finally{for(const handle of saved.retained)R.release(handle);}
    return {resumed:true,token};
   },
-  chooseBasic(token){
+  chooseBasic(token){return this.chooseAbility({token,moveType:0,index:0});},
+  chooseAbility(request){
+   const {token,moveType,index}=request||{};
    validate();if(token!==pending.token)throw Error('Stale enemy input token');
    if(Date.now()>=pending.expiresAt)throw Error('Enemy input expired; original AI will resume');
+   if(![0,1].includes(moveType)||!Number.isInteger(index)||index<0||index>63||(moveType===0&&index!==0))throw Error('Invalid enemy ability selector');
    const saved=pending;
-   if(!R.unbox(call(saved.unit,'CanPerformMove',[A.value('i32',0),A.value('i32',0),A.value('bool',false)]),'bool'))
-    throw Error('Original CanPerformMove rejected basic attack');
-   const ability=R.readRef(saved.unit,'_attackAbilityContext');
-   const abilityId=S.string(call(R.readRef(ability,'<AbilityDO>k__BackingField'),'get_Id'));
+   const chosen=abilities().find(x=>x.moveType===moveType&&x.index===index);
+   if(!chosen)throw Error('Enemy ability absent from original list');
+   if(!chosen.supported)throw Error('Original ability requires ally selection or an unsupported ability type');
+   if(!chosen.ready||!chosen.canPerform)throw Error('Original CanPerformMove/readiness rejected ability');
+   const abilityId=chosen.id;
    const selectedTarget=unitId(call(R.readRef(saved.unit,'_targetingController'),'GetCurrentTarget'));
    // Same original move and completion delegate used by BattleInputProvider.
    // Target remains the original targeting controller's current target.
    pending=null;
    try{
-    const started=R.unbox(call(saved.unit,'PerformManualMove',[A.value('i32',0),A.value('i32',0)]),'bool');
+    const started=R.unbox(call(saved.unit,'PerformManualMove',[A.value('i32',moveType),A.value('i32',index)]),'bool');
     if(!started){pending=saved;throw Error('Original manual move did not start');}
-    call(saved.callback,'Invoke',[A.value('i32',0)]);
+    call(saved.callback,'Invoke',[A.value('i32',moveType)]);
     const actualTarget=unitId(R.readRef(saved.unit,'<EnemyTarget>k__BackingField'));
-    events.push({event:'manual-basic',token,abilityId,selectedTarget,actualTarget});
-    return {started:true,token,abilityId,selectedTarget,actualTarget};
+    events.push({event:moveType===0?'manual-basic':'manual-special',token,abilityId,moveType,index,selectedTarget,actualTarget});
+    return {started:true,token,abilityId,moveType,index,selectedTarget,actualTarget};
    }finally{if(pending!==saved)for(const handle of saved.retained)R.release(handle);}
   },
   stop(){

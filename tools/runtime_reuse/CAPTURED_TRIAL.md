@@ -53,7 +53,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 
 已验证捕获 1-A、保存小队类型 8、`-Auto -Duration 90 -EnemyBasicDemo`：
 两次敌方 B1 普攻、等待期间回合/FSM不前进、原终局和清理通过。
-当前只提供普攻验证；任意技能和友军选取尚未开放。
+该自动演示只执行普攻；显式 CLI 还支持下述普通主动特殊技能。
 该选项仅支持 visual，日志记录 held/manual-input；显式控制接口见下节。
 
 ## 敌方输入 CLI（隔离试玩）
@@ -66,6 +66,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 node tools/runtime_reuse/runtime_cli.mjs enemy-basic --pid PID --request logs/high_reuse/enemy-request.json
 node tools/runtime_reuse/runtime_cli.mjs enemy-resume --pid PID --request logs/high_reuse/enemy-request.json
 node tools/runtime_reuse/runtime_cli.mjs enemy-target --pid PID --request logs/high_reuse/enemy-target.json
+node tools/runtime_reuse/runtime_cli.mjs enemy-ability --pid PID --request logs/high_reuse/enemy-ability.json
 ```
 
 `enemy-basic` 执行原普攻，`enemy-resume` 恢复原 AI。出招 token 只消费一次。
@@ -80,7 +81,18 @@ node tools/runtime_reuse/runtime_cli.mjs enemy-target --pid PID --request logs/h
 整个客户端或比赛倒计时。试玩外命令拒绝，未启用控制的试玩也拒绝。
 
 已验证真实 CLI 普攻、重复 token 拒绝、下一敌方恢复 AI，以及两次无人输入
-超时自动恢复。任意特殊技能、友军/终极选择仍待完成。
+超时自动恢复。
+
+`enemy-ability` 请求为 `{"token":"当前token","moveType":1,"index":0}`。
+必须从当前 `enemyInput.abilities` 读取 moveType/index，不按技能显示顺序猜测；
+moveType 0 是普攻，1 是原特殊技能列表。该列表同时给出原技能 ID、类型、
+冷却、ready、canPerform 和 supported。只有 supported/ready/canPerform 全为
+true 才可提交；执行前再次调用原可用性检查。技能类型须为 ACTIVATED，且
+原 AllyTargetingRuleId 为空。需要友军选择的技能和终极技能仍待接通。
+动作调用原 PerformManualMove 和原输入完成回调，效果、伤害及冷却由原引擎结算。
+验证使用私有库存凯勒兰对维达自定义对战，不冒充捕获关卡原敌方阵容：
+维达 specialability_vader02 产生原持续伤害/减速状态，下一敌方回合冷却为 4，
+再次提交被原可用性检查拒绝，然后可正常恢复原 AI。
 
 敌方目标切换已在原私有库存组成的凯勒兰＋农场卢克诊断编队中双跑验证：
 目标由卢克变为凯勒兰，原普攻 `EnemyTarget` 同步变化，终局与清理通过。
@@ -110,5 +122,5 @@ node tools/runtime_reuse/runtime_cli.mjs battle-cancel --pid PID --request logs/
 校验会拒绝执行，应重新读取快照后再决定操作。
 
 仍待完成：新鲜快照采集入口、好友支援、非空 Datacron、Era 借用单位、其他
-活动/有限次数模式、终极技能独立 UI、敌方控制和预测。当前截图和确定性验证
+活动/有限次数模式、终极技能独立 UI、敌方友军选择和预测。当前截图和确定性验证
 不代表这些范围已通过。
