@@ -1,0 +1,44 @@
+{
+  "scope": "Guarded original sweep confirmation and submission receipt; no authorized live redemption yet",
+  "operations": [
+    "campaign-sweep-confirm",
+    "campaign-sweep-receipt"
+  ],
+  "nativeEvidence": {
+    "confirmClick": "0x181652d40 listing only; forwards current count to delegate",
+    "handler": "0x18164f470 hides preview then original SpendGrindTickets; decompiler includes tail call"
+  },
+  "guards": [
+    "explicit authorization declaration required (operator must obtain actual user consent)",
+    "full mission and exact preview count/ticket/energy quote",
+    "original eligibility and affordability rechecked",
+    "single original redeem target identity and no event instance",
+    "active enabled confirmation button",
+    "submission latched before native call; no second submit per host session"
+  ],
+  "receiptScope": "Ticket difference only, settlementConfirmed remains false; no reward claim made",
+  "tests": [
+    "missing authorization and changed quote rejected",
+    "foreign original target rejected",
+    "one original confirmation callback",
+    "repeat refused",
+    "native exception leaves uncertain receipt and retry refused",
+    "ticket delta observed but settlement false",
+    "runtime loading regression"
+  ],
+  "live": {
+    "hostPid": 26640,
+    "unauthorizedRequestDispatched": false,
+    "receipt": null,
+    "spent": false
+  },
+  "limitations": [
+    "Session-local latch resets on host restart; durable command mailbox persists requests/results but not cross-session logical operation deduplication",
+    "No native authorized confirmation or reward reconciliation verified",
+    "One submission per host until stronger settlement lifecycle implemented"
+  ],
+  "evidence": [
+    "logs/high_reuse/sweep-confirm-rejected.json",
+    "logs/high_reuse/sweep-receipt-empty.json"
+  ]
+}

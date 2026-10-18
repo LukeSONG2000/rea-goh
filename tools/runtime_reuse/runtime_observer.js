@@ -650,6 +650,8 @@ globalThis.EventsBridge=(()=>{
 
 globalThis.CampaignMissionBridge=(()=>{
  const R=RuntimeApi,S=SceneApi;
+ let submission=null;
+ const ticketBalance=()=>R.unbox(S.invoke('InventoryDomainController','GetCurrencyQuantity',R.findBound('InventoryDomainController'),[R.arg.value('i32',10)],['CurrencyTypeEnum']),'i32');
  const active=o=>!o.isNull()&&!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(o)),'bool');
  function current(){
   const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
@@ -669,7 +671,31 @@ globalThis.CampaignMissionBridge=(()=>{
   return {details,component,mission,public:{readConfirmed:true,missionIdentity,locked,enabled,hasAllowedUnit:!!R.readValue(component,'_userHasAtLeastOneAllowedUnit','bool'),scope:'Current original map mission details; selection enters prebattle, not combat'}};
  }
  function execute(operation,payload){
+  if(operation==='campaign-sweep-receipt'){
+   if(submission&&!submission.ticketDebitObserved){
+    try{const after=ticketBalance();submission.ticketsAfter=after;submission.ticketDebitObserved=submission.ticketsBefore-after===submission.ticketCost;}catch(e){submission.readError=String(e);}
+   }
+   return {readConfirmed:true,receipt:submission?{...submission}:null,settlementConfirmed:false,note:'Ticket delta alone is not reward settlement; never retry an uncertain submission.'};
+  }
   const live=current(),info=live.public;
+  if(operation==='campaign-sweep-confirm'){
+   if(payload?.authorization!=='explicit-user-approved-resource-spend')throw Error('Explicit resource authorization required');
+   if(submission)throw Error('Sweep already submitted in this host session; inspect receipt, never retry');
+   const id=payload?.missionIdentity;
+   if(!id||['CampaignID','MapID','NodeID','MissionID','Difficulty'].some(k=>id[k]!==info.missionIdentity[k]))throw Error('Current campaign mission changed');
+   const q=execute('campaign-sweep-status',{}),conditions=execute('campaign-mission',{}).sweep;
+   if(!q.visible||!Number.isInteger(payload.count)||q.count!==payload.count||q.ticketCost!==payload.ticketCost||!q.entryCost||q.entryCost.itemType!==8||q.entryCost.id!==payload.energyId||q.entryCost.total!==payload.energyCost||!conditions.eligibility||conditions.quoteError||conditions.maxSweepCount<q.count)throw Error('Sweep quote changed or unavailable');
+   const g=R.readRef(live.details,'_grindTicketController'),v=R.readRef(g,'_missionGrindTicketView'),button=R.readRef(v,'_confirmButton');
+   const targets=R.readRef(g,'_redeemTargets'),items=R.readRef(targets,'_items');
+   if(R.readValue(g,'_multiMissionMode','bool')||R.readValue(g,'_battleType','u8')!==1||R.readValue(targets,'_size','i32')!==1||items.isNull()||items.add(24).readU64().toNumber()<1)throw Error('Original sweep target list changed');
+   const target=items.add(32).readPointer();
+   if(target.isNull()||!R.readRef(target,'<Mission>k__BackingField').equals(live.mission)||!R.readRef(target,'<EventInstance>k__BackingField').isNull())throw Error('Original sweep target ownership mismatch');
+   if(!active(button)||!R.unbox(S.invoke('UIButton','get_isEnabled',button),'bool'))throw Error('Original sweep confirmation disabled');
+   const before=ticketBalance();if(!Number.isInteger(before)||before<q.ticketCost)throw Error('Insufficient original tickets');
+   submission={missionIdentity:{...info.missionIdentity},count:q.count,ticketCost:q.ticketCost,entryCost:q.entryCost,ticketsBefore:before,ticketDebitObserved:false,confirmationReturned:false,submittedAt:new Date().toISOString()};
+   try{S.invoke('MissionGrindTicketView','OnUseGrindTicketsClick',v);submission.confirmationReturned=true;}catch(e){submission.error=String(e);throw e;}
+   return {claimDispatched:true,receipt:{...submission},settlementConfirmed:false};
+  }
   if(['campaign-sweep-count','campaign-sweep-status','campaign-sweep-close'].includes(operation)){
    const g=R.readRef(live.details,'_grindTicketController'),v=R.readRef(g,'_missionGrindTicketView');
    const visible=active(v);

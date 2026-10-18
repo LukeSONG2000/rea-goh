@@ -456,3 +456,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 【Codex/root 2026-10-19 sweep-count native+live】新增campaign-sweep-count，完整mission identity与单关/整数1..max校验，调用原UpdateTicketCount+ManuallyUpdateCountSlider，host核数量及关卡读回。两原函数只读反编译留证。实机默认24调1，原确认窗1券+6体力，取消后券154286/可负担24未变，返回Home，host25492。越界/小数/null/旧关卡拒绝及原方法mock、campaign/loading PASS。报告SWEEP_COUNT_20261019.json；未确认消费，授权执行与结果核验仍待。
 【Codex/root 2026-10-19 sweep-confirm】认领扫荡确认接口/提交防重和券差额状态，root独占runtime；本轮无资源授权，不实际确认。
+
+【Codex/root 2026-10-19 sweep-confirm implemented-not-spent】新增campaign-sweep-confirm/receipt：声明明确授权、完整关卡/次数/券与体力报价、原eligibility/affordability、实际RedeemTarget单关对象且无event、活动enabled按钮核验；调用前latch，同host第二次拒绝，原异常也保留。receipt只核券差额，settlementConfirmed仍false。原confirm listing与handler留证；mock旧报价/foreign target/缺授权/重复/异常不可重试/差额不冒称奖励通过，loading通过。实机无授权请求在host dispatched=false拒绝，空receipt，host26640/Home，无消费。报告SWEEP_CONFIRM_20261019.json。等待用户明确授权1A一次1券6体力后实测；奖励核验/跨host逻辑去重仍待，不重启以重试。
