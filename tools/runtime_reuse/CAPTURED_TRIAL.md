@@ -217,3 +217,4 @@ implemented but not yet live-validated.
 等级对象新增 `materials`：原 itemType/renderType/id/label/quantityRaw。RecipeData 是值类型 KeyValuePair 列表，使用原 get_Item 装箱读取，不能当对象指针数组。维达普攻各等级 quantityRaw 与原 label 的需求分母吻合；尚未独立核对库存持有数，继续保留 costComplete:false。
 材料条目 `ownedQuantity` 现直接调用原 InventoryDomainController.GetCraftingMaterialQuantity(string) 实时读取，仅对原 MATERIAL 类型有效。其他类型返回 null，读取异常返回 inventoryError；零表示确实读到零，不表示未知。原 UI label 与库存交叉验证通过不等于当前等级可升级，仍应读取原 upgradeAvailable 与解锁条件。
 等级对象新增 currencyOwned：原 InventoryDomainController.GetCurrencyQuantity(CurrencyTypeEnum) 实时返回，失败为 null 并附 currencyError。原 currencyType 数值保留，UNDEFINED 类型的零返回不能当作可消费钱包。余额与材料数量不替代原 upgradeAvailable/allowUpgrade，也不代表用户已授权消费。
+重要实机语义：`upgradeAvailable` **不能单独作为立即升级判据**。50级 VEERS 的1级普攻打开后原窗口默认选中2级（tier=0、upgradeStatus=2），后续3–8级也会 upgradeAvailable=true，但 upgradeStatus=0。原枚举：0 LOCKED、1 ACQUIRED、2 UPGRADE_ELIGIBLE、3 UPGRADE_CANDIDATE。调用方必须保留原选中等级与状态，不能自行跳级或把此布尔值改名为 canUpgradeNow。
