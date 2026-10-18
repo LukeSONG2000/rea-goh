@@ -1,0 +1,201 @@
+{
+  "scope": "One explicitly authorized real squad arena retest, original start and settlement",
+  "opponent": {
+    "rank": 329,
+    "name": "Wormy"
+  },
+  "result": {
+    "victoryConfirmedByNativeRankReport": true,
+    "rankAfter": 329,
+    "rankBefore": 338,
+    "remainingAttemptsBefore": 3,
+    "friendRequestSent": false,
+    "crystalsBefore": 7441,
+    "crystalsAfter": 7441,
+    "remainingAttemptsAfter": 2
+  },
+  "control": {
+    "kind": "live-arena-basic-stopped",
+    "armed": false,
+    "entered": true,
+    "finished": true,
+    "enemyBasics": 12,
+    "playerOriginalInputs": 23,
+    "fallbacks": 0,
+    "errors": [],
+    "moves": [
+      {
+        "turn": 1,
+        "abilityId": "basicability_lordvader",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 6,
+        "abilityId": "basicability_operative",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 8,
+        "abilityId": "basicability_disguisedclonetrooper",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 9,
+        "abilityId": "basicability_appo",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 10,
+        "abilityId": "basicability_lordvader",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 13,
+        "abilityId": "basicability_lordvader",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 19,
+        "abilityId": "basicability_disguisedclonetrooper",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 20,
+        "abilityId": "basicability_knightfalltrooper_pve",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 21,
+        "abilityId": "basicability_appo",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 22,
+        "abilityId": "basicability_lordvader",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 25,
+        "abilityId": "basicability_operative",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 28,
+        "abilityId": "basicability_lordvader",
+        "moveType": 0,
+        "index": 0
+      }
+    ]
+  },
+  "hud": {
+    "observed": "Right-top absolute health/protection and native ability icons visible; no overlap in captured 1402x819 scene",
+    "modeGateCalls": 1,
+    "targetLayout": {
+      "controlsLeft": -355.9000244140625,
+      "label": {
+        "left": -721.9000244140625,
+        "right": -371.9000244140625
+      },
+      "gap": 16,
+      "measured": [
+        {
+          "active": true,
+          "left": -187,
+          "right": 65
+        },
+        {
+          "active": true,
+          "left": -261.2000427246094,
+          "right": 58
+        },
+        {
+          "active": true,
+          "left": -355.9000244140625,
+          "right": -206.5
+        }
+      ]
+    },
+    "longPressVerified": false,
+    "errors": []
+  },
+  "cleanup": {
+    "nativeExitUnhookConfirmed": true,
+    "clientPid": 32088,
+    "ordinaryHostRestored": 36780
+  },
+  "tests": [
+    "live arena one-shot scope and original inputs PASS",
+    "HUD cleanup lifecycle PASS",
+    "runtime loading recovery PASS"
+  ],
+  "limitations": [
+    "Enemy active moves only; original passives, counters, assists and summons retained",
+    "One matchup, not all modes",
+    "No new battle logic changes required"
+  ],
+  "evidence": [
+    {
+      "path": "logs\\high_reuse\\arena-retest-after-attempts.png",
+      "sha256": "00f51cf83a6c5219f0afbcf96a8a383c618f106d2a37599f4a7ce040135c197c"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-after-matchmaking.png",
+      "sha256": "0ff7f351445cb540781cf1ee8dfedb19031e05f26411d6e70d4851acbd3548d6"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-battle.png",
+      "sha256": "fbb90da891b9d2e48c5b6772a456d1d2519a8031af61581cd8a04258de272218"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-before.png",
+      "sha256": "76dc9e4006a65e92d2b6ff5c08683ae3dd3157350155813d8c07805fb99d49c3"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-entered.png",
+      "sha256": "96852e5e891d2f76457f99af6aa0148111a660ff83896be76f05aa335c33c11a"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-opponents.png",
+      "sha256": "e092794e0b92b3b52ed85892341764f6246fcf94c4881feb4347b024ba7e784f"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-prebattle.png",
+      "sha256": "9423417b0f490ea52a9f26379051361d7d006598a1c249daeca28396f4aa2a07"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-settlement.png",
+      "sha256": "f732bd0b7286144f81e18c4faf62c7deba91264202c51d81fe1b9a6d4c50cd02"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-detached-host.json",
+      "sha256": "817e86cff6a38a8709b7632ad1b6ed03f5f3e2202d12f4e5b9a7455867b887af"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-final-host.json",
+      "sha256": "5b4919eb7ff65ff46c1922925717adde7f64fef488a50e25990fc902a82da72c"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-finished-host.json",
+      "sha256": "5b4919eb7ff65ff46c1922925717adde7f64fef488a50e25990fc902a82da72c"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-running.json",
+      "sha256": "b7cab2e9b44344f8927a6b67323c7f634ad745b8a16dc3d2466b65a3ead29a40"
+    },
+    {
+      "path": "logs\\high_reuse\\arena-retest-settlement-host.json",
+      "sha256": "dea0b1c377468bceb8d41d35b8dba865f99f537b1b345d7a40915df4e13a37af"
+    }
+  ]
+}
