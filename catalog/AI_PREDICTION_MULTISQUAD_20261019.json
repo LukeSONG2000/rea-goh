@@ -1,0 +1,15 @@
+{
+  "scope":"Original saved squad type1 against captured campaign enemies; multi-unit AI-result prediction",
+  "baseline":"logs/high_reuse/trial-20261019-030621-779-evidence.json",
+  "experiment":"logs/high_reuse/trial-20261019-030732-673-evidence.json",
+  "results":[
+    {"actor":"GENERALSKYWALKER","ability":"grantedability_generalskywalker","allyCandidates":6,"elapsedMs":46},
+    {"actor":"HERMITYODA","ability":"specialability_hermityoda01","allyCandidates":1,"elapsedMs":4},
+    {"actor":"PVE_REBELTROOPER","ability":"luthen_specialability_rebeltrooper01","allyCandidates":6,"elapsedMs":4},
+    {"actor":"LUTHENRAEL","ability":"specialability_luthenrael01","allyCandidates":3,"elapsedMs":3}
+  ],
+  "verified":{"predictions":4,"allResultObjectIdentitiesAndOrderMatched":true,"originalRandomUnchanged":true,"privateFinalSeedsMatched":true,"fullOriginalRowsAndTreesEqualBaseline":true,"bothTerminal":true,"serviceCalls":0,"cleanupComplete":true,"restoredDisplayHost":31940},
+  "tool":"tools/runtime_reuse/compare_ai_prediction.mjs baseline-evidence.json prediction-evidence.json",
+  "toolValidation":"Offline comparer passed for this pair and earlier Kelleran pair; negative tests reject changed rows, result details, final seeds, service activity, incomplete cleanup and duplicate traces",
+  "limitations":["CLI snapshot was read after return to Home; ai-prediction-multisquad-snapshot.json is not evidence of live prediction interface","No original summon callback or IsSummon flag captured in this run; PVE_REBELTROOPER participation is observed, not universal summon-path verification","Candidate lists are not necessarily final executed targets","No new multi-enemy special-ability coverage; this squad ends the weak captured encounter before an enemy AI decision","Full transitive shared-state isolation and advance-turn forecasting remain unproven"]
+}
