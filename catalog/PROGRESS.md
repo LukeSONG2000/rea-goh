@@ -405,3 +405,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 live-arena-retest】用户再次明确授权一场真实小队竞技场，消耗原次数并原结算；root认领运行时复测，敌方主动普攻/我方原AI，不购买次数/清冷却，不改原目录。
 【Codex/root 2026-10-18 live-arena-retest PASS】真实小队竞技场Wormy(#329)，我方Leia/R2/Drogan/Raddus/Jyn原AI23次，敌方12次主动均basic/index0/moveType0（含原召唤兵），fallback0/errors空；原结算胜利排名338→329，原次数3→2，水晶7441不变。原SC_Exit解除单场hook，普通host36780恢复，回Home。右上绝对值与密集技能栏gap16/截图无重叠，长按本轮未验。三个对应回归PASS，无新增实现缺陷。报告LIVE_ARENA_RETEST_20261018.json，证据logs/high_reuse/arena-retest-*。
 【Codex/root 2026-10-18 popup-regression】认领隔离试玩的原长按面板多状态排版实测，root独占runtime及显示模块，不新增真实竞技场消耗。
+【Codex/root 2026-10-19 calendar-cli】用户新增登录日历领取，root认领原controller/view回调及CLI；前项长按隔离试玩150s清理成功但未验收，暂挂。仅免费原日历领取，不补签付费。
