@@ -1,0 +1,10 @@
+{
+ "scope":"Original mastery total before upper/lower stat limits, distinct from recursive zero-initial mastery term",
+ "nativeEvidence":"GetStatValue 1BBAE55 calls GetInitialUnitCalculatedStat, passes returned float at stack+20 into FDE5C0 at 1BBAE8B, equipment exclusion 0 and override level -1; later calls upper/lower limits",
+ "fields":["mastery.beforeLimits","mastery.netBeforeLimits","mastery.limitAdjustment"],
+ "overlay":"Mastery tab shows pre-limit total and final minus pre-limit adjustment",
+ "live":{"pid":32088,"trial":"trial-20261019-054322-998","unitsRead":11,"warnings":0,"hermitYoda":{"initial":35,"beforeLimits":35,"current":35,"limitAdjustment":0},"generalSkywalker":{"initial":45,"beforeLimits":45,"current":45,"limitAdjustment":0},"returnedHome":true,"cleanupErrors":[],"restoredHostPid":41568},
+ "tests":["Reader exact original argument fixture distinguishes initial20 / recursive40 / pre-limit50 / final35 PASS","Overlay missing and negative limit adjustment text PASS","Runtime loading PASS","Original isolated visual runtime read PASS; timeout cleanup valid"],
+ "limitations":["Live sample did not trigger mastery limits or mastery changes","Nonzero cap adjustment only tested with fixture","Final attribution of other-stat changes to mastery still unknown","Updated overlay layout has not been visually rechecked"],
+ "evidence":["logs/high_reuse/mastery-limits-live-snapshot.json","logs/high_reuse/trial-20261019-054322-998-evidence.json","il2cpp/decompiled/unit_stat_value_listing.txt"]
+}

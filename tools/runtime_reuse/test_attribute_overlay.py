@@ -31,6 +31,11 @@ class OwnerTests(unittest.TestCase):
         text=mastery_text({'mastery':{'initial':60,'current':45,'netBattleDelta':-15}})
         self.assertIn('-15',text);self.assertIn('45',text)
         self.assertIn('未读取',mastery_text({}))
+    def test_mastery_limit_stage(self):
+        text=mastery_text({'mastery':{'initial':20,'current':35,'netBattleDelta':15,'beforeLimits':50,'netBeforeLimits':30,'limitAdjustment':-15}})
+        self.assertIn('限制前精通：50',text)
+        self.assertIn('上下限调整：-15',text)
+        self.assertIn('限制前精通：未读取',mastery_text({}))
     def test_prediction_history_truth_and_local_labels(self):
         names=({'skill':'原技能'}, {'unit':'原角色'})
         row={'sequence':1,'actor':{'baseId':'unit','owner':1},'matched':True,'originalRandomUnchanged':True,'randomAfterMatched':True,'result':{'abilityId':'skill','enemyTargets':[],'allyTargets':[]},'elapsedMs':4}
@@ -46,3 +51,4 @@ class OwnerTests(unittest.TestCase):
         self.assertIn('停止后续预测',prediction_text(data,names))
 
 if __name__=='__main__': unittest.main()
+

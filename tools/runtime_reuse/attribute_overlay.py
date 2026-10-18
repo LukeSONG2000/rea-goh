@@ -19,7 +19,9 @@ def pool(label, value):
 def mastery_text(attributes):
     value=attributes.get('mastery',{})
     lines=[f"精通（Mastery）：初始 {number(value.get('initial'))} → 当前 {number(value.get('current'))}",
-           f"净变化：{number(value.get('netBattleDelta'))}", '',
+           f"净变化：{number(value.get('netBattleDelta'))}",
+           f"限制前精通：{number(value.get('beforeLimits'))}（相对初始 {number(value.get('netBeforeLimits'))}）",
+           f"上下限调整：{number(value.get('limitAdjustment'))}（最终值 − 限制前值）", '',
            '以下为原计算流程中的精通项，尚未经过后续属性修正和上下限；不等于最终属性增量。']
     for stat in attributes.get('stats',[]):
         if stat.get('hasMasteryContribution'):

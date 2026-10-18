@@ -20,7 +20,9 @@ const context=vm.createContext({RuntimeApi:{
  if(method==='GetCalculatedStatValue'){
   assert.equal(type,'StatCalculator');assert.equal(obj,calculator);
   assert.deepEqual(Array.from(types),['UnitStatEnum','IStatSource','EquipmentExclusionType','System.Single','System.Int32']);
-  assert.deepEqual(Array.from(args,a=>a.value),[61,unit,0,0,-1]);
+  assert.ok([0,20].includes(args[3].value));
+  assert.deepEqual(Array.from(args,a=>a.value),[61,unit,0,args[3].value,-1]);
+  if(args[3].value===20)return box(50);
   return box(40); // deliberately differs from final capped mastery (35)
  }
  if(method==='HasMasteryContribution')return box(id===6?1:0,'bool');
@@ -49,3 +51,9 @@ console.log('PASS: original getter arguments, byte enum overload, independent pr
 
 assert.ok(calls.every(c=>c.type!=='UnitDO'),'Never invoke mutating UnitDO display getter');
 assert.equal(result.stats[0].dtoDisplayOnly,null);
+
+assert.equal(result.mastery.beforeLimits,50);
+assert.equal(result.mastery.netBeforeLimits,30);
+assert.equal(result.mastery.limitAdjustment,-15);
+console.log('PASS original initial mastery input distinguishes pre-limit total from recursive term and capped final');
+

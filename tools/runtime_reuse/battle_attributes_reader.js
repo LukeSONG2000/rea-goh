@@ -48,11 +48,20 @@
      (Number.isFinite(calculatedMastery)&&Number.isFinite(masteryCoefficient)?Math.fround(calculatedMastery*masteryCoefficient):null)});
   }
   const mastery=result.stats.find(s=>s.id===61);
+  // GetStatValue 1BBAE55..1BBAE8B passes the original initial stat as the
+  // calculator's initialValue. Its later calls apply upper/lower stat limits.
+  // This differs from the recursive zero-input term used for other stats.
+  const masteryBeforeLimits=(!calculator||calculator.isNull()||!Number.isFinite(mastery.initial))?null:read('mastery before limits',()=>
+   number('StatCalculator','GetCalculatedStatValue',calculator,
+    [R.arg.value('u8',61),R.arg.ref(unit),R.arg.value('u8',0),R.arg.value('f32',mastery.initial),R.arg.value('i32',-1)],
+    ['UnitStatEnum','IStatSource','EquipmentExclusionType','System.Single','System.Int32']));
   result.mastery={initial:mastery.initial,current:mastery.current,netBattleDelta:mastery.netBattleDelta,recursiveCalculationValue:calculatedMastery,
+   beforeLimits:masteryBeforeLimits,netBeforeLimits:delta(masteryBeforeLimits,mastery.initial),limitAdjustment:delta(mastery.current,masteryBeforeLimits),
    attributedStatChanges:null,reason:'No original baseline mastery-contribution snapshot; total stat delta is not mastery-only delta.'};
   result.contract={bonusShield:'Original CurrentBonusShield/MaxBonusShield getters; not inferred from total minus permanent.',
    dtoDisplayOnly:'Unavailable: original display getter mutates datacron context and is deliberately not invoked.',
    netBattleDelta:'Difference of original current and initial readings; includes all changes, not additive-effect sum.',
+   masteryLimits:'Native calculator with original initial mastery, before GetStatValue upper/lower limits. current minus beforeLimits is the observed limit-stage adjustment; not a skill attribution or the zero-input recursive contribution.',
    masteryCoefficient:'Native FDFF40 primary-stat/role lookup coefficient; not current contribution or attributed change.',
    masteryPreModifierTerm:'Float32 product of native recursive mastery calculation (initialValue=0) and coefficient, matching FDE5C0 MULSS stage. Initial stat already includes baseline mastery. Before subsequent stat modifiers and limits; not total mastery contribution or final attributed delta.',
    units:'Raw original stat units. Ratings are not converted to percentages.'};
