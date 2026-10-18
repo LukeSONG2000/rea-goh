@@ -14,7 +14,8 @@ for(const [op,method] of [['battle-ability','choose'],['battle-target','selectTa
 }
 const count=calls.length;
 assert.throws(()=>execute('enemy-basic',request),/not enabled/);
-sandbox.visualProbe.enemyGate={chooseBasic:r=>({started:r==='current'}),resume:r=>({resumed:r==='current'}),snapshot:()=>({pending:true})};
+sandbox.visualProbe.enemyGate={selectTarget:r=>({targetConfirmed:r.targetId==='valid'}),chooseBasic:r=>({started:r==='current'}),resume:r=>({resumed:r==='current'}),snapshot:()=>({pending:true})};
+assert.equal(execute('enemy-target',{...request,targetId:'valid'}).targetConfirmed,true);
 assert.equal(execute('enemy-basic',request).started,true);
 assert.equal(execute('enemy-resume',request).resumed,true);
 assert.equal(sandbox.rpc.exports.enemysnapshot().pending,true);

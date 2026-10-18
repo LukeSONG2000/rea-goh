@@ -1,6 +1,6 @@
 'use strict';
 // Owned isolated trials only. Defers the original input-provider callback;
-// does not change teams, skills, stats, targets, or decision-tree definitions.
+// does not change teams, skills, stats, or decision-tree definitions.
 globalThis.installEnemyInputGate=context=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg;
  const method=R.findMethod(R.findClass('BattleInputProvider'),'DoMove',2);
@@ -10,9 +10,20 @@ globalThis.installEnemyInputGate=context=>{
  const call=(p,n,args=[])=>R.invoke(R.findMethod(R.classOf(p),n,args.length),p,args);
  const actor=()=>call(context,'get_CurrentUnit');
  const fsm=()=>call(context,'get_BattleFsmController');
+ const unitId=p=>p.isNull()?null:S.string(R.readRef(R.readRef(p,'_unitDO'),'Id'));
+ function targeting(){
+  const controller=R.readRef(pending.unit,'_targetingController');
+  const list=call(controller,'GetValidTargets',[A.ref(R.nil)]);
+  const n=R.readValue(list,'_size','i32'),items=S.array(R.readRef(list,'_items'));
+  if(n<0||n>64||n>items.length)throw Error('Original enemy target list bounds');
+  return {controller,units:items.slice(0,n),targets:items.slice(0,n).map(p=>({id:unitId(p),baseId:S.string(R.readRef(R.readRef(R.readRef(p,'_unitDO'),'<Definition>k__BackingField'),'BaseId'))})),
+   selectedTarget:unitId(call(controller,'GetCurrentTarget')),manualTarget:unitId(call(controller,'get_ManualTarget'))};
+ }
  function snapshot(){
   if(!pending)return {pending:false};
-  return {pending:true,token:pending.token,expiresAt:pending.expiresAt,actor:S.string(R.readRef(R.readRef(pending.unit,'_unitDO'),'Id')),
+  const targetInfo=targeting();
+  return {pending:true,token:pending.token,expiresAt:pending.expiresAt,actor:unitId(pending.unit),
+   targets:targetInfo.targets,selectedTarget:targetInfo.selectedTarget,manualTarget:targetInfo.manualTarget,
    owner:R.unbox(call(pending.unit,'get_Owner'),'i32'),
    turn:R.readValue(fsm(),'<TurnCount>k__BackingField','i32'),
    previous:R.readValue(fsm(),'_previousNonIdleState','i32'),next:R.readValue(fsm(),'_nextState','i32')};
@@ -49,6 +60,23 @@ globalThis.installEnemyInputGate=context=>{
  try{Interceptor.replace(address,replacement);Interceptor.replace(watchdogAddress,watchdogReplacement);Interceptor.flush();}
  catch(e){Interceptor.revert(address);Interceptor.revert(watchdogAddress);throw e;}
  return {snapshot,events,errors,get watchdogDeferrals(){return watchdogDeferrals;},
+  selectTarget(request){
+   validate();
+   if(!request||request.token!==pending.token)throw Error('Stale enemy input token');
+   if(Date.now()>=pending.expiresAt)throw Error('Enemy input expired; original AI will resume');
+   const live=targeting();
+   if(typeof request.targetId!=='string'||!live.targets.some(t=>t.id===request.targetId))throw Error('Target is not in original enemy legal target list');
+   if(live.selectedTarget===request.targetId)
+    return {targetConfirmed:true,alreadySelected:true,inputDispatched:false,targetId:request.targetId};
+   // The player UI selection route failed on the tested enemy module. Use the
+   // original AI target resolver with a legal preferred target instead.
+   const preferred=live.units.find(p=>unitId(p)===request.targetId);
+   call(live.controller,'CalculateAndSetCurrentTarget',[A.ref(R.nil),A.ref(preferred)]);
+   const selectedTarget=unitId(call(live.controller,'GetCurrentTarget'));
+   const manualTarget=unitId(call(live.controller,'get_ManualTarget'));
+   events.push({event:'target-selected',token:pending.token,requested:request.targetId,selectedTarget,manualTarget});
+   return {targetConfirmed:selectedTarget===request.targetId,inputDispatched:true,selectedTarget,manualTarget};
+  },
   resume(token){
    validate();if(token!==pending.token)throw Error('Stale enemy input token');
    const saved=pending;pending=null;
@@ -64,6 +92,7 @@ globalThis.installEnemyInputGate=context=>{
     throw Error('Original CanPerformMove rejected basic attack');
    const ability=R.readRef(saved.unit,'_attackAbilityContext');
    const abilityId=S.string(call(R.readRef(ability,'<AbilityDO>k__BackingField'),'get_Id'));
+   const selectedTarget=unitId(call(R.readRef(saved.unit,'_targetingController'),'GetCurrentTarget'));
    // Same original move and completion delegate used by BattleInputProvider.
    // Target remains the original targeting controller's current target.
    pending=null;
@@ -71,8 +100,9 @@ globalThis.installEnemyInputGate=context=>{
     const started=R.unbox(call(saved.unit,'PerformManualMove',[A.value('i32',0),A.value('i32',0)]),'bool');
     if(!started){pending=saved;throw Error('Original manual move did not start');}
     call(saved.callback,'Invoke',[A.value('i32',0)]);
-    events.push({event:'manual-basic',token,abilityId});
-    return {started:true,token,abilityId};
+    const actualTarget=unitId(R.readRef(saved.unit,'<EnemyTarget>k__BackingField'));
+    events.push({event:'manual-basic',token,abilityId,selectedTarget,actualTarget});
+    return {started:true,token,abilityId,selectedTarget,actualTarget};
    }finally{if(pending!==saved)for(const handle of saved.retained)R.release(handle);}
   },
   stop(){

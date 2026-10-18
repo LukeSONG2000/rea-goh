@@ -4,18 +4,24 @@ import assert from 'node:assert/strict';
 const object=(fields={})=>Object.assign({isNull:()=>false,equals(other){return other===this;}},fields);
 let hook,watchdog,nativeMoves=0,watchdogCalls=0,manualMoves=0,completed=0,legal=true,started=true,reverted=0,now=1000;
 const retained=new Set();
+const nil={isNull:()=>true};
+const target=id=>object({_unitDO:object({Id:id,'<Definition>k__BackingField':object({BaseId:id})})});
+const targets=[target('ally-1'),target('ally-2')];let selected=targets[0],manual=nil,targetCalls=0;
+const targetController=object({GetValidTargets:()=>({_size:targets.length,_items:targets}),GetCurrentTarget:()=>selected,get_ManualTarget:()=>manual,
+ CalculateAndSetCurrentTarget:(unused,preferred)=>{targetCalls++;selected=preferred;return preferred;}});
 const unit=object({_unitDO:object({Id:'enemy-1'}),_attackAbilityContext:object({'<AbilityDO>k__BackingField':object({get_Id:()=> 'original-basic'})}),
- get_Owner:()=>1,CanPerformMove:()=>legal,PerformManualMove:()=>{manualMoves++;return started;}});
+ _targetingController:targetController,
+ get_Owner:()=>1,CanPerformMove:()=>legal,PerformManualMove:()=>{manualMoves++;unit['<EnemyTarget>k__BackingField']=selected;return started;}});
 const fsm=object({'<TurnCount>k__BackingField':2,_previousNonIdleState:34,_nextState:1});
 const context=object({get_CurrentUnit:()=>unit,get_BattleFsmController:()=>fsm});
 const state=object(),stateController=object({'<CurrentState>k__BackingField':state});
 const provider=object({_battleContext:context}),callback=object({Invoke:()=>completed++});
-const sandbox={Process:{id:1},Date:{now:()=>now},SceneApi:{string:x=>x},
+const sandbox={Process:{id:1},Date:{now:()=>now},SceneApi:{string:x=>x,array:x=>x},
  NativeFunction:function(a){return ()=>a==='DoMove'?nativeMoves++:watchdogCalls++;},NativeCallback:function(fn){return fn;},
  Interceptor:{replace(a,fn){if(a==='DoMove')hook=fn;else watchdog=fn;},flush(){},revert(){reverted++;}},
- RuntimeApi:{findClass:x=>x,classOf:x=>x,findMethod:(c,name)=>({name,readPointer:()=>name}),
+ RuntimeApi:{nil,string:x=>x,findClass:x=>x,classOf:x=>x,findMethod:(c,name)=>({name,readPointer:()=>name}),
   readRef:(p,k)=>p[k],readValue:(p,k)=>p[k],invoke:(m,p,args)=>p[m.name](...args),unbox:x=>x,
-  retain(p){const h={p};retained.add(h);return h;},release(h){assert(retained.delete(h));},arg:{value:(t,x)=>x}},
+  retain(p){const h={p};retained.add(h);return h;},release(h){assert(retained.delete(h));},arg:{ref:x=>x,value:(t,x)=>x}},
  visualProbe:{fixture:{context,state:stateController},entered:state}};
 vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(new URL('./enemy_input_gate.js',import.meta.url),'utf8'),sandbox);
@@ -24,6 +30,12 @@ hook(object({_battleContext:object()}),unit,callback,null);
 assert.equal(nativeMoves,1,'foreign context forwards to original');
 hook(provider,unit,callback,null);
 const token=gate.snapshot().token;
+assert.equal(gate.snapshot().targets.length,2);
+assert.throws(()=>gate.selectTarget({token,targetId:'illegal'}),/legal target list/);assert.equal(targetCalls,0);
+assert.throws(()=>gate.selectTarget({token:'stale',targetId:'ally-2'}),/Stale/);assert.equal(targetCalls,0);
+assert.equal(gate.selectTarget({token,targetId:'ally-2'}).targetConfirmed,true);
+assert.equal(gate.selectTarget({token,targetId:'ally-2'}).alreadySelected,true);assert.equal(targetCalls,1);
+assert.equal(gate.snapshot().selectedTarget,'ally-2');
 watchdog(fsm,null);assert.equal(watchdogCalls,0);assert.equal(gate.watchdogDeferrals,1);
 watchdog(object(),null);assert.equal(watchdogCalls,1);
 assert.equal(retained.size,3);assert.equal(nativeMoves,1);

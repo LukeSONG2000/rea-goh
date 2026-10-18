@@ -65,15 +65,26 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 ```powershell
 node tools/runtime_reuse/runtime_cli.mjs enemy-basic --pid PID --request logs/high_reuse/enemy-request.json
 node tools/runtime_reuse/runtime_cli.mjs enemy-resume --pid PID --request logs/high_reuse/enemy-request.json
+node tools/runtime_reuse/runtime_cli.mjs enemy-target --pid PID --request logs/high_reuse/enemy-target.json
 ```
 
-前者执行原普攻，后者恢复原 AI。一次 token 只提交一次，结果须通过后续快照确认。
+`enemy-basic` 执行原普攻，`enemy-resume` 恢复原 AI。出招 token 只消费一次。
+`enemy-target` 请求为 `{"token":"当前token","targetId":"enemyInput.targets 中的 id"}`，
+调用原 `CalculateAndSetCurrentTarget(null, preferredTarget)` 并核对实际目标；
+重复选择当前目标是 no-op。选择目标不消费出招 token，也不延长等待时间。
+候选列表来自原 `GetValidTargets(null)`，不是任意角色 ID。选目标后执行普攻，
+回执中的 `actualTarget` 取自原动作启动后的 `EnemyTarget`。恢复 AI 时原 AI
+仍可重新选目标，不能把手动锁定视作 AI 最终目标的保证。
 10 秒没有收到输入会自动恢复原 AI；过期普攻拒绝。只在待输入期间排除该私有
 战斗的防卡死计时，其他战斗和技能执行中的原检测保持正常。该等待不会暂停
 整个客户端或比赛倒计时。试玩外命令拒绝，未启用控制的试玩也拒绝。
 
 已验证真实 CLI 普攻、重复 token 拒绝、下一敌方恢复 AI，以及两次无人输入
 超时自动恢复。任意特殊技能、友军/终极选择仍待完成。
+
+敌方目标切换已在原私有库存组成的凯勒兰＋农场卢克诊断编队中双跑验证：
+目标由卢克变为凯勒兰，原普攻 `EnemyTarget` 同步变化，终局与清理通过。
+这是明确的自定义测试编队，不代表原保存队伍不变；嘲讽/隐身组合尚未单独验收。
 
 ## AI 操作接口
 

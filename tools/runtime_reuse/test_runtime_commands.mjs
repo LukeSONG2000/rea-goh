@@ -32,6 +32,7 @@ try{
  for(const payload of [null,{token:'x',targetId:''},{token:'x',targetId:42},{token:42,targetId:'unit'}]){
   const result=await test({operation:'battle-target',payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
   const selection=await test({operation:'battle-unit',payload});assert.equal(selection.ok,false);assert.equal(selection.dispatched,false);
+  const enemy=await test({operation:'enemy-target',payload});assert.equal(enemy.ok,false);assert.equal(enemy.dispatched,false);
  }
  await processCommands(root,owner,execute,now);assert.equal(calls,1,'Completed requests are not replayed');
  const completed=fs.readdirSync(box).find(f=>JSON.parse(fs.readFileSync(path.join(box,f))).ok);

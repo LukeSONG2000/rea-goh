@@ -1,0 +1,243 @@
+{
+  "date": "2026-10-18",
+  "scope": "Enemy legal target selection through original AI targeting resolver",
+  "runs": [
+    {
+      "path": "logs\\high_reuse\\enemy-target-pair-v2-evidence.json",
+      "sha256": "24fd79b0a949f50c810a9bbdccd6c5de2339ca4c0809b9805b242d7faf2b188e",
+      "events": [
+        {
+          "kind": "diagnostic-custom-private-squad",
+          "units": [
+            "KELLERANBEQ",
+            "LUKESKYWALKER"
+          ],
+          "statsModified": false
+        },
+        {
+          "kind": "enemy-gate-complete",
+          "events": [
+            {
+              "event": "held",
+              "pending": true,
+              "token": "enemy:19440:1",
+              "expiresAt": 1792283444436,
+              "actor": "YDorQZt6RCaym6QiJBqseA",
+              "targets": [
+                {
+                  "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                  "baseId": "KELLERANBEQ"
+                },
+                {
+                  "id": "hCCU9HytSVOBUJkDMmyaSg",
+                  "baseId": "LUKESKYWALKER"
+                }
+              ],
+              "selectedTarget": "hCCU9HytSVOBUJkDMmyaSg",
+              "manualTarget": null,
+              "owner": 1,
+              "turn": 3,
+              "previous": 34,
+              "next": 1
+            },
+            {
+              "event": "target-selected",
+              "token": "enemy:19440:1",
+              "requested": "6MPxxx4ST0uP_DfGN4Kqng",
+              "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+              "manualTarget": null
+            },
+            {
+              "event": "manual-basic",
+              "token": "enemy:19440:1",
+              "abilityId": "basicability_b1battledroid_ONBOARDING",
+              "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+              "actualTarget": "6MPxxx4ST0uP_DfGN4Kqng"
+            }
+          ],
+          "errors": [],
+          "watchdogDeferrals": 331
+        },
+        {
+          "kind": "visual-probe-complete",
+          "verifiedVisualBattle": false,
+          "error": null,
+          "clicked": false,
+          "terminalObserved": true,
+          "lastSnapshot": {
+            "previous": 136,
+            "next": 1,
+            "turns": 5,
+            "currentState": "CampaignGameState"
+          },
+          "serviceCalls": 0,
+          "blockedSocketCalls": {
+            "send": 2915,
+            "sendto": 2,
+            "WSASend": 0,
+            "WSASendTo": 0,
+            "connect": 0,
+            "WSAConnect": 0
+          },
+          "capture": {
+            "path": null,
+            "requested": false,
+            "verified": false,
+            "error": null,
+            "beforeStamp": null
+          },
+          "cleanup": {
+            "home": true,
+            "exitedOwnedStates": 1,
+            "guardRestored": true,
+            "gcReleased": true,
+            "errors": []
+          },
+          "originalUiObserved": true,
+          "screenshotVerified": false,
+          "ownership": {
+            "exitedOwnBattle": true,
+            "campaignExpected": true,
+            "foreignTransition": false
+          }
+        }
+      ]
+    },
+    {
+      "path": "logs\\high_reuse\\enemy-target-pair-v2-repeat-evidence.json",
+      "sha256": "0e6ae8f0b345fe66c48dd78350ea0932ae63984989154dea8514281f8cb1f080",
+      "events": [
+        {
+          "kind": "diagnostic-custom-private-squad",
+          "units": [
+            "KELLERANBEQ",
+            "LUKESKYWALKER"
+          ],
+          "statsModified": false
+        },
+        {
+          "kind": "enemy-gate-complete",
+          "events": [
+            {
+              "event": "held",
+              "pending": true,
+              "token": "enemy:19440:1",
+              "expiresAt": 1792283538354,
+              "actor": "YDorQZt6RCaym6QiJBqseA",
+              "targets": [
+                {
+                  "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                  "baseId": "KELLERANBEQ"
+                },
+                {
+                  "id": "hCCU9HytSVOBUJkDMmyaSg",
+                  "baseId": "LUKESKYWALKER"
+                }
+              ],
+              "selectedTarget": "hCCU9HytSVOBUJkDMmyaSg",
+              "manualTarget": null,
+              "owner": 1,
+              "turn": 3,
+              "previous": 34,
+              "next": 1
+            },
+            {
+              "event": "target-selected",
+              "token": "enemy:19440:1",
+              "requested": "6MPxxx4ST0uP_DfGN4Kqng",
+              "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+              "manualTarget": null
+            },
+            {
+              "event": "manual-basic",
+              "token": "enemy:19440:1",
+              "abilityId": "basicability_b1battledroid_ONBOARDING",
+              "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+              "actualTarget": "6MPxxx4ST0uP_DfGN4Kqng"
+            }
+          ],
+          "errors": [],
+          "watchdogDeferrals": 332
+        },
+        {
+          "kind": "visual-probe-complete",
+          "verifiedVisualBattle": false,
+          "error": null,
+          "clicked": false,
+          "terminalObserved": true,
+          "lastSnapshot": {
+            "previous": 136,
+            "next": 1,
+            "turns": 5,
+            "currentState": "CampaignGameState"
+          },
+          "serviceCalls": 0,
+          "blockedSocketCalls": {
+            "send": 2692,
+            "sendto": 2,
+            "WSASend": 0,
+            "WSASendTo": 0,
+            "connect": 1,
+            "WSAConnect": 0
+          },
+          "capture": {
+            "path": null,
+            "requested": false,
+            "verified": false,
+            "error": null,
+            "beforeStamp": null
+          },
+          "cleanup": {
+            "home": true,
+            "exitedOwnedStates": 1,
+            "guardRestored": true,
+            "gcReleased": true,
+            "errors": []
+          },
+          "originalUiObserved": true,
+          "screenshotVerified": false,
+          "ownership": {
+            "exitedOwnBattle": true,
+            "campaignExpected": true,
+            "foreignTransition": false
+          }
+        }
+      ]
+    }
+  ],
+  "proven": [
+    "Original legal list contains Kelleran and farmboy Luke",
+    "CLI changes original current target from Luke to Kelleran",
+    "Subsequent original PerformManualMove EnemyTarget equals Kelleran",
+    "Repeated same seed final turn5 terminal136/next1",
+    "Service0 and Home/guard/GC clean both runs"
+  ],
+  "fixture": "Explicit diagnostic custom private squad from captured inventory: saved type8 Kelleran plus original private farmboy Luke via SquadCellDO constructor. Captured 1-A opponents and original unit stats unchanged. Not claiming an unchanged saved squad or a natural online encounter.",
+  "failuresPreserved": [
+    "trial-20261018-082307-283-evidence.json: type9 Auto victory before enemy turn; no target coverage",
+    "trial-20261018-082508-240-evidence.json: type9 manual basic victory before enemy turn; no target coverage",
+    "enemy-target-pair-evidence.json: player SelectManualTarget path returned system error; target unchanged, cleanup succeeded"
+  ],
+  "nativeResolver": {
+    "path": "logs/high_reuse/native/enemy_calculate_target.c",
+    "rva": "0x1BAF120",
+    "sha256": "8a7fe6fbdfdf08f4c3f1a1e4d0d87e40edcbc5f985a7daeb6bc0feee2bc75bba",
+    "provider": "existing read-only PyGhidra project, no save",
+    "behavior": "Original GetValidTargets(preferred), optional candidate intersection, native tactic selection and SetCurrentTarget. Result may differ from requested preferred target; receipt checks observed target."
+  },
+  "limits": [
+    "Special skills/ally/ultimate selection pending",
+    "Taunt/stealth combinations not separately runtime-tested",
+    "Player SelectManualTarget exact system-error cause not independently isolated",
+    "No claim of full hidden-state equivalence from terminal summaries",
+    "Original AI resume can reselect target"
+  ],
+  "tests": [
+    "gate invalid/stale/no-op/target selection/ownership/expiry PASS",
+    "trial input PASS",
+    "mailbox target schema PASS",
+    "lifecycle PASS",
+    "turn-order deterministic PASS"
+  ],
+  "restoredHostPid": 21476
+}
