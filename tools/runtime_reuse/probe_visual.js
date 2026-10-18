@@ -63,6 +63,7 @@
   await R.runOnMainThreadOnce(()=>{
    guard=installOfflineSocketGuard(); // covers fixture, entry, polling and exit
    f=createOriginalFixture(Object.assign({},options.fixture||{},{flags:6}));send(originalFixtureDiagnostics(f));
+   if(options.aiPriorityOrder)globalThis.trialAIPriority=installOriginalAIPriority(f.context,options.aiPriorityOrder);
    if(options.traceAI)globalThis.trialAITrace=installOriginalAITrace(f.context);
    if(options.enemyBasicDemo||options.enemyControl)enemyGate=installEnemyInputGate(f.context);
    const loop=R.newObject(R.findClass('UnityGameLoop'));
@@ -196,6 +197,11 @@
     if(enemyGate.errors.length)error=error||'Enemy input gate reported errors';
    }}
    catch(exception){cleanup.errors.push('enemy gate cleanup: '+String(exception));}
+   try{if(globalThis.trialAIPriority){
+    trialAIPriority.stop();const priority=trialAIPriority.snapshot();send(priority);
+    if(priority.errors.length||!priority.originalUnchanged)error=error||'AI priority scope/integrity check failed';
+   }}
+   catch(exception){cleanup.errors.push('AI priority cleanup: '+String(exception));}
    try{if(globalThis.trialAITrace){trialAITrace.stop();send(trialAITrace.snapshot());}}
    catch(exception){cleanup.errors.push('AI trace cleanup: '+String(exception));}
    for(const listener of hooks)try{listener.detach();}catch(exception){cleanup.errors.push('detach: '+String(exception));}

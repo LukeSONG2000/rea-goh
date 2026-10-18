@@ -47,7 +47,7 @@ globalThis.installOriginalAITrace=context=>{
    active.set(this.thread,this.row);rows.push(this.row);
    // Native 16A2EC0 reads context.GameDataDomainController._abilityDecisionTreeDO
    // directly, bypassing the GetAbilityDecisionTree call site.
-   const tree=ref(ref(context,'<GameDataDomainController>k__BackingField'),'_abilityDecisionTreeDO');
+   const tree=globalThis.trialAIPriority?.treeFor(this.row.actor.owner)||ref(ref(context,'<GameDataDomainController>k__BackingField'),'_abilityDecisionTreeDO');
    const key=tree.toString();
    if(!trees.has(key)){
     if(trees.size>=16)throw Error('Too many original AI trees');

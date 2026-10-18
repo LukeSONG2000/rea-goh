@@ -7,7 +7,8 @@ param(
  [switch]$Auto,
  [switch]$TraceAI,
  [switch]$EnemyBasicDemo,
- [switch]$EnemyControl
+ [switch]$EnemyControl,
+ [string]$AiPriorityOrder
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -23,6 +24,7 @@ if($Auto){$prepare+='--auto'}
 if($TraceAI){$prepare+='--trace-ai'}
 if($EnemyBasicDemo){$prepare+='--enemy-basic-demo'}
 if($EnemyControl){$prepare+='--enemy-control'}
+if($AiPriorityOrder){$prepare+=@('--ai-priority-order',(Resolve-Path -LiteralPath $AiPriorityOrder).Path)}
 & py @prepare
 if($LASTEXITCODE -ne 0){throw 'Trial preparation failed; original client untouched'}
 & node --check ($prefix+'.js')

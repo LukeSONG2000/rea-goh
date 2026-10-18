@@ -38,6 +38,11 @@ class CaptureIntegrityTests(unittest.TestCase):
             read_capture(self.file, 'inventory-proto-captured')
 
     def test_invalid_configuration_precedes_file_access(self):
+        for order in [[], [0, 0], [-1, 0], [0, 2], [True], '0', list(range(513))]:
+            with self.assertRaisesRegex(ValueError, 'permutation'):
+                prepare('missing', 'missing', 'missing', 'missing', 8, 'visual', 60, False, ai_priority_order=order)
+        with self.assertRaisesRegex(ValueError, 'visual trial'):
+            prepare('missing', 'missing', 'missing', 'missing', 8, 'headless', 60, False, ai_priority_order=[0])
         with self.assertRaisesRegex(ValueError, 'visual loop'):
             prepare('missing', 'missing', 'missing', 'missing', 8, 'headless', 60, False, True)
         with self.assertRaisesRegex(ValueError, 'visual loop'):

@@ -49,6 +49,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 目前实测 `default` 树 20 个节点。图读取不调用条件求值器，也不改共享树。
 返回的 allyTargets/enemyTargets 是原 AI 返回列表，不应直接解释为最终受击者。
 
+## 隔离试玩中的敌方 AI 优先级
+
+`-AiPriorityOrder logs/high_reuse/ai-priority.json` 接受一个 JSON 数组，数组必须
+是原树全部节点索引的排列；例如已验证的 20 节点默认树，把 damage 节点 17
+提前：`[17,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19]`。
+索引应从没有改序的 `-TraceAI` 记录读取，不把这个示例套到未知树上。
+准备器参数为 `--ai-priority-order <JSON路径>`，自动开启 TraceAI，当前只支持 visual。
+
+实现复制原节点、条件参数、成功结果和最终回退，在私有副本重新连接失败分支。
+只接受完整的线性失败链、成功叶节点和中性继续分支；其他图结构明确拒绝。
+原求值器进入该试玩敌方根节点时使用副本；我方和其他战斗不替换，GameData
+共享树不写入。技能可用性、目标筛选和伤害仍由原引擎处理。
+
+结束证据 `original-ai-priority` 给出 order/originalOrder、实际替换次数、私有图、
+错误及 `originalUnchanged` 检查。原顺序副本须与基线决策一致；改序属于明确的
+模拟策略变更，不是原 AI 行为的忠实重放，也不等于出招前预测。
+
 ## 敌方控制验证 demo
 
 在上述启动命令附加 `-EnemyBasicDemo`，敌方到达原输入提供器时暂存出招请求，
