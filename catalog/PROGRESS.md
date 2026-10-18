@@ -310,3 +310,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 events-list-entry】认领当前原挑战列表读取和选事件进入关卡页；root独占运行时/只读Ghidra，不调用开战、扫荡或购买。
 【Codex/root 2026-10-18 events-list-entry validated】新增events-list/open/missions/missions-back：原挑战tab活动view读event ID/instance/锁定条件，唯一身份且view/controller原行一致才原OnEventClicked；回读原EventDO匹配+mission view活动确认。原OnSelectEvent只读Ghidra核实。实机训练机器人challenge_XP六难度，原能量/货币0、MaxAttempts3/CurrentAttemptCount0/原MaxAttemptsReached=false；原sweep资格只读不调用。关卡返回列表→任务→Home全PASS。mock错实例/锁定/顺序错/活动视图/实时费用/缺cooldown与mailbox、tracker、语法PASS。报告EVENTS_LIST_ENTRY_VALIDATION_20261018.json；原32088/宿主34504。未开战扫荡刷新购买或领奖，无装备操作；实际战斗/奖励闭环继续待做。
 【Codex/root 2026-10-18 event-mission-selection】认领原挑战关卡选择进入选队链，核原资源和单位检查；root独占运行时/只读Ghidra，不调用购买刷新或装备操作。
+【Codex/root 2026-10-18 capability-demo】认领用户要求的已接入能力实机演示，包含未验证选队接口与隔离战斗；root独占运行时，不恢复长期开发目标，不消费货币或修改装备。
