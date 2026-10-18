@@ -244,3 +244,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 enemy-input-cli】认领owned试玩敌方输入CLI：快照待输入token、原AI恢复/原普攻提交、过期及跨会话拒绝、限时自动恢复与退出清理；只扩展隔离宿主，不开放正式战斗控制。
 
 【Codex/root 2026-10-18 enemy-input-cli validated】新增-EnemyControl/--enemy-control及同宿主enemyInput快照、enemy-basic/enemy-resume邮箱CLI，显式启用/owned state-context/单次token/到期普攻拒绝，试玩外直接拒绝。首次10秒等待原防卡死推进actor导致拒绝，保留失败与Home/guard/GC恢复证据；只读反编译BattleLockDetection19380E0确认计时推进，新增仅本owned FSM当前pending actor等待时延后原检测，其他context/动作阶段不动。修正后真实CLI普攻成功→重复token拒绝→下一敌恢复AI；无人输入两次10秒自动恢复，均原turn5终局136/正式service0/清理PASS。测试脚本GBK解码与子PowerShell继承PSModulePath问题仅修诊断环境，未改游戏。gate含expiry/watchdog scope、trial所有权、mailbox schema/回执、prepare/生命周期/同seed全部PASS。报告ENEMY_INPUT_CLI_VALIDATION_20261018.json，正常宿主16972/原19440实际存活Home。仍只验证1-A type8基础攻击/原AI恢复，不是任意技能/目标/友军/终极/预测/优先级完成；未消费或装备操作。
+
+【Codex/root 2026-10-18 enemy-target-cli】认领owned敌方原合法目标列表/选目标CLI与实机交叉验证，复用原targeting controller，不改技能规则。
