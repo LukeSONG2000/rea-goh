@@ -440,3 +440,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 store-read】认领原商店菜单和当前商品报价只读接口，root独占store bridge/CLI/只读Ghidra；不购买不刷新。
 
 【Codex/root 2026-10-19 store-read implemented+live】新增store-open/list/back：原Home OpenStore(Packs)、当前可见商品原ItemIndex映射、原offer价格及外部定价未解标记、继承HudBaseView返回。只读Ghidra确认render排序及水晶页按钮可走购买，reader不调用按钮/刷新。实机48商品46offer其中17外部定价，首次返回方法未在具体类声明而拒绝，改基类原回调后Home确认，host41832。排序/重复越界/忙态/非商店/禁止purchase mock及loading/calendar回归PASS；无购买。报告STORE_READ_20261019.json。商品购买/最终本地化报价/货运商店仍待。
+【Codex/root 2026-10-19 store-price】认领原StoreOfferPriceFormatter报价读取，root独占store bridge/tests及只读Ghidra；不购买不刷新。
