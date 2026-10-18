@@ -50,10 +50,18 @@ globalThis.StoreBridge=(()=>{
   const item=R.readRef(v,'_storeItem');if(item.isNull())throw Error('Store detail item missing');
   return {c,v,item};
  }
+ const active=o=>!o.isNull()&&!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(o)),'bool');
+ function labelStatus(o){return o.isNull()?null:{active:active(o),text:S.string(S.invoke('UILabel','get_text',o))};}
+ function buttonStatus(v,slot,fieldName){
+  const b=R.readRef(v,fieldName);if(b.isNull())return {slot,present:false};
+  const target=R.readRef(b,'_buttonTarget'),labels=R.readRef(b,'_labels');
+  return {slot,present:true,active:active(b),targetActive:active(target),enabled:target.isNull()?null:!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool'),state:R.readValue(b,'_currentState','i32'),hasEnoughForCost:R.readValue(b,'_hasEnoughForCost','bool'),labels:labels.isNull()?[]:list(labels).map(labelStatus),cost:labelStatus(R.readRef(b,'_costLabel')),originalCost:labelStatus(R.readRef(b,'_originalCostDiscountLabel')),discountPercent:labelStatus(R.readRef(b,'_discountPercentLabel')),discountCost:labelStatus(R.readRef(b,'_discountCostLabel'))};
+ }
  function detailStatus(){
   const {v,item}=details(),formatter=R.readRef(v,'_storeOfferPriceFormatter');
   const label=n=>S.string(S.invoke('UILabel','get_text',R.readRef(v,n)));
-  return {readConfirmed:true,id:str(item,'Id'),title:label('_packTitle'),description:label('_descriptionLabel'),fromTab:R.readValue(v,'_fromLocation','i32'),maxPurchaseAmount:R.readValue(v,'_maxPurchaseAmount','i32'),freeButtonShown:R.readValue(v,'_showFreeBuyButton','bool'),offers:list(R.readRef(item,field('AllOffers'))).map(o=>offer(o,formatter)),scope:'Original detail display and offers; no purchase authorization'};
+  const buttons=[['single','_singlePurchaseButton'],['singleCentered','_singlePurchaseButtonCentered'],['multiple','_multiPurchaseButton'],['ok','_OKButtonCentered']].map(([slot,f])=>buttonStatus(v,slot,f));
+  return {readConfirmed:true,id:str(item,'Id'),title:label('_packTitle'),description:label('_descriptionLabel'),fromTab:R.readValue(v,'_fromLocation','i32'),maxPurchaseAmount:R.readValue(v,'_maxPurchaseAmount','i32'),freeButtonShown:R.readValue(v,'_showFreeBuyButton','bool'),buttons,offers:list(R.readRef(item,field('AllOffers'))).map(o=>offer(o,formatter)),scope:'Original detail display and raw button state; hidden text is not a payable quote, enabled does not authorize purchase'};
  }
  function execute(op,p={}){
   if(op==='store-list')return status();

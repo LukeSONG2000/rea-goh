@@ -1,0 +1,19 @@
+{
+  "scope": "Read-only original store detail SmartButton states and label visibility",
+  "metadata": "il2cpp/dump/cs/il2cpp.cs SmartButton and StorePackDetailsView",
+  "live": {
+    "pid": 32088,
+    "hostPid": 38644,
+    "itemId": "premium-pack-silver",
+    "visibleSlot": "singleCentered",
+    "visibleLabel": "免费",
+    "visibleButtonEnabled": true,
+    "paidOffer": {"currencyType": 5, "rawPrice": 250},
+    "hiddenTemplateTextObserved": ["$29.99", "5%", "Standard Button"],
+    "returnedHome": true,
+    "purchaseCalls": 0
+  },
+  "validation": ["store bridge mock PASS: missing/null/hidden labels and disabled button; no mutation calls", "runtime loading PASS", "runtime commands PASS", "native detail navigation and Home round trip PASS"],
+  "limitations": ["Only Bronze pack live verified", "Raw activeInHierarchy is not a rendered pixel visibility test", "Button state and labels do not prove final checkout cost or grant purchase authorization", "No purchase execution or settlement verified"],
+  "evidence": ["logs/high_reuse/store-buttons-detail.json", "logs/high_reuse/store-buttons-home.json"]
+}
