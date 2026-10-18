@@ -1,0 +1,17 @@
+{
+  "scope": "Original decision graph copy and native module mutation audit; not complete prediction",
+  "nativeFindings": [
+    {"rva":"0xfec9b0 / 0xfeca70", "finding":"ParamAsFloat and ParamAsInt parse parameters into node fields and set cache flags. Prediction must not evaluate shared global nodes."},
+    {"rva":"0x16a4cb0", "finding":"Median-health module sorts its input target list. GetTargets builds target lists; downstream use of ordering must preserve the original algorithm."},
+    {"rva":"0xfe09f0 / 0xfe0b10 / 0xfe0bf0", "finding":"StatCalculator uses static ThreadLocal<UnitStatLists>. StartUsing increments nesting depth and can append a list; GetCurrentList clears the selected list; Dispose decrements depth. Cloning StatCalculator alone does not isolate this scratch state."},
+    {"rva":"0x16a5e10", "finding":"Summon-availability module reads ability summon metadata and can call BattleContext.BattleSummonController at +0x88. This dependency still needs transitive audit."}
+  ],
+  "implementation": "MemberwiseClone original tree, nodes and result objects with memoized identity maps; rebind all node/result edges; retain original scalar/cache values; bounded 512 nodes/1024 results; release handles on partial failure or disposal",
+  "sharedReadOnlyByThisHelper": ["parameter strings and arrays", "tree ID and ability tags"],
+  "liveEvidence":"logs/high_reuse/trial-20261019-023755-229-evidence.json",
+  "baseline":"logs/high_reuse/trial-20261019-023217-822-evidence.json",
+  "live": {"nodes":20,"results":40,"copiedGraphEqual":true,"originalGraphUnchanged":true,"allAiRowsAndSeedsEqualBaseline":true,"traceErrors":[],"terminal":true,"serviceCalls":0,"cleanupComplete":true,"restoredHost":39804},
+  "tests": ["branches/shared nodes/shared results/cycles preserved", "copy cache mutation does not change source cache", "bounds and partial-allocation cleanup", "random/pool/context/priority regressions", "turn-order double run identical hashes"],
+  "evidenceDirectory":"il2cpp/decompiled/ai_prediction",
+  "limitations": ["Private graph not yet connected to private GameData/context", "No additional native AI evaluation", "Cache mutation independence tested with VM objects; live test compared graph values/topology and original replay", "Stat scratch disposal had no Ghidra function definition; exact DEC [RCX+0x18], RET instructions retained instead of inventing pseudocode", "Other decision modules and transitive gameplay dependencies remain to audit"]
+}

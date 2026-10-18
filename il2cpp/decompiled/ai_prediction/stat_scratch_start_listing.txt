@@ -1,0 +1,76 @@
+180fe09f0 PUSH RBX
+180fe09f2 SUB RSP,0x20
+180fe09f6 CMP byte ptr [0x185a39ef8],0x0
+180fe09fd MOV RBX,RCX
+180fe0a00 JNZ 0x180fe0a4d
+180fe0a02 LEA RCX,[0x1857a8e70]
+180fe0a09 CALL 0x18035da50
+180fe0a0e OR.LOCK dword ptr [RSP],0x0
+180fe0a13 LEA RCX,[0x1857a8e80]
+180fe0a1a CALL 0x18035da50
+180fe0a1f OR.LOCK dword ptr [RSP],0x0
+180fe0a24 LEA RCX,[0x1857a8e78]
+180fe0a2b CALL 0x18035da50
+180fe0a30 OR.LOCK dword ptr [RSP],0x0
+180fe0a35 LEA RCX,[0x1857a8e60]
+180fe0a3c CALL 0x18035da50
+180fe0a41 OR.LOCK dword ptr [RSP],0x0
+180fe0a46 MOV byte ptr [0x185a39ef8],0x1
+180fe0a4d MOV EAX,dword ptr [RBX + 0x18]
+180fe0a50 MOV RCX,qword ptr [RBX + 0x10]
+180fe0a54 INC EAX
+180fe0a56 MOV qword ptr [RSP + 0x30],RSI
+180fe0a5b MOV qword ptr [RSP + 0x38],RDI
+180fe0a60 MOV dword ptr [RBX + 0x18],EAX
+180fe0a63 TEST RCX,RCX
+180fe0a66 JZ 0x180fe0afe
+180fe0a6c CMP dword ptr [RCX + 0x18],EAX
+180fe0a6f JG 0x180fe0aeb
+180fe0a71 MOV RDI,RCX
+180fe0a74 MOV RCX,qword ptr [0x1857a8e60]
+180fe0a7b CALL 0x1803a51b0
+180fe0a80 MOV RDX,qword ptr [0x1857a8e80]
+180fe0a87 MOV RCX,RAX
+180fe0a8a MOV RSI,RAX
+180fe0a8d CALL 0x182d09b30
+180fe0a92 MOV RAX,qword ptr [0x1857a8e70]
+180fe0a99 INC dword ptr [RDI + 0x1c]
+180fe0a9c MOV RCX,qword ptr [RDI + 0x10]
+180fe0aa0 TEST RCX,RCX
+180fe0aa3 JZ 0x180fe0afe
+180fe0aa5 MOVSXD RDX,dword ptr [RDI + 0x18]
+180fe0aa9 CMP EDX,dword ptr [RCX + 0x18]
+180fe0aac JC 0x180fe0adb
+180fe0aae MOV RAX,qword ptr [RAX + 0x20]
+180fe0ab2 MOV RDX,RSI
+180fe0ab5 MOV RCX,RDI
+180fe0ab8 MOV R8,qword ptr [RAX + 0xc0]
+180fe0abf MOV R8,qword ptr [R8 + 0x70]
+180fe0ac3 CALL 0x1836f50c0
+180fe0ac8 MOV RAX,RBX
+180fe0acb MOV RDI,qword ptr [RSP + 0x38]
+180fe0ad0 MOV RSI,qword ptr [RSP + 0x30]
+180fe0ad5 ADD RSP,0x20
+180fe0ad9 POP RBX
+180fe0ada RET
+180fe0adb LEA EAX,[RDX + 0x1]
+180fe0ade MOV dword ptr [RDI + 0x18],EAX
+180fe0ae1 CMP EDX,dword ptr [RCX + 0x18]
+180fe0ae4 JNC 0x180fe0b04
+180fe0ae6 MOV qword ptr [RCX + RDX*0x8 + 0x20],RSI
+180fe0aeb MOV RDI,qword ptr [RSP + 0x38]
+180fe0af0 MOV RAX,RBX
+180fe0af3 MOV RSI,qword ptr [RSP + 0x30]
+180fe0af8 ADD RSP,0x20
+180fe0afc POP RBX
+180fe0afd RET
+180fe0afe CALL 0x180352450
+180fe0b03 INT3
+180fe0b04 CALL 0x180352460
+180fe0b09 INT3
+180fe0b0a INT3
+180fe0b0b INT3
+180fe0b0c INT3
+180fe0b0d INT3
+180fe0b0e INT3
+180fe0b0f INT3

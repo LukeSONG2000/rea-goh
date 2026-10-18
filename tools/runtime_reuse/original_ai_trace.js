@@ -149,6 +149,34 @@ globalThis.verifyOriginalAIInfrastructure=sourceController=>{
   return {privateBindings,originalUnchanged,readyForEvaluation:false,scope:'Private context/RNG/pool/evaluator bindings; remaining services shared; no AI evaluation'};
  }finally{copy?.dispose();}
 };
+// Preserve graph topology and original lazy parameter caches without evaluating
+// any node. Parameter strings/arrays remain shared and are read-only here.
+globalThis.copyOriginalAIDecisionGraph=source=>{
+ const R=RuntimeApi,S=SceneApi,handles=[],nodes=new Map(),results=new Map();let disposed=false;
+ function dispose(){if(disposed)return;disposed=true;for(const h of handles)R.release(h);}
+ function clone(p){const q=S.invoke('System.Object','MemberwiseClone',p);
+  if(q.isNull()||q.equals(p))throw Error('Independent graph clone required');handles.push(R.retain(q));return q;}
+ function branch(p){if(p.isNull())return p;const key=p.toString();if(results.has(key))return results.get(key);
+  if(results.size>=1024)throw Error('Original AI graph exceeds 1024 results');
+  const q=clone(p);results.set(key,q);R.writeRef(q,'_nextNode',node(R.readRef(p,'_nextNode')));return q;}
+ function node(p){if(p.isNull())return p;const key=p.toString();if(nodes.has(key))return nodes.get(key);
+  if(nodes.size>=512)throw Error('Original AI graph exceeds 512 nodes');
+  const q=clone(p);nodes.set(key,q);
+  for(const f of ['<SuccessResult>k__BackingField','<FailureResult>k__BackingField'])R.writeRef(q,f,branch(R.readRef(p,f)));
+  return q;}
+ try{if(source.isNull())throw Error('Original AI tree absent');const tree=clone(source);R.writeRef(tree,'_rootNode',node(R.readRef(source,'_rootNode')));
+  return {tree,nodeCount:nodes.size,resultCount:results.size,dispose};
+ }catch(e){dispose();throw e;}
+};
+globalThis.verifyOriginalAIDecisionGraph=source=>{
+ const before=JSON.stringify(readOriginalAITree(source).graph);let copy;
+ try{copy=copyOriginalAIDecisionGraph(source);
+  const identical=JSON.stringify(readOriginalAITree(copy.tree).graph)===before;
+  const originalUnchanged=JSON.stringify(readOriginalAITree(source).graph)===before;
+  if(!identical||!originalUnchanged)throw Error('Private graph differs from original');
+  return {identical,originalUnchanged,nodes:copy.nodeCount,results:copy.resultCount,scope:'Topology and values copied; no node evaluation'};
+ }finally{copy?.dispose();}
+};
 globalThis.readOriginalAITree=tree=>{
  const R=RuntimeApi,S=SceneApi,indices=new Map(),nodes=[];
  const ref=(p,f)=>R.readRef(p,f),value=(p,f,t)=>R.readValue(p,f,t);
@@ -179,7 +207,7 @@ globalThis.readOriginalAITree=tree=>{
 
 globalThis.installOriginalAITrace=context=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg,rows=[],errors=[],hooks=[],active=new Map(),trees=new Map();let serial=0,dropped=0;
- let randomCopyAudit=null,targetPoolAudit=null,infrastructureAudit=null,auditAttempted=false;
+ let randomCopyAudit=null,targetPoolAudit=null,infrastructureAudit=null,graphCopyAudit=null,auditAttempted=false;
  const ref=(p,f)=>R.readRef(p,f),text=p=>S.string(p);
  const owns=p=>!p.isNull()&&ref(p,'_battleContext').equals(context);
  const call=(p,n,args=[])=>R.invoke(R.findMethod(R.classOf(p),n,args.length),p,args);
@@ -201,6 +229,7 @@ globalThis.installOriginalAITrace=context=>{
    // Native 16A2EC0 reads context.GameDataDomainController._abilityDecisionTreeDO
    // directly, bypassing the GetAbilityDecisionTree call site.
    const tree=globalThis.trialAIPriority?.treeFor(this.row.actor.owner)||ref(ref(context,'<GameDataDomainController>k__BackingField'),'_abilityDecisionTreeDO');
+   if(graphCopyAudit===null)graphCopyAudit=inspect(()=>verifyOriginalAIDecisionGraph(tree))||{failed:true};
    const key=tree.toString();
    if(!trees.has(key)){
     if(trees.size>=16)throw Error('Too many original AI trees');
@@ -235,5 +264,5 @@ globalThis.installOriginalAITrace=context=>{
   });}
  });
  let stopped=false;
- return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
+ return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit,graphCopyAudit}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
 };
