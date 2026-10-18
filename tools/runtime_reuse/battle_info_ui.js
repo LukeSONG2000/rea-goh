@@ -2,7 +2,7 @@
 // Presentation only. No battle setters, input commands, account writes or RPCs.
 (()=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg,call=S.invoke,hooks=[],popups=new Map(),targets=new Map();
- const marker='\n[80DFFF]',stats={shows:0,updates:0,modeGateCalls:0,tutorialDisplays:0,errors:[],last:null,target:null};
+ const marker='\n[80DFFF]',stats={shows:0,updates:0,modeGateCalls:0,tutorialDisplays:0,errors:[],healthAnomalies:[],last:null,target:null};
  let stopped=false;
  const list=l=>l.isNull()?[]:S.array(R.readRef(l,'_items')).slice(0,R.readValue(l,'_size','i32'));
  const active=o=>!!R.unbox(call('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(o)),'bool');
@@ -29,8 +29,23 @@
  }
  function healthText(unit){
   const read=n=>R.unbox(call('BattleUnitController','get_'+n,unit),'i32');
-  const pair=(label,a,b)=>label+' '+read(a)+' / '+read(b);
-  return [pair('生命','CurrentHP','MaxHP'),pair('总护盾','CurrentShield','MaxShield'),pair('永久护盾','CurrentPermanentShield','MaxPermanentShield'),pair('临时护盾','CurrentBonusShield','MaxBonusShield')].join('\n');
+  const values={};
+  const pair=(label,a,b)=>{values[a]=read(a);values[b]=read(b);return label+' '+values[a]+' / '+values[b];};
+  const text=[pair('生命','CurrentHP','MaxHP'),pair('总护盾','CurrentShield','MaxShield'),pair('永久护盾','CurrentPermanentShield','MaxPermanentShield'),pair('临时护盾','CurrentBonusShield','MaxBonusShield')].join('\n');
+  if(Object.values(values).some(v=>v<0)&&stats.healthAnomalies.length<16){
+   const key=unit.toString()+':'+JSON.stringify(values);
+   if(!stats.healthAnomalies.some(row=>row.key===key)){
+    const row={key,values,observedAt:Date.now(),unitType:R.fullName(R.classOf(unit))};
+    // Preserve native values. Do not clamp a negative stat or substitute a
+    // previous target's maximum before the source of the anomaly is known.
+    try{
+     row.maxShieldStat=R.unbox(call('BattleUnitController','GetStatValue',unit,[A.value('u8',25)],['UnitStatEnum']),'f32');
+     row.unitId=S.string(R.readRef(call('BattleUnitController','get_UnitDO',unit),'Id'));
+    }catch(e){row.diagnosticError=String(e);}
+    stats.healthAnomalies.push(row);send({kind:'battle-info-health-anomaly',...row});
+   }
+  }
+  return text;
  }
  function layoutTarget(item){
   const name=R.readRef(item.target,'_nameLabel'),parent=S.parent(S.transform(name));
@@ -62,7 +77,7 @@
    item={target,label,unit,view};targets.set(target.toString(),item);
   }
   layoutTarget(item);
-  item.unit=unit;setText(item.label,healthText(unit));stats.target=healthText(unit);
+  item.unit=unit;const text=healthText(unit);setText(item.label,text);stats.target=text;
  }
  function render(popup,unit){
   if(unit.isNull())return;
@@ -149,7 +164,7 @@
    });}
   });
   hook('BattleBaseView','SetOpponentUnitData',1,{onEnter(args){this.view=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>renderTarget(this.view,this.unit));}});
-  hook('BattleTargetComponent','SetHealth',1,{onEnter(args){this.target=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>{const item=targets.get(this.target.toString());if(item&&!this.unit.isNull()){item.unit=this.unit;setText(item.label,healthText(this.unit));stats.target=healthText(this.unit);}});}});
+  hook('BattleTargetComponent','SetHealth',1,{onEnter(args){this.target=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>{const item=targets.get(this.target.toString());if(item&&!this.unit.isNull()){item.unit=this.unit;const text=healthText(this.unit);setText(item.label,text);stats.target=text;}});}});
   hook('BattleEffectsPopupView','Show',5,{onEnter(args){this.popup=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>{stats.shows++;render(this.popup,this.unit);});}});
   hook('BattleBaseView','HandleEffectsLongPressed',3,{onEnter(args){this.view=args[0];this.unit=args[1];this.effects=args[2];this.updateOnly=args[3].toInt32()!==0;this.before=stats.shows;},onLeave(){if(!stopped&&!this.updateOnly&&stats.shows===this.before)safe(()=>showEmptyPopup(this.view,this.unit,this.effects));}});
   hook('BattleEffectsPopupView','UpdateHealth',2,{onEnter(args){this.popup=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>render(this.popup,this.unit));}});
