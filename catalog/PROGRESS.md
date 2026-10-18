@@ -384,3 +384,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 selected-squad-copy native-live】新增selected_squad.js通用原SquadDO+UnitDO复制模块，保留空槽/支援/角色别名及cell原字段；读取完整关卡键，不用历史角色替代。原挑战XP/DIFF06当前5人+HK47支援实机复制6个独立UnitDO，私有槽位临改123后原选队未变，恢复副本并释放GC，未开战/消费。原native squad/cell/ally源码已有证据；新增copy mock覆盖共享对象拒绝、支援空槽、别名保持、原角色不变及状态拒绝PASS。普通host23336恢复，返回Home。报告SELECTED_SQUAD_COPY_20261018.json。仍未接入标准launcher；下一步原BattleSupport过渡字段与匹配关卡捕获衔接，不声称全嵌套可变对象隔离或当前选队试玩完成。首次objectives-go返回Events时列表尚未就绪，后续readiness需补。
 
 【Codex/root 2026-10-18 selected-support-transition】认领原PVE入口支援过渡数据与私有副本衔接，root独占只读Ghidra和selected_squad模块，不开线上战斗。
+
+【Codex/root 2026-10-18 selected-support-transition native+live】只读Ghidra核原PvePreBattleController.HandleOnBattleButtonClicked RVA196b310：Transition玩家副本+28、支援+20、事件ID/实例/模式+48/+60/+58，工程已关闭不保存。selected_squad加入原MemberwiseClone支援副本，将SupportUnit绑定同一私有槽角色；实机HK47等级85/盟友true/奖励0/type5/模式2保留，支援与角色均私有，GC释放。加入五键关卡匹配后的applyToTransition，错关卡/已绑定context写前拒绝；mock与syntax PASS，原生战斗初始化未验。普通host37600恢复Home，未战斗/消费。现有high_reuse捕获仅C01L/M01/N01/Mi01，不能冒充当前XP挑战；下一步从匹配光明关卡选队连通完整试玩。报告SELECTED_SUPPORT_TRANSITION_20261018.json，标准launcher未接current selection，完整目标未完成。

@@ -1,0 +1,37 @@
+{
+  "scope": "Preserve current PVE support metadata in native private squad preparation",
+  "nativeEntry": {
+    "method": "PvePreBattleController.HandleOnBattleButtonClicked",
+    "rva": "0x196B310",
+    "evidence": "logs/high_reuse/native/pve_battle_button.c",
+    "mapping": "Transition +0x28 copies current squad; +0x20 receives controller support; +0x48/+0x60/+0x58 receive event ID, instance ID, screen mode",
+    "ghidra": "Existing project read-only, closed without save"
+  },
+  "changes": [
+    "Native System.Object.MemberwiseClone preserves all BattleSupportDO nullable and identity fields",
+    "SupportUnit rebound to the exact private support slot UnitDO; missing/ambiguous/shared support rejected",
+    "applyToTransition transfers selected player/support/event data only after all five captured mission identity keys match, rejecting already bound contexts"
+  ],
+  "live": {
+    "evidence": "logs/high_reuse/selected-support-copy.json",
+    "support": "HK47",
+    "playerLevel": 85,
+    "isAlly": true,
+    "supportRewardQuantity": 0,
+    "supportRewardType": 5,
+    "eventScreenMode": 2,
+    "privateSupportObject": true,
+    "privateUnitObject": true,
+    "gcReleased": true,
+    "battleStarted": false,
+    "restoredDisplayHost": 37600
+  },
+  "tests": ["test_selected_squad.mjs PASS including nullable preservation, support alias binding, each mission-key mismatch before writes and bound-context rejection", "selected_squad.js syntax PASS"],
+  "remaining": [
+    "Transition assignment tested with mocks, not live battle initialization",
+    "Current selection module not yet connected to standard captured launcher",
+    "Only light-side C01L/M01/N01/Mi01 captured battle metadata found in logs/high_reuse; current XP challenge is a different mission and cannot reuse that capture as its enemies",
+    "Next validation should use the matching captured light-side mission or obtain its own original challenge capture; no replacement enemy rules",
+    "Era/replacement units and complete battle-context construction need original-entry parity audit"
+  ]
+}

@@ -41,4 +41,44 @@ assert.throws(()=>api.copy(persisted),/Persisted/);
 const datacron=squad([cell(0,unit('u'),0)]);datacron.fields.Datacron=object('DatacronDO');
 assert.throws(()=>api.copy(datacron),/Datacron/);
 assert.throws(()=>api.copy(squad([])),/Empty/);
+R.nil=nil;R.retain=()=>1;
+context.SceneApi.invoke=(type,method,source,args)=>{
+ if(method==='MemberwiseClone')return object(source.type,{...source.fields});
+ if(method==='set_SupportUnit'){source.fields['<SupportUnit>k__BackingField']=args[0];return nil;}
+ throw Error('Unexpected invocation '+method);
+};
+const ally=object('BattleSupportDO',{'<SupportUnit>k__BackingField':support,_playerLevel:null,_isAlly:false,_supportRewardQuantity:0});
+const supportSquad=api.copy(squad([cell(5,support,1)])).player;
+const allyCopy=api.copySupport(ally,supportSquad);
+assert.notEqual(allyCopy,ally);
+assert.equal(allyCopy.fields._playerLevel,null);assert.equal(allyCopy.fields._isAlly,false);assert.equal(allyCopy.fields._supportRewardQuantity,0);
+assert.equal(allyCopy.fields['<SupportUnit>k__BackingField'],rows(supportSquad.fields._squadCells)[0].fields.Unit);
+assert.equal(ally.fields['<SupportUnit>k__BackingField'],support);
+assert.equal(api.copySupport(nil,supportSquad),nil);
+assert.throws(()=>api.copySupport(ally,squad([cell(0,support,0)])),/exactly one/);
+assert.throws(()=>api.copySupport(ally,squad([cell(5,support,1)])),/live unit/);
+const duplicateSupport=api.copy(squad([cell(5,support,1),cell(6,support,1)])).player;
+assert.throws(()=>api.copySupport(ally,duplicateSupport),/exactly one/);
+const mission={CampaignID:'EVENTS',MapID:'CHALLENGES',NodeID:'XP',MissionID:'DIFF06',Difficulty:1};
+const captured={_campaignID:'EVENTS',_mapId:'CHALLENGES',_nodeId:'XP',_missionId:'DIFF06',difficulty:1};
+const selected={missionIdentity:mission,player:supportSquad,battleSupport:allyCopy,eventId:'challenge_XP',instanceId:'instance',eventScreenMode:2};
+const transition=object('BattleGameState+TransitionData');let writes=0;
+R.string=x=>x;R.arg.value=(_,x)=>x;
+const invoke=context.SceneApi.invoke;
+context.SceneApi.invoke=(type,method,source,args)=>{
+ if(type==='BattleGameState+TransitionData'){writes++;source.fields[method.slice(4)]=args[0];return nil;}
+ return invoke(type,method,source,args);
+};
+for(const key of Object.keys(captured)){
+ const mismatch={...captured,[key]:'wrong'};
+ assert.throws(()=>api.applyToTransition(transition,selected,mismatch),/does not match/);
+ assert.equal(writes,0,'Mission mismatch must reject before any transition writes');
+}
+const bound=object('BattleGameState+TransitionData',{'<BattleContext>k__BackingField':object('Context')});
+assert.throws(()=>api.applyToTransition(bound,selected,captured),/Unbound/);
+assert.equal(writes,0);
+assert.equal(api.applyToTransition(transition,selected,captured).missionMatched,true);
+assert.equal(writes,5);assert.equal(transition.fields.BattleSupport,allyCopy);
+assert.equal(transition.fields.PlayerBattleSquad,supportSquad);
+assert.equal(transition.fields.EventScreenMode,2);
 console.log('Selected squad copy PASS: native-copy contract, support/empty slots, object isolation, alias preservation, unsupported-state rejection');
