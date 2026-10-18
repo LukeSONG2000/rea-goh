@@ -467,3 +467,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 store-tabs】认领原商店页签导航及当前tab读回，root独占store bridge/Ghidra；不购买刷新。
 
 【Codex/root 2026-10-19 store-tabs native+live】store-list新增原accordion页签Label/StoreLocation/Locked，store-tab选择唯一现有未锁页签原HandleButtonClick，same-tab幂等，host核目标tab与商品ready。原nav/controller回调只读Ghidra留证。实机4页签，切水晶tab2读5商品成功并返回Home，host17496，无购买刷新。missing/locked/noop/原回调mock及store/commands/loading PASS。报告STORE_TABS_20261019.json；其余页签未实测，货运商店和购买仍待。
+【Codex/root 2026-10-19 store-details】认领原商品详情导航与读取，root独占store bridge/Ghidra，无购买。
