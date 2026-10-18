@@ -1,0 +1,2822 @@
+{
+  "date": "2026-10-18",
+  "scope": "Home runtime and both local human male patron bundle versions only",
+  "runtime": {
+    "kind": "original-lod-profile",
+    "state": "HomeBaseGameState",
+    "classes": [
+      "UnityEngine.LODFadeMode",
+      "UnityEngine.Rendering.GPUDrivenLODGroupDataCallback",
+      "UnityEngine.Rendering.GPUDrivenLODGroupDataNativeCallback",
+      "UnityEngine.Rendering.GPUDrivenRendererMeshLodData",
+      "UnityEngine.Rendering.GPUDrivenLODGroupDataNative",
+      "UnityEngine.Rendering.GPUDrivenMeshLodInfo",
+      "UnityEngine.Rendering.GPUDrivenLODGroupData",
+      "UnityEngine.Rendering.LODParameters",
+      "System.Linq.Expressions.Interpreter.ModuloInstruction+ModuloDouble",
+      "UnityEngine.AdaptivePerformance.AdaptiveLOD"
+    ],
+    "meshes": [
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/Prop Era/Icon Marker/unit.char_darthjarjar_pre/Scaler/darthjarjar_shadowmesh",
+        "mesh": "darthjarjar_shadowmesh",
+        "vertices": 1068
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/Prop Era/Icon Marker/unit.char_darthjarjar_pre/Scaler/darthjarjar_mesh/darthjarjar_hand_l_mesh",
+        "mesh": "darthjarjar_hand_l_mesh",
+        "vertices": 249
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/Prop Era/Icon Marker/unit.char_darthjarjar_pre/Scaler/darthjarjar_mesh/darthjarjar_fist_r_mesh",
+        "mesh": "darthjarjar_fist_r_mesh",
+        "vertices": 220
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/Prop Era/Icon Marker/unit.char_darthjarjar_pre/Scaler/darthjarjar_mesh",
+        "mesh": "darthjarjar_mesh",
+        "vertices": 7688
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/Prop Col/Icon Marker/prefab.coliseum_ztg_a_active_icon/Scaler/zeffotombguardian_a_mesh",
+        "mesh": "zeffotombguardian_a_mesh",
+        "vertices": 5647
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_5/prefab.cantinapatron_human_male_01_pre/Scaler/cantinapatron_human_male_01_mesh",
+        "mesh": "cantinapatron_human_male_01_mesh",
+        "vertices": 2797
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_6/prefab.cantinapatron_duros_male_01_pre/Scaler/cantinapatron_duros_male_01_mesh",
+        "mesh": "cantinapatron_duros_male_01_mesh",
+        "vertices": 3095
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Walk_Marker_Left_to_Right/prefab.cantinapatron_human_female_01_pre/Scaler/cantinapatron_human_female_01_mesh",
+        "mesh": "cantinapatron_human_female_01_mesh",
+        "vertices": 3506
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_4/prefab.cantinapatron_rodian_male_01_pre/Scaler/cantinapatron_rodian_male_01_mesh",
+        "mesh": "cantinapatron_rodian_male_01_mesh",
+        "vertices": 4530
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_3/prefab.cantinapatron_aqualish_male_01_pre/Scaler/cantinapatron_aqualish_male_01_mesh",
+        "mesh": "cantinapatron_aqualish_male_01_mesh",
+        "vertices": 4782
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_2/prefab.shar_cantina_pre/Scaler/shar_mesh",
+        "mesh": "shar_mesh",
+        "vertices": 5467
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_1/prefab.cantinapatron_zygerrian_female_01_pre/Scaler/cantinapatron_zygerrian_female_01_mesh",
+        "mesh": "cantinapatron_zygerrian_female_01_mesh",
+        "vertices": 4461
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/gonk_cantina_pre/Scaler/gnk_droid_mesh",
+        "mesh": "gnk_droid_mesh",
+        "vertices": 3612
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/b7n5_cantina_pre/Scaler/protocoldroid_mesh",
+        "mesh": "protocoldroid_mesh",
+        "vertices": 5420
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_salvage_table_pre/jawa_location/jawa_salvager_cantina_pre/Scaler/jawa_salvager_mesh/jawa_salvager_coat_mesh",
+        "mesh": "jawa_salvager_coat_mesh",
+        "vertices": 1327
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_salvage_table_pre/jawa_location/jawa_salvager_cantina_pre/Scaler/jawa_salvager_mesh/tool_salvager_mesh",
+        "mesh": "tool_salvager_mesh",
+        "vertices": 372
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_salvage_table_pre/jawa_location/jawa_salvager_cantina_pre/Scaler/jawa_salvager_mesh",
+        "mesh": "jawa_salvager_mesh",
+        "vertices": 1966
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/cantina_pyke_storekeeper_pre/Scaler/cantina_pyke_storekeeper_mesh",
+        "mesh": "cantina_pyke_storekeeper_mesh",
+        "vertices": 4846
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Crowd/unit.char_feyzara_cantina_pre/Scaler/feyzara_mesh",
+        "mesh": "feyzara_mesh",
+        "vertices": 8891
+      },
+      {
+        "type": "UnityEngine.SkinnedMeshRenderer",
+        "path": "env_home_pre/Art Assets/Holotables/env_salvage_table_pre/jawa_location/jawa_salvager_cantina_pre/Scaler/jawa_salvager_mesh/jawa_salvager_hand_mesh",
+        "mesh": "jawa_salvager_hand_mesh",
+        "vertices": 190
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/Prop Era/Icon Marker/unit.char_darthjarjar_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_darthjarjar_pre_ERA_TABLE/swd_darthjarjar_mesh_shadow",
+        "mesh": "swd_darthjarjar_mesh",
+        "vertices": 622
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/Prop Era/Icon Marker/unit.char_darthjarjar_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/swd_darthjarjar_pre_ERA_TABLE",
+        "mesh": "swd_darthjarjar_mesh",
+        "vertices": 622
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/totem_raid_kraytdragon",
+        "mesh": "totem_raid_kraytdragon_mesh",
+        "vertices": 4106
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh/aat_turret_mesh/aat_hatch_right_mesh",
+        "mesh": "aat_hatch_right_mesh",
+        "vertices": 74
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh/aat_turret_mesh/aat_hatch_left_mesh",
+        "mesh": "aat_hatch_left_mesh",
+        "vertices": 76
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh/aat_turret_mesh/aat_canon_main/aat_canon_barrel",
+        "mesh": "aat_canon_barrel",
+        "vertices": 111
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh/aat_turret_mesh/aat_canon_main",
+        "mesh": "aat_canon_main",
+        "vertices": 139
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh/aat_turret_mesh",
+        "mesh": "aat_turret_mesh",
+        "vertices": 528
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh/aat_hatch_front_mesh",
+        "mesh": "aat_hatch_front_mesh",
+        "vertices": 86
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh/aat_canon_secondary/aat_canon_right_mesh",
+        "mesh": "aat_canon_right_mesh",
+        "vertices": 108
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh/aat_canon_secondary/aat_canon_left_mesh",
+        "mesh": "aat_canon_left_mesh",
+        "vertices": 109
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/aat_mesh",
+        "mesh": "aat_body_mesh",
+        "vertices": 2032
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/Prop Raid/Raid Prefab Anchor/prefab.guildraid_inactive_icon/totem_raid_disabled/guild_icon_rancor",
+        "mesh": "rancor_mesh",
+        "vertices": 1627
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_6/prefab.cantinapatron_duros_male_01_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/CupLocator/home_cup_01",
+        "mesh": "home_cup_01_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_4/prefab.cantinapatron_rodian_male_01_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/CupLocator/home_cup_01",
+        "mesh": "home_cup_01_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Marker_1/prefab.cantinapatron_zygerrian_female_01_pre/Scaler/pelvicJNT/spine1JNT/spine2JNT/Right_clavJNT/Right_shldrJNT/Right_elbwJNT/Right_wrstJNT/Right_wpn_offsetJNT/Right_wpnJNT/CupLocator/home_cup_01",
+        "mesh": "home_cup_01_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_tb_tw_table_pre/territory_battle/TB_EVENT_HOTH_EMPIRE(Clone)/hoth_dark_hologram_mesh",
+        "mesh": "hoth_dark_hologram_mesh",
+        "vertices": 1725
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Walk_Marker_Right_to_Left/home_r5d4_pre/Scaler/home_cup_02_char",
+        "mesh": "home_cup_02_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Walk_Marker_Right_to_Left/home_r5d4_pre/Scaler/home_cup_01_char (1)",
+        "mesh": "home_cup_01_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Walk_Marker_Right_to_Left/home_r5d4_pre/Scaler/home_cup_01_char (2)",
+        "mesh": "home_cup_01_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Walk_Marker_Right_to_Left/home_r5d4_pre/Scaler/home_cup_01_char",
+        "mesh": "home_cup_01_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Walk_Marker_Right_to_Left/home_r5d4_pre/Scaler/home_r5d4_head_mesh",
+        "mesh": "home_r5d4_head_mesh",
+        "vertices": 897
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/prefab.patron_playable_director_pre/Walk_Marker_Right_to_Left/home_r5d4_pre",
+        "mesh": "home_r5d4_mesh",
+        "vertices": 4827
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_rgba_atlas",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] noiseglw01_mat",
+        "vertices": 8
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 20
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] resourcesshared_atlas",
+        "vertices": 36
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_rgba_atlas",
+        "vertices": 20
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] New Atlas",
+        "vertices": 16
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 1720
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 108
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 540
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 200
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Mesh",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 220
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] New Atlas",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_rgba_atlas",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 120
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 192
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] charui_mat",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Unlit/Guilds Icon",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] charui_mat",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 8
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 312
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Mesh",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 8
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] charui_mat",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 36
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 20
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 40
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] resourcesshared_atlas",
+        "vertices": 36
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 192
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_rgba_atlas",
+        "vertices": 8
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] misc_atlas",
+        "vertices": 24
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Mesh",
+        "vertices": 8
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_rgba_atlas",
+        "vertices": 48
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 36
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_atlas",
+        "vertices": 96
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] standard_rgba_atlas",
+        "vertices": 8
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 572
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 1760
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] Font Material",
+        "vertices": 660
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "New Game Object",
+        "mesh": "[NGUI] noiseglw01_mat",
+        "vertices": 24
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_wall_booth_02/home_booth_02/sky",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_floor_inlay_01/home_floor_inlay_01a_mesh",
+        "mesh": "Combined Mesh (root: scene) 15",
+        "vertices": 532
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "home_stool_01_mesh",
+        "vertices": 702
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (2)/home_wall_booth_01",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (5)/home_wall_booth_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (4)/home_wall_booth_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (6)/home_wall_booth_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01/home_wall_booth_01",
+        "mesh": "home_wall_booth_01_mesh",
+        "vertices": 631
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/Prop Event/events_enabled/atmos_Quad_01",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_bar_ceiling",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_campaign_table_pre/totem_campaign_planet/totem_campaign_planet_fresnel",
+        "mesh": "totem_campaign_planet_fresnel_mesh",
+        "vertices": 121
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_muftak_01/home_patron_muftak_01_arm",
+        "mesh": "home_patron_muftak_01_arm_mesh",
+        "vertices": 226
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_shistavanen_01/home_patron_shistavanen_01_head",
+        "mesh": "home_patron_shistavanen_01_head_mesh",
+        "vertices": 265
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_pyke_01/home_patron_pyke_01_head",
+        "mesh": "home_patron_pyke_01_head_mesh",
+        "vertices": 637
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_campaign_table_pre/totem_campaign_planet/totem_campaign_planet_glow",
+        "mesh": "totem_campaign_planet_glow_mesh",
+        "vertices": 42
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_shipments_table_pre/home_holoprojector",
+        "mesh": "Combined Mesh (root: scene) 12",
+        "vertices": 4442
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_arena_table_pre/Prop Arena/squadpvp_enabled/totem_arena_sabers/totem_arena_sabers_vader",
+        "mesh": "totem_arena_sabers_vader_mesh",
+        "vertices": 630
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_arena_table_pre/Prop Arena/squadpvp_enabled/totem_arena_sabers/totem_arena_sabers_luke/totem_arena_sabers_luke_blade",
+        "mesh": "totem_arena_sabers_luke_blade_mesh",
+        "vertices": 65
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_floor_inlay_01/home_floor_inlay_01b_mesh",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_campaign_table_pre/VFX/vfx_atmos",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_02 (8)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/home_patron_ev9d9/home_patron_ev9d9_arm_L_mesh",
+        "mesh": "home_patron_ev9d9_arm_L_mesh",
+        "vertices": 182
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_top_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_top_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_02/events_table_event_card/vfx_scanLines",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (19)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_03/events_table_event_card/vfx_frame",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_bar_floor_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_salvage_table_pre/home_holotable_scavenger",
+        "mesh": "Combined Mesh (root: scene) 10",
+        "vertices": 6499
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 12",
+        "vertices": 4442
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (6)/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (4)/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (5)/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (2)/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_hutt_01/home_patron_hutt_01_torso",
+        "mesh": "home_patron_hutt_01_torso_mesh",
+        "vertices": 588
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_hutt_01/home_patron_hutt_01_torso/home_patron_hutt_01_arm",
+        "mesh": "home_patron_hutt_01_arm_mesh",
+        "vertices": 236
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/home_patron_ev9d9/home_patron_ev9d9_arm_R_mesh/home_patron_ev9d9_forearm_R_mesh",
+        "mesh": "home_patron_ev9d9_forearm_R_mesh",
+        "vertices": 323
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_galactic_battles_table_pre/home_holoprojector",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_guilds_table_pre/home_holoprojector (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_salvage_table_pre/home_holoprojector",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_misc_jar_01",
+        "mesh": "Combined Mesh (root: scene) 13",
+        "vertices": 1022
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_misc_jar_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 9",
+        "vertices": 1334
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_arena_table_pre/VFX/Quad (7)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_03 (4)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_03 (4)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_03 (3)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_03 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_03 (5)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_03 (2)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_03 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_03 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_03 (6)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_03 (4)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_03",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_03 (2)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_03 (3)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (2)/home_table_booth_01",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (5)/home_table_booth_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (4)/home_table_booth_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (6)/home_table_booth_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01/home_table_booth_01",
+        "mesh": "Combined Mesh (root: scene) 7",
+        "vertices": 2695
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_guilds_table_pre/home_table_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_bar_island/home_bar_island_top",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (4)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_ceiling_misc_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_salvage_table_pre/Timeline/BeltItem/BeltItem_cantainer/home_scavenger_salvage_02",
+        "mesh": "home_scavenger_salvage_02_mesh",
+        "vertices": 654
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_jawa_01/home_patron_jawa_01_arms",
+        "mesh": "home_patron_jawa_01_arms_mesh",
+        "vertices": 565
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_02",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_guilds_table_pre/Prop Guild/VFX Holo beams/blue_beams/vfx_atmos_Quad",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_gran_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_02 (2)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (9)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_tb_tw_table_pre/home_holotable_territory/home_holotable_territory_surface",
+        "mesh": "Combined Mesh (root: scene) 12",
+        "vertices": 4442
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Wall Lights/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/home_table_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (17)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_bar_counter",
+        "mesh": "Combined Mesh (root: scene) 10",
+        "vertices": 6499
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (16)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_head_dryax",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_arena_table_pre/Prop Arena/squadpvp_enabled/totem_arena_sabers/totem_arena_sabers_luke",
+        "mesh": "totem_arena_sabers_luke_mesh",
+        "vertices": 591
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_pyke_staff",
+        "mesh": "Combined Mesh (root: scene) 11",
+        "vertices": 1217
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_02",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_02",
+        "mesh": "Combined Mesh (root: scene) 12",
+        "vertices": 4442
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/Prop Event/events_enabled/atmos_Quad_02",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_02/events_table_event_card/vfx_frame",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_wall_01 (3)",
+        "mesh": "Combined Mesh (root: scene) 16",
+        "vertices": 630
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_03/events_table_event_card/vfx_scanLines",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_galactic_battles_table_pre/Prop Galactic Battle/shipbattles_enabled/ships/kashyyyk/planet_mesh",
+        "mesh": "Sphere",
+        "vertices": 515
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_arena_table_pre/home_holotable_arena",
+        "mesh": "Combined Mesh (root: scene)",
+        "vertices": 4996
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (5)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_shipments_table_pre/home_holoprojector/vfx_atmos_Quad",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_twilek_01",
+        "mesh": "home_patron_twilek_01_mesh",
+        "vertices": 530
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_door_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_door_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_tb_tw_table_pre/VFX/Quad (7)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (8)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_campaign_table_pre/totem_campaign_planet",
+        "mesh": "totem_campaign_planet_mesh",
+        "vertices": 385
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_floor_inlay_01/home_floor_inlay_01c_mesh",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 02/home_light_hanging_02 (4)",
+        "mesh": "Combined Mesh (root: scene) 15",
+        "vertices": 532
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 02/home_light_hanging_02 (5)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_bar_island/home_bar_island_counter",
+        "mesh": "Combined Mesh (root: scene) 8",
+        "vertices": 2084
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_03/events_table_event_card",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_twilek_01/home_patron_twilek_01_arm",
+        "mesh": "home_patron_twilek_01_arm_mesh",
+        "vertices": 57
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_02 (3)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (11)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_arena_table_pre/home_holotable_arena/home_holotable_arena_surface",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_distillery",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/lomi_junk_pile_01b (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_twilek_01/home_patron_twilek_01_arm/home_cup_01",
+        "mesh": "home_cup_01_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (11)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (7)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (10)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (8)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (6)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (12)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_ithorian_01/home_patron_ithorian_01_arm/home_cup_01",
+        "mesh": "home_cup_01_mesh",
+        "vertices": 122
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (13)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (9)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_tb_tw_table_pre/home_holotable_territory/screen",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/lomi_junk_pile_03c (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/lomi_junk_pile_03c",
+        "mesh": "Combined Mesh (root: scene) 8",
+        "vertices": 2084
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard (6)",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_cable_01/home_ceiling_cable_02",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (10)",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_wall_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 16",
+        "vertices": 630
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (6)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/home_head_rebelpilot",
+        "mesh": "Combined Mesh (root: scene) 7",
+        "vertices": 2695
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_campaign_table_pre/home_holotable_campaign",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Wall Lights/home_light_wall_01 (3)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Wall Lights/home_light_wall_01 (5)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Wall Lights/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Wall Lights/home_light_wall_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Wall Lights/home_light_wall_01 (4)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Wall Lights/home_light_wall_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 02/home_light_hanging_02b",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 02/home_light_hanging_02b",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 02/home_light_hanging_02b",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 02/home_light_hanging_02b",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard (3)",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_doorway_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_moncalamari_01/home_patron_moncalamari_01_head",
+        "mesh": "home_patron_moncalamari_01_head_mesh",
+        "vertices": 231
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_02/events_table_event_card",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_distillery/home_misc_03",
+        "mesh": "Combined Mesh (root: scene) 13",
+        "vertices": 1022
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_bar_island/home_bar_island_shelf",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_campaign_table_pre/home_holotable_campaign/home_holotable_campaign_surface",
+        "mesh": "Combined Mesh (root: scene) 8",
+        "vertices": 2084
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/lomi_junk_pile_02a",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_ithorian_01",
+        "mesh": "Combined Mesh (root: scene) 6",
+        "vertices": 808
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_junkroom",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_02 (2)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_02 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_02",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_02",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_02 (2)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_02 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_02",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/jawa_shelf",
+        "mesh": "home_shelf_mesh",
+        "vertices": 379
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_wall_booth_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_muftak_01/home_patron_muftak_01_head",
+        "mesh": "home_patron_muftak_01_head_mesh",
+        "vertices": 119
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/home_hopper_01",
+        "mesh": "Combined Mesh (root: scene) 7",
+        "vertices": 2695
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_shipments_table_pre/Prop Shipments/shipments_enabled/totem_shipments_ship/vfx_engine_flame1",
+        "mesh": "engine_flame",
+        "vertices": 21
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_02 (9)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/home_holotable_era/home_holotable_era_top",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_twilek_01/home_patron_twilek_01_head",
+        "mesh": "home_patron_twilek_01_head_mesh",
+        "vertices": 280
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_bar_03",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_pirate_protocol_droid_01/home_patron_pirate_protocol_droid_01_torso/home_patron_pirate_protocol_droid_01_head",
+        "mesh": "home_patron_pirate_protocol_droid_01_head_mesh",
+        "vertices": 164
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (4)",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (7)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/home_patron_ev9d9/home_patron_ev9d9_arm_R_mesh",
+        "mesh": "home_patron_ev9d9_arm_R_mesh",
+        "vertices": 182
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_01_mesh",
+        "mesh": "Combined Mesh (root: scene) 12",
+        "vertices": 4442
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_wall_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_floor_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/home_patron_ev9d9",
+        "mesh": "home_patron_ev9d9_mesh",
+        "vertices": 783
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (18)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_galactic_battles_table_pre/Prop Galactic Battle/shipbattles_enabled/ships/hoth/planet_mesh",
+        "mesh": "Sphere",
+        "vertices": 515
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_pyke_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_bar_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard (2)",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_campaign_table_pre/VFX/vfx_cap_rebles",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_01 (3)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_01 (5)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_01",
+        "mesh": "home_bottle_01_mesh",
+        "vertices": 140
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_01 (3)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_01 (6)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_01 (6)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_01 (4)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_01 (3)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (2)/home_bottle_01 (4)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_01 (5)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf (1)/home_bottle_01 (7)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/Bottle Shelf/home_bottle_01 (4)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_gran_02",
+        "mesh": "Combined Mesh (root: scene) 7",
+        "vertices": 2695
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_01 (4)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_campaign_table_pre/VFX/vfx_cap_empire",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_02",
+        "mesh": "Combined Mesh (root: scene) 12",
+        "vertices": 4442
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (7)/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (3)/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (1)/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (10)/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (2)/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (9)/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 10",
+        "vertices": 6499
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (6)/home_light_wall_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked",
+        "mesh": "home_holotable_events_02_mesh",
+        "vertices": 1150
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (5)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/home_holotable_era/home_holotable_era_base",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/home_holotable_store_lid_mesh",
+        "mesh": "home_holotable_store_lid_mesh",
+        "vertices": 708
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_06/events_table_event_card/vfx_frame",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_ithorian_01/home_patron_ithorian_01_head",
+        "mesh": "home_patron_ithorian_01_head_mesh",
+        "vertices": 299
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_gran_02/home_patron_gran_02_head",
+        "mesh": "home_patron_gran_02_head_mesh",
+        "vertices": 283
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_hutt_01",
+        "mesh": "Combined Mesh (root: scene) 12",
+        "vertices": 4442
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/home_holotable_era/home_holotable_era_controls",
+        "mesh": "home_holotable_era_controls_mesh",
+        "vertices": 2177
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_04/events_table_event_card/vfx_frame",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_bar_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_ig11_01/home_patron_ig11_01_head",
+        "mesh": "home_patron_ig11_01_head_mesh",
+        "vertices": 100
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_gran_01/home_patron_gran_head_01",
+        "mesh": "home_patron_gran_head_01_mesh",
+        "vertices": 280
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 01/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 01/home_light_hanging_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 01/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 01/home_light_hanging_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 01/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 01/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Hanging Lights 01/home_light_hanging_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/lomi_junk_pile_02b",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/home_crate_01",
+        "mesh": "Combined Mesh (root: scene) 8",
+        "vertices": 2084
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_01/events_table_event_card",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_02 (4)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_02 (5)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_02 (3)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_02 (6)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_01b",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_01b",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_01b",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_01b",
+        "mesh": "Combined Mesh (root: scene) 9",
+        "vertices": 1334
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_05/events_table_event_card",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_wall_booth_02/home_booth_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/VFX/VFX_atmos",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (6)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (4)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (5)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_doorway_01/home_door_01",
+        "mesh": "home_door_01_mesh",
+        "vertices": 239
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_guilds_table_pre/Prop Guild/guilds_enabled/standard_guild_3D_banner",
+        "mesh": "guild_banner_mesh",
+        "vertices": 10
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_tb_tw_table_pre/home_holotable_territory/screen",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_pirate_protocol_droid_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_console_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_abednedo_01",
+        "mesh": "Combined Mesh (root: scene) 11",
+        "vertices": 1217
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_06/events_table_event_card/vfx_scanLines",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/lomi_junk_pile_01c",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_twilek_01/home_patron_twilek_01_arm/home_patron_twilek_01_forearm",
+        "mesh": "home_patron_twilek_01_forearm_mesh",
+        "vertices": 176
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_console_01",
+        "mesh": "Combined Mesh (root: scene) 7",
+        "vertices": 2695
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_jawa_01/home_patron_jawa_01_head",
+        "mesh": "home_patron_jawa_01_head_mesh",
+        "vertices": 249
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_holotable_table_pre/home_holotable_era/home_holotable_era_surface",
+        "mesh": "Combined Mesh (root: scene) 12",
+        "vertices": 4442
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_wall_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_floor_stairs",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_pirate_protocol_droid_01/home_patron_pirate_protocol_droid_01_torso",
+        "mesh": "home_patron_pirate_protocol_droid_01_torso_mesh",
+        "vertices": 354
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_pyke_01",
+        "mesh": "Combined Mesh (root: scene) 8",
+        "vertices": 2084
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_04/events_table_event_card/vfx_scanLines",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard (1)",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_muftak_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_01 (3)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/behind the bar/Quad",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/home_crate_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_arch_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_floor_stairs/home_wall_stairs_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard (5)",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_bar_01/home_wall_doorway",
+        "mesh": "Combined Mesh (root: scene)",
+        "vertices": 4996
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_06/events_table_event_card",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_doorway_01/home_door_frame_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/home_patron_ev9d9/home_patron_ev9d9_head_mesh",
+        "mesh": "home_patron_ev9d9_head_mesh",
+        "vertices": 488
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_02 (5)",
+        "mesh": "Combined Mesh (root: scene)",
+        "vertices": 4996
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_abednedo_01/home_patron_abednedo_head_01",
+        "mesh": "home_patron_abednedo_head_01_mesh",
+        "vertices": 398
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_shistavanen_01",
+        "mesh": "home_patron_shistavanen_01_mesh",
+        "vertices": 674
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_02 (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_wall_booth_02/home_table_booth_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (6)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 3",
+        "vertices": 6188
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (9)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (10)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (3)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_pillar_01 (7)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (12)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_04/events_table_event_card",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_ithorian_01/home_patron_ithorian_01_arm",
+        "mesh": "home_patron_ithorian_01_arm_mesh",
+        "vertices": 215
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_ceiling_cable_01b",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_ceiling_cable_01b",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Crowd/home_patron_ev9d9/home_patron_ev9d9_arm_L_mesh/home_patron_ev9d9_forearm_L_mesh",
+        "mesh": "home_patron_ev9d9_forearm_L_mesh",
+        "vertices": 323
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (13)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_cable_01",
+        "mesh": "home_ceiling_cable_01_mesh",
+        "vertices": 1624
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_moncalamari_01",
+        "mesh": "Combined Mesh (root: scene)",
+        "vertices": 4996
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_01/events_table_event_card/vfx_scanLines",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_salvage_table_pre/Prop Scavenger/scavenger_enabled/bounty/Salvager_Icons/home_scavenger_salvage_02_holo",
+        "mesh": "home_scavenger_salvage_02_mesh",
+        "vertices": 654
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_05/events_table_event_card/vfx_scanLines",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (15)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (3)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_pipe_wall_01 (2)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/home_head_trooper",
+        "mesh": "home_head_trooper_mesh",
+        "vertices": 1341
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/lomi_junk_pile_03b",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_tb_tw_table_pre/home_holotable_territory",
+        "mesh": "home_holotable_territory_mesh",
+        "vertices": 2530
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_arena_table_pre/Prop Arena/squadpvp_enabled/totem_arena_sabers/totem_arena_sabers_vader/totem_arena_sabers_vader_blade",
+        "mesh": "totem_arena_sabers_vader_blade_mesh",
+        "vertices": 65
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_shipments_table_pre/Prop Shipments/shipments_enabled/totem_shipments_ship/vfx_engine_flame2",
+        "mesh": "engine_flame",
+        "vertices": 21
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/env_VFX_HomeScreen_master/Atmospherics/Quad (14)",
+        "mesh": "Combined Mesh (root: scene) 5",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/home_holotable_store_01_mesh",
+        "mesh": "home_holotable_store_01_mesh",
+        "vertices": 502
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01b",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01b",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Stools/home_stool_01b",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_ig11_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01/home_wall_top_01",
+        "mesh": "home_wall_top_01_mesh",
+        "vertices": 84
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (6)/home_wall_top_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (5)/home_wall_top_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (4)/home_wall_top_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (2)/home_wall_top_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_02 (2)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_bar_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Dining Tables/home_table_01",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Jawa Junk/gen_crate_13a",
+        "mesh": "gen_crate_13_mesh",
+        "vertices": 780
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Cups/home_cup_02 (1)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_raids_table_pre/home_holoprojector (2)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_galactic_battles_table_pre/home_table_01 (1)",
+        "mesh": "Combined Mesh (root: scene) 4",
+        "vertices": 29433
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Static Crowd/home_patron_jawa_01",
+        "mesh": "Combined Mesh (root: scene) 14",
+        "vertices": 8856
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_05/events_table_event_card/vfx_frame",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_galactic_battles_table_pre/Prop Galactic Battle/shipbattles_enabled/ships/tatooine/planet_mesh",
+        "mesh": "Sphere",
+        "vertices": 515
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_shipments_table_pre/Prop Shipments/shipments_enabled/totem_shipments_ship",
+        "mesh": "totem_shipments_ship_mesh",
+        "vertices": 5474
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_banner_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Misc/home_banner_01",
+        "mesh": "Combined Mesh (root: scene) 6",
+        "vertices": 808
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_events_table_pre/home_holotable_events/home_holotable_events_02_mesh_unlocked/Card Container/pivot_card_01/events_table_event_card/vfx_frame",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/vfx_store_ambient/vfx_UI_cant_holo_projector_unlocked_blue/Quad",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_floor_01",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Holotables/env_store_table_pre/home_holotable_store/totem_store_datacard (4)",
+        "mesh": "totem_store_datacard_mesh",
+        "vertices": 160
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Architecture/home_wall_arch_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Bar/home_bar_island/home_bar_island_tank_glass",
+        "mesh": "Combined Mesh (root: scene) 8",
+        "vertices": 2084
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_02 (7)",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Pipes/home_misc_02",
+        "mesh": "Combined Mesh (root: scene) 2",
+        "vertices": 63932
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (4)/sky",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (5)/sky",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (2)/sky",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01/sky",
+        "mesh": "Quad",
+        "vertices": 4
+      },
+      {
+        "type": "UnityEngine.MeshFilter",
+        "path": "env_home_pre/Art Assets/Booths/home_booth_01 (6)/sky",
+        "mesh": "Quad",
+        "vertices": 4
+      }
+    ],
+    "errors": [],
+    "readOnly": true
+  },
+  "bundleAudit": [
+    {
+      "path": "raw_bundles\\cantinapatron_human_male_01_pre\\8b98ddb6ada510000000000000000000\\__data",
+      "types": {
+        "Transform": 30,
+        "GameObject": 30,
+        "MeshFilter": 1,
+        "Avatar": 1,
+        "MonoBehaviour": 7,
+        "Texture2D": 4,
+        "MonoScript": 3,
+        "AnimationClip": 21,
+        "Shader": 2,
+        "Mesh": 2,
+        "AnimatorController": 1,
+        "Material": 2,
+        "SkinnedMeshRenderer": 1,
+        "AssetBundle": 1,
+        "Animator": 1,
+        "CapsuleCollider": 1,
+        "MeshRenderer": 1
+      },
+      "meshes": [
+        {
+          "name": "home_cup_01_mesh",
+          "vertices": 0
+        },
+        {
+          "name": "cantinapatron_human_male_01_mesh",
+          "vertices": 2797
+        }
+      ]
+    },
+    {
+      "path": "raw_bundles\\cantinapatron_human_male_01_pre\\a05741fc72a510000000000000000000\\__data",
+      "types": {
+        "Transform": 30,
+        "GameObject": 30,
+        "MeshFilter": 1,
+        "Avatar": 1,
+        "MonoBehaviour": 7,
+        "Texture2D": 4,
+        "MonoScript": 3,
+        "AnimationClip": 21,
+        "Shader": 2,
+        "Mesh": 2,
+        "AnimatorController": 1,
+        "Material": 2,
+        "SkinnedMeshRenderer": 1,
+        "AssetBundle": 1,
+        "Animator": 1,
+        "CapsuleCollider": 1,
+        "MeshRenderer": 1
+      },
+      "meshes": [
+        {
+          "name": "home_cup_01_mesh",
+          "vertices": 0
+        },
+        {
+          "name": "cantinapatron_human_male_01_mesh",
+          "vertices": 2797
+        }
+      ]
+    }
+  ],
+  "conclusion": "No managed UnityEngine.LODGroup type found. The sampled patron has one skinned body mesh of 2797 vertices, matching both local versions; no LODGroup object in either bundle. No evidence yet that increasing lodBias improves this NPC.",
+  "limitations": [
+    "Not a full local bundle audit; no global missing-resource conclusion.",
+    "Active hierarchy does not prove renderer enabled or camera visibility.",
+    "Raw m_VertexData count zero for cup may reflect compression; not proof of empty mesh.",
+    "No quality setting changed; no image improvement claimed."
+  ],
+  "nextAction": "Do not expose an unvalidated LOD quality toggle; investigate actual render inputs if pursuing DLAA."
+}
