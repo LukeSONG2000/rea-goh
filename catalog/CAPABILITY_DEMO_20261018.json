@@ -1,0 +1,480 @@
+{
+  "date": "2026-10-18",
+  "scope": "User-requested foreground demonstration; long-term goal remains paused",
+  "pid": 32088,
+  "navigation": [
+    "character collection/details/skill popup/level preview/read-only quote",
+    "ship collection/Ghost crew skill",
+    "inbox read",
+    "campaign menu/Light Side entry",
+    "daily/achievements/read/claim tracking",
+    "challenge list/XP missions",
+    "prebattle identity/back after manual support selection"
+  ],
+  "inputEvidence": [
+    "logs/high_reuse/demo-battle-actions.json",
+    "logs/high_reuse/demo-enemy-actions.json",
+    "logs/high_reuse/demo-target-pair-results.json"
+  ],
+  "trials": [
+    {
+      "evidence": "logs\\high_reuse\\trial-20261018-135052-049-evidence.json",
+      "detached": true,
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": false,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 3,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 17460,
+          "sendto": 8,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 13,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "aiTrace": {
+        "rows": 0,
+        "trees": 0,
+        "errors": [],
+        "dropped": 0
+      }
+    },
+    {
+      "evidence": "logs\\high_reuse\\demo-enemy-ally-evidence.json",
+      "detached": true,
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 19,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 14121,
+          "sendto": 7,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 9,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "aiTrace": {
+        "rows": 4,
+        "trees": 1,
+        "errors": [],
+        "dropped": 0
+      }
+    },
+    {
+      "evidence": "logs\\high_reuse\\demo-enemy-ally2-evidence.json",
+      "detached": true,
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 13,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 6552,
+          "sendto": 4,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 3,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "aiTrace": {
+        "rows": 2,
+        "trees": 1,
+        "errors": [],
+        "dropped": 0
+      }
+    },
+    {
+      "evidence": "logs\\high_reuse\\demo-priority-overlay-evidence.json",
+      "detached": true,
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": false,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 8,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 13538,
+          "sendto": 6,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 6,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "overlay": {
+        "shows": 1,
+        "updates": 84,
+        "modeGateCalls": 1,
+        "tutorialDisplays": 0,
+        "errors": [
+          "Error: system error"
+        ],
+        "last": {
+          "health": "生命 39891 / 39891\n总护盾 183642 / 183642\n永久护盾 183642 / 183642\n临时护盾 0 / 0",
+          "effects": [
+            {
+              "icon": "icon_foresight",
+              "suffix": "未读取到计时（原显示标记）",
+              "instances": 0
+            },
+            {
+              "icon": "icon_buff_forceconnection",
+              "suffix": "未读取到计时（原显示标记）",
+              "instances": 0
+            }
+          ]
+        },
+        "target": "生命 0 / 61975\n总护盾 0 / 64715\n永久护盾 0 / 64715\n临时护盾 0 / 0"
+      },
+      "priority": {
+        "order": [
+          17,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          18,
+          19
+        ],
+        "substitutions": 4,
+        "errors": [],
+        "originalUnchanged": true
+      },
+      "aiTrace": {
+        "rows": 8,
+        "trees": 2,
+        "errors": [],
+        "dropped": 0
+      }
+    },
+    {
+      "evidence": "logs\\high_reuse\\demo-target-pair-evidence.json",
+      "detached": true,
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": false,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 5,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 1613,
+          "sendto": 2,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 1,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      }
+    },
+    {
+      "evidence": "logs\\high_reuse\\trial-20261018-140552-838-evidence.json",
+      "detached": true,
+      "completion": {
+        "kind": "simulation-probe-complete",
+        "ticks": 7501,
+        "error": null,
+        "terminal": true,
+        "callbackObserved": false,
+        "fsmOutcome": 0,
+        "simulationOutcomeDiagnosticOnly": 0,
+        "verifiedVictory": true,
+        "summary": {
+          "units": [
+            {
+              "owner": 0,
+              "hp": 39891,
+              "maxHp": 39891,
+              "shield": 183642
+            },
+            {
+              "owner": 1,
+              "hp": 0,
+              "maxHp": 150,
+              "shield": 0
+            },
+            {
+              "owner": 1,
+              "hp": 0,
+              "maxHp": 1,
+              "shield": 0
+            },
+            {
+              "owner": 1,
+              "hp": 0,
+              "maxHp": 1,
+              "shield": 0
+            },
+            {
+              "owner": 1,
+              "hp": 0,
+              "maxHp": 1,
+              "shield": 0
+            },
+            {
+              "owner": 1,
+              "hp": 0,
+              "maxHp": 1,
+              "shield": 0
+            }
+          ],
+          "previousState": 136,
+          "nextState": 0,
+          "terminal": true,
+          "fsmOutcome": 0,
+          "simulationOutcome": 0,
+          "coreBattleStatus": 1,
+          "turns": 5
+        },
+        "healthChanges": [],
+        "attacks": [],
+        "counts": {
+          "SetBattleState": 9,
+          "FsmFinishBattle": 0,
+          "FsmSendBattleFinishRequest": 0,
+          "SimulationDomainFinishBattle": 0,
+          "SaveBattleOutcome": 0,
+          "SendBattleStartRequest": 0,
+          "SendBattleFinishRequest": 0
+        },
+        "trace": [
+          {
+            "kind": "SetBattleState",
+            "tick": 50,
+            "state": 7
+          },
+          {
+            "kind": "SetBattleState",
+            "tick": 100,
+            "state": 8
+          },
+          {
+            "kind": "SetBattleState",
+            "tick": 150,
+            "state": 16
+          },
+          {
+            "kind": "SetBattleState",
+            "tick": 300,
+            "state": 19
+          },
+          {
+            "kind": "SetBattleState",
+            "tick": 1700,
+            "state": 35
+          },
+          {
+            "kind": "SetBattleState",
+            "tick": 3150,
+            "state": 35
+          },
+          {
+            "kind": "SetBattleState",
+            "tick": 4600,
+            "state": 38
+          },
+          {
+            "kind": "SetBattleState",
+            "tick": 6050,
+            "state": 38
+          },
+          {
+            "kind": "SetBattleState",
+            "tick": 7500,
+            "state": 44
+          }
+        ],
+        "traceLimit": 300,
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 0,
+          "sendto": 1,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 0,
+          "WSAConnect": 0
+        },
+        "cleanup": {
+          "attempted": true,
+          "loopStopped": true,
+          "simulationShutdown": true,
+          "hooksDetached": true,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Mission select reaches original support picker; readiness times out until support selected. One GUI selection then original prebattle ID/back succeeded. No online battle started.",
+    "Two auto enemy-control demos timed out without terminal: cleanup passed but auto validation false. Not reported as completed battles.",
+    "Late commands near trial teardown rejected as stale token/owner; no automatic replay.",
+    "Right-top absolute-value label crowds skill icons at 1402x819. Popup statistics and effect rows visibly separated; not full layout acceptance.",
+    "No eligible reward sample; original ineligible-claim rejection only, no actual reward transaction.",
+    "No currency spending, purchases, upgrades or mod/equipment changes; custom trial squads use private captured units, not captured original enemy lineups.",
+    "All modes, single-level skill popup, arbitrary AI prediction/graphs and uncaptured trials remain unverified/unavailable."
+  ],
+  "screenshot": "logs/high_reuse/demo-overlay-before.png"
+}
