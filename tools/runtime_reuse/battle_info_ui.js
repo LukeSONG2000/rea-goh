@@ -3,7 +3,7 @@
 (()=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg,call=S.invoke,hooks=[],popups=new Map(),targets=new Map();
  const marker='\n[80DFFF]',stats={shows:0,updates:0,modeGateCalls:0,tutorialDisplays:0,errors:[],last:null,target:null};
- let stopped=false,gateController=null;
+ let stopped=false;
  const list=l=>l.isNull()?[]:S.array(R.readRef(l,'_items')).slice(0,R.readValue(l,'_size','i32'));
  const active=o=>!!R.unbox(call('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(o)),'bool');
  const withString=(text,fn)=>{const string=R.api('string_new','pointer',['pointer'])(Memory.allocUtf8String(text)),handle=R.retain(string);try{return fn(string);}finally{R.release(handle);}};
@@ -90,6 +90,13 @@
   const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
   if(R.fullName(R.classOf(state))!=='BattleGameState')return;
   const context=R.readRef(R.readRef(state,'_battleController'),'_battleContext');
+  if(enabled===null){
+   // Resolve only from the current battle. A previous battle's helper may
+   // already have been collected when the UI host is stopped in the tavern.
+   const helper=call('BattleContext','get_BattleOpponentAbilityInfoEnabledHelper',context);
+   if(helper.isNull())return;
+   enabled=R.unbox(call('BattleOpponentAbilityInfoEnabledController','IsEnabled',helper),'bool');
+  }
   const view=call('BattleContext','get_BattleView',context);
   call('BattleBaseView','FilterOpponentAbilityDisplay',view,[A.value('bool',enabled)]);
  }
@@ -105,7 +112,7 @@
   stats.shows++;render(popup,unit);
  }
  R.runOnMainThreadOnce(()=>{
-  hook('BattleOpponentAbilityInfoEnabledController','IsEnabled',0,{onEnter(args){gateController=args[0];},onLeave(result){if(!stopped){result.replace(1);stats.modeGateCalls++;}}});
+  hook('BattleOpponentAbilityInfoEnabledController','IsEnabled',0,{onLeave(result){if(!stopped){result.replace(1);stats.modeGateCalls++;}}});
   hook('BattleBaseView','FilterOpponentAbilityDisplay',1,{onEnter(args){if(!stopped)args[1]=ptr(1);}});
   hook('BattleBaseView','SetupOpponentAbilities',4,{
    onEnter(args){this.view=args[0];this.values=[args[1],args[2],args[3],args[4]];},
@@ -149,7 +156,7 @@
    });
    const liveTargets=new Set(S.all('BattleTargetComponent').map(p=>p.toString()));
    for(const item of targets.values())if(liveTargets.has(item.target.toString()))safe(()=>call('UnityEngine.GameObject','SetActive',S.gameObject(item.label),[A.value('bool',false)]));
-   if(gateController)safe(()=>refreshOpponent(R.unbox(call('BattleOpponentAbilityInfoEnabledController','IsEnabled',gateController),'bool')));
+   safe(()=>refreshOpponent(null));
   });return stats;
  };
  rpc.exports={status:()=>stats,stop:()=>globalThis.stopBattleInfo()};
