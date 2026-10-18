@@ -257,7 +257,8 @@ const selectInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='M
 const missionSelected=eventsBridge.execute('events-mission-select',missionRequest);assert.equal(missionSelected.expectedState,'PvePreBattleState');assert.equal(calls.at(-1).method,'MissionSelected');assert.equal(calls.at(-1).args[0].value,missionRow);
 missionFields['<ProgressStatus>k__BackingField']=1;assert.throws(()=>eventsBridge.execute('events-mission-select',missionRequest),/locked/);missionFields['<ProgressStatus>k__BackingField']=5;
 const preView=obj('PreBattleView'),preController=obj('PvePreBattleController',{_battleSupportSelectView:nil,_battleSupportDO:nil,_currentSquad:nil,_eventId:'challenge',_eventInstanceId:'instance',_campaignMissionIdentifier:obj('Identifier')});state=obj('PvePreBattleState',{_featureController:preController});
-const preInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='get_PreBattleView'?preView:method==='get_MissionID'?'mission':preInvoke(type,method,owner,args,types);
+const fullMission={CampaignID:'C01L',MapID:'M01',NodeID:'N01',MissionID:'mission',Difficulty:1};
+const preInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='get_PreBattleView'?preView:type==='CampaignElementIdentifierDO'&&method.startsWith('get_')?fullMission[method.slice(4)]:preInvoke(type,method,owner,args,types);
 assert.equal(ctx.PreBattleBridge.status().missionId,'mission');ctx.PreBattleBridge.back();assert.equal(calls.at(-1).method,'HandlePreBattleViewBackClicked');
 const supportUnit=obj('UnitDO',{Id:'support-unit','<Definition>k__BackingField':obj('Definition',{BaseId:'ORIGINAL_SUPPORT'})});
 preController.fields._battleSupportDO=obj('BattleSupportDO',{_playerId:'support-player','<SupportUnit>k__BackingField':supportUnit});
@@ -277,6 +278,19 @@ const supportRequest={eventId:'challenge',missionId:'mission',playerId:'support-
 assert.throws(()=>ctx.PreBattleBridge.support('prebattle-support-select',{...supportRequest,missionId:'stale'}),/mission changed/);
 assert.throws(()=>ctx.PreBattleBridge.support('prebattle-support-select',{...supportRequest,playerId:'missing'}),/unique current support/);
 ctx.PreBattleBridge.support('prebattle-support-select',supportRequest);assert.equal(calls.at(-1).method,'OnSelectButtonClicked');assert.equal(calls.at(-1).object,supportView);assert.equal(calls.at(-1).args[0].value,'support-player');
+preController.fields._eventId=null;
+const campaignSupport={...supportRequest,eventId:null,missionIdentity:{...fullMission}};
+assert.throws(()=>ctx.PreBattleBridge.support('prebattle-support-select',{...campaignSupport,missionIdentity:undefined}),/Full campaign/);
+for(const key of Object.keys(fullMission)){
+ const before=calls.filter(c=>c.method==='OnSelectButtonClicked').length;
+ assert.throws(()=>ctx.PreBattleBridge.support('prebattle-support-select',{...campaignSupport,missionIdentity:{...fullMission,[key]:key==='Difficulty'?2:'different'}}),/mission changed/);
+ assert.equal(calls.filter(c=>c.method==='OnSelectButtonClicked').length,before);
+}
+const campaignResult=ctx.PreBattleBridge.support('prebattle-support-select',campaignSupport);
+assert.equal(campaignResult.expectedMissionIdentity.CampaignID,'C01L');
+preController.fields._battleSupportSelectView=nil;
+assert.equal(ctx.PreBattleBridge.back().expectedState,'CampaignGameState');
+preController.fields._battleSupportSelectView=supportView;preController.fields._eventId='challenge';
 supportView.fields._battleSupportData=list([supportRow,supportRow]);assert.throws(()=>ctx.PreBattleBridge.support('prebattle-support-select',supportRequest),/unique current support/);
 preController.fields._battleSupportSelectController.fields._view=nil;assert.throws(()=>ctx.PreBattleBridge.support('prebattle-supports'),/ownership mismatch/);
 preController.fields._battleSupportSelectView=nil;

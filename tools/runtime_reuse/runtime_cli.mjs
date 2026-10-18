@@ -20,7 +20,7 @@ if(args.length===1&&args[0]==='capabilities'){
   {name:'prebattle-roster',effect:'read original filtered roster and current empty slot',arguments:['--pid <PID>']},
   ...['prebattle-remove','prebattle-add'].map(name=>({name,effect:'original squad callback and slot readback; no Battle button',arguments:['--pid <PID>','--request <JSON file>'],request:{eventId:'current event',missionId:'current mission',cellIndex:'original slot index',unitId:'original unit ID'}})),
   {name:'prebattle-supports',effect:'read current original support choices',arguments:['--pid <PID>']},
-  {name:'prebattle-support-select',effect:'original support selection into squad page; no Battle button',arguments:['--pid <PID>','--request <JSON file>'],request:{eventId:'current event ID',missionId:'current mission ID',playerId:'current support player ID'}},
+  {name:'prebattle-support-select',effect:'original support selection into squad page; no Battle button',arguments:['--pid <PID>','--request <JSON file>'],request:{eventId:'current event ID, or null for ordinary campaign',missionId:'current mission ID',missionIdentity:'copy prebattle-supports.missionIdentity; required when eventId is null',playerId:'current support player ID'}},
   {name:'prebattle-back',effect:'original prebattle Back callback',arguments:['--pid <PID>']},
   {name:'events-missions',effect:'read original mission costs, progress and attempt/cooldown flags',arguments:['--pid <PID>']},
   {name:'events-list',effect:'read original active challenge list',arguments:['--pid <PID>']},

@@ -21,4 +21,9 @@ after.prebattle.squadCells=[{cellIndex:3,unit:{unitId:'new-unit'}}];assert.equal
 after.prebattle.squadCells=[{cellIndex:4,unit:{unitId:'new-unit'}}];assert.equal(check(),true);
 ctx.operation='prebattle-remove';result.expectedCellUnitId=null;assert.equal(check(),false);
 after.prebattle.squadCells=[{cellIndex:4,unit:null}];assert.equal(check(),true);
+ctx.operation='prebattle-support-select';delete result.expectedCellIndex;
+result.expectedMissionIdentity={CampaignID:'C01L',MapID:'M01',NodeID:'N01',MissionID:'m',Difficulty:1};
+after.prebattle.missionIdentity={...result.expectedMissionIdentity};
+assert.equal(check(),true);
+after.prebattle.missionIdentity.MapID='M02';assert.equal(check(),false,'Same mission ID in a different map must not confirm');
 console.log('PASS native prebattle confirmation: selected identity, mission, phase and loading');

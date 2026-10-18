@@ -679,7 +679,13 @@ globalThis.PreBattleBridge=(()=>{
   const ready=!supportSelectionRequired&&active(S.invoke('PreBattleController','get_PreBattleView',c));
   const support=R.readRef(c,'_battleSupportDO');
   const selectedSupport=support.isNull()?null:{playerId:S.string(R.readRef(support,'_playerId')),unit:unitIdentity(R.readRef(support,'<SupportUnit>k__BackingField'))};
-  return {ready,supportSelectionRequired,phase:supportSelectionRequired?'support':ready?'squad':'loading',selectedSupport,squadCells:ready?squadCells(c):null,eventId:S.string(R.readRef(c,'_eventId')),instanceId:S.string(R.readRef(c,'_eventInstanceId')),missionId:mission.isNull()?null:S.string(S.invoke('CampaignElementIdentifierDO','get_MissionID',mission))};
+  let missionIdentity=null;
+  if(!mission.isNull()){
+   missionIdentity={};
+   for(const name of ['CampaignID','MapID','NodeID','MissionID'])missionIdentity[name]=S.string(S.invoke('CampaignElementIdentifierDO','get_'+name,mission));
+   missionIdentity.Difficulty=R.unbox(S.invoke('CampaignElementIdentifierDO','get_Difficulty',mission),'u8');
+  }
+  return {ready,supportSelectionRequired,phase:supportSelectionRequired?'support':ready?'squad':'loading',selectedSupport,squadCells:ready?squadCells(c):null,eventId:S.string(R.readRef(c,'_eventId')),instanceId:S.string(R.readRef(c,'_eventInstanceId')),missionId:missionIdentity?.MissionID??null,missionIdentity};
  }catch(error){return {ready:false,error:String(error)};}}
  function support(operation,payload){
   const c=current(),state=status();
@@ -693,14 +699,19 @@ globalThis.PreBattleBridge=(()=>{
   const str=(r,k)=>S.string(R.readRef(r,'<'+k+'>k__BackingField'));
   if(operation==='prebattle-supports')return {...state,readConfirmed:true,supports:rows.map(r=>({playerId:str(r,'PlayerId'),unitName:str(r,'UnitName'),supportTitle:str(r,'SupportTitle'),isAlly:!!R.readValue(r,'<IsAlly>k__BackingField','bool')}))};
   if(operation!=='prebattle-support-select')throw Error('Unsupported support operation');
-  if(!payload||['eventId','missionId','playerId'].some(k=>typeof payload[k]!=='string'||!payload[k].length||payload[k].length>256))throw Error('Support and mission identity required');
+  if(!payload||['missionId','playerId'].some(k=>typeof payload[k]!=='string'||!payload[k].length||payload[k].length>256)||(payload.eventId!==null&&(typeof payload.eventId!=='string'||!payload.eventId.length||payload.eventId.length>256)))throw Error('Support and mission identity required');
   if(payload.eventId!==state.eventId||payload.missionId!==state.missionId)throw Error('Current mission changed');
+  if(payload.eventId===null||payload.missionIdentity!==undefined){
+   const identity=payload.missionIdentity;
+   if(!identity||['CampaignID','MapID','NodeID','MissionID'].some(k=>typeof identity[k]!=='string'||!identity[k].length||identity[k].length>256)||!Number.isInteger(identity.Difficulty)||identity.Difficulty<0||identity.Difficulty>255)throw Error('Full campaign mission identity required');
+   if(['CampaignID','MapID','NodeID','MissionID','Difficulty'].some(k=>identity[k]!==state.missionIdentity?.[k]))throw Error('Current campaign mission changed');
+  }
   const matches=rows.filter(r=>str(r,'PlayerId')===payload.playerId);
   if(matches.length!==1)throw Error('Expected unique current support');
   S.invoke('BattleSupportSelectView','OnSelectButtonClicked',view,[R.arg.ref(R.readRef(matches[0],'<PlayerId>k__BackingField'))],['System.String']);
-  return {expectedState:'PvePreBattleState',eventId:state.eventId,missionId:state.missionId,expectedSupportPlayerId:payload.playerId,supportSelectionDispatched:true};
+  return {expectedState:'PvePreBattleState',eventId:state.eventId,missionId:state.missionId,expectedMissionIdentity:state.missionIdentity,expectedSupportPlayerId:payload.playerId,supportSelectionDispatched:true};
  }
- function back(){const c=current();if(!status().ready)throw Error('Prebattle view not ready');S.invoke('PreBattleController','HandlePreBattleViewBackClicked',c);return {expectedState:'EventsParentGameState'};}
+ function back(){const c=current(),live=status();if(!live.ready)throw Error('Prebattle view not ready');S.invoke('PreBattleController','HandlePreBattleViewBackClicked',c);return {expectedState:live.eventId===null?'CampaignGameState':'EventsParentGameState'};}
  function edit(operation,payload){
   const c=current(),live=status();if(!live.ready)throw Error('Original squad view required');
   const editor=R.readRef(c,'_squadEditController'),view=S.invoke('PreBattleController','get_PreBattleView',c);

@@ -1,0 +1,38 @@
+{
+  "scope": "Ordinary PVE campaign support selection and return via original UI callbacks",
+  "changes": [
+    "prebattle snapshots expose full CampaignID/MapID/NodeID/MissionID/Difficulty",
+    "prebattle-support-select admits explicit null eventId only with full valid matching missionIdentity; omitted eventId stays invalid",
+    "Native dispatch and host confirmation both compare full mission identity; old event-based callers remain supported",
+    "prebattle-back confirms CampaignGameState for ordinary campaigns and EventsParentGameState for event missions"
+  ],
+  "live": {
+    "mission": {"CampaignID":"C01L","MapID":"M01","NodeID":"N01","MissionID":"Mi01","Difficulty":1},
+    "incorrectMapRejected": "M02 request rejected with Current campaign mission changed before original selection callback",
+    "correctSupport": "JARJARBINKS",
+    "supportIdentityConfirmed": true,
+    "returnStateConfirmed": "CampaignGameState",
+    "finalState": "HomeBaseGameState",
+    "gamePid": 32088,
+    "hostPid": 39064,
+    "battleStarted": false
+  },
+  "evidence": [
+    "logs/high_reuse/campaign-cli-support-list.json",
+    "logs/high_reuse/campaign-cli-support-rejected.json",
+    "logs/high_reuse/campaign-cli-support-selected.json",
+    "logs/high_reuse/campaign-cli-back.json"
+  ],
+  "tests": [
+    "test_inventory_bridge.mjs PASS: each mission key mismatch prevents native callback, null event selection, original callbacks",
+    "test_runtime_commands.mjs PASS: malformed identity, missing map, inconsistent mission, no replay",
+    "test_prebattle_confirmation.mjs PASS: identical MissionID in different map does not confirm",
+    "test_runtime_loading.mjs PASS",
+    "syntax and diff checks PASS"
+  ],
+  "remaining": [
+    "Campaign map mission button still requires original UI clicking; this change covers support choice and return",
+    "Ordinary campaign squad edit commands still require non-null event ID; extend separately with same full mission identity requirement",
+    "No currency spending, battle entry, sweep or reward claim was performed"
+  ]
+}

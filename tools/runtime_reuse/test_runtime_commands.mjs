@@ -27,6 +27,11 @@ try{
  for(const payload of [null,{}, {eventId:'e',missionId:'m',playerId:''},{eventId:'e',missionId:'m',playerId:42}]){
   const result=await test({operation:'prebattle-support-select',payload});assert.equal(result.dispatched,false);
  }
+ const campaignPayload={eventId:null,missionId:'Mi01',playerId:'p',missionIdentity:{CampaignID:'C01L',MapID:'M01',NodeID:'N01',MissionID:'Mi01',Difficulty:1}};
+ assert.equal((await test({operation:'prebattle-support-select',payload:campaignPayload})).ok,true);
+ for(const missionIdentity of [undefined,{}, {...campaignPayload.missionIdentity,MapID:''},{...campaignPayload.missionIdentity,Difficulty:256},{...campaignPayload.missionIdentity,MissionID:'Mi02'}]){
+  assert.equal((await test({operation:'prebattle-support-select',payload:{...campaignPayload,missionIdentity}})).dispatched,false);
+ }
  for(const payload of [null,{}, {questId:'q',tab:1,subTab:0},{questId:'',tab:2,subTab:1},{questId:'q',tab:3,subTab:1}]){
   const result=await test({operation:'objectives-claim',payload});assert.equal(result.dispatched,false);
  }
@@ -99,18 +104,18 @@ try{
   await processCommands(root,owner,async()=>result,now);
   assert.equal(JSON.parse(fs.readFileSync(path.join(box,id+'.result.json'))).ok,true);
  }
- await processCommands(root,owner,execute,now);assert.equal(calls,1,'Completed requests are not replayed');
+ await processCommands(root,owner,execute,now);assert.equal(calls,2,'Completed requests are not replayed');
  const completed=fs.readdirSync(box).find(f=>JSON.parse(fs.readFileSync(path.join(box,f))).ok);
  const completedId=completed.replace('.result.json','');
  fs.writeFileSync(path.join(box,completedId+'.request.json'),JSON.stringify({id:completedId,...owner,operation:'inventory-home',expiresAt:11000}));
- await processCommands(root,owner,execute,now);assert.equal(calls,1,'Duplicate completed IDs must not dispatch again');
+ await processCommands(root,owner,execute,now);assert.equal(calls,2,'Duplicate completed IDs must not dispatch again');
  const pendingId=crypto.randomUUID();
  fs.writeFileSync(path.join(box,pendingId+'.request.json'),JSON.stringify({id:pendingId,...owner,operation:'inventory-home',expiresAt:11000}));
  await processCommands(root,owner,async()=>({transitionConfirmed:false}),now);
  const pending=JSON.parse(fs.readFileSync(path.join(box,pendingId+'.result.json')));
  assert.equal(pending.ok,false);assert.equal(pending.dispatched,true);
  const id=crypto.randomUUID();fs.writeFileSync(path.join(box,id+'.running.json'),'{}');
- await processCommands(root,owner,execute,now);assert.equal(calls,1,'Uncertain running commands are never retried');
+ await processCommands(root,owner,execute,now);assert.equal(calls,2,'Uncertain running commands are never retried');
  console.log('PASS: valid dispatch, wrong owner/expired/unknown operations rejected, no replay or retry.');
 }finally{
  for(const file of fs.readdirSync(box))fs.unlinkSync(path.join(box,file));fs.rmdirSync(box);fs.rmdirSync(root);
