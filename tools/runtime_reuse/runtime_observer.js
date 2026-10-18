@@ -336,7 +336,21 @@ globalThis.InboxClaimTracker=(()=>{
  }
  const expose=r=>{const {owner,target,handle,...result}=r;return {...result,rewardBalanceReconciled:r.rewardBalanceReconciled===true,
   settlementEvidence:r.rewardBalanceReconciled?'native-wallet-delta':r.outcome==='native-success-callback'?'native-success-callback':'unconfirmed'};};
- function finish(target,outcome){const r=closures.get(target.toString());if(r&&r.outcome==='pending'){r.outcome=outcome;r.finishedAt=new Date().toISOString();}}
+ function finish(target,outcome){
+  let r=closures.get(target.toString());
+  // Calls made inside our main-thread dispatcher may not re-enter other
+  // interceptor listeners. Correlate asynchronous result closures directly;
+  // never require observing the synchronous service entry first.
+  if(!r&&!target.isNull()&&R.fullName(R.classOf(target))===type){
+   const owner=R.readRef(target,'<>4__this'),message=R.readRef(target,'messageDO');
+   if(!message.isNull()){
+    const id=S.string(R.readRef(message,'<Id>k__BackingField'));
+    r=records.find(r=>r.messageId===id&&r.owner.equals(owner)&&r.outcome==='pending');
+    if(r){r.target=target;r.handle=R.retain(target);closures.set(target.toString(),r);}
+   }
+  }
+  if(r&&r.outcome==='pending'){r.nativeCallbackObserved=true;r.outcome=outcome;r.finishedAt=new Date().toISOString();}
+ }
  function release(target){const r=closures.get(target.toString());if(r){closures.delete(target.toString());R.release(r.handle);r.handle=null;r.target=null;}}
  function install(){
   if(installed)return;
@@ -354,7 +368,9 @@ globalThis.InboxClaimTracker=(()=>{
   }],
   [type,'<UpdateInbox>b__0',0,{onEnter(args){this.target=args[0];finish(this.target,'native-success-callback');},onLeave(){release(this.target);}}],
   [type,'<UpdateInbox>b__1',1,{onEnter(args){this.target=args[0];finish(this.target,'native-failure-callback');},onLeave(){release(this.target);}}]];
-  try{const resolved=entries.map(([t,m,n,cb])=>[R.findMethod(R.findClass(t),m,n).readPointer(),cb]);for(const [p,cb] of resolved)hooks.push(Interceptor.attach(p,cb));installed=true;}
+  // submit invokes the native UI immediately in this same JS callback. Make
+  // all observers effective before the native transaction can run.
+  try{const resolved=entries.map(([t,m,n,cb])=>[R.findMethod(R.findClass(t),m,n).readPointer(),cb]);for(const [p,cb] of resolved)hooks.push(Interceptor.attach(p,cb));Interceptor.flush();installed=true;}
   catch(error){for(const h of hooks.splice(0))h.detach();throw error;}
  }
  function submit(info,owner,callback){

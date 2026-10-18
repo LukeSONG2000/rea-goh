@@ -1,0 +1,51 @@
+{
+  "probe": {
+    "kind": "readonly-hook-visibility",
+    "address": "0x1807dd0",
+    "virtualAddress": "0x1807dd0",
+    "values": [
+      {
+        "mode": "runtime-default",
+        "value": 7441,
+        "hits": 0
+      },
+      {
+        "mode": "all",
+        "value": 7441,
+        "hits": 0,
+        "exception": false
+      },
+      {
+        "mode": "default",
+        "value": 7441,
+        "hits": 0,
+        "exception": false
+      },
+      {
+        "mode": "direct-all",
+        "value": 7441,
+        "hits": 0
+      },
+      {
+        "mode": "direct-default",
+        "value": 7441,
+        "hits": 0
+      }
+    ]
+  },
+  "conclusion": "All five synchronous calls from the main-thread dispatcher returned valid balance but attached listener received zero hits; explicit flush and traps=all did not resolve this.",
+  "change": "Allow result callback closure to correlate directly by exact controller and message ID even when service entry was not observed.",
+  "validation": "Mock callback-only success and foreign-owner rejection PASS; no remaining ordinary reward email used for live callback-only verification.",
+  "fleetReward": {
+    "request": "logs/high_reuse/inbox-fleet-claim-receipt.json",
+    "status": "logs/high_reuse/inbox-fleet-claim-status.json",
+    "crystalsPreviouslyVerified": 7391,
+    "crystalsReadByProbe": 7441,
+    "crystalDelta": 50,
+    "otherRewardsReconciled": false
+  },
+  "limitations": [
+    "Result callback closure path still needs fresh live reward validation",
+    "No success fabricated for previous pending callback records"
+  ]
+}
