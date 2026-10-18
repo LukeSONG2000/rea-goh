@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import ttk
 from pathlib import Path
 from datetime import datetime, timezone
+from functools import lru_cache
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAPSHOT = ROOT / 'logs/high_reuse/runtime-snapshot.json'
@@ -23,6 +24,45 @@ def mastery_text(attributes):
     for stat in attributes.get('stats',[]):
         if stat.get('hasMasteryContribution'):
             lines.append(f"{LABELS.get(stat['id'],stat['name'])}：{number(stat.get('masteryPreModifierTerm'))}（全部因素净变化 {number(stat.get('netBattleDelta'))}）")
+    return '\n\n'.join(lines)
+
+@lru_cache(maxsize=1)
+def prediction_names():
+    """Local original labels only; unknown entries keep their original ID."""
+    try:
+        loc=json.loads((ROOT/'catalog/loc_cn.json').read_text(encoding='utf-8'))
+        abilities=json.loads((ROOT/'catalog/gamedata/ability.json').read_text(encoding='utf-8'))['data']
+        characters=json.loads((ROOT/'catalog/character_names.json').read_text(encoding='utf-8'))
+        return ({r['id']:loc.get(r.get('nameKey'),r['id']) for r in abilities},
+                {r['defId']:r.get('name_zh') or r.get('name_en') or r['defId'] for r in characters.values() if r.get('defId')})
+    except (OSError,ValueError,KeyError,TypeError):
+        return {},{}
+
+def prediction_text(data,names=None):
+    if data.get('state')!='BattleGameState': return '当前不在战斗中。'
+    prediction=data.get('aiPrediction')
+    if not prediction or prediction.get('experimental') is not True:
+        return '当前未开启实验预测。\n\n仅隔离试玩的 ExperimentalPrediction 模式提供记录。'
+    abilities,characters=names if names is not None else prediction_names()
+    def unit(value):
+        value=value or {};key=value.get('baseId') or '未知单位'
+        side={0:'我方',1:'敌方'}.get(value.get('owner'),'未知阵营')
+        return f"{side} · {characters.get(key,key)}"
+    def targets(values): return '、'.join(unit(v) for v in values or []) or '无'
+    lines=['即时预测验证 · 实验功能\n这是出招前计算、随后与原 AI 对照的记录，不是下一回合预告。目标为候选集合，不代表最终命中目标。']
+    if prediction.get('failed'): lines.append('验证异常，已停止后续预测。')
+    history=prediction.get('history') or []
+    if not history: lines.append('等待原 AI 做出决策。')
+    for row in reversed(history[-16:]):
+        matched=row.get('matched');result=row.get('result') or {};key=result.get('abilityId')
+        verified=matched is True and row.get('originalRandomUnchanged') is True and row.get('randomAfterMatched') is True and not row.get('error')
+        outcome='已核验一致' if verified else ('等待核验' if matched is None and not row.get('error') else '核验异常')
+        lines.append(f"#{row.get('sequence','?')}  {unit(row.get('actor'))}  · {outcome}\n"
+                     f"技能：{abilities.get(key,key) if key else '未返回技能'}\n"
+                     f"敌方候选：{targets(result.get('enemyTargets'))}\n"
+                     f"友方候选：{targets(result.get('allyTargets'))}\n"
+                     f"计算耗时：{number(row.get('elapsedMs'))} 毫秒"+
+                     (f"\n异常：{row['error']}" if row.get('error') else ''))
     return '\n\n'.join(lines)
 
 def process_alive(pid):
@@ -82,12 +122,14 @@ def create_window(pid,snapshot_reader=read_snapshot):
         return text,frame
     effects,effects_frame=text_tab('状态期限')
     mastery,mastery_frame=text_tab('精通变化')
+    prediction,prediction_frame=text_tab('AI 预测记录')
     ttk.Label(window,text='净变化包含全部战斗因素；不等同于精通单独贡献。面板基础值尚未验证。',wraplength=620).pack(fill='x',padx=12,pady=8)
     keys=[]
     def clear(message):
         status.config(text=message);health.config(text='');table.delete(*table.get_children());choice['values']=[];choice.set('')
         effects.config(state='normal');effects.delete('1.0','end');effects.config(state='disabled')
         mastery.config(state='normal');mastery.delete('1.0','end');mastery.config(state='disabled')
+        prediction.config(state='normal');prediction.delete('1.0','end');prediction.config(state='disabled')
     def refresh():
         nonlocal keys
         try:
@@ -108,12 +150,15 @@ def create_window(pid,snapshot_reader=read_snapshot):
                 rows=[f"{e.get('locKey') or e.get('effectId')}\n{e['durationText']}" for e in unit['status']['effects'] if e.get('iconSprite')]
                 effects.config(state='normal');effects.delete('1.0','end');effects.insert('1.0','\n\n'.join(rows) or '无状态效果');effects.config(state='disabled')
                 mastery.config(state='normal');mastery.delete('1.0','end');mastery.insert('1.0',mastery_text(a));mastery.config(state='disabled')
+                content=prediction_text(data)
+                if prediction.get('1.0','end-1c')!=content:
+                    prediction.config(state='normal');prediction.delete('1.0','end');prediction.insert('1.0',content);prediction.config(state='disabled')
         except (OSError,ValueError,KeyError,TypeError) as exc: clear(str(exc))
         window.after(1000,refresh)
     def close():
         window.destroy()
     window.protocol('WM_DELETE_WINDOW',close);refresh()
-    return window,{'tabs':tabs,'mastery':mastery,'mastery_frame':mastery_frame,'effects':effects,'effects_frame':effects_frame,'refresh':refresh,'status':status}
+    return window,{'tabs':tabs,'mastery':mastery,'mastery_frame':mastery_frame,'effects':effects,'effects_frame':effects_frame,'prediction':prediction,'prediction_frame':prediction_frame,'refresh':refresh,'status':status}
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)

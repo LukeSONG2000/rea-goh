@@ -1,0 +1,13 @@
+{
+  "scope":"Read-only desktop prediction verification history tab",
+  "implementation":"attribute_overlay.py consumes existing aiPrediction snapshot; labels from local original ability/Chinese localization/character catalog, unknown labels preserve IDs; latest first, at most16 records, wraps and scrolls",
+  "truthLabels":["Immediate evaluation history, not next-turn forecast","AI candidate lists, not final hit targets","Verified only if result match and original seed unchanged and final seed match with no error","Explicit stopped/error/waiting/not-enabled states"],
+  "lifecycle":"Existing owner/PID/freshness validation applies before rendering. No units, Home or invalid/stale snapshot clears prediction text along with other panes. Unchanged content preserves scroll position.",
+  "verification":{
+    "unitTests":"3 tests pass including existing owner switch/stale/future snapshots and new prediction truth labels",
+    "actualTkLayout":"650x650 with explicitly labelled historical Vader native snapshot; no overlap observed; scroll reaches end and remains after refresh; Home clears text",
+    "images":["logs/high_reuse/overlay-prediction-history.png","logs/high_reuse/overlay-prediction-scroll.png"],
+    "sample":"logs/high_reuse/ai-prediction-vader-live-snapshot.json"
+  },
+  "limitations":["This turn used historical captured data for layout, not a new live battle","No claim of all DPI/window sizes verified","Prediction remains explicit experimental owned-trial mode","Some local catalog entries lack localized names and display original IDs","No advance-turn forecast"]
+}
