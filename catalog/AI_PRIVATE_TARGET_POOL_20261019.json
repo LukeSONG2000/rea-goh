@@ -1,0 +1,28 @@
+{
+  "scope": "Independent original target-list pool; not complete AI prediction",
+  "implementation": "Allocate original closed generic ListPool class, run original two-argument constructor with an empty queue and original per-list capacity; retain pool for lifetime, track outstanding list ownership, return outstanding lists and release pool on dispose",
+  "guards": ["reject null pool and unexpected capacity", "reject shared queue", "reject foreign/double returns", "reject use after dispose", "release handle on constructor failure"],
+  "liveEvidence": "logs/high_reuse/trial-20261019-022641-862-evidence.json",
+  "baseline": "logs/high_reuse/trial-20261019-020617-427-evidence.json",
+  "live": {
+    "originalCapacity": 32,
+    "twoConcurrentListsDistinct": true,
+    "listReuseConfirmed": true,
+    "reusedListEmpty": true,
+    "originalQueueFieldsUnchanged": true,
+    "allAiRowsAndSeedsEqualBaseline": true,
+    "decisionGraphsEqualBaseline": true,
+    "traceErrors": [],
+    "nativeTerminal": true,
+    "serviceCalls": 0,
+    "homeAndGuardAndDefinitionsAndGcRestored": true,
+    "restoredDisplayHost": 32972
+  },
+  "tests": ["pool ownership/reuse/lifetime/constructor-failure/shared-queue VM regression", "random-copy regression", "decision graph regression", "private-priority regression", "turn-order demo two identical output hashes"],
+  "limitations": [
+    "Source queue verification compares identity, array identity, size, version, head and tail; it is not a deep heap comparison",
+    "Reused lists were initially empty; native clearing of populated lists not tested here",
+    "Private pool is not yet bound into a private AI context or targeting evaluator",
+    "Unit/stat/effect transitive dependencies and complete predictive evaluation remain pending"
+  ]
+}
