@@ -22,10 +22,12 @@ export async function processCommands(directory,owner,execute,now=Date.now){
    if(r.operation==='calendar-select'&&(typeof r.payload?.calendarId!=='string'||!r.payload.calendarId.length||r.payload.calendarId.length>256))throw Error('Invalid calendar identity');
    if(r.operation==='calendar-claim'&&(typeof r.payload?.calendarId!=='string'||!r.payload.calendarId.length||r.payload.calendarId.length>256||!Number.isInteger(r.payload.rewardIndex)||r.payload.rewardIndex<0||typeof r.payload.lastClaimed!=='string'||!/^\d{1,20}$/.test(r.payload.lastClaimed)))throw Error('Invalid calendar reward identity');
    if(['inbox-select','inbox-claim'].includes(r.operation)&&(typeof r.payload?.messageId!=='string'||!r.payload.messageId.length||r.payload.messageId.length>256))throw Error('Invalid inbox message identity');
-   if(r.operation==='campaign-prebattle'){
+   if(['campaign-prebattle','campaign-sweep-preview','campaign-sweep-count','campaign-sweep-confirm'].includes(r.operation)){
     const m=r.payload?.missionIdentity;
     if(!m||['CampaignID','MapID','NodeID','MissionID'].some(k=>typeof m[k]!=='string'||!m[k].length||m[k].length>256)||!Number.isInteger(m.Difficulty)||m.Difficulty<0||m.Difficulty>255)throw Error('Invalid full campaign mission identity');
    }
+   if(['campaign-sweep-count','campaign-sweep-confirm'].includes(r.operation)&&(!Number.isSafeInteger(r.payload?.count)||r.payload.count<1||r.payload.count>2147483647))throw Error('Invalid sweep count');
+   if(r.operation==='campaign-sweep-confirm'&&(!Number.isSafeInteger(r.payload.ticketCost)||r.payload.ticketCost<1||!Number.isSafeInteger(r.payload.energyCost)||r.payload.energyCost<1||typeof r.payload.energyId!=='string'||!r.payload.energyId.length||r.payload.energyId.length>256))throw Error('Invalid sweep resource quote');
    if(['prebattle-remove','prebattle-add'].includes(r.operation)&&(!Number.isInteger(r.payload?.cellIndex)||r.payload.cellIndex<0||r.payload.cellIndex>63))throw Error('Invalid squad edit identity');
    if(['prebattle-support-select','prebattle-remove','prebattle-add'].includes(r.operation)){
     const p=r.payload;
@@ -48,8 +50,26 @@ export async function processCommands(directory,owner,execute,now=Date.now){
    if(['battle-target','battle-unit','enemy-target','enemy-unit'].includes(r.operation)&&(!r.payload||typeof r.payload.token!=='string'||r.payload.token.length>3000||typeof r.payload.targetId!=='string'||!r.payload.targetId.length||r.payload.targetId.length>256))throw Error('Invalid battle target request');
    if(r.operation==='battle-ability'&&(!r.payload||typeof r.payload.token!=='string'||r.payload.token.length>3000||!Number.isInteger(r.payload.index)||r.payload.index<0||r.payload.index>63))throw Error('Invalid battle ability request');
    if(r.operation==='battle-cancel'&&(!r.payload||typeof r.payload.token!=='string'||!r.payload.token.length||r.payload.token.length>3000))throw Error('Invalid cancellation request');
+   // Resource confirmation has a durable, exclusive claim independent of PID,
+   // host and request UUID. Never clear it on timeout, exception or restart.
+   const sweepClaimPath=path.join(directory,'sweep-confirmation.pending.json');
+   if(r.operation==='campaign-sweep-confirm'){
+    let fd;
+    try{fd=fs.openSync(sweepClaimPath,'wx');}
+    catch(e){if(e.code==='EEXIST')throw Error('Prior sweep submission requires reconciliation; read campaign-sweep-receipt. Restarting does not authorize retry.');throw e;}
+    try{
+     fs.writeFileSync(fd,JSON.stringify({schemaVersion:1,id,...owner,createdAt:now(),missionIdentity:r.payload.missionIdentity,count:r.payload.count,ticketCost:r.payload.ticketCost,energyId:r.payload.energyId,energyCost:r.payload.energyCost,status:'dispatch-outcome-unknown'}));
+     fs.fsyncSync(fd);
+    }finally{fs.closeSync(fd);}
+   }
    // Claim happens before invocation. A crash leaves .running, never an auto retry.
    response.dispatched=true;response.result=await execute(r.operation,r.payload);
+   if(r.operation==='campaign-sweep-receipt'&&fs.existsSync(sweepClaimPath)){
+    const claim=JSON.parse(fs.readFileSync(sweepClaimPath,'utf8'));
+    if(!uuid.test(claim.id))throw Error('Invalid durable sweep record; retained for inspection');
+    const previous=path.join(mailbox,claim.id+'.result.json');
+    response.result={...response.result,durableSubmission:claim,originalCommandResult:fs.existsSync(previous)?JSON.parse(fs.readFileSync(previous,'utf8')):null,retryBlocked:true};
+   }
    response.ok=['campaign-sweep-confirm','calendar-claim','objectives-claim','inbox-claim'].includes(r.operation)?response.result?.claimDispatched===true:['store-list','calendar-list','calendar-claim-status','campaign-sweep-receipt','campaign-sweep-status','campaign-mission','inbox-claim-status','prebattle-roster','prebattle-supports','events-missions','events-list','objectives-claim-status','objectives-list','inbox-list','inventory-list','inventory-skill-quote'].includes(r.operation)?response.result?.readConfirmed===true:['enemy-basic','enemy-ability'].includes(r.operation)?(response.result?.started===true||response.result?.selectionStarted===true||response.result?.selectionEmpty===true):r.operation==='enemy-unit'?response.result?.started===true:r.operation==='enemy-cancel'?response.result?.selectionCancelled===true:r.operation==='enemy-resume'?response.result?.resumed===true:r.operation==='battle-cancel'?response.result?.selectionCancelled===true:r.operation==='battle-unit'?response.result?.selectionCompleted===true:['battle-target','enemy-target'].includes(r.operation)?response.result?.targetConfirmed===true:r.operation==='battle-ability'?response.result?.inputDispatched===true:response.result?.transitionConfirmed===true;
    if(!response.ok)response.error='Operation dispatched but not confirmed; inspect current state before retrying.';
   }catch(e){response.error=String(e);}

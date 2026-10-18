@@ -1,0 +1,28 @@
+{
+  "scope": "Durable sweep dispatch exclusion across helper/client PID and request UUID changes",
+  "implementation": [
+    "Exclusive wx pending record written and fsynced before runtime dispatch",
+    "Persistent claim retained on success, exception and missing command result",
+    "Host restarts do not clear claim",
+    "Receipt exposes original command result and persistent claim after in-memory state loss",
+    "Malformed resource and mission inputs rejected before persistent claim"
+  ],
+  "tests": [
+    "success and exception reject next owner/new UUID",
+    "native mock sees record before invocation",
+    "truncated claim rejects dispatch",
+    "receipt links original command ID",
+    "command/campaign/loading regression PASS"
+  ],
+  "live": {
+    "hostPid": 428,
+    "emptyReceiptRead": true,
+    "realPendingRecordCreated": false,
+    "resourceSpend": false
+  },
+  "limitations": [
+    "No reconciliation/release lifecycle yet; further confirmations remain blocked after any dispatch until reviewed resolution",
+    "Authorization declaration is an operator assertion, not proof of user consent; agent must obtain explicit approval",
+    "No resource-consuming native execution in this turn"
+  ]
+}
