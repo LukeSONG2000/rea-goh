@@ -354,3 +354,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 captured-definition-scope】认领捕获PVE定义表生命周期及HUD空状态刷新。只读原GetUnitDefinition确认fallback到0x1C0表；短实验保留原转换表可进入原终局turn4，恢复旧表equal=true；HUD切换null报错导致host保留。已核Home/guard/GC/表恢复完成后仅停止自己诊断host34076，下一步正式作用域清理及回归。
 
 【Codex/root 2026-10-18 captured-definition-scope fixed】新增通用原PVE定义表作用域：转换结果保留原表，fixture成功最后启用，原战斗/模拟关闭后恢复，再释放GC；遇其他owner替表拒绝覆盖。HUD refresh补CurrentState null窗口。标准visual实机terminal turn4、HUD errors空、serviceCalls0、Home/definitionsRestored/guard/GC/cleanup全通过；headless两次terminal胜利、伤害/血量序列和最终单位/结果一致，但ticks1801/1651及SetBattleState5/4不同，不声称全trace确定性。作用域所有权/空旧表/幂等、HUD空状态及清理、prepare5项、turn_order种子确定性通过。报告CAPTURED_DEFINITION_SCOPE_VALIDATION_20261018.json；普通host11536恢复，CLI确认Home。未验证截图排版/所有模式，当前选队同步仍待；无线上次数消费。
+
+【Codex/root 2026-10-18 mastery-stage】认领实时精通原计算阶段读数。原FDE5C0汇编fde988/fde9be/fde9c3确认系数乘递归原MASTERY计算值后加入，随后还有其他修正；GetStatValue另有上下限，不能直接以最终精通值乘系数冒称最终属性归因。将暴露原阶段读数并保持最终贡献未知，核原运行时。
