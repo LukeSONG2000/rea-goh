@@ -185,3 +185,11 @@ node tools/runtime_reuse/runtime_cli.mjs inventory-home --pid PID
 
 当前接口未接入升级、装备变更、商店购买、扫荡或奖励领取；不是这些目标已经完成。
 试玩持有运行时期间继续拒绝收藏导航。购买与装备拆卸／分解须另外获得明确授权。
+
+详情快照新增 `detail.skills`：原技能 ID、能力引用 ID、真实能力名称 key、能力类型、
+定义冷却、当前保存 tier、定义 tier 数量、解锁要求及船员来源。技能定义本身的名称
+可能是通用占位，单独放在 `skillDefinitionNameKey`；展示名称应使用 `abilityNameKey`。
+`currentTier` 是原 `UnitDO.GetSkillTier` 返回值；缺席技能返回 `present:false/currentTier:null`。
+它不是 UI 显示等级。原 UI 的显示计算还包含 `RequiredSkillTier` 偏移，不能直接加一。
+`definitionIsZeta` 是定义标志，不代表当前已经购买 Zeta；`baseCooldown` 是能力定义值，
+不是战斗中经过升级和效果修正后的实际剩余 CD。读数失败明确返回 `skillsError`，不填假值。

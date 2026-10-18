@@ -6,7 +6,7 @@ const end=source.indexOf('globalThis.readRuntimeSnapshot=');
 const nil={isNull:()=>true};
 const obj=(type,fields={})=>({type,fields,isNull:()=>false});
 const list=rows=>obj('List',{_size:rows.length,_items:{isNull:()=>false,add:n=>n===24?{readU64:()=>({toNumber:()=>rows.length})}:{readPointer:()=>rows[(n-32)/8]}}});
-const unit=(id,baseId)=>obj('UnitDO',{Id:id,'<Definition>k__BackingField':obj('Definition',{BaseId:baseId}),'<CurrentLevel>k__BackingField':85,'<CurrentRarity>k__BackingField':7,'<CurrentTier>k__BackingField':12});
+const unit=(id,baseId)=>obj('UnitDO',{Id:id,'<Definition>k__BackingField':obj('Definition',{BaseId:baseId,_skillDefinitions:list([]),_crewMemberSlots:list([])}),'<CurrentLevel>k__BackingField':85,'<CurrentRarity>k__BackingField':7,'<CurrentTier>k__BackingField':12});
 const owned=unit('vader-id','VADER'),preview=unit('preview-id','PREVIEW');
 const ownRow=obj('Row',{'<Unit>k__BackingField':owned}),previewRow=obj('Row',{'<Unit>k__BackingField':preview});
 const view=obj('View',{_filterData:list([ownRow,previewRow])});
@@ -18,10 +18,10 @@ const master=obj('MasterInventoryController',{_transitionData:transition,_charac
 const collection=obj('MasterInventoryGameState',{_masterInventoryController:master});let state=collection;
 const stateController=obj('StateController');
 const inventory=obj('InventoryDomainController',{'<Inventory>k__BackingField':obj('Inventory',{_unitRoster:obj('Roster',{_units:list([owned])})})});
-const calls=[];
+const calls=[],tierReads=[];let skillTier=6;
 const R={nil,findBound:name=>name==='StateController'?stateController:inventory,classOf:o=>o.type,fullName:x=>x,
  readRef:(o,n)=>o===stateController?state:(assert.ok(n in o.fields,'missing field '+n),o.fields[n]),readValue:(o,n)=>o.fields[n],unbox:x=>x,arg:{ref:value=>({value})}};
-const S={string:x=>x,gameObject:x=>x,invoke:(type,method,object,args)=>{if(method==='get_activeInHierarchy')return active;if(method==='get_IsLoanedUnit')return false;calls.push({type,method,object,args});}};
+const S={string:x=>x,gameObject:x=>x,invoke:(type,method,object,args)=>{if(method==='get_activeInHierarchy')return active;if(method==='get_IsLoanedUnit')return false;if(method==='HasSkill')return args[0].value==='present';if(method==='GetSkillTier'){tierReads.push(args[0].value);assert.equal(args[0].value,'present');return skillTier;}if(method==='GetTotalTiers')return 7;if(method==='GetAbility')return nil;calls.push({type,method,object,args});}};
 const ctx=vm.createContext({RuntimeApi:R,SceneApi:S});vm.runInContext(source.slice(0,end),ctx);const bridge=ctx.InventoryBridge;
 assert.equal(bridge.readiness().ready,true);
 let result=bridge.execute('inventory-list');assert.equal(result.units.length,1);assert.equal(result.units[0].baseId,'VADER');assert.equal(calls.length,0);
@@ -35,7 +35,19 @@ state=obj('HomeBaseGameState');assert.throws(()=>bridge.execute('inventory-list'
 for(const type of ['CharacterDetailsState','ShipDetailsState']){
  const data=obj('Data',{[type==='CharacterDetailsState'?'<Unit>k__BackingField':'Unit']:owned});
  state=obj(type,{_controller:obj('Controller',{_transitionData:data})});
- assert.equal(bridge.detail(state).unitId,'vader-id');bridge.execute('inventory-back');assert.equal(calls.at(-1).method,'OnBackButtonClicked');
+ assert.equal(bridge.detail(state).unitId,'vader-id');assert.equal(bridge.detail(state).skills.length,0);assert.equal(bridge.detail(state).skillsError,undefined);bridge.execute('inventory-back');assert.equal(calls.at(-1).method,'OnBackButtonClicked');
 }
 assert.throws(()=>bridge.execute('upgrade'),/Unsupported/);
-console.log('PASS inventory bridge: own filtered IDs only, preview/foreign/inactive/wrong-state rejection, original character/ship callbacks, detail readback and back; no mutation API.');
+const skill=id=>obj('Skill',{Id:id,AbilityReferenceId:'ability-'+id,NameKey:'DEFINITION_PLACEHOLDER',RequiredTier:0,RequiredRelicTier:0,SkillType:0,OmicronMode:0,IsZeta:false});
+const definition=owned.fields['<Definition>k__BackingField'];
+definition.fields._skillDefinitions=list([skill('present')]);
+definition.fields._crewMemberSlots=list([obj('CrewSlot',{'<CrewMemberId>k__BackingField':'VADER','<CrewSkillDef>k__BackingField':list([skill('absent')])})]);
+let skills=bridge.detail(state).skills;
+assert.equal(skills.length,2);assert.equal(skills[0].currentTier,6);assert.equal(skills[0].tierCount,7);
+assert.equal(skills[1].source,'crew');assert.equal(skills[1].crewMemberId,'VADER');assert.equal(skills[1].present,false);assert.equal(skills[1].currentTier,null);assert.equal(skills[0].abilityNameKey,null);
+assert.deepEqual(tierReads,['present'],'missing skills must not invoke the throwing indexer');
+skillTier=3;assert.equal(bridge.detail(state).skills[0].currentTier,3,'tier remains a live read');
+definition.fields._skillDefinitions.fields._size=5000;
+const invalid=bridge.detail(state);assert.match(invalid.skillsError,/bounds/);assert.equal(invalid.unitId,'vader-id','failed skill read does not remove basic identity');
+
+console.log('PASS inventory bridge: own filtered IDs only, preview/foreign/inactive/wrong-state rejection, original character/ship callbacks, detail readback and back; live unit/crew skill tiers, missing-skill indexer guard and bounded failure; no mutation API.');

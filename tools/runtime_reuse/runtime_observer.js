@@ -17,6 +17,32 @@ globalThis.InventoryBridge=(()=>{
   return {unitId:S.string(R.readRef(unit,'Id')),baseId:S.string(R.readRef(definition,'BaseId')),loaned:!!R.unbox(S.invoke('UnitDO','get_IsLoanedUnit',unit),'bool'),
    level:R.readValue(unit,'<CurrentLevel>k__BackingField','i32'),rarity:R.readValue(unit,'<CurrentRarity>k__BackingField','u8'),tier:R.readValue(unit,'<CurrentTier>k__BackingField','u8')};
  }
+ function skills(unit){
+  const definition=R.readRef(unit,'<Definition>k__BackingField'),entries=[];
+  for(const skill of list(R.readRef(definition,'_skillDefinitions')))entries.push({skill,source:'unit',crewMemberId:null});
+  for(const slot of list(R.readRef(definition,'_crewMemberSlots'))){
+   const crewMemberId=S.string(R.readRef(slot,'<CrewMemberId>k__BackingField'));
+   for(const skill of list(R.readRef(slot,'<CrewSkillDef>k__BackingField')))entries.push({skill,source:'crew',crewMemberId});
+  }
+  if(entries.length>256)throw Error('Inventory skill definition bound exceeded');
+  return entries.map(({skill,source,crewMemberId})=>{
+   const id=R.readRef(skill,'Id'),args=[R.arg.ref(id)];
+   const present=!!R.unbox(S.invoke('UnitDO','HasSkill',unit,args,['System.String']),'bool');
+   // GetSkillTier is an indexer and throws for absent skills. Never guess zero.
+   const currentTier=present?R.unbox(S.invoke('UnitDO','GetSkillTier',unit,args,['System.String']),'i32'):null;
+   const reference=R.readRef(skill,'AbilityReferenceId');
+   const ability=S.invoke('UnitDO','GetAbility',unit,[R.arg.ref(reference)],['System.String']);
+   return {skillId:S.string(id),abilityReferenceId:S.string(reference),
+    skillDefinitionNameKey:S.string(R.readRef(skill,'NameKey')),
+    abilityNameKey:ability.isNull()?null:S.string(S.invoke('AbilityDO','get_NameKey',ability)),
+    abilityType:ability.isNull()?null:R.unbox(S.invoke('AbilityDO','get_AbilityType',ability),'u8'),
+    baseCooldown:ability.isNull()?null:R.readValue(ability,'CooldownMax','i16'),source,crewMemberId,present,currentTier,
+    tierCount:R.unbox(S.invoke('SkillDefinitionDO','GetTotalTiers',skill),'i32'),
+    requiredUnitTier:R.readValue(skill,'RequiredTier','u8'),requiredRelicTier:R.readValue(skill,'RequiredRelicTier','u8'),
+    skillType:R.readValue(skill,'SkillType','i32'),omicronMode:R.readValue(skill,'OmicronMode','i32'),
+    definitionIsZeta:R.readValue(skill,'IsZeta','bool')};
+  });
+ }
  function inventory(){
   const state=current();if(state.isNull()||R.fullName(R.classOf(state))!=='MasterInventoryGameState')throw Error('Inventory command requires the collection screen');
   const master=R.readRef(state,'_masterInventoryController'),data=R.readRef(master,'_transitionData');
@@ -35,7 +61,10 @@ globalThis.InventoryBridge=(()=>{
   const data=R.readRef(controller,'_transitionData');
   if(data.isNull())return {loading:true};
   const unit=R.readRef(data,type==='CharacterDetailsState'?'<Unit>k__BackingField':'Unit');
-  return unit.isNull()?{loading:true}:{kind:type==='CharacterDetailsState'?'characters':'ships',...unitInfo(unit)};
+  if(unit.isNull())return {loading:true};
+  const result={kind:type==='CharacterDetailsState'?'characters':'ships',...unitInfo(unit)};
+  try{result.skills=skills(unit);}catch(error){result.skillsError=String(error);}
+  return result;
  }
  function execute(operation,request){
   if(operation==='inventory-back'){
