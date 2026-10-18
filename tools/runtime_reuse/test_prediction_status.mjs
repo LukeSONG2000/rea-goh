@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const context={equals:p=>p===context},foreign={equals:()=>false};
+let detached=0;
+const sandbox={RuntimeApi:{arg:{},findClass:()=>({}),findMethod:()=>({readPointer:()=>({})})},SceneApi:{},Interceptor:{attach:()=>({detach(){detached++;}})}};
+vm.runInNewContext(fs.readFileSync(new URL('./original_ai_trace.js',import.meta.url),'utf8'),sandbox);
+const passive=sandbox.installOriginalAITrace(context);
+assert.equal(passive.predictionStatus(context),null);passive.stop();
+const trace=sandbox.installOriginalAITrace(context,{experimentalPrediction:true});
+assert.equal(trace.predictionStatus(foreign),null);
+const status=trace.predictionStatus(context);assert.equal(status.experimental,true);assert.equal(status.total,0);assert.equal(status.history.length,0);assert.match(status.scope,/not a future-turn/);
+trace.stop();trace.stop();assert.equal(trace.predictionStatus(context),null);assert.equal(detached,8);
+console.log('PASS prediction status requires experimental flag, exact owned context and active trace; stop detaches once');

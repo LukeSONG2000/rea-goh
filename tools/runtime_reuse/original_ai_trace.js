@@ -269,7 +269,7 @@ globalThis.installOriginalAITrace=(context,options={})=>{
  function resultIdentity(value){if(value.isNull())return null;const result={ability:ref(value,'Ability').toString()};
   for(const f of ['EnemyTargets','AllyTargets']){const list=ref(value,f);if(list.isNull()){result[f]=[];continue;}const size=R.readValue(list,'_size','i32');if(size<0||size>64)throw Error('Prediction target bounds');const items=ref(list,'_items');result[f]=Array.from({length:size},(_,i)=>items.add(32+i*8).readPointer().toString());}return result;}
  function predict(controller,input,sequence){
-  const record={sequence,scope:'Experimental immediate AI-entry prediction; shared units and stat scratch',matched:null};predictions.push(record);
+  const record={sequence,actor:unit(ref(input,'Self')),scope:'Experimental immediate AI-entry prediction; shared units and stat scratch',matched:null};predictions.push(record);
   let infrastructure,inputs,value,handle,disposeMethod;
   const before=readOriginalAIRandomState(context),started=Date.now();
   try{
@@ -341,5 +341,9 @@ globalThis.installOriginalAITrace=(context,options={})=>{
   });}
  });
  let stopped=false;
- return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; optional experimental immediate-entry prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit,graphCopyAudit,inputCopyAudit,predictions,predictionFailed}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
+ return {predictionStatus(owner){
+  if(stopped||options.experimentalPrediction!==true||!owner.equals(context))return null;
+  return {experimental:true,timing:'immediately before original AI evaluator',scope:'Recent prediction verification history; not a future-turn forecast or final target selection',failed:predictionFailed,total:predictions.length,
+   history:predictions.slice(-16).map(p=>({sequence:p.sequence,actor:p.actor,result:p.result,matched:p.matched,originalRandomUnchanged:p.originalRandomUnchanged,randomAfterMatched:p.randomAfterMatched,elapsedMs:p.elapsedMs,error:p.error||p.cleanupError||null}))};
+ },snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; optional experimental immediate-entry prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit,graphCopyAudit,inputCopyAudit,predictions,predictionFailed}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
 };

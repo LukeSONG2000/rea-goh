@@ -801,6 +801,7 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const pending=stage=>({...result,battleReady:false,loadingStage:stage,input:{unavailable:true,reason:'Original battle view is not ready'}});
  const controller=R.readRef(state,'_battleController');if(controller.isNull())return pending('controller');
  const context=R.readRef(controller,'_battleContext');if(context.isNull())return pending('context');
+ if(globalThis.trialAITrace?.predictionStatus){const prediction=trialAITrace.predictionStatus(context);if(prediction)result.aiPrediction=prediction;}
  const seen=new Set();
  // Read this battle view's original handles, not every loaded Unity object.
  const view=S.invoke('BattleContext','get_BattleView',context);

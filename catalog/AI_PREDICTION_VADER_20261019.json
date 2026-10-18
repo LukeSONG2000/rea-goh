@@ -1,0 +1,22 @@
+{
+  "scope": "Captured private Kelleran versus captured private Vader custom duel; original stats and skills; not a replay of the captured campaign enemy squad",
+  "runs": [
+    {"evidence":"logs/high_reuse/ai-prediction-vader-20261019-evidence.json","result":"fixture failed before entry: obsolete roster variable scope; serviceCalls0 and complete cleanup; not a passed battle"},
+    {"evidence":"logs/high_reuse/ai-prediction-vader-v2-20261019-evidence.json","predictions":9,"allMatched":true,"nativeTerminal":true,"predictionValid":true,"elapsedMs":[51,6,4,6,4,5,4,5,3]},
+    {"evidence":"logs/high_reuse/ai-prediction-vader-v3-20261019-evidence.json","predictions":9,"allMatched":true,"nativeTerminal":true,"predictionValid":true,"allOriginalRowsAndRandomSeedsEqualV2":true}
+  ],
+  "enemySequence": ["specialability_vader01","specialability_vader02","basicability_darthvader","specialability_vader03","specialability_vader01","basicability_darthvader"],
+  "oldBaseline": "logs/high_reuse/ai-priority-baseline-evidence.json",
+  "comparison": "Strip only subsequently added RNG fields from v2 rows: exact original decision-trace equality to historical baseline; v3 equals v2 including RNG fields",
+  "cleanup": {"serviceCalls":0,"homeGuardDefinitionsGcRestored":true,"ordinaryHost":25396},
+  "interface": {
+    "command":"node tools/runtime_reuse/runtime_cli.mjs snapshot --pid 32088",
+    "field":"aiPrediction",
+    "evidence":"logs/high_reuse/ai-prediction-vader-live-snapshot.json",
+    "liveObservedHistoryRows":6,
+    "scope":"Recent immediate-entry prediction and verification history, not a future-turn forecast or final targeting-tactic selection",
+    "guard":"Only enabled experimental trace and exact owned BattleContext while trace active; no native pointer identities exposed by status"
+  },
+  "tests": ["experimental enablement/exact context/stopped status guards", "prediction evidence validation", "runtime loading regression", "turn-order two identical output hashes"],
+  "limitations": ["Two-character custom matchup only; no fleet/multi-target coverage", "Original skill and candidate-target prediction at evaluator entry; no advance-turn forecast", "Shared stat scratch and remaining services not fully isolated", "No visual prediction display yet; existing CLI snapshot exposes history"]
+}
