@@ -42,6 +42,17 @@ globalThis.CalendarBridge=(()=>{
   }
   const {c,v}=live();
   if(op==='calendar-close'){call(v,'OnBackClick');return {navigationDispatched:true};}
+  if(op==='calendar-select'){
+   if(typeof p.calendarId!=='string'||!p.calendarId.length||p.calendarId.length>256)throw Error('Explicit calendarId required');
+   const rows=list(R.readRef(v,'_calendarList'));
+   const matches=rows.map((data,index)=>({data,index})).filter(r=>S.string(R.readRef(r.data,'Id'))===p.calendarId);
+   if(matches.length!==1)throw Error('Calendar ID missing or ambiguous in current list');
+   const selected=call(v,'get_ActiveRenderData');
+   if(!rows.some(r=>r.equals(selected)))throw Error('Calendar selection ownership mismatch');
+   const unchanged=matches[0].data.equals(selected);
+   if(!unchanged)call(v,'ShowCalendar',[A.value('i32',matches[0].index)]);
+   return {navigationDispatched:!unchanged,alreadySelected:unchanged,expectedCalendarId:p.calendarId};
+  }
   const info=status();
   if(typeof p.calendarId!=='string'||p.calendarId!==info.selected.id||!Number.isInteger(p.rewardIndex)||p.rewardIndex!==info.selected.rewardIndex||p.lastClaimed!==info.selected.lastClaimed)throw Error('Calendar reward identity changed');
   if(op!=='calendar-claim')throw Error('Unsupported calendar operation');

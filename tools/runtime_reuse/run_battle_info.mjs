@@ -60,12 +60,15 @@ try{
     }
     if(operation.startsWith('calendar-')){
      const result=await script.exports.calendarcommand(operation,payload);
-     if(!['calendar-open','calendar-close'].includes(operation))return result;
+     if(!['calendar-open','calendar-close','calendar-select'].includes(operation))return result;
      let confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));
       const visible=await script.exports.calendarvisibility();
-      confirmed=operation==='calendar-open'?(visible.showing&&visible.active):(!visible.showing&&!visible.active);
+      if(operation==='calendar-select'){
+       const after=await script.exports.calendarcommand('calendar-list',{});
+       confirmed=visible.showing&&visible.active&&after.selected?.id===result.expectedCalendarId;
+      }else confirmed=operation==='calendar-open'?(visible.showing&&visible.active):(!visible.showing&&!visible.active);
       if(confirmed)break;
      }
      return {...result,transitionConfirmed:confirmed};

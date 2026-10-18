@@ -17,6 +17,7 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const payload of [null,{}, {calendarId:0},{calendarId:''},{calendarId:'x'.repeat(257)}])assert.equal((await test({operation:'calendar-select',payload})).dispatched,false);
  for(const payload of [null,{}, {calendarId:'OCTOBER',rewardIndex:-1,lastClaimed:'1'}, {calendarId:'OCTOBER',rewardIndex:0,lastClaimed:1}, {calendarId:'OCTOBER',rewardIndex:0,lastClaimed:'bad'}]){
   assert.equal((await test({operation:'calendar-claim',payload})).dispatched,false);
  }
@@ -98,6 +99,7 @@ try{
   ['objectives-list',undefined,{readConfirmed:true,quests:[]}],
   ['inbox-open',undefined,{transitionConfirmed:true}],
   ['calendar-open',undefined,{transitionConfirmed:true}],
+  ['calendar-select',{calendarId:'OCTOBER'},{transitionConfirmed:true}],
   ['calendar-close',undefined,{transitionConfirmed:true}],
   ['calendar-list',undefined,{readConfirmed:true}],
   ['calendar-claim-status',undefined,{readConfirmed:true}],

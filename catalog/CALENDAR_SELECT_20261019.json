@@ -1,0 +1,44 @@
+{
+  "operation": "calendar-select",
+  "request": {
+    "calendarId": "calendar-list.calendars[].id"
+  },
+  "nativeEvidence": {
+    "behavior": "Original ShowCalendar checks current index and accordion bounds, updates selection and calls InitializeDailyLogin",
+    "selectionRva": "0x139dd60",
+    "nodeClickRva": "0x139dd50",
+    "analysis": "Existing Ghidra read-only project closed without saving",
+    "nodeListing": "XOR R8D,R8D; JMP 0x18139dd60"
+  },
+  "guards": [
+    "Live visible calendar with no info overlay or bulk claim in progress",
+    "Nonempty bounded ID",
+    "Exactly one matching current list row",
+    "Current selection belongs to list",
+    "Already-selected target returns idempotently without native callback",
+    "Host confirms selected ID after dispatch"
+  ],
+  "tests": [
+    "Actual bridge VM: two calendars, select second using index 1; no reward callback",
+    "Missing/duplicate IDs rejected",
+    "Malformed mailbox requests rejected",
+    "Existing calendar claim/settlement regression PASS",
+    "Live OCTOBER already-selected confirmation PASS",
+    "Live unavailable calendar rejected; close confirmed"
+  ],
+  "limitations": [
+    "Current account has only OCTOBER; native switch between two distinct live calendars not verified",
+    "Selection does not claim or purchase",
+    "Multiple queued rewards of same currency still require aggregate settlement reconciliation; current tracker verifies per-claim deltas only"
+  ],
+  "evidence": [
+    "logs/high_reuse/calendar-select-list.json",
+    "logs/high_reuse/calendar-select-receipt.json",
+    "logs/high_reuse/calendar-select-rejected.json"
+  ],
+  "runtime": {
+    "hostPid": 5340,
+    "returnedHome": true,
+    "pid": 32088
+  }
+}

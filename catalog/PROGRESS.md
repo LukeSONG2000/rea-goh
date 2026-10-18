@@ -412,3 +412,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 socket-pressure】认领隔离socket guard高频重试诊断，root独占guard/probe及对应测试；先测线程/调用来源，不解除隔离、不假装网络成功。
 【Codex/root 2026-10-19 socket-pressure fixed+verified】有界32 caller诊断定位GameAssembly+0x391512后台send，120s基线20154次，Unity主线程仅11次。guard仅后台同caller第9次起退避50ms，主线程/初始仍5ms，原-1/10050拒绝不变；诊断异常不影响拒绝。120s复测后台2156次(-89.3%)主线程10次，无诊断错/遗漏，serviceCalls0与清理全部通过。额外Auto原terminal通过，host8384/Home恢复。socket守卫/准备5测试/语法PASS。报告OFFLINE_SOCKET_BACKOFF_20261019.json。该证据证明重试压力减少，不等于帧率或CPU改善；具体原网络子系统未归因。
 【Codex/root 2026-10-19 calendar-select】认领原日历列表按ID选择接口，root独占calendar/CLI/host测试；当前无新领取，核原ShowCalendar索引路径。
+【Codex/root 2026-10-19 calendar-select implemented+partial-live】新增calendar-select按当前列表唯一ID定位索引，原CalendarView.ShowCalendar调用后host核选中ID；原节点回调139dd50尾跳139dd60已只读Ghidra确认，未保存工程。同项幂等不调native，缺失/重复ID拒绝。两日历VM切换index1/零领取及mailbox畸形请求测试PASS；实机仅OCTOBER，当前项确认和不存在ID拒绝、关闭返回Home通过，host5340。报告CALENDAR_SELECT_20261019.json。尚无两本真实日历切换实测，多本同币种批量奖励需聚合到账核验，未冒称完成。
