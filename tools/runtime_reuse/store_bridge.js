@@ -79,8 +79,18 @@ globalThis.StoreBridge=(()=>{
   return {readConfirmed:true,visible:true,itemId:str(item,'Id'),phase:R.readValue(c,'_currentState','i32'),allTilesRevealed:R.readValue(c,'_allTilesRevealed','bool'),rewards,finishButton:buttonStatus(v,'finish','_finishButton'),settlementConfirmed:false,scope:'Original pack display; item ID alone is not transaction correlation or inventory delta proof'};
  }
  const wallet=()=>InboxClaimTracker.readBalances([{id:'PREMIUM',itemType:2,quantity:1},{id:'SOCIAL',itemType:2,quantity:1}]).map(({expected,...row})=>row);
+ function materialBaseline(){
+  const source=S.invoke('InventoryDomainController','GetCraftingMaterialsInInventory',R.findBound('InventoryDomainController')),seen=new Set();
+  const materials=list(source).map(m=>{
+   const id=str(R.readRef(m,field('Definition')),'Id'),value=val(m,'Quantity');
+   if(!id||seen.has(id)||!Number.isSafeInteger(value)||value<=0)throw Error('Invalid original material baseline');
+   seen.add(id);return {id,itemType:7,value};
+  });
+  return {readConfirmed:true,capturedAt:Date.now(),materials,scope:'Original positive-quantity inventory only; absent IDs remain unknown, not assumed zero'};
+ }
  let submission=null;
  function execute(op,p={}){
+  if(op==='store-material-baseline')return materialBaseline();
   if(op==='store-reward-inventory'){
    if(!Array.isArray(p.rewards)||p.rewards.length<1||p.rewards.length>128||p.rewards.some(r=>!r||typeof r.id!=='string'||!r.id.length||r.id.length>256||!Number.isInteger(r.itemType)||r.itemType<0||r.itemType>255||!Number.isSafeInteger(r.quantity)||r.quantity<=0))throw Error('Bounded explicit reward identities and quantities required');
    return {readConfirmed:true,balances:InboxClaimTracker.readBalances(p.rewards),wallet:wallet(),settlementConfirmed:false,scope:'Current original inventory only; requested quantity is not a verified grant or pre-claim baseline'};
@@ -118,8 +128,9 @@ globalThis.StoreBridge=(()=>{
    if(visible.length!==1||!visible[0].enabled)throw Error('Unique active enabled single-purchase button required');
    const walletBefore=wallet();
    if(walletBefore.length!==2||walletBefore.some(b=>!Number.isSafeInteger(b.value)))throw Error('Wallet baseline unavailable');
+   const materialBefore=materialBaseline();
    StorePurchaseTracker.prepare(c,item,p.itemId);
-   submission={itemId:p.itemId,quantity:1,expectedCost:0,walletBefore,submittedAt:Date.now(),nativeReturned:false,error:null};
+   submission={itemId:p.itemId,quantity:1,expectedCost:0,walletBefore,materialBefore,submittedAt:Date.now(),nativeReturned:false,error:null};
    try{S.invoke('StorePackDetailsView','PurchasePackClicked',v);submission.nativeReturned=true;}
    catch(e){submission.error=String(e);throw e;}
    return {claimDispatched:true,submission,settlementConfirmed:false};

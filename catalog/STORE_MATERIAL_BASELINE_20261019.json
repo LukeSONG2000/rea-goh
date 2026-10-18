@@ -1,0 +1,10 @@
+{
+ "operation":"store-material-baseline",
+ "source":"InventoryDomainController.GetCraftingMaterialsInInventory RVA 18080e0",
+ "nativeFinding":"Builds a new list by enumerating original inventory materials and including Quantity > 0. No inventory mutation in bounded function.",
+ "behavior":"Free claim captures positive material IDs and quantities before preparing observer and invoking native button; returned submission persists snapshot through normal mailbox result",
+ "live":{"pid":32088,"hostPid":1796,"readConfirmed":true,"materialCount":169,"ahsokaShardQuantity":4,"newClaim":false},
+ "tests":["Original source method used and snapshot included before claim PASS","Invalid quantity and list bounds refused PASS","Bridge/commands/loading/durable regressions PASS","CLI syntax PASS"],
+ "limitations":["Absent material IDs are unknown, not inferred zero","Baseline excludes currency/equipment/units/mods/datacrons","Old completed claim predates capture; cannot retroactively reconcile","No new real pre/post material reward comparison yet","Snapshot persists in successful command result; crash before result persistence can lose it"],
+ "evidence":["logs/high_reuse/store-material-baseline-live.json","il2cpp/decompiled/store/inventory_material_list.c","il2cpp/decompiled/store/inventory_material_list_listing.txt"]
+}

@@ -60,7 +60,7 @@ try{
     }
     if(operation.startsWith('store-')){
      const result=await script.exports.storecommand(operation,payload);
-     if(['store-reward-inventory','store-rewards-next','store-rewards','store-claim-free','store-claim-status','store-list','store-details'].includes(operation))return result;
+     if(['store-material-baseline','store-reward-inventory','store-rewards-next','store-rewards','store-claim-free','store-claim-status','store-list','store-details'].includes(operation))return result;
      if(operation==='store-rewards-close'){
       let after=null;
       for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();if(after.state!=='PackOpeningGameState')break;}

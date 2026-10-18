@@ -17,7 +17,9 @@ const calls=[];
 const read=(o,k)=>{if(!(k in o))throw Error('Missing mock field '+k);return o[k];};
 const R={arg:{value:(t,v)=>v,ref:v=>v},readValue:read,readRef:read,findBound:()=>({'<CurrentState>k__BackingField':state}),classOf:o=>o.type,fullName:x=>x,unbox:x=>x?.type==='StoreLocation'?x.value:x};
 let productReady=true,formatCalls=0;
-const S={string:x=>x,gameObject:x=>x,invoke:(t,m,o)=>{if(m==='get_activeInHierarchy')return o.active;if(m==='CanFormatOffer')return productReady;if(m==='Format'){formatCalls++;return 'cached price';}calls.push([t,m]);}};
+const material=ptr(fields({Definition:ptr(fields({Id:'material-A'})),Quantity:10}));
+const materials=list([material]);
+const S={string:x=>x,gameObject:x=>x,invoke:(t,m,o)=>{if(m==='GetCraftingMaterialsInInventory')return materials;if(m==='get_activeInHierarchy')return o.active;if(m==='CanFormatOffer')return productReady;if(m==='Format'){formatCalls++;return 'cached price';}calls.push([t,m]);}};
 const balances={PREMIUM:100,SOCIAL:200};
 const context={StorePurchaseTracker:{install:()=>{},prepare:()=>{},status:()=>({record:null})},InboxClaimTracker:{readBalances:rows=>rows.map(r=>({...r,expected:r.quantity,value:balances[r.id]??null}))},RuntimeApi:R,SceneApi:S,rpc:{exports:{}}};
 vm.runInNewContext(fs.readFileSync(new URL('./store_bridge.js',import.meta.url),'utf8'),context);
@@ -186,3 +188,14 @@ assert.equal(calls.length,callsBeforeMissingBalance);
 assert.equal(context.StoreBridge.execute('store-claim-status').submission,null);
 console.log('PASS missing wallet baseline blocks original claim before invocation');
 
+
+const baseline=context.StoreBridge.execute('store-material-baseline');
+assert.equal(baseline.materials[0].id,'material-A');
+assert.equal(baseline.materials[0].value,10);
+assert.equal(freeResult.submission.materialBefore.materials[0].value,10);
+material['<Quantity>k__BackingField']=0;
+assert.throws(()=>context.StoreBridge.execute('store-material-baseline'),/Invalid original/);
+material['<Quantity>k__BackingField']=10;
+materials._size=2;
+assert.throws(()=>context.StoreBridge.execute('store-material-baseline'),/bounds/);
+console.log('PASS original material baseline captured before claim, invalid quantity/bounds rejected');
