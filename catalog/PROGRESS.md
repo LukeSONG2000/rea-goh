@@ -338,3 +338,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 support-picker resumed】恢复支援选择CLI任务；root独占runtime_observer/runtime_commands/runtime_cli/run_battle_info和对应测试。核原view→controller→预战选队回调，新增当前列表读取及明确选择，不点击Battle、不自动消耗次数。
 
 【Codex/root 2026-10-18 support-picker validated】新增prebattle-supports/prebattle-support-select；原当前view列表+controller ownership校验、event/mission/唯一playerId匹配后原OnSelectButtonClicked。prebattle区分support/squad/loading，mission-select接受原支援中间页而不误报超时。challenge_XP/DIFF06实机15候选→原选队截图→Back→Events→Objectives→Home全部确认。首次读取回执误分类已修并复跑；mock旧关卡/重复候选/错view/回调原参、mailbox读取及选择回执/无重放、loading、syntax PASS。报告SUPPORT_PICKER_CLI_VALIDATION_20261018.json；原32088/host7868存活。未点击Battle/扫荡/购买或装备修改；支援取消、选队编辑和真实开战接口仍待，非全模式完成。
+【Codex/root 2026-10-18 live-arena-basic】用户明确要求消耗一次真实小队竞技场并结算，敌方仅普攻、我方原AI。选队接口暂挂；root独占原运行时，先实现仅下一场PVP生效的原普攻回调替换并测试，原结算保持，不购买次数或清冷却。
