@@ -17,6 +17,9 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const operation of ['prebattle-remove','prebattle-add'])for(const payload of [null,{}, {eventId:'e',missionId:'m',unitId:'u',cellIndex:-1},{eventId:'e',missionId:'m',unitId:'u',cellIndex:1.5}]){
+  assert.equal((await test({operation,payload})).dispatched,false);
+ }
  for(const payload of [null,{}, {eventId:'e',missionId:'m',playerId:''},{eventId:'e',missionId:'m',playerId:42}]){
   const result=await test({operation:'prebattle-support-select',payload});assert.equal(result.dispatched,false);
  }
@@ -63,6 +66,9 @@ try{
   ['events-mission-select',{eventId:'event',missionId:'mission'},{transitionConfirmed:true}],
   ['prebattle-back',undefined,{transitionConfirmed:true}],
   ['prebattle-supports',undefined,{readConfirmed:true,supports:[]}],
+  ['prebattle-roster',undefined,{readConfirmed:true,roster:[]}],
+  ['prebattle-remove',{eventId:'e',missionId:'m',unitId:'u',cellIndex:1},{transitionConfirmed:true}],
+  ['prebattle-add',{eventId:'e',missionId:'m',unitId:'u',cellIndex:1},{transitionConfirmed:true}],
   ['prebattle-support-select',{eventId:'e',missionId:'m',playerId:'p'},{transitionConfirmed:true}],
   ['events-open',{eventId:'event',instanceId:'instance'},{transitionConfirmed:true}],
   ['events-missions-back',undefined,{transitionConfirmed:true}],

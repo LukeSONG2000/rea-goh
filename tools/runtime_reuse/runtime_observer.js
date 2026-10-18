@@ -575,7 +575,35 @@ globalThis.PreBattleBridge=(()=>{
   return {expectedState:'PvePreBattleState',eventId:state.eventId,missionId:state.missionId,expectedSupportPlayerId:payload.playerId,supportSelectionDispatched:true};
  }
  function back(){const c=current();if(!status().ready)throw Error('Prebattle view not ready');S.invoke('PreBattleController','HandlePreBattleViewBackClicked',c);return {expectedState:'EventsParentGameState'};}
- return {status,back,support};
+ function edit(operation,payload){
+  const c=current(),live=status();if(!live.ready)throw Error('Original squad view required');
+  const editor=R.readRef(c,'_squadEditController'),view=S.invoke('PreBattleController','get_PreBattleView',c);
+  if(editor.isNull()||!c.equals(R.readRef(editor,'_preBattleController'))||!view.equals(R.readRef(editor,'_view'))||!R.readRef(c,'_currentSquad').equals(R.readRef(editor,'_squadBeingEdited')))throw Error('Squad editor ownership mismatch');
+  const list=R.readRef(view,'_filteredScrollData');if(list.isNull())throw Error('Roster not ready');
+  const n=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
+  if(n<0||n>2048||(items.isNull()?n!==0:n>items.add(24).readU64().toNumber()))throw Error('Roster list bounds invalid');
+  const rows=Array.from({length:n},(_,i)=>items.add(32+8*i).readPointer()).filter(r=>R.fullName(R.classOf(r))==='UnitListItemRendererData');
+  const units=rows.map(row=>({row,unit:unitIdentity(R.readRef(row,'<Unit>k__BackingField'))})).filter(x=>x.unit);
+  const editingIndex=R.readValue(editor,'_indexEditing','i32');
+  if(operation==='prebattle-roster')return {...live,readConfirmed:true,editingIndex,roster:units.map(x=>x.unit),scope:'Current original filtered roster; owned/loaned eligibility remains native'};
+  if(!['prebattle-remove','prebattle-add'].includes(operation))throw Error('Unsupported squad edit');
+  if(!payload||['eventId','missionId','unitId'].some(k=>typeof payload[k]!=='string'||!payload[k].length||payload[k].length>256)||!Number.isInteger(payload.cellIndex)||payload.cellIndex<0||payload.cellIndex>63)throw Error('Squad and mission identity required');
+  if(payload.eventId!==live.eventId||payload.missionId!==live.missionId)throw Error('Current mission changed');
+  const cells=live.squadCells.filter(cell=>cell.cellIndex===payload.cellIndex);
+  if(cells.length!==1||![0,2].includes(cells[0].unitType)||cells[0].mandatory||!cells[0].selectable)throw Error('Editable original character slot required');
+  const cell=cells[0];
+  if(operation==='prebattle-remove'){
+   if(cell.unit?.unitId!==payload.unitId)throw Error('Slot unit changed');
+   S.invoke('PreBattleController','HandleOnSquadSlotTapped',c,[R.arg.value('i32',payload.cellIndex)],['System.Int32']);
+  }else{
+   if(cell.unit||editingIndex!==payload.cellIndex)throw Error('Expected original current empty slot');
+   const matches=units.filter(x=>x.unit.unitId===payload.unitId);if(matches.length!==1)throw Error('Expected unique current roster unit');
+   if(live.squadCells.some(x=>x.unit?.unitId===payload.unitId))throw Error('Unit already in squad');
+   S.invoke('SquadEditController','InventoryUnitTapped',editor,[R.arg.ref(matches[0].row)],['System.Object']);
+  }
+  return {expectedState:'PvePreBattleState',eventId:live.eventId,missionId:live.missionId,expectedCellIndex:payload.cellIndex,expectedCellUnitId:operation==='prebattle-remove'?null:payload.unitId,editDispatched:true};
+ }
+ return {status,back,support,edit};
 })();
 
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
@@ -693,3 +721,4 @@ rpc.exports.eventscommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()
 
 rpc.exports.prebattleback=()=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.back());
 rpc.exports.prebattlesupport=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.support(operation,payload));
+rpc.exports.prebattleedit=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>PreBattleBridge.edit(operation,payload));

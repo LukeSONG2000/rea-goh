@@ -36,13 +36,13 @@ try{
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
-    if(['prebattle-supports','prebattle-support-select','prebattle-back','events-mission-select','events-missions','events-list','events-open','events-missions-back'].includes(operation)){
-     const result=operation.startsWith('prebattle-support')?await script.exports.prebattlesupport(operation,payload):operation==='prebattle-back'?await script.exports.prebattleback():await script.exports.eventscommand(operation,payload);
-     if(['prebattle-supports','events-list','events-missions'].includes(operation))return result;
+    if(['prebattle-roster','prebattle-remove','prebattle-add','prebattle-supports','prebattle-support-select','prebattle-back','events-mission-select','events-missions','events-list','events-open','events-missions-back'].includes(operation)){
+     const result=['prebattle-roster','prebattle-remove','prebattle-add'].includes(operation)?await script.exports.prebattleedit(operation,payload):operation.startsWith('prebattle-support')?await script.exports.prebattlesupport(operation,payload):operation==='prebattle-back'?await script.exports.prebattleback():await script.exports.eventscommand(operation,payload);
+     if(['prebattle-roster','prebattle-supports','events-list','events-missions'].includes(operation))return result;
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
-      confirmed=operation==='prebattle-back'?after.state===result.expectedState:['events-mission-select','prebattle-support-select'].includes(operation)?after.state===result.expectedState&&(after.prebattle?.ready||(operation==='events-mission-select'&&after.prebattle?.supportSelectionRequired))&&after.prebattle.eventId===result.eventId&&after.prebattle.missionId===result.missionId&&(operation!=='prebattle-support-select'||after.prebattle.selectedSupport?.playerId===result.expectedSupportPlayerId):after.state===result.expectedState&&(result.listExpected?after.events?.listActive:after.events?.missionsActive&&after.events?.eventId===result.eventId);
+      confirmed=operation==='prebattle-back'?after.state===result.expectedState:['prebattle-remove','prebattle-add','events-mission-select','prebattle-support-select'].includes(operation)?after.state===result.expectedState&&(after.prebattle?.ready||(operation==='events-mission-select'&&after.prebattle?.supportSelectionRequired))&&(result.expectedCellIndex===undefined||after.prebattle.squadCells?.some(c=>c.cellIndex===result.expectedCellIndex&&(c.unit?.unitId??null)===result.expectedCellUnitId))&&after.prebattle.eventId===result.eventId&&after.prebattle.missionId===result.missionId&&(operation!=='prebattle-support-select'||after.prebattle.selectedSupport?.playerId===result.expectedSupportPlayerId):after.state===result.expectedState&&(result.listExpected?after.events?.listActive:after.events?.missionsActive&&after.events?.eventId===result.eventId);
       if(confirmed)break;
      }
      return {...result,transitionConfirmed:!!confirmed,afterState:after.state,events:after.events,prebattle:after.prebattle};

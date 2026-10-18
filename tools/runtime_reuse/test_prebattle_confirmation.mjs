@@ -15,4 +15,10 @@ after.prebattle.selectedSupport={playerId:'chosen'};after.prebattle.missionId='s
 after.prebattle.missionId='m';after.prebattle.ready=false;after.prebattle.supportSelectionRequired=true;assert.equal(check(),false,'Support page is not completed selection');
 ctx.operation='events-mission-select';assert.equal(check(),true,'Mission navigation can legitimately stop at support step');
 after.prebattle.supportSelectionRequired=false;assert.equal(check(),false,'Loading is not completion');
+after.prebattle.ready=true;ctx.operation='prebattle-add';result.expectedCellIndex=4;result.expectedCellUnitId='new-unit';
+after.prebattle.squadCells=[{cellIndex:4,unit:{unitId:'old-unit'}}];assert.equal(check(),false);
+after.prebattle.squadCells=[{cellIndex:3,unit:{unitId:'new-unit'}}];assert.equal(check(),false,'Correct unit in wrong slot is not confirmation');
+after.prebattle.squadCells=[{cellIndex:4,unit:{unitId:'new-unit'}}];assert.equal(check(),true);
+ctx.operation='prebattle-remove';result.expectedCellUnitId=null;assert.equal(check(),false);
+after.prebattle.squadCells=[{cellIndex:4,unit:null}];assert.equal(check(),true);
 console.log('PASS native prebattle confirmation: selected identity, mission, phase and loading');

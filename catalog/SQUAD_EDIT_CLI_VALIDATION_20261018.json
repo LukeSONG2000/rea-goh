@@ -1,0 +1,91 @@
+{
+  "scope": "PVE native squad roster and original remove/add callbacks; no battle started",
+  "operations": [
+    "prebattle-roster",
+    "prebattle-remove",
+    "prebattle-add"
+  ],
+  "requestForEdits": {
+    "eventId": "current event identity",
+    "missionId": "current mission identity",
+    "cellIndex": "original leader/default character slot index",
+    "unitId": "expected current unit for remove; current filtered roster unit for add"
+  },
+  "nativeCallbacks": {
+    "remove": "PreBattleController.HandleOnSquadSlotTapped(int), RVA 1ADBD70",
+    "add": "SquadEditController.InventoryUnitTapped(object original render data), RVA 1AE86E0"
+  },
+  "runtime": {
+    "eventId": "challenge_XP",
+    "missionId": "DIFF06",
+    "rosterCount": 302,
+    "slot": 4,
+    "sequence": [
+      "JOLEEBINDO",
+      "empty",
+      "VADER",
+      "empty",
+      "JOLEEBINDO"
+    ],
+    "allCellsRestoredExactly": true,
+    "supportRestoredExactly": true,
+    "finalState": "HomeBaseGameState",
+    "pid": 32088,
+    "hostPid": 30596
+  },
+  "guards": [
+    "Current native state/view/editor/squad ownership",
+    "Same event and mission",
+    "Unique selectable nonmandatory leader/default slot",
+    "Remove expected unit matches slot",
+    "Add only original current empty edit slot and unique current roster render data",
+    "No direct UpdateSquad or field writes; original native restrictions and prompts retained",
+    "Success requires original expected slot empty or exact requested unit readback"
+  ],
+  "tests": [
+    "bridge native callback/arguments, stale unit, mandatory/support slots, occupied/wrong empty slot, wrong editor, missing roster unit PASS",
+    "actual host acknowledgement: wrong slot/unit rejected and correct add/remove accepted PASS",
+    "mailbox invalid edit schema and proper read/mutation acknowledgement PASS",
+    "runtime loading PASS"
+  ],
+  "evidence": [
+    {
+      "path": "logs\\high_reuse\\squad-edit-before.json",
+      "sha256": "71dc35d82dc2c0a065d509fac9c8fd4557fc725875c6b41a6eaab17b88fee70b"
+    },
+    {
+      "path": "logs\\high_reuse\\squad-edit-removed.json",
+      "sha256": "986585655b103aefd439ca1b57c04903dc2fb5b67534b3aeb038921d51808da4"
+    },
+    {
+      "path": "logs\\high_reuse\\squad-edit-added.json",
+      "sha256": "a3ec4619e8d222bbf793ce8d5da3aab37ddac4600671e25201d1f88f0e99e9a0"
+    },
+    {
+      "path": "logs\\high_reuse\\squad-edit-vader-removed.json",
+      "sha256": "e6fa131e4dba960c334479f21c25d33c4523c3d931c7d6e494a9081084fa1342"
+    },
+    {
+      "path": "logs\\high_reuse\\squad-edit-restored.json",
+      "sha256": "cac9905f1b2e13af972d871e846b3aca3ed2c64978845b0c8d0a94f83e19f886"
+    },
+    {
+      "path": "logs\\high_reuse\\squad-edit-vader.png",
+      "sha256": "546e920c60b3666b70d91801e794f5e32267f16dbe7148525a41f9b49132a949"
+    },
+    {
+      "path": "logs\\high_reuse\\native\\squad_slot_tapped.c",
+      "sha256": "58ab98dc79462fb06887e8c4ca6a92193cded21f995358b1cbed7dce86ffd143"
+    },
+    {
+      "path": "logs\\high_reuse\\native\\squad_inventory_tapped.c",
+      "sha256": "cd808ac702ba2099fa8a9f1fb9b4449d07a9e37649ea97369e1c17dcc4c7d18d"
+    }
+  ],
+  "limitations": [
+    "Character PVE challenge verified; other modes and fleets not yet integrated",
+    "Roster reflects current original filter, not every owned unit",
+    "Native restriction prompts can leave edit unconfirmed; not auto-accepted",
+    "Preset selection, support cancellation, actual start/sweep interfaces remain unfinished"
+  ]
+}

@@ -345,3 +345,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 【Codex/root 2026-10-18 prebattle-readback validated】snapshot.prebattle新增原selectedSupport(playerId/unitId/baseId)及squadCells(原索引/类型/可选/必选/单位或null)。原HandleOnAllySelected写0x168已有native证据核对。支援选择成功改为同关卡选队ready且原selectedSupport.playerId匹配请求；实机challenge_XP/DIFF06选HK47，身份匹配且原SUPPORT槽5同unitId，其他5槽读回Bastila/Anakin/GMY/Ahsoka/Jolee。原Back→Events→Objectives→Home通过；无开战扣次。实际host确认表达式错身份/旧关卡/加载/支援中间页测试、bridge空槽及实时变化、mailbox/loading/语法PASS。报告PREBATTLE_READBACK_VALIDATION_20261018.json；原32088/host35588。尚未选队编辑/支援取消/全模式。
 【Codex/root 2026-10-18 squad-edit】root认领原选队编辑回调与当前候选列表；只读Ghidra单实例核对，随后可恢复换人验证，不开战、不修改mod或全息记录仪。
+
+【Codex/root 2026-10-18 squad-edit validated】新增prebattle-roster/remove/add。只读Ghidra核原槽点击实际移除，InventoryUnitTapped原始renderData经过原类别/重复/传奇/大型单位等检查；工程已关闭未保存。当前view/editor/squad所有权及原过滤候选限定，移除匹配旧unitId、添加仅原当前空槽、leader/default非mandatory，回执按原槽单位确认。challenge_XP/DIFF06实机302候选，槽4乔利→空→维达→空→乔利；所有槽及支援身份与before精确一致→Home。bridge/mutation mailbox/实际host槽确认/loading与语法通过。报告SQUAD_EDIT_CLI_VALIDATION_20261018.json及截图logs/high_reuse/squad-edit-vader.png。原32088/host30596；无开战扣次/消费/装备变更。选队预设、其他模式与舰队、试玩入口统一衔接仍待。
