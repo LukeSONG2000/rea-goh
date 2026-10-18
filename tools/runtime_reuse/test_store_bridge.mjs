@@ -56,6 +56,9 @@ const button=ptr({active:true,_buttonTarget:ptr({active:true,enabled:false}),_la
 const detailItem=item('A');detailItem['<AllOffers>k__BackingField']=list([offer]);
 controller._storePackDetailsView=ptr({active:true,_storeItem:detailItem,_storeOfferPriceFormatter:ptr({}),_packTitle:label('Bronze'),_descriptionLabel:label('Description'),_fromLocation:0,_maxPurchaseAmount:1,_showFreeBuyButton:true,_giftState:0,_singlePurchaseButton:button,_singlePurchaseButtonCentered:nil,_multiPurchaseButton:nil,_OKButtonCentered:nil});
 const oldInvoke=S.invoke;S.invoke=(t,m,o,...rest)=>m==='IsFreePurchase'?o._showFreeBuyButton && o._storeItem.freeOffer:m==='get_text'?o.text:m==='get_isEnabled'?o.enabled:oldInvoke(t,m,o,...rest);
+detailItem['<Offer>k__BackingField']=ptr({...offer,_price:777});
+detailItem['<Giftable>k__BackingField']=false;
+detailItem['<ShowBuyConfirmation>k__BackingField']=true;
 detailItem.freeOffer=true;
 const beforeRead=calls.length;
 const detail=bridge.execute('store-details');
@@ -76,4 +79,13 @@ detailItem.freeOffer=false;
 assert.equal(bridge.execute('store-details').nativeFreePurchase,false);
 assert.equal(bridge.execute('store-details').freeButtonShown,true);
 console.log('PASS native free predicate exposed separately from visible flag');
+
+
+assert.equal(detail.currentOffer.rawPrice,777);
+assert.equal(detail.offers[0].rawPrice,100);
+assert.equal(detail.showBuyConfirmation,true);
+assert.equal(detail.giftable,false);
+detailItem['<Offer>k__BackingField']=nil;
+assert.equal(bridge.execute('store-details').currentOffer,null);
+console.log('PASS current offer separate from offer list; missing quote not invented');
 

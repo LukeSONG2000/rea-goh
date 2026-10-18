@@ -1,0 +1,8 @@
+{
+ "scope":"Native store controller dispatch, current offer and confirmation metadata",
+ "native":{"fixedPurchaseRva":"1c4f050","basePurchaseRva":"1c41d60","baseSendRva":"1c40c50","processRequestRva":"1c41630","fixedProcessRva":"1c4f240","fixedSendRva":"1c4f990","successCallbackRva":"1c41900","findings":["Fixed send computes cost zero for freePurchase, otherwise quantity * item.Offer.price, then checks balance for non-real-money offers","Purchase path uses item.Offer (+0x108), not arbitrary AllOffers entry","Giftable item can route through recipient flow; do not bypass original UI","ShowBuyConfirmation alone does not promise a confirmation: base send also checks currency, threshold, freePurchase and other branches","Process request invokes requestConfirmed before subsequent submission call: callback is not settlement","Fixed purchase C includes tail-called base body; bounded listing defines actual function range"]},
+ "live":{"pid":32088,"hostPid":35084,"item":"premium-pack-silver","nativeFreePurchase":true,"giftable":false,"showBuyConfirmation":true,"currentOfferCurrencyType":5,"currentOfferPrice":250,"purchaseInvoked":false},
+ "tests":["current offer differs from AllOffers mock PASS","missing current offer remains null PASS","store and loading regressions PASS","live original current offer and flags read"],
+ "limitations":["No purchase executed","Final inventory settlement and durable submission protocol not implemented","Real-money and gifting flows not verified"],
+ "evidence":["logs/high_reuse/store-current-offer-detail.json","logs/high_reuse/store-current-offer-home.json"]
+}

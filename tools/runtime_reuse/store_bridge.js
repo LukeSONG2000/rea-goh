@@ -60,8 +60,9 @@ globalThis.StoreBridge=(()=>{
  function detailStatus(){
   const {v,item}=details(),formatter=R.readRef(v,'_storeOfferPriceFormatter');
   const label=n=>S.string(S.invoke('UILabel','get_text',R.readRef(v,n)));
+  const currentOffer=R.readRef(item,field('Offer'));
   const buttons=[['single','_singlePurchaseButton'],['singleCentered','_singlePurchaseButtonCentered'],['multiple','_multiPurchaseButton'],['ok','_OKButtonCentered']].map(([slot,f])=>buttonStatus(v,slot,f));
-  return {readConfirmed:true,id:str(item,'Id'),title:label('_packTitle'),description:label('_descriptionLabel'),fromTab:R.readValue(v,'_fromLocation','i32'),maxPurchaseAmount:R.readValue(v,'_maxPurchaseAmount','i32'),freeButtonShown:R.readValue(v,'_showFreeBuyButton','bool'),nativeFreePurchase:!!R.unbox(S.invoke('StorePackDetailsView','IsFreePurchase',v),'bool'),giftState:R.readValue(v,'_giftState','i32'),buttons,offers:list(R.readRef(item,field('AllOffers'))).map(o=>offer(o,formatter)),scope:'Original detail display and raw button state; hidden text is not a payable quote, enabled does not authorize purchase'};
+  return {readConfirmed:true,id:str(item,'Id'),title:label('_packTitle'),description:label('_descriptionLabel'),fromTab:R.readValue(v,'_fromLocation','i32'),maxPurchaseAmount:R.readValue(v,'_maxPurchaseAmount','i32'),freeButtonShown:R.readValue(v,'_showFreeBuyButton','bool'),nativeFreePurchase:!!R.unbox(S.invoke('StorePackDetailsView','IsFreePurchase',v),'bool'),giftState:R.readValue(v,'_giftState','i32'),giftable:val(item,'Giftable','bool'),showBuyConfirmation:val(item,'ShowBuyConfirmation','bool'),currentOffer:currentOffer.isNull()?null:offer(currentOffer,formatter),buttons,offers:list(R.readRef(item,field('AllOffers'))).map(o=>offer(o,formatter)),scope:'Original detail display and raw button state; hidden text is not a payable quote, enabled does not authorize purchase'};
  }
  function execute(op,p={}){
   if(op==='store-list')return status();
@@ -95,4 +96,5 @@ globalThis.StoreBridge=(()=>{
  return {execute,status};
 })();
 rpc.exports.storecommand=(op,p)=>RuntimeApi.runOnMainThreadOnce(()=>StoreBridge.execute(op,p));
+
 
