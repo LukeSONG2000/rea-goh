@@ -1,0 +1,83 @@
+{
+  "scope": "Original login calendar CLI; free current daily reward, no catch-up/purchase",
+  "operations": [
+    "calendar-open",
+    "calendar-list",
+    "calendar-claim",
+    "calendar-close",
+    "calendar-claim-status"
+  ],
+  "nativeEvidence": {
+    "hideRva": "0x1393a30",
+    "claimControllerRva": "0x13942e0",
+    "claimRewardRva": "0x139c4f0",
+    "finding": "Original bulk-claim flag queues UI claims; HideCalendarView tail-calls ProcessBulkClaim. Claim dispatch is not settlement.",
+    "claimViewRva": "0x139c470",
+    "bulkRva": "0x1394850",
+    "analysis": "Existing Ghidra project opened read-only, closed without save"
+  },
+  "live": {
+    "incorrectIndexRejected": true,
+    "rewardIndex": 3,
+    "calendar": "OCTOBER",
+    "afterButton": 7441,
+    "claim": {
+      "calendarId": "OCTOBER",
+      "rewardIndex": 3,
+      "lastClaimed": "1792253525",
+      "rewards": [
+        {
+          "id": "PREMIUM",
+          "itemType": 2,
+          "quantity": 50
+        }
+      ],
+      "before": [
+        {
+          "id": "PREMIUM",
+          "itemType": 2,
+          "expected": 50,
+          "value": 7441
+        }
+      ],
+      "claimDispatched": true,
+      "after": [
+        {
+          "id": "PREMIUM",
+          "itemType": 2,
+          "expected": 50,
+          "value": 7491
+        }
+      ],
+      "rewardBalanceReconciled": true,
+      "settlementEvidence": "native-inventory-delta"
+    },
+    "claimedFlagAfterReopen": true,
+    "duplicateRequestRejected": true,
+    "before": 7441,
+    "finalHost": 37352,
+    "afterClose": 7491,
+    "reward": "50 PREMIUM"
+  },
+  "validation": [
+    "actual bridge VM guards, deferred settlement PASS",
+    "mailbox malformed calendar payloads and receipts PASS",
+    "CLI syntax PASS",
+    "final explicit visibility open/close real client PASS"
+  ],
+  "limitations": [
+    "Only current selected calendar claim; multiple-calendar selection not exposed yet",
+    "Balance reconciliation supports currency/material through shared inventory reader; other reward types remain unconfirmed",
+    "In-memory receipt history is per host; mailbox receipts and this live evidence retained on disk",
+    "Long-press popup regression still pending; isolated trial reached timeout cleanly, serviceCalls zero"
+  ],
+  "evidence": [
+    "logs/high_reuse/calendar-before.json",
+    "logs/high_reuse/calendar-claim-receipt.json",
+    "logs/high_reuse/calendar-before-close.json",
+    "logs/high_reuse/calendar-after-close.json",
+    "logs/high_reuse/calendar-after-reopen.json",
+    "logs/high_reuse/calendar-duplicate-rejected.json",
+    "logs/high_reuse/calendar-settled-home.png"
+  ]
+}

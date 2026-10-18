@@ -17,6 +17,9 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const payload of [null,{}, {calendarId:'OCTOBER',rewardIndex:-1,lastClaimed:'1'}, {calendarId:'OCTOBER',rewardIndex:0,lastClaimed:1}, {calendarId:'OCTOBER',rewardIndex:0,lastClaimed:'bad'}]){
+  assert.equal((await test({operation:'calendar-claim',payload})).dispatched,false);
+ }
  for(const payload of [null,{}, {messageId:''},{messageId:42},{messageId:'a'.repeat(257)}]){
   assert.equal((await test({operation:'inbox-select',payload})).dispatched,false);
  }
@@ -94,6 +97,11 @@ try{
   ['objectives-home',undefined,{transitionConfirmed:true}],
   ['objectives-list',undefined,{readConfirmed:true,quests:[]}],
   ['inbox-open',undefined,{transitionConfirmed:true}],
+  ['calendar-open',undefined,{transitionConfirmed:true}],
+  ['calendar-close',undefined,{transitionConfirmed:true}],
+  ['calendar-list',undefined,{readConfirmed:true}],
+  ['calendar-claim-status',undefined,{readConfirmed:true}],
+  ['calendar-claim',{calendarId:'OCTOBER',rewardIndex:0,lastClaimed:'123'},{claimDispatched:true}],
   ['inbox-home',undefined,{transitionConfirmed:true}],
   ['inbox-list',undefined,{readConfirmed:true,messages:[]}],
   ['inventory-skill-quote',{unitId:'unit',skillId:'skill',tier:0},{readConfirmed:true}],

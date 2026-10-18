@@ -58,6 +58,18 @@ try{
      }
      return {...result,transitionConfirmed:confirmed,afterState:after.state};
     }
+    if(operation.startsWith('calendar-')){
+     const result=await script.exports.calendarcommand(operation,payload);
+     if(!['calendar-open','calendar-close'].includes(operation))return result;
+     let confirmed=false;
+     for(let i=0;i<30;i++){
+      await new Promise(r=>setTimeout(r,250));
+      const visible=await script.exports.calendarvisibility();
+      confirmed=operation==='calendar-open'?(visible.showing&&visible.active):(!visible.showing&&!visible.active);
+      if(confirmed)break;
+     }
+     return {...result,transitionConfirmed:confirmed};
+    }
     if(operation.startsWith('inbox-')){
      const result=await script.exports.inboxcommand(operation,payload);
      if(['inbox-list','inbox-claim','inbox-claim-status'].includes(operation))return result;
