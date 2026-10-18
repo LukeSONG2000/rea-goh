@@ -341,3 +341,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 live-arena-basic】用户明确要求消耗一次真实小队竞技场并结算，敌方仅普攻、我方原AI。选队接口暂挂；root独占原运行时，先实现仅下一场PVP生效的原普攻回调替换并测试，原结算保持，不购买次数或清冷却。
 
 【Codex/root 2026-10-18 live-arena-basic validated】按用户明确授权真实小队竞技场对Yegs(#338)，我方原Leia/R2/Drogan/Raddus/Jyn自动AI。新增显式-LiveArenaBasic仅PvpPreBattle下一原squad PVP上下文，原enemy DoMove转原CanPerformMove+PerformManualMove(0,0)+完成回调；被动协攻反击保留、不碰结算。实机敌方6次主动输入全原basic/0/0、我方13次原AI，fallback0/errors0。原结算报告345→338，匹配页同；次数4→3截图，水晶7286不变，拒绝结算后好友请求。SC_Exit自动解除且恢复普通host1296；HUD加载/对局/返回存活errors0，右上绝对值与图标gap16无重叠。未重验长按。live-scope/原enemy gate/HUD lifecycle/loading测试PASS，报告LIVE_ARENA_BASIC_VALIDATION_20261018.json及logs实拍。原32088存活；未购买次数/清冷却/改装备或原目录。
+【Codex/root 2026-10-18 prebattle-readback】恢复原目标，root认领原选队阵容槽位及支援身份只读回读，增强支援选择成功判定；不消耗战斗次数，不修改装备。
