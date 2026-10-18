@@ -17,11 +17,11 @@ vm.runInContext(part,ctx);
 const unit={toString:()=> 'unit'};
 ctx.healthText(unit);assert.equal(reads,8);assert.equal(messages.length,0);
 shieldMax=-1;
-assert.match(ctx.healthText(unit),/永久护盾 100 \/ -1/,'Native negative value must not be fabricated as zero');
+assert.match(ctx.healthText(unit),/永久护盾 100 \/ 受限\(-1\)/,'Native negative ceiling remains visible and is distinguished from a normal capacity');
 assert.equal(messages.length,1);assert.equal(messages[0].maxShieldStat,-1);
 ctx.healthText(unit);assert.equal(messages.length,1,'Repeated identical reads must not flood IPC');
 diagnosticThrows=true;shieldMax=-2;
-assert.match(ctx.healthText(unit),/100 \/ -2/,'A diagnostic failure must not prevent text updates');
+assert.match(ctx.healthText(unit),/100 \/ 受限\(-2\)/,'A diagnostic failure must not prevent text updates');
 assert.match(messages.at(-1).diagnosticError,/diagnostic unavailable/);
 for(let i=3;i<40;i++){shieldMax=-i;ctx.healthText(unit);}
 assert.equal(stats.healthAnomalies.length,16,'Diagnostic history is bounded');

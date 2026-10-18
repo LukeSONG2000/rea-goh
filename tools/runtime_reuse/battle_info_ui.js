@@ -30,7 +30,10 @@
  function healthText(unit){
   const read=n=>R.unbox(call('BattleUnitController','get_'+n,unit),'i32');
   const values={};
-  const pair=(label,a,b)=>{values[a]=read(a);values[b]=read(b);return label+' '+values[a]+' / '+values[b];};
+  // Original CurrentShield caps the usable total at max(0, MaxShield).
+  // A negative native ceiling can coexist with retained permanent shield;
+  // expose it as a restriction, without rewriting either native reading.
+  const pair=(label,a,b)=>{values[a]=read(a);values[b]=read(b);return label+' '+values[a]+' / '+(values[b]<0?'受限('+values[b]+')':values[b]);};
   const text=[pair('生命','CurrentHP','MaxHP'),pair('总护盾','CurrentShield','MaxShield'),pair('永久护盾','CurrentPermanentShield','MaxPermanentShield'),pair('临时护盾','CurrentBonusShield','MaxBonusShield')].join('\n');
   if(Object.values(values).some(v=>v<0)&&stats.healthAnomalies.length<16){
    const key=unit.toString()+':'+JSON.stringify(values);

@@ -1,0 +1,59 @@
+{
+  "sourceVersion": "0.40.6:i9YYIijBSxuHHNoSmCMBoQ",
+  "effects": [
+    {
+      "id": "uniqueability_admiralraddus01_hope_protection_disruption_all_part1_unavoidable_4turn",
+      "param": [
+        "FORCE_DEBUFF",
+        "MAX_SHIELD",
+        "MAX_STAT_LIMIT",
+        "UNRESISTABLE"
+      ],
+      "additiveAmountDecimal": "-10000",
+      "persistentLocKey": "BattleEffect_ProtectionDisruption",
+      "descriptiveTag": [
+        {
+          "tag": "featcounter_protection_disruption_debuff",
+          "exclude": false
+        },
+        {
+          "tag": "special_protection_disruption_debuff",
+          "exclude": false
+        },
+        {
+          "tag": "countable_special_debuff",
+          "exclude": false
+        }
+      ]
+    },
+    {
+      "id": "specialability_glleia01_ambushed_debuff_part2",
+      "param": [
+        "FORCE_DEBUFF",
+        "MAX_SHIELD",
+        "MAX_STAT_LIMIT",
+        "UNRESISTABLE"
+      ],
+      "additiveAmountDecimal": "-10000",
+      "persistentLocKey": "",
+      "descriptiveTag": [
+        {
+          "tag": "special_ambushed_debuff_pt2",
+          "exclude": false
+        }
+      ]
+    }
+  ],
+  "nativeEvidence": {
+    "currentShield": "logs/high_reuse/native/unit_current_shield.c",
+    "maxPermanent": "logs/high_reuse/native/unit_max_permanent.c",
+    "statLimits": "logs/effect_phase2/unit_stat_value.c"
+  },
+  "findings": [
+    "CurrentShield clamps total into a nonnegative effective maximum while CurrentPermanentShield exposes retained storage",
+    "Negative maximum is not necessarily corruption or a death sentinel",
+    "Original Leia Ambushed and Raddus Protection Disruption definitions impose MAX_SHIELD/MAX_STAT_LIMIT with raw additiveAmountDecimal=-10000",
+    "Exact applied effect identity and decimal conversion for each captured anomaly remain to be correlated"
+  ],
+  "presentation": "Negative native maxima rendered as 受限(-1), preserving raw value; no battle values modified"
+}
