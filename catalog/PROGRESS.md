@@ -370,3 +370,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 inbox-claim】认领邮箱原奖励详情按钮核对和单邮件领取回调跟踪；使用原UI回调，不直接调用PlayerService或自行RPC。先读取活动详情/按钮/邮件身份，再限制奖励类型，跟踪原success/failure且不重试不确定领取。
 
 【Codex/root 2026-10-18 inbox-claim partial-real】新增inbox-claim及claim-status：当前选中唯一ID、原reward detail对象/活动enabled按钮/奖励非空/无custom action检查，原BaseInboxRewardView.ActionButtonClicked，session防重放。真实小队奖励邮件移除（预期500竞技币/18000信用点），原callback未捕获且未核余额，不宣称到账确认；第二封大竞技场每日105水晶实测7286→7391，native-wallet差额核对成功。两封均未重试，无消费。PlayerService/原闭包被动tracker mock含异步匹配通过但实机nativeTransactionObserved仍false，回调路径待继续核，不把余额证明伪称callback成功。奖励detail实际按钮领取，列表ActionButtonLabel删除不适合作执行依据。相关mock/loading/syntax通过，原InboxHome返回Home，当前host7640。报告INBOX_CLAIM_VALIDATION_20261018.json；原Ghidra源码记录detail/update/dismiss。
+
+【Codex/root 2026-10-18 inbox-hook-flush】认领领取首次调用漏记。发现tracker在同一主线程JS回调里attach后立即调用原领取，未flush；其他原运行时即时hook已有显式flush。先修安装可见性和延迟生效mock，再真实新邮件验证，不重试已领取邮件。
