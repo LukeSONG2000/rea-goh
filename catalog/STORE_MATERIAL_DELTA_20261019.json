@@ -1,0 +1,8 @@
+{
+ "scope":"Reconcile credited material rewards from matched original success callback against copied pre-claim material snapshot",
+ "behavior":["Require observed native success without tracker error","Require nonempty credited rewards, positive integer quantities and material type7 only","Aggregate duplicate reward IDs using shared original inventory reader","Missing/ambiguous pre-claim inventory stays unknown","Require exact current minus before equals aggregated credited quantity","Latch successful comparison with timestamp; later spending does not erase evidence","Overall settlementConfirmed remains false"],
+ "tests":["Partial/excess deltas refused PASS","Duplicate rewards total compared PASS","Exact material delta latched PASS","Caller baseline mutation cannot affect captured snapshot PASS","Missing/ambiguous baseline and unsupported type refused PASS","Tracker/bridge/durable/loading regressions PASS"],
+ "live":{"pid":32088,"hostPid":31840,"observerInstalled":true,"record":null,"oldRetryBlocked":true,"newClaim":false},
+ "limitations":["No fresh native callback plus before/after validated live yet","Only credited material subset, not full result/units/conversions reconciliation","Preexisting claim cannot be retroactively verified","Durable release and fresh-claim lifecycle remain pending"],
+ "evidence":["logs/high_reuse/store-material-delta-status.json"]
+}

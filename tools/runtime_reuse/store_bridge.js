@@ -129,7 +129,7 @@ globalThis.StoreBridge=(()=>{
    const walletBefore=wallet();
    if(walletBefore.length!==2||walletBefore.some(b=>!Number.isSafeInteger(b.value)))throw Error('Wallet baseline unavailable');
    const materialBefore=materialBaseline();
-   StorePurchaseTracker.prepare(c,item,p.itemId);
+   StorePurchaseTracker.prepare(c,item,p.itemId,materialBefore);
    submission={itemId:p.itemId,quantity:1,expectedCost:0,walletBefore,materialBefore,submittedAt:Date.now(),nativeReturned:false,error:null};
    try{S.invoke('StorePackDetailsView','PurchasePackClicked',v);submission.nativeReturned=true;}
    catch(e){submission.error=String(e);throw e;}
@@ -166,6 +166,7 @@ globalThis.StoreBridge=(()=>{
  return {execute,status};
 })();
 rpc.exports.storecommand=(op,p)=>RuntimeApi.runOnMainThreadOnce(()=>StoreBridge.execute(op,p));
+
 
 
 

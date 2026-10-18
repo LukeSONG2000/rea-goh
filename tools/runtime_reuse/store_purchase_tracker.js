@@ -33,13 +33,30 @@ globalThis.StorePurchaseTracker=(()=>{
    Interceptor.flush();installed=true;
   }catch(e){for(const h of hooks.splice(0))h.detach();throw e;}
  }
- function prepare(c,i,id){
+ function prepare(c,i,id,baseline=null){
   if(record)throw Error('Native store observer already has a submission');
   install();
   try{handles.push(R.retain(c));handles.push(R.retain(i));}catch(e){release();throw e;}
-  owner=c;item=i;record={itemId:id,nativeSuccessObserved:false,creditedBucketItems:null,trackingError:null,settlementConfirmed:false};
+  owner=c;item=i;record={itemId:id,materialBefore:baseline?JSON.parse(JSON.stringify(baseline)):null,nativeSuccessObserved:false,creditedBucketItems:null,trackingError:null,materialRewardsReconciled:false,settlementConfirmed:false};
  }
- function status(){return {installed,record:record?{...record}:null,scope:'Same controller and item object plus result item ID; observes native success, not an inventory delta or transaction ID'};}
+ function reconcile(){
+  if(!record?.nativeSuccessObserved||record.trackingError||record.materialRewardsReconciled)return;
+  const rewards=record.creditedBucketItems,before=record.materialBefore;
+  if(!before?.readConfirmed||!Array.isArray(before.materials)||!Array.isArray(rewards)||!rewards.length){record.comparisonUnavailable='Missing original rewards or pre-claim baseline';return;}
+  if(rewards.some(r=>r.itemType!==7||!r.id||!Number.isSafeInteger(r.quantity)||r.quantity<=0)){record.comparisonUnavailable='Unsupported or invalid reward type/quantity';return;}
+  try{
+   const after=InboxClaimTracker.readBalances(rewards);
+   record.materialComparison=after.map(a=>{
+    const matches=before.materials.filter(b=>b.id===a.id&&b.itemType===7);
+    const value=matches.length===1&&Number.isSafeInteger(matches[0].value)&&matches[0].value>0?matches[0].value:null;
+    return {id:a.id,itemType:a.itemType,before:value,after:a.value,expected:a.expected,delta:value!==null&&Number.isSafeInteger(a.value)?a.value-value:null};
+   });
+   record.materialRewardsReconciled=after.length===new Set(rewards.map(r=>r.id)).size&&record.materialComparison.every(r=>r.itemType===7&&Number.isSafeInteger(r.expected)&&r.expected>0&&r.delta===r.expected);
+   record.comparisonUnavailable=null;
+   if(record.materialRewardsReconciled)record.materialReconciledAt=Date.now();
+  }catch(e){record.comparisonUnavailable=String(e);}
+ }
+ function status(){reconcile();return {installed,record:record?{...record}:null,scope:'Native success and credited material delta only; not proof of other reward categories, transaction ID, or authorization to retry'};}
  function dispose(){for(const h of hooks.splice(0))h.detach();installed=false;release();return status();}
  return {install,prepare,status,dispose};
 })();
