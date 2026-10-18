@@ -1,6 +1,14 @@
 'use strict';
 // Observe original calls only. Never invokes the decision evaluator or random stream.
 // Snapshot the original graph without evaluating conditions or advancing RNG.
+globalThis.readOriginalAIRandomState=context=>{
+ const result={};
+ for(const name of ['BattleRandom','PlayerAbilitySelectionRandom','OpponentAbilitySelectionRandom','PlayerTargetRandom','OpponentTargetRandom']){
+  const random=RuntimeApi.readRef(context,'<'+name+'>k__BackingField');
+  result[name]=random.isNull()?null:String(RuntimeApi.readValue(random,'_seed','i64'));
+ }
+ return result;
+};
 globalThis.readOriginalAITree=tree=>{
  const R=RuntimeApi,S=SceneApi,indices=new Map(),nodes=[];
  const ref=(p,f)=>R.readRef(p,f),value=(p,f,t)=>R.readValue(p,f,t);
@@ -44,6 +52,7 @@ globalThis.installOriginalAITrace=context=>{
    if(rows.length>=128){dropped++;return;}
    this.thread=Process.getCurrentThreadId();this.previous=active.get(this.thread);
    this.row={sequence:++serial,actor:unit(ref(args[1],'Self')),chance:R.readValue(args[1],'Chance','i32'),nodes:[],results:[]};
+   this.row.randomBefore=readOriginalAIRandomState(context);
    active.set(this.thread,this.row);rows.push(this.row);
    // Native 16A2EC0 reads context.GameDataDomainController._abilityDecisionTreeDO
    // directly, bypassing the GetAbilityDecisionTree call site.
@@ -58,6 +67,8 @@ globalThis.installOriginalAITrace=context=>{
 
   });},
   onLeave(value){if(!this.row)return;inspect(()=>{
+   this.row.randomAfter=readOriginalAIRandomState(context);
+   this.row.randomChanged=Object.keys(this.row.randomBefore).filter(k=>this.row.randomBefore[k]!==this.row.randomAfter[k]);
    if(value.isNull()){this.row.result=null;return;}
    const ability=ref(value,'Ability');
    this.row.result={abilityId:ability.isNull()?null:text(call(ref(ability,'<AbilityDO>k__BackingField'),'get_Id')),enemyTargets:targets(ref(value,'EnemyTargets')),allyTargets:targets(ref(value,'AllyTargets'))};

@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const names=['BattleRandom','PlayerAbilitySelectionRandom','OpponentAbilitySelectionRandom','PlayerTargetRandom','OpponentTargetRandom'];
+const context={},reads=[];
+names.forEach((name,i)=>context['<'+name+'>k__BackingField']={isNull:()=>false,seed:9007199254740993n+BigInt(i)});
+const sandbox={RuntimeApi:{readRef:(o,f)=>{reads.push(f);return o[f];},readValue:(o,f,type)=>{assert.equal(f,'_seed');assert.equal(type,'i64');return o.seed;}}};
+vm.runInNewContext(fs.readFileSync(new URL('./original_ai_trace.js',import.meta.url),'utf8'),sandbox);
+const before=sandbox.readOriginalAIRandomState(context);
+assert.equal(before.BattleRandom,'9007199254740993');assert.equal(reads.length,5);
+assert.equal(context['<BattleRandom>k__BackingField'].seed,9007199254740993n);
+context['<OpponentTargetRandom>k__BackingField'].seed=123n;
+const after=sandbox.readOriginalAIRandomState(context);
+assert.deepEqual(Object.keys(before).filter(k=>before[k]!==after[k]),['OpponentTargetRandom']);
+context['<PlayerTargetRandom>k__BackingField']={isNull:()=>true};assert.equal(sandbox.readOriginalAIRandomState(context).PlayerTargetRandom,null);
+console.log('PASS exact int64 seeds, five streams, null stream, no evaluator/RNG/native calls or writes');
