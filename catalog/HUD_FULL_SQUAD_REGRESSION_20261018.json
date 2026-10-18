@@ -1,0 +1,190 @@
+{
+  "scope": "Original runtime private PVE fixture with owned full squads, not online arena",
+  "runs": [
+    {
+      "evidence": "logs\\high_reuse\\shield-restriction-demo-v3-evidence.json",
+      "sha256": "68f6ef0b1d29ae071cf10e28ed7413ba537fbca7cc12a071870a2f196ba54ffe",
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": false,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 17,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 2,
+          "sendto": 6,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 7,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "hud": {
+        "shows": 0,
+        "updates": 0,
+        "modeGateCalls": 1,
+        "tutorialDisplays": 0,
+        "errors": [],
+        "healthAnomalies": [],
+        "last": null,
+        "target": "生命 228967 / 228967\n总护盾 0 / 101823\n永久护盾 0 / 101823\n临时护盾 0 / 0",
+        "targetLayout": {
+          "controlsLeft": -355.9000244140625,
+          "label": {
+            "left": -721.9000244140625,
+            "right": -371.9000244140625
+          },
+          "gap": 16,
+          "measured": [
+            {
+              "active": true,
+              "left": -187,
+              "right": 65
+            },
+            {
+              "active": true,
+              "left": -261.2000427246094,
+              "right": 58
+            },
+            {
+              "active": true,
+              "left": -355.9000244140625,
+              "right": -206.5
+            }
+          ]
+        }
+      },
+      "detached": true
+    },
+    {
+      "evidence": "logs\\high_reuse\\shield-restriction-demo-v4-evidence.json",
+      "sha256": "b9fcaaddb2649de1da2795938f7292148513945bcedd0190aef29ada37e680c5",
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 50,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 26680,
+          "sendto": 11,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 14,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "hud": {
+        "shows": 0,
+        "updates": 0,
+        "modeGateCalls": 1,
+        "tutorialDisplays": 0,
+        "errors": [],
+        "healthAnomalies": [],
+        "last": null,
+        "target": "生命 0 / 76490\n总护盾 0 / 148506\n永久护盾 0 / 148506\n临时护盾 0 / 0",
+        "targetLayout": {
+          "controlsLeft": -290.8999938964844,
+          "label": {
+            "left": -656.8999633789062,
+            "right": -306.89996337890625
+          },
+          "gap": 16,
+          "measured": [
+            {
+              "active": true,
+              "left": -187,
+              "right": 65
+            },
+            {
+              "active": true,
+              "left": -196.4000244140625,
+              "right": 58
+            },
+            {
+              "active": true,
+              "left": -290.8999938964844,
+              "right": -141.5
+            }
+          ]
+        }
+      },
+      "detached": true
+    }
+  ],
+  "screenshot": {
+    "path": "logs\\high_reuse\\shield-v4-nonzero-cd.png",
+    "sha256": "c056bb6b9a98f7004af84a5bcb9b4a63a442bb6df6c9f03968e16aa14f9771ad",
+    "width": 1402,
+    "height": 819,
+    "observed": "Original opponent cooldown values 1 and 3 visible simultaneously with four separate absolute health/protection lines; no overlap in this frame"
+  },
+  "negativeMaximumReproduced": false,
+  "limitations": [
+    "No negative max captured; effect attribution and restricted wording visual acceptance remain unverified",
+    "No long-press panel exercised in these runs",
+    "Does not prove all modes, other resolutions or online display-host loading"
+  ],
+  "tests": [
+    "test_battle_info_health.mjs PASS",
+    "test_battle_info_layout.mjs PASS",
+    "test_battle_info_lifecycle.mjs PASS",
+    "test_runtime_loading.mjs PASS"
+  ]
+}
