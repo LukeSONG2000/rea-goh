@@ -79,6 +79,24 @@ globalThis.InventoryBridge=(()=>{
    if(rows!==null&&rows.length>256)throw Error('Skill display bound exceeded');
    return rows;
  }
+ function skillMaterials(data){
+  const recipe=R.readRef(data,'<RecipeData>k__BackingField');
+  if(recipe.isNull())return null;
+  const count=R.readValue(recipe,'_size','i32');
+  if(count<0||count>128)throw Error('Skill recipe bound exceeded');
+  const rows=[];
+  // List<KeyValuePair<...>> contains value types: use the original indexer to box
+  // each pair instead of interpreting the array as a list of object pointers.
+  const get=R.findMethod(R.classOf(recipe),'get_Item',1);
+  for(let i=0;i<count;i++){
+   const pair=R.invoke(get,recipe,[R.arg.value('i32',i)]),tile=R.readRef(pair,'value');
+   if(tile.isNull())throw Error('Null skill recipe tile');
+   rows.push({itemType:R.readValue(pair,'key','u8'),renderType:R.fullName(R.classOf(tile)),
+    id:S.string(R.readRef(tile,'ID')),label:S.string(R.readRef(tile,'<LabelString>k__BackingField')),
+    quantityRaw:R.readValue(tile,'<Quantity>k__BackingField','i32')});
+  }
+  return rows;
+ }
  function skillLevel(data){
   if(data.isNull())return null;
   const text=name=>S.string(R.readRef(data,'<'+name+'>k__BackingField'));
@@ -89,7 +107,7 @@ globalThis.InventoryBridge=(()=>{
    lockedByConditions:!!value('LevelLockedByConditions','bool'),upgradeStatus:value('UpgradeStatus'),
    upgradeAvailable:!!value('UpgradeAvailable','bool'),
    currencyCost:value('RecipeCost'),currencyType:value('RecipeCurrencyType'),
-   costComplete:false}; // Material recipe rows are not yet decoded; never treat as a complete quote.
+   materials:skillMaterials(data),costComplete:false}; // Raw UI quantity semantics still require validation.
  }
  function skillPopup(controller,type,raw=false){
   const owner=abilityOwner(controller,type);if(owner.isNull())return null;
