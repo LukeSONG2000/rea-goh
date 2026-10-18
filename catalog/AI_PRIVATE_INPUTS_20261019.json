@@ -1,0 +1,11 @@
+{
+  "scope": "Private decision graph routing and AI input containers; not complete prediction",
+  "graphRoute": "Clone original GameDataDomainController, bind cloned tree to its _abilityDecisionTreeDO, bind private BattleContext.GameDataDomainController and private controller._gameDataDC to this same clone; reject mismatched source game-data identity",
+  "inputs": "MemberwiseClone original BattleAbilityAIContext and four list containers; original System.Array.Clone for backing arrays; preserve list and array aliases, null lists, source ordering, Chance, PreferredTarget, Self and PrimaryAbility",
+  "stillShared": ["unit and AbilityContext elements", "most GameData collections", "other context services", "stat calculator thread-local scratch"],
+  "liveEvidence": "logs/high_reuse/trial-20261019-024246-579-evidence.json",
+  "baseline": "logs/high_reuse/trial-20261019-023755-229-evidence.json",
+  "live": {"privateGraphRouting":true,"originalReferencesAndSeedsUnchanged":true,"privateLists":4,"privateArrays":4,"inputContentsAndOrderEqual":true,"allAiRowsAndSeedsEqualBaseline":true,"decisionTreesEqualBaseline":true,"traceErrors":[],"terminal":true,"serviceCalls":0,"cleanupComplete":true,"restoredHost":10268},
+  "tests": ["VM list and array edits leave originals unchanged", "list aliases and shared array aliases preserved", "null lists and scalar/element identities preserved", "bounds and partial allocation failure cleanup", "pool/context/graph/random/priority regressions", "turn-order two identical output hashes"],
+  "limitations": ["No additional native AI evaluation", "Native input validation checks original contents against copies without editing native elements", "Source graph clone is assembled; target tactic and transitive unit/stat/effect dependencies still need audit", "readyForEvaluation remains false"]
+}

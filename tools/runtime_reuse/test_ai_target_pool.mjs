@@ -40,9 +40,13 @@ R.fullName=c=>c.name;R.api=()=>klass=>pointer({type:klass.name});R.unbox=x=>x;
 const battle=pointer({type:'BattleContext',BattleUnitControllerListPool:original});
 const evaluator=pointer({type:'BattleTargetingRuleEvaluator',_battleContext:battle});
 const controller=pointer({type:'BattleAbilityAIController',_battleContext:battle,_targetingRuleEvaluator:evaluator});
+const nil={isNull:()=>true};
+const tree=pointer({type:'AbilityDecisionTreeDO',_rootNode:nil});
+const data=pointer({type:'GameDataDomainController',_abilityDecisionTreeDO:tree});
+battle['<GameDataDomainController>k__BackingField']=data;controller._gameDataDC=data;
 const names=['BattleRandom','PlayerAbilitySelectionRandom','OpponentAbilitySelectionRandom','PlayerTargetRandom','OpponentTargetRandom'];
 names.forEach((n,i)=>battle['<'+n+'>k__BackingField']=pointer({type:'JavaRandom',_seed:BigInt(i+100)}));
-const originals=new Set([original,battle,evaluator,controller,...names.map(n=>battle['<'+n+'>k__BackingField'])]);
+const originals=new Set([original,battle,evaluator,controller,data,tree,...names.map(n=>battle['<'+n+'>k__BackingField'])]);
 let writes=0,failWrite=Infinity;
 R.writeRef=(p,k,v)=>{assert.ok(!originals.has(p),'Never write original object');if(++writes===failWrite)throw Error('write failure');p[k]=v;};
 sandbox.SceneApi={invoke(type,name,p,args){
@@ -51,6 +55,7 @@ sandbox.SceneApi={invoke(type,name,p,args){
 }};
 const infrastructure=sandbox.verifyOriginalAIInfrastructure(controller);
 assert.equal(infrastructure.privateBindings,true);assert.equal(infrastructure.originalUnchanged,true);assert.equal(infrastructure.readyForEvaluation,false);assert.equal(retained.size,0);
+assert.equal(infrastructure.privateGraphRouting,true);
 writes=0;failWrite=7;assert.throws(()=>sandbox.createOriginalAIInfrastructure(controller),/write failure/);assert.equal(retained.size,0,'Release all copies after partial binding failure');
 failWrite=Infinity;evaluator._battleContext=pointer({type:'BattleContext'});
 assert.throws(()=>sandbox.createOriginalAIInfrastructure(controller),/identity mismatch/);assert.equal(retained.size,0);

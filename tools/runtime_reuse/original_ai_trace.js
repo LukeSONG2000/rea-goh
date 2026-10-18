@@ -101,32 +101,39 @@ globalThis.verifyOriginalAITargetPool=context=>{
   return {originalUnchanged,reuseConfirmed,empty,capacity:privatePool.capacity,scope:'Original private pool borrow/return only; not AI prediction'};
  }finally{privatePool?.dispose();}
 };
-// Infrastructure only: units, stat calculators, game data and other context
+// Infrastructure only: units, stat calculators, most game data and other context
 // services remain shared. Do not evaluate this controller until audited.
 globalThis.createOriginalAIInfrastructure=sourceController=>{
- const R=RuntimeApi,S=SceneApi,handles=[];let random,pool,disposed=false;
+ const R=RuntimeApi,S=SceneApi,handles=[];let random,pool,graph,disposed=false;
  const source=R.readRef(sourceController,'_battleContext');
  const sourceEvaluator=R.readRef(sourceController,'_targetingRuleEvaluator');
  if(source.isNull()||sourceEvaluator.isNull()||!R.readRef(sourceEvaluator,'_battleContext').equals(source))throw Error('AI evaluator/context identity mismatch');
+ const sourceData=R.readRef(source,'<GameDataDomainController>k__BackingField');
+ if(sourceData.isNull()||!R.readRef(sourceController,'_gameDataDC').equals(sourceData))throw Error('AI game-data identity mismatch');
  function clone(p){const q=S.invoke('System.Object','MemberwiseClone',p);
   if(q.isNull()||q.equals(p)||!R.classOf(q).equals(R.classOf(p)))throw Error('Independent same-type clone required');
   handles.push(R.retain(q));return q;}
  function dispose(){if(disposed)return;disposed=true;
-  try{pool?.dispose();}finally{try{random?.dispose();}finally{for(const h of handles)R.release(h);}}}
+  try{pool?.dispose();}finally{try{random?.dispose();}finally{try{graph?.dispose();}finally{for(const h of handles)R.release(h);}}}}
  try{
   const context=clone(source),controller=clone(sourceController),evaluator=clone(sourceEvaluator);
   random=copyOriginalAIRandomStreams(source);pool=createOriginalAITargetPool(source);
+  const gameData=clone(sourceData);graph=copyOriginalAIDecisionGraph(R.readRef(sourceData,'_abilityDecisionTreeDO'));
+  R.writeRef(gameData,'_abilityDecisionTreeDO',graph.tree);
+  R.writeRef(context,'<GameDataDomainController>k__BackingField',gameData);
+  R.writeRef(controller,'_gameDataDC',gameData);
   for(const name of Object.keys(random.state()))R.writeRef(context,'<'+name+'>k__BackingField',random.stream(name));
   R.writeRef(context,'BattleUnitControllerListPool',pool.pool);
   R.writeRef(evaluator,'_battleContext',context);
   R.writeRef(controller,'_battleContext',context);
   R.writeRef(controller,'_targetingRuleEvaluator',evaluator);
-  return {context,controller,evaluator,random,pool,dispose,readyForEvaluation:false};
+  return {context,controller,evaluator,gameData,graph,random,pool,dispose,readyForEvaluation:false};
  }catch(e){dispose();throw e;}
 };
 globalThis.verifyOriginalAIInfrastructure=sourceController=>{
  const R=RuntimeApi,source=R.readRef(sourceController,'_battleContext');
  const evaluator=R.readRef(sourceController,'_targetingRuleEvaluator');
+ const sourceData=R.readRef(source,'<GameDataDomainController>k__BackingField'),sourceTree=R.readRef(sourceData,'_abilityDecisionTreeDO');
  const pool=R.readRef(source,'BattleUnitControllerListPool'),before=readOriginalAIRandomState(source);
  const names=Object.keys(before),originalStreams=names.map(n=>R.readRef(source,'<'+n+'>k__BackingField'));
  let copy;
@@ -135,6 +142,10 @@ globalThis.verifyOriginalAIInfrastructure=sourceController=>{
   const privateBindings=R.readRef(copy.controller,'_battleContext').equals(copy.context)&&
    R.readRef(copy.controller,'_targetingRuleEvaluator').equals(copy.evaluator)&&
    R.readRef(copy.evaluator,'_battleContext').equals(copy.context)&&
+   !copy.gameData.equals(sourceData)&&!copy.graph.tree.equals(sourceTree)&&
+   R.readRef(copy.context,'<GameDataDomainController>k__BackingField').equals(copy.gameData)&&
+   R.readRef(copy.controller,'_gameDataDC').equals(copy.gameData)&&
+   R.readRef(copy.gameData,'_abilityDecisionTreeDO').equals(copy.graph.tree)&&
    R.readRef(copy.context,'BattleUnitControllerListPool').equals(copy.pool.pool)&&
    names.every((n,i)=>!R.readRef(copy.context,'<'+n+'>k__BackingField').equals(originalStreams[i]));
   for(const n of names)copy.random.nextInt(n,100);
@@ -143,10 +154,12 @@ globalThis.verifyOriginalAIInfrastructure=sourceController=>{
    R.readRef(sourceController,'_battleContext').equals(source)&&
    R.readRef(sourceController,'_targetingRuleEvaluator').equals(evaluator)&&
    R.readRef(evaluator,'_battleContext').equals(source)&&
+   R.readRef(source,'<GameDataDomainController>k__BackingField').equals(sourceData)&&
+   R.readRef(sourceController,'_gameDataDC').equals(sourceData)&&R.readRef(sourceData,'_abilityDecisionTreeDO').equals(sourceTree)&&
    R.readRef(source,'BattleUnitControllerListPool').equals(pool)&&
    names.every((n,i)=>R.readRef(source,'<'+n+'>k__BackingField').equals(originalStreams[i]));
   if(!privateBindings||!originalUnchanged)throw Error('Private AI infrastructure verification failed');
-  return {privateBindings,originalUnchanged,readyForEvaluation:false,scope:'Private context/RNG/pool/evaluator bindings; remaining services shared; no AI evaluation'};
+  return {privateBindings,originalUnchanged,privateGraphRouting:true,readyForEvaluation:false,scope:'Private context/RNG/pool/evaluator/game-data graph route; remaining services shared; no AI evaluation'};
  }finally{copy?.dispose();}
 };
 // Preserve graph topology and original lazy parameter caches without evaluating
@@ -175,6 +188,44 @@ globalThis.verifyOriginalAIDecisionGraph=source=>{
   const originalUnchanged=JSON.stringify(readOriginalAITree(source).graph)===before;
   if(!identical||!originalUnchanged)throw Error('Private graph differs from original');
   return {identical,originalUnchanged,nodes:copy.nodeCount,results:copy.resultCount,scope:'Topology and values copied; no node evaluation'};
+ }finally{copy?.dispose();}
+};
+// Container isolation only; unit and AbilityContext elements remain shared.
+globalThis.copyOriginalAIInputs=source=>{
+ const R=RuntimeApi,S=SceneApi,handles=[],lists=new Map(),arrays=new Map();let disposed=false;
+ function dispose(){if(disposed)return;disposed=true;for(const h of handles)R.release(h);}
+ function clone(p,array=false){const q=S.invoke(array?'System.Array':'System.Object',array?'Clone':'MemberwiseClone',p);
+  if(q.isNull()||q.equals(p))throw Error('Independent input container required');handles.push(R.retain(q));return q;}
+ try{
+  if(source.isNull()||R.fullName(R.classOf(source))!=='BattleAbilityAIContext')throw Error('Original AI input context required');
+  const context=clone(source);
+  for(const f of ['EnemyTargetOptions','Enemies','Allies','SpecialAbilities']){
+   const p=R.readRef(source,f);if(p.isNull())continue;
+   let q=lists.get(p.toString());
+   if(!q){
+    const size=R.readValue(p,'_size','i32');if(size<0||size>512)throw Error('AI input list exceeds bounds');
+    q=clone(p);lists.set(p.toString(),q);
+    const items=R.readRef(p,'_items');if(items.isNull())throw Error('AI input list backing array absent');
+    let privateItems=arrays.get(items.toString());
+    if(!privateItems){privateItems=clone(items,true);arrays.set(items.toString(),privateItems);}
+    R.writeRef(q,'_items',privateItems);
+   }
+   R.writeRef(context,f,q);
+  }
+  return {context,dispose,listCount:lists.size,arrayCount:arrays.size,readyForEvaluation:false};
+ }catch(e){dispose();throw e;}
+};
+globalThis.verifyOriginalAIInputs=source=>{
+ const R=RuntimeApi,S=SceneApi,fields=['EnemyTargetOptions','Enemies','Allies','SpecialAbilities'];
+ function snapshot(p){return fields.map(f=>{const list=R.readRef(p,f);if(list.isNull())return {field:f,null:true};
+  return {field:f,size:R.readValue(list,'_size','i32'),version:R.readValue(list,'_version','i32'),items:S.array(R.readRef(list,'_items')).map(x=>x.toString())};});}
+ const before=snapshot(source);let copy;
+ try{copy=copyOriginalAIInputs(source);
+  const contentsEqual=JSON.stringify(snapshot(copy.context))===JSON.stringify(before);
+  const independent=fields.every(f=>{const a=R.readRef(source,f),b=R.readRef(copy.context,f);return a.isNull()?b.isNull():!a.equals(b)&&!R.readRef(a,'_items').equals(R.readRef(b,'_items'));});
+  const originalUnchanged=JSON.stringify(before)===JSON.stringify(snapshot(source));
+  if(!contentsEqual||!independent||!originalUnchanged)throw Error('AI input copy verification failed');
+  return {contentsEqual,independent,originalUnchanged,lists:copy.listCount,arrays:copy.arrayCount,scope:'Lists and arrays independent; elements shared; no evaluation'};
  }finally{copy?.dispose();}
 };
 globalThis.readOriginalAITree=tree=>{
@@ -207,7 +258,7 @@ globalThis.readOriginalAITree=tree=>{
 
 globalThis.installOriginalAITrace=context=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg,rows=[],errors=[],hooks=[],active=new Map(),trees=new Map();let serial=0,dropped=0;
- let randomCopyAudit=null,targetPoolAudit=null,infrastructureAudit=null,graphCopyAudit=null,auditAttempted=false;
+ let randomCopyAudit=null,targetPoolAudit=null,infrastructureAudit=null,graphCopyAudit=null,inputCopyAudit=null,auditAttempted=false;
  const ref=(p,f)=>R.readRef(p,f),text=p=>S.string(p);
  const owns=p=>!p.isNull()&&ref(p,'_battleContext').equals(context);
  const call=(p,n,args=[])=>R.invoke(R.findMethod(R.classOf(p),n,args.length),p,args);
@@ -224,7 +275,7 @@ globalThis.installOriginalAITrace=context=>{
    this.row.randomBefore=readOriginalAIRandomState(context);
    // Streams are initialized by original battle entry, not fixture allocation.
    // Audit at the first real evaluator entry, before its original body runs.
-   if(!auditAttempted){auditAttempted=true;randomCopyAudit=inspect(()=>verifyOriginalAIRandomCopies(context));targetPoolAudit=inspect(()=>verifyOriginalAITargetPool(context));infrastructureAudit=inspect(()=>verifyOriginalAIInfrastructure(args[0]));}
+   if(!auditAttempted){auditAttempted=true;randomCopyAudit=inspect(()=>verifyOriginalAIRandomCopies(context));targetPoolAudit=inspect(()=>verifyOriginalAITargetPool(context));infrastructureAudit=inspect(()=>verifyOriginalAIInfrastructure(args[0]));inputCopyAudit=inspect(()=>verifyOriginalAIInputs(args[1]));}
    active.set(this.thread,this.row);rows.push(this.row);
    // Native 16A2EC0 reads context.GameDataDomainController._abilityDecisionTreeDO
    // directly, bypassing the GetAbilityDecisionTree call site.
@@ -264,5 +315,5 @@ globalThis.installOriginalAITrace=context=>{
   });}
  });
  let stopped=false;
- return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit,graphCopyAudit}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
+ return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit,targetPoolAudit,infrastructureAudit,graphCopyAudit,inputCopyAudit}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
 };
