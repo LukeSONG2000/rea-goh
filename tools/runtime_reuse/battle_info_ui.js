@@ -82,7 +82,7 @@
  }
  function refreshCurrentTarget(){
   const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
-  if(R.fullName(R.classOf(state))!=='BattleGameState')return;
+  if(state.isNull()||R.fullName(R.classOf(state))!=='BattleGameState')return;
   const controller=R.readRef(state,'_battleController');if(controller.isNull())return;
   const context=R.readRef(controller,'_battleContext');if(context.isNull())return;
   const view=call('BattleContext','get_BattleView',context);

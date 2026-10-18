@@ -60,7 +60,8 @@ globalThis.convertCapturedBattle=(bytes,metadata)=>{
   globalThis.captureConversionPhase='native-function-returned';
   const data=own(returned);
   globalThis.captureConversionPhase='converted';
-  return {battleData:data,missionId:identity,proto:source.object,release};
+  const definitionMap=own(R.readRef(gameData,'_pveUnitDefinitionMap'));
+  return {battleData:data,missionId:identity,proto:source.object,release,gameData,definitionMap};
  }catch(e){release();throw e;}
  finally{
   try{if(gameData&&oldMap){R.writeRef(gameData,'_pveUnitDefinitionMap',oldMap);restored=R.readRef(gameData,'_pveUnitDefinitionMap').equals(oldMap);}}

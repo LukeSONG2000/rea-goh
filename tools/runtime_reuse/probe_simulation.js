@@ -116,7 +116,13 @@
    finally {
     try {if(guard){guard.restore();cleanup.guardRestored=true;}}
     catch(e){cleanup.errors.push('guard restore: '+String(e));}
-    finally {try{R.releaseAll();cleanup.gcReleased=true;}catch(e){cleanup.errors.push('GC release: '+String(e));}}
+    finally {try{
+     if(fixture?.restoreDefinitions){
+      if(initializationAttempted&&!cleanup.loopStopped)throw Error('Definitions retained while simulation may be active');
+      await R.runOnMainThreadOnce(()=>fixture.restoreDefinitions());cleanup.definitionsRestored=true;
+     }
+     R.releaseAll();cleanup.gcReleased=true;
+    }catch(e){cleanup.errors.push('definitions/GC release: '+String(e));}}
    }
   }
   const serviceCalls=counts.SendBattleStartRequest+counts.SendBattleFinishRequest;

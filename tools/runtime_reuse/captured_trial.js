@@ -44,5 +44,8 @@ globalThis.createCapturedTrial=options=>{
  call(context,'set_BattleController',[A.ref(simulation)]);
  call(battleData,'set_PlayerSquad',[A.ref(player)]);
  call(domain,'set_BattleData',[A.ref(battleData)]);
- return {data,context,domain,battleData,player,opponent,state,simulation,missionId,mission,options,source,built,converted};
+ // Activate last, after all builder rejection paths. Keep the original table
+ // through asynchronous VFX preload, summons and state teardown.
+ const restoreDefinitions=activateCapturedDefinitions(converted.gameData,converted.definitionMap);
+ return {data,context,domain,battleData,player,opponent,state,simulation,missionId,mission,options,source,built,converted,restoreDefinitions};
 };

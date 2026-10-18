@@ -43,7 +43,7 @@ def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto, t
     root = Path(__file__).resolve().parent
     modules = ['runtime_api.js', 'unity_scene_api.js', 'offline_socket_guard.js',
                'original_fixture.js', 'battle_proto.js', 'isolated_inventory.js',
-               'captured_battle.js', 'captured_trial.js']
+               'captured_battle.js', 'definition_scope.js', 'captured_trial.js']
     if mode == 'visual':
         modules += ['battle_status_reader.js', 'battle_info_ui.js', 'battle_attributes_reader.js',
                     'battle_input.js', 'runtime_observer.js', 'trial_input.js']

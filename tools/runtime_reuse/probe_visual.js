@@ -214,7 +214,10 @@
    for(const listener of hooks)try{listener.detach();}catch(exception){cleanup.errors.push('detach: '+String(exception));}
    try{if(guard){guard.restore();cleanup.guardRestored=true;}}catch(exception){cleanup.errors.push('guard restore: '+String(exception));}
    // No release while a live original state may still depend on fixture objects.
-   if(cleanup.home)try{R.releaseAll();cleanup.gcReleased=true;}catch(exception){cleanup.errors.push('GC release: '+String(exception));}
+   if(cleanup.home)try{
+    await R.runOnMainThreadOnce(()=>{if(f?.restoreDefinitions){f.restoreDefinitions();cleanup.definitionsRestored=true;}});
+    R.releaseAll();cleanup.gcReleased=true;
+   }catch(exception){cleanup.errors.push('definitions/GC release: '+String(exception));}
    verifyCapture();
    const verifiedVisualBattle=!error&&readyAt!==0&&clicked&&terminalObserved&&serviceCalls===0&&cleanup.home&&cleanup.guardRestored&&cleanup.errors.length===0;
    send({kind:'visual-probe-complete',verifiedVisualBattle,error,clicked,terminalObserved,lastSnapshot,serviceCalls,

@@ -1,0 +1,164 @@
+{
+  "cause": "Original BattleData conversion installs captured PVE definitions; immediate table restoration hid those definitions from later original summon/VFX lookup.",
+  "nativeEvidence": "GameDataDomainController.GetUnitDefinition RVA 0x1BE3680 falls back to _pveUnitDefinitionMap; VFX summon reader RVA 0x1BB5E90 uses that getter.",
+  "observedMissingId": "PVE_REBELTROOPER:SUMMON_SCALAR_1",
+  "fix": "Lease the entire original converted table after successful fixture construction until owned battle shutdown, then restore previous table before releasing GC handles. No hero-specific data/rule patch.",
+  "visual": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": true,
+    "error": null,
+    "clicked": true,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 4,
+      "currentState": "CampaignGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 881,
+      "sendto": 1,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 1,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": [],
+      "definitionsRestored": true
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": true,
+      "foreignTransition": false
+    }
+  },
+  "headlessDeterminism": {
+    "fsmOutcome": true,
+    "summary": true,
+    "attacks": true,
+    "healthChanges": true,
+    "counts": false
+  },
+  "headless": [
+    {
+      "terminal": true,
+      "fsmOutcome": 0,
+      "cleanup": {
+        "attempted": true,
+        "loopStopped": true,
+        "simulationShutdown": true,
+        "hooksDetached": true,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": [],
+        "definitionsRestored": true
+      },
+      "serviceCalls": 0,
+      "ticks": 1801,
+      "counts": {
+        "SetBattleState": 5,
+        "FsmFinishBattle": 0,
+        "FsmSendBattleFinishRequest": 0,
+        "SimulationDomainFinishBattle": 0,
+        "SaveBattleOutcome": 0,
+        "SendBattleStartRequest": 0,
+        "SendBattleFinishRequest": 0
+      }
+    },
+    {
+      "terminal": true,
+      "fsmOutcome": 0,
+      "cleanup": {
+        "attempted": true,
+        "loopStopped": true,
+        "simulationShutdown": true,
+        "hooksDetached": true,
+        "guardRestored": true,
+        "gcReleased": true,
+        "errors": [],
+        "definitionsRestored": true
+      },
+      "serviceCalls": 0,
+      "ticks": 1651,
+      "counts": {
+        "SetBattleState": 4,
+        "FsmFinishBattle": 0,
+        "FsmSendBattleFinishRequest": 0,
+        "SimulationDomainFinishBattle": 0,
+        "SaveBattleOutcome": 0,
+        "SendBattleStartRequest": 0,
+        "SendBattleFinishRequest": 0
+      }
+    }
+  ],
+  "hud": {
+    "shows": 0,
+    "updates": 0,
+    "modeGateCalls": 1,
+    "tutorialDisplays": 0,
+    "errors": [],
+    "healthAnomalies": [],
+    "last": null,
+    "target": "生命 0 / 1\n总护盾 0 / 0\n永久护盾 0 / 0\n临时护盾 0 / 0",
+    "targetLayout": {
+      "controlsLeft": -187,
+      "label": {
+        "left": -553,
+        "right": -203
+      },
+      "gap": 16,
+      "measured": [
+        {
+          "active": true,
+          "left": -187,
+          "right": 65
+        },
+        {
+          "active": true,
+          "left": -131.5999755859375,
+          "right": 58
+        },
+        {
+          "active": true,
+          "left": -122.5,
+          "right": -77.50006103515625
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "logs\\high_reuse\\trial-20261018-193834-147-evidence.json",
+      "sha256": "5467a861a522cdc678f9c96d366ec383d58730f39c9af1d120aafb74c30a59b4"
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-193944-320-evidence.json",
+      "sha256": "9a7cb064d3b0a078d867430858e51f8c18e88ebea56330261953c5ab725a6726"
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-194007-934-evidence.json",
+      "sha256": "d3a87c80e8c577ac240a3792b8a8248d6ec21b1416093b569c019ca56e7f24df"
+    }
+  ],
+  "limitations": [
+    "Captured historical squad/mission only; current selection and support synchronization unfinished.",
+    "No screenshot layout acceptance in this run.",
+    "No claim of all modes or every summon validated.",
+    "Headless tick counts (1801/1651) and SetBattleState call counts (5/4) differ; combat summary, damage and health sequences match, not whole-trace determinism."
+  ]
+}
