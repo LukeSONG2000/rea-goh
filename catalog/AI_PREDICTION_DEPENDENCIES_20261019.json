@@ -1,0 +1,46 @@
+{
+  "scope": "Native AI prediction dependency audit; not an implemented predictor",
+  "binarySha256": "12cc254525a58aedea122a2967d0476da05b98ef0c219dc18cfc0b7207538db6",
+  "method": "Existing Ghidra program opened read-only, decompiled nine functions, cross-checked IL2CPP metadata and instruction listings, closed without save",
+  "evidenceDirectory": "il2cpp/decompiled/ai_prediction",
+  "findings": [
+    {
+      "functions": ["0x16a3540", "0x16a3bd0", "0x16a3d20", "0x16a4540"],
+      "dependency": "BattleContext.BattleUnitControllerListPool at +0x308",
+      "observation": "Both graph results and basic fallback acquire pooled lists; enemy and ally selection acquire additional scratch lists. Result owns pooled EnemyTargets and AllyTargets.",
+      "consequence": "MemberwiseClone of BattleContext alone shares the mutable pool. Prediction must use an independent original ListPool instance, and dispose result lists before releasing that pool. Cloning the pool shallowly would still share its Queue."
+    },
+    {
+      "functions": ["0x16a4380"],
+      "dependency": "PlayerAbilitySelectionRandom +0x160 / OpponentAbilitySelectionRandom +0x168",
+      "observation": "Preferred-target rule evaluation advances the actor-side stream inlined with multiplier 0x5deece66d and addend 0xb, assigning seed >> 16 to TargetingContext.RandomUnitIndex.",
+      "consequence": "Hooking JavaRandom.nextInt alone cannot isolate all random consumption. Bind copied streams into the private context used by the original evaluator."
+    },
+    {
+      "functions": ["0x16a4380", "0x1bb0200", "0x1bb0ec0"],
+      "dependency": "BattleAbilityAIController._targetingRuleEvaluator -> BattleTargetingRuleEvaluator._battleContext",
+      "observation": "Nested evaluator has its own context reference and obtains filtered-target lists through that context's +0x308 pool.",
+      "consequence": "Private AI controller must own a private targeting evaluator rebound to the same private BattleContext. Rebinding only AI controller._battleContext leaves live pool access reachable."
+    },
+    {
+      "functions": ["0x16a4540", "0x1bbae00"],
+      "dependency": "BattleUnitController.GetStatValue -> StatCalculator and persistent-effect limits",
+      "observation": "Lowest-health selection reads current health and calls original GetStatValue(1); this enters the recursive stat calculation and min/max effect-limit paths.",
+      "consequence": "Do not replace target ranking with base-unit or cached display stats. Transitive stat-calculator mutability still requires audit before sharing unit references."
+    },
+    {
+      "functions": ["0x1be6e80"],
+      "dependency": "GameDataDomainController targeting-rule collection +0x170",
+      "observation": "Inspected lookup body resolves an index and reads an existing rule; no direct rule-object write in this body.",
+      "consequence": "This narrow observation does not prove all GameData access or downstream rule evaluation read-only."
+    }
+  ],
+  "remaining": [
+    "Audit decision modules and their transitive unit/stat/effect dependencies",
+    "Audit Chance generation before AI entry and target-tactic selection after AI result",
+    "Construct private context, pools, evaluator, lists and required mutable dependencies with original types",
+    "Compare private prediction against next original decision and verify live seeds, state and replay unchanged"
+  ],
+  "runtimeActions": "None: no additional live evaluator call, battle attempt, reward claim or currency expenditure",
+  "limitations": "Decompiler types and floating-point return signatures can be inaccurate; listings and metadata retained. No full transitive read-only proof and no new prediction runtime validation."
+}
