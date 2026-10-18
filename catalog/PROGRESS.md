@@ -386,3 +386,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 selected-support-transition】认领原PVE入口支援过渡数据与私有副本衔接，root独占只读Ghidra和selected_squad模块，不开线上战斗。
 
 【Codex/root 2026-10-18 selected-support-transition native+live】只读Ghidra核原PvePreBattleController.HandleOnBattleButtonClicked RVA196b310：Transition玩家副本+28、支援+20、事件ID/实例/模式+48/+60/+58，工程已关闭不保存。selected_squad加入原MemberwiseClone支援副本，将SupportUnit绑定同一私有槽角色；实机HK47等级85/盟友true/奖励0/type5/模式2保留，支援与角色均私有，GC释放。加入五键关卡匹配后的applyToTransition，错关卡/已绑定context写前拒绝；mock与syntax PASS，原生战斗初始化未验。普通host37600恢复Home，未战斗/消费。现有high_reuse捕获仅C01L/M01/N01/Mi01，不能冒充当前XP挑战；下一步从匹配光明关卡选队连通完整试玩。报告SELECTED_SUPPORT_TRANSITION_20261018.json，标准launcher未接current selection，完整目标未完成。
+
+【Codex/root 2026-10-18 current-selection-trial】认领标准captured launcher接当前PVE选队与支援，并以匹配光明关卡运行验证；root独占运行时/prepare/captured_trial，不进行线上开战或货币消费。
