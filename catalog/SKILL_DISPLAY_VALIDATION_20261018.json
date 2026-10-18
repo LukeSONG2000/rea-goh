@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original character detail UI read-only; Vader live test",
+  "skills": [
+    {
+      "skillId": "basicskill_VADER",
+      "abilityId": "basicability_darthvader",
+      "name": "恐吓挥砍",
+      "levelText": "[9F9F9F]满级（基本）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    },
+    {
+      "skillId": "specialskill_VADER02",
+      "abilityId": "specialability_vader02",
+      "name": "原力碾压",
+      "levelText": "[9F9F9F]满级（特殊）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    },
+    {
+      "skillId": "specialskill_VADER01",
+      "abilityId": "specialability_vader01",
+      "name": "淘汰之刃",
+      "levelText": "[9F9F9F]满级（特殊）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    },
+    {
+      "skillId": "specialskill_VADER03",
+      "abilityId": "specialability_vader03",
+      "name": "冷血屠杀",
+      "levelText": "[9F9F9F]满级（特殊）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    },
+    {
+      "skillId": "leaderskill_VADER",
+      "abilityId": "leaderability_vader_BASE",
+      "name": "恐吓激励",
+      "levelText": "[9F9F9F]满级（首领）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    },
+    {
+      "skillId": "uniqueskill_VADER01",
+      "abilityId": "uniqueability_vader01",
+      "name": "无路可逃",
+      "levelText": "[9F9F9F]满级（独有）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    }
+  ],
+  "evidence": "logs/high_reuse/skill-display-vader.json",
+  "nativeGetter": "UnitDetailsAbilityViewData.CurrentTierDisplayValueForSkill RVA 0x108AEA0",
+  "tests": [
+    "live getter result 8 vs raw tier 6",
+    "mock live getter change",
+    "mock invalid-list failure preserves raw skills",
+    "runtime mailbox tests",
+    "original Back and Home verified"
+  ],
+  "limitations": [
+    "Ship display not integrated",
+    "No upgrade purchase or equipment mutation",
+    "No full roster coverage"
+  ],
+  "finalState": "HomeBaseGameState"
+}

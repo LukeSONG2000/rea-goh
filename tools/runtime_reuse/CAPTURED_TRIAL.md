@@ -193,3 +193,4 @@ node tools/runtime_reuse/runtime_cli.mjs inventory-home --pid PID
 它不是 UI 显示等级。原 UI 的显示计算还包含 `RequiredSkillTier` 偏移，不能直接加一。
 `definitionIsZeta` 是定义标志，不代表当前已经购买 Zeta；`baseCooldown` 是能力定义值，
 不是战斗中经过升级和效果修正后的实际剩余 CD。读数失败明确返回 `skillsError`，不填假值。
+`detail.skillDisplay`（目前角色详情）读取当前原 UI 控制器的数据：技能/能力 ID、本地化名称与 levelText、内部 currentTier、requiredSkillTier、原 getter 的 displayLevel、maxed 和 locked。不要以 currentTier+1 替代 displayLevel；维达实测内部6对应界面8。船员技能显示仍待接入。数据未初始化返回 null，读取失败返回 skillDisplayError，不影响 detail.skills。

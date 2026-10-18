@@ -47,6 +47,16 @@ assert.equal(skills.length,2);assert.equal(skills[0].currentTier,6);assert.equal
 assert.equal(skills[1].source,'crew');assert.equal(skills[1].crewMemberId,'VADER');assert.equal(skills[1].present,false);assert.equal(skills[1].currentTier,null);assert.equal(skills[0].abilityNameKey,null);
 assert.deepEqual(tierReads,['present'],'missing skills must not invoke the throwing indexer');
 skillTier=3;assert.equal(bridge.detail(state).skills[0].currentTier,3,'tier remains a live read');
+const display=obj('Display',{'<SkillId>k__BackingField':'present','<AbilityId>k__BackingField':'ability-present','<NameText>k__BackingField':'Original name','<LevelText>k__BackingField':'Original level','<CurrentTierForSkill>k__BackingField':6,'<RequiredSkillTier>k__BackingField':-1,'<SkillForAbilityMaxed>k__BackingField':true,'<Locked>k__BackingField':false});
+const abilityController=obj('Abilities',{_abilityViewData:list([display])});
+const displayController=obj('Controller',{_transitionData:obj('Data',{'<Unit>k__BackingField':owned}),_unitDetailsInfoPanelsController:obj('Panels',{_unitDetailsAbilityController:abilityController})});
+state=obj('CharacterDetailsState',{_controller:displayController});
+const originalInvoke=S.invoke;let uiLevel=8;
+S.invoke=(type,method,object,args)=>method==='get_CurrentTierDisplayValueForSkill'?(assert.equal(object,display),uiLevel):originalInvoke(type,method,object,args);
+let detail=bridge.detail(state);assert.equal(detail.skillDisplayError,undefined);assert.equal(detail.skillDisplay[0].displayLevel,8);assert.equal(detail.skillDisplay[0].requiredSkillTier,-1);assert.equal(detail.skillDisplay[0].maxed,true);
+uiLevel=5;assert.equal(bridge.detail(state).skillDisplay[0].displayLevel,5,'display getter remains live, not raw-tier arithmetic');
+abilityController.fields._abilityViewData.fields._size=5000;
+detail=bridge.detail(state);assert.match(detail.skillDisplayError,/bounds/);assert.equal(detail.skills.length,2,'display failure preserves raw skill data');
 definition.fields._skillDefinitions.fields._size=5000;
 const invalid=bridge.detail(state);assert.match(invalid.skillsError,/bounds/);assert.equal(invalid.unitId,'vader-id','failed skill read does not remove basic identity');
 

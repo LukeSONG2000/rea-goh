@@ -64,6 +64,21 @@ globalThis.InventoryBridge=(()=>{
   if(unit.isNull())return {loading:true};
   const result={kind:type==='CharacterDetailsState'?'characters':'ships',...unitInfo(unit)};
   try{result.skills=skills(unit);}catch(error){result.skillsError=String(error);}
+  if(type==='CharacterDetailsState')try{
+   const panels=R.readRef(controller,'_unitDetailsInfoPanelsController');
+   const abilities=panels.isNull()?R.nil:R.readRef(panels,'_unitDetailsAbilityController');
+   result.skillDisplay=abilities.isNull()?null:list(R.readRef(abilities,'_abilityViewData')).map(data=>({
+    skillId:S.string(R.readRef(data,'<SkillId>k__BackingField')),
+    abilityId:S.string(R.readRef(data,'<AbilityId>k__BackingField')),
+    name:S.string(R.readRef(data,'<NameText>k__BackingField')),
+    levelText:S.string(R.readRef(data,'<LevelText>k__BackingField')),
+    currentTier:R.readValue(data,'<CurrentTierForSkill>k__BackingField','i32'),
+    requiredSkillTier:R.readValue(data,'<RequiredSkillTier>k__BackingField','i32'),
+    displayLevel:R.unbox(S.invoke('UnitDetailsAbilityViewData','get_CurrentTierDisplayValueForSkill',data),'i32'),
+    maxed:!!R.readValue(data,'<SkillForAbilityMaxed>k__BackingField','bool'),
+    locked:!!R.readValue(data,'<Locked>k__BackingField','bool')
+   }));
+  }catch(error){result.skillDisplayError=String(error);}
   return result;
  }
  function execute(operation,request){
