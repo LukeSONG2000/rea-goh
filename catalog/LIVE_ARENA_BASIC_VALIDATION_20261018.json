@@ -1,0 +1,175 @@
+{
+  "scope": "One explicitly user-authorized real squad arena match; native start/result flow, not isolated trial",
+  "opponent": {
+    "name": "Yegs",
+    "rank": 338
+  },
+  "playerSquad": [
+    "GLLEIA",
+    "R2D2_LEGENDARY",
+    "CAPTAINDROGAN",
+    "ADMIRALRADDUS",
+    "JYNERSO"
+  ],
+  "result": {
+    "nativeReport": "Rank improved from 345 to 338",
+    "rankBefore": 345,
+    "rankAfter": 338,
+    "remainingAttemptsBefore": 4,
+    "remainingAttemptsAfter": 3,
+    "crystalsBefore": 7286,
+    "crystalsAfter": 7286,
+    "friendRequestSent": false
+  },
+  "control": {
+    "kind": "live-arena-basic-stopped",
+    "armed": false,
+    "entered": true,
+    "finished": true,
+    "enemyBasics": 6,
+    "playerOriginalInputs": 13,
+    "fallbacks": 0,
+    "errors": [],
+    "moves": [
+      {
+        "turn": 1,
+        "abilityId": "basicability_supremeleaderkyloren",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 4,
+        "abilityId": "basicability_fosithtrooper",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 8,
+        "abilityId": "basicability_kyloren",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 9,
+        "abilityId": "basicability_supremeleaderkyloren",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 13,
+        "abilityId": "basicability_supremeleaderkyloren",
+        "moveType": 0,
+        "index": 0
+      },
+      {
+        "turn": 17,
+        "abilityId": "basicability_kyloren",
+        "moveType": 0,
+        "index": 0
+      }
+    ]
+  },
+  "implementation": {
+    "entry": "start_battle_info.ps1 -LiveArenaBasic, explicitly armed in PvpPreBattleState",
+    "scope": "First incoming original squad PVP BattleGameState only, context and current actor matched",
+    "enemy": "Native attack ability readiness plus CanPerformMove(0,0,false); PerformManualMove(0,0), original completion Invoke(0)",
+    "player": "Unmodified original DoMove; original Auto enabled via GUI",
+    "cleanup": "Native battle SC_Exit reverts hook; ordinary display host restarted afterward",
+    "notModified": [
+      "stats",
+      "skills",
+      "passives",
+      "counterattacks",
+      "assists",
+      "timer",
+      "network request payloads",
+      "result",
+      "original installation"
+    ]
+  },
+  "hud": {
+    "errors": [],
+    "modeGateCalls": 1,
+    "targetLayout": {
+      "controlsLeft": -355.9000244140625,
+      "label": {
+        "left": -721.9000244140625,
+        "right": -371.9000244140625
+      },
+      "gap": 16,
+      "measured": [
+        {
+          "active": true,
+          "left": -187,
+          "right": 65
+        },
+        {
+          "active": true,
+          "left": -261.2000427246094,
+          "right": 58
+        },
+        {
+          "active": true,
+          "left": -355.9000244140625,
+          "right": -206.5
+        }
+      ]
+    },
+    "observed": "Right-top ability icons and absolute values remained visible without overlap; host survived real loading/battle/exit",
+    "longPressRevalidated": false
+  },
+  "evidence": [
+    {
+      "path": "logs\\high_reuse\\live-basic-before-attempts.png",
+      "sha256": "2223bbd7321a0bcbb4e77b4c3d29d588b8b2032c3f53b3b1f3c6d63ee68450d7"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-opponents.png",
+      "sha256": "1ff53285cbf199cbfb0beca588c3e7582e7c6036729afeb6e7c720e840325e07"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-prebattle.png",
+      "sha256": "390a51b70e3d570008d1b18a66a4c09fbed97d43ff01c6a78b0be5328b787ca2"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-entered.png",
+      "sha256": "82686ae96c44b0d0a9d29bf01ca43975090794233794dc9ffa28ca26e8f3b04f"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-monitor\\frame-000.png",
+      "sha256": "4b5d89411a18b0ead4d68ab31603e183e73334fda8fea625553c8793e5b743c4"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-settlement.png",
+      "sha256": "9897580ebe11cb4ba122f6bce83b0f7a955ba6b110d84ebd65ec49cfa4646b99"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-after-matchmaking.png",
+      "sha256": "d30786170f2f35a2d4b1aa896a7968fcdf3e7cdbbae46a1d42cdc1862683d9d4"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-after-attempts.png",
+      "sha256": "c80e2306477073638c53e370ae0494a5563c8ed74e434a1902ec3fc110011ab3"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-final-host.json",
+      "sha256": "4f566957b24d19eb2b1fdd5cb8186651b424fd801a639cea40d321216d144205"
+    },
+    {
+      "path": "logs\\high_reuse\\live-basic-detached-host.json",
+      "sha256": "09bb88eb2d40c6a90ad3fa61a89434ae056e7a41545f259cafd40443cec682d6"
+    }
+  ],
+  "tests": [
+    "live arena scoped original input and one-shot lifecycle PASS",
+    "existing isolated enemy gate PASS",
+    "HUD cleanup lifecycle PASS",
+    "runtime loading recovery PASS"
+  ],
+  "limitations": [
+    "Only this real squad arena matchup verified",
+    "Only enemy active provider inputs forced basic; original passive effects retained",
+    "This battle does not verify long-press panel or all modes",
+    "If native basic is unavailable, implementation explicitly records fallback and retains original match; zero fallbacks in this run"
+  ]
+}

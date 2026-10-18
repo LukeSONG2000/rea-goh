@@ -1,0 +1,32 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const obj=(type,fields={})=>({type,...fields,isNull:()=>false,equals(other){return this===other;}});
+const nil={isNull:()=>true};
+let owner=1,legal=true,starts=true,manual=0,original=0,done=0,hook,reverts=0,completionThrows=false;
+const callbacks={};
+const ability=obj('Ability',{get_IsAbilityReady:()=>true,'<AbilityDO>k__BackingField':obj('Data',{get_Id:()=> 'original-basic',get_AbilityType:()=>0,get_AllyTargetingRuleId:()=>''})});
+const unit=obj('Unit',{get_Owner:()=>owner,_attackAbilityContext:ability,CanPerformMove:()=>legal,PerformManualMove:()=>{manual++;return starts;}});
+const fsm=obj('Fsm',{'<TurnCount>k__BackingField':3});
+const context=obj('Context',{get_CurrentUnit:()=>unit,get_BattleFsmController:()=>fsm});
+const pre=obj('PvpPreBattleState'),battle=obj('BattleGameState',{_battleController:obj('Controller',{_battleContext:context})});
+const states=obj('StateController',{'<CurrentState>k__BackingField':pre});
+const provider=obj('Provider',{_battleContext:context}),cb=obj('Callback',{Invoke:()=>{done++;if(completionThrows)throw Error('completion error');}});
+const transition=obj('BattleGameState+TransitionData',{'<BattleTypeEnum>k__BackingField':0,'<CombatTypeEnum>k__BackingField':0});
+const sandbox={send:()=>{},NativeFunction:function(){return ()=>original++;},NativeCallback:function(fn){return fn;},SceneApi:{string:x=>x},
+ Interceptor:{attach(a,c){callbacks[a]=c;return {detach(){}};},replace(a,f){hook=f;},revert(){reverts++;},flush(){}},
+ RuntimeApi:{findBound:()=>states,findClass:x=>x,classOf:o=>o.type,fullName:x=>x,readRef:(o,k)=>o[k],readValue:(o,k)=>o[k],findMethod:(type,name)=>({name,readPointer:()=>type+'.'+name}),invoke:(m,o,args)=>o[m.name](...args),unbox:x=>x,arg:{value:(t,x)=>x}}};
+vm.createContext(sandbox);vm.runInContext(fs.readFileSync(new URL('./live_arena_basic.js',import.meta.url),'utf8'),sandbox);
+const gate=sandbox.installLiveArenaBasic();
+hook(provider,unit,cb,null);assert.equal(original,1);assert.equal(manual,0);
+callbacks['BattleGameState.SC_Enter'].onEnter([battle,transition]);states['<CurrentState>k__BackingField']=battle;
+owner=0;hook(provider,unit,cb,null);assert.equal(original,2);assert.equal(manual,0);
+owner=1;hook(obj('OtherProvider',{_battleContext:obj('Other')}),unit,cb,null);assert.equal(original,3);
+hook(provider,unit,cb,null);assert.equal(manual,1);assert.equal(done,1);assert.equal(gate.status().enemyBasics,1);
+legal=false;hook(provider,unit,cb,null);assert.equal(manual,1);assert.equal(original,4);assert.equal(gate.status().fallbacks,1);
+legal=true;starts=false;hook(provider,unit,cb,null);assert.equal(original,5);assert.equal(done,1);
+starts=true;completionThrows=true;hook(provider,unit,cb,null);assert.equal(original,5,'No duplicate original move after a started move');assert.equal(done,2);
+callbacks['BattleGameState.SC_Exit'].onEnter([battle]);assert.equal(gate.status().finished,true);assert.equal(reverts,1);gate.stop();assert.equal(reverts,1);
+states['<CurrentState>k__BackingField']=obj('HomeBaseGameState');assert.throws(()=>sandbox.installLiveArenaBasic(),/PVP prebattle/);
+states['<CurrentState>k__BackingField']=pre;const second=sandbox.installLiveArenaBasic();transition['<BattleTypeEnum>k__BackingField']=1;callbacks['BattleGameState.SC_Enter'].onEnter([battle,transition]);assert.equal(second.status().entered,false);assert.equal(second.status().armed,false);
+console.log('PASS live arena: one PVP context, original player AI, original enemy basic, rejection fallback, no duplicate after dispatch, exit cleanup');
