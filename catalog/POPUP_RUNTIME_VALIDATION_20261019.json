@@ -1,0 +1,117 @@
+{
+  "scope": "Original long-press status popup on isolated captured PVE, live GUI and original skill callbacks",
+  "screenshots": [
+    "logs/high_reuse/popup-luthen-1402.png",
+    "logs/high_reuse/popup-yoda-1402.png",
+    "logs/high_reuse/popup-yoda-1867.png",
+    "logs/high_reuse/popup-yoda-updated-1867.png"
+  ],
+  "verified": [
+    "1402x819 original Luthen two marker descriptions below absolute health/protection; no overlap",
+    "Hermit Yoda stealth 2 own completed turns, HP 66339/66339 permanent protection 87102/87102",
+    "1867x1080 resized original popup remains separated",
+    "Original General Skywalker basic then Hermit Yoda specialability_hermityoda02 dispatched via CLI; stealth decreased to 1 and foresight appeared with 2 turns",
+    "Two wrapped status descriptions remain separated at 1867x1080"
+  ],
+  "hud": {
+    "shows": 3,
+    "updates": 1060,
+    "modeGateCalls": 1,
+    "tutorialDisplays": 0,
+    "errors": [],
+    "healthAnomalies": [],
+    "last": {
+      "health": "生命 66339 / 66339\n总护盾 87102 / 87102\n永久护盾 87102 / 87102\n临时护盾 0 / 0",
+      "effects": [
+        {
+          "icon": "icon_foresight",
+          "suffix": "剩余 2 次自身完整回合完成；另有原移除条件",
+          "instances": 2
+        },
+        {
+          "icon": "icon_stealth",
+          "suffix": "剩余 1 次自身完整回合完成；另有原移除条件",
+          "instances": 1
+        }
+      ]
+    },
+    "target": "生命 1 / 1\n总护盾 0 / 0\n永久护盾 0 / 0\n临时护盾 0 / 0",
+    "targetLayout": {
+      "controlsLeft": -187,
+      "label": {
+        "left": -553,
+        "right": -203
+      },
+      "gap": 16,
+      "measured": [
+        {
+          "active": true,
+          "left": -187,
+          "right": 65
+        },
+        {
+          "active": true,
+          "left": -131.5999755859375,
+          "right": 58
+        },
+        {
+          "active": true,
+          "left": -122.5,
+          "right": -77.50006103515625
+        }
+      ]
+    }
+  },
+  "completion": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": false,
+    "terminalObserved": false,
+    "lastSnapshot": {
+      "previous": 34,
+      "next": 1,
+      "turns": 2,
+      "currentState": "BattleGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 102215,
+      "sendto": 40,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 36,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": [],
+      "definitionsRestored": true
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": false,
+      "campaignExpected": false,
+      "foreignTransition": false
+    }
+  },
+  "limitations": [
+    "No terminal: intentional manual UI inspection until 600 second timeout",
+    "Dense overflowing/scrolling list not verified",
+    "Updated two-effect panel at small size not captured: timeout returned Home before capture; popup-yoda-updated-1402.png is Home and excluded",
+    "No claim of all-mode coverage",
+    "Socket guard recorded 102215 blocked sends over 600s: performance impact not measured, follow-up required"
+  ],
+  "next": "Verify dense scrolling and investigate offline socket retry pressure; keep original network isolation intact"
+}
