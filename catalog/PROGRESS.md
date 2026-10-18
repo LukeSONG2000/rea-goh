@@ -390,3 +390,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 current-selection-trial】认领标准captured launcher接当前PVE选队与支援，并以匹配光明关卡运行验证；root独占运行时/prepare/captured_trial，不进行线上开战或货币消费。
 
 【Codex/root 2026-10-18 current-selection-trial playable】标准start_captured_trial加入-CurrentSelection，原当前PVE小队/支援+五键匹配捕获关卡；独立原角色和支援metadata进入原simulation context，保留全量敌方转换。匹配光明1-A两次试玩均native terminal/turn2/serviceCalls0，Home/guard/定义表/GC恢复无错。首次JML支援，二次改选GLLEIA，实际runtime读到五名当前队员+新莱娅和5敌方，HUD errors0，证明非历史固定阵容。证据trial-20261018-220758-151与222101-524。current模式删除未使用inventory依赖，最终无inventory原准备+syntax通过（两次实战在删除准备依赖前）。prepare/selected-squad测试和原种子demo双跑通过。原32088/Home、普通host9188恢复。报告CURRENT_SELECTION_TRIAL_20261018.json含运行命令；未验证截图或召唤实际触发，不声称全模式/未知关卡可用。发现普通战役support CLI拒绝null eventId，暂用原UI选择，下步修身份封装。
+
+【Codex/root 2026-10-18 campaign-support-cli】认领普通战役null eventId的支援CLI和Back返回，增加完整关卡身份匹配，root独占运行时/命令层/测试，不开线上战斗。
