@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original daily objectives navigation and read-only CLI; not reward execution",
+  "nativeEvidence": {
+    "homeCallback": {
+      "method": "HomeBaseController.OnNextMissionClicked",
+      "rva": "0x173BA40",
+      "notes": "Original transition sets tab 2 and chooses subtab 1 or 4 using feature check, then enters through original transition controller."
+    },
+    "claimCallback": {
+      "method": "ObjectivesDailyQuestSubController.HandleClaimButtonClicked",
+      "rva": "0x187FF30",
+      "calls": "ObjectivesQuestSubController.CallClaimQuest at 0x18884F0 with animation/completion/failure callbacks"
+    },
+    "claimWrapper": "CallClaimQuest builds a one-ID list and delegates to CallClaimQuestsAndHeadlines 0x1888600; this route was decompiled, never invoked.",
+    "provider": "Existing local PyGhidra project opened read-only and closed without save"
+  },
+  "live": {
+    "pid": 32088,
+    "hostPid": 9240,
+    "opened": {
+      "expectedState": "ObjectivesGameState",
+      "transitionConfirmed": true,
+      "afterState": "ObjectivesGameState"
+    },
+    "questCount": 8,
+    "total": 8,
+    "completed": 0,
+    "readyForClaimCount": 0,
+    "allDailiesClaimable": false,
+    "returned": {
+      "expectedState": "HomeBaseGameState",
+      "transitionConfirmed": true,
+      "afterState": "HomeBaseGameState"
+    },
+    "finalState": "HomeBaseGameState"
+  },
+  "validation": [
+    "Original Home callback and Back ownership mocked",
+    "Current field changes read fresh",
+    "Inactive view, wrong state, oversized list and unsupported claim rejected",
+    "Mailbox read/transition receipt cases passed",
+    "All changed JavaScript syntax checked"
+  ],
+  "limitations": [
+    "No claimable live daily quest; no reward execution performed",
+    "Other objective tabs not yet exposed",
+    "No purchase, currency spend or equipment changes"
+  ],
+  "diagnosticCorrection": "Host branch insertion initially failed syntax check; corrected before any runtime load."
+}

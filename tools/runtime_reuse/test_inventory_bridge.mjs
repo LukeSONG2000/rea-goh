@@ -149,4 +149,21 @@ active=false;assert.throws(()=>inbox.execute('inbox-list'),/not ready/);active=t
 inboxView.fields._filterRenderData.fields._size=5000;assert.throws(()=>inbox.execute('inbox-list'),/bounds/);
 assert.throws(()=>inbox.execute('inbox-claim'),/Unsupported/);
 inbox.execute('inbox-home');assert.equal(calls.at(-1).method,'OnBackButtonClicked');assert.equal(calls.at(-1).object,inboxController);
-console.log('PASS inventory and inbox bridges: original callbacks, readback, state/readiness/bounds guards; no upgrade/claim/delete APIs.');
+const objectives=ctx.ObjectivesBridge;
+state=obj('HomeBaseGameState',{_homeBaseController:homeController});
+objectives.execute('objectives-open');assert.equal(calls.at(-1).method,'OnNextMissionClicked');
+assert.throws(()=>objectives.execute('objectives-list'),/Objectives page/);
+const quest=obj('QuestSlatRenderData',{'<Id>k__BackingField':'daily-test','<Description>k__BackingField':'Original quest',
+ '<ProgressText>k__BackingField':'3/3','<CurrentProgress>k__BackingField':3,'<TargetProgress>k__BackingField':3,
+ '<ReadyForClaim>k__BackingField':true,'<ClaimDisabled>k__BackingField':true,'<ClaimDisabledMessageKey>k__BackingField':'LOCKED'});
+const dailyData=obj('Data',{ActiveQuests:list([quest]),TotalQuests:1,CompletedQuests:0,AllDailiesClaimable:false,AllDailiesCompleted:false});
+const objectiveController=obj('ObjectivesController',{_view:obj('ObjectivesView'),_dailyQuestSubController:obj('Sub',{_renderData:dailyData,_dailyQuestSubView:obj('DailyView')})});
+state=obj('ObjectivesGameState',{_objectivesController:objectiveController});
+const prevInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='get_ClaimRequirementMet'?false:prevInvoke(type,method,owner,args,types);
+let tasks=objectives.execute('objectives-list');assert.equal(tasks.quests[0].currentProgress,'3');assert.equal(tasks.quests[0].claimDisabled,true);assert.equal(tasks.quests[0].claimRequirementMet,false);
+quest.fields['<CurrentProgress>k__BackingField']=2;assert.equal(objectives.execute('objectives-list').quests[0].currentProgress,'2');
+active=false;assert.throws(()=>objectives.execute('objectives-list'),/not ready/);active=true;
+dailyData.fields.ActiveQuests.fields._size=5000;assert.throws(()=>objectives.execute('objectives-list'),/bounds/);
+assert.throws(()=>objectives.execute('objectives-claim'),/Unsupported/);
+objectives.execute('objectives-home');assert.equal(calls.at(-1).object,objectiveController);
+console.log('PASS inventory, inbox, objectives bridges: original callbacks, live fields and guards.');

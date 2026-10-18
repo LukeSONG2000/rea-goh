@@ -222,3 +222,14 @@ implemented but not yet live-validated.
 只读报价：`inventory-skill-quote --pid <PID> --request <file.json>`，参数为当前 unitId、skillId、selectedLevel.tier。返回currency/materials及原originalConditions。displayCostsComplete仅表示当前UI配方金额、已支持材料类型和库存均成功读取；不足库存也可完整读取，绝不代表可执行。未知材料类型、缺少库存或读数错误时为false。executionSupported固定false；不生成消费授权或锁价。选中等级变化时旧请求拒绝。
 邮箱CLI：`inbox-open --pid <PID>` 从酒馆调用原邮箱入口；`inbox-list --pid <PID>` 返回当前原筛选列表的id/subject/message/source/expires/actionLabel/selected；`inbox-home --pid <PID>` 调用原返回。列表仅显式读取，不参与周期全表轮询。打开沿用原客户端行为，可能伴随正常已读标记；接口未开放领取、删除、邀请接受或自定义链接按钮。试玩宿主不可使用邮箱导航。
 邮箱列表新增原 messageType（使用客户端枚举，非Protos枚举）、hasCustomAction（仅ActionLink存在）、rewards（原ItemTile的id/renderType/itemType/quantity）。rewards=null表示原列表未提供，[]才是空列表。按钮文本和ActionLink均不能单独判定可以领取；当前BASIC样本按钮“前往”且奖励为空，未用于领取测试。
+# Original daily objectives navigation
+
+`runtime_cli.mjs objectives-open --pid <PID>` invokes the original Home
+`OnNextMissionClicked` callback, preserving its feature checks and initial tab choice.
+`objectives-list` reads the currently active daily quest view: original descriptions,
+progress (64-bit values represented as strings), claim readiness, disabled reason,
+and requirement result. These flags remain separate; completed progress does not
+imply a claim is allowed. `objectives-home` uses the original Back callback.
+All three commands use the shared display host. No claim operation is exposed yet.
+Only daily quests are read; other objectives tabs require subsequent integration.
+

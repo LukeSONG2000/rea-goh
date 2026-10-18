@@ -35,6 +35,17 @@ try{
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
+    if(operation.startsWith('objectives-')){
+     const result=await script.exports.objectivescommand(operation);
+     if(operation==='objectives-list')return result;
+     let after,confirmed=false;
+     for(let i=0;i<30;i++){
+      await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
+      confirmed=after.state===result.expectedState&&(operation==='objectives-home'||after.objectives?.ready===true);
+      if(confirmed)break;
+     }
+     return {...result,transitionConfirmed:confirmed,afterState:after.state};
+    }
     if(operation.startsWith('inbox-')){
      const result=await script.exports.inboxcommand(operation);
      if(operation==='inbox-list')return result;

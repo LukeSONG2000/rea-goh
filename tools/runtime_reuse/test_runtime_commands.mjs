@@ -49,6 +49,9 @@ try{
   const quote=await test({operation:'inventory-skill-quote',payload:{unitId:'unit',skillId:'skill',tier}});assert.equal(quote.dispatched,false);
  }
  for(const [operation,payload,result] of [
+  ['objectives-open',undefined,{transitionConfirmed:true}],
+  ['objectives-home',undefined,{transitionConfirmed:true}],
+  ['objectives-list',undefined,{readConfirmed:true,quests:[]}],
   ['inbox-open',undefined,{transitionConfirmed:true}],
   ['inbox-home',undefined,{transitionConfirmed:true}],
   ['inbox-list',undefined,{readConfirmed:true,messages:[]}],

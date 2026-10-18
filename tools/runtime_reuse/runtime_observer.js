@@ -284,6 +284,52 @@ globalThis.InboxBridge=(()=>{
  return {execute,status(){try{view();return {ready:true};}catch(error){return {ready:false,error:String(error)};}}};
 })();
 
+globalThis.ObjectivesBridge=(()=>{
+ const R=RuntimeApi,S=SceneApi;
+ const state=()=>R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+ function view(){
+  const current=state();if(R.fullName(R.classOf(current))!=='ObjectivesGameState')throw Error('Objectives page required');
+  const controller=R.readRef(current,'_objectivesController');if(controller.isNull())throw Error('Objectives loading');
+  const objectives=R.readRef(controller,'_view');
+  if(objectives.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(objectives)),'bool'))throw Error('Objectives view not ready');
+  return {controller,objectives};
+ }
+ function execute(operation){
+  if(operation==='objectives-open'){
+   const current=state();if(R.fullName(R.classOf(current))!=='HomeBaseGameState')throw Error('Open objectives from Home');
+   S.invoke('HomeBaseController','OnNextMissionClicked',R.readRef(current,'_homeBaseController'));
+   return {expectedState:'ObjectivesGameState'};
+  }
+  const live=view();
+  if(operation==='objectives-home'){
+   S.invoke('FeatureController','OnBackButtonClicked',live.controller);
+   return {expectedState:'HomeBaseGameState'};
+  }
+  if(operation!=='objectives-list')throw Error('Unsupported objectives command');
+  const sub=R.readRef(live.controller,'_dailyQuestSubController');
+  const data=R.readRef(sub,'_renderData'),dailyView=R.readRef(sub,'_dailyQuestSubView');
+  if(data.isNull()||dailyView.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(dailyView)),'bool'))throw Error('Daily quests tab not ready');
+  const list=R.readRef(data,'ActiveQuests');if(list.isNull())throw Error('Daily quests not initialized');
+  const count=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
+  if(count<0||count>4096||(items.isNull()?count!==0:count>items.add(24).readU64().toNumber()))throw Error('Quest list bounds invalid');
+  const quests=[];
+  for(let i=0;i<count;i++){
+   const row=items.add(32+i*8).readPointer();
+   const text=name=>S.string(R.readRef(row,'<'+name+'>k__BackingField'));
+   const value=(name,type)=>R.readValue(row,'<'+name+'>k__BackingField',type);
+   quests.push({id:text('Id'),description:text('Description'),progressText:text('ProgressText'),
+    currentProgress:String(value('CurrentProgress','i64')),targetProgress:String(value('TargetProgress','i64')),
+    readyForClaim:!!value('ReadyForClaim','bool'),claimDisabled:!!value('ClaimDisabled','bool'),
+    claimDisabledMessageKey:text('ClaimDisabledMessageKey'),
+    claimRequirementMet:!!R.unbox(S.invoke('QuestSlatRenderData','get_ClaimRequirementMet',row),'bool')});
+  }
+  return {readConfirmed:true,quests,total:R.readValue(data,'TotalQuests','i32'),completed:R.readValue(data,'CompletedQuests','i32'),
+   allDailiesClaimable:!!R.readValue(data,'AllDailiesClaimable','bool'),allDailiesCompleted:!!R.readValue(data,'AllDailiesCompleted','bool'),
+   scope:'Current original daily quest UI; no reward claim dispatched'};
+ }
+ return {execute,status(){try{view();return {ready:true};}catch(error){return {ready:false,error:String(error)};}}};
+})();
+
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const R=RuntimeApi,S=SceneApi;
  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
@@ -291,6 +337,7 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const stateName=R.fullName(R.classOf(state));
  const result={schemaVersion:1,state:stateName,units:[],scope:'observed current client; no gameplay input'};
  if(stateName==='HomeBaseGameState')result.campaignMenu=readCampaignMenu();
+ if(stateName==='ObjectivesGameState')result.objectives=ObjectivesBridge.status();
  if(stateName==='InboxGameState')result.inbox=InboxBridge.status();
  if(stateName==='MasterInventoryGameState'){
   const controller=R.readRef(state,'_masterInventoryController'),data=R.readRef(controller,'_transitionData');
@@ -383,3 +430,5 @@ rpc.exports.campaignnavigate=(operation,payload)=>RuntimeApi.runOnMainThreadOnce
 
 rpc.exports.inventorycommand=(operation,request)=>RuntimeApi.runOnMainThreadOnce(()=>InventoryBridge.execute(operation,request));
 rpc.exports.inboxcommand=operation=>RuntimeApi.runOnMainThreadOnce(()=>InboxBridge.execute(operation));
+
+rpc.exports.objectivescommand=operation=>RuntimeApi.runOnMainThreadOnce(()=>ObjectivesBridge.execute(operation));
