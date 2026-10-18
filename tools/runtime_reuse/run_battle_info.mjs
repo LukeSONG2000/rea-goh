@@ -60,7 +60,12 @@ try{
     }
     if(operation.startsWith('store-')){
      const result=await script.exports.storecommand(operation,payload);
-     if(['store-rewards','store-claim-free','store-claim-status','store-list','store-details'].includes(operation))return result;
+     if(['store-rewards-next','store-rewards','store-claim-free','store-claim-status','store-list','store-details'].includes(operation))return result;
+     if(operation==='store-rewards-close'){
+      let after=null;
+      for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();if(after.state!=='PackOpeningGameState')break;}
+      return {...result,transitionConfirmed:!!after?.state&&after.state!=='PackOpeningGameState',afterState:after?.state};
+     }
      if(operation==='store-item'){
       let detail=null,lastError=null;
       for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,250));try{detail=await script.exports.storecommand('store-details');if(detail.id===result.expectedItemId)break;}catch(e){lastError=String(e);}}

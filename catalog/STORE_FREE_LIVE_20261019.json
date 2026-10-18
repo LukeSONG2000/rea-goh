@@ -1,0 +1,20 @@
+{
+ "scope":"Original free Bronze pack UI flow and phase-guarded reward navigation",
+ "operationsAdded":["store-rewards-next","store-rewards-close"],
+ "nativeEvidence":"PackOpeningController.HandleOnBackButtonClicked bounded listing: phase3 -> DoneShowTile; phase5 -> PackOpeningFinished. No HandleBuyAgainClicked invocation.",
+ "live":{
+  "pid":32088,"claimHostPid":27024,"finalHostPid":12736,
+  "claimId":"6256a434-d3bb-48c0-a519-f6777e98736d",
+  "itemId":"premium-pack-silver","nativeFreeBefore":true,"giftable":false,
+  "claimDispatchedOnce":true,"nativeReturned":true,
+  "reward":{"id":"unitshard_AHSOKATANO","itemType":7,"quantity":2},
+  "firstRewardPhase":3,"afterNextPhase":5,"allTilesRevealed":true,
+  "finishButtonText":"完成","finishReturnedState":"StoreState",
+  "freeButtonAfter":false,"returnedHome":true,
+  "restartRetryDispatched":false,"durableRecordRetained":true,
+  "settlementConfirmed":false
+ },
+ "tests":["phase/revealed/enabled/onboarding guards PASS","original Back callback, no buy-again PASS","bridge/commands/loading/durable regressions PASS","CLI and host syntax PASS"],
+ "limitations":["No pre-claim inventory quantity captured, so reward inventory delta not proven","UI item match and sequential flow are not native transaction callback correlation","No paid purchase performed; wallet before/after not captured","Pending record retained; automated reconcile/release lifecycle still pending","Other pack types and multi-item reveal paths not live verified"],
+ "evidence":["logs/high_reuse/store-live-free-before.json","logs/high_reuse/store-live-free-claim.json","logs/high_reuse/store-live-free-rewards-later.json","logs/high_reuse/store-live-free-next.json","logs/high_reuse/store-live-free-final-rewards.json","logs/high_reuse/store-live-free-close.json","logs/high_reuse/store-live-free-after-details.json","logs/high_reuse/store-live-free-durable-status.json","logs/high_reuse/store-live-free-retry-rejected.json","logs/high_reuse/store-live-free-home.json"]
+}

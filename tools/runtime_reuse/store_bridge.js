@@ -81,6 +81,22 @@ globalThis.StoreBridge=(()=>{
  let submission=null;
  function execute(op,p={}){
   if(op==='store-rewards')return packRewards();
+  if(op==='store-rewards-next'){
+   const before=packRewards();
+   if(!before.visible||before.phase!==3)throw Error('Original unit reward display required');
+   const c=R.readRef(current(),'_packOpeningController');
+   if(R.readValue(c,'_inOnboardingFlow','bool'))throw Error('Onboarding pack unsupported');
+   S.invoke('PackOpeningController','HandleOnBackButtonClicked',c);
+   return {inputDispatched:true,rewardsBeforeInput:before};
+  }
+  if(op==='store-rewards-close'){
+   const before=packRewards(),b=before.finishButton;
+   if(!before.visible||before.phase!==5||!before.allTilesRevealed||!b?.active||!b.targetActive||!b.enabled)throw Error('Final revealed pack and enabled finish button required');
+   const c=R.readRef(current(),'_packOpeningController');
+   if(R.readValue(c,'_inOnboardingFlow','bool'))throw Error('Onboarding pack finish unsupported');
+   S.invoke('PackOpeningController','HandleOnBackButtonClicked',c);
+   return {navigationDispatched:true,rewardsBeforeClose:before};
+  }
   if(op==='store-claim-status')return {readConfirmed:true,submission,settlementConfirmed:false};
   if(op==='store-claim-free'){
    if(submission)throw Error('Prior store submission requires reconciliation');
