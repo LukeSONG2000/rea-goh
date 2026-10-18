@@ -134,8 +134,16 @@ inbox.execute('inbox-open');assert.equal(calls.at(-1).method,'OnInboxClicked');a
 assert.throws(()=>inbox.execute('inbox-list'),/Inbox page/);
 const message=obj('Message',Object.fromEntries(Object.entries({Id:'message-id',Subject:'Original subject',Source:'Original source',ExpireTime:'1 day',Message:'Original content',ActionButtonLabel:'Collect',ItemSelected:true}).map(([k,v])=>['<'+k+'>k__BackingField',v])));
 const inboxView=obj('InboxView',{_filterRenderData:list([message])});
+message.fields['<ItemTile>k__BackingField']=list([]);message.fields['<MessageType>k__BackingField']=1;message.fields['<CustomButtonActionLink>k__BackingField']=nil;
 const inboxController=obj('InboxController',{_inboxView:inboxView});state=obj('InboxGameState',{_inboxController:inboxController});
 assert.equal(inbox.status().ready,true);assert.equal(inbox.execute('inbox-list').messages[0].subject,'Original subject');
+assert.equal(inbox.execute('inbox-list').messages[0].messageType,1);assert.equal(inbox.execute('inbox-list').messages[0].rewards.length,0);
+const originalInboxInvoke=S.invoke;
+S.invoke=(type,method,owner,args,types)=>method==='get_ItemType'?7:originalInboxInvoke(type,method,owner,args,types);
+message.fields['<ItemTile>k__BackingField']=list([material]);message.fields['<CustomButtonActionLink>k__BackingField']=obj('Link');
+let mail=inbox.execute('inbox-list').messages[0];assert.equal(mail.rewards[0].id,'ability_mat_A');assert.equal(mail.rewards[0].quantity,4);assert.equal(mail.hasCustomAction,true);
+message.fields['<ItemTile>k__BackingField'].fields._size=257;assert.throws(()=>inbox.execute('inbox-list'),/reward list bounds/);
+message.fields['<ItemTile>k__BackingField']=nil;assert.equal(inbox.execute('inbox-list').messages[0].rewards,null,'missing reward data is not an empty reward list');
 message.fields['<Subject>k__BackingField']='Updated';assert.equal(inbox.execute('inbox-list').messages[0].subject,'Updated');
 active=false;assert.throws(()=>inbox.execute('inbox-list'),/not ready/);active=true;
 inboxView.fields._filterRenderData.fields._size=5000;assert.throws(()=>inbox.execute('inbox-list'),/bounds/);

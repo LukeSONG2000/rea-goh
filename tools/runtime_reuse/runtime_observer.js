@@ -263,8 +263,21 @@ globalThis.InboxBridge=(()=>{
   for(let i=0;i<count;i++){
    const data=items.add(32+i*8).readPointer();
    const text=name=>S.string(R.readRef(data,'<'+name+'>k__BackingField'));
+   const rewardList=R.readRef(data,'<ItemTile>k__BackingField');let rewards=null;
+   if(!rewardList.isNull()){
+    const n=R.readValue(rewardList,'_size','i32'),array=R.readRef(rewardList,'_items');
+    if(n<0||n>256||(array.isNull()?n!==0:n>array.add(24).readU64().toNumber()))throw Error('Inbox reward list bounds invalid');
+    rewards=[];
+    for(let j=0;j<n;j++){
+     const tile=array.add(32+j*8).readPointer(),renderType=R.fullName(R.classOf(tile));
+     rewards.push({id:S.string(R.readRef(tile,'ID')),renderType,
+      itemType:R.unbox(S.invoke(renderType,'get_ItemType',tile),'u8'),quantity:R.readValue(tile,'<Quantity>k__BackingField','i32')});
+    }
+   }
    messages.push({id:text('Id'),subject:text('Subject'),source:text('Source'),expires:text('ExpireTime'),
-    message:text('Message'),actionLabel:text('ActionButtonLabel'),selected:!!R.readValue(data,'<ItemSelected>k__BackingField','bool')});
+    message:text('Message'),actionLabel:text('ActionButtonLabel'),selected:!!R.readValue(data,'<ItemSelected>k__BackingField','bool'),
+    messageType:R.readValue(data,'<MessageType>k__BackingField','i32'),
+    hasCustomAction:!R.readRef(data,'<CustomButtonActionLink>k__BackingField').isNull(),rewards});
   }
   return {readConfirmed:true,messages,scope:'Current original filtered inbox list; no claim/delete/custom action dispatched'};
  }

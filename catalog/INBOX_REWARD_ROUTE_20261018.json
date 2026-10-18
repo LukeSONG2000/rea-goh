@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-18",
+  "messages": [
+    {
+      "messageType": 1,
+      "hasCustomActionLink": false,
+      "rewardCount": 0
+    }
+  ],
+  "nativeEvidence": [
+    "logs/high_reuse/native/inbox_detail_clicked.c",
+    "logs/high_reuse/native/inbox_dismiss_clicked.c"
+  ],
+  "nativeFinding": "MessageDetailClicked resolves original message, checks expiry, branches over attachments and calls UpdateInbox; not a generic harmless read handler. Further transaction and overflow analysis required.",
+  "tests": [
+    "live BASIC message with zero rewards",
+    "mock populated rewards/null rewards/link flag/bounds",
+    "mailbox regression"
+  ],
+  "finalState": "HomeBaseGameState",
+  "limitations": [
+    "No reward-bearing mail currently observed",
+    "No claim or deletion executed",
+    "hasCustomAction reports ActionLink presence only, not all possible button actions",
+    "Populated reward item path currently mock tested only"
+  ]
+}
