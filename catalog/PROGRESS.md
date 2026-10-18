@@ -378,3 +378,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 inbox-material-reconciliation】认领混合材料/货币奖励原库存核对；root独占runtime_observer/CLI/tests。仅只读验证既有奖励ID，不重领历史邮件，不发请求或消费。
 
 【Codex/root 2026-10-18 inbox-material-reconciliation validated-partial】混合奖励改用原GetCurrencyQuantity/GetCraftingMaterialQuantity读取，按(itemType,id)合并并逐项核差；未知类型/读错保留null，部分到账不算整封到账，更新CLI说明。真实只读6项成功：水晶7441、舰船信用点237829000、舰币27475、四星材料11315、三星材料68474、扫荡券154286；没有新领取或重试，历史材料无before不能追认到账。混合部分/全部/重复/异类型同ID/未知/读错/数量溢出及既有桥接/mailbox/loading测试PASS。probe退出，普通host7416恢复，原32088存活。报告INBOX_MATERIAL_RECONCILIATION_20261018.json；下一封混合奖励的真实before/after及callback-only仍待。
+
+【Codex/root 2026-10-18 selected-squad-copy】认领试玩当前选队/支援衔接。先将原SquadDO与UnitDO复制和身份/槽位/支援保真核对沉淀为通用模块，实机只读复制验证；不使用历史阵容替代当前选队，不线上开战。root独占相关代码和运行时。
