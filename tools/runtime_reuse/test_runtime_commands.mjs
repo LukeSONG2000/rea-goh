@@ -17,6 +17,10 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const payload of [null,{}, {messageId:''},{messageId:42},{messageId:'a'.repeat(257)}]){
+  assert.equal((await test({operation:'inbox-select',payload})).dispatched,false);
+ }
+ assert.equal(calls,1,'Malformed inbox requests must not invoke selection');
  for(const operation of ['prebattle-remove','prebattle-add'])for(const payload of [null,{}, {eventId:'e',missionId:'m',unitId:'u',cellIndex:-1},{eventId:'e',missionId:'m',unitId:'u',cellIndex:1.5}]){
   assert.equal((await test({operation,payload})).dispatched,false);
  }

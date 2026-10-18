@@ -59,12 +59,12 @@ try{
      return {...result,transitionConfirmed:confirmed,afterState:after.state};
     }
     if(operation.startsWith('inbox-')){
-     const result=await script.exports.inboxcommand(operation);
+     const result=await script.exports.inboxcommand(operation,payload);
      if(operation==='inbox-list')return result;
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
-      confirmed=after.state===result.expectedState&&(operation==='inbox-home'||after.inbox?.ready===true);
+      confirmed=after.state===result.expectedState&&(operation==='inbox-home'||after.inbox?.ready===true)&&(operation!=='inbox-select'||after.inbox?.selectedMessageId===result.expectedMessageId);
       if(confirmed)break;
      }
      return {...result,transitionConfirmed:confirmed,afterState:after.state};

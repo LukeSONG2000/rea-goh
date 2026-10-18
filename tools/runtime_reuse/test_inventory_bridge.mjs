@@ -138,6 +138,16 @@ message.fields['<ItemTile>k__BackingField']=list([]);message.fields['<MessageTyp
 const inboxController=obj('InboxController',{_inboxView:inboxView});state=obj('InboxGameState',{_inboxController:inboxController});
 assert.equal(inbox.status().ready,true);assert.equal(inbox.execute('inbox-list').messages[0].subject,'Original subject');
 assert.equal(inbox.execute('inbox-list').messages[0].messageType,1);assert.equal(inbox.execute('inbox-list').messages[0].rewards.length,0);
+assert.equal(inbox.status().selectedMessageId,'message-id');
+assert.throws(()=>inbox.execute('inbox-select',{}),/messageId/);
+assert.throws(()=>inbox.execute('inbox-select',{messageId:'gone'}),/absent/);
+const inboxSelected=inbox.execute('inbox-select',{messageId:'message-id'});
+assert.equal(inboxSelected.expectedMessageId,'message-id');
+assert.equal(calls.at(-1).method,'SelectListItem');assert.equal(calls.at(-1).object,inboxView);
+assert.equal(calls.at(-1).args[0].value,message);
+inboxView.fields._filterRenderData=list([message,message]);
+assert.throws(()=>inbox.execute('inbox-select',{messageId:'message-id'}),/ambiguous/);
+inboxView.fields._filterRenderData=list([message]);
 const originalInboxInvoke=S.invoke;
 S.invoke=(type,method,owner,args,types)=>method==='get_ItemType'?7:originalInboxInvoke(type,method,owner,args,types);
 message.fields['<ItemTile>k__BackingField']=list([material]);message.fields['<CustomButtonActionLink>k__BackingField']=obj('Link');
@@ -289,3 +299,4 @@ assert.throws(()=>ctx.PreBattleBridge.edit('prebattle-add',{...addRequest,unitId
 editor.fields._view=nil;assert.throws(()=>ctx.PreBattleBridge.edit('prebattle-roster'),/ownership mismatch/);
 state=obj('HomeBaseGameState');assert.equal(ctx.PreBattleBridge.status().ready,false);assert.throws(()=>ctx.PreBattleBridge.support('prebattle-supports'),/PVE prebattle/);
 console.log('PASS inventory, inbox, objectives bridges: original callbacks, live fields and guards.');
+

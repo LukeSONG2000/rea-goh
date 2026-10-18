@@ -243,7 +243,7 @@ globalThis.InboxBridge=(()=>{
   if(inbox.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(inbox)),'bool'))throw Error('Inbox view not ready');
   return {controller,inbox};
  }
- function execute(operation){
+ function execute(operation,payload={}){
   if(operation==='inbox-open'){
    const current=state();if(R.fullName(R.classOf(current))!=='HomeBaseGameState')throw Error('Open inbox from Home');
    S.invoke('HomeBaseController','OnInboxClicked',R.readRef(current,'_homeBaseController'));
@@ -254,11 +254,19 @@ globalThis.InboxBridge=(()=>{
    S.invoke('FeatureController','OnBackButtonClicked',live.controller);
    return {expectedState:'HomeBaseGameState'};
   }
-  if(operation!=='inbox-list')throw Error('Unsupported inbox command');
+  if(!['inbox-list','inbox-select'].includes(operation))throw Error('Unsupported inbox command');
   const list=R.readRef(live.inbox,'_filterRenderData');
   if(list.isNull())throw Error('Inbox list not initialized');
   const count=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
   if(count<0||count>4096||(items.isNull()?count!==0:count>items.add(24).readU64().toNumber()))throw Error('Inbox list bounds invalid');
+  if(operation==='inbox-select'){
+   if(typeof payload.messageId!=='string'||!payload.messageId.length||payload.messageId.length>256)throw Error('Explicit messageId required');
+   const matches=[];
+   for(let i=0;i<count;i++){const data=items.add(32+i*8).readPointer();if(S.string(R.readRef(data,'<Id>k__BackingField'))===payload.messageId)matches.push(data);}
+   if(matches.length!==1)throw Error('Message absent or ambiguous in current filtered inbox');
+   S.invoke('InboxView','SelectListItem',live.inbox,[R.arg.ref(matches[0])]);
+   return {expectedState:'InboxGameState',expectedMessageId:payload.messageId};
+  }
   const messages=[];
   for(let i=0;i<count;i++){
    const data=items.add(32+i*8).readPointer();
@@ -281,7 +289,7 @@ globalThis.InboxBridge=(()=>{
   }
   return {readConfirmed:true,messages,scope:'Current original filtered inbox list; no claim/delete/custom action dispatched'};
  }
- return {execute,status(){try{view();return {ready:true};}catch(error){return {ready:false,error:String(error)};}}};
+ return {execute,status(){try{const selected=execute('inbox-list').messages.filter(m=>m.selected);return {ready:true,selectedMessageId:selected.length===1?selected[0].id:null};}catch(error){return {ready:false,error:String(error)};}}};
 })();
 
 // Observe only closures captured while our exact original claim call is running.
@@ -712,7 +720,7 @@ rpc.exports.campaignnavigate=(operation,payload)=>RuntimeApi.runOnMainThreadOnce
 });
 
 rpc.exports.inventorycommand=(operation,request)=>RuntimeApi.runOnMainThreadOnce(()=>InventoryBridge.execute(operation,request));
-rpc.exports.inboxcommand=operation=>RuntimeApi.runOnMainThreadOnce(()=>InboxBridge.execute(operation));
+rpc.exports.inboxcommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>InboxBridge.execute(operation,payload));
 
 rpc.exports.objectivescommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>ObjectivesBridge.execute(operation,payload));
 rpc.exports.questclaimdispose=()=>RuntimeApi.runOnMainThreadOnce(()=>QuestClaimTracker.dispose());
