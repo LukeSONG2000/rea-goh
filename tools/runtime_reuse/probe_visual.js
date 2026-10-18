@@ -168,6 +168,13 @@
   }
  }catch(exception){error=String(exception);send({kind:'original-visual-error',error});}
  finally{
+  // The normal captured-trial path owns the same information display as the
+  // live host. Restore labels/gates while the owned battle is still valid.
+  try{if(typeof globalThis.stopBattleInfo==='function'){
+   const status=await globalThis.stopBattleInfo();
+   send({kind:'trial-hud-cleanup',status});
+   if(status.errors?.length)cleanup.errors.push('HUD reported errors during trial');
+  }}catch(exception){cleanup.errors.push('HUD cleanup: '+String(exception));}
   try{
    // Only leave our exact BattleGameState or its tracked original Campaign
    // return. A user/other system's state transition is never overwritten.

@@ -45,7 +45,7 @@ def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto, t
                'original_fixture.js', 'battle_proto.js', 'isolated_inventory.js',
                'captured_battle.js', 'captured_trial.js']
     if mode == 'visual':
-        modules += ['battle_status_reader.js', 'battle_attributes_reader.js',
+        modules += ['battle_status_reader.js', 'battle_info_ui.js', 'battle_attributes_reader.js',
                     'battle_input.js', 'runtime_observer.js', 'trial_input.js']
     if trace_ai:
         modules += ['original_ai_trace.js']
@@ -73,6 +73,7 @@ def prepare(battle, inventory, dump, prefix, squad_type, mode, duration, auto, t
     prefix = Path(prefix)
     js, manifest_path = Path(str(prefix) + '.js'), Path(str(prefix) + '.json')
     manifest = {'schemaVersion': 1, 'mode': mode, 'durationSeconds': duration, 'auto': auto,
+                'informationDisplay': mode == 'visual',
                 'aiPriorityOrder': ai_priority_order, 'battleCli': mode == 'visual', 'traceAI': trace_ai, 'enemyBasicDemo': enemy_basic_demo, 'enemyControl': enemy_control,
                 'squadType': squad_type, 'mission': metadata.get('mission'),
                 'battle': battle_info, 'inventory': inventory_info,

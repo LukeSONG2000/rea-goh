@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 from prepare_captured_trial import read_capture, prepare
 
 
@@ -54,6 +55,24 @@ class CaptureIntegrityTests(unittest.TestCase):
         for squad, mode, duration, auto in [(256, 'visual', 60, False), (1, 'visual', 0, False), (1, 'headless', 60, True)]:
             with self.assertRaises(ValueError):
                 prepare('missing', 'missing', 'missing', 'missing', squad, mode, duration, auto)
+
+    def test_visual_hud_precedes_observer_and_cleans_up(self):
+        root = Path(self.tmp.name)
+        dump = root / 'metadata.cs'
+        dump.write_text('test schema fixture')
+        capture = (b'\x08\x07', {'mission': {}}, {'sha256': 'test'})
+        with patch('prepare_captured_trial.read_capture', return_value=capture), \
+             patch('prepare_captured_trial.schema_from_dump', return_value={}), \
+             patch('prepare_captured_trial.materialize', side_effect=lambda data, *_: data):
+            visual = prepare('battle', 'inventory', dump, root / 'visual', 1, 'visual', 15, False)
+            headless = prepare('battle', 'inventory', dump, root / 'headless', 1, 'headless', 15, False)
+        source = Path(visual['source']).read_text(encoding='utf-8')
+        self.assertTrue(visual['informationDisplay'])
+        self.assertLess(source.index('globalThis.stopBattleInfo='), source.index('globalThis.readRuntimeSnapshot='))
+        self.assertIn("kind:'trial-hud-cleanup'", source)
+        self.assertIn("cleanup.errors.push('HUD cleanup:", source)
+        self.assertFalse(headless['informationDisplay'])
+        self.assertNotIn('globalThis.stopBattleInfo=', Path(headless['source']).read_text(encoding='utf-8'))
 
 
 if __name__ == '__main__':
