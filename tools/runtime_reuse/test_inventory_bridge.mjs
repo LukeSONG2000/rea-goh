@@ -107,6 +107,13 @@ recipe.fields._size=129;assert.match(bridge.detail(state).skillPopupError,/recip
 level.fields['<RecipeData>k__BackingField']=nil;
 level.fields['<Cooldown>k__BackingField']=2;assert.equal(bridge.detail(state).skillPopup.selectedLevel.cooldown,2);
 assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'}),/Close the current/);
+level.fields['<RecipeData>k__BackingField']=recipe;
+const quote=bridge.execute('inventory-skill-quote',{unitId:'vader-id',skillId:'present',tier:6});
+assert.equal(quote.readConfirmed,true);assert.equal(quote.displayCostsComplete,true);assert.equal(quote.executionSupported,false);assert.equal(quote.originalConditions.upgradeAvailable,false);
+assert.equal(quote.currency.owned,0);assert.equal(quote.materials[0].ownedQuantity,0);
+assert.throws(()=>bridge.execute('inventory-skill-quote',{unitId:'vader-id',skillId:'other',tier:6}),/current skill/);
+assert.throws(()=>bridge.execute('inventory-skill-quote',{unitId:'vader-id',skillId:'present',tier:5}),/selected tier/);
+pair.fields.key=2;assert.equal(bridge.execute('inventory-skill-quote',{unitId:'vader-id',skillId:'present',tier:6}).displayCostsComplete,false);pair.fields.key=7;
 assert.throws(()=>bridge.execute('inventory-skill-level',{unitId:'vader-id',skillId:'other',tier:6}),/popup changed/);
 assert.throws(()=>bridge.execute('inventory-skill-level',{unitId:'vader-id',skillId:'present',tier:5}),/Choose one tier/);
 assert.throws(()=>bridge.execute('inventory-skill-level',{unitId:'vader-id',skillId:'present',tier:1.5}),/Invalid skill tier/);

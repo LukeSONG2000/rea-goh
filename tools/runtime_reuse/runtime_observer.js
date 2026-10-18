@@ -166,11 +166,22 @@ globalThis.InventoryBridge=(()=>{
   return result;
  }
  function execute(operation,request){
-  if(['inventory-skill','inventory-skill-close','inventory-skill-level'].includes(operation)){
+  if(['inventory-skill','inventory-skill-close','inventory-skill-level','inventory-skill-quote'].includes(operation)){
    const state=current(),type=R.fullName(R.classOf(state));
    if(!['CharacterDetailsState','ShipDetailsState'].includes(type))throw Error('Skill command requires a unit detail page');
    const controller=R.readRef(state,'_controller'),info=detail(state);
    if(info.loading||!request||request.unitId!==info.unitId)throw Error('Skill command unit changed or missing unitId');
+   if(operation==='inventory-skill-quote'){
+    const panel=info.skillPopup,selected=panel?.selectedLevel;
+    if(info.skillPopupError||panel?.kind!=='levels'||panel.skillId!==request.skillId||!selected||selected.tier!==request.tier)throw Error('Quote requires the current skill and selected tier');
+    const costs=selected.materials;
+    const complete=Array.isArray(costs)&&costs.every(m=>m.itemType===7&&typeof m.id==='string'&&m.id.length>0&&Number.isInteger(m.quantityRaw)&&m.quantityRaw>=0&&Number.isInteger(m.ownedQuantity)&&m.ownedQuantity>=0&&!m.inventoryError)&&Number.isInteger(selected.currencyCost)&&selected.currencyCost>=0&&Number.isInteger(selected.currencyOwned)&&selected.currencyOwned>=0&&!selected.currencyError&&(selected.currencyCost===0||selected.currencyType>0);
+    return {readConfirmed:true,unitId:info.unitId,skillId:panel.skillId,abilityId:panel.abilityId,tier:selected.tier,levelText:selected.levelText,
+     currency:{type:selected.currencyType,required:selected.currencyCost,owned:selected.currencyOwned,error:selected.currencyError||null},
+     materials:costs,displayCostsComplete:complete,
+     originalConditions:{allowUpgrade:panel.allowUpgrade,upgradeAvailable:selected.upgradeAvailable,upgradeStatus:selected.upgradeStatus,lockedByConditions:selected.lockedByConditions,requirements:selected.requirements},
+     executionSupported:false,scope:'Current original UI cost snapshot; not a reservation, purchase authorization or server transaction quote'};
+   }
    const popup=skillPopup(controller,type,true);
    if(operation==='inventory-skill-level'){
     if(!popup||popup.viewType!=='UnitDetailsSkillOverlayView')throw Error('Level selection requires the original multi-level popup');

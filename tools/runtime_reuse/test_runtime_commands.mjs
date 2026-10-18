@@ -38,7 +38,7 @@ try{
   const ally=await test({operation:'enemy-unit',payload});assert.equal(ally.ok,false);assert.equal(ally.dispatched,false);
   const enemy=await test({operation:'enemy-target',payload});assert.equal(enemy.ok,false);assert.equal(enemy.dispatched,false);
  }
- for(const operation of ['inventory-skill','inventory-skill-close','inventory-skill-level'])for(const payload of [null,{}, {unitId:''},{unitId:42}]){
+ for(const operation of ['inventory-skill','inventory-skill-close','inventory-skill-level','inventory-skill-quote'])for(const payload of [null,{}, {unitId:''},{unitId:42}]){
   const result=await test({operation,payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  for(const skillId of [undefined,'',42,'x'.repeat(257)]){
@@ -46,8 +46,10 @@ try{
  }
  for(const tier of [undefined,-2,128,1.5,'6']){
   const result=await test({operation:'inventory-skill-level',payload:{unitId:'unit',skillId:'skill',tier}});assert.equal(result.dispatched,false);
+  const quote=await test({operation:'inventory-skill-quote',payload:{unitId:'unit',skillId:'skill',tier}});assert.equal(quote.dispatched,false);
  }
  for(const [operation,payload,result] of [
+  ['inventory-skill-quote',{unitId:'unit',skillId:'skill',tier:0},{readConfirmed:true}],
   ['inventory-skill-level',{unitId:'unit',skillId:'skill',tier:-1},{transitionConfirmed:true}],
   ['inventory-skill',{unitId:'unit',skillId:'skill'},{transitionConfirmed:true}],
   ['inventory-skill-close',{unitId:'unit'},{transitionConfirmed:true}],

@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-18",
+  "quote": {
+    "readConfirmed": true,
+    "unitId": "z92U_lKlRAqT_o6Aqr7XQg",
+    "skillId": "basicskill_VEERS",
+    "abilityId": "basicability_veers",
+    "tier": 0,
+    "levelText": "2",
+    "currency": {
+      "type": 1,
+      "required": 700,
+      "owned": 415387857,
+      "error": null
+    },
+    "materials": [
+      {
+        "itemType": 7,
+        "renderType": "MaterialsItemRenderData",
+        "id": "ability_mat_A",
+        "label": "16307/3",
+        "quantityRaw": 3,
+        "ownedQuantity": 16307
+      }
+    ],
+    "displayCostsComplete": true,
+    "originalConditions": {
+      "allowUpgrade": true,
+      "upgradeAvailable": true,
+      "upgradeStatus": 2,
+      "lockedByConditions": false,
+      "requirements": ""
+    },
+    "executionSupported": false,
+    "scope": "Current original UI cost snapshot; not a reservation, purchase authorization or server transaction quote"
+  },
+  "staleTierRejected": true,
+  "unchangedSkills": true,
+  "finalState": "HomeBaseGameState",
+  "tests": [
+    "native next-level read-only quote",
+    "mock zero stock balances retain original false eligibility",
+    "mock unsupported item types incomplete",
+    "mailbox invalid request/tier guards"
+  ],
+  "limitations": [
+    "UI snapshot is not a server quote or reservation",
+    "No purchase authorization or execution endpoint",
+    "Live coverage one character next-level quote"
+  ]
+}
