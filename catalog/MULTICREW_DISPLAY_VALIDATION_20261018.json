@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-18",
+  "cases": [
+    {
+      "unit": "GHOST",
+      "skills": 6,
+      "crew": [
+        {
+          "skillId": "specialskill_GHOST01",
+          "crewMemberId": "HERASYNDULLAS3",
+          "slot": 0,
+          "displayLevel": 8
+        },
+        {
+          "skillId": "specialskill_GHOST02",
+          "crewMemberId": "KANANJARRUSS3",
+          "slot": 1,
+          "displayLevel": 8
+        },
+        {
+          "skillId": "specialskill_GHOST03",
+          "crewMemberId": "ZEBS3",
+          "slot": 2,
+          "displayLevel": 8
+        }
+      ]
+    },
+    {
+      "unit": "MILLENNIUMFALCON",
+      "skills": 5,
+      "crew": [
+        {
+          "skillId": "specialskill_MILLENNIUMFALCON01",
+          "crewMemberId": "HANSOLO",
+          "slot": 0,
+          "displayLevel": 8
+        },
+        {
+          "skillId": "specialskill_MILLENNIUMFALCON02",
+          "crewMemberId": "CHEWBACCALEGENDARY",
+          "slot": 1,
+          "displayLevel": 8
+        }
+      ]
+    }
+  ],
+  "validation": "Original definition IDs match original display rows; all slots and skill IDs complete in these two ships",
+  "finalState": "HomeBaseGameState",
+  "limitations": [
+    "Does not establish all ships or locked/missing crew behavior",
+    "No upgrade, currency, mod or Datacron operation performed"
+  ],
+  "evidence": [
+    "logs/high_reuse/multicrew-ghost.json",
+    "logs/high_reuse/multicrew-falcon.json"
+  ]
+}
