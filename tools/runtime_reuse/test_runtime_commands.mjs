@@ -17,6 +17,15 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const operation of ['enemy-basic','enemy-resume']){
+  for(const payload of [null,{}, {token:42},{token:''}]){
+   const result=await test({operation,payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
+  }
+  const id=crypto.randomUUID();
+  fs.writeFileSync(path.join(box,id+'.request.json'),JSON.stringify({id,...owner,operation,payload:{token:'enemy-token'},expiresAt:11000}));
+  await processCommands(root,owner,async()=>operation==='enemy-basic'?{started:true}:{resumed:true},now);
+  assert.equal(JSON.parse(fs.readFileSync(path.join(box,id+'.result.json'))).ok,true);
+ }
  for(const payload of [null,{}, {token:42},{token:''}]){
   const result=await test({operation:'battle-cancel',payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }

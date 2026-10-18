@@ -1,0 +1,364 @@
+{
+  "date": "2026-10-18",
+  "scope": "Owned enemy input CLI with 10-second fallback",
+  "runs": [
+    {
+      "path": "logs\\high_reuse\\trial-20261018-081250-039-evidence.json",
+      "sha256": "531acc379512584605f1f2d15ef6403054297de0f9942c4c901cf3c8feabb5eb",
+      "expectedSuccess": false,
+      "events": [
+        {
+          "kind": "original-visual-error",
+          "error": "Error: Enemy input ownership changed"
+        },
+        {
+          "kind": "enemy-gate-complete",
+          "events": [
+            {
+              "event": "held",
+              "pending": true,
+              "token": "enemy:19440:1",
+              "expiresAt": 1792282399318,
+              "actor": "tTVXM4hRQsCdTfQpamWbJw",
+              "owner": 1,
+              "turn": 2,
+              "previous": 34,
+              "next": 1
+            }
+          ],
+          "errors": [
+            "Error: Duplicate pending enemy input"
+          ]
+        },
+        {
+          "kind": "visual-probe-complete",
+          "verifiedVisualBattle": false,
+          "error": "Error: Enemy input ownership changed",
+          "clicked": true,
+          "terminalObserved": false,
+          "lastSnapshot": {
+            "previous": 34,
+            "next": 1,
+            "turns": 3,
+            "currentState": "BattleGameState"
+          },
+          "serviceCalls": 0,
+          "blockedSocketCalls": {
+            "send": 4,
+            "sendto": 2,
+            "WSASend": 0,
+            "WSASendTo": 0,
+            "connect": 0,
+            "WSAConnect": 0
+          },
+          "capture": {
+            "path": null,
+            "requested": false,
+            "verified": false,
+            "error": null,
+            "beforeStamp": null
+          },
+          "cleanup": {
+            "home": true,
+            "exitedOwnedStates": 1,
+            "guardRestored": true,
+            "gcReleased": true,
+            "errors": []
+          },
+          "originalUiObserved": true,
+          "screenshotVerified": false,
+          "ownership": {
+            "exitedOwnBattle": false,
+            "campaignExpected": false,
+            "foreignTransition": false
+          }
+        }
+      ]
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-081549-835-evidence.json",
+      "sha256": "65e4adcf5c222661942d402953f3b1360e2225348da7dfc2cdaceb9370d48aa9",
+      "expectedSuccess": true,
+      "events": [
+        {
+          "kind": "enemy-gate-complete",
+          "events": [
+            {
+              "event": "held",
+              "pending": true,
+              "token": "enemy:19440:1",
+              "expiresAt": 1792282578815,
+              "actor": "tTVXM4hRQsCdTfQpamWbJw",
+              "owner": 1,
+              "turn": 2,
+              "previous": 34,
+              "next": 1
+            },
+            {
+              "event": "manual-basic",
+              "token": "enemy:19440:1",
+              "abilityId": "basicability_b1battledroid_ONBOARDING"
+            },
+            {
+              "event": "held",
+              "pending": true,
+              "token": "enemy:19440:2",
+              "expiresAt": 1792282583804,
+              "actor": "YDorQZt6RCaym6QiJBqseA",
+              "owner": 1,
+              "turn": 3,
+              "previous": 34,
+              "next": 1
+            },
+            {
+              "event": "resumed-original",
+              "token": "enemy:19440:2"
+            }
+          ],
+          "errors": [],
+          "watchdogDeferrals": 555
+        },
+        {
+          "kind": "visual-probe-complete",
+          "verifiedVisualBattle": true,
+          "error": null,
+          "clicked": true,
+          "terminalObserved": true,
+          "lastSnapshot": {
+            "previous": 136,
+            "next": 1,
+            "turns": 5,
+            "currentState": "CampaignGameState"
+          },
+          "serviceCalls": 0,
+          "blockedSocketCalls": {
+            "send": 1418,
+            "sendto": 2,
+            "WSASend": 0,
+            "WSASendTo": 0,
+            "connect": 1,
+            "WSAConnect": 0
+          },
+          "capture": {
+            "path": null,
+            "requested": false,
+            "verified": false,
+            "error": null,
+            "beforeStamp": null
+          },
+          "cleanup": {
+            "home": true,
+            "exitedOwnedStates": 1,
+            "guardRestored": true,
+            "gcReleased": true,
+            "errors": []
+          },
+          "originalUiObserved": true,
+          "screenshotVerified": false,
+          "ownership": {
+            "exitedOwnBattle": true,
+            "campaignExpected": true,
+            "foreignTransition": false
+          }
+        }
+      ]
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-081653-097-evidence.json",
+      "sha256": "048af9fc7f22a412f8b91ff99ed8c62f4792075cc6d3f7a4eef122514b7c4b07",
+      "expectedSuccess": true,
+      "events": [
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:1",
+            "expiresAt": 1792282641156,
+            "actor": "tTVXM4hRQsCdTfQpamWbJw",
+            "owner": 1,
+            "turn": 2,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:1"
+          }
+        },
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:2",
+            "expiresAt": 1792282653648,
+            "actor": "YDorQZt6RCaym6QiJBqseA",
+            "owner": 1,
+            "turn": 3,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:2"
+          }
+        },
+        {
+          "kind": "enemy-gate-complete",
+          "events": [
+            {
+              "event": "held",
+              "pending": true,
+              "token": "enemy:19440:1",
+              "expiresAt": 1792282641156,
+              "actor": "tTVXM4hRQsCdTfQpamWbJw",
+              "owner": 1,
+              "turn": 2,
+              "previous": 34,
+              "next": 1
+            },
+            {
+              "event": "resumed-original",
+              "token": "enemy:19440:1"
+            },
+            {
+              "event": "held",
+              "pending": true,
+              "token": "enemy:19440:2",
+              "expiresAt": 1792282653648,
+              "actor": "YDorQZt6RCaym6QiJBqseA",
+              "owner": 1,
+              "turn": 3,
+              "previous": 34,
+              "next": 1
+            },
+            {
+              "event": "resumed-original",
+              "token": "enemy:19440:2"
+            }
+          ],
+          "errors": [],
+          "watchdogDeferrals": 2107
+        },
+        {
+          "kind": "visual-probe-complete",
+          "verifiedVisualBattle": true,
+          "error": null,
+          "clicked": true,
+          "terminalObserved": true,
+          "lastSnapshot": {
+            "previous": 136,
+            "next": 1,
+            "turns": 5,
+            "currentState": "CampaignGameState"
+          },
+          "serviceCalls": 0,
+          "blockedSocketCalls": {
+            "send": 3732,
+            "sendto": 3,
+            "WSASend": 0,
+            "WSASendTo": 0,
+            "connect": 1,
+            "WSAConnect": 0
+          },
+          "capture": {
+            "path": null,
+            "requested": false,
+            "verified": false,
+            "error": null,
+            "beforeStamp": null
+          },
+          "cleanup": {
+            "home": true,
+            "exitedOwnedStates": 1,
+            "guardRestored": true,
+            "gcReleased": true,
+            "errors": []
+          },
+          "originalUiObserved": true,
+          "screenshotVerified": false,
+          "ownership": {
+            "exitedOwnBattle": true,
+            "campaignExpected": true,
+            "foreignTransition": false
+          }
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "operation": "snapshot",
+      "exit": 0,
+      "result": "actual fresh CLI snapshot read"
+    },
+    {
+      "operation": "enemy-basic",
+      "exit": 0,
+      "result": {
+        "id": "a614d3ab-5e50-4e99-801e-319276bae4a1",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "started": true,
+          "token": "enemy:19440:1",
+          "abilityId": "basicability_b1battledroid_ONBOARDING"
+        }
+      }
+    },
+    {
+      "operation": "enemy-basic",
+      "exit": 1,
+      "result": {
+        "id": "ca26c971-2450-4ad5-9896-071cadc9a1ca",
+        "ok": false,
+        "dispatched": true,
+        "error": "Error: No owned enemy input"
+      }
+    },
+    {
+      "operation": "snapshot",
+      "exit": 0,
+      "result": "actual fresh CLI snapshot read"
+    },
+    {
+      "operation": "enemy-resume",
+      "exit": 0,
+      "result": {
+        "id": "b7ec29b2-9e4d-4b11-9511-913d771f1c32",
+        "ok": true,
+        "dispatched": true,
+        "result": {
+          "resumed": true,
+          "token": "enemy:19440:2"
+        }
+      }
+    }
+  ],
+  "nativeWatchdogEvidence": {
+    "rva": "0x19380E0",
+    "path": "logs/high_reuse/native/battle_lock_detection.c",
+    "sha256": "138321d8a8759082fdafc8e922939f9fd042c19c6efeccf4728fc64e43876201",
+    "finding": "Accumulates original unit-turn timer and can reset stalled turns; deferred only for exact owned FSM and pending current actor"
+  },
+  "failureResolution": [
+    "First run lost actor ownership while waiting; safe refusal and Home cleanup retained",
+    "Read-only watchdog decompilation then scoped deferral; explicit CLI and unattended fallback passed",
+    "Diagnostic Python GBK snapshot read corrected to UTF-8; child PowerShell PSModulePath inheritance corrected in diagnostic only"
+  ],
+  "tests": [
+    "enemy gate ownership/expiry/watchdog scope/cleanup mock PASS",
+    "trial input ownership/enabled flag PASS",
+    "mailbox enemy schema and success receipts PASS",
+    "prepare config rejection PASS",
+    "lifecycle PASS",
+    "turn-order same seed PASS",
+    "outside-trial enemy command rejected"
+  ],
+  "restoredHostPid": 16972,
+  "limits": [
+    "Captured 1-A and saved squad type8 only",
+    "Basic attack and original AI resume only; arbitrary skill/target/ally/ultimate not implemented",
+    "10-second bounded wait; original match countdown not paused",
+    "Prediction and decision-tree priority editing remain incomplete"
+  ]
+}

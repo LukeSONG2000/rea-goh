@@ -54,12 +54,13 @@ try{
  if(manifest.mode==='visual'&&manifest.battleCli===true){
   while(!complete){
    await processCommands(directory,owner,async(operation,payload)=>{
-    if(complete||!['battle-ability','battle-target','battle-unit','battle-cancel'].includes(operation))throw Error('Operation unavailable in owned trial');
+    if(complete||!['battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume'].includes(operation))throw Error('Operation unavailable in owned trial');
     return await script.exports.trialcommand(operation,payload);
    });
    if(complete)break;
    try{
     const snapshot=await script.exports.snapshot();
+    if(manifest.enemyControl)snapshot.enemyInput=await script.exports.enemysnapshot();
     const temp=snapshotPath+'.tmp';fs.writeFileSync(temp,JSON.stringify({...snapshot,...owner,trial:true,observedAt:new Date().toISOString()}));fs.renameSync(temp,snapshotPath);
    }catch(e){saveStatus({snapshotError:String(e)});}
    await new Promise(resolve=>setTimeout(resolve,250));

@@ -64,7 +64,7 @@
    guard=installOfflineSocketGuard(); // covers fixture, entry, polling and exit
    f=createOriginalFixture(Object.assign({},options.fixture||{},{flags:6}));send(originalFixtureDiagnostics(f));
    if(options.traceAI)globalThis.trialAITrace=installOriginalAITrace(f.context);
-   if(options.enemyBasicDemo)enemyGate=installEnemyInputGate(f.context);
+   if(options.enemyBasicDemo||options.enemyControl)enemyGate=installEnemyInputGate(f.context);
    const loop=R.newObject(R.findClass('UnityGameLoop'));
    const injector=R.readRef(R.nil,'_instance',R.findClass('Injector'));
    R.invoke(R.findMethod(R.findClass('Injector'),'Inject',1),injector,[A.ref(loop)]);
@@ -102,7 +102,7 @@
     onLeave(result){if(this.campaign&&!result.isNull())ownedCampaign=result;}
    },['System.Type','IStateTransitionData','System.Boolean']);
    const result=enterType('BattleGameState',f.data);if(!result.isNull())entered=result;
-   globalThis.visualProbe={fixture:f,entered};
+   globalThis.visualProbe={fixture:f,entered,enemyGate:options.enemyControl?enemyGate:null};
   });
   const deadline=Date.now()+options.maxDurationMs;
   while(Date.now()<deadline){
@@ -112,9 +112,12 @@
      const snapshot=enemyGate.snapshot();
      if(snapshot.pending){
       if(heldToken!==snapshot.token){heldToken=snapshot.token;heldAt=Date.now();send({kind:'enemy-held-start',snapshot});}
-      else if(Date.now()-heldAt>=2200){
+      else if(options.enemyBasicDemo&&Date.now()-heldAt>=2200){
        send({kind:'enemy-held-end',snapshot,elapsed:Date.now()-heldAt});
        send({kind:'enemy-manual-input',result:enemyGate.chooseBasic(snapshot.token)});
+      }
+      else if(options.enemyControl&&Date.now()>=snapshot.expiresAt){
+       send({kind:'enemy-input-timeout',snapshot,result:enemyGate.resume(snapshot.token)});
       }
      }
     }
@@ -185,7 +188,7 @@
   }catch(exception){cleanup.errors.push('state cleanup: '+String(exception));}
   finally{
    try{if(enemyGate){
-    enemyGate.stop();send({kind:'enemy-gate-complete',events:enemyGate.events,errors:enemyGate.errors});
+    enemyGate.stop();send({kind:'enemy-gate-complete',events:enemyGate.events,errors:enemyGate.errors,watchdogDeferrals:enemyGate.watchdogDeferrals});
     if(enemyGate.errors.length)error=error||'Enemy input gate reported errors';
    }}
    catch(exception){cleanup.errors.push('enemy gate cleanup: '+String(exception));}

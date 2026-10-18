@@ -53,8 +53,27 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 
 已验证捕获 1-A、保存小队类型 8、`-Auto -Duration 90 -EnemyBasicDemo`：
 两次敌方 B1 普攻、等待期间回合/FSM不前进、原终局和清理通过。
-当前只提供普攻验证；任意技能、友军选取、长时间等待、防锁死计时处理和
-独立敌方操作 CLI 尚未开放。该选项仅支持 visual，日志记录 held/manual-input。
+当前只提供普攻验证；任意技能和友军选取尚未开放。
+该选项仅支持 visual，日志记录 held/manual-input；显式控制接口见下节。
+
+## 敌方输入 CLI（隔离试玩）
+
+启动时使用 `-EnemyControl`（与 `-EnemyBasicDemo` 互斥）。快照中的
+`enemyInput` 给出 `pending/token/actor/turn/expiresAt`。待输入时保存
+`{"token":"enemyInput.token 的实际值"}` 到请求 JSON，然后调用：
+
+```powershell
+node tools/runtime_reuse/runtime_cli.mjs enemy-basic --pid PID --request logs/high_reuse/enemy-request.json
+node tools/runtime_reuse/runtime_cli.mjs enemy-resume --pid PID --request logs/high_reuse/enemy-request.json
+```
+
+前者执行原普攻，后者恢复原 AI。一次 token 只提交一次，结果须通过后续快照确认。
+10 秒没有收到输入会自动恢复原 AI；过期普攻拒绝。只在待输入期间排除该私有
+战斗的防卡死计时，其他战斗和技能执行中的原检测保持正常。该等待不会暂停
+整个客户端或比赛倒计时。试玩外命令拒绝，未启用控制的试玩也拒绝。
+
+已验证真实 CLI 普攻、重复 token 拒绝、下一敌方恢复 AI，以及两次无人输入
+超时自动恢复。任意特殊技能、友军/终极选择仍待完成。
 
 ## AI 操作接口
 

@@ -13,9 +13,16 @@ for(const [op,method] of [['battle-ability','choose'],['battle-target','selectTa
  assert.equal(execute(op,request).accepted,method);assert.equal(calls.at(-1)[1],request);
 }
 const count=calls.length;
+assert.throws(()=>execute('enemy-basic',request),/not enabled/);
+sandbox.visualProbe.enemyGate={chooseBasic:r=>({started:r==='current'}),resume:r=>({resumed:r==='current'}),snapshot:()=>({pending:true})};
+assert.equal(execute('enemy-basic',request).started,true);
+assert.equal(execute('enemy-resume',request).resumed,true);
+assert.equal(sandbox.rpc.exports.enemysnapshot().pending,true);
+assert.throws(()=>execute('enemy-basic',{}),/Expected enemy input token/);
 assert.throws(()=>execute('campaign-home',request),/Only battle inputs/);
 controller['<CurrentState>k__BackingField']=pointer({_battleController:{_battleContext:context}});
 assert.throws(()=>execute('battle-ability',request),/not the owned trial/);
+assert.throws(()=>execute('enemy-basic',request),/not the owned trial/);
 controller['<CurrentState>k__BackingField']=state;
 state._battleController._battleContext=pointer({});
 assert.throws(()=>execute('battle-ability',request),/context ownership mismatch/);

@@ -6,13 +6,13 @@ globalThis.installEnemyInputGate=context=>{
  const method=R.findMethod(R.findClass('BattleInputProvider'),'DoMove',2);
  const address=method.readPointer();
  const original=new NativeFunction(address,'void',['pointer','pointer','pointer','pointer']);
- const events=[],errors=[];let pending=null,serial=0,stopped=false;
+ const events=[],errors=[];let pending=null,serial=0,stopped=false,watchdogDeferrals=0;
  const call=(p,n,args=[])=>R.invoke(R.findMethod(R.classOf(p),n,args.length),p,args);
  const actor=()=>call(context,'get_CurrentUnit');
  const fsm=()=>call(context,'get_BattleFsmController');
  function snapshot(){
   if(!pending)return {pending:false};
-  return {pending:true,token:pending.token,actor:S.string(R.readRef(R.readRef(pending.unit,'_unitDO'),'Id')),
+  return {pending:true,token:pending.token,expiresAt:pending.expiresAt,actor:S.string(R.readRef(R.readRef(pending.unit,'_unitDO'),'Id')),
    owner:R.unbox(call(pending.unit,'get_Owner'),'i32'),
    turn:R.readValue(fsm(),'<TurnCount>k__BackingField','i32'),
    previous:R.readValue(fsm(),'_previousNonIdleState','i32'),next:R.readValue(fsm(),'_nextState','i32')};
@@ -30,14 +30,25 @@ globalThis.installEnemyInputGate=context=>{
       R.unbox(call(unit,'get_Owner'),'i32')===1){
     if(pending){defer=true;throw Error('Duplicate pending enemy input');}
     const retained=[provider,unit,callback].map(p=>R.retain(p));
-    pending={provider,unit,callback,info,retained,token:'enemy:'+Process.id+':'+(++serial)};
+    pending={provider,unit,callback,info,retained,expiresAt:Date.now()+10000,token:'enemy:'+Process.id+':'+(++serial)};
     defer=true;events.push({event:'held',...snapshot()});
    }
   }catch(e){errors.push(String(e));}
   if(!defer)original(provider,unit,callback,info);
  },'void',['pointer','pointer','pointer','pointer']);
- Interceptor.replace(address,replacement);Interceptor.flush();
- return {snapshot,events,errors,
+ const watchdogAddress=R.findMethod(R.findClass('BattleFsmController'),'BattleLockDetection',0).readPointer();
+ const originalWatchdog=new NativeFunction(watchdogAddress,'void',['pointer','pointer']);
+ const watchdogReplacement=new NativeCallback((controller,info)=>{
+  // Exclude deliberate input waiting from the original lock timer. Keep its
+  // normal behavior for every other context and while moves are resolving.
+  if(!stopped&&pending&&controller.equals(fsm())&&actor().equals(pending.unit)){
+   watchdogDeferrals++;return;
+  }
+  originalWatchdog(controller,info);
+ },'void',['pointer','pointer']);
+ try{Interceptor.replace(address,replacement);Interceptor.replace(watchdogAddress,watchdogReplacement);Interceptor.flush();}
+ catch(e){Interceptor.revert(address);Interceptor.revert(watchdogAddress);throw e;}
+ return {snapshot,events,errors,get watchdogDeferrals(){return watchdogDeferrals;},
   resume(token){
    validate();if(token!==pending.token)throw Error('Stale enemy input token');
    const saved=pending;pending=null;
@@ -47,6 +58,7 @@ globalThis.installEnemyInputGate=context=>{
   },
   chooseBasic(token){
    validate();if(token!==pending.token)throw Error('Stale enemy input token');
+   if(Date.now()>=pending.expiresAt)throw Error('Enemy input expired; original AI will resume');
    const saved=pending;
    if(!R.unbox(call(saved.unit,'CanPerformMove',[A.value('i32',0),A.value('i32',0),A.value('bool',false)]),'bool'))
     throw Error('Original CanPerformMove rejected basic attack');
@@ -71,7 +83,7 @@ globalThis.installEnemyInputGate=context=>{
     const state=R.readRef(probe.fixture.state,'<CurrentState>k__BackingField');
     if(state.equals(probe.entered))throw Error('Exit owned battle before discarding pending input');
    }
-   Interceptor.revert(address);Interceptor.flush();stopped=true;
+   Interceptor.revert(address);Interceptor.revert(watchdogAddress);Interceptor.flush();stopped=true;
    if(pending){for(const handle of pending.retained)R.release(handle);pending=null;}
   }
  };
