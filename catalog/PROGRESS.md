@@ -314,3 +314,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 capability-demo completed】前台演示收藏/角色飞船技能/等级报价、邮箱、战役、任务成就、挑战；关卡进入实际弹支援选择，自动ready超时，GUI选支援后原选队身份及Back成功，未线上开战。隔离战斗演示我方目标/技能/友军取消确认、敌方技能/友军取消确认/普攻/恢复AI/改目标；改序维达战和双人改目标战均terminal+serviceCalls0+清理通过，headless终态通过。两场Auto敌控超时未终局保留失败口径；末尾token/owner拒绝未重放。面板生命护盾可见，但1402x819右上数值挤压技能图标仍待修；领奖仅不合格拒绝无到账样本。报告CAPABILITY_DEMO_20261018.json，长期目标继续暂停；原目录不写，无货币消费拆装。
 【Codex/root 2026-10-18 support-picker】用户要求恢复原目标，认领原支援选择中间步骤与选队返回闭环；root独占runtime_observer/CLI/host/tests及必要只读Ghidra。原目录只读，不调用消费购买或装备操作。
 【Codex/root 2026-10-18 arena-dual-control】用户临时优先任务：小队竞技场双方控制、敌方仅普攻、HUD验收。支援选择集成暂挂，root独占运行时。先确认真实竞技场上下文与捕获；不把PVE试验当竞技场，不购买刷新，不改装备。
+
+【Codex/root 2026-10-18 arena-dual-control validated-partial】原选队私有PVP模拟第三轮进入原竞技场场景并terminal回Home，44 turn计数、32友方原回调均accepted、17敌方主动指令全部basic/index0/moveType0；被动协攻反击保留。serviceCalls0，guard恢复/GC释放/cleanup无错，原阵容身份槽位一致。前两次错误分别为encounter键和塔斯肯召唤定义缺失，未删机制。长按生命护盾与部分剩余回合实测可见且无重叠；右上文字压技能图标、死亡切换护盾max=-1、终态后一次UI system error未修。CD图标可见但非零CD及全模式未验收。非线上排名对局，无排名提交。报告ARENA_DUAL_CONTROL_VALIDATION_20261018.json；原32088，显示host15304恢复；本地原型尚非正式CLI。

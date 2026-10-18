@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original client private native PVP simulation using selected arena squads; not ranked online match",
+  "attempts": [
+    {
+      "version": 1,
+      "failure": "Wrong encounter dictionary key; fixed to native PVP key 1; original source artifact overwritten before evidence completion"
+    },
+    {
+      "version": 2,
+      "failure": "Missing preview runtime summon definition PVE_TUSKENRAIDER:OMICRON_SUMMON; original definition exists locally; no rule stripped"
+    },
+    {
+      "version": 3,
+      "result": "native terminal and orderly return home"
+    }
+  ],
+  "fixture": {
+    "kind": "arena-fixture",
+    "battleType": 0,
+    "combatType": 0,
+    "seed": 8,
+    "source": "current original PvpPreBattleState player squad and selected opponent, private native copies",
+    "squads": {
+      "player": [
+        {
+          "slot": 0,
+          "type": 0,
+          "id": "hm5lmelPSNejk6_opLIc1Q",
+          "baseId": "GLLEIA"
+        },
+        {
+          "slot": 1,
+          "type": 2,
+          "id": "u6ty-aD1Tp2X16vC-QhzSw",
+          "baseId": "R2D2_LEGENDARY"
+        },
+        {
+          "slot": 2,
+          "type": 2,
+          "id": "jlP-KDD7Q-iyV0KAzyxucA",
+          "baseId": "CAPTAINDROGAN"
+        },
+        {
+          "slot": 3,
+          "type": 2,
+          "id": "rLVBO6a4QhiXnpaOiISlng",
+          "baseId": "ADMIRALRADDUS"
+        },
+        {
+          "slot": 4,
+          "type": 2,
+          "id": "VSC0MFNVR8ipEcEDz_L2IA",
+          "baseId": "JYNERSO"
+        }
+      ],
+      "opponent": [
+        {
+          "slot": 0,
+          "type": 0,
+          "id": "5YFtAGQIQ56ud98hysyzOQ",
+          "baseId": "JEDIMASTERKENOBI"
+        },
+        {
+          "slot": 1,
+          "type": 2,
+          "id": "2gLYW-dgTBKQrmyb7CWaOg",
+          "baseId": "COMMANDERAHSOKA"
+        },
+        {
+          "slot": 2,
+          "type": 2,
+          "id": "qzzds76xRAejuS0bHPiAKg",
+          "baseId": "AHSOKATANO"
+        },
+        {
+          "slot": 3,
+          "type": 2,
+          "id": "Ykh9A1oiRBekD2Kacy2RDw",
+          "baseId": "GENERALSKYWALKER"
+        },
+        {
+          "slot": 4,
+          "type": 2,
+          "id": "O4UbOsoXRfmA7hzGW-9ZTw",
+          "baseId": "GENERALKENOBI"
+        }
+      ]
+    },
+    "scope": "isolated PVP simulation; not an online ranked match or server-seed replay"
+  },
+  "complete": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": false,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 44,
+      "currentState": "HomeBaseGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 46899,
+      "sendto": 19,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 23,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 0,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": false,
+      "foreignTransition": false
+    }
+  },
+  "enemyActiveCommands": 17,
+  "enemyAllBasic": true,
+  "enemyAbilities": {
+    "basicability_jedimasterkenobi": 7,
+    "basicability_commanderahsoka": 4,
+    "basicability_generalskywalker": 3,
+    "basicability_ahsokatano": 3
+  },
+  "playerCommands": 32,
+  "playerAccepted": 32,
+  "sourceIntegrity": {
+    "kind": "arena-source-integrity",
+    "unchanged": true,
+    "scope": "original squad identity/slots; no inventory mutation requested"
+  },
+  "hud": {
+    "shows": 19,
+    "updates": 304,
+    "modeGateCalls": 1,
+    "tutorialDisplays": 0,
+    "errors": [
+      "Error: system error"
+    ],
+    "last": {
+      "health": "生命 25975 / 334835\n总护盾 0 / 121521\n永久护盾 0 / 121521\n临时护盾 0 / 0",
+      "effects": [
+        {
+          "icon": "icon_role_attacker",
+          "suffix": "剩余 1 次全场行动结束",
+          "instances": 1
+        },
+        {
+          "icon": "icon_ambush",
+          "suffix": "剩余 1 次自身完整回合完成；另有原移除条件",
+          "instances": 1
+        },
+        {
+          "icon": "icon_fracture",
+          "suffix": "无固定回合（按原条件移除）",
+          "instances": 1
+        },
+        {
+          "icon": "icon_penetration",
+          "suffix": "剩余 2 次自身完整回合完成；另有原移除条件",
+          "instances": 1
+        },
+        {
+          "icon": "icon_mastery_up",
+          "suffix": "未读取到计时（原显示标记）",
+          "instances": 0
+        }
+      ]
+    },
+    "target": "生命 0 / 91836\n总护盾 0 / 112936\n永久护盾 0 / 112936\n临时护盾 0 / 0"
+  },
+  "visualFindings": [
+    "Popup absolute HP and permanent/bonus protection visible and updating; visible duration rows separated",
+    "Top-right numbers overlap ability icons at 1402x819",
+    "Transient -1 protection maxima observed during target death transition",
+    "One UI system error observed after terminal transition",
+    "Arena ability icons visible; full nonzero cooldown rendering and all modes not established by this run"
+  ],
+  "evidence": "logs/high_reuse/arena-dual-demo-v3-evidence.json",
+  "screenshots": [
+    "logs/high_reuse/arena-v3-top-right.png",
+    "logs/high_reuse/arena-v3-popup.png",
+    "logs/high_reuse/arena-v3-popup-durations.png"
+  ],
+  "limitations": [
+    "Private prototype under logs, not stable public arena CLI",
+    "Datacron-equipped squads rejected pending isolation validation",
+    "Passive assists/counters remain original; basic-only applies to active enemy choices",
+    "Source integrity check covers squad identities/slots only",
+    "No winner claim from terminal alone"
+  ]
+}
