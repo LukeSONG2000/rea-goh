@@ -67,6 +67,8 @@ node tools/runtime_reuse/runtime_cli.mjs enemy-basic --pid PID --request logs/hi
 node tools/runtime_reuse/runtime_cli.mjs enemy-resume --pid PID --request logs/high_reuse/enemy-request.json
 node tools/runtime_reuse/runtime_cli.mjs enemy-target --pid PID --request logs/high_reuse/enemy-target.json
 node tools/runtime_reuse/runtime_cli.mjs enemy-ability --pid PID --request logs/high_reuse/enemy-ability.json
+node tools/runtime_reuse/runtime_cli.mjs enemy-unit --pid PID --request logs/high_reuse/enemy-unit.json
+node tools/runtime_reuse/runtime_cli.mjs enemy-cancel --pid PID --request logs/high_reuse/enemy-request.json
 ```
 
 `enemy-basic` 执行原普攻，`enemy-resume` 恢复原 AI。出招 token 只消费一次。
@@ -87,9 +89,20 @@ node tools/runtime_reuse/runtime_cli.mjs enemy-ability --pid PID --request logs/
 必须从当前 `enemyInput.abilities` 读取 moveType/index，不按技能显示顺序猜测；
 moveType 0 是普攻，1 是原特殊技能列表。该列表同时给出原技能 ID、类型、
 冷却、ready、canPerform 和 supported。只有 supported/ready/canPerform 全为
-true 才可提交；执行前再次调用原可用性检查。技能类型须为 ACTIVATED，且
-原 AllyTargetingRuleId 为空。需要友军选择的技能和终极技能仍待接通。
+true 才可提交；执行前再次调用原可用性检查。支持 ACTIVATED 和具有原友军
+目标规则的 ACTIVATED_ALLY_SELECT；终极技能独立 UI 仍待接通。
 动作调用原 PerformManualMove 和原输入完成回调，效果、伤害及冷却由原引擎结算。
+
+当 `requiresAllySelection=true`，`enemy-ability`（或该角色的 `enemy-basic`）
+先调用原 SelectAlly，回执 `selectionStarted=true` 表示等待选择，尚未释放技能。
+用回执的新 token，或重新读快照中的 `enemyInput.token`，发送
+`enemy-unit`：`{"token":"新token","targetId":"selectionCandidates 中的 id"}`。
+这会调用原 HandleUnitTapped，核对原 AllyTarget，再执行之前选择的技能。
+`enemy-cancel` 只需要 token，调用原 CancelSelectUnit 后返回新 token，可重新选技能。
+选择/取消不延长最初的 10 秒期限；超时先清理选择，再交还原 AI。
+原候选为空时回执为 `selectionEmpty=true`，没有释放技能；应重新读取状态。
+`ok=true` 表示请求对应阶段已确认，只有 `started=true` 才表示动作已经启动。
+待选友军期间禁止改选技能或敌方目标；使用 enemy 命令，不能通过 battle-unit 绕过。
 验证使用私有库存凯勒兰对维达自定义对战，不冒充捕获关卡原敌方阵容：
 维达 specialability_vader02 产生原持续伤害/减速状态，下一敌方回合冷却为 4，
 再次提交被原可用性检查拒绝，然后可正常恢复原 AI。
@@ -122,5 +135,5 @@ node tools/runtime_reuse/runtime_cli.mjs battle-cancel --pid PID --request logs/
 校验会拒绝执行，应重新读取快照后再决定操作。
 
 仍待完成：新鲜快照采集入口、好友支援、非空 Datacron、Era 借用单位、其他
-活动/有限次数模式、终极技能独立 UI、敌方友军选择和预测。当前截图和确定性验证
+活动/有限次数模式、终极技能独立 UI、敌方预测和决策树编辑。当前截图和确定性验证
 不代表这些范围已通过。

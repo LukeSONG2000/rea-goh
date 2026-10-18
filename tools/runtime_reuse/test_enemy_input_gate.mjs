@@ -14,8 +14,11 @@ const specials=[ability('original-special'),ability('ally-special','original-all
 const unit=object({_unitDO:object({Id:'enemy-1'}),_attackAbilityContext:ability('original-basic'),_limitBreakAbilityContexts:{_size:2,_items:specials},
  _targetingController:targetController,
  get_Owner:()=>1,CanPerformMove:()=>legal,PerformManualMove:()=>{manualMoves++;unit['<EnemyTarget>k__BackingField']=selected;return started;}});
+let noCandidates=false,cancelCalls=0;
+const selector=object({_completed:nil,_units:nil,get_CurrentlyPerformingUnitSelection:()=>!selector._completed.isNull(),CancelSelectUnit:()=>{cancelCalls++;selector._completed=nil;selector._units=nil;},HandleUnitTapped:id=>{unit['<AllyTarget>k__BackingField']=targets.find(t=>t._unitDO.Id===id);selector._completed=nil;selector._units=nil;}});
 const fsm=object({'<TurnCount>k__BackingField':2,_previousNonIdleState:34,_nextState:1});
-const context=object({get_CurrentUnit:()=>unit,get_BattleFsmController:()=>fsm});
+fsm.SelectAlly=()=>{selector._completed=noCandidates?nil:object();selector._units=noCandidates?nil:{_size:targets.length,_items:targets};unit['<AllyTarget>k__BackingField']=nil;};
+const context=object({'<BattleManualUnitSelectController>k__BackingField':selector,get_CurrentUnit:()=>unit,get_BattleFsmController:()=>fsm});
 const state=object(),stateController=object({'<CurrentState>k__BackingField':state});
 const provider=object({_battleContext:context}),callback=object({Invoke:()=>completed++});
 const sandbox={Process:{id:1},Date:{now:()=>now},SceneApi:{string:x=>x,array:x=>x},
@@ -37,8 +40,8 @@ specials[0].get_IsAbilityReady=()=>false;
 assert.throws(()=>gate.chooseAbility({token,moveType:1,index:0}),/readiness/);
 specials[0].get_IsAbilityReady=()=>true;
 assert.throws(()=>gate.chooseAbility({token,moveType:1,index:2}),/absent/);
-assert.throws(()=>gate.chooseAbility({token,moveType:1,index:1}),/ally selection/);
-specials[0]['<AbilityDO>k__BackingField'].get_AbilityType=()=>3;
+
+specials[0]['<AbilityDO>k__BackingField'].get_AbilityType=()=>1;
 assert.equal(gate.snapshot().abilities[1].supported,false);
 assert.throws(()=>gate.chooseAbility({token,moveType:1,index:0}),/unsupported ability type/);
 specials[0]['<AbilityDO>k__BackingField'].get_AbilityType=()=>0;
@@ -66,8 +69,30 @@ assert.throws(()=>gate.chooseBasic(token),/No owned/);
 hook(provider,unit,callback,null);
 const specialResult=gate.chooseAbility({token:gate.snapshot().token,moveType:1,index:0});
 assert.equal(specialResult.abilityId,'original-special');assert.equal(specialResult.moveType,1);assert.equal(completed,2);
+// Selection rotates tokens; invalid IDs cannot consume the pending move.
+hook(provider,unit,callback,null);
+let before=gate.snapshot().token;
+let selectionResult=gate.chooseAbility({token:before,moveType:1,index:1});
+assert.equal(selectionResult.selectionStarted,true);assert.notEqual(selectionResult.token,before);
+const ownedCallback=selector._completed;selector._completed=object();
+assert.throws(()=>gate.selectUnit({token:selectionResult.token,targetId:'ally-1'}),/ownership changed/);selector._completed=ownedCallback;
+assert.throws(()=>gate.selectUnit({token:before,targetId:'ally-1'}),/Stale/);
+assert.throws(()=>gate.selectUnit({token:selectionResult.token,targetId:'invalid'}),/candidates/);
+assert.throws(()=>gate.chooseBasic(selectionResult.token),/Finish or cancel/);
+assert.equal(gate.cancelSelection(selectionResult.token).selectionCancelled,true);assert.equal(cancelCalls,1);
+assert.equal(gate.snapshot().selectingUnit,false);
+noCandidates=true;
+assert.equal(gate.chooseAbility({token:gate.snapshot().token,moveType:1,index:1}).selectionEmpty,true);
+assert.equal(gate.snapshot().selectedAbility,null);noCandidates=false;
+selectionResult=gate.chooseAbility({token:gate.snapshot().token,moveType:1,index:1});
+const allyResult=gate.selectUnit({token:selectionResult.token,targetId:'ally-2'});
+assert.equal(allyResult.allyTarget,'ally-2');assert.equal(allyResult.started,true);assert.equal(completed,3);
+hook(provider,unit,callback,null);
+selectionResult=gate.chooseAbility({token:gate.snapshot().token,moveType:1,index:1});
+now=12000;assert.throws(()=>gate.selectUnit({token:selectionResult.token,targetId:'ally-2'}),/expired/);
+assert.equal(gate.resume(selectionResult.token).resumed,true);assert.equal(cancelCalls,2);assert.equal(nativeMoves,2);now=1000;
 hook(provider,unit,callback,null);hook(provider,unit,callback,null);
-assert.equal(nativeMoves,1,'duplicate must not dispatch a second move');assert.equal(retained.size,3);
+assert.equal(nativeMoves,2,'duplicate must not dispatch a second move');assert.equal(retained.size,3);
 assert.throws(()=>gate.stop(),/Exit owned/);assert.equal(reverted,0);
 stateController['<CurrentState>k__BackingField']=object();gate.stop();gate.stop();
 assert.equal(reverted,2);assert.equal(retained.size,0);

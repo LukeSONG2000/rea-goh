@@ -9,7 +9,7 @@ import {createRequire} from 'node:module';
 import {execFileSync} from 'node:child_process';
 const args=process.argv.slice(2);
 let battleRequest;
-if(['campaign-enter','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability'].includes(args[0])&&args.length===5&&args[3]==='--request'){
+if(['campaign-enter','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])&&args.length===5&&args[3]==='--request'){
  if(fs.statSync(args[4]).size>4096)throw Error('Request file too large');
  battleRequest=JSON.parse(fs.readFileSync(args[4],'utf8').replace(/^\uFEFF/,''));args.splice(3,2);
 }
@@ -19,15 +19,17 @@ if(args.length===1&&args[0]==='capabilities'){
   {name:'enemy-basic',effect:'owned trial only: original basic attack',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token'}},
   {name:'enemy-resume',effect:'owned trial only: resume original AI',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token'}},
   {name:'enemy-target',effect:'owned trial only: original legal target selection',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token',targetId:'snapshot.enemyInput.targets[].id'}},
-  {name:'enemy-ability',effect:'owned trial only: original basic or special without ally selection',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token',moveType:'snapshot.enemyInput.abilities[].moveType',index:'snapshot.enemyInput.abilities[].index'}},
+  {name:'enemy-unit',effect:'confirm original ally candidate and execute pending enemy skill',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token',targetId:'snapshot.enemyInput.selectionCandidates[].id'}},
+  {name:'enemy-cancel',effect:'cancel enemy ally selection without spending the move',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token'}},
+  {name:'enemy-ability',effect:'owned trial only: original ability; may begin ally selection',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token',moveType:'snapshot.enemyInput.abilities[].moveType',index:'snapshot.enemyInput.abilities[].index'}},
   {name:'snapshot',effect:'read',arguments:['--pid <SWGoH PID>']},
   {name:'watch',effect:'read',arguments:['--pid <SWGoH PID>']},
   {name:'battle-ability',effect:'original gameplay input',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',index:'snapshot.input.abilities[].index'},result:'inputDispatched confirms callback only; observe subsequent snapshot for resolution'},
   {name:'battle-cancel',effect:'cancel original pending unit selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token'},result:'selectionCancelled confirms original cancellation'},
   {name:'battle-unit',effect:'complete original pending unit selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',targetId:'snapshot.input.selectionCandidates[].id'},result:'selectionCompleted confirms original selection callback finished'},
   {name:'battle-target',effect:'original target selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',targetId:'snapshot.input.targets[].id'},result:'targetConfirmed checks actual and manual target; repeated selection is a no-op'}
- ],navigation:['campaign-menu','campaign-home','inventory-home','inventory-characters','inventory-ships'],trial:{launcher:'start_captured_trial.ps1',scope:'captured snapshots; owned visual trial supports snapshot and battle inputs'},unavailable:['otherActions','uncapturedTrial','aiPrediction','enemyAllySelection','enemyUltimateSkills','aiPriorityEditing']}));
-}else if(args.length===3&&['snapshot','watch','campaign-menu','campaign-enter','campaign-home','inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability'].includes(args[0])&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
+ ],navigation:['campaign-menu','campaign-home','inventory-home','inventory-characters','inventory-ships'],trial:{launcher:'start_captured_trial.ps1',scope:'captured snapshots; owned visual trial supports snapshot and battle inputs'},unavailable:['otherActions','uncapturedTrial','aiPrediction','enemyUltimateSkills','aiPriorityEditing']}));
+}else if(args.length===3&&['snapshot','watch','campaign-menu','campaign-enter','campaign-home','inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
  const pid=Number(args[2]);
  const processPath=execFileSync('powershell.exe',['-NoProfile','-Command',`(Get-Process -Id ${pid} -ErrorAction Stop).Path`],{encoding:'utf8'}).trim();
  if(processPath.toLowerCase()!=='e:\\games\\ea games\\swgoh\\swgoh.exe')throw Error('PID must be the supported original client');
@@ -49,7 +51,7 @@ if(args.length===1&&args[0]==='capabilities'){
     if(cached.pid!==pid||cached.hostPid!==status.hostPid||Date.now()-Date.parse(cached.observedAt)>5000)throw Error('Trial snapshot stale; do not attach another host');
     console.log(JSON.stringify(cached,null,2));process.exit(0);
    }
-   if(!['battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability'].includes(args[0]))throw Error('Only snapshot and battle inputs are available while trial owns runtime');
+   if(!['battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0]))throw Error('Only snapshot and battle inputs are available while trial owns runtime');
    const result=await submitCommand(path.dirname(trialStatusPath),{pid,hostPid:status.hostPid},args[0],battleRequest);
    console.log(JSON.stringify(result,null,2));process.exit(result.ok?0:1);
   }
@@ -61,7 +63,7 @@ if(args.length===1&&args[0]==='capabilities'){
   const status=JSON.parse(fs.readFileSync(statusPath,'utf8'));
   if(status.pid===pid&&!status.detached){
    process.kill(status.hostPid,0);
-   if(args[0].startsWith('inventory-')||args[0].startsWith('campaign-')||['campaign-enter','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability'].includes(args[0])){
+   if(args[0].startsWith('inventory-')||args[0].startsWith('campaign-')||['campaign-enter','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])){
     const result=await submitCommand(path.dirname(statusPath),{pid,hostPid:status.hostPid},args[0],battleRequest);
     console.log(JSON.stringify(result,null,2));process.exit(result.ok?0:1);
    }
@@ -71,7 +73,7 @@ if(args.length===1&&args[0]==='capabilities'){
    console.log(JSON.stringify(cached,null,2));process.exit(0);
   }
  }
- if(['campaign-menu','campaign-enter','campaign-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability'].includes(args[0]))throw Error('Start the shared battle-info host for this operation.');
+ if(['campaign-menu','campaign-enter','campaign-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0]))throw Error('Start the shared battle-info host for this operation.');
  const releaseOwnership=acquireRuntimeSession(pid);
  const session=await frida.attach(pid);
  try{

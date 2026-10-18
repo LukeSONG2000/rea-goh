@@ -54,7 +54,7 @@ try{
  if(manifest.mode==='visual'&&manifest.battleCli===true){
   while(!complete){
    await processCommands(directory,owner,async(operation,payload)=>{
-    if(complete||!['battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability'].includes(operation))throw Error('Operation unavailable in owned trial');
+    if(complete||!['battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(operation))throw Error('Operation unavailable in owned trial');
     return await script.exports.trialcommand(operation,payload);
    });
    if(complete)break;

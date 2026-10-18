@@ -24,8 +24,44 @@ globalThis.installEnemyInputGate=context=>{
      cooldown:R.readValue(x.ability,'<CooldownCounter>k__BackingField','i32'),
      ready:!!R.unbox(call(x.ability,'get_IsAbilityReady'),'bool'),
      canPerform:!!R.unbox(call(pending.unit,'CanPerformMove',[A.value('i32',x.moveType),A.value('i32',x.index),A.value('bool',false)]),'bool'),
-     supported:abilityType===0&&!allyTargetingRuleId};
+     requiresAllySelection:!!allyTargetingRuleId,
+     supported:abilityType===0||(abilityType===3&&!!allyTargetingRuleId)};
    });
+ }
+ function selection(){
+  if(!pending?.choice)return {selectingUnit:false,selectionCandidates:[]};
+  const controller=R.readRef(context,'<BattleManualUnitSelectController>k__BackingField');
+  const active=!!R.unbox(call(controller,'get_CurrentlyPerformingUnitSelection'),'bool');
+  if(!active)return {controller,selectingUnit:false,selectionCandidates:[]};
+  if(pending.choice.callback&&!R.readRef(controller,'_completed').equals(pending.choice.callback))throw Error('Enemy selection ownership changed');
+  const list=R.readRef(controller,'_units');
+  const n=R.readValue(list,'_size','i32'),items=S.array(R.readRef(list,'_items'));
+  if(n<0||n>64||n>items.length)throw Error('Original ally selection list bounds');
+  return {controller,selectingUnit:true,selectionCandidates:items.slice(0,n).map(p=>({id:unitId(p),baseId:S.string(R.readRef(R.readRef(R.readRef(p,'_unitDO'),'<Definition>k__BackingField'),'BaseId'))}))};
+ }
+ function clearSelection(){
+  if(!pending.choice)return;
+  const live=selection();
+  if(live.selectingUnit){
+   call(live.controller,'CancelSelectUnit');
+   if(R.unbox(call(live.controller,'get_CurrentlyPerformingUnitSelection'),'bool'))throw Error('Original ally cancellation not confirmed');
+  }
+  pending.choice=null;
+ }
+ function freshToken(){pending.token='enemy:'+Process.id+':'+(++serial);}
+ function dispatch(chosen){
+  const saved=pending,{token}=saved,{moveType,index,id:abilityId}=chosen;
+  const selectedTarget=unitId(call(R.readRef(saved.unit,'_targetingController'),'GetCurrentTarget'));
+  pending=null;
+  try{
+   const started=R.unbox(call(saved.unit,'PerformManualMove',[A.value('i32',moveType),A.value('i32',index)]),'bool');
+   if(!started){pending=saved;throw Error('Original manual move did not start');}
+   call(saved.callback,'Invoke',[A.value('i32',moveType)]);
+   const actualTarget=unitId(R.readRef(saved.unit,'<EnemyTarget>k__BackingField'));
+   const allyTarget=chosen.requiresAllySelection?unitId(R.readRef(saved.unit,'<AllyTarget>k__BackingField')):null;
+   const result={started:true,token,abilityId,moveType,index,selectedTarget,actualTarget,allyTarget};
+   events.push({event:moveType===0?'manual-basic':'manual-special',...result});return result;
+  }finally{if(pending!==saved)for(const handle of saved.retained)R.release(handle);}
  }
  function targeting(){
   const controller=R.readRef(pending.unit,'_targetingController');
@@ -37,8 +73,10 @@ globalThis.installEnemyInputGate=context=>{
  }
  function snapshot(){
   if(!pending)return {pending:false};
-  const targetInfo=targeting();
+  const targetInfo=targeting(),ally=selection();
   return {pending:true,token:pending.token,expiresAt:pending.expiresAt,actor:unitId(pending.unit),
+   selectingUnit:ally.selectingUnit,selectionCandidates:ally.selectionCandidates,
+   selectedAbility:pending.choice?{moveType:pending.choice.moveType,index:pending.choice.index,id:pending.choice.id}:null,
    abilities:abilities().map(({ability,...info})=>info),
    targets:targetInfo.targets,selectedTarget:targetInfo.selectedTarget,manualTarget:targetInfo.manualTarget,
    owner:R.unbox(call(pending.unit,'get_Owner'),'i32'),
@@ -81,6 +119,7 @@ globalThis.installEnemyInputGate=context=>{
    validate();
    if(!request||request.token!==pending.token)throw Error('Stale enemy input token');
    if(Date.now()>=pending.expiresAt)throw Error('Enemy input expired; original AI will resume');
+   if(pending.choice)throw Error('Finish or cancel enemy ally selection first');
    const live=targeting();
    if(typeof request.targetId!=='string'||!live.targets.some(t=>t.id===request.targetId))throw Error('Target is not in original enemy legal target list');
    if(live.selectedTarget===request.targetId)
@@ -96,6 +135,7 @@ globalThis.installEnemyInputGate=context=>{
   },
   resume(token){
    validate();if(token!==pending.token)throw Error('Stale enemy input token');
+   clearSelection();
    const saved=pending;pending=null;
    try{original(saved.provider,saved.unit,saved.callback,saved.info);events.push({event:'resumed-original',token});}
    finally{for(const handle of saved.retained)R.release(handle);}
@@ -107,24 +147,49 @@ globalThis.installEnemyInputGate=context=>{
    validate();if(token!==pending.token)throw Error('Stale enemy input token');
    if(Date.now()>=pending.expiresAt)throw Error('Enemy input expired; original AI will resume');
    if(![0,1].includes(moveType)||!Number.isInteger(index)||index<0||index>63||(moveType===0&&index!==0))throw Error('Invalid enemy ability selector');
-   const saved=pending;
+   if(pending.choice)throw Error('Finish or cancel enemy ally selection first');
    const chosen=abilities().find(x=>x.moveType===moveType&&x.index===index);
    if(!chosen)throw Error('Enemy ability absent from original list');
    if(!chosen.supported)throw Error('Original ability requires ally selection or an unsupported ability type');
    if(!chosen.ready||!chosen.canPerform)throw Error('Original CanPerformMove/readiness rejected ability');
-   const abilityId=chosen.id;
-   const selectedTarget=unitId(call(R.readRef(saved.unit,'_targetingController'),'GetCurrentTarget'));
-   // Same original move and completion delegate used by BattleInputProvider.
-   // Target remains the original targeting controller's current target.
-   pending=null;
-   try{
-    const started=R.unbox(call(saved.unit,'PerformManualMove',[A.value('i32',moveType),A.value('i32',index)]),'bool');
-    if(!started){pending=saved;throw Error('Original manual move did not start');}
-    call(saved.callback,'Invoke',[A.value('i32',moveType)]);
-    const actualTarget=unitId(R.readRef(saved.unit,'<EnemyTarget>k__BackingField'));
-    events.push({event:moveType===0?'manual-basic':'manual-special',token,abilityId,moveType,index,selectedTarget,actualTarget});
-    return {started:true,token,abilityId,moveType,index,selectedTarget,actualTarget};
-   }finally{if(pending!==saved)for(const handle of saved.retained)R.release(handle);}
+   if(chosen.requiresAllySelection){
+    const controller=R.readRef(context,'<BattleManualUnitSelectController>k__BackingField');
+    if(R.unbox(call(controller,'get_CurrentlyPerformingUnitSelection'),'bool'))throw Error('Another original unit selection is active');
+    pending.choice={moveType,index,id:chosen.id};
+    // Native closure writes AllyTarget. A null continuation leaves input held
+    // until enemy-unit explicitly confirms and dispatches the move.
+    freshToken();
+    call(fsm(),'SelectAlly',[A.ref(chosen.ability),A.ref(R.nil)]);
+    const active=!!R.unbox(call(controller,'get_CurrentlyPerformingUnitSelection'),'bool');
+    if(active)pending.choice.callback=R.readRef(controller,'_completed');
+    const live=selection();
+    if(!active)pending.choice=null; // Native empty-list path already completed with null.
+    const result={started:false,selectionStarted:active,selectionEmpty:!active,token:pending.token,abilityId:chosen.id,candidates:live.selectionCandidates};
+    events.push({event:'ally-selection',...result});return result;
+   }
+   return dispatch(chosen);
+  },
+  selectUnit(request){
+   validate();if(request?.token!==pending.token)throw Error('Stale enemy input token');
+   if(Date.now()>=pending.expiresAt)throw Error('Enemy input expired; original AI will resume');
+   if(!pending.choice)throw Error('No pending enemy ally selection');
+   const live=selection();
+   if(!live.selectingUnit||!live.selectionCandidates.some(t=>t.id===request.targetId))throw Error('Unit is not in original enemy ally candidates');
+   const chosen=abilities().find(x=>x.moveType===pending.choice.moveType&&x.index===pending.choice.index&&x.id===pending.choice.id);
+   if(!chosen?.ready||!chosen.canPerform)throw Error('Original CanPerformMove/readiness rejected ability');
+   call(live.controller,'HandleUnitTapped',[A.ref(R.string(request.targetId))]);
+   const actual=unitId(R.readRef(pending.unit,'<AllyTarget>k__BackingField'));
+   if(R.unbox(call(live.controller,'get_CurrentlyPerformingUnitSelection'),'bool')||actual!==request.targetId)throw Error('Original ally selection not confirmed');
+   events.push({event:'ally-selected',token:pending.token,abilityId:chosen.id,actual});
+   pending.choice=null;return dispatch(chosen);
+  },
+  cancelSelection(token){
+   validate();if(token!==pending.token)throw Error('Stale enemy input token');
+   if(Date.now()>=pending.expiresAt)throw Error('Enemy input expired; original AI will resume');
+   if(!pending.choice)throw Error('No pending enemy ally selection');
+   clearSelection();freshToken();
+   events.push({event:'ally-selection-cancelled',token:pending.token});
+   return {selectionCancelled:true,token:pending.token};
   },
   stop(){
    if(stopped)return;

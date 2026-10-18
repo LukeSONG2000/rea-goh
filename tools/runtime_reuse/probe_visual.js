@@ -114,7 +114,9 @@
       if(heldToken!==snapshot.token){heldToken=snapshot.token;heldAt=Date.now();send({kind:'enemy-held-start',snapshot});}
       else if(options.enemyBasicDemo&&Date.now()-heldAt>=2200){
        send({kind:'enemy-held-end',snapshot,elapsed:Date.now()-heldAt});
-       send({kind:'enemy-manual-input',result:enemyGate.chooseBasic(snapshot.token)});
+       const result=enemyGate.chooseBasic(snapshot.token);
+       send({kind:'enemy-manual-input',result});
+       if(!result.started)send({kind:'enemy-basic-demo-original-fallback',result:enemyGate.resume(result.token)});
       }
       else if(options.enemyControl&&Date.now()>=snapshot.expiresAt){
        send({kind:'enemy-input-timeout',snapshot,result:enemyGate.resume(snapshot.token)});

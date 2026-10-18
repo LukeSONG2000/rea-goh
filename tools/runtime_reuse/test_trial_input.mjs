@@ -14,14 +14,17 @@ for(const [op,method] of [['battle-ability','choose'],['battle-target','selectTa
 }
 const count=calls.length;
 assert.throws(()=>execute('enemy-basic',request),/not enabled/);
-sandbox.visualProbe.enemyGate={chooseAbility:r=>({started:r.token==='current'&&r.index===0}),selectTarget:r=>({targetConfirmed:r.targetId==='valid'}),chooseBasic:r=>({started:r==='current'}),resume:r=>({resumed:r==='current'}),snapshot:()=>({pending:true})};
+sandbox.visualProbe.enemyGate={selectUnit:r=>({started:r.targetId==='valid'}),cancelSelection:t=>({selectionCancelled:t==='current'}),chooseAbility:r=>({started:r.token==='current'&&r.index===0}),selectTarget:r=>({targetConfirmed:r.targetId==='valid'}),chooseBasic:r=>({started:r==='current'}),resume:r=>({resumed:r==='current'}),snapshot:()=>({pending:true})};
 assert.equal(execute('enemy-ability',{...request,moveType:1,index:0}).started,true);
+assert.equal(execute('enemy-unit',{...request,targetId:'valid'}).started,true);
+assert.equal(execute('enemy-cancel',request).selectionCancelled,true);
+assert.throws(()=>execute('battle-unit',request),/Use enemy commands/);
 assert.equal(execute('enemy-target',{...request,targetId:'valid'}).targetConfirmed,true);
 assert.equal(execute('enemy-basic',request).started,true);
 assert.equal(execute('enemy-resume',request).resumed,true);
 assert.equal(sandbox.rpc.exports.enemysnapshot().pending,true);
 assert.throws(()=>execute('enemy-basic',{}),/Expected enemy input token/);
-assert.throws(()=>execute('campaign-home',request),/Only battle inputs/);
+assert.throws(()=>execute('campaign-home',request),/Use enemy commands/);
 controller['<CurrentState>k__BackingField']=pointer({_battleController:{_battleContext:context}});
 assert.throws(()=>execute('battle-ability',request),/not the owned trial/);
 assert.throws(()=>execute('enemy-basic',request),/not the owned trial/);

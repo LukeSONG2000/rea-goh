@@ -1,0 +1,1282 @@
+{
+  "date": "2026-10-18",
+  "scope": "Generic enemy ally selection/cancel/timeout CLI, original SelectAlly and HandleUnitTapped; custom private Wat+Vader vs Kelleran only",
+  "runs": [
+    {
+      "path": "logs\\high_reuse\\enemy-ally-cli-v1-evidence.json",
+      "sha256": "c7d176e78c7e1dd317ae2d6ef169cd28b100e455cb5b24841dccee591ede38d6",
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 7,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 2,
+          "sendto": 6,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 9,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "selectionEvents": [
+        {
+          "event": "ally-selection",
+          "started": false,
+          "selectionStarted": false,
+          "selectionEmpty": true,
+          "token": "enemy:19440:2",
+          "abilityId": "basicability_wattambor",
+          "candidates": []
+        },
+        {
+          "event": "ally-selection",
+          "started": false,
+          "selectionStarted": true,
+          "selectionEmpty": false,
+          "token": "enemy:19440:3",
+          "abilityId": "wattambor_tech1_ability",
+          "candidates": [
+            {
+              "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+              "baseId": "VADER"
+            }
+          ]
+        },
+        {
+          "event": "ally-selection-cancelled",
+          "token": "enemy:19440:4"
+        },
+        {
+          "event": "ally-selection",
+          "started": false,
+          "selectionStarted": true,
+          "selectionEmpty": false,
+          "token": "enemy:19440:5",
+          "abilityId": "wattambor_tech1_ability",
+          "candidates": [
+            {
+              "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+              "baseId": "VADER"
+            }
+          ]
+        }
+      ],
+      "timeouts": [
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:5",
+            "expiresAt": 1792285941150,
+            "actor": "0ConuDEeRRKTK60gSUgBiQ",
+            "selectingUnit": true,
+            "selectionCandidates": [
+              {
+                "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+                "baseId": "VADER"
+              }
+            ],
+            "selectedAbility": {
+              "moveType": 1,
+              "index": 1,
+              "id": "wattambor_tech1_ability"
+            },
+            "abilities": [
+              {
+                "moveType": 0,
+                "index": 0,
+                "id": "basicability_wattambor",
+                "allyTargetingRuleId": "target_debuffed_ally",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 0,
+                "id": "specialability_wattambor01",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 1,
+                "id": "wattambor_tech1_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 2,
+                "id": "wattambor_tech2_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 3,
+                "id": "wattambor_tech3_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              }
+            ],
+            "targets": [
+              {
+                "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                "baseId": "KELLERANBEQ"
+              }
+            ],
+            "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+            "manualTarget": null,
+            "owner": 1,
+            "turn": 0,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:5"
+          }
+        },
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:6",
+            "expiresAt": 1792285955852,
+            "actor": "qDYpT6UdQ2uPo3sVFlgRHw",
+            "selectingUnit": false,
+            "selectionCandidates": [],
+            "selectedAbility": null,
+            "abilities": [
+              {
+                "moveType": 0,
+                "index": 0,
+                "id": "basicability_darthvader",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 0,
+                "id": "specialability_vader02",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 1,
+                "id": "specialability_vader01",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 2,
+                "id": "specialability_vader03",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              }
+            ],
+            "targets": [
+              {
+                "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                "baseId": "KELLERANBEQ"
+              }
+            ],
+            "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+            "manualTarget": null,
+            "owner": 1,
+            "turn": 2,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:6"
+          }
+        },
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:7",
+            "expiresAt": 1792285969288,
+            "actor": "0ConuDEeRRKTK60gSUgBiQ",
+            "selectingUnit": false,
+            "selectionCandidates": [],
+            "selectedAbility": null,
+            "abilities": [
+              {
+                "moveType": 0,
+                "index": 0,
+                "id": "basicability_wattambor",
+                "allyTargetingRuleId": "target_debuffed_ally",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 0,
+                "id": "specialability_wattambor01",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 1,
+                "id": "wattambor_tech1_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": false,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 2,
+                "id": "wattambor_tech2_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": false,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 3,
+                "id": "wattambor_tech3_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": false,
+                "requiresAllySelection": true,
+                "supported": true
+              }
+            ],
+            "targets": [
+              {
+                "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                "baseId": "KELLERANBEQ"
+              }
+            ],
+            "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+            "manualTarget": null,
+            "owner": 1,
+            "turn": 3,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:7"
+          }
+        },
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:8",
+            "expiresAt": 1792285981245,
+            "actor": "qDYpT6UdQ2uPo3sVFlgRHw",
+            "selectingUnit": false,
+            "selectionCandidates": [],
+            "selectedAbility": null,
+            "abilities": [
+              {
+                "moveType": 0,
+                "index": 0,
+                "id": "basicability_darthvader",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 0,
+                "id": "specialability_vader02",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 4,
+                "ready": false,
+                "canPerform": false,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 1,
+                "id": "specialability_vader01",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 2,
+                "id": "specialability_vader03",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              }
+            ],
+            "targets": [
+              {
+                "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                "baseId": "KELLERANBEQ"
+              }
+            ],
+            "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+            "manualTarget": null,
+            "owner": 1,
+            "turn": 4,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:8"
+          }
+        },
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:9",
+            "expiresAt": 1792285993708,
+            "actor": "qDYpT6UdQ2uPo3sVFlgRHw",
+            "selectingUnit": false,
+            "selectionCandidates": [],
+            "selectedAbility": null,
+            "abilities": [
+              {
+                "moveType": 0,
+                "index": 0,
+                "id": "basicability_darthvader",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 0,
+                "id": "specialability_vader02",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 3,
+                "ready": false,
+                "canPerform": false,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 1,
+                "id": "specialability_vader01",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 2,
+                "id": "specialability_vader03",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 8,
+                "ready": false,
+                "canPerform": false,
+                "requiresAllySelection": false,
+                "supported": true
+              }
+            ],
+            "targets": [
+              {
+                "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                "baseId": "KELLERANBEQ"
+              }
+            ],
+            "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+            "manualTarget": null,
+            "owner": 1,
+            "turn": 5,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:9"
+          }
+        },
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:10",
+            "expiresAt": 1792286008833,
+            "actor": "qDYpT6UdQ2uPo3sVFlgRHw",
+            "selectingUnit": false,
+            "selectionCandidates": [],
+            "selectedAbility": null,
+            "abilities": [
+              {
+                "moveType": 0,
+                "index": 0,
+                "id": "basicability_darthvader",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 0,
+                "id": "specialability_vader02",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 2,
+                "ready": false,
+                "canPerform": false,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 1,
+                "id": "specialability_vader01",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 2,
+                "id": "specialability_vader03",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 7,
+                "ready": false,
+                "canPerform": false,
+                "requiresAllySelection": false,
+                "supported": true
+              }
+            ],
+            "targets": [
+              {
+                "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                "baseId": "KELLERANBEQ"
+              }
+            ],
+            "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+            "manualTarget": null,
+            "owner": 1,
+            "turn": 6,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:10"
+          }
+        }
+      ],
+      "commands": [
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:1",
+            "moveType": 0,
+            "index": 0
+          },
+          "code": 0,
+          "receipt": {
+            "id": "486a0222-ba7d-4819-b76c-45dcd83568d9",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "started": false,
+              "selectionStarted": false,
+              "selectionEmpty": true,
+              "token": "enemy:19440:2",
+              "abilityId": "basicability_wattambor",
+              "candidates": []
+            }
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:2",
+            "moveType": 1,
+            "index": 1
+          },
+          "code": 0,
+          "receipt": {
+            "id": "733427b6-e55c-40b4-9d2a-57aaf13c963d",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "started": false,
+              "selectionStarted": true,
+              "selectionEmpty": false,
+              "token": "enemy:19440:3",
+              "abilityId": "wattambor_tech1_ability",
+              "candidates": [
+                {
+                  "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+                  "baseId": "VADER"
+                }
+              ]
+            }
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-unit",
+          "payload": {
+            "token": "enemy:19440:3",
+            "targetId": "invalid"
+          },
+          "code": 1,
+          "receipt": {
+            "id": "a2bdb970-6090-4323-8ae4-30cc97080ca9",
+            "ok": false,
+            "dispatched": true,
+            "error": "Error: Unit is not in original enemy ally candidates"
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-cancel",
+          "payload": {
+            "token": "enemy:19440:3"
+          },
+          "code": 0,
+          "receipt": {
+            "id": "1348f246-f6d0-47e9-980b-c168fda2e298",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "selectionCancelled": true,
+              "token": "enemy:19440:4"
+            }
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-unit",
+          "payload": {
+            "token": "enemy:19440:3",
+            "targetId": "qDYpT6UdQ2uPo3sVFlgRHw"
+          },
+          "code": 1,
+          "receipt": {
+            "id": "2c66fbc2-274d-40d2-9a00-13e6a49348d6",
+            "ok": false,
+            "dispatched": true,
+            "error": "Error: Stale enemy input token"
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:4",
+            "moveType": 1,
+            "index": 1
+          },
+          "code": 0,
+          "receipt": {
+            "id": "cb4a500d-8862-436c-96a8-55a72ba4aba5",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "started": false,
+              "selectionStarted": true,
+              "selectionEmpty": false,
+              "token": "enemy:19440:5",
+              "abilityId": "wattambor_tech1_ability",
+              "candidates": [
+                {
+                  "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+                  "baseId": "VADER"
+                }
+              ]
+            }
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-unit",
+          "payload": {
+            "token": "enemy:19440:5",
+            "targetId": "qDYpT6UdQ2uPo3sVFlgRHw"
+          },
+          "code": 1,
+          "receipt": {
+            "id": "064dc91b-4059-4946-ae2a-093a2f0f2016",
+            "ok": false,
+            "dispatched": true,
+            "error": "Error: No owned enemy input"
+          },
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "path": "logs\\high_reuse\\enemy-ally-cli-v2-evidence.json",
+      "sha256": "f4e853d23585ab2c6f2915e31136eebceb071e65b0b516f23f44914b6934fb37",
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 16,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 8293,
+          "sendto": 6,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 4,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "selectionEvents": [
+        {
+          "event": "ally-selection",
+          "started": false,
+          "selectionStarted": false,
+          "selectionEmpty": true,
+          "token": "enemy:19440:2",
+          "abilityId": "basicability_wattambor",
+          "candidates": []
+        },
+        {
+          "event": "ally-selection",
+          "started": false,
+          "selectionStarted": true,
+          "selectionEmpty": false,
+          "token": "enemy:19440:3",
+          "abilityId": "wattambor_tech1_ability",
+          "candidates": [
+            {
+              "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+              "baseId": "VADER"
+            }
+          ]
+        },
+        {
+          "event": "ally-selection-cancelled",
+          "token": "enemy:19440:4"
+        }
+      ],
+      "timeouts": [],
+      "commands": [
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:1",
+            "moveType": 0,
+            "index": 0
+          },
+          "code": 0,
+          "receipt": {
+            "id": "50e9e75e-74f1-489c-a362-285dee56f983",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "started": false,
+              "selectionStarted": false,
+              "selectionEmpty": true,
+              "token": "enemy:19440:2",
+              "abilityId": "basicability_wattambor",
+              "candidates": []
+            }
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:2",
+            "moveType": 1,
+            "index": 1
+          },
+          "code": 0,
+          "receipt": {
+            "id": "8bf89721-1e4b-4e90-aff9-a39ce1bbe762",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "started": false,
+              "selectionStarted": true,
+              "selectionEmpty": false,
+              "token": "enemy:19440:3",
+              "abilityId": "wattambor_tech1_ability",
+              "candidates": [
+                {
+                  "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+                  "baseId": "VADER"
+                }
+              ]
+            }
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-unit",
+          "payload": {
+            "token": "enemy:19440:3",
+            "targetId": "invalid"
+          },
+          "code": 1,
+          "receipt": {
+            "id": "15e85a79-9985-4d98-8233-f687915911bd",
+            "ok": false,
+            "dispatched": true,
+            "error": "Error: Unit is not in original enemy ally candidates"
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-cancel",
+          "payload": {
+            "token": "enemy:19440:3"
+          },
+          "code": 0,
+          "receipt": {
+            "id": "1c6fe643-9d4d-4746-9a45-17f557865aa0",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "selectionCancelled": true,
+              "token": "enemy:19440:4"
+            }
+          },
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "path": "logs\\high_reuse\\enemy-ally-cli-v3-evidence.json",
+      "sha256": "ea3cb2bf2c150b028cedb3a8fdd47da93358235469c6d402f39da347b2d7317c",
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 6,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 1166,
+          "sendto": 3,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 0,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "selectionEvents": [
+        {
+          "event": "ally-selection",
+          "started": false,
+          "selectionStarted": true,
+          "selectionEmpty": false,
+          "token": "enemy:19440:2",
+          "abilityId": "wattambor_tech1_ability",
+          "candidates": [
+            {
+              "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+              "baseId": "VADER"
+            }
+          ]
+        },
+        {
+          "event": "ally-selected",
+          "token": "enemy:19440:2",
+          "abilityId": "wattambor_tech1_ability",
+          "actual": "qDYpT6UdQ2uPo3sVFlgRHw"
+        },
+        {
+          "event": "manual-special",
+          "started": true,
+          "token": "enemy:19440:2",
+          "abilityId": "wattambor_tech1_ability",
+          "moveType": 1,
+          "index": 1,
+          "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+          "actualTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+          "allyTarget": "qDYpT6UdQ2uPo3sVFlgRHw"
+        }
+      ],
+      "timeouts": [],
+      "commands": [
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:1",
+            "moveType": 1,
+            "index": 1
+          },
+          "code": 0,
+          "receipt": {
+            "id": "d6d4f1c1-0f07-4ed1-8c87-841d11efdec3",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "started": false,
+              "selectionStarted": true,
+              "selectionEmpty": false,
+              "token": "enemy:19440:2",
+              "abilityId": "wattambor_tech1_ability",
+              "candidates": [
+                {
+                  "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+                  "baseId": "VADER"
+                }
+              ]
+            }
+          },
+          "stderr": ""
+        },
+        {
+          "operation": "enemy-unit",
+          "payload": {
+            "token": "enemy:19440:2",
+            "targetId": "qDYpT6UdQ2uPo3sVFlgRHw"
+          },
+          "code": 0,
+          "receipt": {
+            "id": "304570d7-9829-489d-98f5-e9931c29bfbe",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "started": true,
+              "token": "enemy:19440:2",
+              "abilityId": "wattambor_tech1_ability",
+              "moveType": 1,
+              "index": 1,
+              "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+              "actualTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+              "allyTarget": "qDYpT6UdQ2uPo3sVFlgRHw"
+            }
+          },
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "path": "logs\\high_reuse\\enemy-ally-cli-v4-evidence.json",
+      "sha256": "65f2f45d0cb9e30c240026de6f540556a0574f11c8339b3bcc723e27100d9ead",
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 5,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 726,
+          "sendto": 2,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 1,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "selectionEvents": [
+        {
+          "event": "ally-selection",
+          "started": false,
+          "selectionStarted": true,
+          "selectionEmpty": false,
+          "token": "enemy:19440:2",
+          "abilityId": "wattambor_tech1_ability",
+          "candidates": [
+            {
+              "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+              "baseId": "VADER"
+            }
+          ]
+        }
+      ],
+      "timeouts": [
+        {
+          "kind": "enemy-input-timeout",
+          "snapshot": {
+            "pending": true,
+            "token": "enemy:19440:2",
+            "expiresAt": 1792286372084,
+            "actor": "0ConuDEeRRKTK60gSUgBiQ",
+            "selectingUnit": true,
+            "selectionCandidates": [
+              {
+                "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+                "baseId": "VADER"
+              }
+            ],
+            "selectedAbility": {
+              "moveType": 1,
+              "index": 1,
+              "id": "wattambor_tech1_ability"
+            },
+            "abilities": [
+              {
+                "moveType": 0,
+                "index": 0,
+                "id": "basicability_wattambor",
+                "allyTargetingRuleId": "target_debuffed_ally",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 0,
+                "id": "specialability_wattambor01",
+                "allyTargetingRuleId": "",
+                "abilityType": 0,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": false,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 1,
+                "id": "wattambor_tech1_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 2,
+                "id": "wattambor_tech2_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              },
+              {
+                "moveType": 1,
+                "index": 3,
+                "id": "wattambor_tech3_ability",
+                "allyTargetingRuleId": "target_ally_without_tech",
+                "abilityType": 3,
+                "cooldown": 0,
+                "ready": true,
+                "canPerform": true,
+                "requiresAllySelection": true,
+                "supported": true
+              }
+            ],
+            "targets": [
+              {
+                "id": "6MPxxx4ST0uP_DfGN4Kqng",
+                "baseId": "KELLERANBEQ"
+              }
+            ],
+            "selectedTarget": "6MPxxx4ST0uP_DfGN4Kqng",
+            "manualTarget": null,
+            "owner": 1,
+            "turn": 0,
+            "previous": 34,
+            "next": 1
+          },
+          "result": {
+            "resumed": true,
+            "token": "enemy:19440:2"
+          }
+        }
+      ],
+      "commands": [
+        {
+          "operation": "enemy-ability",
+          "payload": {
+            "token": "enemy:19440:1",
+            "moveType": 1,
+            "index": 1
+          },
+          "code": 0,
+          "receipt": {
+            "id": "44a0f62c-9ca3-4a19-a49e-ae2c9596dc84",
+            "ok": true,
+            "dispatched": true,
+            "result": {
+              "started": false,
+              "selectionStarted": true,
+              "selectionEmpty": false,
+              "token": "enemy:19440:2",
+              "abilityId": "wattambor_tech1_ability",
+              "candidates": [
+                {
+                  "id": "qDYpT6UdQ2uPo3sVFlgRHw",
+                  "baseId": "VADER"
+                }
+              ]
+            }
+          },
+          "stderr": ""
+        }
+      ]
+    }
+  ],
+  "confirmedEffects": [
+    {
+      "instanceKey": "0x28718751d20",
+      "effectKey": "0x2871a615840",
+      "effectId": "techability1_wattambor_recovery_handler",
+      "locKey": "BattleEffect_TECH1",
+      "tooltipKey": "BattleEffect_TECH1",
+      "iconSprite": "icon_medpac",
+      "overlaySprite": "button_locked",
+      "backgroundSprite": "icon_apply_neutral",
+      "iconColor": "",
+      "persistentIconPriority": 0,
+      "effectIconPriority": 0,
+      "groupable": false,
+      "isBuff": true,
+      "isDebuff": false,
+      "stackingLine": "ability-stacking-line",
+      "conditions": [
+        {
+          "conditionType": 19,
+          "conditionValue": "",
+          "kind": "non-turn-condition",
+          "remaining": null,
+          "requiredCount": 1,
+          "observedCount": 0,
+          "valueParsedAsCount": false,
+          "reported": false,
+          "reason": "Not a supported turn/action expiration counter"
+        }
+      ],
+      "durationText": "无固定回合（按原条件移除）",
+      "permanent": null
+    }
+  ],
+  "tests": [
+    "gate ownership/old token/invalid ally/empty candidates/cancel/expiry/resume",
+    "mailbox reply semantics and request validation",
+    "trial routing blocks player selection bridge during held enemy input",
+    "prepare 4 tests",
+    "lifecycle",
+    "demo_turn_order internal same-seed double run"
+  ],
+  "limitations": [
+    "All runs intentionally deadline-bounded; no terminal victory observed and runner exit 1 preserved",
+    "v1 confirmation exceeded 10 seconds and was rejected; v2 AI used sole eligible ally tech so later tech unavailable, not bypassed",
+    "No broad all-hero/all-mode claim",
+    "Native effects sampled after CLI selection; no new screenshot validation",
+    "Enemy ultimate UI, prediction, and tree editing remain pending"
+  ]
+}

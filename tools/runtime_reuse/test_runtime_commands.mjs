@@ -20,13 +20,13 @@ try{
  for(const payload of [{token:'x',moveType:2,index:0},{token:'x',moveType:1,index:-1},{token:'x',moveType:1,index:64},{token:'x',moveType:0,index:1},{token:'x',moveType:1,index:1.5}]){
   const result=await test({operation:'enemy-ability',payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
- for(const operation of ['enemy-basic','enemy-resume']){
+ for(const operation of ['enemy-basic','enemy-resume','enemy-cancel']){
   for(const payload of [null,{}, {token:42},{token:''}]){
    const result=await test({operation,payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
   }
   const id=crypto.randomUUID();
   fs.writeFileSync(path.join(box,id+'.request.json'),JSON.stringify({id,...owner,operation,payload:{token:'enemy-token'},expiresAt:11000}));
-  await processCommands(root,owner,async()=>operation==='enemy-basic'?{started:true}:{resumed:true},now);
+  await processCommands(root,owner,async()=>operation==='enemy-basic'?{started:true}:operation==='enemy-cancel'?{selectionCancelled:true}:{resumed:true},now);
   assert.equal(JSON.parse(fs.readFileSync(path.join(box,id+'.result.json'))).ok,true);
  }
  for(const payload of [null,{}, {token:42},{token:''}]){
@@ -35,7 +35,16 @@ try{
  for(const payload of [null,{token:'x',targetId:''},{token:'x',targetId:42},{token:42,targetId:'unit'}]){
   const result=await test({operation:'battle-target',payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
   const selection=await test({operation:'battle-unit',payload});assert.equal(selection.ok,false);assert.equal(selection.dispatched,false);
+  const ally=await test({operation:'enemy-unit',payload});assert.equal(ally.ok,false);assert.equal(ally.dispatched,false);
   const enemy=await test({operation:'enemy-target',payload});assert.equal(enemy.ok,false);assert.equal(enemy.dispatched,false);
+ }
+ for(const [operation,payload,result] of [
+  ['enemy-ability',{token:'t',moveType:1,index:1},{selectionStarted:true,started:false}],
+  ['enemy-basic',{token:'t'},{selectionEmpty:true,started:false}],
+  ['enemy-unit',{token:'t',targetId:'ally'},{started:true,allyTarget:'ally'}]]){
+  const id=crypto.randomUUID();fs.writeFileSync(path.join(box,id+'.request.json'),JSON.stringify({id,...owner,operation,payload,expiresAt:11000}));
+  await processCommands(root,owner,async()=>result,now);
+  assert.equal(JSON.parse(fs.readFileSync(path.join(box,id+'.result.json'))).ok,true);
  }
  await processCommands(root,owner,execute,now);assert.equal(calls,1,'Completed requests are not replayed');
  const completed=fs.readdirSync(box).find(f=>JSON.parse(fs.readFileSync(path.join(box,f))).ok);
