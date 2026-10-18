@@ -407,3 +407,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 popup-regression】认领隔离试玩的原长按面板多状态排版实测，root独占runtime及显示模块，不新增真实竞技场消耗。
 【Codex/root 2026-10-19 calendar-cli】用户新增登录日历领取，root认领原controller/view回调及CLI；前项长按隔离试玩150s清理成功但未验收，暂挂。仅免费原日历领取，不补签付费。
 【Codex/root 2026-10-19 calendar-cli validated】新增calendar-open/list/claim/close/claim-status，原view/controller唯一当前日历，id/index/LastClaimed匹配，原claim可用且未领，拒绝catch-up路由与重复提交。只读Ghidra核原ClaimButtonClicked/HideCalendarView→ProcessBulkClaim批量延迟结算。实机OCTOBER index3免费50水晶，7441→点击后7441→关闭后7491，余额精确核验；重开sourceClaimed=true/按钮禁用，旧请求拒绝。最终显式visibility开关回读实测通过，host37352/Home。VM守卫/延迟到账与命令校验/语法PASS。报告CALENDAR_CLI_20261019.json；多日历选择及非货币材料奖励结算仍未覆盖，长按面板任务暂挂未验收。
+【Codex/root 2026-10-19 popup-regression resumed】恢复长按状态面板隔离实机验收；root独占显示与试玩，600s人工验收窗口，不新增线上战斗消耗。
