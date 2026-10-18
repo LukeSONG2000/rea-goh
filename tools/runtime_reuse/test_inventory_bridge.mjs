@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {readFileSync} from 'node:fs';
+const source=readFileSync(new URL('./runtime_observer.js',import.meta.url),'utf8');
+const end=source.indexOf('globalThis.readRuntimeSnapshot=');
+const nil={isNull:()=>true};
+const obj=(type,fields={})=>({type,fields,isNull:()=>false});
+const list=rows=>obj('List',{_size:rows.length,_items:{isNull:()=>false,add:n=>n===24?{readU64:()=>({toNumber:()=>rows.length})}:{readPointer:()=>rows[(n-32)/8]}}});
+const unit=(id,baseId)=>obj('UnitDO',{Id:id,'<Definition>k__BackingField':obj('Definition',{BaseId:baseId}),'<CurrentLevel>k__BackingField':85,'<CurrentRarity>k__BackingField':7,'<CurrentTier>k__BackingField':12});
+const owned=unit('vader-id','VADER'),preview=unit('preview-id','PREVIEW');
+const ownRow=obj('Row',{'<Unit>k__BackingField':owned}),previewRow=obj('Row',{'<Unit>k__BackingField':preview});
+const view=obj('View',{_filterData:list([ownRow,previewRow])});
+let active=true;
+const character=obj('CharacterInventoryController',{_inventoryView:view});
+const ship=obj('ShipInventoryController',{_shipInventoryView:view});
+const transition=obj('Transition',{'<Type>k__BackingField':1,'<ReadOnlyRoster>k__BackingField':nil});
+const master=obj('MasterInventoryController',{_transitionData:transition,_characterInventoryController:character,_shipInventoryController:ship});
+const collection=obj('MasterInventoryGameState',{_masterInventoryController:master});let state=collection;
+const stateController=obj('StateController');
+const inventory=obj('InventoryDomainController',{'<Inventory>k__BackingField':obj('Inventory',{_unitRoster:obj('Roster',{_units:list([owned])})})});
+const calls=[];
+const R={nil,findBound:name=>name==='StateController'?stateController:inventory,classOf:o=>o.type,fullName:x=>x,
+ readRef:(o,n)=>o===stateController?state:(assert.ok(n in o.fields,'missing field '+n),o.fields[n]),readValue:(o,n)=>o.fields[n],unbox:x=>x,arg:{ref:value=>({value})}};
+const S={string:x=>x,gameObject:x=>x,invoke:(type,method,object,args)=>{if(method==='get_activeInHierarchy')return active;if(method==='get_IsLoanedUnit')return false;calls.push({type,method,object,args});}};
+const ctx=vm.createContext({RuntimeApi:R,SceneApi:S});vm.runInContext(source.slice(0,end),ctx);const bridge=ctx.InventoryBridge;
+assert.equal(bridge.readiness().ready,true);
+let result=bridge.execute('inventory-list');assert.equal(result.units.length,1);assert.equal(result.units[0].baseId,'VADER');assert.equal(calls.length,0);
+assert.throws(()=>bridge.execute('inventory-unit',{unitId:'preview-id'}),/owned unit/);
+assert.throws(()=>bridge.execute('inventory-unit',{unitId:''}),/Expected/);assert.equal(calls.length,0);
+bridge.execute('inventory-unit',{unitId:'vader-id'});assert.equal(calls[0].method,'HandleOnUnitTileClicked');assert.equal(calls[0].args[0].value,ownRow);
+transition.fields['<Type>k__BackingField']=2;bridge.execute('inventory-unit',{unitId:'vader-id'});assert.equal(calls[1].method,'OnShipInventoryTileClicked');
+active=false;assert.equal(bridge.readiness().ready,false);assert.throws(()=>bridge.execute('inventory-list'),/not ready/);active=true;
+transition.fields['<ReadOnlyRoster>k__BackingField']=owned;assert.throws(()=>bridge.execute('inventory-list'),/player collection/);transition.fields['<ReadOnlyRoster>k__BackingField']=nil;
+state=obj('HomeBaseGameState');assert.throws(()=>bridge.execute('inventory-list'),/collection screen/);assert.throws(()=>bridge.execute('inventory-back'),/detail page/);
+for(const type of ['CharacterDetailsState','ShipDetailsState']){
+ const data=obj('Data',{[type==='CharacterDetailsState'?'<Unit>k__BackingField':'Unit']:owned});
+ state=obj(type,{_controller:obj('Controller',{_transitionData:data})});
+ assert.equal(bridge.detail(state).unitId,'vader-id');bridge.execute('inventory-back');assert.equal(calls.at(-1).method,'OnBackButtonClicked');
+}
+assert.throws(()=>bridge.execute('upgrade'),/Unsupported/);
+console.log('PASS inventory bridge: own filtered IDs only, preview/foreign/inactive/wrong-state rejection, original character/ship callbacks, detail readback and back; no mutation API.');

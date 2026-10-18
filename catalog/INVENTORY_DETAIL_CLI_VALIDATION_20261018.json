@@ -1,0 +1,235 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original collection list, character/ship detail navigation and basic readback; not configuration mutation, purchase, sweep or rewards.",
+  "fix": "Old openInventory passed asyncEntry:false and falsely accepted MasterInventoryGameState as readiness. Original HomeBaseController passes true. Cold-start comparison proves native asynchronous preparation loads preset tabs and renders the collection.",
+  "nativeEvidence": [
+    "logs/high_reuse/native/home_collection_clicked.c",
+    "logs/high_reuse/native/state_async_enter.c",
+    "logs/high_reuse/native/character_show_details.c",
+    "logs/high_reuse/native/ship_tile_clicked.c"
+  ],
+  "coldStart": {
+    "before": {
+      "kind": "inventory-preset-health",
+      "state": "HomeBaseGameState",
+      "domain": "0x271cb4e0f00",
+      "inventory": "0x2722649cd20",
+      "roster": "0x27225bf5120",
+      "units": 370,
+      "characterTabs": 0,
+      "shipTabs": 0
+    },
+    "after": {
+      "kind": "inventory-preset-health",
+      "state": "HomeBaseGameState",
+      "domain": "0x271cb4e0f00",
+      "inventory": "0x2722649cd20",
+      "roster": "0x27225bf5120",
+      "units": 370,
+      "characterTabs": 7,
+      "shipTabs": 1
+    },
+    "receipt": {
+      "id": "59203735-d4ed-4092-ad3f-f269442c2fc8",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "invoked": "StateController.EnterState",
+        "effect": "original inventory navigation",
+        "kind": "characters",
+        "transitionConfirmed": true,
+        "afterState": "MasterInventoryGameState",
+        "inventory": {
+          "type": 1,
+          "navigation": 8,
+          "ready": true
+        }
+      }
+    },
+    "vader": {
+      "id": "55f62815-4530-4e40-b026-2117f4fefb0f",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "unitId": "qDYpT6UdQ2uPo3sVFlgRHw",
+        "expectedState": "CharacterDetailsState",
+        "effect": "original inventory tile callback",
+        "transitionConfirmed": true,
+        "afterState": "CharacterDetailsState",
+        "detail": {
+          "kind": "characters",
+          "unitId": "qDYpT6UdQ2uPo3sVFlgRHw",
+          "baseId": "VADER",
+          "level": 85,
+          "rarity": 7,
+          "tier": 12
+        }
+      }
+    },
+    "conclusion": "Fresh client also starts with 0 tabs; original natural collection click loads 7/1. Corrected async-entry cold run reproduces loading on same inventory/roster objects. Prior empty tabs were not evidence of trial corruption."
+  },
+  "finalOperations": [
+    {
+      "operation": "inventory-back",
+      "exit": 1,
+      "evidence": "logs\\high_reuse\\inventory-final-wrong-state.json",
+      "ok": false
+    },
+    {
+      "operation": "inventory-ships",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-ships-open.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-list",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-ships-list.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-unit",
+      "exit": 1,
+      "evidence": "logs\\high_reuse\\inventory-final-invalid-unit.json",
+      "ok": false
+    },
+    {
+      "operation": "inventory-unit",
+      "exit": 1,
+      "evidence": "logs\\high_reuse\\inventory-final-invalid-payload.json",
+      "ok": false
+    },
+    {
+      "operation": "inventory-unit",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-ship-detail.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-back",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-ship-back.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-home",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-ship-home.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-characters",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-characters-open.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-list",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-characters-list.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-unit",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-vader-detail.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-back",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-vader-back.json",
+      "ok": true
+    },
+    {
+      "operation": "inventory-home",
+      "exit": 0,
+      "evidence": "logs\\high_reuse\\inventory-final-vader-home.json",
+      "ok": true
+    }
+  ],
+  "counts": {
+    "currentFilteredCharacters": 308,
+    "currentFilteredShips": 56,
+    "loanedCharacters": 0,
+    "loanedShips": 0
+  },
+  "detailReceipts": [
+    {
+      "id": "585ea33a-1d6a-4fda-aa25-88e2a7e1e409",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "unitId": "qDYpT6UdQ2uPo3sVFlgRHw",
+        "expectedState": "CharacterDetailsState",
+        "effect": "original inventory tile callback",
+        "transitionConfirmed": true,
+        "afterState": "CharacterDetailsState",
+        "detail": {
+          "kind": "characters",
+          "unitId": "qDYpT6UdQ2uPo3sVFlgRHw",
+          "baseId": "VADER",
+          "loaned": false,
+          "level": 85,
+          "rarity": 7,
+          "tier": 12
+        }
+      }
+    },
+    {
+      "id": "db5a7c70-2779-4ae0-a963-3eea71b6ac96",
+      "ok": true,
+      "dispatched": true,
+      "result": {
+        "unitId": "EP59RSfURPS8bB9HO35Z1A",
+        "expectedState": "ShipDetailsState",
+        "effect": "original inventory tile callback",
+        "transitionConfirmed": true,
+        "afterState": "ShipDetailsState",
+        "detail": {
+          "kind": "ships",
+          "unitId": "EP59RSfURPS8bB9HO35Z1A",
+          "baseId": "BWINGREBEL",
+          "loaned": false,
+          "level": 85,
+          "rarity": 4,
+          "tier": 0
+        }
+      }
+    }
+  ],
+  "guards": [
+    "current original filtered list",
+    "current player roster ID intersection",
+    "read-only foreign roster rejected",
+    "active original child view",
+    "invalid unit/schema and wrong state rejected",
+    "trial navigation remains disallowed"
+  ],
+  "validation": [
+    "test_inventory_bridge.mjs",
+    "test_runtime_commands.mjs",
+    "test_runtime_transition.mjs",
+    "13 live CLI operations; final Home; shared host errors empty"
+  ],
+  "limitations": [
+    "Basic detail identity/level/rarity/tier/loaned only; complete gear/mod/skill configuration readers and edits remain pending.",
+    "List reflects current native filters, not a guarantee of all roster units.",
+    "No reward, currency, upgrade or equipment operation was invoked; no claim of exhaustive balance-diff audit."
+  ],
+  "finalHome": {
+    "schemaVersion": 1,
+    "state": "HomeBaseGameState",
+    "units": [],
+    "scope": "observed current client; no gameplay input",
+    "campaignMenu": [],
+    "pid": 32088,
+    "observedAt": "2026-10-18T02:38:06.711Z"
+  },
+  "files": {
+    "runtime_observer.js": "86f15e41dedecd82b9c6049a63f80a9a5001e5ff5f80945c4ec0812652be89bc",
+    "runtime_commands.mjs": "c808f61ddd79fa31a69ef7cb0b848adfadb6b6aaa0b91f5b5935620646ecd7ac",
+    "runtime_cli.mjs": "c4b66b1f000a6f0c47dd6dc4df1bfcb7716e3f7c75a87ee5ddf5d8c5523bad4e",
+    "run_battle_info.mjs": "a65bd14625e946af42d89cf666bd427520ab4b138e0365812977811c6a90e2cc"
+  }
+}

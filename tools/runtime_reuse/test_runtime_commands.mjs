@@ -13,7 +13,7 @@ async function test(extra){
 }
 try{
  assert.equal((await test({})).ok,true);assert.equal(calls,1);
- for(const invalid of [{pid:999},{hostPid:999},{expiresAt:9999},{expiresAt:Infinity},{operation:'purchase'},{operation:'eval'},{operation:'campaign-enter'},{operation:'campaign-enter',payload:{feature:'19'}},{operation:'campaign-enter',payload:{feature:-1}},{operation:'campaign-enter',payload:{feature:256}},{operation:'campaign-enter',payload:{feature:1.5}},{operation:'battle-ability'},{operation:'battle-ability',payload:{token:'x',index:-1}},{operation:'battle-ability',payload:{token:'x',index:1.5}}]){
+ for(const invalid of [{pid:999},{hostPid:999},{expiresAt:9999},{expiresAt:Infinity},{operation:'purchase'},{operation:'eval'},{operation:'inventory-unit'},{operation:'inventory-unit',payload:{unitId:''}},{operation:'inventory-unit',payload:{unitId:42}},{operation:'inventory-unit',payload:{unitId:'a'.repeat(257)}},{operation:'campaign-enter'},{operation:'campaign-enter',payload:{feature:'19'}},{operation:'campaign-enter',payload:{feature:-1}},{operation:'campaign-enter',payload:{feature:256}},{operation:'campaign-enter',payload:{feature:1.5}},{operation:'battle-ability'},{operation:'battle-ability',payload:{token:'x',index:-1}},{operation:'battle-ability',payload:{token:'x',index:1.5}}]){
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
@@ -39,6 +39,9 @@ try{
   const enemy=await test({operation:'enemy-target',payload});assert.equal(enemy.ok,false);assert.equal(enemy.dispatched,false);
  }
  for(const [operation,payload,result] of [
+  ['inventory-list',undefined,{readConfirmed:true,units:[]}],
+  ['inventory-unit',{unitId:'native-unit-id'},{transitionConfirmed:true}],
+  ['inventory-back',undefined,{transitionConfirmed:true}],
   ['enemy-ability',{token:'t',moveType:1,index:1},{selectionStarted:true,started:false}],
   ['enemy-basic',{token:'t'},{selectionEmpty:true,started:false}],
   ['enemy-unit',{token:'t',targetId:'ally'},{started:true,allyTarget:'ally'}]]){

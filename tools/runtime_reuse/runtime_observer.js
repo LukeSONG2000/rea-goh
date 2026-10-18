@@ -1,5 +1,67 @@
 'use strict';
 // Snapshot is read-only; separate explicit RPC exports perform original UI navigation.
+
+// Inventory reads are explicit requests: do not enumerate the full roster on
+// every battle-info tick. Only the currently open detail is polled.
+globalThis.InventoryBridge=(()=>{
+ const R=RuntimeApi,S=SceneApi;
+ const current=()=>R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+ function list(value){
+  if(value.isNull())return [];
+  const items=R.readRef(value,'_items'),n=R.readValue(value,'_size','i32');
+  if(n<0||n>4096||(items.isNull()?n!==0:n>items.add(24).readU64().toNumber()))throw Error('Inventory list bounds invalid');
+  return Array.from({length:n},(_,i)=>items.add(32+i*8).readPointer());
+ }
+ function unitInfo(unit){
+  const definition=R.readRef(unit,'<Definition>k__BackingField');
+  return {unitId:S.string(R.readRef(unit,'Id')),baseId:S.string(R.readRef(definition,'BaseId')),loaned:!!R.unbox(S.invoke('UnitDO','get_IsLoanedUnit',unit),'bool'),
+   level:R.readValue(unit,'<CurrentLevel>k__BackingField','i32'),rarity:R.readValue(unit,'<CurrentRarity>k__BackingField','u8'),tier:R.readValue(unit,'<CurrentTier>k__BackingField','u8')};
+ }
+ function inventory(){
+  const state=current();if(state.isNull()||R.fullName(R.classOf(state))!=='MasterInventoryGameState')throw Error('Inventory command requires the collection screen');
+  const master=R.readRef(state,'_masterInventoryController'),data=R.readRef(master,'_transitionData');
+  if(!R.readRef(data,'<ReadOnlyRoster>k__BackingField').isNull())throw Error('Inventory interface requires the player collection');
+  const kind=R.readValue(data,'<Type>k__BackingField','i32');
+  if(![1,2].includes(kind))throw Error('Select characters or ships first');
+  const controller=R.readRef(master,kind===1?'_characterInventoryController':'_shipInventoryController');
+  const view=R.readRef(controller,kind===1?'_inventoryView':'_shipInventoryView');
+  if(view.isNull())throw Error('Inventory view has not been initialized');
+  if(!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(view)),'bool'))throw Error('Inventory view is not ready');
+  return {kind,controller,rows:list(R.readRef(view,'_filterData'))};
+ }
+ function detail(state){
+  const type=R.fullName(R.classOf(state));if(!['CharacterDetailsState','ShipDetailsState'].includes(type))return null;
+  const controller=R.readRef(state,'_controller');if(controller.isNull())return {loading:true};
+  const data=R.readRef(controller,'_transitionData');
+  if(data.isNull())return {loading:true};
+  const unit=R.readRef(data,type==='CharacterDetailsState'?'<Unit>k__BackingField':'Unit');
+  return unit.isNull()?{loading:true}:{kind:type==='CharacterDetailsState'?'characters':'ships',...unitInfo(unit)};
+ }
+ function execute(operation,request){
+  if(operation==='inventory-back'){
+   const state=current(),type=R.fullName(R.classOf(state));
+   if(!['CharacterDetailsState','ShipDetailsState'].includes(type))throw Error('Back requires a character or ship detail page');
+   const controller=R.readRef(state,'_controller');
+   S.invoke(type==='CharacterDetailsState'?'CharacterDetailsController':'FeatureController','OnBackButtonClicked',controller);
+   return {expectedState:'MasterInventoryGameState',effect:'original detail back callback'};
+  }
+  if(!['inventory-list','inventory-unit'].includes(operation))throw Error('Unsupported inventory action');
+  const live=inventory();
+  const domain=R.findBound('InventoryDomainController'),loadedInventory=R.readRef(domain,'<Inventory>k__BackingField');
+  const roster=R.readRef(loadedInventory,'_unitRoster');
+  const ownedIds=new Set(list(R.readRef(roster,'_units')).map(unit=>S.string(R.readRef(unit,'Id'))));
+  const rows=live.rows.filter(row=>!row.isNull()).map(row=>({row,unit:R.readRef(row,'<Unit>k__BackingField')}))
+   .filter(r=>!r.unit.isNull()&&ownedIds.has(S.string(R.readRef(r.unit,'Id'))));
+  if(operation==='inventory-list')return {readConfirmed:true,kind:live.kind===1?'characters':'ships',units:rows.filter(r=>!r.unit.isNull()).map(r=>unitInfo(r.unit)),scope:'current player-roster units in the original filtered list; loaned marked; no configuration changes'};
+  if(typeof request?.unitId!=='string'||!request.unitId.length||request.unitId.length>256)throw Error('Expected owned inventory unitId');
+  const chosen=rows.filter(r=>!r.unit.isNull()&&S.string(R.readRef(r.unit,'Id'))===request.unitId);
+  if(chosen.length!==1)throw Error('Choose one owned unit from the current filtered inventory list');
+  S.invoke(live.kind===1?'CharacterInventoryController':'ShipInventoryController',live.kind===1?'HandleOnUnitTileClicked':'OnShipInventoryTileClicked',live.controller,[R.arg.ref(chosen[0].row)]);
+  return {unitId:request.unitId,expectedState:live.kind===1?'CharacterDetailsState':'ShipDetailsState',effect:'original inventory tile callback'};
+ }
+ return {execute,detail,readiness(){try{inventory();return {ready:true};}catch(e){return {ready:false,reason:String(e)};}}};
+})();
+
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const R=RuntimeApi,S=SceneApi;
  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
@@ -9,8 +71,9 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  if(stateName==='HomeBaseGameState')result.campaignMenu=readCampaignMenu();
  if(stateName==='MasterInventoryGameState'){
   const controller=R.readRef(state,'_masterInventoryController'),data=R.readRef(controller,'_transitionData');
-  result.inventory={type:R.readValue(data,'<Type>k__BackingField','i32'),navigation:R.readValue(data,'<NavType>k__BackingField','i32')};
+  result.inventory={type:R.readValue(data,'<Type>k__BackingField','i32'),navigation:R.readValue(data,'<NavType>k__BackingField','i32'),...InventoryBridge.readiness()};
  }
+ if(['CharacterDetailsState','ShipDetailsState'].includes(stateName))result.detail=InventoryBridge.detail(state);
  if(stateName!=='BattleGameState')return result;
  try{result.input=BattleInputBridge.snapshot();}catch(e){result.input={unavailable:true,error:String(e)};}
  const context=R.readRef(R.readRef(state,'_battleController'),'_battleContext');
@@ -50,7 +113,9 @@ globalThis.openInventory=kind=>RuntimeApi.runOnMainThreadOnce(()=>{
  for(const [name,value] of [['Type',kind==='characters'?1:2],['NavType',kind==='characters'?8:10]])S.invoke('MasterInventoryGameState+TransitionData','set_'+name,data,[A.value('i32',value)]);
  S.invoke('MasterInventoryGameState+TransitionData','set_IsPlayerRoster',data,[A.value('bool',true)]);
  S.invoke('MasterInventoryGameState+TransitionData','set_UseConditionalCachedTransitionData',data,[A.value('bool',false)]);
- S.invoke('StateController','EnterState',controller,[A.ref(S.type('MasterInventoryGameState')),A.ref(data),A.value('bool',false)],['System.Type','IStateTransitionData','System.Boolean']);
+ // Original HomeBaseController uses asyncEntry=true: this runs the original
+ // state preparation (including preset tabs) before creating the inventory UI.
+ S.invoke('StateController','EnterState',controller,[A.ref(S.type('MasterInventoryGameState')),A.ref(data),A.value('bool',true)],['System.Type','IStateTransitionData','System.Boolean']);
  return {invoked:'StateController.EnterState',effect:'original inventory navigation',kind,transitionConfirmed:false};
  }finally{R.release(handle);}
 });
@@ -92,3 +157,5 @@ rpc.exports.campaignnavigate=(operation,payload)=>RuntimeApi.runOnMainThreadOnce
  }
  return {invoked:operation,effect:'original menu navigation; no battle start or sweep'};
 });
+
+rpc.exports.inventorycommand=(operation,request)=>RuntimeApi.runOnMainThreadOnce(()=>InventoryBridge.execute(operation,request));

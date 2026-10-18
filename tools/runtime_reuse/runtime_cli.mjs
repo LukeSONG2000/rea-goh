@@ -9,12 +9,15 @@ import {createRequire} from 'node:module';
 import {execFileSync} from 'node:child_process';
 const args=process.argv.slice(2);
 let battleRequest;
-if(['campaign-enter','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])&&args.length===5&&args[3]==='--request'){
+if(['inventory-unit','campaign-enter','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])&&args.length===5&&args[3]==='--request'){
  if(fs.statSync(args[4]).size>4096)throw Error('Request file too large');
  battleRequest=JSON.parse(fs.readFileSync(args[4],'utf8').replace(/^\uFEFF/,''));args.splice(3,2);
 }
 if(args.length===1&&args[0]==='capabilities'){
  console.log(JSON.stringify({schemaVersion:1,operations:[
+  {name:'inventory-list',effect:'read current player-roster units in filtered collection; loaned marked',arguments:['--pid <PID>']},
+  {name:'inventory-unit',effect:'original collection tile opens details; no upgrade',arguments:['--pid <PID>','--request <JSON file>'],request:{unitId:'inventory-list.units[].unitId'}},
+  {name:'inventory-back',effect:'original detail back callback',arguments:['--pid <PID>']},
   {name:'campaign-enter',effect:'open a visible unlocked campaign; no battle start',arguments:['--pid <PID>','--request <JSON file>'],request:{feature:'snapshot.campaignMenu[].feature'}},
   {name:'enemy-basic',effect:'owned trial only: original basic attack',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token'}},
   {name:'enemy-resume',effect:'owned trial only: resume original AI',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token'}},
@@ -29,7 +32,7 @@ if(args.length===1&&args[0]==='capabilities'){
   {name:'battle-unit',effect:'complete original pending unit selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',targetId:'snapshot.input.selectionCandidates[].id'},result:'selectionCompleted confirms original selection callback finished'},
   {name:'battle-target',effect:'original target selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',targetId:'snapshot.input.targets[].id'},result:'targetConfirmed checks actual and manual target; repeated selection is a no-op'}
  ],navigation:['campaign-menu','campaign-home','inventory-home','inventory-characters','inventory-ships'],trial:{launcher:'start_captured_trial.ps1',aiPriorityOrder:'-AiPriorityOrder <JSON permutation file>; owned enemy, original linear chain only',scope:'captured snapshots; owned visual trial supports snapshot and battle inputs'},unavailable:['otherActions','uncapturedTrial','aiPrediction','enemyUltimateSkills']}));
-}else if(args.length===3&&['snapshot','watch','campaign-menu','campaign-enter','campaign-home','inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
+}else if(args.length===3&&['inventory-list','inventory-unit','inventory-back','snapshot','watch','campaign-menu','campaign-enter','campaign-home','inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
  const pid=Number(args[2]);
  const processPath=execFileSync('powershell.exe',['-NoProfile','-Command',`(Get-Process -Id ${pid} -ErrorAction Stop).Path`],{encoding:'utf8'}).trim();
  if(processPath.toLowerCase()!=='e:\\games\\ea games\\swgoh\\swgoh.exe')throw Error('PID must be the supported original client');
@@ -63,7 +66,7 @@ if(args.length===1&&args[0]==='capabilities'){
   const status=JSON.parse(fs.readFileSync(statusPath,'utf8'));
   if(status.pid===pid&&!status.detached){
    process.kill(status.hostPid,0);
-   if(args[0].startsWith('inventory-')||args[0].startsWith('campaign-')||['campaign-enter','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])){
+   if(args[0].startsWith('inventory-')||args[0].startsWith('campaign-')||['inventory-unit','campaign-enter','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])){
     const result=await submitCommand(path.dirname(statusPath),{pid,hostPid:status.hostPid},args[0],battleRequest);
     console.log(JSON.stringify(result,null,2));process.exit(result.ok?0:1);
    }
@@ -73,7 +76,7 @@ if(args.length===1&&args[0]==='capabilities'){
    console.log(JSON.stringify(cached,null,2));process.exit(0);
   }
  }
- if(['campaign-menu','campaign-enter','campaign-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0]))throw Error('Start the shared battle-info host for this operation.');
+ if(['inventory-list','inventory-unit','inventory-back','campaign-menu','campaign-enter','campaign-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0]))throw Error('Start the shared battle-info host for this operation.');
  const releaseOwnership=acquireRuntimeSession(pid);
  const session=await frida.attach(pid);
  try{
@@ -99,5 +102,5 @@ if(args.length===1&&args[0]==='capabilities'){
   }
  }finally{await session.detach();releaseOwnership();}
 }else{
- console.error('Usage: node tools/runtime_reuse/runtime_cli.mjs capabilities | snapshot|watch|inventory-home|inventory-characters|inventory-ships|campaign-menu|campaign-home --pid <SWGoH PID> | campaign-enter|battle-ability|battle-target|battle-unit|battle-cancel --pid <PID> --request <JSON file>');process.exitCode=2;
+ console.error('Usage: node tools/runtime_reuse/runtime_cli.mjs capabilities | snapshot|watch|inventory-home|inventory-characters|inventory-ships|inventory-list|inventory-back|campaign-menu|campaign-home --pid <SWGoH PID> | inventory-unit|campaign-enter|battle-ability|battle-target|battle-unit|battle-cancel --pid <PID> --request <JSON file>');process.exitCode=2;
 }

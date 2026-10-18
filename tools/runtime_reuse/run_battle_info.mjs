@@ -35,6 +35,17 @@ try{
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
+    if(['inventory-list','inventory-unit','inventory-back'].includes(operation)){
+     const result=await script.exports.inventorycommand(operation,payload);
+     if(operation==='inventory-list')return result;
+     let after,confirmed=false;
+     for(let i=0;i<20;i++){
+      await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
+      confirmed=after.state===result.expectedState&&(operation==='inventory-unit'?after.detail?.unitId===result.unitId:after.inventory?.ready===true);
+      if(confirmed)break;
+     }
+     return {...result,transitionConfirmed:confirmed,afterState:after.state,detail:after.detail};
+    }
     if(operation==='battle-ability')return await script.exports.battleability(payload);
     if(operation==='battle-cancel')return await script.exports.battlecancel(payload);
     if(operation==='battle-unit')return await script.exports.battleunit(payload);
@@ -51,9 +62,9 @@ try{
     const home=operation==='inventory-home';
     const result=home?await script.exports.inventoryhome():await script.exports.openinventory(operation==='inventory-characters'?'characters':'ships');
     let after,confirmed=false;
-    for(let i=0;i<10;i++){
+    for(let i=0;i<30;i++){
      await new Promise(r=>setTimeout(r,300));after=await script.exports.snapshot();
-     confirmed=home?after.state==='HomeBaseGameState':after.state==='MasterInventoryGameState'&&after.inventory?.type===(operation==='inventory-characters'?1:2);
+     confirmed=home?after.state==='HomeBaseGameState':after.state==='MasterInventoryGameState'&&after.inventory?.type===(operation==='inventory-characters'?1:2)&&after.inventory?.ready===true;
      if(confirmed)break;
     }
     return {...result,transitionConfirmed:confirmed,afterState:after.state,inventory:after.inventory};

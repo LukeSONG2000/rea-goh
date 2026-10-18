@@ -159,3 +159,29 @@ node tools/runtime_reuse/runtime_cli.mjs battle-cancel --pid PID --request logs/
 仍待完成：新鲜快照采集入口、好友支援、非空 Datacron、Era 借用单位、其他
 活动/有限次数模式、终极技能独立 UI、敌方预测和决策树编辑。当前截图和确定性验证
 不代表这些范围已通过。
+
+## 收藏与详情 CLI
+
+日常显示宿主运行时，可通过同一宿主操作原收藏页面：
+
+```powershell
+node tools/runtime_reuse/runtime_cli.mjs inventory-characters --pid PID
+node tools/runtime_reuse/runtime_cli.mjs inventory-list --pid PID
+node tools/runtime_reuse/runtime_cli.mjs inventory-unit --pid PID --request logs/high_reuse/unit-detail.json
+node tools/runtime_reuse/runtime_cli.mjs snapshot --pid PID
+node tools/runtime_reuse/runtime_cli.mjs inventory-back --pid PID
+node tools/runtime_reuse/runtime_cli.mjs inventory-home --pid PID
+```
+
+`unit-detail.json` 为 `{"unitId":"inventory-list 返回的 unitId"}`。飞船先从主页执行
+`inventory-ships`，其余操作相同。列表只在显式请求时读取，采用当前原生筛选列表并与
+当前玩家库存 ID 交叉校验；不把未拥有单位的预览对象当作库存。`loaned` 来自原
+`IsLoanedUnit`。等级、星级和 `tier` 保留原数值／枚举（例如 `tier:12` 是原枚举值，
+不要直接当作 UI 装备等级文字）。详情快照位于 `snapshot.detail`。
+
+进入收藏使用原 `EnterState(..., asyncEntry:true)` 准备流程。确认成功要求收藏子视图
+已激活，而不只是状态名称变化；冷启动时默认预设页签尚未加载，跳过该流程会出现空白页。
+打开详情调用原角色／飞船 tile 回调；返回调用原详情 Back 回调。
+
+当前接口未接入升级、装备变更、商店购买、扫荡或奖励领取；不是这些目标已经完成。
+试玩持有运行时期间继续拒绝收藏导航。购买与装备拆卸／分解须另外获得明确授权。
