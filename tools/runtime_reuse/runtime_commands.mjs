@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import {compareStoreWallet} from './store_receipt.mjs';
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 export async function processCommands(directory,owner,execute,now=Date.now){
  const mailbox=path.join(directory,'commands');fs.mkdirSync(mailbox,{recursive:true});
@@ -83,7 +84,8 @@ export async function processCommands(directory,owner,execute,now=Date.now){
     const claim=JSON.parse(fs.readFileSync(storeClaimPath,'utf8'));
     if(!uuid.test(claim.id))throw Error('Invalid durable store record; retained for inspection');
     const previous=path.join(mailbox,claim.id+'.result.json');
-    response.result={...response.result,durableSubmission:claim,originalCommandResult:fs.existsSync(previous)?JSON.parse(fs.readFileSync(previous,'utf8')):null,retryBlocked:true};
+    const original=fs.existsSync(previous)?JSON.parse(fs.readFileSync(previous,'utf8')):null;
+    response.result={...response.result,durableSubmission:claim,originalCommandResult:original,durableWalletComparison:compareStoreWallet(claim,original,response.result,owner.pid),retryBlocked:true};
    }
    response.ok=['store-claim-free','campaign-sweep-confirm','calendar-claim','objectives-claim','inbox-claim'].includes(r.operation)?response.result?.claimDispatched===true:['store-reward-inventory','store-rewards','store-claim-status','store-details','store-list','calendar-list','calendar-claim-status','campaign-sweep-rewards','campaign-sweep-receipt','campaign-sweep-status','campaign-mission','inbox-claim-status','prebattle-roster','prebattle-supports','events-missions','events-list','objectives-claim-status','objectives-list','inbox-list','inventory-list','inventory-skill-quote'].includes(r.operation)?response.result?.readConfirmed===true:['enemy-basic','enemy-ability'].includes(r.operation)?(response.result?.started===true||response.result?.selectionStarted===true||response.result?.selectionEmpty===true):r.operation==='enemy-unit'?response.result?.started===true:r.operation==='enemy-cancel'?response.result?.selectionCancelled===true:r.operation==='enemy-resume'?response.result?.resumed===true:r.operation==='battle-cancel'?response.result?.selectionCancelled===true:r.operation==='battle-unit'?response.result?.selectionCompleted===true:['battle-target','enemy-target'].includes(r.operation)?response.result?.targetConfirmed===true:['store-rewards-next','battle-ability'].includes(r.operation)?response.result?.inputDispatched===true:response.result?.transitionConfirmed===true;
    if(!response.ok)response.error='Operation dispatched but not confirmed; inspect current state before retrying.';

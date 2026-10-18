@@ -40,3 +40,12 @@ const interrupted=fs.mkdtempSync(path.resolve('logs/high_reuse/store-durable-int
 fs.writeFileSync(path.join(interrupted,'store-free.pending.json'),'{');
 assert.equal((await command(interrupted,3,'store-claim-free',payload,async()=>{throw Error('must not execute');})).dispatched,false);
 console.log('PASS durable pre-dispatch claim, malformed input, success/exception restart refusal, original receipt, truncated record refusal');
+const recoveredRoot=fs.mkdtempSync(path.resolve('logs/high_reuse/store-wallet-recovery-'));
+const wallet=[{id:'PREMIUM',itemType:2,value:100},{id:'SOCIAL',itemType:2,value:300}];
+const saved=await command(recoveredRoot,10,'store-claim-free',payload,async()=>({claimDispatched:true,submission:{...payload,walletBefore:wallet},settlementConfirmed:false}));
+const recovered=await command(recoveredRoot,11,'store-claim-status',{},async()=>({readConfirmed:true,submission:null,walletAfter:wallet,settlementConfirmed:false}));
+assert.equal(recovered.result.durableWalletComparison.unchanged,true);
+assert.equal(recovered.result.durableWalletComparison.sourceCommandId,saved.id);
+assert.equal(recovered.result.retryBlocked,true);
+assert.equal(recovered.result.settlementConfirmed,false);
+console.log('PASS new host recovers original command wallet without releasing retry protection');

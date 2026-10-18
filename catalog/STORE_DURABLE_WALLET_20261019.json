@@ -1,0 +1,8 @@
+{
+ "scope":"Recover pre-claim wallet comparison from original persisted store command across helper restart",
+ "behavior":["Original command ID and dispatched flag must match durable claim","Item ID, quantity one and zero expected cost must match","Current client PID must match durable record","Require exactly PREMIUM and SOCIAL nonnegative integer balances before and after","Return exact differences without settlement or retry authorization","Missing historic baseline remains unknown"],
+ "tests":["Pure comparator: unchanged/change, wrong command/item/client, absent/duplicate/invalid baseline PASS","Mailbox integration: new helper owner restores original baseline, retains retry block and settlement false PASS","Store durable/commands/loading regressions PASS"],
+ "live":{"pid":32088,"hostPid":2632,"confirmed":false,"unchanged":null,"reason":"pre-claim-wallet-unavailable","retryBlocked":true,"newClaim":false},
+ "limitations":["Old claim remains unconfirmed because it predates wallet capture","No new real saved baseline yet","PID equality is not account identity or a process creation epoch","Intervening user activity can affect wallet deltas","Reward inventory delta and durable guard release still pending"],
+ "evidence":["logs/high_reuse/store-durable-wallet-live.json"]
+}
