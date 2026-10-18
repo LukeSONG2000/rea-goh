@@ -382,3 +382,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 selected-squad-copy】认领试玩当前选队/支援衔接。先将原SquadDO与UnitDO复制和身份/槽位/支援保真核对沉淀为通用模块，实机只读复制验证；不使用历史阵容替代当前选队，不线上开战。root独占相关代码和运行时。
 
 【Codex/root 2026-10-18 selected-squad-copy native-live】新增selected_squad.js通用原SquadDO+UnitDO复制模块，保留空槽/支援/角色别名及cell原字段；读取完整关卡键，不用历史角色替代。原挑战XP/DIFF06当前5人+HK47支援实机复制6个独立UnitDO，私有槽位临改123后原选队未变，恢复副本并释放GC，未开战/消费。原native squad/cell/ally源码已有证据；新增copy mock覆盖共享对象拒绝、支援空槽、别名保持、原角色不变及状态拒绝PASS。普通host23336恢复，返回Home。报告SELECTED_SQUAD_COPY_20261018.json。仍未接入标准launcher；下一步原BattleSupport过渡字段与匹配关卡捕获衔接，不声称全嵌套可变对象隔离或当前选队试玩完成。首次objectives-go返回Events时列表尚未就绪，后续readiness需补。
+
+【Codex/root 2026-10-18 selected-support-transition】认领原PVE入口支援过渡数据与私有副本衔接，root独占只读Ghidra和selected_squad模块，不开线上战斗。
