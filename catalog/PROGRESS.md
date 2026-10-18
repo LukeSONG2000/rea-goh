@@ -358,3 +358,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 mastery-stage】认领实时精通原计算阶段读数。原FDE5C0汇编fde988/fde9be/fde9c3确认系数乘递归原MASTERY计算值后加入，随后还有其他修正；GetStatValue另有上下限，不能直接以最终精通值乘系数冒称最终属性归因。将暴露原阶段读数并保持最终贡献未知，核原运行时。
 
 【Codex/root 2026-10-18 mastery-stage validated】属性reader新增原递归StatCalculator(MASTERY, initialValue0)读数及float32系数乘积，保持最终归因delta=null；明确此为已含基础精通的初始属性之外、后续修正前的计算项。原JMK隔离实机60→75/+15，recursive15，伤害两项390/暴击等级两项108/暴伤0.045，warnings0；白兵精通项0但护甲总净+2，证明不能把总delta归因精通。标准捕获阵容零变化读数也无错。两轮手动时限清理Home/guard/GC/errors空，无开战消费；普通host25684恢复。新增悬浮窗精通页，快照格式验证通过，GUI排版未验收。reader参数/禁止DTO getter测试PASS。报告MASTERY_STAGE_VALIDATION_20261018.json。精通降低、上限相互作用和最终贡献分解仍待。
+
+【Codex/root 2026-10-18 overlay-owner-routing】认领悬浮窗当前宿主选择与精通页布局验收；发现overlay固定runtime-snapshot会在trial持有时无法读取战斗，启动脚本也未识别trial owner。修复只读路由及存活/身份/时效校验，不另附加游戏。
