@@ -1,0 +1,39 @@
+{
+  "scope": "Original cached offer price text; not checkout or purchase authorization",
+  "nativeEvidence": {
+    "CanFormatOffer": "0x181c91f00",
+    "Format": "0x181c92ea0",
+    "GetCommerceItemInfo": "0x18114c870",
+    "findings": [
+      "CurrencyType 4 resolves cached commerce display price; absent cache uses original fallback",
+      "GetCommerceItemInfo checks existing dictionary at SDK+0x210; no request in inspected function",
+      "Other currencies use original number formatter"
+    ]
+  },
+  "live": {
+    "pid": 32088,
+    "hostPid": 25880,
+    "items": 48,
+    "offers": 46,
+    "originalCurrencyFormatted": 29,
+    "cachedCommerceFormatted": 17,
+    "errors": 0,
+    "returnedHome": true,
+    "purchaseInvocations": 0
+  },
+  "validation": [
+    "VM cached price and unavailable cache distinction",
+    "sorted identity and readiness guards regression",
+    "runtime loading PASS"
+  ],
+  "limitations": [
+    "Cache freshness and checkout final price not verified",
+    "Per-item overrideDisplayPrice preserved separately; offer text is not necessarily final card text",
+    "No purchase/refresh implementation in this bridge"
+  ],
+  "evidence": [
+    "logs/high_reuse/store-price-open.json",
+    "logs/high_reuse/store-price-list.json",
+    "logs/high_reuse/store-price-back.json"
+  ]
+}

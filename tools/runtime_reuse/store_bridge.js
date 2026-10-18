@@ -15,19 +15,26 @@ globalThis.StoreBridge=(()=>{
   if(v.isNull()||!R.readValue(c,'_tabInteractionReady','bool')||R.readValue(c,'_showingSubview','bool')||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(v)),'bool'))throw Error('Store catalog unavailable or busy');
   return {c,v};
  }
- function offer(o){
+ function offer(o,formatter){
   if(o.isNull())throw Error('Null store offer');
   const productId=S.string(R.readRef(o,'_productId')),webProductId=S.string(R.readRef(o,'_webProductId'));
-  return {currencyType:R.readValue(o,'_currencyType','i32'),rawPrice:R.readValue(o,'_price','i32'),productId,webProductId,costKey:S.string(R.readRef(o,'_costKey')),requiresProductPricing:!!(productId||webProductId)};
+  const currencyType=R.readValue(o,'_currencyType','i32');
+  let formattedPrice=null,priceSource='unavailable',priceError=null;
+  try{
+   const cached=currencyType!==4||!!R.unbox(S.invoke('StoreOfferPriceFormatter','CanFormatOffer',formatter,[A.ref(o)],['OfferDO']),'bool');
+   formattedPrice=S.string(S.invoke('StoreOfferPriceFormatter','Format',formatter,[A.ref(o)],['OfferDO']));
+   if(formattedPrice)priceSource=currencyType===4?(cached?'cached-commerce-product':'original-fallback-unconfirmed'):'original-currency-formatter';
+  }catch(e){priceError=String(e);}
+  return {formattedPrice,priceSource,priceConfirmed:priceSource==='cached-commerce-product'||priceSource==='original-currency-formatter',priceError,currencyType,rawPrice:R.readValue(o,'_price','i32'),productId,webProductId,costKey:S.string(R.readRef(o,'_costKey')),requiresProductPricing:!!(productId||webProductId)};
  }
  function status(){
-  const {v}=live(),items=list(R.readRef(v,'_storeItemData')),render=list(R.readRef(v,'_storeItemRenderData')),seen=new Set();
+  const {v}=live(),formatter=R.readRef(v,'_storeOfferPriceFormatter'),items=list(R.readRef(v,'_storeItemData')),render=list(R.readRef(v,'_storeItemRenderData')),seen=new Set();
   const rows=render.map(d=>{
    const index=val(d,'ItemIndex');if(index<0||index>=items.length||seen.has(index))throw Error('Store item mapping invalid');seen.add(index);
    const item=items[index];if(item.isNull())throw Error('Null store item');
-   return {itemIndex:index,id:str(item,'Id'),nameKey:str(d,'NameKey'),quantity:val(d,'Quantity'),possiblePurchases:val(d,'PossiblePurchases'),maxPurchaseLimit:val(d,'MaxPurchaseLimit'),maxPurchasePerTransaction:val(item,'MaxPurchasePerTransaction'),locked:val(d,'IsLocked','bool'),freeOffer:val(d,'IsFreeOffer','bool'),showPrice:val(d,'ShowPrice','bool'),overrideDisplayPrice:str(d,'OverrideDisplayPrice'),offers:array(R.readRef(d,field('Offers'))).map(offer)};
+   return {itemIndex:index,id:str(item,'Id'),nameKey:str(d,'NameKey'),quantity:val(d,'Quantity'),possiblePurchases:val(d,'PossiblePurchases'),maxPurchaseLimit:val(d,'MaxPurchaseLimit'),maxPurchasePerTransaction:val(item,'MaxPurchasePerTransaction'),locked:val(d,'IsLocked','bool'),freeOffer:val(d,'IsFreeOffer','bool'),showPrice:val(d,'ShowPrice','bool'),overrideDisplayPrice:str(d,'OverrideDisplayPrice'),offers:array(R.readRef(d,field('Offers'))).map(o=>offer(o,formatter))};
   });
-  return {readConfirmed:true,storeTab:R.readValue(v,'_currentStoreTab','i32'),items:rows,purchaseAuthorized:false,note:'Original displayed offers; rawPrice is not a localized real-money quote. PossiblePurchases is the original eligibility count, not physical stock.'};
+  return {readConfirmed:true,storeTab:R.readValue(v,'_currentStoreTab','i32'),items:rows,purchaseAuthorized:false,note:'Original offer formatting; fallback prices remain unconfirmed. Per-item overrideDisplayPrice may override offer text; this is not a checkout authorization. PossiblePurchases is the original eligibility count, not physical stock.'};
  }
  function execute(op){
   if(op==='store-list')return status();
