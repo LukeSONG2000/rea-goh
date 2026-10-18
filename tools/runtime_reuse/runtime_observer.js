@@ -666,11 +666,21 @@ globalThis.CampaignMissionBridge=(()=>{
   const button=R.readRef(component,'_selectMissionButton'),target=button.isNull()?R.nil:R.readRef(button,'_buttonTarget');
   const locked=!!R.readValue(details,'_selectedMissionIsLocked','bool')||!!R.readValue(component,'_missionLocked','bool');
   const enabled=active(component)&&active(button)&&!target.isNull()&&!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool');
-  return {details,mission,public:{readConfirmed:true,missionIdentity,locked,enabled,hasAllowedUnit:!!R.readValue(component,'_userHasAtLeastOneAllowedUnit','bool'),scope:'Current original map mission details; selection enters prebattle, not combat'}};
+  return {details,component,mission,public:{readConfirmed:true,missionIdentity,locked,enabled,hasAllowedUnit:!!R.readValue(component,'_userHasAtLeastOneAllowedUnit','bool'),scope:'Current original map mission details; selection enters prebattle, not combat'}};
  }
  function execute(operation,payload){
   const live=current(),info=live.public;
-  if(operation==='campaign-mission')return info;
+  if(operation==='campaign-mission'){
+   const button=R.readRef(live.component,'_useTicketsButton'),target=button.isNull()?R.nil:R.readRef(button,'_buttonTarget');
+   const cost=R.readRef(live.component,'_missionEntryCost'),cd=R.readRef(live.component,'_cooldownRenderData');
+   const entryCost=cost.isNull()?null:{id:S.string(R.readRef(cost,'<ID>k__BackingField')),itemType:R.readValue(cost,'<ItemType>k__BackingField','u8'),quantity:R.readValue(cost,'<Quantity>k__BackingField','i32')};
+   let cooldown=null;
+   if(!cd.isNull()){
+    const cv=(n,t='i32')=>R.readValue(cd,'<'+n+'>k__BackingField',t);
+    cooldown={hasCooldown:!!cv('HasCoolDown','bool'),active:!!cv('CoolDownActive','bool'),maxAttempts:cv('MaxAttempts'),currentAttemptCount:cv('CurrentAttemptCount'),maxAttemptsReached:!!R.unbox(S.invoke('CooldownRenderData','MaxAttemptsReached',cd),'bool')};
+   }
+   return {...info,sweep:{buttonVisible:active(live.component)&&active(button),buttonEnabled:!target.isNull()&&!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool'),entryCost,cooldown,maxSweepCount:null,ticketCost:null,executionAuthorized:false,scope:'Current original UI conditions only; entryCost is per mission, not a complete sweep quote. Entry can execute immediately without a confirmation dialog.'}};
+  }
   if(operation!=='campaign-prebattle')throw Error('Unsupported campaign mission operation');
   const id=payload?.missionIdentity;
   if(!id||['CampaignID','MapID','NodeID','MissionID'].some(k=>typeof id[k]!=='string'||!id[k].length||id[k].length>256)||!Number.isInteger(id.Difficulty)||id.Difficulty<0||id.Difficulty>255)throw Error('Full campaign mission identity required');

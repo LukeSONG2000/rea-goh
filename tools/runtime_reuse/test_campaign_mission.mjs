@@ -20,6 +20,14 @@ const ctx=vm.createContext({RuntimeApi:{nil,findBound:()=>stateController,readRe
 }}});
 vm.runInContext(source,ctx);const bridge=ctx.CampaignMissionBridge;
 assert.equal(bridge.execute('campaign-mission').missionIdentity.MapID,'M01');
+assert.equal(bridge.execute('campaign-mission').sweep.buttonVisible,false);
+component.fields._useTicketsButton=button;
+component.fields._missionEntryCost=obj('Cost',{'<ID>k__BackingField':'ENERGY','<ItemType>k__BackingField':2,'<Quantity>k__BackingField':6});
+let sweep=bridge.execute('campaign-mission').sweep;
+assert.equal(sweep.entryCost.quantity,6);assert.equal(sweep.buttonVisible,true);assert.equal(sweep.buttonEnabled,true);
+assert.equal(sweep.ticketCost,null);assert.equal(sweep.maxSweepCount,null);assert.equal(sweep.executionAuthorized,false);
+target.enabled=false;assert.equal(bridge.execute('campaign-mission').sweep.buttonEnabled,false);target.enabled=true;
+
 const payload={missionIdentity:{...identity}};
 for(const key of Object.keys(identity))assert.throws(()=>bridge.execute('campaign-prebattle',{missionIdentity:{...identity,[key]:key==='Difficulty'?2:'wrong'}}),/mission changed/);
 assert.equal(calls.length,0);

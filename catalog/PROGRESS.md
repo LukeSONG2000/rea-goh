@@ -444,3 +444,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 【Codex/root 2026-10-19 store-price native+live】原StoreOfferPriceFormatter Format/CanFormatOffer及SDK GetCommerceItemInfo只读Ghidra核查，currency4读既有缓存价格，缺失回退保留unconfirmed；其他币种原数字格式化。store-list新增formattedPrice/source/confirmed/error，每商品overrideDisplayPrice另保留。实机48商品46报价：29原货币格式化+17缓存商品价格，零读取错，返回Home，host25880，无购买。缓存缺失/原格式化及既有映射/守卫mock和loading PASS。报告STORE_PRICE_20261019.json。报价是当前缓存非结账最终价，不宣称缓存新鲜或完整商品卡文本。
 【Codex/root 2026-10-19 sweep-read】认领原扫荡条件/消耗/次数及入口核查，root独占相关bridge和只读Ghidra；不消耗扫荡券/货币。
+
+【Codex/root 2026-10-19 sweep-read native+live】原Initialize存在max=1且totalEntryCost为空直接SpendGrindTickets(1)分支，不能把UseGrindTickets视为无消费预览；保留原C+bounded listing。campaign-mission新增原扫荡按钮可见/enabled、每关入场BucketItem与cooldown，ticketCost/maxSweepCount未核明确null。实机光明1A PVE体力6、按钮可用/无cooldown，返回Home，host33900。campaign身份/可用性+新增读取mock、loading通过；无扫荡/体力/券消耗。报告SWEEP_CONDITIONS_20261019.json；下一步原CanAffordMission和计数/券消耗核查，执行接口未完成。

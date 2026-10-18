@@ -1,0 +1,39 @@
+{
+  "scope": "Campaign mission original sweep UI conditions; no sweep executed",
+  "nativeEvidence": {
+    "Initialize": "0x18164dde0",
+    "ShowGrindTicketView": "0x18164f2d0",
+    "IsGrindTicketsEnabled": "0x1816502a0",
+    "finding": "Initialize calls SpendGrindTickets(1) when computed maximum is one and total entry cost is null; entry cannot be assumed preview-only",
+    "caveat": "Show pseudocode includes tail-called view logic outside nominal address interval; bounded listing retained"
+  },
+  "live": {
+    "pid": 32088,
+    "hostPid": 33900,
+    "mission": "C01L/M01/N01/Mi01 Difficulty 1",
+    "buttonVisible": true,
+    "buttonEnabled": true,
+    "entryCost": {
+      "id": "PVE",
+      "itemType": 8,
+      "quantity": 6
+    },
+    "cooldownActive": false,
+    "maxAttemptsReached": false,
+    "returnedHome": true,
+    "sweepInvocations": 0
+  },
+  "validation": [
+    "campaign identity/availability tests plus read-only sweep conditions PASS",
+    "runtime loading PASS"
+  ],
+  "limitations": [
+    "ticketCost and maxSweepCount explicitly null until original affordability path audited",
+    "Current campaign detail only, no new event sweep execution",
+    "No UI entry called because some original branches spend immediately"
+  ],
+  "evidence": [
+    "logs/high_reuse/sweep-conditions.json",
+    "logs/high_reuse/sweep-home.json"
+  ]
+}

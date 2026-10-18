@@ -52,7 +52,7 @@ if(args.length===1&&args[0]==='capabilities'){
   {name:'inventory-skill-quote',effect:'read selected original skill costs and conditions; no upgrade',arguments:['--pid <PID>','--request <JSON file>'],request:{unitId:'snapshot.detail.unitId',skillId:'snapshot.detail.skillPopup.skillId',tier:'snapshot.detail.skillPopup.selectedLevel.tier'}},
   {name:'inventory-back',effect:'original detail back callback',arguments:['--pid <PID>']},
   {name:'campaign-enter',effect:'open a visible unlocked campaign; no battle start',arguments:['--pid <PID>','--request <JSON file>'],request:{feature:'snapshot.campaignMenu[].feature'}},
-  {name:'campaign-mission',effect:'read current map mission identity and selection availability',arguments:['--pid <PID>']},
+  {name:'campaign-mission',effect:'read current map mission identity, selection and sweep UI conditions; no sweep dispatched',arguments:['--pid <PID>']},
   {name:'campaign-prebattle',effect:'original selected mission callback to support/squad selection; no combat start',arguments:['--pid <PID>','--request <JSON file>'],request:{missionIdentity:'copy campaign-mission.missionIdentity'}},
   {name:'enemy-basic',effect:'owned trial only: original basic attack',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token'}},
   {name:'enemy-resume',effect:'owned trial only: resume original AI',arguments:['--pid <PID>','--request <JSON file>'],request:{token:'snapshot.enemyInput.token'}},
