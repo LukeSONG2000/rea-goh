@@ -58,6 +58,12 @@ const preview=obj('Preview',{_currentTicketCount:2,_maxTicketCount:20,_numUnique
 details.fields._grindTicketController.fields._missionGrindTicketView=preview;
 assert.throws(()=>bridge.execute('campaign-sweep-preview',payload),/already open/);
 assert.equal(bridge.execute('campaign-sweep-status').ticketCost,2);
+for(const count of [0,21,1.5,null])assert.throws(()=>bridge.execute('campaign-sweep-count',{...payload,count}),/Invalid/);
+assert.throws(()=>bridge.execute('campaign-sweep-count',{missionIdentity:{...identity,MissionID:'wrong'},count:1}),/changed/);
+assert.equal(bridge.execute('campaign-sweep-count',{...payload,count:1}).expectedCount,1);
+assert.equal(calls.at(-2).method,'UpdateTicketCount');assert.equal(calls.at(-2).args[0],1);
+assert.equal(calls.at(-1).method,'ManuallyUpdateCountSlider');
+
 assert.equal(bridge.execute('campaign-sweep-status').entryCost.total,12);
 assert.equal(bridge.execute('campaign-sweep-close').navigationDispatched,true);
 assert.equal(calls.at(-1).method,'OnBackClick');

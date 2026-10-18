@@ -1,0 +1,53 @@
+{
+  "scope": "Original single-mission sweep count selection only",
+  "operation": "campaign-sweep-count",
+  "nativeEvidence": {
+    "UpdateTicketCount": "0x181652ee0 clamps count and updates original labels/buttons",
+    "ManuallyUpdateCountSlider": "0x1816530c0 sets original slider while ignoreSliderChanges is true"
+  },
+  "live": {
+    "pid": 32088,
+    "hostPid": 25492,
+    "preview": {
+      "readConfirmed": true,
+      "visible": true,
+      "missionIdentity": {
+        "CampaignID": "C01L",
+        "MapID": "M01",
+        "NodeID": "N01",
+        "MissionID": "Mi01",
+        "Difficulty": 1
+      },
+      "count": 1,
+      "maxSweepCount": 24,
+      "ticketCost": 1,
+      "entryCost": {
+        "id": "PVE",
+        "itemType": 8,
+        "perAttempt": 6,
+        "total": 6
+      },
+      "scope": "Original confirmation window quantities; no redemption dispatched"
+    },
+    "ticketsAfter": 154286,
+    "affordableAttemptsAfter": 24,
+    "returnedHome": true,
+    "confirmationInvocations": 0
+  },
+  "validation": [
+    "zero/fraction/null/out-of-range rejected",
+    "changed mission rejected",
+    "native count+slider methods selected",
+    "host readback verifies expected count and full mission",
+    "campaign and loading regression PASS"
+  ],
+  "limitations": [
+    "No redemption/settlement or resource debit tested",
+    "Only existing single-mission preview supported"
+  ],
+  "evidence": [
+    "logs/high_reuse/sweep-count-one.json",
+    "logs/high_reuse/sweep-count-after.json",
+    "logs/high_reuse/sweep-count-home.json"
+  ]
+}

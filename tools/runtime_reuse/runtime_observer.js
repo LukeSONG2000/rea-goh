@@ -670,12 +670,22 @@ globalThis.CampaignMissionBridge=(()=>{
  }
  function execute(operation,payload){
   const live=current(),info=live.public;
-  if(['campaign-sweep-status','campaign-sweep-close'].includes(operation)){
+  if(['campaign-sweep-count','campaign-sweep-status','campaign-sweep-close'].includes(operation)){
    const g=R.readRef(live.details,'_grindTicketController'),v=R.readRef(g,'_missionGrindTicketView');
    const visible=active(v);
    if(operation==='campaign-sweep-close'){
     if(!visible)throw Error('Sweep preview not visible');
     S.invoke('MissionGrindTicketView','OnBackClick',v);return {navigationDispatched:true};
+   }
+   if(operation==='campaign-sweep-count'){
+    if(!visible)throw Error('Sweep preview not visible');
+    const id=payload?.missionIdentity;
+    if(!id||['CampaignID','MapID','NodeID','MissionID','Difficulty'].some(k=>id[k]!==info.missionIdentity[k]))throw Error('Current campaign mission changed');
+    const max=R.readValue(v,'_maxTicketCount','i32');
+    if(!Number.isInteger(payload.count)||payload.count<1||payload.count>max||R.readValue(v,'_numUniqueMissions','i32')!==1)throw Error('Invalid single-mission sweep count');
+    S.invoke('MissionGrindTicketView','UpdateTicketCount',v,[R.arg.value('i32',payload.count)],['System.Int32']);
+    S.invoke('MissionGrindTicketView','ManuallyUpdateCountSlider',v);
+    return {navigationDispatched:true,expectedCount:payload.count,expectedMissionIdentity:info.missionIdentity};
    }
    if(!visible)return {readConfirmed:true,visible:false};
    const count=R.readValue(v,'_currentTicketCount','i32'),max=R.readValue(v,'_maxTicketCount','i32'),missions=R.readValue(v,'_numUniqueMissions','i32'),perMission=R.readValue(v,'_isMaxTicketsPerMission','bool'),cost=R.readRef(v,'_costPerTicket');
