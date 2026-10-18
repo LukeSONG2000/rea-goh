@@ -1,0 +1,216 @@
+{
+  "scope": "90-second original private PVP HUD regression",
+  "result": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": false,
+    "terminalObserved": false,
+    "lastSnapshot": {
+      "previous": 34,
+      "next": 1,
+      "turns": 17,
+      "currentState": "BattleGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 14421,
+      "sendto": 6,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 7,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": false,
+      "campaignExpected": false,
+      "foreignTransition": false
+    }
+  },
+  "hud": {
+    "kind": "arena-hud",
+    "status": {
+      "shows": 0,
+      "updates": 0,
+      "modeGateCalls": 1,
+      "tutorialDisplays": 0,
+      "errors": [
+        "Error: object is null"
+      ],
+      "healthAnomalies": [
+        {
+          "key": "0x26fe78a52a0:{\"CurrentHP\":111867,\"MaxHP\":111867,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":109281,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+          "values": {
+            "CurrentHP": 111867,
+            "MaxHP": 111867,
+            "CurrentShield": 0,
+            "MaxShield": -1,
+            "CurrentPermanentShield": 109281,
+            "MaxPermanentShield": -1,
+            "CurrentBonusShield": 0,
+            "MaxBonusShield": 0
+          },
+          "observedAt": 1792312449138,
+          "unitType": "BattleUnitController",
+          "maxShieldStat": -1,
+          "unitId": "1d4YUk3TQiKe7u1nQIlTpQ",
+          "deferred": {
+            "observedAt": 1792312449307,
+            "text": "生命 111867 / 111867\n总护盾 0 / -1\n永久护盾 109281 / -1\n临时护盾 0 / 0"
+          }
+        },
+        {
+          "key": "0x26fe78a52a0:{\"CurrentHP\":91453,\"MaxHP\":111867,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":109281,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+          "values": {
+            "CurrentHP": 91453,
+            "MaxHP": 111867,
+            "CurrentShield": 0,
+            "MaxShield": -1,
+            "CurrentPermanentShield": 109281,
+            "MaxPermanentShield": -1,
+            "CurrentBonusShield": 0,
+            "MaxBonusShield": 0
+          },
+          "observedAt": 1792312450245,
+          "unitType": "BattleUnitController",
+          "maxShieldStat": -1,
+          "unitId": "1d4YUk3TQiKe7u1nQIlTpQ",
+          "deferred": {
+            "observedAt": 1792312450557,
+            "text": "生命 91453 / 111867\n总护盾 0 / -1\n永久护盾 109281 / -1\n临时护盾 0 / 0"
+          }
+        },
+        {
+          "key": "0x26fe78a52a0:{\"CurrentHP\":46759,\"MaxHP\":111867,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":109281,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+          "values": {
+            "CurrentHP": 46759,
+            "MaxHP": 111867,
+            "CurrentShield": 0,
+            "MaxShield": -1,
+            "CurrentPermanentShield": 109281,
+            "MaxPermanentShield": -1,
+            "CurrentBonusShield": 0,
+            "MaxBonusShield": 0
+          },
+          "observedAt": 1792312456021,
+          "unitType": "BattleUnitController",
+          "maxShieldStat": -1,
+          "unitId": "1d4YUk3TQiKe7u1nQIlTpQ",
+          "deferred": {
+            "observedAt": 1792312456222,
+            "text": "生命 57052 / 111867\n总护盾 0 / -1\n永久护盾 109281 / -1\n临时护盾 0 / 0"
+          }
+        },
+        {
+          "key": "0x26fe78a52a0:{\"CurrentHP\":4480,\"MaxHP\":111867,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":109281,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+          "values": {
+            "CurrentHP": 4480,
+            "MaxHP": 111867,
+            "CurrentShield": 0,
+            "MaxShield": -1,
+            "CurrentPermanentShield": 109281,
+            "MaxPermanentShield": -1,
+            "CurrentBonusShield": 0,
+            "MaxBonusShield": 0
+          },
+          "observedAt": 1792312456026,
+          "unitType": "BattleUnitController",
+          "maxShieldStat": -1,
+          "unitId": "1d4YUk3TQiKe7u1nQIlTpQ",
+          "deferred": {
+            "observedAt": 1792312456222,
+            "text": "生命 57052 / 111867\n总护盾 0 / -1\n永久护盾 109281 / -1\n临时护盾 0 / 0"
+          }
+        },
+        {
+          "key": "0x26fe78a52a0:{\"CurrentHP\":1118,\"MaxHP\":111867,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":109281,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+          "values": {
+            "CurrentHP": 1118,
+            "MaxHP": 111867,
+            "CurrentShield": 0,
+            "MaxShield": -1,
+            "CurrentPermanentShield": 109281,
+            "MaxPermanentShield": -1,
+            "CurrentBonusShield": 0,
+            "MaxBonusShield": 0
+          },
+          "observedAt": 1792312456031,
+          "unitType": "BattleUnitController",
+          "maxShieldStat": -1,
+          "unitId": "1d4YUk3TQiKe7u1nQIlTpQ",
+          "deferred": {
+            "observedAt": 1792312456222,
+            "text": "生命 57052 / 111867\n总护盾 0 / -1\n永久护盾 109281 / -1\n临时护盾 0 / 0"
+          }
+        },
+        {
+          "key": "0x26fe78a52a0:{\"CurrentHP\":57052,\"MaxHP\":111867,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":109281,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+          "values": {
+            "CurrentHP": 57052,
+            "MaxHP": 111867,
+            "CurrentShield": 0,
+            "MaxShield": -1,
+            "CurrentPermanentShield": 109281,
+            "MaxPermanentShield": -1,
+            "CurrentBonusShield": 0,
+            "MaxBonusShield": 0
+          },
+          "observedAt": 1792312456034,
+          "unitType": "BattleUnitController",
+          "maxShieldStat": -1,
+          "unitId": "1d4YUk3TQiKe7u1nQIlTpQ",
+          "deferred": {
+            "observedAt": 1792312456222,
+            "text": "生命 57052 / 111867\n总护盾 0 / -1\n永久护盾 109281 / -1\n临时护盾 0 / 0"
+          }
+        },
+        {
+          "key": "0x26fe78a52a0:{\"CurrentHP\":0,\"MaxHP\":111867,\"CurrentShield\":0,\"MaxShield\":-1,\"CurrentPermanentShield\":109281,\"MaxPermanentShield\":-1,\"CurrentBonusShield\":0,\"MaxBonusShield\":0}",
+          "values": {
+            "CurrentHP": 0,
+            "MaxHP": 111867,
+            "CurrentShield": 0,
+            "MaxShield": -1,
+            "CurrentPermanentShield": 109281,
+            "MaxPermanentShield": -1,
+            "CurrentBonusShield": 0,
+            "MaxBonusShield": 0
+          },
+          "observedAt": 1792312473363,
+          "unitType": "BattleUnitController",
+          "maxShieldStat": -1,
+          "unitId": "1d4YUk3TQiKe7u1nQIlTpQ",
+          "deferred": {
+            "observedAt": 1792312473394,
+            "text": "生命 0 / 111867\n总护盾 0 / -1\n永久护盾 109281 / -1\n临时护盾 0 / 0"
+          }
+        }
+      ],
+      "last": null,
+      "target": "生命 297294 / 297294\n总护盾 235274 / 300151\n永久护盾 108475 / 108475\n临时护盾 126799 / 191676"
+    }
+  },
+  "findings": [
+    "Negative max shield persists in deferred main-thread readings; callback-only hypothesis not supported",
+    "targetLayout missing in tested run means no finite control boundary reached; dense layout remains failing",
+    "Timer observed null view during loading; null controller/context/view guards added afterward, native retest pending"
+  ],
+  "screenshot": "logs/high_reuse/arena-hud-regression-v2.png",
+  "evidence": "logs/high_reuse/arena-hud-regression-v2-evidence.json"
+}

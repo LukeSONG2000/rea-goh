@@ -3,7 +3,7 @@
 (()=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg,call=S.invoke,hooks=[],popups=new Map(),targets=new Map();
  const marker='\n[80DFFF]',stats={shows:0,updates:0,modeGateCalls:0,tutorialDisplays:0,errors:[],healthAnomalies:[],last:null,target:null};
- let stopped=false;
+ let stopped=false,refreshTimer=null,refreshPending=false;
  const list=l=>l.isNull()?[]:S.array(R.readRef(l,'_items')).slice(0,R.readValue(l,'_size','i32'));
  const active=o=>!!R.unbox(call('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(o)),'bool');
  const withString=(text,fn)=>{const string=R.api('string_new','pointer',['pointer'])(Memory.allocUtf8String(text)),handle=R.retain(string);try{return fn(string);}finally{R.release(handle);}};
@@ -54,18 +54,44 @@
   if(!component.isNull())for(const field of ['_abilityButtonGrid','_leaderAndUniqueIconsGrid']){
    const control=R.readRef(component,field);if(!control.isNull())controls.push(control);
   }
-  let left=Infinity;
-  for(const control of controls){
-   if(!active(control))continue;
+  const bounds=control=>{
    const box=call('NGUIMath','CalculateRelativeWidgetBounds',R.nil,[A.ref(parent),A.ref(S.transform(control))],['UnityEngine.Transform','UnityEngine.Transform']);
    const p=R.api('object_unbox','pointer',['pointer'])(box);
-   // Unity Bounds stores center then extents, both Vector3, in parent space.
-   const minX=p.readFloat()-p.add(12).readFloat();
+   return {left:p.readFloat()-p.add(12).readFloat(),right:p.readFloat()+p.add(12).readFloat()};
+  };
+  let left=Infinity;
+  const measured=[];
+  for(const control of controls){
+   const isActive=active(control);
+   if(!isActive){measured.push({active:false});continue;}
+   const measuredBounds=bounds(control);measured.push({active:true,...measuredBounds});
+   const minX=measuredBounds.left;
    if(Number.isFinite(minX))left=Math.min(left,minX);
   }
-  if(!Number.isFinite(left))return;
+  if(!Number.isFinite(left)){stats.targetLayout={measured,unavailable:true};return;}
   const position=S.vector(S.transform(name),'localPosition');
   setVector(S.transform(item.label),'localPosition',[left-16,position[1],position[2]]);
+  // A cloned label can carry scaling/geometry offsets. Correct its actual
+  // right edge rather than treating the Transform origin as the edge.
+  const actual=bounds(item.label),delta=left-16-actual.right;
+  if(Number.isFinite(delta))setVector(S.transform(item.label),'localPosition',[left-16+delta,position[1],position[2]]);
+  stats.targetLayout={controlsLeft:left,label:bounds(item.label),gap:16,measured};
+ }
+ function refreshCurrentTarget(){
+  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+  if(R.fullName(R.classOf(state))!=='BattleGameState')return;
+  const controller=R.readRef(state,'_battleController');if(controller.isNull())return;
+  const context=R.readRef(controller,'_battleContext');if(context.isNull())return;
+  const view=call('BattleContext','get_BattleView',context);
+  if(view.isNull())return;
+  const target=R.readRef(view,'_opponentTargetComponent'),item=targets.get(target.toString());
+  if(!item||!item.view.equals(view)||!active(target))return;
+  const text=healthText(item.unit);setText(item.label,text);stats.target=text;
+  for(const row of stats.healthAnomalies)if(!row.deferred&&row.key.startsWith(item.unit.toString()+':')){
+   row.deferred={observedAt:Date.now(),text};
+   send({kind:'battle-info-health-deferred',key:row.key,...row.deferred});
+  }
+  layoutTarget(item);
  }
  function renderTarget(view,unit){
   if(unit.isNull())return;
@@ -170,13 +196,19 @@
   hook('BattleEffectsPopupView','UpdateHealth',2,{onEnter(args){this.popup=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>render(this.popup,this.unit));}});
   hook('BattleEffectsPopupView','Update',0,{onEnter(args){this.popup=args[0];},onLeave(){if(stopped)return;const item=popups.get(this.popup.toString());if(item&&Date.now()-item.lastTime>300)safe(()=>{if(R.unbox(call('BattleEffectsPopupView','get_IsDisplaying',this.popup),'bool'))render(this.popup,item.unit);});}});
   safe(refreshOpponent);
+  refreshTimer=setInterval(()=>{
+   if(stopped||refreshPending)return;
+   refreshPending=true;
+   R.runOnMainThreadOnce(()=>{if(!stopped)safe(refreshCurrentTarget);})
+    .catch(e=>{if(!stopped)safe(()=>{throw e;});}).finally(()=>{refreshPending=false;});
+  },300);
   send({kind:'battle-info-installed',pid:Process.id,scope:'UI only',hooks:hooks.length});
  }).catch(error=>send({kind:'battle-info-error',error:String(error)}));
  globalThis.battleInfoStatus=()=>stats;
  globalThis.battleInfoTestPopup=showEmptyPopup;
  globalThis.battleInfoTestTarget=renderTarget;
  globalThis.stopBattleInfo=async()=>{
-  stopped=true;hooks.forEach(h=>h.detach());
+  stopped=true;if(refreshTimer!==null)clearInterval(refreshTimer);hooks.forEach(h=>h.detach());
   await R.runOnMainThreadOnce(()=>{
    const alive=new Set(S.all('BattleEffectsPopupView').map(p=>p.toString()));
    for(const item of popups.values())if(alive.has(item.popup.toString()))safe(()=>{

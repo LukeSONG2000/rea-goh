@@ -325,3 +325,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 【Codex/root 2026-10-18 arena-hud-regression evidence】原私有PVP新克诺比队47 turn后300s超时 orderly回Home（非terminal），UI errors0/cleanup无错/serviceCalls0。自动窗口图证实密集技能栏仍重叠，边界方案未完全通过。16条负值采样：满血201899/201899时原BattleUnitController.GetStatValue(MAX_SHIELD25)=-1，与MaxPermanentShield=-1一致，推翻死亡专属推断；不能夹零，下一步核回调内/回调外值和布局实际时机。报告ARENA_HUD_REGRESSION_20261018.json，原证据与截图logs保留；原32088回酒馆，显示host39660，原目录/资源未改。
 【Codex/root 2026-10-18 hud-post-layout】认领HUD当前战斗定时刷新、实际渲染边界校正与回调后负值对照；root独占显示模块和运行时。
+
+【Codex/root 2026-10-18 hud-post-layout partial】新增300ms仅当前BattleView/目标的主线程刷新、stop清timer并拒绝排队回调；按标签实际bounds校正右边缘，附测量记录。90s私有PVP实测负MAX_SHIELD回调外仍-1，排除仅即时回调中间值；targetLayout缺失证明无有效边界（原版本提前返回），密集截图仍失败。实测加载期view空一次，已补controller/context/view空检查并增加逐控件active/bounds记录，后续原生复测待做。lifecycle含timer-stop/health诊断/语法PASS；报告HUD_DEFERRED_REGRESSION_20261018.json。回Home清理通过，不宣称布局/负值已修；无规则或原目录更改。

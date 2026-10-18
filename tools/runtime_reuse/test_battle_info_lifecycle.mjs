@@ -23,11 +23,16 @@ async function scenario(inBattle,originalEnabled){
   if(m==='FilterOpponentAbilityDisplay')return;
   assert.fail(c+'.'+m);
  }};
+ let timerCallback=null,timerCleared=false;
  const ctx=vm.createContext({RuntimeApi:R,SceneApi:S,rpc:{exports:{}},send:()=>{},
+  setInterval(fn,ms){assert.equal(ms,300);timerCallback=fn;return 123;},
+  clearInterval(id){assert.equal(id,123);timerCleared=true;},
   Interceptor:{attach(address,callbacks){hooks.set(address,callbacks);return {detach(){detached++;}};}}});
  vm.runInContext(source,ctx);await Promise.resolve();calls.length=0;
  const result=await ctx.stopBattleInfo();
  assert.equal(result.errors.length,0);assert.equal(detached,9);
+ assert.equal(timerCleared,true);const countAfterStop=calls.length;
+ timerCallback();await Promise.resolve();assert.equal(calls.length,countAfterStop,'Queued timer after stop must not touch native objects');
  if(!inBattle)assert.equal(calls.length,0,'Home cleanup must not dereference a previous battle');
  else assert.equal(calls.at(-1).args[0],originalEnabled,'Restore actual mode gate, including false');
 }
