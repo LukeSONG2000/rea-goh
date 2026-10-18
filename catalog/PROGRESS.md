@@ -374,3 +374,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 inbox-hook-flush】认领领取首次调用漏记。发现tracker在同一主线程JS回调里attach后立即调用原领取，未flush；其他原运行时即时hook已有显式flush。先修安装可见性和延迟生效mock，再真实新邮件验证，不重试已领取邮件。
 
 【Codex/root 2026-10-18 inbox-hook-visibility evidence+fix】首次flush假设实机未解决，舰队未领取邮件仅提交一次仍入口未观察；其后只读余额probe在主线程dispatcher中反射default/all/default与direct-all/default五次均返回7441、hook hits均0，RVA1807dd0/virtual相同。明确不归因单纯flush；原异步callback现可通过闭包真实owner+messageDO.Id直接关联pending记录，不依赖service entry，nativeTransactionObserved仍保真false。延迟生效及callback-only/foreign owner mock PASS，原生callback-only路径尚无新奖励实测。舰队水晶从此前核7391到7441差50，其他混合奖励未逐项核对；两探针已退出无请求，普通host22472恢复Home。报告INBOX_HOOK_VISIBILITY_20261018.json。未重试任何已提交邮件，未消费资源。
+
+【Codex/root 2026-10-18 inbox-material-reconciliation】认领混合材料/货币奖励原库存核对；root独占runtime_observer/CLI/tests。仅只读验证既有奖励ID，不重领历史邮件，不发请求或消费。
