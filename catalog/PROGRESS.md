@@ -327,3 +327,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 hud-post-layout】认领HUD当前战斗定时刷新、实际渲染边界校正与回调后负值对照；root独占显示模块和运行时。
 
 【Codex/root 2026-10-18 hud-post-layout partial】新增300ms仅当前BattleView/目标的主线程刷新、stop清timer并拒绝排队回调；按标签实际bounds校正右边缘，附测量记录。90s私有PVP实测负MAX_SHIELD回调外仍-1，排除仅即时回调中间值；targetLayout缺失证明无有效边界（原版本提前返回），密集截图仍失败。实测加载期view空一次，已补controller/context/view空检查并增加逐控件active/bounds记录，后续原生复测待做。lifecycle含timer-stop/health诊断/语法PASS；报告HUD_DEFERRED_REGRESSION_20261018.json。回Home清理通过，不宣称布局/负值已修；无规则或原目录更改。
+【Codex/root 2026-10-18 hud-bounds dense-pass】边界有效但Infinity汇总未生效；改null首有效边界比较后，PVE实机controlsLeft=-187/labelRight=-203，密集竞技场controlsLeft=-238.700012/labelRight=-254.700012，均留16单位。竞技场v3窗口截图数值与5图标分离，30s手动停留后清理errors0。actual-edge mock覆盖偏移及动态扩展，lifecycle/health测试PASS。仅1402x819当前PVE/PVP布局通过，缩放/全模式仍待，负值归因未完成。证据logs/high_reuse/hud-measure-v2-evidence.json及arena-hud-regression-v3-evidence.json、截图同名前缀png。

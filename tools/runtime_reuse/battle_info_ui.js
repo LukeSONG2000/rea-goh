@@ -59,16 +59,16 @@
    const p=R.api('object_unbox','pointer',['pointer'])(box);
    return {left:p.readFloat()-p.add(12).readFloat(),right:p.readFloat()+p.add(12).readFloat()};
   };
-  let left=Infinity;
+  let left=null;
   const measured=[];
   for(const control of controls){
    const isActive=active(control);
    if(!isActive){measured.push({active:false});continue;}
    const measuredBounds=bounds(control);measured.push({active:true,...measuredBounds});
    const minX=measuredBounds.left;
-   if(Number.isFinite(minX))left=Math.min(left,minX);
+   if(Number.isFinite(minX)&&(left===null||minX<left))left=minX;
   }
-  if(!Number.isFinite(left)){stats.targetLayout={measured,unavailable:true};return;}
+  if(left===null){stats.targetLayout={measured,unavailable:true};return;}
   const position=S.vector(S.transform(name),'localPosition');
   setVector(S.transform(item.label),'localPosition',[left-16,position[1],position[2]]);
   // A cloned label can carry scaling/geometry offsets. Correct its actual
