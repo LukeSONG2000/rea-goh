@@ -290,3 +290,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 skill-level-navigation】认领原AbilityLevelButtonClicked等级切换CLI，以当前unit/skill/tier核验和原选中等级回读确认，不执行升级；root写运行时与tests。
 【Codex/root 2026-10-18 skill-level-navigation validated】新增inventory-skill-level，unitId/skillId/原levels内唯一tier校验，原AbilityLevelButtonClicked调用，host回读selectedLevel.tier确认。VEERS实机2→8→2，8级原LOCKED保留、2级原UPGRADE_ELIGIBLE，描述/材料费用随原UI改变；关闭后skills与进入前精确一致，最终Home。mock旧skill/缺失tier/非整数/原对象回调及mailbox边界PASS。报告SKILL_LEVEL_NAVIGATION_VALIDATION_20261018.json；宿主35820。飞船等级切换/单级拒绝尚未实机覆盖，未升级购买拆装。
 【Codex/root 2026-10-18 ship-level-navigation】认领飞船增援技能原等级切换/货币材料读取验证，复用通用CLI，不升级购买。
+【Codex/root 2026-10-18 ship-level-navigation validated】TIEADVANCED增援技能原3等级实测3→1→3，CLI回执确认selected tier -1/1；3级原货币类型2费用525000、余额237733000，专用shipability_mat_hardware_systems需求75、库存1711。既有等级ACQUIRED保留，不作为可购买报价；原技能列表前后精确一致，原关闭/Back/Home最终Home。通用实现无需修改；报告SHIP_LEVEL_NAVIGATION_VALIDATION_20261018.json。无升级购买拆装，单级窗口及真实升级事务未验证。

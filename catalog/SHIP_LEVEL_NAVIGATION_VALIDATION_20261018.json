@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-18",
+  "unit": "TIEADVANCED",
+  "skillId": "hardwareskill_TIEADVANCED01",
+  "selectedFirst": {
+    "tier": -1,
+    "levelText": "1",
+    "typeText": "等级1 （独有）",
+    "description": "[c][f0ff23]进入战斗：[-][/c]对所有敌人施加2个持续伤害效果并持续2回合，此效果无法躲避。",
+    "requirements": null,
+    "cooldown": 0,
+    "hideCooldown": false,
+    "lockedByConditions": false,
+    "upgradeStatus": 1,
+    "upgradeAvailable": false,
+    "currencyCost": 0,
+    "currencyType": 0,
+    "materials": [],
+    "costComplete": false,
+    "currencyOwned": 0
+  },
+  "selectedLast": {
+    "tier": 1,
+    "levelText": "3",
+    "typeText": "等级3 （独有）",
+    "description": "[c][f0ff23]进入战斗：[-][/c]对所有敌人施加3个持续伤害效果和进攻降低并持续2回合，此效果无法躲避。",
+    "requirements": "",
+    "cooldown": 0,
+    "hideCooldown": false,
+    "lockedByConditions": false,
+    "upgradeStatus": 1,
+    "upgradeAvailable": false,
+    "currencyCost": 525000,
+    "currencyType": 2,
+    "materials": [
+      {
+        "itemType": 7,
+        "renderType": "MaterialsItemRenderData",
+        "id": "shipability_mat_hardware_systems",
+        "label": "1711/75",
+        "quantityRaw": 75,
+        "ownedQuantity": 1711
+      }
+    ],
+    "costComplete": false,
+    "currencyOwned": 237733000
+  },
+  "unchangedSkills": true,
+  "finalState": "HomeBaseGameState",
+  "validation": "Original three-tier reinforcement UI; CLI preview 3 to 1 to 3, original ship currency type and hardware material read",
+  "limitations": [
+    "Existing acquired levels, not an upgrade transaction",
+    "No single-level popup coverage",
+    "No purchase or upgrade executed"
+  ]
+}
