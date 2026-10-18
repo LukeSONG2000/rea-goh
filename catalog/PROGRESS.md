@@ -455,3 +455,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 sweep-count】认领原确认窗次数调整及读回，root独占runtime/Ghidra，不确认消费。
 
 【Codex/root 2026-10-19 sweep-count native+live】新增campaign-sweep-count，完整mission identity与单关/整数1..max校验，调用原UpdateTicketCount+ManuallyUpdateCountSlider，host核数量及关卡读回。两原函数只读反编译留证。实机默认24调1，原确认窗1券+6体力，取消后券154286/可负担24未变，返回Home，host25492。越界/小数/null/旧关卡拒绝及原方法mock、campaign/loading PASS。报告SWEEP_COUNT_20261019.json；未确认消费，授权执行与结果核验仍待。
+【Codex/root 2026-10-19 sweep-confirm】认领扫荡确认接口/提交防重和券差额状态，root独占runtime；本轮无资源授权，不实际确认。
