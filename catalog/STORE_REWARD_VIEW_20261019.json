@@ -1,0 +1,10 @@
+{
+ "operation":"store-rewards",
+ "source":"PackOpeningGameState._packOpeningController._packOpeningContext.PackOpeningViewData._allRewardTiles",
+ "fields":["visible","itemId","phase","allTilesRevealed","rewards.id","rewards.itemType","rewards.quantity","finishButton"],
+ "nativeAudit":{"packFinishRva":"18c29c0","packBackRva":"18c2e40","finding":"Back dispatches DoneShowTile at phase 3 and finish at phase 5; other phases return. Finish is distinct from HandleBuyAgainClicked. Reader invokes neither.","scope":"bounded listing, decompiled C can include tail-called finish body; existing project closed no save"},
+ "tests":["Reward type/ID/quantity/phase mock PASS","Hidden view returns visible false PASS","Invalid list bounds refused PASS","Reader does not invoke mutating callbacks PASS","Bridge/durable/commands/loading regression PASS","CLI capabilities generated"],
+ "live":{"pid":32088,"hostPid":37456,"emptyRewardRead":true,"claimExecuted":false},
+ "limitations":["Real populated reward view not yet verified","Item ID match alone does not correlate purchase transaction","Displayed rewards do not prove inventory delta","Finish callback not exposed yet"],
+ "evidence":["logs/high_reuse/store-rewards-empty.json"]
+}

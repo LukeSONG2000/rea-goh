@@ -64,8 +64,23 @@ globalThis.StoreBridge=(()=>{
   const buttons=[['single','_singlePurchaseButton'],['singleCentered','_singlePurchaseButtonCentered'],['multiple','_multiPurchaseButton'],['ok','_OKButtonCentered']].map(([slot,f])=>buttonStatus(v,slot,f));
   return {readConfirmed:true,id:str(item,'Id'),title:label('_packTitle'),description:label('_descriptionLabel'),fromTab:R.readValue(v,'_fromLocation','i32'),maxPurchaseAmount:R.readValue(v,'_maxPurchaseAmount','i32'),freeButtonShown:R.readValue(v,'_showFreeBuyButton','bool'),nativeFreePurchase:!!R.unbox(S.invoke('StorePackDetailsView','IsFreePurchase',v),'bool'),giftState:R.readValue(v,'_giftState','i32'),giftable:val(item,'Giftable','bool'),showBuyConfirmation:val(item,'ShowBuyConfirmation','bool'),currentOffer:currentOffer.isNull()?null:offer(currentOffer,formatter),buttons,offers:list(R.readRef(item,field('AllOffers'))).map(o=>offer(o,formatter)),scope:'Original detail display and raw button state; hidden text is not a payable quote, enabled does not authorize purchase'};
  }
+ function packRewards(){
+  const state=current();if(name(state)!=='PackOpeningGameState')return {readConfirmed:true,visible:false,rewards:null,settlementConfirmed:false};
+  const c=R.readRef(state,'_packOpeningController'),context=R.readRef(c,'_packOpeningContext');
+  if(context.isNull())throw Error('Pack context not ready');
+  const v=R.readRef(context,'PackOpeningView');
+  if(!active(v))return {readConfirmed:true,visible:false,rewards:null,settlementConfirmed:false};
+  const item=R.readRef(context,'StoreItem'),data=R.readRef(context,'PackOpeningViewData');
+  const rewards=list(R.readRef(data,'_allRewardTiles')).map(tile=>{
+   if(tile.isNull())throw Error('Null pack reward');
+   const renderType=name(tile);
+   return {id:S.string(R.readRef(tile,'ID')),renderType,itemType:R.unbox(S.invoke(renderType,'get_ItemType',tile),'u8'),quantity:val(tile,'Quantity')};
+  });
+  return {readConfirmed:true,visible:true,itemId:str(item,'Id'),phase:R.readValue(c,'_currentState','i32'),allTilesRevealed:R.readValue(c,'_allTilesRevealed','bool'),rewards,finishButton:buttonStatus(v,'finish','_finishButton'),settlementConfirmed:false,scope:'Original pack display; item ID alone is not transaction correlation or inventory delta proof'};
+ }
  let submission=null;
  function execute(op,p={}){
+  if(op==='store-rewards')return packRewards();
   if(op==='store-claim-status')return {readConfirmed:true,submission,settlementConfirmed:false};
   if(op==='store-claim-free'){
    if(submission)throw Error('Prior store submission requires reconciliation');
