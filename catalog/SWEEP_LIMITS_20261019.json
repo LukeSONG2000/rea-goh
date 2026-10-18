@@ -1,0 +1,55 @@
+{
+  "scope": "Ordinary single campaign mission sweep maximum; no execution",
+  "native": {
+    "CanAffordMission": "0x18164e6f0",
+    "GetNumAffordableAttempts": "0x1813a5e10",
+    "CalculateRemaningCooldownAttempts": "0x181650730",
+    "SpendGrindTickets": "0x18164f580",
+    "findings": [
+      "CanAffordMission calls purchase/refresh prompts on unavailable branches; not called by reader",
+      "Original ordinary branch minimum combines affordable attempts, remaining cooldown attempts, tickets owned and BaseMaxNumGrindTicketRedemption",
+      "Remaining attempt helper uses INT_MAX for uncapped attempts and clamps cooldown missions to one",
+      "Spend modifies requested target counts and dispatches original battle redemption; not a balance debit proof"
+    ]
+  },
+  "live": {
+    "buttonVisible": true,
+    "buttonEnabled": true,
+    "entryCost": {
+      "id": "PVE",
+      "itemType": 8,
+      "quantity": 6
+    },
+    "cooldown": {
+      "hasCooldown": false,
+      "active": false,
+      "maxAttempts": 0,
+      "currentAttemptCount": 0,
+      "maxAttemptsReached": false
+    },
+    "eligibility": true,
+    "limits": {
+      "affordableAttempts": 24,
+      "remainingAttempts": 2147483647,
+      "ticketsOwned": 154286,
+      "perRequestCap": 100
+    },
+    "maxSweepCount": 24,
+    "quoteError": null,
+    "ticketCost": null,
+    "executionAuthorized": false,
+    "scope": "Current original UI conditions only; entryCost is per mission, not a complete sweep quote. Entry can execute immediately without a confirmation dialog."
+  },
+  "hostPid": 20332,
+  "returnedHome": true,
+  "tests": [
+    "campaign mock native bounds and active cooldown zero",
+    "existing identity/selection guard regression",
+    "runtime loading PASS"
+  ],
+  "limitations": [
+    "ticketCost remains null: full original redemption cost and settlement evidence pending",
+    "Max calculation applies ordinary campaign branch only, not event/multi-mission branches",
+    "Read-only bounds verified live; no original dialog or debit performed"
+  ]
+}

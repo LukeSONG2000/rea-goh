@@ -679,7 +679,17 @@ globalThis.CampaignMissionBridge=(()=>{
     const cv=(n,t='i32')=>R.readValue(cd,'<'+n+'>k__BackingField',t);
     cooldown={hasCooldown:!!cv('HasCoolDown','bool'),active:!!cv('CoolDownActive','bool'),maxAttempts:cv('MaxAttempts'),currentAttemptCount:cv('CurrentAttemptCount'),maxAttemptsReached:!!R.unbox(S.invoke('CooldownRenderData','MaxAttemptsReached',cd),'bool')};
    }
-   return {...info,sweep:{buttonVisible:active(live.component)&&active(button),buttonEnabled:!target.isNull()&&!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool'),entryCost,cooldown,maxSweepCount:null,ticketCost:null,executionAuthorized:false,scope:'Current original UI conditions only; entryCost is per mission, not a complete sweep quote. Entry can execute immediately without a confirmation dialog.'}};
+   const grind=R.readRef(live.details,'_grindTicketController');
+   let limits=null,maxSweepCount=null,eligibility=null,quoteError=null;
+   try{
+    if(grind.isNull()||cd.isNull())throw Error('Original sweep controller/cooldown unavailable');
+    eligibility=!!R.unbox(S.invoke('MissionGrindTicketController','IsGrindTicketsEnabled',grind,[R.arg.ref(live.mission),R.arg.value('bool',false)],['CampaignNodeMissionDO','System.Boolean']),'bool');
+    limits={affordableAttempts:R.unbox(S.invoke('CampaignRequirementController','GetNumAffordableAttempts',R.readRef(grind,'_campaignRequirements'),[R.arg.ref(cost)],['BucketItemDO']),'i32'),remainingAttempts:R.unbox(S.invoke('MissionGrindTicketController','CalculateRemaningCooldownAttempts',grind,[R.arg.ref(cd)],['CooldownRenderData']),'i32'),ticketsOwned:R.unbox(S.invoke('InventoryDomainController','GetCurrencyQuantity',R.readRef(grind,'_inventoryDomainController'),[R.arg.value('i32',10)],['CurrencyTypeEnum']),'i32'),perRequestCap:R.readValue(R.readRef(grind,'_gameConstants'),'BaseMaxNumGrindTicketRedemption','i32')};
+    if(!Object.values(limits).every(Number.isInteger)||limits.affordableAttempts<0||limits.ticketsOwned<0||limits.perRequestCap<1)throw Error('Invalid original sweep limits');
+    // Ordinary campaign branch of native CanAffordMission RVA 0x164e6f0.
+    maxSweepCount=eligibility&&!info.locked&&!cooldown.active&&!cooldown.maxAttemptsReached?Math.max(0,Math.min(...Object.values(limits))):0;
+   }catch(e){quoteError=String(e);}
+   return {...info,sweep:{buttonVisible:active(live.component)&&active(button),buttonEnabled:!target.isNull()&&!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool'),entryCost,cooldown,eligibility,limits,maxSweepCount,quoteError,ticketCost:null,executionAuthorized:false,scope:'Current original UI conditions only; entryCost is per mission, not a complete sweep quote. Entry can execute immediately without a confirmation dialog.'}};
   }
   if(operation!=='campaign-prebattle')throw Error('Unsupported campaign mission operation');
   const id=payload?.missionIdentity;

@@ -12,9 +12,10 @@ const component=obj('Component',{_mission:mission,_selectMissionButton:button,_m
 const details=obj('Details',{_missionDetailsComponent:component,_selectedMission:mission,_selectedMissionIsLocked:false});
 let state=obj('CampaignGameState',{_campaignController:obj('Campaign',{_missionsDetailsController:details})});
 const stateController=obj('StateController'),calls=[];
-const ctx=vm.createContext({RuntimeApi:{nil,findBound:()=>stateController,readRef:(o,k)=>o===stateController?state:o.fields[k]??nil,readValue:(o,k)=>o.fields[k],unbox:x=>x,classOf:o=>o.type,fullName:x=>x,arg:{ref:x=>x}},SceneApi:{string:x=>x,gameObject:x=>x,invoke:(type,method,o,args)=>{
+const ctx=vm.createContext({RuntimeApi:{nil,findBound:()=>stateController,readRef:(o,k)=>o===stateController?state:o.fields[k]??nil,readValue:(o,k)=>o.fields[k],unbox:x=>x,classOf:o=>o.type,fullName:x=>x,arg:{ref:x=>x,value:(t,x)=>x}},SceneApi:{string:x=>x,gameObject:x=>x,invoke:(type,method,o,args)=>{
  if(method==='get_activeInHierarchy')return o.active;
  if(method==='get_isEnabled')return o.enabled;
+ if(method==='IsGrindTicketsEnabled')return true;if(method==='GetNumAffordableAttempts')return 24;if(method==='CalculateRemaningCooldownAttempts')return 2147483647;if(method==='GetCurrencyQuantity')return 154286;if(method==='MaxAttemptsReached')return false;
  if(type==='CampaignElementIdentifierDO')return identity[method.slice(4)];
  calls.push({type,method,o,args});return nil;
 }}});
@@ -37,10 +38,16 @@ for(const [object,key,value] of [[details.fields,'_selectedMissionIsLocked',true
 component.fields._mission=obj('Other');assert.throws(()=>bridge.execute('campaign-prebattle',payload),/ownership/);component.fields._mission=mission;
 assert.equal(calls.length,0);assert.equal(bridge.execute('campaign-prebattle',payload).selectionDispatched,true);
 assert.equal(calls.length,1);assert.equal(calls[0].method,'HandleOnSelectMissionClicked');assert.equal(calls[0].o,details);assert.equal(calls[0].args[0],mission);
+details.fields._grindTicketController=obj('Grind',{_campaignRequirements:obj('Requirements'),_inventoryDomainController:obj('Inventory'),_gameConstants:obj('Constants',{BaseMaxNumGrindTicketRedemption:20})});
+component.fields._cooldownRenderData=obj('Cooldown',{'<HasCoolDown>k__BackingField':false,'<CoolDownActive>k__BackingField':false,'<MaxAttempts>k__BackingField':0,'<CurrentAttemptCount>k__BackingField':0});
+assert.equal(bridge.execute('campaign-mission').sweep.maxSweepCount,20);
+component.fields._cooldownRenderData.fields['<CoolDownActive>k__BackingField']=true;
+assert.equal(bridge.execute('campaign-mission').sweep.maxSweepCount,0);
 state=obj('BattleGameState');assert.throws(()=>bridge.execute('campaign-mission'),/campaign map/);
 const host=fs.readFileSync(new URL('./run_battle_info.mjs',import.meta.url),'utf8');
 const checkLine=host.split('\n').find(line=>line.trim().startsWith('confirmed=after.state===result.expectedState&&')&&line.includes('expectedMissionIdentity'));
 assert.ok(checkLine);
+
 const result={expectedState:'PvePreBattleState',expectedMissionIdentity:identity};
 const after={state:'PvePreBattleState',prebattle:{ready:false,supportSelectionRequired:true,missionIdentity:{...identity}}};
 const confirmation=vm.createContext({result,after,confirmed:false});

@@ -447,3 +447,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 【Codex/root 2026-10-19 sweep-read native+live】原Initialize存在max=1且totalEntryCost为空直接SpendGrindTickets(1)分支，不能把UseGrindTickets视为无消费预览；保留原C+bounded listing。campaign-mission新增原扫荡按钮可见/enabled、每关入场BucketItem与cooldown，ticketCost/maxSweepCount未核明确null。实机光明1A PVE体力6、按钮可用/无cooldown，返回Home，host33900。campaign身份/可用性+新增读取mock、loading通过；无扫荡/体力/券消耗。报告SWEEP_CONDITIONS_20261019.json；下一步原CanAffordMission和计数/券消耗核查，执行接口未完成。
 【Codex/root 2026-10-19 sweep-cost】认领原CanAffordMission/SpendGrindTickets消耗与上限审计，root独占只读Ghidra，不调用消费入口。
+
+【Codex/root 2026-10-19 sweep-cost limits-live】只读核CanAffordMission/Spend/remaining/GetNumAffordableAttempts：可用性函数会弹购买提示且部分分支写initialCount，reader不调用；普通战役按原四项min并用原底层查询。campaign-mission实机1A：affordable24、remaining INT_MAX、券154286、原cap100，max24，eligible true，quoteError null，返回Home，host20332。mock上限/冷却归零+身份守卫/loading PASS，无消费。报告SWEEP_LIMITS_20261019.json；ticketCost仍未知，原Spend只证明提交请求而非真实扣减，多任务/活动及结算仍待。
