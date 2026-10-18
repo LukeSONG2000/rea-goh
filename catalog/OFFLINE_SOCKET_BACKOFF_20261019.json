@@ -1,0 +1,457 @@
+{
+  "scope": "Original-runtime isolated trial socket retry pressure; not an FPS benchmark",
+  "finding": "Repeated background send at GameAssembly.dll+0x391512, not the Unity installation thread",
+  "change": "Preserve 5 ms initial/main-thread rejection. After 8 failures per background caller use 50 ms delay. Same -1 / WSAENETDOWN 10050, all six APIs blocked, no successful sends fabricated.",
+  "diagnostics": "At most 32 API/thread/caller records; metadata failures cannot bypass network rejection",
+  "comparison": {
+    "afterMainCalls": 10,
+    "afterElapsedMs": 122233,
+    "afterBackgroundSends": 2156,
+    "reductionPercent": 89.3,
+    "beforeMainCalls": 11,
+    "beforeBackgroundSends": 20154,
+    "beforeElapsedMs": 121977
+  },
+  "tests": [
+    "socket API rejection, bounded diagnostics, diagnostic failure isolation, Unity-thread delay unchanged, background backoff, restore idempotence PASS",
+    "5 captured trial preparation tests PASS",
+    "native original automatic battle terminal and clean restoration PASS",
+    "syntax and scoped diff check PASS"
+  ],
+  "runs": [
+    {
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": false,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 0,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 2,
+          "sendto": 2,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 0,
+          "WSAConnect": 0
+        },
+        "socketDiagnostics": {
+          "elapsedMs": 32870,
+          "installedThread": 42772,
+          "installedThreadCalls": 4,
+          "untrackedCalls": 0,
+          "diagnosticErrors": 0,
+          "delayPerCallMs": 5,
+          "callers": [
+            {
+              "api": "send",
+              "thread": 42772,
+              "count": 2,
+              "module": "GameAssembly.dll",
+              "offset": "0xa35836"
+            },
+            {
+              "api": "sendto",
+              "thread": 42772,
+              "count": 2,
+              "module": "GameAssembly.dll",
+              "offset": "0xa358a6"
+            }
+          ]
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": [],
+          "definitionsRestored": true
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "path": "logs/high_reuse/trial-20261019-010919-573-evidence.json"
+    },
+    {
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": false,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 0,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 20156,
+          "sendto": 8,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 9,
+          "WSAConnect": 0
+        },
+        "socketDiagnostics": {
+          "elapsedMs": 121977,
+          "installedThread": 42772,
+          "installedThreadCalls": 11,
+          "untrackedCalls": 0,
+          "diagnosticErrors": 0,
+          "delayPerCallMs": 5,
+          "callers": [
+            {
+              "api": "connect",
+              "thread": 42772,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0xa3420f"
+            },
+            {
+              "api": "send",
+              "thread": 30748,
+              "count": 20154,
+              "module": "GameAssembly.dll",
+              "offset": "0x391512"
+            },
+            {
+              "api": "sendto",
+              "thread": 42772,
+              "count": 8,
+              "module": "GameAssembly.dll",
+              "offset": "0xa358a6"
+            },
+            {
+              "api": "send",
+              "thread": 42772,
+              "count": 2,
+              "module": "GameAssembly.dll",
+              "offset": "0xa35836"
+            },
+            {
+              "api": "connect",
+              "thread": 40180,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 10800,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 13864,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 26792,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 40572,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 26728,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 18588,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 4208,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            }
+          ]
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": [],
+          "definitionsRestored": true
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "path": "logs/high_reuse/trial-20261019-011207-267-evidence.json"
+    },
+    {
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": false,
+        "error": null,
+        "clicked": false,
+        "terminalObserved": false,
+        "lastSnapshot": {
+          "previous": 34,
+          "next": 1,
+          "turns": 0,
+          "currentState": "BattleGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 2158,
+          "sendto": 8,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 8,
+          "WSAConnect": 0
+        },
+        "socketDiagnostics": {
+          "elapsedMs": 122233,
+          "installedThread": 42772,
+          "installedThreadCalls": 10,
+          "untrackedCalls": 0,
+          "diagnosticErrors": 0,
+          "initialDelayMs": 5,
+          "backgroundRepeatDelayMs": 50,
+          "backoffCalls": 2148,
+          "callers": [
+            {
+              "api": "send",
+              "thread": 42772,
+              "count": 2,
+              "module": "GameAssembly.dll",
+              "offset": "0xa35836"
+            },
+            {
+              "api": "sendto",
+              "thread": 42772,
+              "count": 8,
+              "module": "GameAssembly.dll",
+              "offset": "0xa358a6"
+            },
+            {
+              "api": "send",
+              "thread": 25200,
+              "count": 2156,
+              "module": "GameAssembly.dll",
+              "offset": "0x391512"
+            },
+            {
+              "api": "connect",
+              "thread": 22504,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 33068,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 34344,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 2660,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 7084,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 41488,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 14328,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            },
+            {
+              "api": "connect",
+              "thread": 14896,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0x390c8e"
+            }
+          ]
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": [],
+          "definitionsRestored": true
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": false,
+          "campaignExpected": false,
+          "foreignTransition": false
+        }
+      },
+      "path": "logs/high_reuse/trial-20261019-011800-207-evidence.json"
+    },
+    {
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 4,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 2,
+          "sendto": 1,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 1,
+          "WSAConnect": 0
+        },
+        "socketDiagnostics": {
+          "elapsedMs": 20485,
+          "installedThread": 42772,
+          "installedThreadCalls": 4,
+          "untrackedCalls": 0,
+          "diagnosticErrors": 0,
+          "initialDelayMs": 5,
+          "backgroundRepeatDelayMs": 50,
+          "backoffCalls": 0,
+          "callers": [
+            {
+              "api": "send",
+              "thread": 42772,
+              "count": 2,
+              "module": "GameAssembly.dll",
+              "offset": "0xa35836"
+            },
+            {
+              "api": "connect",
+              "thread": 42772,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0xa3420f"
+            },
+            {
+              "api": "sendto",
+              "thread": 42772,
+              "count": 1,
+              "module": "GameAssembly.dll",
+              "offset": "0xa358a6"
+            }
+          ]
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": [],
+          "definitionsRestored": true
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      },
+      "path": "logs/high_reuse/trial-20261019-012232-717-evidence.json"
+    }
+  ],
+  "limitations": [
+    "Uncontrolled sequential runtime samples; not a CPU or FPS causal benchmark",
+    "The exact native network subsystem behind the caller has not been identified",
+    "Unsupported/more than 32 caller identities retain initial delay",
+    "Broader goal remains incomplete"
+  ]
+}

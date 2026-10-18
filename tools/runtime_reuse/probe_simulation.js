@@ -130,6 +130,6 @@
    fsmOutcome,simulationOutcomeDiagnosticOnly:simulationOutcome,
    verifiedVictory:terminal&&fsmOutcome===0&&error===null&&serviceCalls===0&&cleanup.loopStopped&&cleanup.errors.length===0,
    summary,healthChanges,attacks,counts,trace,traceLimit:300,serviceCalls,
-   blockedSocketCalls:guard?guard.counts:null,cleanup});
+   blockedSocketCalls:guard?guard.counts:null,socketDiagnostics:guard?guard.diagnostics():null,cleanup});
  }
 })().catch(error=>send({kind:'simulation-probe-outer-error',error:String(error)}));

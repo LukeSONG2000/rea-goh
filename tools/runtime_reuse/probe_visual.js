@@ -221,7 +221,7 @@
    verifyCapture();
    const verifiedVisualBattle=!error&&readyAt!==0&&clicked&&terminalObserved&&serviceCalls===0&&cleanup.home&&cleanup.guardRestored&&cleanup.errors.length===0;
    send({kind:'visual-probe-complete',verifiedVisualBattle,error,clicked,terminalObserved,lastSnapshot,serviceCalls,
-    blockedSocketCalls:guard?guard.counts:null,capture,cleanup,
+    blockedSocketCalls:guard?guard.counts:null,socketDiagnostics:guard?guard.diagnostics():null,capture,cleanup,
     originalUiObserved:readyAt!==0,screenshotVerified:capture.verified,
     ownership:{exitedOwnBattle,campaignExpected,foreignTransition}});
   }
