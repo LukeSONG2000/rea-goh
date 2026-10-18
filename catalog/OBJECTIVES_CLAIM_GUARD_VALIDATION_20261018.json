@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-18",
+  "scope": "Guarded original daily/achievement claim input; completion still unverified",
+  "nativeEvidence": {
+    "dailyCallback": "0x187FF30",
+    "achievementCallback": "0x1876E10",
+    "commonWrapper": "0x18884F0",
+    "transaction": "0x1888600",
+    "findings": "Both original button callbacks preserve animation/completion plumbing through CallClaimQuest. Shared transaction acquires original transition token and calls EpisodeDomainController path. No direct network endpoint call added.",
+    "provider": "Existing local PyGhidra read-only project; closed without saving"
+  },
+  "guard": [
+    "Exact current tab/subtab and unique quest ID",
+    "Original ReadyForClaim true, ClaimDisabled false, ClaimRequirementMet true",
+    "Subcontroller not shut down and transition token null",
+    "Reserve before invocation; same host session cannot repeat even after exception"
+  ],
+  "live": {
+    "pid": 32088,
+    "hostPid": 39448,
+    "eligibleSampleAvailable": false,
+    "ineligibleRejected": true,
+    "taskReadbackUnchanged": true,
+    "finalState": "HomeBaseGameState"
+  },
+  "tests": [
+    "Daily and achievement native callback routing mocked",
+    "All qualification gates and duplicate ID rejection",
+    "Wrong tab/unknown quest",
+    "Duplicate submission and uncertain exception are not replayed",
+    "Mailbox payload validation and submission receipt semantics",
+    "Changed JS syntax checks"
+  ],
+  "limitations": [
+    "Successful reward dispatch and server outcome not live verified",
+    "Receipt confirms original callback invocation only; rewardConfirmed stays false",
+    "Session reservation blocks same ID until host restart, including next daily reset",
+    "No claims executed during live test, no currency spending or equipment modifications"
+  ]
+}

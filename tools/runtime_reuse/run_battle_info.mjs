@@ -36,8 +36,8 @@ try{
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
     if(operation.startsWith('objectives-')){
-     const result=await script.exports.objectivescommand(operation);
-     if(operation==='objectives-list')return result;
+     const result=await script.exports.objectivescommand(operation,payload);
+     if(['objectives-list','objectives-claim'].includes(operation))return result;
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();

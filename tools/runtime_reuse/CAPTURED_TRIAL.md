@@ -230,7 +230,7 @@ implemented but not yet live-validated.
 progress (64-bit values represented as strings), claim readiness, disabled reason,
 and requirement result. These flags remain separate; completed progress does not
 imply a claim is allowed. `objectives-home` uses the original Back callback.
-All three commands use the shared display host. No claim operation is exposed yet.
+All three commands use the shared display host.
 `objectives-achievements` and `objectives-daily` select the original tabs through
 `ObjectivesView.GetTabLocation` and `TabClicked`, preserving original lock checks
 and accordion selection. Receipts confirm the controller's resulting tab/subtab.
@@ -238,4 +238,22 @@ and accordion selection. Receipts confirm the controller's resulting tab/subtab.
 the same quest fields. Other tabs explicitly reject list reads. Navigation receipt
 does not guarantee asynchronous subview loading has completed; list reads check
 the current subview separately and may report not ready.
+
+`objectives-claim --pid <PID> --request <JSON file>` accepts
+`{"questId":"<original quest id>","tab":2,"subTab":1}` for daily tasks or
+`tab:3, subTab:0` for achievements. It rereads the active original list, requires
+one matching ID, ReadyForClaim, no ClaimDisabled, ClaimRequirementMet, and an idle
+live subcontroller, then invokes its original HandleClaimButtonClicked callback.
+The bridge never invokes purchase or equipment operations.
+
+Receipt `claimDispatched:true` confirms callback invocation only;
+`rewardConfirmed:false` explicitly means the asynchronous reward outcome is
+unverified. `ok:true` for this command is submission success, not reward credit.
+The mailbox's outer `dispatched` means bridge execution was attempted and can be
+true even when eligibility rejects the request before the native claim callback.
+Do not automatically retry. Each tab/subtab/quest ID is reserved before invocation
+for the host's lifetime, including invocation exceptions; this also means a future
+daily reset needs a new host session after the previous outcome is checked.
+Live validation currently covers rejection of an ineligible daily task only.
+Eligible dispatch has mock coverage, not a completed live reward transaction.
 

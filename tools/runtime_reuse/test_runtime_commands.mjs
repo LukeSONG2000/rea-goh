@@ -17,6 +17,9 @@ try{
   const result=await test(invalid);assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
  assert.equal(calls,1,'Rejected commands never dispatch');
+ for(const payload of [null,{}, {questId:'q',tab:1,subTab:0},{questId:'',tab:2,subTab:1},{questId:'q',tab:3,subTab:1}]){
+  const result=await test({operation:'objectives-claim',payload});assert.equal(result.dispatched,false);
+ }
  for(const payload of [{token:'x',moveType:2,index:0},{token:'x',moveType:1,index:-1},{token:'x',moveType:1,index:64},{token:'x',moveType:0,index:1},{token:'x',moveType:1,index:1.5}]){
   const result=await test({operation:'enemy-ability',payload});assert.equal(result.ok,false);assert.equal(result.dispatched,false);
  }
@@ -50,6 +53,7 @@ try{
  }
  for(const [operation,payload,result] of [
   ['objectives-open',undefined,{transitionConfirmed:true}],
+  ['objectives-claim',{questId:'q',tab:2,subTab:1},{claimDispatched:true,rewardConfirmed:false}],
   ['objectives-achievements',undefined,{transitionConfirmed:true}],
   ['objectives-daily',undefined,{transitionConfirmed:true}],
   ['objectives-home',undefined,{transitionConfirmed:true}],

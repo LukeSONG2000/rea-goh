@@ -286,6 +286,7 @@ globalThis.InboxBridge=(()=>{
 
 globalThis.ObjectivesBridge=(()=>{
  const R=RuntimeApi,S=SceneApi;
+ const submittedClaims=new Set();
  const state=()=>R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
  function view(){
   const current=state();if(R.fullName(R.classOf(current))!=='ObjectivesGameState')throw Error('Objectives page required');
@@ -294,7 +295,7 @@ globalThis.ObjectivesBridge=(()=>{
   if(objectives.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(objectives)),'bool'))throw Error('Objectives view not ready');
   return {controller,objectives};
  }
- function execute(operation){
+ function execute(operation,payload){
   if(operation==='objectives-open'){
    const current=state();if(R.fullName(R.classOf(current))!=='HomeBaseGameState')throw Error('Open objectives from Home');
    S.invoke('HomeBaseController','OnNextMissionClicked',R.readRef(current,'_homeBaseController'));
@@ -315,7 +316,7 @@ globalThis.ObjectivesBridge=(()=>{
    S.invoke('ObjectivesView','TabClicked',live.objectives,[R.arg.value('i64',R.unbox(location,'i64')),R.arg.ref(null)]);
    return {expectedState:'ObjectivesGameState',tab,subTab};
   }
-  if(operation!=='objectives-list')throw Error('Unsupported objectives command');
+  if(!['objectives-list','objectives-claim'].includes(operation))throw Error('Unsupported objectives command');
   const tab=R.readValue(live.controller,'_currentTabType','i32'),subTab=R.readValue(live.controller,'_currentSubTabType','i32');
   const achievements=tab===3;
   if(!achievements&&(tab!==2||subTab!==1))throw Error('Current objectives tab is not supported for reading');
@@ -325,9 +326,9 @@ globalThis.ObjectivesBridge=(()=>{
   const list=achievements?R.readRef(subView,'_achievementListRenderData'):R.readRef(data,'ActiveQuests');if(list.isNull())throw Error('Quests not initialized');
   const count=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
   if(count<0||count>4096||(items.isNull()?count!==0:count>items.add(24).readU64().toNumber()))throw Error('Quest list bounds invalid');
-  const quests=[];
+  const quests=[],rows=[];
   for(let i=0;i<count;i++){
-   const row=items.add(32+i*8).readPointer();
+   const row=items.add(32+i*8).readPointer();rows.push(row);
    const text=name=>S.string(R.readRef(row,'<'+name+'>k__BackingField'));
    const value=(name,type)=>R.readValue(row,'<'+name+'>k__BackingField',type);
    quests.push({id:text('Id'),description:text('Description'),progressText:text('ProgressText'),
@@ -335,6 +336,21 @@ globalThis.ObjectivesBridge=(()=>{
     readyForClaim:!!value('ReadyForClaim','bool'),claimDisabled:!!value('ClaimDisabled','bool'),
     claimDisabledMessageKey:text('ClaimDisabledMessageKey'),
     claimRequirementMet:!!R.unbox(S.invoke('QuestSlatRenderData','get_ClaimRequirementMet',row),'bool')});
+  }
+  if(operation==='objectives-claim'){
+   if(typeof payload?.questId!=='string'||!payload.questId.length||payload.questId.length>256||payload.tab!==tab||payload.subTab!==subTab)throw Error('Claim request must match current objectives tab and quest ID');
+   const matches=quests.map((q,i)=>({q,i})).filter(x=>x.q.id===payload.questId);
+   if(matches.length!==1)throw Error('Claim requires a unique current quest');
+   const {q,i}=matches[0];
+   if(!q.readyForClaim||q.claimDisabled||!q.claimRequirementMet)throw Error('Original quest is not eligible for claim');
+   if(R.readValue(sub,'_wasShutDown','bool')||!R.readRef(sub,'_transitionToken').isNull())throw Error('Original quest controller is busy or shut down');
+   const key=JSON.stringify([tab,subTab,q.id]);
+   if(submittedClaims.has(key))throw Error('Claim already submitted in this host session; inspect outcome, do not retry');
+   // Reserve before invoking: exceptions or lost replies must not replay a claim.
+   submittedClaims.add(key);
+   S.invoke(achievements?'ObjectivesAchievementsSubController':'ObjectivesDailyQuestSubController','HandleClaimButtonClicked',sub,[R.arg.ref(R.readRef(rows[i],'<Id>k__BackingField'))],['System.String']);
+   return {claimDispatched:true,rewardConfirmed:false,questId:q.id,tab,subTab,
+    scope:'Original reward button callback invoked; asynchronous server outcome is not confirmed. No automatic retry.'};
   }
   if(achievements)return {readConfirmed:true,tab,subTab,quests,scope:'Current original achievement list; no claim dispatched'};
   return {readConfirmed:true,tab,subTab,quests,total:R.readValue(data,'TotalQuests','i32'),completed:R.readValue(data,'CompletedQuests','i32'),
@@ -445,4 +461,4 @@ rpc.exports.campaignnavigate=(operation,payload)=>RuntimeApi.runOnMainThreadOnce
 rpc.exports.inventorycommand=(operation,request)=>RuntimeApi.runOnMainThreadOnce(()=>InventoryBridge.execute(operation,request));
 rpc.exports.inboxcommand=operation=>RuntimeApi.runOnMainThreadOnce(()=>InboxBridge.execute(operation));
 
-rpc.exports.objectivescommand=operation=>RuntimeApi.runOnMainThreadOnce(()=>ObjectivesBridge.execute(operation));
+rpc.exports.objectivescommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>ObjectivesBridge.execute(operation,payload));
