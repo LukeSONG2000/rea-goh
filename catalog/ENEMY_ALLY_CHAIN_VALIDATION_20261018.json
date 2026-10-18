@@ -1,0 +1,198 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original enemy ally-selection diagnostic: private inventory Wat + Vader versus Kelleran, not captured enemy lineup",
+  "nativeChain": [
+    "BattleFsmController.SelectAlly(ability,null) calls original selector using current actors own unit module allies and original AllyTargetingRuleId",
+    "Original SelectUnit filters via target evaluator and stores candidates",
+    "HandleUnitTapped invokes original SelectAlly closure, sets current actor AllyTarget; null onSelected is explicitly tolerated",
+    "PerformManualMove plus retained input completion executes original ability"
+  ],
+  "nativeRvas": {
+    "SelectAlly": "193B020",
+    "callback": "1A5E4C0",
+    "SelectUnit": "1A66280",
+    "selectionFinished": "1A66A70",
+    "predicate": "1A66DA0"
+  },
+  "selection": {
+    "kind": "diagnostic-original-enemy-ally",
+    "abilityId": "wattambor_tech1_ability",
+    "candidates": [
+      "qDYpT6UdQ2uPo3sVFlgRHw"
+    ],
+    "requested": "qDYpT6UdQ2uPo3sVFlgRHw",
+    "actual": "qDYpT6UdQ2uPo3sVFlgRHw",
+    "selectionPending": false
+  },
+  "effects": [
+    {
+      "instanceKey": "0x287294e09c0",
+      "effectKey": "0x287267a7c00",
+      "effectId": "tech_bonus_move_handler",
+      "locKey": "",
+      "tooltipKey": "",
+      "iconSprite": "",
+      "overlaySprite": "",
+      "backgroundSprite": "icon_apply_neutral",
+      "iconColor": "",
+      "persistentIconPriority": 0,
+      "effectIconPriority": 0,
+      "groupable": false,
+      "isBuff": false,
+      "isDebuff": false,
+      "stackingLine": "ability-stacking-line",
+      "conditions": [
+        {
+          "conditionType": 27,
+          "conditionValue": "tech1_handler",
+          "kind": "non-turn-condition",
+          "remaining": null,
+          "requiredCount": 1,
+          "observedCount": 0,
+          "valueParsedAsCount": false,
+          "reported": false,
+          "reason": "Not a supported turn/action expiration counter"
+        },
+        {
+          "conditionType": 27,
+          "conditionValue": "tech2_handler",
+          "kind": "non-turn-condition",
+          "remaining": null,
+          "requiredCount": 1,
+          "observedCount": 0,
+          "valueParsedAsCount": false,
+          "reported": false,
+          "reason": "Not a supported turn/action expiration counter"
+        },
+        {
+          "conditionType": 27,
+          "conditionValue": "tech3_handler",
+          "kind": "non-turn-condition",
+          "remaining": null,
+          "requiredCount": 1,
+          "observedCount": 0,
+          "valueParsedAsCount": false,
+          "reported": false,
+          "reason": "Not a supported turn/action expiration counter"
+        }
+      ],
+      "durationText": "无固定回合（按原条件移除）",
+      "permanent": null
+    },
+    {
+      "instanceKey": "0x287294e0960",
+      "effectKey": "0x287267a7ae0",
+      "effectId": "techability1_wattambor_recovery_handler",
+      "locKey": "BattleEffect_TECH1",
+      "tooltipKey": "BattleEffect_TECH1",
+      "iconSprite": "icon_medpac",
+      "overlaySprite": "button_locked",
+      "backgroundSprite": "icon_apply_neutral",
+      "iconColor": "",
+      "persistentIconPriority": 0,
+      "effectIconPriority": 0,
+      "groupable": false,
+      "isBuff": true,
+      "isDebuff": false,
+      "stackingLine": "ability-stacking-line",
+      "conditions": [
+        {
+          "conditionType": 19,
+          "conditionValue": "",
+          "kind": "non-turn-condition",
+          "remaining": null,
+          "requiredCount": 1,
+          "observedCount": 0,
+          "valueParsedAsCount": false,
+          "reported": false,
+          "reason": "Not a supported turn/action expiration counter"
+        }
+      ],
+      "durationText": "无固定回合（按原条件移除）",
+      "permanent": null
+    }
+  ],
+  "completion": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": false,
+    "error": null,
+    "clicked": true,
+    "terminalObserved": false,
+    "lastSnapshot": {
+      "previous": 34,
+      "next": 1,
+      "turns": 36,
+      "currentState": "BattleGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 23074,
+      "sendto": 12,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 12,
+      "WSAConnect": 0
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": []
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": false,
+      "campaignExpected": false,
+      "foreignTransition": false
+    }
+  },
+  "evidence": [
+    {
+      "path": "logs\\high_reuse\\native\\ally_selected_callback.c",
+      "sha256": "5ed234362ff4390891ee4a5692f11c67a908f982c51d99acdf655d33c8949e7a"
+    },
+    {
+      "path": "logs\\high_reuse\\native\\manual_select_unit.c",
+      "sha256": "4efb07d17ed4c9d2d184e521ca038c5bdaad197b50636a5b7f8215a4114ffe74"
+    },
+    {
+      "path": "logs\\high_reuse\\native\\manual_select_finished.c",
+      "sha256": "bdae815daebb597b4566da663c68c8ea9a81f854350e23267409e0d82511c4c3"
+    },
+    {
+      "path": "logs\\high_reuse\\native\\manual_select_predicate.c",
+      "sha256": "7e6a8111864dbbfea4f2adee5b98b98466c03e05a3fea00776eddd4cd3ceede6"
+    },
+    {
+      "path": "logs\\high_reuse\\enemy-ally-wat-v2-custom.js",
+      "sha256": "fb7e28ed260f4f0fa6ddd5c57e948fcaa642a4530424e70e2a550d20954e3153"
+    },
+    {
+      "path": "logs\\high_reuse\\enemy-ally-wat-v2-evidence.json",
+      "sha256": "496535c0066f31c3e4a28ed1ea7cc815917233a168fbbc425648dc165daabdd0"
+    },
+    {
+      "path": "logs\\high_reuse\\enemy-ally-wat-v2-next-turn.json",
+      "sha256": "db69afdb1178cd263d8105ea661cab43ca3bc86018ad83521956f30b87028287"
+    }
+  ],
+  "failedFirstRun": {
+    "path": "logs\\high_reuse\\enemy-ally-wat-v1-evidence.json",
+    "reason": "Wat basic target_debuffed_ally had no candidates; diagnostic incorrectly read null list. Probe also attempted player basic during enemy opening bonus turn. Cleanup succeeded. Neither was counted as success."
+  },
+  "implementationFix": "probe_visual auto-click waits for owner 0, state34/next1; enemy opening bonus turn no longer searches player buttons",
+  "limitations": [
+    "Ally selection is verified in diagnostic source only; generic enemy CLI still rejects it",
+    "No screenshot verification",
+    "Other abilities and cancellation/timeout/null candidate handling need production implementation and live validation"
+  ]
+}

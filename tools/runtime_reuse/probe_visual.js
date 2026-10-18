@@ -138,7 +138,9 @@
       send({kind:'original-frame-capture-requested',path:options.capturePath,verified:false});
      }catch(exception){capture.error=String(exception);}
     }
-    if(options.autoClick&&previous===34&&readyAt&&Date.now()-readyAt>2000&&!clicked){
+    const currentUnit=call(f.context,'get_CurrentUnit');
+    const playerAwaiting=previous===34&&next===1&&!currentUnit.isNull()&&R.unbox(call(currentUnit,'get_Owner'),'i32')===0;
+    if(options.autoClick&&playerAwaiting&&readyAt&&Date.now()-readyAt>2000&&!clicked){
      const table=R.readRef(call(f.context,'get_BattleView'),'_playerAbilitiesComponent');
      const buttons=R.readRef(table,'_abilityButtons'),basic=call(table,'get_BasicAttackButton');
      const items=R.readRef(buttons,'_items'),n=R.readValue(buttons,'_size','i32');let index=-1;
