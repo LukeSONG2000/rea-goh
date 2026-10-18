@@ -60,7 +60,7 @@ try{
     }
     if(operation.startsWith('inbox-')){
      const result=await script.exports.inboxcommand(operation,payload);
-     if(operation==='inbox-list')return result;
+     if(['inbox-list','inbox-claim','inbox-claim-status'].includes(operation))return result;
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
@@ -111,6 +111,8 @@ try{
  if(!detached){last=await script.exports.stop();save();}
 }finally{
  if(!detached&&script){
+  try{const claims=await script.exports.inboxclaimdispose();fs.writeFileSync(path.join(directory,`inbox-claims-${process.pid}.json`),JSON.stringify(claims,null,2));}
+  catch(error){messages.push({kind:'inbox-claim-dispose-error',error:String(error)});}
   try{const claims=await script.exports.questclaimdispose();fs.writeFileSync(path.join(directory,`quest-claims-${process.pid}.json`),JSON.stringify(claims,null,2));}
   catch(error){messages.push({kind:'quest-claim-dispose-error',error:String(error)});}
  }

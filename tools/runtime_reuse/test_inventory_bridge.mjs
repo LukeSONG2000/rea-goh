@@ -157,7 +157,7 @@ message.fields['<ItemTile>k__BackingField']=nil;assert.equal(inbox.execute('inbo
 message.fields['<Subject>k__BackingField']='Updated';assert.equal(inbox.execute('inbox-list').messages[0].subject,'Updated');
 active=false;assert.throws(()=>inbox.execute('inbox-list'),/not ready/);active=true;
 inboxView.fields._filterRenderData.fields._size=5000;assert.throws(()=>inbox.execute('inbox-list'),/bounds/);
-assert.throws(()=>inbox.execute('inbox-claim'),/Unsupported/);
+assert.throws(()=>inbox.execute('inbox-claim'),/messageId/);
 inbox.execute('inbox-home');assert.equal(calls.at(-1).method,'OnBackButtonClicked');assert.equal(calls.at(-1).object,inboxController);
 const objectives=ctx.ObjectivesBridge;
 state=obj('HomeBaseGameState',{_homeBaseController:homeController});
@@ -299,4 +299,5 @@ assert.throws(()=>ctx.PreBattleBridge.edit('prebattle-add',{...addRequest,unitId
 editor.fields._view=nil;assert.throws(()=>ctx.PreBattleBridge.edit('prebattle-roster'),/ownership mismatch/);
 state=obj('HomeBaseGameState');assert.equal(ctx.PreBattleBridge.status().ready,false);assert.throws(()=>ctx.PreBattleBridge.support('prebattle-supports'),/PVE prebattle/);
 console.log('PASS inventory, inbox, objectives bridges: original callbacks, live fields and guards.');
+
 

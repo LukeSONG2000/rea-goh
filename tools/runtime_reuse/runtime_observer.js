@@ -235,6 +235,7 @@ globalThis.InventoryBridge=(()=>{
 
 globalThis.InboxBridge=(()=>{
  const R=RuntimeApi,S=SceneApi;
+ const submitted=new Set();
  const state=()=>R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
  function view(){
   const current=state();if(R.fullName(R.classOf(current))!=='InboxGameState')throw Error('Inbox page required');
@@ -243,7 +244,34 @@ globalThis.InboxBridge=(()=>{
   if(inbox.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(inbox)),'bool'))throw Error('Inbox view not ready');
   return {controller,inbox};
  }
+ function selectedDetail(live,message){
+  const map=R.readRef(live.inbox,'_inboxDetailView');
+  const args=[R.arg.value('i32',message.messageType)];
+  const detail=R.invoke(R.findMethod(R.classOf(map),'get_Item',1),map,args);
+  const type=R.fullName(R.classOf(detail));
+  const rewardViews=['InboxRewardDetailView','InboxRankRewardsDetailView','InboxGuildRankedRewardDetailView','InboxGuildExchangeInboxDetailView','InboxParameterizedRewardDetailView','InboxTerritoryCovertMissionRewardDetailView','InboxTerritoryMapCompleteRewardDetailView','InboxTerritoryTournamentEventRewardDetailView','InboxTerritoryTournamentMatchRewardDetailView','InboxTerritoryTournamentRewardDetailView','InboxTerritoryWarCompleteRewardDetailView'];
+  if(!rewardViews.includes(type))return {public:{type,rewardView:false},detail:null};
+  const button=R.readRef(detail,'_actionButton'),target=R.readRef(button,'_buttonTarget');
+  const labels=R.readRef(button,'_labels'),count=R.readValue(labels,'_size','i32'),items=R.readRef(labels,'_items');
+  if(count<0||count>16||(items.isNull()?count!==0:count>items.add(24).readU64().toNumber()))throw Error('Action label bounds invalid');
+  const text=[];for(let i=0;i<count;i++)text.push(S.string(S.invoke('UILabel','get_text',items.add(32+i*8).readPointer())));
+  const active=o=>!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(o)),'bool');
+  return {detail,public:{type,rewardView:true,messageId:S.string(R.readRef(detail,'_messageId')),active:active(detail)&&active(button),enabled:!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool'),buttonText:text}};
+ }
  function execute(operation,payload={}){
+  if(operation==='inbox-claim-status')return InboxClaimTracker.status();
+  if(operation==='inbox-claim'){
+   if(typeof payload.messageId!=='string'||!payload.messageId.length)throw Error('Explicit messageId required');
+   const live=view(),rows=execute('inbox-list').messages.filter(m=>m.id===payload.messageId);
+   if(rows.length!==1||!rows[0].selected)throw Error('Select the exact current reward message first');
+   const message=rows[0],selected=selectedDetail(live,message),action=selected.public;
+   if(!action.rewardView||action.messageId!==message.id||!action.active||!action.enabled||!message.rewards?.length||message.hasCustomAction)throw Error('Original reward action not ready');
+   if(submitted.has(message.id))throw Error('Message claim already submitted in this session; inspect status, do not retry');
+   const currencyBefore=InboxClaimTracker.readCurrencies(message.rewards);
+   InboxClaimTracker.install();submitted.add(message.id);
+   const tracking=InboxClaimTracker.submit({messageId:message.id,rewards:message.rewards,currencyBefore},live.controller,()=>S.invoke('BaseInboxRewardView','ActionButtonClicked',selected.detail));
+   return {claimDispatched:true,tracking};
+  }
   if(operation==='inbox-open'){
    const current=state();if(R.fullName(R.classOf(current))!=='HomeBaseGameState')throw Error('Open inbox from Home');
    S.invoke('HomeBaseController','OnInboxClicked',R.readRef(current,'_homeBaseController'));
@@ -287,9 +315,63 @@ globalThis.InboxBridge=(()=>{
     messageType:R.readValue(data,'<MessageType>k__BackingField','i32'),
     hasCustomAction:!R.readRef(data,'<CustomButtonActionLink>k__BackingField').isNull(),rewards});
   }
-  return {readConfirmed:true,messages,scope:'Current original filtered inbox list; no claim/delete/custom action dispatched'};
+  let detail=null;const selected=messages.filter(m=>m.selected);
+  if(selected.length===1)try{detail=selectedDetail(live,selected[0]).public;}catch(error){detail={unavailable:true,error:String(error)};}
+  return {readConfirmed:true,messages,selectedDetail:detail,scope:'Current original filtered inbox list; no claim/delete/custom action dispatched'};
  }
  return {execute,status(){try{const selected=execute('inbox-list').messages.filter(m=>m.selected);return {ready:true,selectedMessageId:selected.length===1?selected[0].id:null};}catch(error){return {ready:false,error:String(error)};}}};
+})();
+
+globalThis.InboxClaimTracker=(()=>{
+ const R=RuntimeApi,S=SceneApi,records=[],closures=new Map(),hooks=[];
+ const type='InboxController+<>c__DisplayClass49_0';let active=null,installed=false;
+ function readCurrencies(rewards){
+  if(!rewards?.length||rewards.some(r=>r.itemType!==2))return null;
+  const inventory=R.findBound('InventoryDomainController'),totals=new Map();
+  for(const r of rewards)totals.set(r.id,(totals.get(r.id)||0)+r.quantity);
+  return [...totals].map(([id,expected])=>{
+   const code=R.unbox(S.invoke('System.Enum','Parse',R.nil,[R.arg.ref(S.type('CurrencyTypeEnum')),R.arg.ref(R.string(id))],['System.Type','System.String']),'i32');
+   return {id,expected,value:R.unbox(S.invoke('InventoryDomainController','GetCurrencyQuantity',inventory,[R.arg.value('i32',code)],['CurrencyTypeEnum']),'i32')};
+  });
+ }
+ const expose=r=>{const {owner,target,handle,...result}=r;return {...result,rewardBalanceReconciled:r.rewardBalanceReconciled===true,
+  settlementEvidence:r.rewardBalanceReconciled?'native-wallet-delta':r.outcome==='native-success-callback'?'native-success-callback':'unconfirmed'};};
+ function finish(target,outcome){const r=closures.get(target.toString());if(r&&r.outcome==='pending'){r.outcome=outcome;r.finishedAt=new Date().toISOString();}}
+ function release(target){const r=closures.get(target.toString());if(r){closures.delete(target.toString());R.release(r.handle);r.handle=null;r.target=null;}}
+ function install(){
+  if(installed)return;
+  const entries=[['PlayerService','UpdateInbox',7,{
+   onEnter(args){let record=null;try{
+    const messageId=S.string(args[1]);record=records.find(r=>r.messageId===messageId&&r.outcome==='pending'&&!r.nativeTransactionObserved);
+    if(!record)return;
+    const target=R.readRef(args[5],'m_target'),failed=R.readRef(args[6],'m_target');
+    record.callbackCheck={action:args[2].toInt32(),targetType:target.isNull()?null:R.fullName(R.classOf(target)),sameTarget:target.equals(failed)};
+    if(args[2].toInt32()!==2||target.isNull()||!target.equals(failed)||R.fullName(R.classOf(target))!==type||!R.readRef(target,'<>4__this').equals(record.owner))return;
+    const message=R.readRef(target,'messageDO');if(S.string(R.readRef(message,'<Id>k__BackingField'))!==record.messageId)return;
+    if(closures.has(target.toString()))throw Error('Duplicate native inbox transaction');
+    record.target=target;record.handle=R.retain(target);record.nativeTransactionObserved=true;closures.set(target.toString(),record);
+   }catch(error){if(record)record.trackingError=String(error);}}
+  }],
+  [type,'<UpdateInbox>b__0',0,{onEnter(args){this.target=args[0];finish(this.target,'native-success-callback');},onLeave(){release(this.target);}}],
+  [type,'<UpdateInbox>b__1',1,{onEnter(args){this.target=args[0];finish(this.target,'native-failure-callback');},onLeave(){release(this.target);}}]];
+  try{const resolved=entries.map(([t,m,n,cb])=>[R.findMethod(R.findClass(t),m,n).readPointer(),cb]);for(const [p,cb] of resolved)hooks.push(Interceptor.attach(p,cb));installed=true;}
+  catch(error){for(const h of hooks.splice(0))h.detach();throw error;}
+ }
+ function submit(info,owner,callback){
+  install();if(active||records.length>=256)throw Error('Inbox tracking busy or full');
+  const r={...info,owner,id:String(records.length+1),outcome:'pending',nativeTransactionObserved:false,submittedAt:new Date().toISOString()};
+  records.push(r);active=r;
+  try{callback();return expose(r);}catch(error){r.invocationError=String(error);throw error;}finally{active=null;}
+ }
+ function status(){
+  for(const r of records)if(r.currencyBefore&&!r.rewardBalanceReconciled)try{
+   r.currencyAfter=readCurrencies(r.rewards);
+   r.rewardBalanceReconciled=r.currencyAfter.length===r.currencyBefore.length&&r.currencyBefore.every(b=>{const a=r.currencyAfter.find(a=>a.id===b.id);return a&&a.value-b.value===b.expected;});
+  }catch(error){r.balanceReadError=String(error);}
+  return {readConfirmed:true,claims:records.map(expose),scope:'Original callback outcomes; currency-only rewards also compared against before/after native wallet readings. Never automatically retry pending or uncertain claims.'};
+ }
+ function dispose(){for(const h of hooks.splice(0))h.detach();for(const r of [...closures.values()])release(r.target);installed=false;return status();}
+ return {install,submit,status,dispose,readCurrencies};
 })();
 
 // Observe only closures captured while our exact original claim call is running.
@@ -724,6 +806,7 @@ rpc.exports.inboxcommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=
 
 rpc.exports.objectivescommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>ObjectivesBridge.execute(operation,payload));
 rpc.exports.questclaimdispose=()=>RuntimeApi.runOnMainThreadOnce(()=>QuestClaimTracker.dispose());
+rpc.exports.inboxclaimdispose=()=>RuntimeApi.runOnMainThreadOnce(()=>InboxClaimTracker.dispose());
 
 rpc.exports.eventscommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>EventsBridge.execute(operation,payload));
 

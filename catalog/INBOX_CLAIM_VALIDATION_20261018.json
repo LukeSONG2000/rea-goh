@@ -1,0 +1,50 @@
+{
+  "claimInterface": "inbox-claim / inbox-claim-status; original active reward button, no replay",
+  "confirmedCurrencyClaim": {
+    "messageId": "TerritoryTournamentDailyRank_29871960_CHROMIUM:5",
+    "rewards": [
+      {
+        "id": "PREMIUM",
+        "renderType": "CurrencyItemRenderData",
+        "itemType": 2,
+        "quantity": 105
+      }
+    ],
+    "currencyBefore": [
+      {
+        "id": "PREMIUM",
+        "expected": 105,
+        "value": 7286
+      }
+    ],
+    "id": "1",
+    "outcome": "pending",
+    "nativeTransactionObserved": false,
+    "submittedAt": "2026-10-18T12:34:21.276Z",
+    "currencyAfter": [
+      {
+        "id": "PREMIUM",
+        "expected": 105,
+        "value": 7391
+      }
+    ],
+    "rewardBalanceReconciled": true
+  },
+  "firstClaim": {
+    "messageId": "DailyPvpRank_29871960_344",
+    "expectedRewards": {
+      "PVP_CURRENCY": 500,
+      "GRIND": 18000
+    },
+    "messageRemoved": true,
+    "callbackObserved": false,
+    "balanceReconciled": false,
+    "evidence": "logs/high_reuse/inbox-claim-live-status.json"
+  },
+  "limitations": [
+    "Native callback capture not validated: both live submissions lacked nativeTransactionObserved; pending callback outcome preserved.",
+    "Only currency-only reward balance reconciliation implemented; mixed rewards require separate reconciliation.",
+    "No retry of either submitted message."
+  ],
+  "stateAfter": "HomeBaseGameState"
+}
