@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-18",
+  "status": "Runtime feasibility evidence; no enhancement enabled",
+  "scope": "Original client Home scene, read-only REA-installed Frida probe. Not a battle GPU capture.",
+  "evidence": "logs/high_reuse/graphics-runtime-profile.json",
+  "hardware": {"gpu": "NVIDIA GeForce RTX 3070 Ti", "driver": "32.0.16.1714"},
+  "runtime": {
+    "pid": 32088,
+    "currentRenderPipeline": null,
+    "interpretation": "Built-in Unity rendering pipeline",
+    "loadedGraphicsModules": ["UnityPlayer.dll", "d3d11.dll", "d3d12.dll"],
+    "loadedNgxOrStreamlineModules": [],
+    "unityNvidiaRuntimeTypes": [],
+    "activeHomeCameras": {"depthTextureMode": 0, "allowHDR": false, "allowMSAA": true, "width": 2434, "height": 1369},
+    "lodBias": 0.30000001192092896
+  },
+  "findings": [
+    "Current NVIDIA compatibility table lists DLSS 5 3D-Guided Neural Rendering for RTX 50 only; RTX 30 is not officially supported. This is not proof that unofficial ports are fundamentally impossible.",
+    "DLAA is native-resolution temporal anti-aliasing; its output is not recovered higher-detail source geometry.",
+    "No ready NVIDIA runtime integration was found. Streamline integration requires resource tagging and frame constants, including motion-vector conventions, jitter and projection transforms. A screenshot-only postprocess does not supply that integration.",
+    "Home camera depthTextureMode=0 does not establish absence of custom depth or motion buffers in all battle modes.",
+    "Low lodBias is a candidate for an original-resource detail experiment, not proof of visible loss or proof that higher-detail meshes exist. No quality settings were changed."
+  ],
+  "limitations": [
+    "Stripped QualitySettings getters prevented reading global AA, maximumLODLevel, mip limit and anisotropic filtering. Null values mean unknown, not disabled.",
+    "Camera allowMSAA is permission, not proof of effective antialiasing.",
+    "Loaded d3d12.dll does not establish the active graphics API.",
+    "No DLSS SDK/plugin installed, no rendered A/B enhancement result and no model-detail restoration demonstrated."
+  ],
+  "nextValidation": [
+    "Inspect active original LODGroups and their renderer meshes before any reversible lodBias experiment; compare fixed-camera images and restore settings.",
+    "For DLAA integration, capture a private battle rendering frame and establish accessible depth, object/camera motion vectors, jitter and HUD-free color, then verify SDK support before implementing a hook.",
+    "Keep DLSS 5 separate from ordinary DLAA; current local hardware lacks official DLSS 5 support."
+  ],
+  "sources": [
+    "https://www.nvidia.com/en-eu/geforce/technologies/dlss/",
+    "https://github.com/NVIDIA-RTX/Streamline/blob/main/docs/ProgrammingGuide.md"
+  ]
+}
