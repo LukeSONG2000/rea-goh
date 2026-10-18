@@ -1,0 +1,7 @@
+{
+ "scope":"Desktop overlay mastery/effect refresh scrolling and narrow layout",
+ "fixes":["Do not rewrite unchanged text","Preserve visible text index on changed content; keep end pinned when already at end","Reset scroll on unit identity change","Clear historical content when no battle units or snapshot invalid","Wrap status/health/footer to actual window width","Allocate footer before expanding tabs so it remains visible","Minimum window size 420x480"],
+ "validation":{"realTkSizes":["420x520","650x650"],"fixture":"Labelled historical native snapshot plus synthetic long numeric/status text, not current gameplay","checks":["unchanged refresh retains scroll","changed refresh retains end","new unit returns top","Home clears old text","30 effect rows scroll to end","manual screenshot inspection: no overlap, footer visible"],"unitTests":"4 PASS"},
+ "evidence":["logs/high_reuse/check_overlay_refresh_layout.py","logs/high_reuse/overlay-narrow-mastery.png","logs/high_reuse/overlay-narrow-effects.png","logs/high_reuse/overlay-mastery-limits-wide.png"],
+ "limitations":["Not all display scaling factors verified","Current live overlay process, if already open, needs restart to load Python changes","This does not finish native mastery attribution"]
+}
