@@ -394,3 +394,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 campaign-support-cli】认领普通战役null eventId的支援CLI和Back返回，增加完整关卡身份匹配，root独占运行时/命令层/测试，不开线上战斗。
 
 【Codex/root 2026-10-18 campaign-support-cli validated】普通战役prebattle-support-select显式null eventId可用，强制完整CampaignID/MapID/NodeID/MissionID/Difficulty；snapshot输出完整键，native派发前与host完成回读均匹配。Back普通关卡预期CampaignGameState，活动仍Events。光明1-A实测错MapID=M02原回调前拒绝，正确请求选中JARJARBINKS具体实例并transitionConfirmed，Back回Campaign再Home；无战斗/消费。桥接/命令防重放/回读/加载测试及syntax/diff PASS。报告CAMPAIGN_SUPPORT_CLI_20261018.json。原32088、host39064。仍需原UI点地图关卡进入选队，普通关卡编辑接口null eventId另待接同样身份规则。
+
+【Codex/root 2026-10-18 campaign-squad-cli】认领普通战役阵容增删null eventId兼容，复用完整关卡身份校验，实机移除/复原同一队员；root独占命令桥接和宿主，无开战消费。
