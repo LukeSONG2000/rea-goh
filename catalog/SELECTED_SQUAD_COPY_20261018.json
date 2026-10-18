@@ -1,0 +1,30 @@
+{
+  "scope": "Current original PVE selection copied for subsequent private trial assembly; not yet a playable current-selection launcher",
+  "module": "tools/runtime_reuse/selected_squad.js",
+  "nativeEvidence": [
+    "logs/high_reuse/native/squad_copy.c: SquadDO copy constructor RVA 0x1005180 copies cell list",
+    "logs/high_reuse/native/squad_cell_copy.c: cell copy retains original Unit reference, requiring separate native UnitDO copy",
+    "logs/high_reuse/native/prebattle_ally_selected.c: selected support is attached to the current squad"
+  ],
+  "liveEvidence": "logs/high_reuse/selected-squad-copy.json",
+  "liveResult": {
+    "gamePid": 32088,
+    "mission": {"CampaignID":"EVENTS","MapID":"CHALLENGES","NodeID":"XP","MissionID":"DIFF06","Difficulty":1},
+    "selectedUnits": ["BASTILASHAN","ANAKINKNIGHT","GRANDMASTERYODA","AHSOKATANO","JOLEEBINDO","HK47"],
+    "supportSlot": 5,
+    "copiedUnits": 6,
+    "slotAndIdentityPreserved": true,
+    "privateCellMutationDidNotChangeSource": true,
+    "gcReleased": true,
+    "battleStarted": false,
+    "ordinaryHostRestored": 23336
+  },
+  "tests": ["test_selected_squad.mjs PASS", "selected_squad.js syntax PASS"],
+  "remaining": [
+    "Connect original support transition metadata and full mission identity to a matching captured battle",
+    "Current launcher still uses historical saved squad; module is not yet loaded by that launcher",
+    "Live copy identity and slot check is not proof of full battle-state isolation or all nested mutable objects",
+    "Datacron, squad abilities and persisted battle states remain explicit unsupported cases rather than silently removed",
+    "Events navigation briefly reached expected state before list readiness; command readiness needs follow-up"
+  ]
+}

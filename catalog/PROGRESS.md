@@ -380,3 +380,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 inbox-material-reconciliation validated-partial】混合奖励改用原GetCurrencyQuantity/GetCraftingMaterialQuantity读取，按(itemType,id)合并并逐项核差；未知类型/读错保留null，部分到账不算整封到账，更新CLI说明。真实只读6项成功：水晶7441、舰船信用点237829000、舰币27475、四星材料11315、三星材料68474、扫荡券154286；没有新领取或重试，历史材料无before不能追认到账。混合部分/全部/重复/异类型同ID/未知/读错/数量溢出及既有桥接/mailbox/loading测试PASS。probe退出，普通host7416恢复，原32088存活。报告INBOX_MATERIAL_RECONCILIATION_20261018.json；下一封混合奖励的真实before/after及callback-only仍待。
 
 【Codex/root 2026-10-18 selected-squad-copy】认领试玩当前选队/支援衔接。先将原SquadDO与UnitDO复制和身份/槽位/支援保真核对沉淀为通用模块，实机只读复制验证；不使用历史阵容替代当前选队，不线上开战。root独占相关代码和运行时。
+
+【Codex/root 2026-10-18 selected-squad-copy native-live】新增selected_squad.js通用原SquadDO+UnitDO复制模块，保留空槽/支援/角色别名及cell原字段；读取完整关卡键，不用历史角色替代。原挑战XP/DIFF06当前5人+HK47支援实机复制6个独立UnitDO，私有槽位临改123后原选队未变，恢复副本并释放GC，未开战/消费。原native squad/cell/ally源码已有证据；新增copy mock覆盖共享对象拒绝、支援空槽、别名保持、原角色不变及状态拒绝PASS。普通host23336恢复，返回Home。报告SELECTED_SQUAD_COPY_20261018.json。仍未接入标准launcher；下一步原BattleSupport过渡字段与匹配关卡捕获衔接，不声称全嵌套可变对象隔离或当前选队试玩完成。首次objectives-go返回Events时列表尚未就绪，后续readiness需补。
