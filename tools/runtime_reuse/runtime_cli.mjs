@@ -38,7 +38,7 @@ if(args.length===1&&args[0]==='capabilities'){
   {name:'inbox-list',effect:'read current filtered inbox; no claims or deletion',arguments:['--pid <PID>']},
   {name:'inbox-select',effect:'select one original inbox message; no claim or deletion',arguments:['--pid <PID>','--request <JSON file>'],request:{messageId:'inbox-list.messages[].id'}},
   {name:'inbox-claim',effect:'claim one selected native reward; never retry automatically',arguments:['--pid <PID>','--request <JSON file>'],request:{messageId:'selected original reward ID'}},
-  {name:'inbox-claim-status',effect:'read original claim callback outcome; no balance reconciliation',arguments:['--pid <PID>']},
+  {name:'inbox-claim-status',effect:'read original callback outcomes and currency/material balance deltas; unsupported rewards remain unconfirmed',arguments:['--pid <PID>']},
   {name:'inbox-home',effect:'original inbox back navigation',arguments:['--pid <PID>']},
   {name:'inventory-list',effect:'read current player-roster units in filtered collection; loaned marked',arguments:['--pid <PID>']},
   {name:'inventory-unit',effect:'original collection tile opens details; no upgrade',arguments:['--pid <PID>','--request <JSON file>'],request:{unitId:'inventory-list.units[].unitId'}},

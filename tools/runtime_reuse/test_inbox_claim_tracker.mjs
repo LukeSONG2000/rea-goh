@@ -31,4 +31,35 @@ finish(callbackOnly,true);assert.equal(t.status().claims[4].outcome,'native-succ
 assert.equal(t.status().claims[4].nativeTransactionObserved,false,'Callback does not fabricate service-entry observation');
 assert.equal(t.status().claims[4].nativeCallbackObserved,true);
 assert.equal(t.dispose().claims[3].outcome,'pending');assert.equal(roots.size,0);assert.equal(hooks.size,0);
+// Inventory comparisons exercise the production tracker with original getter signatures.
+const balances=new Map([['2:PREMIUM',100],['7:ship-xp-mat-four-star',20]]),calls=[];
+Object.assign(ctx.RuntimeApi,{nil,findBound:()=>owner,string:x=>x,unbox:x=>x,arg:{ref:x=>x,value:(_,x)=>x}});
+Object.assign(ctx.SceneApi,{type:x=>x,invoke:(type,method,instance,args,signature)=>{
+ calls.push({type,method,args,signature});
+ if(method==='Parse')return args[1];
+ if(method==='GetCurrencyQuantity')return balances.get('2:'+args[0]);
+ if(method==='GetCraftingMaterialQuantity')return balances.get('7:'+args[0]);
+ throw Error('Unexpected method '+method);
+}});
+const rewards=[{itemType:2,id:'PREMIUM',quantity:5},{itemType:7,id:'ship-xp-mat-four-star',quantity:2},{itemType:7,id:'ship-xp-mat-four-star',quantity:2}];
+const before=t.readBalances(rewards);assert.equal(before.length,2);assert.equal(before[1].expected,4);
+assert.equal(calls.find(c=>c.method==='GetCraftingMaterialQuantity').signature[0],'System.String');
+t.submit({messageId:'mixed',rewards,balanceBefore:before},owner,()=>{});
+balances.set('2:PREMIUM',105);
+let mixed=()=>t.status().claims.find(r=>r.messageId==='mixed');
+assert.equal(mixed().rewardBalanceReconciled,false,'Partial currency delivery is not full mixed delivery');
+balances.set('7:ship-xp-mat-four-star',24);
+assert.equal(mixed().rewardBalanceReconciled,true);assert.equal(mixed().settlementEvidence,'native-inventory-delta');
+assert.equal(mixed().nativeCallbackObserved,undefined,'Inventory evidence does not fabricate a callback');
+const unsupported=[...rewards,{itemType:1,id:'PREMIUM',quantity:1}];
+const unknown=t.readBalances(unsupported);assert.equal(unknown.length,3,'Same ID with different type stays distinct');
+t.submit({messageId:'unknown',rewards:unsupported,balanceBefore:unknown},owner,()=>{});
+balances.set('2:PREMIUM',110);balances.set('7:ship-xp-mat-four-star',28);
+const unknownStatus=t.status().claims.find(r=>r.messageId==='unknown');
+assert.equal(unknownStatus.rewardBalanceReconciled,false);assert.equal(unknownStatus.balanceComparison[2].delta,null);
+assert.throws(()=>t.readBalances([{itemType:7,id:'bad',quantity:-1}]),/Invalid/);
+assert.throws(()=>t.readBalances([{itemType:7,id:'bad',quantity:Number.MAX_SAFE_INTEGER},{itemType:7,id:'bad',quantity:1}]),/overflow/);
+const invoke=ctx.SceneApi.invoke;ctx.SceneApi.invoke=()=>{throw Error('Native read failed');};
+assert.equal(t.readBalances(rewards)[0].value,null);ctx.SceneApi.invoke=invoke;
+t.dispose();assert.equal(hooks.size,0);
 console.log('Inbox tracker PASS: exact ID/owner/closure, callbacks, pending cleanup, no fabricated balance confirmation');

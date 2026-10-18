@@ -1,0 +1,37 @@
+{
+  "scope": "Inbox claim reconciliation for mixed currency and crafting material rewards",
+  "implementation": "Read native inventory before original UI claim, compare per (itemType,id) after claim, aggregate repeated reward rows, retain unsupported/read-error rows as unconfirmed",
+  "originalEvidence": {
+    "metadata": "il2cpp/dump/cs/il2cpp.cs",
+    "itemTypes": {"CURRENCY": 2, "MATERIAL": 7},
+    "materialGetter": "InventoryDomainController.GetCraftingMaterialQuantity(System.String), RVA 0x1809800",
+    "currencyGetter": "InventoryDomainController.GetCurrencyQuantity(CurrencyTypeEnum), RVA 0x1807DD0"
+  },
+  "liveReadOnly": {
+    "gamePid": 32088,
+    "evidence": "logs/high_reuse/inbox-material-readonly.json",
+    "values": {
+      "PREMIUM": 7441,
+      "SHIP_GRIND": 237829000,
+      "PVP_SHIP_CURRENCY": 27475,
+      "ship-xp-mat-four-star": 11315,
+      "ship-xp-mat-three-star": 68474,
+      "GRIND_TICKET": 154286
+    },
+    "newClaimDispatched": false,
+    "displayHostRestored": 7416
+  },
+  "tests": [
+    "test_inbox_claim_tracker.mjs PASS: mixed partial/full deltas, duplicate aggregation, type+id identity, unknown types, read errors, invalid quantities, callback independence",
+    "test_inventory_bridge.mjs PASS",
+    "test_runtime_commands.mjs PASS",
+    "test_runtime_loading.mjs PASS",
+    "runtime_observer.js syntax PASS"
+  ],
+  "limitations": [
+    "No new mixed reward transaction tested; historical fleet mail lacks material pre-claim baseline and was not retried",
+    "Exact inventory deltas do not exclude unrelated concurrent inventory changes",
+    "Only currency and material types reconciled; other item types remain explicitly unconfirmed",
+    "Native asynchronous callback-only correlation still awaits a fresh reward validation"
+  ]
+}

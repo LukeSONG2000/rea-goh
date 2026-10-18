@@ -267,9 +267,9 @@ globalThis.InboxBridge=(()=>{
    const message=rows[0],selected=selectedDetail(live,message),action=selected.public;
    if(!action.rewardView||action.messageId!==message.id||!action.active||!action.enabled||!message.rewards?.length||message.hasCustomAction)throw Error('Original reward action not ready');
    if(submitted.has(message.id))throw Error('Message claim already submitted in this session; inspect status, do not retry');
-   const currencyBefore=InboxClaimTracker.readCurrencies(message.rewards);
+   const balanceBefore=InboxClaimTracker.readBalances(message.rewards);
    InboxClaimTracker.install();submitted.add(message.id);
-   const tracking=InboxClaimTracker.submit({messageId:message.id,rewards:message.rewards,currencyBefore},live.controller,()=>S.invoke('BaseInboxRewardView','ActionButtonClicked',selected.detail));
+   const tracking=InboxClaimTracker.submit({messageId:message.id,rewards:message.rewards,balanceBefore},live.controller,()=>S.invoke('BaseInboxRewardView','ActionButtonClicked',selected.detail));
    return {claimDispatched:true,tracking};
   }
   if(operation==='inbox-open'){
@@ -325,17 +325,32 @@ globalThis.InboxBridge=(()=>{
 globalThis.InboxClaimTracker=(()=>{
  const R=RuntimeApi,S=SceneApi,records=[],closures=new Map(),hooks=[];
  const type='InboxController+<>c__DisplayClass49_0';let active=null,installed=false;
- function readCurrencies(rewards){
-  if(!rewards?.length||rewards.some(r=>r.itemType!==2))return null;
+ function readBalances(rewards){
+  if(!rewards?.length)return [];
   const inventory=R.findBound('InventoryDomainController'),totals=new Map();
-  for(const r of rewards)totals.set(r.id,(totals.get(r.id)||0)+r.quantity);
-  return [...totals].map(([id,expected])=>{
-   const code=R.unbox(S.invoke('System.Enum','Parse',R.nil,[R.arg.ref(S.type('CurrencyTypeEnum')),R.arg.ref(R.string(id))],['System.Type','System.String']),'i32');
-   return {id,expected,value:R.unbox(S.invoke('InventoryDomainController','GetCurrencyQuantity',inventory,[R.arg.value('i32',code)],['CurrencyTypeEnum']),'i32')};
+  for(const r of rewards){
+   if(typeof r.id!=='string'||!r.id||!Number.isSafeInteger(r.quantity)||r.quantity<=0)throw Error('Invalid reward quantity or identity');
+   const key=JSON.stringify([r.itemType,r.id]),previous=totals.get(key);
+   const expected=(previous?.expected||0)+r.quantity;
+   if(!Number.isSafeInteger(expected))throw Error('Reward quantity overflow');
+   totals.set(key,{id:r.id,itemType:r.itemType,expected});
+  }
+  return [...totals.values()].map(row=>{
+   const {id,itemType}=row;
+   try{
+    let value;
+    if(itemType===2){
+     const code=R.unbox(S.invoke('System.Enum','Parse',R.nil,[R.arg.ref(S.type('CurrencyTypeEnum')),R.arg.ref(R.string(id))],['System.Type','System.String']),'i32');
+     value=R.unbox(S.invoke('InventoryDomainController','GetCurrencyQuantity',inventory,[R.arg.value('i32',code)],['CurrencyTypeEnum']),'i32');
+    }else if(itemType===7){
+     value=R.unbox(S.invoke('InventoryDomainController','GetCraftingMaterialQuantity',inventory,[R.arg.ref(R.string(id))],['System.String']),'i32');
+    }else return {...row,value:null,unavailable:'Unsupported reward item type'};
+    return {...row,value};
+   }catch(error){return {...row,value:null,unavailable:String(error)};}
   });
  }
  const expose=r=>{const {owner,target,handle,...result}=r;return {...result,rewardBalanceReconciled:r.rewardBalanceReconciled===true,
-  settlementEvidence:r.rewardBalanceReconciled?'native-wallet-delta':r.outcome==='native-success-callback'?'native-success-callback':'unconfirmed'};};
+  settlementEvidence:r.rewardBalanceReconciled?'native-inventory-delta':r.outcome==='native-success-callback'?'native-success-callback':'unconfirmed'};};
  function finish(target,outcome){
   let r=closures.get(target.toString());
   // Calls made inside our main-thread dispatcher may not re-enter other
@@ -380,14 +395,19 @@ globalThis.InboxClaimTracker=(()=>{
   try{callback();return expose(r);}catch(error){r.invocationError=String(error);throw error;}finally{active=null;}
  }
  function status(){
-  for(const r of records)if(r.currencyBefore&&!r.rewardBalanceReconciled)try{
-   r.currencyAfter=readCurrencies(r.rewards);
-   r.rewardBalanceReconciled=r.currencyAfter.length===r.currencyBefore.length&&r.currencyBefore.every(b=>{const a=r.currencyAfter.find(a=>a.id===b.id);return a&&a.value-b.value===b.expected;});
+  for(const r of records)if(r.balanceBefore&&!r.rewardBalanceReconciled)try{
+   r.balanceAfter=readBalances(r.rewards);
+   r.balanceComparison=r.balanceBefore.map(b=>{
+    const a=r.balanceAfter.find(a=>a.id===b.id&&a.itemType===b.itemType);
+    const delta=Number.isSafeInteger(b.value)&&Number.isSafeInteger(a?.value)?a.value-b.value:null;
+    return {id:b.id,itemType:b.itemType,expected:b.expected,delta,matched:delta!==null&&delta===b.expected};
+   });
+   r.rewardBalanceReconciled=r.balanceBefore.length>0&&r.balanceAfter.length===r.balanceBefore.length&&r.balanceComparison.every(b=>b.matched);
   }catch(error){r.balanceReadError=String(error);}
-  return {readConfirmed:true,claims:records.map(expose),scope:'Original callback outcomes; currency-only rewards also compared against before/after native wallet readings. Never automatically retry pending or uncertain claims.'};
+  return {readConfirmed:true,claims:records.map(expose),scope:'Original callback outcomes and native currency/material inventory deltas; unsupported rewards remain unconfirmed. Deltas cannot exclude unrelated concurrent inventory changes. Never automatically retry pending or uncertain claims.'};
  }
  function dispose(){for(const h of hooks.splice(0))h.detach();for(const r of [...closures.values()])release(r.target);installed=false;return status();}
- return {install,submit,status,dispose,readCurrencies};
+ return {install,submit,status,dispose,readBalances};
 })();
 
 // Observe only closures captured while our exact original claim call is running.
