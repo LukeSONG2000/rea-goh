@@ -213,3 +213,4 @@ popups are rejected. These commands do not upgrade, unlock or purchase skills;
 trial mode does not expose inventory navigation. Live verification covers Vader
 basic and Ghost crew skill multi-level popups; single-level popup behavior is
 implemented but not yet live-validated.
+多级弹窗 `detail.skillPopup.levels` 和 `selectedLevel` 提供原等级文本、描述、冷却、条件锁定、upgradeStatus/upgradeAvailable及货币费用枚举。`tier`仍为内部值；已获得等级的费用只是UI配方值，不代表下一次可购买报价。材料列表尚未解码，所有等级明确返回 `costComplete:false`，不能据此批准完整消费。

@@ -74,9 +74,14 @@ assert.throws(()=>bridge.execute('inventory-skill',{unitId:'wrong',skillId:'pres
 assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'missing'}),/Choose one skill/);
 bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'});
 assert.equal(calls.at(-1).method,'AbilityClicked');assert.equal(calls.at(-1).args[0].value,'ability-present');
-const popup=obj('Popup',{_data:obj('Crafting',{'<SkillId>k__BackingField':'present','<AbilityId>k__BackingField':'ability-present','<AbilityName>k__BackingField':'Original name'})});
+const level=obj('Level',Object.fromEntries(Object.entries({AbilityTier:6,AbilityLevel:'8',AbilityLevelType:'Basic',AbilityDescription:'Original description',AbilityUpgradeRequirements:'Original requirement',Cooldown:4,HideCooldown:false,LevelLockedByConditions:true,UpgradeStatus:0,UpgradeAvailable:false,RecipeCost:1200,RecipeCurrencyType:1}).map(([k,v])=>['<'+k+'>k__BackingField',v])));
+const popup=obj('Popup',{_selectedLevelData:level,_data:obj('Crafting',{'<SkillId>k__BackingField':'present','<AbilityId>k__BackingField':'ability-present','<AbilityName>k__BackingField':'Original name','<AbilityLevelData>k__BackingField':list([level]),'<AllowUpgrade>k__BackingField':false})});
 abilityController.fields._skillsOverlayView=popup;
 assert.equal(bridge.detail(state).skillPopup.skillId,'present');
+assert.equal(bridge.detail(state).skillPopup.selectedLevel.currencyCost,1200);
+assert.equal(bridge.detail(state).skillPopup.levels[0].description,'Original description');
+assert.equal(bridge.detail(state).skillPopup.levels[0].costComplete,false);
+level.fields['<Cooldown>k__BackingField']=2;assert.equal(bridge.detail(state).skillPopup.selectedLevel.cooldown,2);
 assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'}),/Close the current/);
 bridge.execute('inventory-skill-close',{unitId:'vader-id'});assert.equal(calls.at(-1).method,'OnBackClick');assert.equal(calls.at(-1).object,popup);
 abilityController.fields._skillsOverlayView=nil;assert.throws(()=>bridge.execute('inventory-skill-close',{unitId:'vader-id'}),/No active/);

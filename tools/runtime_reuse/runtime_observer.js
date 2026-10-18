@@ -79,6 +79,18 @@ globalThis.InventoryBridge=(()=>{
    if(rows!==null&&rows.length>256)throw Error('Skill display bound exceeded');
    return rows;
  }
+ function skillLevel(data){
+  if(data.isNull())return null;
+  const text=name=>S.string(R.readRef(data,'<'+name+'>k__BackingField'));
+  const value=(name,kind='i32')=>R.readValue(data,'<'+name+'>k__BackingField',kind);
+  return {tier:value('AbilityTier'),levelText:text('AbilityLevel'),typeText:text('AbilityLevelType'),
+   description:text('AbilityDescription'),requirements:text('AbilityUpgradeRequirements'),
+   cooldown:value('Cooldown'),hideCooldown:!!value('HideCooldown','bool'),
+   lockedByConditions:!!value('LevelLockedByConditions','bool'),upgradeStatus:value('UpgradeStatus'),
+   upgradeAvailable:!!value('UpgradeAvailable','bool'),
+   currencyCost:value('RecipeCost'),currencyType:value('RecipeCurrencyType'),
+   costComplete:false}; // Material recipe rows are not yet decoded; never treat as a complete quote.
+ }
  function skillPopup(controller,type,raw=false){
   const owner=abilityOwner(controller,type);if(owner.isNull())return null;
   for(const [field,viewType] of [['_skillsOverlayView','UnitDetailsSkillOverlayView'],['_abilityDetailsView','AbilityDetailsView']]){
@@ -86,7 +98,12 @@ globalThis.InventoryBridge=(()=>{
    if(raw)return {view,viewType};
    if(viewType==='UnitDetailsSkillOverlayView'){
     const data=R.readRef(view,'_data');
-    return data.isNull()?{loading:true}:{kind:'levels',skillId:S.string(R.readRef(data,'<SkillId>k__BackingField')),abilityId:S.string(R.readRef(data,'<AbilityId>k__BackingField')),name:S.string(R.readRef(data,'<AbilityName>k__BackingField'))};
+    if(data.isNull())return {loading:true};
+    const levels=list(R.readRef(data,'<AbilityLevelData>k__BackingField'));
+    if(levels.length>128)throw Error('Skill level bound exceeded');
+    return {kind:'levels',skillId:S.string(R.readRef(data,'<SkillId>k__BackingField')),abilityId:S.string(R.readRef(data,'<AbilityId>k__BackingField')),name:S.string(R.readRef(data,'<AbilityName>k__BackingField')),
+     allowUpgrade:!!R.readValue(data,'<AllowUpgrade>k__BackingField','bool'),
+     selectedLevel:skillLevel(R.readRef(view,'_selectedLevelData')),levels:levels.map(skillLevel)};
    }
    const label=R.readRef(view,'_abilityName');
    return {kind:'single',name:S.string(S.invoke('UILabel','get_text',label))};
