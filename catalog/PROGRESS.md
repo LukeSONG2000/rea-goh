@@ -362,3 +362,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 overlay-owner-routing】认领悬浮窗当前宿主选择与精通页布局验收；发现overlay固定runtime-snapshot会在trial持有时无法读取战斗，启动脚本也未识别trial owner。修复只读路由及存活/身份/时效校验，不另附加游戏。
 
 【Codex/root 2026-10-18 overlay-owner-routing validated】overlay按runtime-session锁及活宿主选择普通/试玩快照，拒绝宿主不匹配、错PID、过期/未来时戳、needsAttention；普通快照新增hostPid，启动脚本识别原trial宿主不重复附加。原试玩60s期间read_snapshot读BattleGameState/11单位/host3348/trial=true，退出后同函数读Home/host37896；首次20s读取过晚仅Home，不计战斗通过。两场时限清理Home/定义/guard/GC/errors空，无线上次数消费。实际Tk窗口用明确标注的历史JMK样本实拍精通页无重叠；新增状态/精通滚动条，40行合成布局样本可滚至末行。截图overlay-mastery-layout.png/overlay-status-scroll.png仅布局证据，原试玩路由快照overlay-trial-route.json/restored-route.json。owner切换/错身份/过期/未来/死进程/负值和unknown测试、runtime loading、syntax PASS。当前分辨率650x650验收，不声称所有DPI；其他完整目标继续。
+
+【Codex/root 2026-10-18 inbox-selection】认领邮箱原生按ID选择及精确回读，作为领取链前置。原MessageDetailClicked会调用UpdateInbox，不能当纯选择；使用原InboxView.SelectListItem，现有列表ActionButtonLabel不能证明领取/删除动作类型。root独占相关接口，原目录只读。
