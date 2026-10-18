@@ -1,0 +1,32 @@
+{
+  "scope": "Current campaign sweep controller reward window reader and Continue callback",
+  "operations": [
+    "campaign-sweep-rewards",
+    "campaign-sweep-rewards-close"
+  ],
+  "nativeEvidence": [
+    "BattlePveRewardView.OnButtonClick 0x181384a30 dispatches Continue then destroys VFX",
+    "MissionGrindTicketController.OnContinueClicked 0x181650770 dispatches event then ReleaseRewardView",
+    "Uses original _rewardListData ItemTileRenderData ID/type/quantity"
+  ],
+  "tests": [
+    "owned reward data and original Continue callback",
+    "disabled Continue rejection",
+    "array bounds rejection",
+    "inactive view returns no rewards",
+    "display does not claim settlement",
+    "campaign/commands/durable/loading regression PASS"
+  ],
+  "live": {
+    "hostPid": 21376,
+    "noRewardWindowRead": true,
+    "returnedHome": true,
+    "resourceSpend": false
+  },
+  "limitations": [
+    "No newly earned native rewards or real Continue yet; awaits resource authorization",
+    "No correlation to particular receipt, no inventory reconciliation",
+    "Current campaign controller only; event reward interfaces still pending",
+    "Decompiled C may include tail-call bodies; bounded listings retained"
+  ]
+}

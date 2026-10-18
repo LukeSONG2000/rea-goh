@@ -678,6 +678,30 @@ globalThis.CampaignMissionBridge=(()=>{
    return {readConfirmed:true,receipt:submission?{...submission}:null,settlementConfirmed:false,note:'Ticket delta alone is not reward settlement; never retry an uncertain submission.'};
   }
   const live=current(),info=live.public;
+  if(['campaign-sweep-rewards','campaign-sweep-rewards-close'].includes(operation)){
+   const g=R.readRef(live.details,'_grindTicketController'),v=R.readRef(g,'_battlePveRewardView');
+   if(!active(v)){
+    if(operation==='campaign-sweep-rewards-close')throw Error('Sweep reward view not visible');
+    return {readConfirmed:true,visible:false,rewards:null,settlementConfirmed:false};
+   }
+   const list=R.readRef(v,'_rewardListData');if(list.isNull())throw Error('Sweep reward data not ready');
+   const n=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
+   if(n<0||n>4096||(items.isNull()?n!==0:n>items.add(24).readU64().toNumber()))throw Error('Sweep reward list bounds');
+   const rewards=[];
+   for(let i=0;i<n;i++){
+    const tile=items.add(32+i*8).readPointer();if(tile.isNull())throw Error('Null sweep reward');
+    const renderType=R.fullName(R.classOf(tile));
+    rewards.push({id:S.string(R.readRef(tile,'ID')),renderType,itemType:R.unbox(S.invoke(renderType,'get_ItemType',tile),'u8'),quantity:R.readValue(tile,'<Quantity>k__BackingField','i32')});
+   }
+   const button=R.readRef(v,'_continueButton'),target=button.isNull()?R.nil:R.readRef(button,'_buttonTarget');
+   const canContinue=active(button)&&!target.isNull()&&!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool');
+   if(operation==='campaign-sweep-rewards-close'){
+    if(!canContinue)throw Error('Original reward continue disabled');
+    S.invoke('BattlePveRewardView','OnButtonClick',v);
+    return {navigationDispatched:true,rewardsBeforeClose:rewards};
+   }
+   return {readConfirmed:true,visible:true,canContinue,rewards,settlementConfirmed:false,scope:'Reward tiles owned by current sweep controller; display evidence only, not inventory reconciliation or submission correlation'};
+  }
   if(operation==='campaign-sweep-confirm'){
    if(payload?.authorization!=='explicit-user-approved-resource-spend')throw Error('Explicit resource authorization required');
    if(submission)throw Error('Sweep already submitted in this host session; inspect receipt, never retry');

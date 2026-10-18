@@ -110,10 +110,14 @@ try{
     if(operation==='battle-cancel')return await script.exports.battlecancel(payload);
     if(operation==='battle-unit')return await script.exports.battleunit(payload);
     if(operation==='battle-target')return await script.exports.battletarget(payload);
-    if(['campaign-sweep-confirm','campaign-sweep-receipt','campaign-sweep-count','campaign-sweep-preview','campaign-sweep-status','campaign-sweep-close','campaign-mission','campaign-prebattle'].includes(operation)){
+    if(['campaign-sweep-rewards','campaign-sweep-rewards-close','campaign-sweep-confirm','campaign-sweep-receipt','campaign-sweep-count','campaign-sweep-preview','campaign-sweep-status','campaign-sweep-close','campaign-mission','campaign-prebattle'].includes(operation)){
      const result=await script.exports.campaignmission(operation,payload);
-     if(['campaign-sweep-confirm','campaign-sweep-receipt','campaign-mission','campaign-sweep-status'].includes(operation))return result;
-     if(['campaign-sweep-confirm','campaign-sweep-receipt','campaign-sweep-count','campaign-sweep-preview','campaign-sweep-close'].includes(operation)){
+     if(['campaign-sweep-rewards','campaign-sweep-confirm','campaign-sweep-receipt','campaign-mission','campaign-sweep-status'].includes(operation))return result;
+     if(operation==='campaign-sweep-rewards-close'){
+      let after=null;for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,250));after=await script.exports.campaignmission('campaign-sweep-rewards',{});if(!after.visible)break;}
+      return {...result,transitionConfirmed:after?.visible===false};
+     }
+     if(['campaign-sweep-count','campaign-sweep-preview','campaign-sweep-close'].includes(operation)){
       let preview=null,confirmed=false;
       for(let i=0;i<30;i++){
        await new Promise(r=>setTimeout(r,250));preview=await script.exports.campaignmission('campaign-sweep-status',{});

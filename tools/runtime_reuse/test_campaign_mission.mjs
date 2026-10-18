@@ -15,6 +15,7 @@ const stateController=obj('StateController'),calls=[];let ticketQuantity=154286,
 const ctx=vm.createContext({RuntimeApi:{nil,findBound:()=>stateController,readRef:(o,k)=>o===stateController?state:o.fields[k]??nil,readValue:(o,k)=>o.fields[k],unbox:x=>x,classOf:o=>o.type,fullName:x=>x,arg:{ref:x=>x,value:(t,x)=>x}},SceneApi:{string:x=>x,gameObject:x=>x,invoke:(type,method,o,args)=>{
  if(method==='get_activeInHierarchy')return o.active;
  if(method==='get_isEnabled')return o.enabled;
+ if(method==='get_ItemType')return o.fields.itemType;
  if(method==='IsGrindTicketsEnabled')return true;if(method==='GetNumAffordableAttempts')return 24;if(method==='CalculateRemaningCooldownAttempts')return 2147483647;if(method==='GetCurrencyQuantity')return ticketQuantity;if(method==='MaxAttemptsReached')return false;
  if(type==='CampaignElementIdentifierDO')return identity[method.slice(4)];
  calls.push({type,method,o,args});if(method==='OnUseGrindTicketsClick'&&throwConfirm)throw Error('uncertain native failure');return nil;
@@ -87,6 +88,19 @@ assert.equal(bridge.execute('campaign-sweep-receipt').settlementConfirmed,false)
 vm.runInContext(source,ctx);throwConfirm=true;
 assert.throws(()=>ctx.CampaignMissionBridge.execute('campaign-sweep-confirm',confirm),/uncertain/);
 assert.throws(()=>ctx.CampaignMissionBridge.execute('campaign-sweep-confirm',confirm),/already submitted/);
+assert.equal(bridge.execute('campaign-sweep-rewards').visible,false);
+const rewardTile=obj('CurrencyTile',{ID:'GRIND',itemType:2,'<Quantity>k__BackingField':700});
+const rewardArray={isNull:()=>false,add:n=>n===24?{readU64:()=>({toNumber:()=>1})}:{readPointer:()=>rewardTile}};
+const continueTarget=obj('UIButton');continueTarget.enabled=false;
+const rewardView=obj('Rewards',{_rewardListData:obj('List',{_size:1,_items:rewardArray}),_continueButton:obj('SmartButton',{_buttonTarget:continueTarget})});
+g.fields._battlePveRewardView=rewardView;
+assert.equal(bridge.execute('campaign-sweep-rewards').rewards[0].quantity,700);
+assert.equal(bridge.execute('campaign-sweep-rewards').settlementConfirmed,false);
+assert.throws(()=>bridge.execute('campaign-sweep-rewards-close'),/disabled/);
+continueTarget.enabled=true;assert.equal(bridge.execute('campaign-sweep-rewards-close').navigationDispatched,true);
+assert.equal(calls.at(-1).method,'OnButtonClick');assert.equal(calls.at(-1).o,rewardView);
+rewardView.fields._rewardListData.fields._size=2;assert.throws(()=>bridge.execute('campaign-sweep-rewards'),/bounds/);
+rewardView.active=false;assert.equal(bridge.execute('campaign-sweep-rewards').visible,false);
 state=obj('BattleGameState');assert.throws(()=>bridge.execute('campaign-mission'),/campaign map/);
 const host=fs.readFileSync(new URL('./run_battle_info.mjs',import.meta.url),'utf8');
 const checkLine=host.split('\n').find(line=>line.trim().startsWith('confirmed=after.state===result.expectedState&&')&&line.includes('expectedMissionIdentity'));
