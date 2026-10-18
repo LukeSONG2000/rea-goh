@@ -231,5 +231,11 @@ progress (64-bit values represented as strings), claim readiness, disabled reaso
 and requirement result. These flags remain separate; completed progress does not
 imply a claim is allowed. `objectives-home` uses the original Back callback.
 All three commands use the shared display host. No claim operation is exposed yet.
-Only daily quests are read; other objectives tabs require subsequent integration.
+`objectives-achievements` and `objectives-daily` select the original tabs through
+`ObjectivesView.GetTabLocation` and `TabClicked`, preserving original lock checks
+and accordion selection. Receipts confirm the controller's resulting tab/subtab.
+`objectives-list` also reads achievements when that subview is active, returning
+the same quest fields. Other tabs explicitly reject list reads. Navigation receipt
+does not guarantee asynchronous subview loading has completed; list reads check
+the current subview separately and may report not ready.
 

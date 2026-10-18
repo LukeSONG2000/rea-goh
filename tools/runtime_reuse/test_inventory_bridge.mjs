@@ -159,6 +159,7 @@ const quest=obj('QuestSlatRenderData',{'<Id>k__BackingField':'daily-test','<Desc
 const dailyData=obj('Data',{ActiveQuests:list([quest]),TotalQuests:1,CompletedQuests:0,AllDailiesClaimable:false,AllDailiesCompleted:false});
 const objectiveController=obj('ObjectivesController',{_view:obj('ObjectivesView'),_dailyQuestSubController:obj('Sub',{_renderData:dailyData,_dailyQuestSubView:obj('DailyView')})});
 state=obj('ObjectivesGameState',{_objectivesController:objectiveController});
+objectiveController.fields._currentTabType=2;objectiveController.fields._currentSubTabType=1;
 const prevInvoke=S.invoke;S.invoke=(type,method,owner,args,types)=>method==='get_ClaimRequirementMet'?false:prevInvoke(type,method,owner,args,types);
 let tasks=objectives.execute('objectives-list');assert.equal(tasks.quests[0].currentProgress,'3');assert.equal(tasks.quests[0].claimDisabled,true);assert.equal(tasks.quests[0].claimRequirementMet,false);
 quest.fields['<CurrentProgress>k__BackingField']=2;assert.equal(objectives.execute('objectives-list').quests[0].currentProgress,'2');
@@ -166,4 +167,16 @@ active=false;assert.throws(()=>objectives.execute('objectives-list'),/not ready/
 dailyData.fields.ActiveQuests.fields._size=5000;assert.throws(()=>objectives.execute('objectives-list'),/bounds/);
 assert.throws(()=>objectives.execute('objectives-claim'),/Unsupported/);
 objectives.execute('objectives-home');assert.equal(calls.at(-1).object,objectiveController);
+let visible=true;const objectivesInvoke=S.invoke;
+S.invoke=(type,method,owner,args,types)=>{
+ if(method==='IsTabVisible'||method==='IsSubTabVisible')return visible;
+ if(method==='GetTabLocation')return 123456;
+ return objectivesInvoke(type,method,owner,args,types);
+};
+objectives.execute('objectives-achievements');assert.equal(calls.at(-1).method,'TabClicked');assert.equal(calls.at(-1).args[0].value,123456);
+visible=false;assert.throws(()=>objectives.execute('objectives-daily'),/not visible/);visible=true;
+objectiveController.fields._currentTabType=3;objectiveController.fields._currentSubTabType=0;
+objectiveController.fields._achievementsSubController=obj('Achievements',{_renderData:obj('Data'),_achievementsSubView:obj('AchievementsView',{_achievementListRenderData:list([quest])})});
+assert.equal(objectives.status().tab,3);assert.equal(objectives.execute('objectives-list').quests[0].id,'daily-test');
+objectiveController.fields._currentTabType=1;assert.throws(()=>objectives.execute('objectives-list'),/not supported/);
 console.log('PASS inventory, inbox, objectives bridges: original callbacks, live fields and guards.');

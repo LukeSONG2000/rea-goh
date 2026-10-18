@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original achievements/daily tab navigation and quest reads",
+  "nativeEvidence": {
+    "view": "ObjectivesView.TabClicked RVA 0x18AC420",
+    "location": "GetTabLocation RVA 0x18AB0B0 returns AccordionLocation(two int32 fields)",
+    "behavior": "Original TabClicked resolves tab, checks tab/subtab locked delegates, updates selected location and accordion, then dispatches OnTabClicked. No direct controller selection writes.",
+    "provider": "Read-only existing local PyGhidra project; closed without saving"
+  },
+  "live": {
+    "pid": 32088,
+    "hostPid": 5536,
+    "achievementNavigation": {
+      "expectedState": "ObjectivesGameState",
+      "tab": 3,
+      "subTab": 0,
+      "transitionConfirmed": true,
+      "afterState": "ObjectivesGameState"
+    },
+    "achievementCount": 21,
+    "claimableAchievements": 0,
+    "dailyNavigation": {
+      "expectedState": "ObjectivesGameState",
+      "tab": 2,
+      "subTab": 1,
+      "transitionConfirmed": true,
+      "afterState": "ObjectivesGameState"
+    },
+    "dailyCount": 8,
+    "returned": {
+      "expectedState": "HomeBaseGameState",
+      "transitionConfirmed": true,
+      "afterState": "HomeBaseGameState"
+    }
+  },
+  "tests": [
+    "Mock invisible tab rejection",
+    "Original GetTabLocation value passed unchanged to TabClicked",
+    "Achievement list reads same native fields",
+    "Unsupported tab reading rejected",
+    "Mailbox navigation receipts and existing regression suite pass",
+    "Changed JS syntax checks pass"
+  ],
+  "limitations": [
+    "No claimable live achievements and no claims executed",
+    "Other objectives categories remain unimplemented",
+    "Tab receipt confirms selection; read command independently checks active loaded subview",
+    "No new screenshot: runtime view/controller readback only"
+  ],
+  "consumption": "No purchases, currency spending or equipment changes"
+}

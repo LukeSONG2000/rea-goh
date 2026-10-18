@@ -50,6 +50,8 @@ try{
  }
  for(const [operation,payload,result] of [
   ['objectives-open',undefined,{transitionConfirmed:true}],
+  ['objectives-achievements',undefined,{transitionConfirmed:true}],
+  ['objectives-daily',undefined,{transitionConfirmed:true}],
   ['objectives-home',undefined,{transitionConfirmed:true}],
   ['objectives-list',undefined,{readConfirmed:true,quests:[]}],
   ['inbox-open',undefined,{transitionConfirmed:true}],

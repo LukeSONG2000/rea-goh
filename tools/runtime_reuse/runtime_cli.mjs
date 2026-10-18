@@ -15,6 +15,8 @@ if(['inventory-unit','inventory-skill','inventory-skill-close','inventory-skill-
 }
 if(args.length===1&&args[0]==='capabilities'){
  console.log(JSON.stringify({schemaVersion:1,operations:[
+  {name:'objectives-achievements',effect:'original tab navigation; no claim',arguments:['--pid <PID>']},
+  {name:'objectives-daily',effect:'original tab navigation; no claim',arguments:['--pid <PID>']},
   {name:'objectives-open',effect:'original objectives open; no claims',arguments:['--pid <PID>']},
   {name:'objectives-list',effect:'original objectives list; no claims',arguments:['--pid <PID>']},
   {name:'objectives-home',effect:'original objectives home; no claims',arguments:['--pid <PID>']},
@@ -42,7 +44,7 @@ if(args.length===1&&args[0]==='capabilities'){
   {name:'battle-unit',effect:'complete original pending unit selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',targetId:'snapshot.input.selectionCandidates[].id'},result:'selectionCompleted confirms original selection callback finished'},
   {name:'battle-target',effect:'original target selection',arguments:['--pid <SWGoH PID>','--request <JSON file>'],request:{token:'snapshot.input.token',targetId:'snapshot.input.targets[].id'},result:'targetConfirmed checks actual and manual target; repeated selection is a no-op'}
  ],navigation:['campaign-menu','campaign-home','inventory-home','inventory-characters','inventory-ships'],trial:{launcher:'start_captured_trial.ps1',aiPriorityOrder:'-AiPriorityOrder <JSON permutation file>; owned enemy, original linear chain only',scope:'captured snapshots; owned visual trial supports snapshot and battle inputs'},unavailable:['otherActions','uncapturedTrial','aiPrediction','enemyUltimateSkills']}));
-}else if(args.length===3&&['objectives-open','objectives-list','objectives-home','inbox-open','inbox-list','inbox-home','inventory-list','inventory-unit','inventory-skill','inventory-skill-close','inventory-skill-level','inventory-skill-quote','inventory-back','snapshot','watch','campaign-menu','campaign-enter','campaign-home','inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
+}else if(args.length===3&&['objectives-achievements','objectives-daily','objectives-open','objectives-list','objectives-home','inbox-open','inbox-list','inbox-home','inventory-list','inventory-unit','inventory-skill','inventory-skill-close','inventory-skill-level','inventory-skill-quote','inventory-back','snapshot','watch','campaign-menu','campaign-enter','campaign-home','inventory-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0])&&args[1]==='--pid'&&/^[1-9][0-9]*$/.test(args[2])){
  const pid=Number(args[2]);
  const processPath=execFileSync('powershell.exe',['-NoProfile','-Command',`(Get-Process -Id ${pid} -ErrorAction Stop).Path`],{encoding:'utf8'}).trim();
  if(processPath.toLowerCase()!=='e:\\games\\ea games\\swgoh\\swgoh.exe')throw Error('PID must be the supported original client');
@@ -86,7 +88,7 @@ if(args.length===1&&args[0]==='capabilities'){
    console.log(JSON.stringify(cached,null,2));process.exit(0);
   }
  }
- if(['objectives-open','objectives-list','objectives-home','inbox-open','inbox-list','inbox-home','inventory-list','inventory-unit','inventory-skill','inventory-skill-close','inventory-skill-level','inventory-skill-quote','inventory-back','campaign-menu','campaign-enter','campaign-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0]))throw Error('Start the shared battle-info host for this operation.');
+ if(['objectives-achievements','objectives-daily','objectives-open','objectives-list','objectives-home','inbox-open','inbox-list','inbox-home','inventory-list','inventory-unit','inventory-skill','inventory-skill-close','inventory-skill-level','inventory-skill-quote','inventory-back','campaign-menu','campaign-enter','campaign-home','inventory-characters','inventory-ships','battle-ability','battle-target','battle-unit','battle-cancel','enemy-basic','enemy-resume','enemy-target','enemy-ability','enemy-unit','enemy-cancel'].includes(args[0]))throw Error('Start the shared battle-info host for this operation.');
  const releaseOwnership=acquireRuntimeSession(pid);
  const session=await frida.attach(pid);
  try{

@@ -41,7 +41,7 @@ try{
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
-      confirmed=after.state===result.expectedState&&(operation==='objectives-home'||after.objectives?.ready===true);
+      confirmed=after.state===result.expectedState&&(operation==='objectives-home'||after.objectives?.ready===true)&&(result.tab===undefined||(after.objectives?.tab===result.tab&&after.objectives?.subTab===result.subTab));
       if(confirmed)break;
      }
      return {...result,transitionConfirmed:confirmed,afterState:after.state};

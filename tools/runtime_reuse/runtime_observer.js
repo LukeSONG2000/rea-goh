@@ -305,11 +305,24 @@ globalThis.ObjectivesBridge=(()=>{
    S.invoke('FeatureController','OnBackButtonClicked',live.controller);
    return {expectedState:'HomeBaseGameState'};
   }
+  if(operation==='objectives-achievements'||operation==='objectives-daily'){
+   const tab=operation==='objectives-achievements'?3:2,subTab=tab===3?0:1;
+   if(!R.unbox(S.invoke('ObjectivesController','IsTabVisible',live.controller,[R.arg.value('i32',tab)]),'bool'))throw Error('Objectives tab not visible');
+   if(subTab&&!R.unbox(S.invoke('ObjectivesController','IsSubTabVisible',live.controller,[R.arg.value('i32',subTab)]),'bool'))throw Error('Objectives subtab not visible');
+   const location=S.invoke('ObjectivesView','GetTabLocation',live.objectives,[R.arg.value('i32',tab),R.arg.value('i32',subTab)]);
+   // AccordionLocation is two int32 fields; preserve the original returned bits.
+   // Original TabClicked checks locks and updates both accordion and content.
+   S.invoke('ObjectivesView','TabClicked',live.objectives,[R.arg.value('i64',R.unbox(location,'i64')),R.arg.ref(null)]);
+   return {expectedState:'ObjectivesGameState',tab,subTab};
+  }
   if(operation!=='objectives-list')throw Error('Unsupported objectives command');
-  const sub=R.readRef(live.controller,'_dailyQuestSubController');
-  const data=R.readRef(sub,'_renderData'),dailyView=R.readRef(sub,'_dailyQuestSubView');
-  if(data.isNull()||dailyView.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(dailyView)),'bool'))throw Error('Daily quests tab not ready');
-  const list=R.readRef(data,'ActiveQuests');if(list.isNull())throw Error('Daily quests not initialized');
+  const tab=R.readValue(live.controller,'_currentTabType','i32'),subTab=R.readValue(live.controller,'_currentSubTabType','i32');
+  const achievements=tab===3;
+  if(!achievements&&(tab!==2||subTab!==1))throw Error('Current objectives tab is not supported for reading');
+  const sub=R.readRef(live.controller,achievements?'_achievementsSubController':'_dailyQuestSubController');
+  const data=R.readRef(sub,'_renderData'),subView=R.readRef(sub,achievements?'_achievementsSubView':'_dailyQuestSubView');
+  if(data.isNull()||subView.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(subView)),'bool'))throw Error('Objectives subview not ready');
+  const list=achievements?R.readRef(subView,'_achievementListRenderData'):R.readRef(data,'ActiveQuests');if(list.isNull())throw Error('Quests not initialized');
   const count=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
   if(count<0||count>4096||(items.isNull()?count!==0:count>items.add(24).readU64().toNumber()))throw Error('Quest list bounds invalid');
   const quests=[];
@@ -323,11 +336,12 @@ globalThis.ObjectivesBridge=(()=>{
     claimDisabledMessageKey:text('ClaimDisabledMessageKey'),
     claimRequirementMet:!!R.unbox(S.invoke('QuestSlatRenderData','get_ClaimRequirementMet',row),'bool')});
   }
-  return {readConfirmed:true,quests,total:R.readValue(data,'TotalQuests','i32'),completed:R.readValue(data,'CompletedQuests','i32'),
+  if(achievements)return {readConfirmed:true,tab,subTab,quests,scope:'Current original achievement list; no claim dispatched'};
+  return {readConfirmed:true,tab,subTab,quests,total:R.readValue(data,'TotalQuests','i32'),completed:R.readValue(data,'CompletedQuests','i32'),
    allDailiesClaimable:!!R.readValue(data,'AllDailiesClaimable','bool'),allDailiesCompleted:!!R.readValue(data,'AllDailiesCompleted','bool'),
    scope:'Current original daily quest UI; no reward claim dispatched'};
  }
- return {execute,status(){try{view();return {ready:true};}catch(error){return {ready:false,error:String(error)};}}};
+ return {execute,status(){try{const live=view();return {ready:true,tab:R.readValue(live.controller,'_currentTabType','i32'),subTab:R.readValue(live.controller,'_currentSubTabType','i32')};}catch(error){return {ready:false,error:String(error)};}}};
 })();
 
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
