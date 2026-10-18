@@ -1,0 +1,172 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original challenge list, event selection, mission reads and return",
+  "nativeEvidence": {
+    "selection": "SoloEventsSubController.OnSelectEvent RVA 0x15F5100 uses _eventData index and original event flow including ShowEventsMissionView; UI OnEventClicked preserves original callback",
+    "provider": "Existing local PyGhidra project opened read-only, closed without save"
+  },
+  "live": {
+    "pid": 32088,
+    "hostPid": 34504,
+    "eventCount": 9,
+    "selectedEvent": "challenge_XP",
+    "missions": [
+      {
+        "id": "DIFF01",
+        "title": "一阶",
+        "subtitle": "",
+        "progressStatus": 5,
+        "hasMetUnitRequirements": true,
+        "energyType": 0,
+        "energy": 0,
+        "currencyType": 0,
+        "currencyAmount": 0,
+        "selectLabel": "战斗",
+        "unlockRequirement": "达到玩家等级15以解锁",
+        "grindTicketsEnabled": true,
+        "playerMeetsGrindTicketRequirements": true,
+        "cooldown": {
+          "hasCooldown": false,
+          "active": false,
+          "maxAttempts": 3,
+          "currentAttemptCount": 0,
+          "maxAttemptsReached": false,
+          "canBuyRefresh": false
+        }
+      },
+      {
+        "id": "DIFF02",
+        "title": "二阶",
+        "subtitle": "",
+        "progressStatus": 5,
+        "hasMetUnitRequirements": true,
+        "energyType": 0,
+        "energy": 0,
+        "currencyType": 0,
+        "currencyAmount": 0,
+        "selectLabel": "战斗",
+        "unlockRequirement": "达到玩家等级25以解锁",
+        "grindTicketsEnabled": true,
+        "playerMeetsGrindTicketRequirements": true,
+        "cooldown": {
+          "hasCooldown": false,
+          "active": false,
+          "maxAttempts": 3,
+          "currentAttemptCount": 0,
+          "maxAttemptsReached": false,
+          "canBuyRefresh": false
+        }
+      },
+      {
+        "id": "DIFF03",
+        "title": "三阶",
+        "subtitle": "",
+        "progressStatus": 5,
+        "hasMetUnitRequirements": true,
+        "energyType": 0,
+        "energy": 0,
+        "currencyType": 0,
+        "currencyAmount": 0,
+        "selectLabel": "战斗",
+        "unlockRequirement": "达到玩家等级38以解锁",
+        "grindTicketsEnabled": true,
+        "playerMeetsGrindTicketRequirements": true,
+        "cooldown": {
+          "hasCooldown": false,
+          "active": false,
+          "maxAttempts": 3,
+          "currentAttemptCount": 0,
+          "maxAttemptsReached": false,
+          "canBuyRefresh": false
+        }
+      },
+      {
+        "id": "DIFF04",
+        "title": "四阶",
+        "subtitle": "",
+        "progressStatus": 5,
+        "hasMetUnitRequirements": true,
+        "energyType": 0,
+        "energy": 0,
+        "currencyType": 0,
+        "currencyAmount": 0,
+        "selectLabel": "战斗",
+        "unlockRequirement": "达到玩家等级56以解锁",
+        "grindTicketsEnabled": true,
+        "playerMeetsGrindTicketRequirements": true,
+        "cooldown": {
+          "hasCooldown": false,
+          "active": false,
+          "maxAttempts": 3,
+          "currentAttemptCount": 0,
+          "maxAttemptsReached": false,
+          "canBuyRefresh": false
+        }
+      },
+      {
+        "id": "DIFF05",
+        "title": "五阶",
+        "subtitle": "",
+        "progressStatus": 5,
+        "hasMetUnitRequirements": true,
+        "energyType": 0,
+        "energy": 0,
+        "currencyType": 0,
+        "currencyAmount": 0,
+        "selectLabel": "战斗",
+        "unlockRequirement": "达到玩家等级70以解锁",
+        "grindTicketsEnabled": true,
+        "playerMeetsGrindTicketRequirements": true,
+        "cooldown": {
+          "hasCooldown": false,
+          "active": false,
+          "maxAttempts": 3,
+          "currentAttemptCount": 0,
+          "maxAttemptsReached": false,
+          "canBuyRefresh": false
+        }
+      },
+      {
+        "id": "DIFF06",
+        "title": "六阶",
+        "subtitle": "",
+        "progressStatus": 5,
+        "hasMetUnitRequirements": true,
+        "energyType": 0,
+        "energy": 0,
+        "currencyType": 0,
+        "currencyAmount": 0,
+        "selectLabel": "战斗",
+        "unlockRequirement": "达到玩家等级84以解锁",
+        "grindTicketsEnabled": true,
+        "playerMeetsGrindTicketRequirements": true,
+        "cooldown": {
+          "hasCooldown": false,
+          "active": false,
+          "maxAttempts": 3,
+          "currentAttemptCount": 0,
+          "maxAttemptsReached": false,
+          "canBuyRefresh": false
+        }
+      }
+    ],
+    "missionPageConfirmed": true,
+    "returnListConfirmed": true,
+    "finalState": "HomeBaseGameState"
+  },
+  "validation": [
+    "Unique event and instance identity",
+    "Native view/controller row ordering match",
+    "Original locked and unmet unit entries rejected",
+    "Active view gates",
+    "Mission costs read fresh, missing cooldown remains null",
+    "Native MaxAttemptsReached retained",
+    "Mailbox/bridge/claim-tracker regressions and syntax checks"
+  ],
+  "limitations": [
+    "Only training droid challenge mission page tested live",
+    "No battle, sweep, attempt refresh, actual reward claim or spending performed",
+    "Mission costs are UI data, not a committed transaction quote",
+    "No new rendered screenshot; active native view/controller readback"
+  ]
+}

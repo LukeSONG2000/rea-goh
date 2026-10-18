@@ -440,6 +440,73 @@ globalThis.ObjectivesBridge=(()=>{
  return {execute,status(){try{const live=view();return {ready:true,tab:R.readValue(live.controller,'_currentTabType','i32'),subTab:R.readValue(live.controller,'_currentSubTabType','i32')};}catch(error){return {ready:false,error:String(error)};}}};
 })();
 
+globalThis.EventsBridge=(()=>{
+ const R=RuntimeApi,S=SceneApi;
+ const active=v=>!v.isNull()&&!!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(v)),'bool');
+ function context(){
+  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+  if(R.fullName(R.classOf(state))!=='EventsParentGameState')throw Error('Events page required');
+  const controller=R.readRef(state,'_eventsParentController');
+  if(R.readValue(controller,'_currentTabType','i32')!==4)throw Error('Challenges tab required');
+  const sub=R.readRef(controller,'_challengesSubController');
+  return {controller,sub,view:R.readRef(sub,'_challengeView'),missions:R.readRef(sub,'_eventsMissionView')};
+ }
+ function list(value){
+  if(value.isNull())throw Error('Event list not loaded');
+  const n=R.readValue(value,'_size','i32'),items=R.readRef(value,'_items');
+  if(n<0||n>2048||(items.isNull()?n!==0:n>items.add(24).readU64().toNumber()))throw Error('Event list bounds invalid');
+  return Array.from({length:n},(_,i)=>items.add(32+8*i).readPointer());
+ }
+ function execute(operation,payload){
+  const c=context();
+  if(operation==='events-missions'){
+   if(!active(c.missions))throw Error('Event missions not active');
+   const event=R.readRef(c.sub,'_event');if(event.isNull())throw Error('Current event unavailable');
+   const missions=list(R.readRef(c.missions,'_missions')).map(row=>{
+    const str=n=>S.string(R.readRef(row,'<'+n+'>k__BackingField'));
+    const value=(n,type='i32')=>R.readValue(row,'<'+n+'>k__BackingField',type);
+    const cd=R.readRef(row,'<CooldownRenderDataObject>k__BackingField');let cooldown=null;
+    if(!cd.isNull()){
+     const cv=(n,type='i32')=>R.readValue(cd,'<'+n+'>k__BackingField',type);
+     cooldown={hasCooldown:!!cv('HasCoolDown','bool'),active:!!cv('CoolDownActive','bool'),maxAttempts:cv('MaxAttempts'),currentAttemptCount:cv('CurrentAttemptCount'),maxAttemptsReached:!!R.unbox(S.invoke('CooldownRenderData','MaxAttemptsReached',cd),'bool'),canBuyRefresh:!!cv('CanBuyRefresh','bool')};
+    }
+    return {id:str('Id'),title:str('Title'),subtitle:str('SubTitle'),progressStatus:value('ProgressStatus'),hasMetUnitRequirements:!!value('HasMetUnitRequirements','bool'),
+     energyType:value('EnergyType'),energy:value('Energy'),currencyType:value('CurrencyType'),currencyAmount:value('CurrencyAmount'),
+     selectLabel:str('SelectButtonLocalizationValue'),unlockRequirement:str('UnlockRequirementLocalizationValue'),
+     grindTicketsEnabled:!!value('GrindTicketsEnabledForMission','bool'),playerMeetsGrindTicketRequirements:!!value('PlayerMeetsGrindTicketRequirements','bool'),cooldown};
+   });
+   return {readConfirmed:true,eventId:S.string(R.readRef(event,'<Id>k__BackingField')),missions,scope:'Original mission UI values; no battle, sweep or refresh dispatched'};
+  }
+  if(operation==='events-missions-back'){
+   if(!active(c.missions))throw Error('Event missions not active');
+   S.invoke('SoloEventsSubController','BackFromEventsMissionView',c.sub);return {expectedState:'EventsParentGameState',listExpected:true};
+  }
+  if(!['events-list','events-open'].includes(operation))throw Error('Unsupported events command');
+  if(!active(c.view)||active(c.missions))throw Error('Challenge list not active');
+  const rows=list(R.readRef(c.view,'_eventItemRenderData'));
+  const events=rows.map(row=>{
+   const str=n=>S.string(R.readRef(row,'<'+n+'>k__BackingField'));
+   const flag=n=>!!R.readValue(row,'<'+n+'>k__BackingField','bool');
+   return {eventId:str('EventId'),instanceId:str('EventInstanceId'),title:str('TitleText'),description:str('EventDescription'),
+    locked:flag('IsLocked'),featureLocked:flag('FeatureLocked'),meetsUnitOwnedRequirement:flag('MeetsUnitOwnedRequirement'),hasAnyAllowedUnit:flag('HasAnyAllowedUnit'),lockText:str('LockString')};
+  });
+  if(operation==='events-list')return {readConfirmed:true,events};
+  if(typeof payload?.eventId!=='string'||!payload.eventId.length||typeof payload.instanceId!=='string')throw Error('Event identity required');
+  const indices=events.flatMap((e,i)=>e.eventId===payload.eventId&&e.instanceId===payload.instanceId?[i]:[]);
+  if(indices.length!==1)throw Error('Expected unique current event');
+  const index=indices[0],event=events[index],backing=list(R.readRef(c.sub,'_eventData'));
+  if(!backing[index]||!rows[index].equals(backing[index]))throw Error('Event view/controller ordering mismatch');
+  if(event.locked||event.featureLocked||!event.meetsUnitOwnedRequirement||!event.hasAnyAllowedUnit)throw Error('Original event entry is locked or unit requirements unmet');
+  S.invoke('SoloEventsSubView','OnEventClicked',c.view,[R.arg.value('i32',index)]);
+  return {expectedState:'EventsParentGameState',eventId:event.eventId,instanceId:event.instanceId};
+ }
+ function status(){try{
+  const c=context(),event=R.readRef(c.sub,'_event');
+  return {ready:true,listActive:active(c.view)&&!active(c.missions),missionsActive:active(c.missions),eventId:event.isNull()?null:S.string(R.readRef(event,'<Id>k__BackingField'))};
+ }catch(error){return {ready:false,error:String(error)};}}
+ return {execute,status};
+})();
+
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const R=RuntimeApi,S=SceneApi;
  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
@@ -447,6 +514,7 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const stateName=R.fullName(R.classOf(state));
  const result={schemaVersion:1,state:stateName,units:[],scope:'observed current client; no gameplay input'};
  if(stateName==='HomeBaseGameState')result.campaignMenu=readCampaignMenu();
+ if(stateName==='EventsParentGameState')result.events=EventsBridge.status();
  if(stateName==='ObjectivesGameState')result.objectives=ObjectivesBridge.status();
  if(stateName==='InboxGameState')result.inbox=InboxBridge.status();
  if(stateName==='MasterInventoryGameState'){
@@ -543,3 +611,5 @@ rpc.exports.inboxcommand=operation=>RuntimeApi.runOnMainThreadOnce(()=>InboxBrid
 
 rpc.exports.objectivescommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>ObjectivesBridge.execute(operation,payload));
 rpc.exports.questclaimdispose=()=>RuntimeApi.runOnMainThreadOnce(()=>QuestClaimTracker.dispose());
+
+rpc.exports.eventscommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>EventsBridge.execute(operation,payload));

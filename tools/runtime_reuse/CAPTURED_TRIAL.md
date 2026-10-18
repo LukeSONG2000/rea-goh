@@ -281,3 +281,19 @@ the resulting state. It follows the original navigation history: entering from
 Objectives returned to Objectives in live validation, then objectives-home
 returned to the cantina. Event-state confirmation is not subview render validation.
 
+Challenge interfaces:
+- `events-list --pid <PID>` reads the active original challenge view, including
+  event/instance identity, title, lock and unit-requirement flags.
+- `events-open --pid <PID> --request <JSON file>` accepts `eventId` and `instanceId`
+  from that list. It verifies current view/controller row identity and original
+  entry flags, then invokes OnEventClicked. Confirmation requires the matching
+  original EventDO and an active mission view.
+- `events-missions --pid <PID>` reads mission IDs, progress, original costs,
+  requirements, sweep eligibility and raw cooldown/attempt values. Attempts are
+  exposed as CurrentAttemptCount/MaxAttempts plus original MaxAttemptsReached;
+  no derived remaining-count interpretation is imposed.
+- `events-missions-back --pid <PID>` invokes the original mission Back callback
+  and confirms the challenge list is active again.
+
+These commands do not launch battles, sweep, refresh attempts or purchase energy.
+

@@ -35,6 +35,17 @@ try{
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
+    if(['events-missions','events-list','events-open','events-missions-back'].includes(operation)){
+     const result=await script.exports.eventscommand(operation,payload);
+     if(['events-list','events-missions'].includes(operation))return result;
+     let after,confirmed=false;
+     for(let i=0;i<30;i++){
+      await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
+      confirmed=after.state===result.expectedState&&(result.listExpected?after.events?.listActive:after.events?.missionsActive&&after.events?.eventId===result.eventId);
+      if(confirmed)break;
+     }
+     return {...result,transitionConfirmed:!!confirmed,afterState:after.state,events:after.events};
+    }
     if(operation==='events-back'||operation.startsWith('objectives-')){
      const result=await script.exports.objectivescommand(operation,payload);
      if(['objectives-claim-status','objectives-list','objectives-claim'].includes(operation))return result;
