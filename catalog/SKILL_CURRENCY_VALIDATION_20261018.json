@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-18",
+  "skillId": "basicskill_VADER",
+  "levels": [
+    {
+      "tier": -1,
+      "currencyType": 0,
+      "currencyCost": 0,
+      "currencyOwned": 0,
+      "upgradeAvailable": false
+    },
+    {
+      "tier": 0,
+      "currencyType": 1,
+      "currencyCost": 700,
+      "currencyOwned": 415387857,
+      "upgradeAvailable": false
+    },
+    {
+      "tier": 1,
+      "currencyType": 1,
+      "currencyCost": 1400,
+      "currencyOwned": 415387857,
+      "upgradeAvailable": false
+    },
+    {
+      "tier": 2,
+      "currencyType": 1,
+      "currencyCost": 2100,
+      "currencyOwned": 415387857,
+      "upgradeAvailable": false
+    },
+    {
+      "tier": 3,
+      "currencyType": 1,
+      "currencyCost": 4100,
+      "currencyOwned": 415387857,
+      "upgradeAvailable": false
+    },
+    {
+      "tier": 4,
+      "currencyType": 1,
+      "currencyCost": 8200,
+      "currencyOwned": 415387857,
+      "upgradeAvailable": false
+    },
+    {
+      "tier": 5,
+      "currencyType": 1,
+      "currencyCost": 24700,
+      "currencyOwned": 415387857,
+      "upgradeAvailable": false
+    },
+    {
+      "tier": 6,
+      "currencyType": 1,
+      "currencyCost": 43800,
+      "currencyOwned": 415387857,
+      "upgradeAvailable": false
+    }
+  ],
+  "source": "Original InventoryDomainController.GetCurrencyQuantity(CurrencyTypeEnum), local read",
+  "tests": [
+    "live maxed Vader: balance sufficient but native eligibility false",
+    "mock zero balance/live read preserves native eligibility",
+    "navigation/mailbox regressions"
+  ],
+  "finalState": "HomeBaseGameState",
+  "limitations": [
+    "No independent wallet UI screenshot comparison",
+    "Currency type 0 original return zero is not a spendable currency quote",
+    "No upgrade or purchase performed; full quote remains unverified"
+  ]
+}

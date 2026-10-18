@@ -107,13 +107,17 @@ globalThis.InventoryBridge=(()=>{
   if(data.isNull())return null;
   const text=name=>S.string(R.readRef(data,'<'+name+'>k__BackingField'));
   const value=(name,kind='i32')=>R.readValue(data,'<'+name+'>k__BackingField',kind);
-  return {tier:value('AbilityTier'),levelText:text('AbilityLevel'),typeText:text('AbilityLevelType'),
+  const result={tier:value('AbilityTier'),levelText:text('AbilityLevel'),typeText:text('AbilityLevelType'),
    description:text('AbilityDescription'),requirements:text('AbilityUpgradeRequirements'),
    cooldown:value('Cooldown'),hideCooldown:!!value('HideCooldown','bool'),
    lockedByConditions:!!value('LevelLockedByConditions','bool'),upgradeStatus:value('UpgradeStatus'),
    upgradeAvailable:!!value('UpgradeAvailable','bool'),
    currencyCost:value('RecipeCost'),currencyType:value('RecipeCurrencyType'),
-   materials:skillMaterials(data),costComplete:false}; // Raw UI quantity semantics still require validation.
+   materials:skillMaterials(data),costComplete:false,currencyOwned:null};
+  try{
+   result.currencyOwned=R.unbox(S.invoke('InventoryDomainController','GetCurrencyQuantity',R.findBound('InventoryDomainController'),[R.arg.value('i32',result.currencyType)],['CurrencyTypeEnum']),'i32');
+  }catch(error){result.currencyError=String(error);}
+  return result;
  }
  function skillPopup(controller,type,raw=false){
   const owner=abilityOwner(controller,type);if(owner.isNull())return null;
