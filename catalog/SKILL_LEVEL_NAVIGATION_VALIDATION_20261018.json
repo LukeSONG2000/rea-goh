@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-18",
+  "unit": "VEERS",
+  "selectedEight": {
+    "tier": 6,
+    "levelText": "8",
+    "typeText": "等级8 （基本）",
+    "description": "对敌方目标造成物理伤害，有70%几率在2回合内向维尔斯将军以及一名未获得速度提升的随机帝国士兵施加此增益。",
+    "requirements": "",
+    "cooldown": 0,
+    "hideCooldown": false,
+    "lockedByConditions": false,
+    "upgradeStatus": 0,
+    "upgradeAvailable": true,
+    "currencyCost": 43800,
+    "currencyType": 1,
+    "materials": [
+      {
+        "itemType": 7,
+        "renderType": "MaterialsItemRenderData",
+        "id": "ability_mat_D",
+        "label": "275/5",
+        "quantityRaw": 5,
+        "ownedQuantity": 275
+      }
+    ],
+    "costComplete": false,
+    "currencyOwned": 415387857
+  },
+  "selectedTwo": {
+    "tier": 0,
+    "levelText": "2",
+    "typeText": "等级2 （基本）",
+    "description": "对敌方目标造成物理伤害，有25%几率在2回合内向维尔斯将军以及一名未获得速度提升的随机帝国士兵施加此增益。",
+    "requirements": "",
+    "cooldown": 0,
+    "hideCooldown": false,
+    "lockedByConditions": false,
+    "upgradeStatus": 2,
+    "upgradeAvailable": true,
+    "currencyCost": 700,
+    "currencyType": 1,
+    "materials": [
+      {
+        "itemType": 7,
+        "renderType": "MaterialsItemRenderData",
+        "id": "ability_mat_A",
+        "label": "16307/3",
+        "quantityRaw": 3,
+        "ownedQuantity": 16307
+      }
+    ],
+    "costComplete": false,
+    "currencyOwned": 415387857
+  },
+  "unchangedSkillData": true,
+  "finalState": "HomeBaseGameState",
+  "entry": "Original UnitDetailsSkillOverlayView.AbilityLevelButtonClicked",
+  "tests": [
+    "real 2 to 8 to 2 preview with selected tier confirmation",
+    "mock stale skill/missing tier/noninteger rejection and original callback object",
+    "mailbox malformed/negative bound/positive bound rejection"
+  ],
+  "limitations": [
+    "One character multi-level popup live tested",
+    "Ship level navigation and single-level rejection not live tested",
+    "No upgrade or purchase executed"
+  ]
+}

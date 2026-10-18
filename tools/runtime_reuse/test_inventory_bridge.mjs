@@ -107,6 +107,11 @@ recipe.fields._size=129;assert.match(bridge.detail(state).skillPopupError,/recip
 level.fields['<RecipeData>k__BackingField']=nil;
 level.fields['<Cooldown>k__BackingField']=2;assert.equal(bridge.detail(state).skillPopup.selectedLevel.cooldown,2);
 assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'}),/Close the current/);
+assert.throws(()=>bridge.execute('inventory-skill-level',{unitId:'vader-id',skillId:'other',tier:6}),/popup changed/);
+assert.throws(()=>bridge.execute('inventory-skill-level',{unitId:'vader-id',skillId:'present',tier:5}),/Choose one tier/);
+assert.throws(()=>bridge.execute('inventory-skill-level',{unitId:'vader-id',skillId:'present',tier:1.5}),/Invalid skill tier/);
+const selected=bridge.execute('inventory-skill-level',{unitId:'vader-id',skillId:'present',tier:6});
+assert.equal(selected.selectedTier,6);assert.equal(calls.at(-1).method,'AbilityLevelButtonClicked');assert.equal(calls.at(-1).args[0].value,level);
 bridge.execute('inventory-skill-close',{unitId:'vader-id'});assert.equal(calls.at(-1).method,'OnBackClick');assert.equal(calls.at(-1).object,popup);
 abilityController.fields._skillsOverlayView=nil;assert.throws(()=>bridge.execute('inventory-skill-close',{unitId:'vader-id'}),/No active/);
 shipController.fields._currentData=shipData;shipController.fields._skillsOverlayView=nil;shipController.fields._abilityDetailsView=nil;

@@ -218,3 +218,4 @@ implemented but not yet live-validated.
 材料条目 `ownedQuantity` 现直接调用原 InventoryDomainController.GetCraftingMaterialQuantity(string) 实时读取，仅对原 MATERIAL 类型有效。其他类型返回 null，读取异常返回 inventoryError；零表示确实读到零，不表示未知。原 UI label 与库存交叉验证通过不等于当前等级可升级，仍应读取原 upgradeAvailable 与解锁条件。
 等级对象新增 currencyOwned：原 InventoryDomainController.GetCurrencyQuantity(CurrencyTypeEnum) 实时返回，失败为 null 并附 currencyError。原 currencyType 数值保留，UNDEFINED 类型的零返回不能当作可消费钱包。余额与材料数量不替代原 upgradeAvailable/allowUpgrade，也不代表用户已授权消费。
 重要实机语义：`upgradeAvailable` **不能单独作为立即升级判据**。50级 VEERS 的1级普攻打开后原窗口默认选中2级（tier=0、upgradeStatus=2），后续3–8级也会 upgradeAvailable=true，但 upgradeStatus=0。原枚举：0 LOCKED、1 ACQUIRED、2 UPGRADE_ELIGIBLE、3 UPGRADE_CANDIDATE。调用方必须保留原选中等级与状态，不能自行跳级或把此布尔值改名为 canUpgradeNow。
+技能等级预览：`inventory-skill-level --pid <PID> --request <file.json>`，JSON含当前 unitId、skillId 和 `skillPopup.levels[].tier`（内部tier，不是显示等级）。要求原多级窗口已打开，仅调用原 AbilityLevelButtonClicked；回执校验原 selectedLevel.tier，保留原 LOCKED 状态，不升级。窗口/技能变更、未知等级与非法范围拒绝。

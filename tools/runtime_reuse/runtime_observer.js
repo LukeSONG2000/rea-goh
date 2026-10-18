@@ -166,12 +166,24 @@ globalThis.InventoryBridge=(()=>{
   return result;
  }
  function execute(operation,request){
-  if(['inventory-skill','inventory-skill-close'].includes(operation)){
+  if(['inventory-skill','inventory-skill-close','inventory-skill-level'].includes(operation)){
    const state=current(),type=R.fullName(R.classOf(state));
    if(!['CharacterDetailsState','ShipDetailsState'].includes(type))throw Error('Skill command requires a unit detail page');
    const controller=R.readRef(state,'_controller'),info=detail(state);
    if(info.loading||!request||request.unitId!==info.unitId)throw Error('Skill command unit changed or missing unitId');
    const popup=skillPopup(controller,type,true);
+   if(operation==='inventory-skill-level'){
+    if(!popup||popup.viewType!=='UnitDetailsSkillOverlayView')throw Error('Level selection requires the original multi-level popup');
+    if(!Number.isInteger(request.tier)||request.tier< -1||request.tier>127)throw Error('Invalid skill tier');
+    const data=R.readRef(popup.view,'_data');
+    if(data.isNull()||S.string(R.readRef(data,'<SkillId>k__BackingField'))!==request.skillId)throw Error('Skill popup changed');
+    const levels=list(R.readRef(data,'<AbilityLevelData>k__BackingField'));
+    if(levels.length>128)throw Error('Skill level bound exceeded');
+    const matches=levels.filter(level=>R.readValue(level,'<AbilityTier>k__BackingField','i32')===request.tier);
+    if(matches.length!==1)throw Error('Choose one tier from the original popup levels');
+    S.invoke('UnitDetailsSkillOverlayView','AbilityLevelButtonClicked',popup.view,[R.arg.ref(matches[0])]);
+    return {expectedState:type,unitId:info.unitId,skillId:request.skillId,selectedTier:request.tier};
+   }
    if(operation==='inventory-skill-close'){
     if(!popup)throw Error('No active original skill popup');
     S.invoke(popup.viewType,'OnBackClick',popup.view);

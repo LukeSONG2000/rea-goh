@@ -35,13 +35,14 @@ try{
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
-    if(['inventory-list','inventory-unit','inventory-skill','inventory-skill-close','inventory-back'].includes(operation)){
+    if(['inventory-list','inventory-unit','inventory-skill','inventory-skill-close','inventory-skill-level','inventory-back'].includes(operation)){
      const result=await script.exports.inventorycommand(operation,payload);
      if(operation==='inventory-list')return result;
      let after,confirmed=false;
      for(let i=0;i<20;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
-      confirmed=['inventory-skill','inventory-skill-close'].includes(operation)?after.state===result.expectedState&&after.detail?.unitId===result.unitId&&!after.detail?.skillPopupError&&(result.closing?after.detail?.skillPopup===null:after.detail?.skillPopup?.skillId===result.skillId||(after.detail?.skillPopup?.kind==='single'&&after.detail?.skillPopup?.name===result.name)):after.state===result.expectedState&&(operation==='inventory-unit'?after.detail?.unitId===result.unitId:after.inventory?.ready===true);
+      confirmed=['inventory-skill','inventory-skill-close','inventory-skill-level'].includes(operation)?after.state===result.expectedState&&after.detail?.unitId===result.unitId&&!after.detail?.skillPopupError&&(result.closing?after.detail?.skillPopup===null:after.detail?.skillPopup?.skillId===result.skillId||(after.detail?.skillPopup?.kind==='single'&&after.detail?.skillPopup?.name===result.name)):after.state===result.expectedState&&(operation==='inventory-unit'?after.detail?.unitId===result.unitId:after.inventory?.ready===true);
+      if(operation==='inventory-skill-level')confirmed=confirmed&&after.detail?.skillPopup?.selectedLevel?.tier===result.selectedTier;
       if(confirmed)break;
      }
      return {...result,transitionConfirmed:confirmed,afterState:after.state,detail:after.detail};
