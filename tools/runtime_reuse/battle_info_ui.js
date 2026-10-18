@@ -32,6 +32,26 @@
   const pair=(label,a,b)=>label+' '+read(a)+' / '+read(b);
   return [pair('生命','CurrentHP','MaxHP'),pair('总护盾','CurrentShield','MaxShield'),pair('永久护盾','CurrentPermanentShield','MaxPermanentShield'),pair('临时护盾','CurrentBonusShield','MaxBonusShield')].join('\n');
  }
+ function layoutTarget(item){
+  const name=R.readRef(item.target,'_nameLabel'),parent=S.parent(S.transform(name));
+  const component=R.readRef(item.view,'_opponentAbilitiesComponent');
+  const controls=[name];
+  if(!component.isNull())for(const field of ['_abilityButtonGrid','_leaderAndUniqueIconsGrid']){
+   const control=R.readRef(component,field);if(!control.isNull())controls.push(control);
+  }
+  let left=Infinity;
+  for(const control of controls){
+   if(!active(control))continue;
+   const box=call('NGUIMath','CalculateRelativeWidgetBounds',R.nil,[A.ref(parent),A.ref(S.transform(control))],['UnityEngine.Transform','UnityEngine.Transform']);
+   const p=R.api('object_unbox','pointer',['pointer'])(box);
+   // Unity Bounds stores center then extents, both Vector3, in parent space.
+   const minX=p.readFloat()-p.add(12).readFloat();
+   if(Number.isFinite(minX))left=Math.min(left,minX);
+  }
+  if(!Number.isFinite(left))return;
+  const position=S.vector(S.transform(name),'localPosition');
+  setVector(S.transform(item.label),'localPosition',[left-16,position[1],position[2]]);
+ }
  function renderTarget(view,unit){
   if(unit.isNull())return;
   const target=R.readRef(view,'_opponentTargetComponent');if(target.isNull())return;
@@ -39,8 +59,9 @@
   if(!item){
    const name=R.readRef(target,'_nameLabel'),transform=S.transform(name),position=S.vector(transform,'localPosition');
    const label=makeLabel(R.readRef(view,'_effectDetailsPopup'),{parent:S.parent(transform),name:'REA_TargetAbsoluteHealth',pivot:2,width:350,font:18,position:[position[0],position[1],position[2]]});
-   item={target,label,unit};targets.set(target.toString(),item);
+   item={target,label,unit,view};targets.set(target.toString(),item);
   }
+  layoutTarget(item);
   item.unit=unit;setText(item.label,healthText(unit));stats.target=healthText(unit);
  }
  function render(popup,unit){
@@ -123,6 +144,8 @@
      call('BattleAbilityComponent','ToggleAbilityButtonsVisible',c,[A.value('bool',true)]);stats.tutorialDisplays++;
     }
     call('BattleBaseView','FilterOpponentAbilityDisplay',this.view,[A.value('bool',true)]);
+    const target=R.readRef(this.view,'_opponentTargetComponent'),item=targets.get(target.toString());
+    if(item)layoutTarget(item);
    });}
   });
   hook('BattleBaseView','SetOpponentUnitData',1,{onEnter(args){this.view=args[0];this.unit=args[1];},onLeave(){if(!stopped)safe(()=>renderTarget(this.view,this.unit));}});
