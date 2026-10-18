@@ -312,3 +312,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 event-mission-selection】认领原挑战关卡选择进入选队链，核原资源和单位检查；root独占运行时/只读Ghidra，不调用购买刷新或装备操作。
 【Codex/root 2026-10-18 capability-demo】认领用户要求的已接入能力实机演示，包含未验证选队接口与隔离战斗；root独占运行时，不恢复长期开发目标，不消费货币或修改装备。
 【Codex/root 2026-10-18 capability-demo completed】前台演示收藏/角色飞船技能/等级报价、邮箱、战役、任务成就、挑战；关卡进入实际弹支援选择，自动ready超时，GUI选支援后原选队身份及Back成功，未线上开战。隔离战斗演示我方目标/技能/友军取消确认、敌方技能/友军取消确认/普攻/恢复AI/改目标；改序维达战和双人改目标战均terminal+serviceCalls0+清理通过，headless终态通过。两场Auto敌控超时未终局保留失败口径；末尾token/owner拒绝未重放。面板生命护盾可见，但1402x819右上数值挤压技能图标仍待修；领奖仅不合格拒绝无到账样本。报告CAPABILITY_DEMO_20261018.json，长期目标继续暂停；原目录不写，无货币消费拆装。
+【Codex/root 2026-10-18 support-picker】用户要求恢复原目标，认领原支援选择中间步骤与选队返回闭环；root独占runtime_observer/CLI/host/tests及必要只读Ghidra。原目录只读，不调用消费购买或装备操作。
