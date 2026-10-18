@@ -452,3 +452,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 sweep-preview】认领原单关扫荡确认窗预览/关闭及成本标签核查，root独占runtime/Ghidra；不确认扫荡。
 
 【Codex/root 2026-10-19 sweep-preview native+live】新增campaign-sweep-preview/status/close，原details回调→单mission UseGrindTickets；严格完整关卡身份、正体力cost、原可用按钮/max>1避开auto-spend，拒绝重复预览/多关状态。原标签核count*cost及单关ticket=count。实机1A原确认窗默认24次/24券/144体力、max24；取消/返回Home成功，券仍154286、可负担次数仍24，无confirm，host14656。preview回调/取消/货币和max1拒绝/重复/数量mock及loading PASS。报告SWEEP_PREVIEW_20261019.json；数量选择和授权执行/结算仍待。
+【Codex/root 2026-10-19 sweep-count】认领原确认窗次数调整及读回，root独占runtime/Ghidra，不确认消费。
