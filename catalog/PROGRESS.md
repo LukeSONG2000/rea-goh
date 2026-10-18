@@ -398,3 +398,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 campaign-squad-cli】认领普通战役阵容增删null eventId兼容，复用完整关卡身份校验，实机移除/复原同一队员；root独占命令桥接和宿主，无开战消费。
 
 【Codex/root 2026-10-18 campaign-squad-cli validated】prebattle-remove/add兼容普通战役null eventId，强制完整关卡键，与支援共用native requireMission；host回读带完整missionIdentity与slot/unit核对。光明1-A真实第1槽HERMITYODA移除→null→原InventoryUnitTapped加回，wholeSquadRestored/supportRestored均true，未开战/消费。原support/mandatory/重复/empty-slot/所属view守卫保留。桥接各键错配/命令层畸形拒绝/回读及loading测试PASS，syntax/diff PASS。报告CAMPAIGN_SQUAD_CLI_20261018.json；回Home，原32088普通host22088。地图关卡选择仍需原UI一次点击，待封装。
+
+【Codex/root 2026-10-18 campaign-mission-cli】认领原地图关卡详情到选队CLI，root独占只读Ghidra及运行时接口；仅原选择回调，不扫荡/刷新/购买/线上开战。
