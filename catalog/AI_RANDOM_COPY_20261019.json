@@ -1,0 +1,203 @@
+{
+  "scope": "Native independent JavaRandom copies for future isolated AI prediction",
+  "implementation": [
+    "System.Object.MemberwiseClone retains exact private seed instead of reseeding via constructor",
+    "Five streams copied with source alias relationships preserved within each clone set",
+    "Original context never rebound or written",
+    "Retained copies disposed on success, partial construction failure, and audit failure",
+    "Audit deferred until first real AI evaluator entry because fixture allocation precedes stream initialization"
+  ],
+  "audit": {
+    "before": {
+      "BattleRandom": "60514616381808",
+      "PlayerAbilitySelectionRandom": "25291343502",
+      "OpponentAbilitySelectionRandom": "25291343502",
+      "PlayerTargetRandom": "25291343502",
+      "OpponentTargetRandom": "25291343502"
+    },
+    "after": {
+      "BattleRandom": "60514616381808",
+      "PlayerAbilitySelectionRandom": "25291343502",
+      "OpponentAbilitySelectionRandom": "25291343502",
+      "PlayerTargetRandom": "25291343502",
+      "OpponentTargetRandom": "25291343502"
+    },
+    "originalUnchanged": true,
+    "rows": [
+      {
+        "name": "BattleRandom",
+        "first": [
+          0,
+          3,
+          50,
+          160069454
+        ],
+        "second": [
+          0,
+          3,
+          50,
+          160069454
+        ],
+        "equal": true
+      },
+      {
+        "name": "PlayerAbilitySelectionRandom",
+        "first": [
+          0,
+          0,
+          91,
+          573487173
+        ],
+        "second": [
+          0,
+          0,
+          91,
+          573487173
+        ],
+        "equal": true
+      },
+      {
+        "name": "OpponentAbilitySelectionRandom",
+        "first": [
+          0,
+          0,
+          91,
+          573487173
+        ],
+        "second": [
+          0,
+          0,
+          91,
+          573487173
+        ],
+        "equal": true
+      },
+      {
+        "name": "PlayerTargetRandom",
+        "first": [
+          0,
+          0,
+          91,
+          573487173
+        ],
+        "second": [
+          0,
+          0,
+          91,
+          573487173
+        ],
+        "equal": true
+      },
+      {
+        "name": "OpponentTargetRandom",
+        "first": [
+          0,
+          0,
+          91,
+          573487173
+        ],
+        "second": [
+          0,
+          0,
+          91,
+          573487173
+        ],
+        "equal": true
+      }
+    ],
+    "scope": "Private RNG copies only; not an isolated AI evaluator"
+  },
+  "completion": {
+    "kind": "visual-probe-complete",
+    "verifiedVisualBattle": true,
+    "error": null,
+    "clicked": true,
+    "terminalObserved": true,
+    "lastSnapshot": {
+      "previous": 136,
+      "next": 1,
+      "turns": 5,
+      "currentState": "CampaignGameState"
+    },
+    "serviceCalls": 0,
+    "blockedSocketCalls": {
+      "send": 2,
+      "sendto": 1,
+      "WSASend": 0,
+      "WSASendTo": 0,
+      "connect": 0,
+      "WSAConnect": 0
+    },
+    "socketDiagnostics": {
+      "elapsedMs": 19194,
+      "installedThread": 42772,
+      "installedThreadCalls": 3,
+      "untrackedCalls": 0,
+      "diagnosticErrors": 0,
+      "initialDelayMs": 5,
+      "backgroundRepeatDelayMs": 50,
+      "backoffCalls": 0,
+      "callers": [
+        {
+          "api": "send",
+          "thread": 42772,
+          "count": 2,
+          "module": "GameAssembly.dll",
+          "offset": "0xa35836"
+        },
+        {
+          "api": "sendto",
+          "thread": 42772,
+          "count": 1,
+          "module": "GameAssembly.dll",
+          "offset": "0xa358a6"
+        }
+      ]
+    },
+    "capture": {
+      "path": null,
+      "requested": false,
+      "verified": false,
+      "error": null,
+      "beforeStamp": null
+    },
+    "cleanup": {
+      "home": true,
+      "exitedOwnedStates": 1,
+      "guardRestored": true,
+      "gcReleased": true,
+      "errors": [],
+      "definitionsRestored": true
+    },
+    "originalUiObserved": true,
+    "screenshotVerified": false,
+    "ownership": {
+      "exitedOwnBattle": true,
+      "campaignExpected": true,
+      "foreignTransition": false
+    }
+  },
+  "baseline": {
+    "allRowsResultsRngAndTreesEqual": true,
+    "path": "logs/high_reuse/trial-20261019-015533-267-evidence.json"
+  },
+  "failedAttempt": {
+    "cleaned": true,
+    "resolution": "Audit at first native evaluation entry",
+    "path": "logs/high_reuse/trial-20261019-020425-180-evidence.json",
+    "reason": "Random streams not initialized at fixture allocation"
+  },
+  "tests": [
+    "Native five streams x two copies x four bounds PASS",
+    "Copy aliases, int64 exactness, invalid bounds, disposed use, allocation failure cleanup PASS",
+    "Original graph/private priority regressions PASS",
+    "Five prepare tests PASS",
+    "Turn order seed repeated output hash equal"
+  ],
+  "limitations": [
+    "No complete isolated AI evaluator or pre-turn skill prediction yet",
+    "AI context/targets/ability caches and other mutable dependencies still need isolation",
+    "Copy audit only enabled through explicit TraceAI trials"
+  ],
+  "finalHost": 30060
+}

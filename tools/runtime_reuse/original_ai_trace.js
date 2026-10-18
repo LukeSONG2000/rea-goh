@@ -1,5 +1,6 @@
 'use strict';
-// Observe original calls only. Never invokes the decision evaluator or random stream.
+// Observe original decisions only. Never invokes an extra decision evaluator or
+// advances an original random stream. The copy audit advances private clones.
 // Snapshot the original graph without evaluating conditions or advancing RNG.
 globalThis.readOriginalAIRandomState=context=>{
  const result={};
@@ -8,6 +9,46 @@ globalThis.readOriginalAIRandomState=context=>{
   result[name]=random.isNull()?null:String(RuntimeApi.readValue(random,'_seed','i64'));
  }
  return result;
+};
+
+globalThis.copyOriginalAIRandomStreams=context=>{
+ const R=RuntimeApi,S=SceneApi,handles=[],streams={},copies=new Map();let disposed=false;
+ const names=['BattleRandom','PlayerAbilitySelectionRandom','OpponentAbilitySelectionRandom','PlayerTargetRandom','OpponentTargetRandom'];
+ function dispose(){if(disposed)return;disposed=true;for(const handle of handles)R.release(handle);}
+ function requireOpen(){if(disposed)throw Error('Random copy already disposed');}
+ try{
+  for(const name of names){
+   const source=R.readRef(context,'<'+name+'>k__BackingField');
+   if(source.isNull()||R.fullName(R.classOf(source))!=='JavaRandom')throw Error('Original JavaRandom stream required: '+name);
+   let copy=copies.get(source.toString());
+   if(!copy){
+    copy=S.invoke('System.Object','MemberwiseClone',source);
+    if(copy.isNull()||copy.equals(source)||R.fullName(R.classOf(copy))!=='JavaRandom')throw Error('Independent JavaRandom copy required');
+    handles.push(R.retain(copy));
+    if(String(R.readValue(copy,'_seed','i64'))!==String(R.readValue(source,'_seed','i64')))throw Error('Copied random seed changed');
+    copies.set(source.toString(),copy);
+   }
+   streams[name]=copy;
+  }
+ }catch(error){dispose();throw error;}
+ return {dispose,state(){requireOpen();return Object.fromEntries(names.map(n=>[n,String(R.readValue(streams[n],'_seed','i64'))]));},
+  nextInt(name,bound){requireOpen();if(!Object.hasOwn(streams,name)||!Number.isInteger(bound)||bound<1||bound>2147483647)throw Error('Invalid private random draw');return R.unbox(S.invoke('JavaRandom','nextInt',streams[name],[R.arg.value('i32',bound)]),'i32');}};
+};
+
+globalThis.verifyOriginalAIRandomCopies=context=>{
+ const before=readOriginalAIRandomState(context);let a,b;
+ try{
+  a=copyOriginalAIRandomStreams(context);b=copyOriginalAIRandomStreams(context);
+  const rows=Object.keys(before).map(name=>{
+   const first=[1,7,100,2147483647].map(bound=>a.nextInt(name,bound));
+   const second=[1,7,100,2147483647].map(bound=>b.nextInt(name,bound));
+   return {name,first,second,equal:JSON.stringify(first)===JSON.stringify(second)};
+  });
+  const after=readOriginalAIRandomState(context);
+  const unchanged=JSON.stringify(before)===JSON.stringify(after);
+  if(!unchanged||rows.some(r=>!r.equal))throw Error('Private random copy verification failed');
+  return {before,after,originalUnchanged:unchanged,rows,scope:'Private RNG copies only; not an isolated AI evaluator'};
+ }finally{a?.dispose();b?.dispose();}
 };
 globalThis.readOriginalAITree=tree=>{
  const R=RuntimeApi,S=SceneApi,indices=new Map(),nodes=[];
@@ -39,6 +80,7 @@ globalThis.readOriginalAITree=tree=>{
 
 globalThis.installOriginalAITrace=context=>{
  const R=RuntimeApi,S=SceneApi,A=R.arg,rows=[],errors=[],hooks=[],active=new Map(),trees=new Map();let serial=0,dropped=0;
+ let randomCopyAudit=null,auditAttempted=false;
  const ref=(p,f)=>R.readRef(p,f),text=p=>S.string(p);
  const owns=p=>!p.isNull()&&ref(p,'_battleContext').equals(context);
  const call=(p,n,args=[])=>R.invoke(R.findMethod(R.classOf(p),n,args.length),p,args);
@@ -53,6 +95,9 @@ globalThis.installOriginalAITrace=context=>{
    this.thread=Process.getCurrentThreadId();this.previous=active.get(this.thread);
    this.row={sequence:++serial,actor:unit(ref(args[1],'Self')),chance:R.readValue(args[1],'Chance','i32'),nodes:[],results:[]};
    this.row.randomBefore=readOriginalAIRandomState(context);
+   // Streams are initialized by original battle entry, not fixture allocation.
+   // Audit at the first real evaluator entry, before its original body runs.
+   if(!auditAttempted){auditAttempted=true;randomCopyAudit=inspect(()=>verifyOriginalAIRandomCopies(context));}
    active.set(this.thread,this.row);rows.push(this.row);
    // Native 16A2EC0 reads context.GameDataDomainController._abilityDecisionTreeDO
    // directly, bypassing the GetAbilityDecisionTree call site.
@@ -91,5 +136,5 @@ globalThis.installOriginalAITrace=context=>{
   });}
  });
  let stopped=false;
- return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
+ return {snapshot:()=>({kind:'original-ai-trace',scope:'observed original decisions; not a pre-turn prediction',rows,trees:Array.from(trees.values(),record=>record.graph),errors,dropped,randomCopyAudit}),stop(){if(stopped)return;stopped=true;for(const h of hooks)h.detach();}};
 };
