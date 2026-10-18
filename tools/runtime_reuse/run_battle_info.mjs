@@ -37,7 +37,7 @@ try{
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
     if(operation.startsWith('objectives-')){
      const result=await script.exports.objectivescommand(operation,payload);
-     if(['objectives-list','objectives-claim'].includes(operation))return result;
+     if(['objectives-claim-status','objectives-list','objectives-claim'].includes(operation))return result;
      let after,confirmed=false;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
@@ -98,5 +98,9 @@ try{
  }
  if(!detached){last=await script.exports.stop();save();}
 }finally{
+ if(!detached&&script){
+  try{const claims=await script.exports.questclaimdispose();fs.writeFileSync(path.join(directory,`quest-claims-${process.pid}.json`),JSON.stringify(claims,null,2));}
+  catch(error){messages.push({kind:'quest-claim-dispose-error',error:String(error)});}
+ }
  if(!detached)await session.detach();detached=true;save();releaseOwnership();
 }

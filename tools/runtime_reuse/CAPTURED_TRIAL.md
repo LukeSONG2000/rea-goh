@@ -257,3 +257,14 @@ daily reset needs a new host session after the previous outcome is checked.
 Live validation currently covers rejection of an ineligible daily task only.
 Eligible dispatch has mock coverage, not a completed live reward transaction.
 
+`objectives-claim-status --pid <PID>` reports this host session's tracked claims.
+Tracking captures the original transaction's callback closure only during an
+interface-owned claim, matching quest ID, subcontroller, success/failure target
+identity, and original closure class. Native callback outcomes are `pending`,
+`native-success-callback`, or `native-failure-callback`; exceptions and tracking
+errors remain visible. A success callback is not a separate balance audit:
+`rewardConfirmed` remains false. Unknown outcomes are never retried automatically.
+Records are saved to `logs/high_reuse/quest-claims-<host PID>.json` on orderly host
+shutdown; native hooks and retained callback objects are released. A new session
+does not merge old records or reinterpret pending claims as failures.
+

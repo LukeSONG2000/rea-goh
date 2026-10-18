@@ -181,6 +181,8 @@ assert.equal(objectives.status().tab,3);assert.equal(objectives.execute('objecti
 objectiveController.fields._currentTabType=1;assert.throws(()=>objectives.execute('objectives-list'),/not supported/);
 objectiveController.fields._currentTabType=3;
 const claimRequest={questId:'daily-test',tab:3,subTab:0};
+// Correlation hooks are tested independently with native-call-shaped mocks.
+ctx.QuestClaimTracker={install(){},submit(info,owner,callback){callback();return {id:'test'};}};
 const achievementSub=objectiveController.fields._achievementsSubController;
 achievementSub.fields._wasShutDown=false;achievementSub.fields._transitionToken=nil;
 assert.throws(()=>objectives.execute('objectives-claim',claimRequest),/not eligible/);

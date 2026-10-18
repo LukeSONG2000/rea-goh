@@ -284,6 +284,69 @@ globalThis.InboxBridge=(()=>{
  return {execute,status(){try{view();return {ready:true};}catch(error){return {ready:false,error:String(error)};}}};
 })();
 
+// Observe only closures captured while our exact original claim call is running.
+// No callback replacement, synthetic completion, or repeated transaction.
+globalThis.QuestClaimTracker=(()=>{
+ const R=RuntimeApi,S=SceneApi,records=[],closures=new Map(),hooks=[];
+ let active=null,installed=false;
+ const closureType='ObjectivesQuestSubController+<>c__DisplayClass17_0';
+ function install(){
+  if(installed)return;
+  const entries=[
+   ['EpisodeDomainController','ClaimQuestsAndHeadlines',5,{
+    onEnter(args){
+     if(!active)return;
+     try{
+      const ids=args[1],headline=args[2];
+      if(ids.isNull()||!headline.isNull()||R.readValue(ids,'_size','i32')!==1)return;
+      const items=R.readRef(ids,'_items');
+      if(items.isNull()||items.add(24).readU64().toNumber()<1||S.string(items.add(32).readPointer())!==active.questId)return;
+      const target=R.readRef(args[3],'m_target'),failureTarget=R.readRef(args[4],'m_target');
+      if(target.isNull()||!target.equals(failureTarget)||R.fullName(R.classOf(target))!==closureType||!R.readRef(target,'<>4__this').equals(active.owner))return;
+      if(active.nativeTransactionObserved)throw Error('Multiple native transactions during one claim dispatch');
+      if(closures.has(target.toString()))throw Error('Claim closure already tracked');
+      active.handle=R.retain(target);closures.set(target.toString(),active);active.closure=target;active.nativeTransactionObserved=true;
+     }catch(error){active.trackingError=String(error);}
+    }
+   }],
+   [closureType,'<CallClaimQuestsAndHeadlines>b__0',2,{onEnter(args){this.claimTarget=args[0];finish(args[0],'native-success-callback');},onLeave(){releaseTarget(this.claimTarget);}}],
+   [closureType,'<CallClaimQuestsAndHeadlines>b__1',1,{onEnter(args){this.claimTarget=args[0];finish(args[0],'native-failure-callback');},onLeave(){releaseTarget(this.claimTarget);}}]
+  ];
+  try{
+   // Resolve all original methods before installing any hook.
+   const resolved=entries.map(([type,name,n,callbacks])=>[R.findMethod(R.findClass(type),name,n).readPointer(),callbacks]);
+   for(const [address,callbacks] of resolved)hooks.push(Interceptor.attach(address,callbacks));
+   installed=true;
+  }catch(error){for(const hook of hooks.splice(0))hook.detach();throw error;}
+ }
+ function finish(target,outcome){
+  const record=closures.get(target.toString());if(!record)return;
+  if(record.outcome!=='pending')return;
+  record.outcome=outcome;record.finishedAt=new Date().toISOString();
+ }
+ function publicRecord(record){
+  const {owner,closure,handle,...plain}=record;return {...plain,rewardConfirmed:false};
+ }
+ function releaseTarget(target){
+  if(!target)return;const key=target.toString(),record=closures.get(key);if(!record)return;
+  closures.delete(key);R.release(record.handle);record.handle=null;record.closure=null;
+ }
+ function dispose(){
+  for(const hook of hooks.splice(0))hook.detach();
+  for(const record of [...closures.values()])releaseTarget(record.closure);
+  installed=false;return {readConfirmed:true,claims:records.map(publicRecord),trackingStopped:true};
+ }
+ function submit(info,owner,callback){
+  install();if(active)throw Error('Nested claim dispatch rejected');
+  if(records.length>=256)throw Error('Claim tracking session capacity reached');
+  const record={...info,id:String(records.length+1),owner,outcome:'pending',nativeTransactionObserved:false,submittedAt:new Date().toISOString()};
+  records.push(record);active=record;
+  try{callback();return publicRecord(record);}catch(error){record.invocationError=String(error);throw error;}finally{active=null;}
+ }
+ function status(){install();return {readConfirmed:true,trackingInstalled:installed,claims:records.map(publicRecord),scope:'Native callback observation only; reward balances are not reconciled. Never retry pending or uncertain claims automatically.'};}
+ return {install,submit,status,dispose};
+})();
+
 globalThis.ObjectivesBridge=(()=>{
  const R=RuntimeApi,S=SceneApi;
  const submittedClaims=new Set();
@@ -296,6 +359,7 @@ globalThis.ObjectivesBridge=(()=>{
   return {controller,objectives};
  }
  function execute(operation,payload){
+  if(operation==='objectives-claim-status')return QuestClaimTracker.status();
   if(operation==='objectives-open'){
    const current=state();if(R.fullName(R.classOf(current))!=='HomeBaseGameState')throw Error('Open objectives from Home');
    S.invoke('HomeBaseController','OnNextMissionClicked',R.readRef(current,'_homeBaseController'));
@@ -347,9 +411,10 @@ globalThis.ObjectivesBridge=(()=>{
    const key=JSON.stringify([tab,subTab,q.id]);
    if(submittedClaims.has(key))throw Error('Claim already submitted in this host session; inspect outcome, do not retry');
    // Reserve before invoking: exceptions or lost replies must not replay a claim.
+   QuestClaimTracker.install();
    submittedClaims.add(key);
-   S.invoke(achievements?'ObjectivesAchievementsSubController':'ObjectivesDailyQuestSubController','HandleClaimButtonClicked',sub,[R.arg.ref(R.readRef(rows[i],'<Id>k__BackingField'))],['System.String']);
-   return {claimDispatched:true,rewardConfirmed:false,questId:q.id,tab,subTab,
+   const tracking=QuestClaimTracker.submit({questId:q.id,tab,subTab},sub,()=>S.invoke(achievements?'ObjectivesAchievementsSubController':'ObjectivesDailyQuestSubController','HandleClaimButtonClicked',sub,[R.arg.ref(R.readRef(rows[i],'<Id>k__BackingField'))],['System.String']));
+   return {claimDispatched:true,rewardConfirmed:false,trackingId:tracking.id,questId:q.id,tab,subTab,
     scope:'Original reward button callback invoked; asynchronous server outcome is not confirmed. No automatic retry.'};
   }
   if(achievements)return {readConfirmed:true,tab,subTab,quests,scope:'Current original achievement list; no claim dispatched'};
@@ -462,3 +527,4 @@ rpc.exports.inventorycommand=(operation,request)=>RuntimeApi.runOnMainThreadOnce
 rpc.exports.inboxcommand=operation=>RuntimeApi.runOnMainThreadOnce(()=>InboxBridge.execute(operation));
 
 rpc.exports.objectivescommand=(operation,payload)=>RuntimeApi.runOnMainThreadOnce(()=>ObjectivesBridge.execute(operation,payload));
+rpc.exports.questclaimdispose=()=>RuntimeApi.runOnMainThreadOnce(()=>QuestClaimTracker.dispose());

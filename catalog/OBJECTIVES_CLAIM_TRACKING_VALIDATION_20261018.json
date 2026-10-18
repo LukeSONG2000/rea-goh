@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-18",
+  "scope": "Correlated native claim callbacks and read-only status; not live claim success",
+  "nativeEvidence": {
+    "transactionTailJump": "0x188876F JMP 0x19E7780 (EpisodeDomainController.ClaimQuestsAndHeadlines)",
+    "successClosure": "ObjectivesQuestSubController+<>c__DisplayClass17_0.<CallClaimQuestsAndHeadlines>b__0, RVA 0x1888D20",
+    "failureClosure": "same closure b__1, RVA 0x1888E90",
+    "domainSuccess": "0x19E7CD0 updates claimed challenge flags and invokes the original onSuccess delegate",
+    "provider": "Read-only local PyGhidra project closed without saving; live IL2CPP method resolution installed all three hooks"
+  },
+  "correlation": [
+    "Only inside explicit owned synchronous claim invocation",
+    "Exactly one quest ID and null headline",
+    "Original success/failure delegates have same target",
+    "Target has exact original closure type and matching subcontroller",
+    "Second native transaction during same submission reported as tracking error"
+  ],
+  "live": {
+    "pid": 32088,
+    "firstHost": 42120,
+    "finalHost": 40832,
+    "installed": true,
+    "claimsObserved": 0,
+    "orderlyStopArchiveVerified": true,
+    "finalState": "HomeBaseGameState"
+  },
+  "tests": [
+    "Ignore unowned calls and foreign closure/quest",
+    "Observe matching success and failure independently",
+    "Ignore duplicate/foreign outcomes",
+    "Invocation exception preserved without automatic retry",
+    "Dispose releases pending roots and all hooks",
+    "Bridge and mailbox regressions and syntax checks pass"
+  ],
+  "limitations": [
+    "Native success/failure events simulated in tests only; no eligible live claim sample",
+    "Success callback does not reconcile balances; rewardConfirmed remains false",
+    "Pending claims stay pending on shutdown; archived records are not merged into new host session"
+  ],
+  "consumption": "No actual reward claim, purchase, currency spending or equipment changes"
+}
