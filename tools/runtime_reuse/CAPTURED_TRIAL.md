@@ -44,6 +44,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/runtime_reuse/start_ca
 原树 ID 回调在当前验证中未触发，缺失的 `treeId` 不代表没有使用决策树。
 返回的 allyTargets/enemyTargets 是原 AI 返回列表，不应直接解释为最终受击者。
 
+## 敌方控制验证 demo
+
+在上述启动命令附加 `-EnemyBasicDemo`，敌方到达原输入提供器时暂存出招请求，
+等待约 2.2 秒，再经原 `CanPerformMove` 检查、`PerformManualMove` 和原完成回调
+提交普攻。保留原目标和战斗结算管线，不改队伍归属、伤害、冷却或共享决策树。
+这会主动改变敌方技能选择，属于隔离实验，不是原 AI 重放。
+
+已验证捕获 1-A、保存小队类型 8、`-Auto -Duration 90 -EnemyBasicDemo`：
+两次敌方 B1 普攻、等待期间回合/FSM不前进、原终局和清理通过。
+当前只提供普攻验证；任意技能、友军选取、长时间等待、防锁死计时处理和
+独立敌方操作 CLI 尚未开放。该选项仅支持 visual，日志记录 held/manual-input。
+
 ## AI 操作接口
 
 有画面试玩运行期间，在另一个终端使用现有 CLI，`PID` 替换为原游戏进程号：

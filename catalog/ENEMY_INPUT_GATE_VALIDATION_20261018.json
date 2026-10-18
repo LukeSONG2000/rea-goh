@@ -1,0 +1,291 @@
+{
+  "date": "2026-10-18",
+  "scope": "Owned captured trial enemy input gate and manual basic attack demo",
+  "nativeEvidence": {
+    "provider": "Existing read-only PyGhidra project; REA MCP had no open target",
+    "DoMove": "RVA 0x1A64420: reads current-unit manual choice; invokes PerformManualMove-equivalent body or PerformAISuggestedMove, then Action<UnitMoveType> callback",
+    "PerformManualMove": "RVA 0x1BC36D0: original targeting plus PerformOpeningMove; native callback invoked after success",
+    "CanPerformMove": "RVA 0x1BC2BD0: checked before diagnostic manual move",
+    "sourceDirectory": "logs/high_reuse/native",
+    "projectSaved": false
+  },
+  "runs": [
+    {
+      "path": "logs\\high_reuse\\enemy-gate-probe-evidence.json",
+      "sha256": "a54ff7be8d6e38639587dfc1a73806bb6ecb021780ef540b3636a95ebb825c30",
+      "gate": {
+        "kind": "enemy-gate-complete",
+        "events": [
+          {
+            "event": "held",
+            "pending": true,
+            "token": "enemy:19440:1",
+            "actor": "tTVXM4hRQsCdTfQpamWbJw",
+            "owner": 1,
+            "turn": 2,
+            "previous": 34,
+            "next": 1
+          },
+          {
+            "event": "resumed-original",
+            "token": "enemy:19440:1"
+          },
+          {
+            "event": "held",
+            "pending": true,
+            "token": "enemy:19440:2",
+            "actor": "YDorQZt6RCaym6QiJBqseA",
+            "owner": 1,
+            "turn": 3,
+            "previous": 34,
+            "next": 1
+          },
+          {
+            "event": "resumed-original",
+            "token": "enemy:19440:2"
+          }
+        ],
+        "errors": []
+      },
+      "stableHeldSnapshots": true,
+      "heldMilliseconds": [
+        2267,
+        2267
+      ],
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 5,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 3740,
+          "sendto": 1,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 1,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      }
+    },
+    {
+      "path": "logs\\high_reuse\\enemy-manual-basic-evidence.json",
+      "sha256": "24aa111f57fb15002b18a2254194f3523aa64d153dbaf107f4b28d2c00aa04e0",
+      "gate": {
+        "kind": "enemy-gate-complete",
+        "events": [
+          {
+            "event": "held",
+            "pending": true,
+            "token": "enemy:19440:1",
+            "actor": "tTVXM4hRQsCdTfQpamWbJw",
+            "owner": 1,
+            "turn": 2,
+            "previous": 34,
+            "next": 1
+          },
+          {
+            "event": "manual-basic",
+            "token": "enemy:19440:1",
+            "abilityId": "basicability_b1battledroid_ONBOARDING"
+          },
+          {
+            "event": "held",
+            "pending": true,
+            "token": "enemy:19440:2",
+            "actor": "YDorQZt6RCaym6QiJBqseA",
+            "owner": 1,
+            "turn": 3,
+            "previous": 34,
+            "next": 1
+          },
+          {
+            "event": "manual-basic",
+            "token": "enemy:19440:2",
+            "abilityId": "basicability_b1battledroid_ONBOARDING"
+          }
+        ],
+        "errors": []
+      },
+      "stableHeldSnapshots": true,
+      "heldMilliseconds": [
+        2266,
+        2266
+      ],
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 5,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 4,
+          "sendto": 2,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 0,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      }
+    },
+    {
+      "path": "logs\\high_reuse\\trial-20261018-080626-186-evidence.json",
+      "sha256": "c8f5cf175c61ea806899ec73ae5109c0313274aeb64dfef1578d09bc4cc21541",
+      "gate": {
+        "kind": "enemy-gate-complete",
+        "events": [
+          {
+            "event": "held",
+            "pending": true,
+            "token": "enemy:19440:1",
+            "actor": "tTVXM4hRQsCdTfQpamWbJw",
+            "owner": 1,
+            "turn": 2,
+            "previous": 34,
+            "next": 1
+          },
+          {
+            "event": "manual-basic",
+            "token": "enemy:19440:1",
+            "abilityId": "basicability_b1battledroid_ONBOARDING"
+          },
+          {
+            "event": "held",
+            "pending": true,
+            "token": "enemy:19440:2",
+            "actor": "YDorQZt6RCaym6QiJBqseA",
+            "owner": 1,
+            "turn": 3,
+            "previous": 34,
+            "next": 1
+          },
+          {
+            "event": "manual-basic",
+            "token": "enemy:19440:2",
+            "abilityId": "basicability_b1battledroid_ONBOARDING"
+          }
+        ],
+        "errors": []
+      },
+      "stableHeldSnapshots": true,
+      "heldMilliseconds": [
+        2215,
+        2208
+      ],
+      "completion": {
+        "kind": "visual-probe-complete",
+        "verifiedVisualBattle": true,
+        "error": null,
+        "clicked": true,
+        "terminalObserved": true,
+        "lastSnapshot": {
+          "previous": 136,
+          "next": 1,
+          "turns": 5,
+          "currentState": "CampaignGameState"
+        },
+        "serviceCalls": 0,
+        "blockedSocketCalls": {
+          "send": 1570,
+          "sendto": 2,
+          "WSASend": 0,
+          "WSASendTo": 0,
+          "connect": 1,
+          "WSAConnect": 0
+        },
+        "capture": {
+          "path": null,
+          "requested": false,
+          "verified": false,
+          "error": null,
+          "beforeStamp": null
+        },
+        "cleanup": {
+          "home": true,
+          "exitedOwnedStates": 1,
+          "guardRestored": true,
+          "gcReleased": true,
+          "errors": []
+        },
+        "originalUiObserved": true,
+        "screenshotVerified": false,
+        "ownership": {
+          "exitedOwnBattle": true,
+          "campaignExpected": true,
+          "foreignTransition": false
+        }
+      }
+    }
+  ],
+  "checks": [
+    "test_enemy_input_gate mock PASS",
+    "prepare 4 tests PASS",
+    "trial input ownership PASS",
+    "trial lifecycle PASS",
+    "demo_turn_order same-seed PASS"
+  ],
+  "limits": [
+    "Only captured 1-A and saved squad type8 tested",
+    "Basic uses original current target; special/ally/ultimate and arbitrary target control pending",
+    "2.2 second holds tested; long-wait lock detection not handled",
+    "No pre-turn prediction or priority editing",
+    "Current B1 AI also chose basic: this proves dispatch path, not changed outcome"
+  ],
+  "restoredDisplayHostPid": 36816
+}

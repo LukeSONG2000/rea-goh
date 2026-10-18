@@ -11,6 +11,7 @@
  const hooks=[],cleanup={home:false,exitedOwnedStates:0,guardRestored:false,gcReleased:false,errors:[]};
  let f=null,guard=null,entered=null,ownedCampaign=null,exitedOwnBattle=false,campaignExpected=false,foreignTransition=false,returningHome=false;
  let serviceCalls=0,last=-1,clicked=false,readyAt=0,error=null,lastSnapshot=null,terminalObserved=false;
+ let enemyGate=null,heldToken=null,heldAt=0;
  const capture={path:options.capturePath,requested:false,verified:false,error:null,beforeStamp:null};
  const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
  const typename=object=>object&&!object.isNull()?R.fullName(R.classOf(object)):null;
@@ -63,6 +64,7 @@
    guard=installOfflineSocketGuard(); // covers fixture, entry, polling and exit
    f=createOriginalFixture(Object.assign({},options.fixture||{},{flags:6}));send(originalFixtureDiagnostics(f));
    if(options.traceAI)globalThis.trialAITrace=installOriginalAITrace(f.context);
+   if(options.enemyBasicDemo)enemyGate=installEnemyInputGate(f.context);
    const loop=R.newObject(R.findClass('UnityGameLoop'));
    const injector=R.readRef(R.nil,'_instance',R.findClass('Injector'));
    R.invoke(R.findMethod(R.findClass('Injector'),'Inject',1),injector,[A.ref(loop)]);
@@ -106,6 +108,16 @@
   while(Date.now()<deadline){
    let shouldStop=false;
    await R.runOnMainThreadOnce(()=>{
+    if(enemyGate){
+     const snapshot=enemyGate.snapshot();
+     if(snapshot.pending){
+      if(heldToken!==snapshot.token){heldToken=snapshot.token;heldAt=Date.now();send({kind:'enemy-held-start',snapshot});}
+      else if(Date.now()-heldAt>=2200){
+       send({kind:'enemy-held-end',snapshot,elapsed:Date.now()-heldAt});
+       send({kind:'enemy-manual-input',result:enemyGate.chooseBasic(snapshot.token)});
+      }
+     }
+    }
     const state=current(),name=typename(state);
     if(name==='CampaignGameState'&&campaignExpected&&!foreignTransition&&!ownedCampaign)ownedCampaign=state;
     if(foreignTransition){shouldStop=true;return;}
@@ -172,6 +184,11 @@
    if(!cleanup.home)cleanup.errors.push('Home restoration not confirmed; GC handles retained');
   }catch(exception){cleanup.errors.push('state cleanup: '+String(exception));}
   finally{
+   try{if(enemyGate){
+    enemyGate.stop();send({kind:'enemy-gate-complete',events:enemyGate.events,errors:enemyGate.errors});
+    if(enemyGate.errors.length)error=error||'Enemy input gate reported errors';
+   }}
+   catch(exception){cleanup.errors.push('enemy gate cleanup: '+String(exception));}
    try{if(globalThis.trialAITrace){trialAITrace.stop();send(trialAITrace.snapshot());}}
    catch(exception){cleanup.errors.push('AI trace cleanup: '+String(exception));}
    for(const listener of hooks)try{listener.detach();}catch(exception){cleanup.errors.push('detach: '+String(exception));}
