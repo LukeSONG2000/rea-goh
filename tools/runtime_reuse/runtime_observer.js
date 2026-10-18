@@ -233,6 +233,44 @@ globalThis.InventoryBridge=(()=>{
  return {execute,detail,readiness(){try{inventory();return {ready:true};}catch(e){return {ready:false,reason:String(e)};}}};
 })();
 
+globalThis.InboxBridge=(()=>{
+ const R=RuntimeApi,S=SceneApi;
+ const state=()=>R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+ function view(){
+  const current=state();if(R.fullName(R.classOf(current))!=='InboxGameState')throw Error('Inbox page required');
+  const controller=R.readRef(current,'_inboxController');if(controller.isNull())throw Error('Inbox loading');
+  const inbox=R.readRef(controller,'_inboxView');
+  if(inbox.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(inbox)),'bool'))throw Error('Inbox view not ready');
+  return {controller,inbox};
+ }
+ function execute(operation){
+  if(operation==='inbox-open'){
+   const current=state();if(R.fullName(R.classOf(current))!=='HomeBaseGameState')throw Error('Open inbox from Home');
+   S.invoke('HomeBaseController','OnInboxClicked',R.readRef(current,'_homeBaseController'));
+   return {expectedState:'InboxGameState'};
+  }
+  const live=view();
+  if(operation==='inbox-home'){
+   S.invoke('FeatureController','OnBackButtonClicked',live.controller);
+   return {expectedState:'HomeBaseGameState'};
+  }
+  if(operation!=='inbox-list')throw Error('Unsupported inbox command');
+  const list=R.readRef(live.inbox,'_filterRenderData');
+  if(list.isNull())throw Error('Inbox list not initialized');
+  const count=R.readValue(list,'_size','i32'),items=R.readRef(list,'_items');
+  if(count<0||count>4096||(items.isNull()?count!==0:count>items.add(24).readU64().toNumber()))throw Error('Inbox list bounds invalid');
+  const messages=[];
+  for(let i=0;i<count;i++){
+   const data=items.add(32+i*8).readPointer();
+   const text=name=>S.string(R.readRef(data,'<'+name+'>k__BackingField'));
+   messages.push({id:text('Id'),subject:text('Subject'),source:text('Source'),expires:text('ExpireTime'),
+    message:text('Message'),actionLabel:text('ActionButtonLabel'),selected:!!R.readValue(data,'<ItemSelected>k__BackingField','bool')});
+  }
+  return {readConfirmed:true,messages,scope:'Current original filtered inbox list; no claim/delete/custom action dispatched'};
+ }
+ return {execute,status(){try{view();return {ready:true};}catch(error){return {ready:false,error:String(error)};}}};
+})();
+
 globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const R=RuntimeApi,S=SceneApi;
  const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
@@ -240,6 +278,7 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
  const stateName=R.fullName(R.classOf(state));
  const result={schemaVersion:1,state:stateName,units:[],scope:'observed current client; no gameplay input'};
  if(stateName==='HomeBaseGameState')result.campaignMenu=readCampaignMenu();
+ if(stateName==='InboxGameState')result.inbox=InboxBridge.status();
  if(stateName==='MasterInventoryGameState'){
   const controller=R.readRef(state,'_masterInventoryController'),data=R.readRef(controller,'_transitionData');
   result.inventory={type:R.readValue(data,'<Type>k__BackingField','i32'),navigation:R.readValue(data,'<NavType>k__BackingField','i32'),...InventoryBridge.readiness()};
@@ -330,3 +369,4 @@ rpc.exports.campaignnavigate=(operation,payload)=>RuntimeApi.runOnMainThreadOnce
 });
 
 rpc.exports.inventorycommand=(operation,request)=>RuntimeApi.runOnMainThreadOnce(()=>InventoryBridge.execute(operation,request));
+rpc.exports.inboxcommand=operation=>RuntimeApi.runOnMainThreadOnce(()=>InboxBridge.execute(operation));

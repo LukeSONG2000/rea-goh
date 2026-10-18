@@ -128,4 +128,17 @@ assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'p
 shipData.fields['<AdvancedAbilityData>k__BackingField']=nil;shipData.fields['<CrewAbilityData>k__BackingField']=list([]);
 bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'});assert.equal(calls.at(-1).type,'ShipDetailsController');assert.equal(calls.at(-1).args[0].value,display);
 state=obj('HomeBaseGameState');assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'}),/detail page/);
-console.log('PASS inventory bridge: owned navigation, live raw/display skill reads; character and ship original skill callbacks, stale unit/unknown/duplicate/overlapping popup rejection, original popup close.');
+const inbox=ctx.InboxBridge;
+const homeController=obj('Home');state=obj('HomeBaseGameState',{_homeBaseController:homeController});
+inbox.execute('inbox-open');assert.equal(calls.at(-1).method,'OnInboxClicked');assert.equal(calls.at(-1).object,homeController);
+assert.throws(()=>inbox.execute('inbox-list'),/Inbox page/);
+const message=obj('Message',Object.fromEntries(Object.entries({Id:'message-id',Subject:'Original subject',Source:'Original source',ExpireTime:'1 day',Message:'Original content',ActionButtonLabel:'Collect',ItemSelected:true}).map(([k,v])=>['<'+k+'>k__BackingField',v])));
+const inboxView=obj('InboxView',{_filterRenderData:list([message])});
+const inboxController=obj('InboxController',{_inboxView:inboxView});state=obj('InboxGameState',{_inboxController:inboxController});
+assert.equal(inbox.status().ready,true);assert.equal(inbox.execute('inbox-list').messages[0].subject,'Original subject');
+message.fields['<Subject>k__BackingField']='Updated';assert.equal(inbox.execute('inbox-list').messages[0].subject,'Updated');
+active=false;assert.throws(()=>inbox.execute('inbox-list'),/not ready/);active=true;
+inboxView.fields._filterRenderData.fields._size=5000;assert.throws(()=>inbox.execute('inbox-list'),/bounds/);
+assert.throws(()=>inbox.execute('inbox-claim'),/Unsupported/);
+inbox.execute('inbox-home');assert.equal(calls.at(-1).method,'OnBackButtonClicked');assert.equal(calls.at(-1).object,inboxController);
+console.log('PASS inventory and inbox bridges: original callbacks, readback, state/readiness/bounds guards; no upgrade/claim/delete APIs.');

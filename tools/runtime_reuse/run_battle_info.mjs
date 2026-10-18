@@ -35,6 +35,17 @@ try{
   await new Promise(resolve=>setTimeout(resolve,1000));
   if(!detached){
    await processCommands(directory,{pid:Number(pid),hostPid:process.pid},async (operation,payload)=>{
+    if(operation.startsWith('inbox-')){
+     const result=await script.exports.inboxcommand(operation);
+     if(operation==='inbox-list')return result;
+     let after,confirmed=false;
+     for(let i=0;i<30;i++){
+      await new Promise(r=>setTimeout(r,250));after=await script.exports.snapshot();
+      confirmed=after.state===result.expectedState&&(operation==='inbox-home'||after.inbox?.ready===true);
+      if(confirmed)break;
+     }
+     return {...result,transitionConfirmed:confirmed,afterState:after.state};
+    }
     if(['inventory-list','inventory-unit','inventory-skill','inventory-skill-close','inventory-skill-level','inventory-skill-quote','inventory-back'].includes(operation)){
      const result=await script.exports.inventorycommand(operation,payload);
      if(['inventory-list','inventory-skill-quote'].includes(operation))return result;

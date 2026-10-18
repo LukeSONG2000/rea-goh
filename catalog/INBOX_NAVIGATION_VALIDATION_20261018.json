@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-18",
+  "operations": [
+    "inbox-open",
+    "inbox-list",
+    "inbox-home"
+  ],
+  "openedState": "InboxGameState",
+  "filteredMessageCount": 1,
+  "finalState": "HomeBaseGameState",
+  "tests": [
+    "original Home click and controller Back",
+    "current active original view filtered list",
+    "mock wrong-state/inactive/list bounds/live title/unsupported claim",
+    "mailbox read and transition receipt distinction"
+  ],
+  "privacy": "Mail contents retained in local logs only; not copied into catalog",
+  "limitations": [
+    "No reward claim/delete/custom action dispatched",
+    "Opening follows original client UI and may have normal read-state side effects",
+    "One current inbox; empty/filter variations not live tested"
+  ]
+}
