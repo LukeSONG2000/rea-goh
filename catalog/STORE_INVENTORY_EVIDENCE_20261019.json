@@ -1,0 +1,9 @@
+{
+ "operation":"store-reward-inventory",
+ "scope":"Current original inventory for bounded explicit reward IDs; not historical delta proof",
+ "baseline":"Future free claim reads PREMIUM and SOCIAL before native button invocation; unavailable balance refuses claim. Status compares same-session before/after, settlement remains false.",
+ "live":{"pid":32088,"hostPid":36636,"materialId":"unitshard_AHSOKATANO","currentQuantity":4,"premium":7491,"social":303832,"newClaim":false,"settlementConfirmed":false},
+ "tests":["Explicit bounded reward payload validation PASS","Unknown inventory returns null, no settlement claim PASS","Wallet baseline retained before dispatch PASS","Changed wallet detected PASS","Missing wallet refuses original callback PASS","Bridge/commands/durable/loading and CLI syntax PASS"],
+ "limitations":["Previous free claim had no baseline; current quantity 4 cannot establish previous quantity 2","Reward pre-claim baseline and native success callback correlation still pending","Wallet evidence is session-local; host restart without preserved baseline cannot infer unchanged","Unsupported reward types remain null"],
+ "evidence":["logs/high_reuse/store-reward-inventory-live.json","logs/high_reuse/store-wallet-status-live.json"]
+}

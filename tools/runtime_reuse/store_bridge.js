@@ -78,8 +78,13 @@ globalThis.StoreBridge=(()=>{
   });
   return {readConfirmed:true,visible:true,itemId:str(item,'Id'),phase:R.readValue(c,'_currentState','i32'),allTilesRevealed:R.readValue(c,'_allTilesRevealed','bool'),rewards,finishButton:buttonStatus(v,'finish','_finishButton'),settlementConfirmed:false,scope:'Original pack display; item ID alone is not transaction correlation or inventory delta proof'};
  }
+ const wallet=()=>InboxClaimTracker.readBalances([{id:'PREMIUM',itemType:2,quantity:1},{id:'SOCIAL',itemType:2,quantity:1}]).map(({expected,...row})=>row);
  let submission=null;
  function execute(op,p={}){
+  if(op==='store-reward-inventory'){
+   if(!Array.isArray(p.rewards)||p.rewards.length<1||p.rewards.length>128||p.rewards.some(r=>!r||typeof r.id!=='string'||!r.id.length||r.id.length>256||!Number.isInteger(r.itemType)||r.itemType<0||r.itemType>255||!Number.isSafeInteger(r.quantity)||r.quantity<=0))throw Error('Bounded explicit reward identities and quantities required');
+   return {readConfirmed:true,balances:InboxClaimTracker.readBalances(p.rewards),wallet:wallet(),settlementConfirmed:false,scope:'Current original inventory only; requested quantity is not a verified grant or pre-claim baseline'};
+  }
   if(op==='store-rewards')return packRewards();
   if(op==='store-rewards-next'){
    const before=packRewards();
@@ -97,7 +102,10 @@ globalThis.StoreBridge=(()=>{
    S.invoke('PackOpeningController','HandleOnBackButtonClicked',c);
    return {navigationDispatched:true,rewardsBeforeClose:before};
   }
-  if(op==='store-claim-status')return {readConfirmed:true,submission,settlementConfirmed:false};
+  if(op==='store-claim-status'){
+   const after=wallet(),before=submission?.walletBefore;
+   return {readConfirmed:true,submission,walletAfter:after,walletUnchanged:before?before.length===after.length&&before.every(b=>Number.isSafeInteger(b.value)&&after.some(a=>a.id===b.id&&a.itemType===b.itemType&&a.value===b.value)):null,settlementConfirmed:false};
+  }
   if(op==='store-claim-free'){
    if(submission)throw Error('Prior store submission requires reconciliation');
    if(typeof p.itemId!=='string'||!p.itemId.length||p.itemId.length>256||p.quantity!==1||p.expectedCost!==0)throw Error('Explicit item, quantity one and zero cost required');
@@ -107,7 +115,9 @@ globalThis.StoreBridge=(()=>{
    if(!info.currentOffer||info.currentOffer.currencyType!==5||info.currentOffer.requiresProductPricing)throw Error('Unsupported free store currency route');
    const visible=info.buttons.filter(b=>b.present&&b.active&&b.targetActive&&['single','singleCentered'].includes(b.slot));
    if(visible.length!==1||!visible[0].enabled)throw Error('Unique active enabled single-purchase button required');
-   submission={itemId:p.itemId,quantity:1,expectedCost:0,submittedAt:Date.now(),nativeReturned:false,error:null};
+   const walletBefore=wallet();
+   if(walletBefore.length!==2||walletBefore.some(b=>!Number.isSafeInteger(b.value)))throw Error('Wallet baseline unavailable');
+   submission={itemId:p.itemId,quantity:1,expectedCost:0,walletBefore,submittedAt:Date.now(),nativeReturned:false,error:null};
    try{S.invoke('StorePackDetailsView','PurchasePackClicked',v);submission.nativeReturned=true;}
    catch(e){submission.error=String(e);throw e;}
    return {claimDispatched:true,submission,settlementConfirmed:false};
