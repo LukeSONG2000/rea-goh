@@ -366,3 +366,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 inbox-selection】认领邮箱原生按ID选择及精确回读，作为领取链前置。原MessageDetailClicked会调用UpdateInbox，不能当纯选择；使用原InboxView.SelectListItem，现有列表ActionButtonLabel不能证明领取/删除动作类型。root独占相关接口，原目录只读。
 
 【Codex/root 2026-10-18 inbox-selection validated】新增inbox-select --request {messageId}，当前过滤列表唯一ID匹配后原InboxView.SelectListItem(renderData)，读取ItemSelected准确确认，不走MessageDetailClicked（原UpdateInbox事务路径）。只读Ghidra选择函数及detail/update完成无保存。实机指定DailyPvpRank_29871960_344，四封仍在且仅目标selected=true，随后inbox-home确认Home；未领取、删除或点击站外链接。缺失/重复ID、原对象参数、错误页、payload校验与mailbox防重放测试PASS。普通host34720。证据logs/high_reuse/inbox-after-select.json及native/inbox_select_item.c；领取和到账callback仍待接通，不将选择当领取。
+
+【Codex/root 2026-10-18 inbox-claim】认领邮箱原奖励详情按钮核对和单邮件领取回调跟踪；使用原UI回调，不直接调用PlayerService或自行RPC。先读取活动详情/按钮/邮件身份，再限制奖励类型，跟踪原success/failure且不重试不确定领取。
