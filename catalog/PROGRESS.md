@@ -240,3 +240,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 enemy-control-route】认领原敌方自动出招与FSM暂停入口验证；先核原方法体，不改线上控制/共享定义，隔离试玩内验证原合法技能入口。
 
 【Codex/root 2026-10-18 enemy-control-route validated】原BattleInputProvider.DoMove可暂存请求+完成委托；新增enemy_input_gate（仅owned context），恢复原AI与原CanPerformMove→PerformManualMove→原Action回调两条验证。DoMove/原自动/手动/FSM方法体由既有只读PyGhidra项目核对，REA MCP本轮无open target，未声称其成功反编译。两敌各等待约2266ms、actor/turn/FSM不前进；恢复AI一轮、指定普攻两轮均原turn5终局136、正式service0、Home/guard/GC PASS。正式启动器增加-EnemyBasicDemo（visual-only，2.2秒后提交原普攻），不是通用敌方CLI，保留原目标、不改队伍/数值/共享树；当前B1原AI也是普攻，不能据此宣称结局变化。mock覆盖跨context/过期token/原拒绝/所有权/重复调用/清理，prepare4/生命周期/输入/同seed回归PASS。报告ENEMY_INPUT_GATE_VALIDATION_20261018.json；正常宿主36816/原19440存活，CLI Home。特殊技能/选友军/终极/长暂停防锁死、预测/优先级仍待完成，无消费或装备操作。
+
+【Codex/root 2026-10-18 enemy-input-cli】认领owned试玩敌方输入CLI：快照待输入token、原AI恢复/原普攻提交、过期及跨会话拒绝、限时自动恢复与退出清理；只扩展隔离宿主，不开放正式战斗控制。
