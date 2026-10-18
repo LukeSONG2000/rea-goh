@@ -1,0 +1,34 @@
+{
+  "scope": "Aggregate reconciliation of original calendar rewards pending confirmation",
+  "behavior": [
+    "Combine reward expectations by itemType and ID across pending receipts",
+    "Require matching pre-claim balance for each shared item",
+    "Require exact total delta for all rewards; no partial or excess credit confirmation",
+    "Record batch members and aggregate comparison explicitly",
+    "Latch successful evidence; later balances do not undo settlement",
+    "Never replay claim on unconfirmed status"
+  ],
+  "tests": [
+    "Single receipt native-delta behavior preserved",
+    "Two 50 same-currency claims require +100",
+    "Partial +50 and excess +101 rejected",
+    "Inconsistent pre-claim balances rejected",
+    "Unsupported item keeps whole batch unconfirmed",
+    "Confirmed evidence survives later spending",
+    "Existing selection, no duplicate claim, mailbox tests PASS"
+  ],
+  "live": {
+    "moduleLoaded": true,
+    "hostPid": 3212,
+    "emptyHistoryRead": true,
+    "newClaims": 0,
+    "originalCalendarStillClaimed": true,
+    "openCloseVerified": true
+  },
+  "limitations": [
+    "No fresh multi-calendar reward available: aggregate native settlement remains unverified",
+    "Balance delta corroborates expected receipt; concurrent external changes can remain ambiguous",
+    "Mixed baseline cohorts conservatively unconfirmed rather than guessing settlement order",
+    "Session-local tracking; previous receipts remain in mailbox/evidence files"
+  ]
+}

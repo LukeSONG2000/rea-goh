@@ -21,14 +21,28 @@ globalThis.CalendarBridge=(()=>{
   return {readConfirmed:true,calendars:rows.map(d=>({...row(c,d),selected:d.equals(selected)})),selected:row(c,selected),claimEnabled:active(button)&&!target.isNull()&&!!R.unbox(S.invoke('UIButton','get_isEnabled',target),'bool'),catchUpRoute:!!R.readValue(v,'_catchUpIsFree','bool')};
  }
  function claimStatus(){
-  return {readConfirmed:true,claims:records.map(r=>{
-   if(r.rewardBalanceReconciled)return {...r};
-   const after=InboxClaimTracker.readBalances(r.rewards);
-   const exact=r.before.length>0&&r.before.every(b=>{const a=after.find(x=>x.id===b.id&&x.itemType===b.itemType);return Number.isSafeInteger(b.value)&&Number.isSafeInteger(a?.value)&&a.value-b.value===b.expected;});
-   const result={...r,after,rewardBalanceReconciled:exact,settlementEvidence:exact?'native-inventory-delta':'unconfirmed'};
-   if(exact)Object.assign(r,result);
-   return result;
-  })};
+  const pending=records.filter(r=>!r.rewardBalanceReconciled);
+  if(pending.length){
+   // Original bulk claims may credit the same currency/material once for several
+   // calendars. Reconcile the entire pending cohort, never each receipt against
+   // the combined delta (which could also misidentify a partial settlement).
+   const after=InboxClaimTracker.readBalances(pending.flatMap(r=>r.rewards));
+   const key=r=>JSON.stringify([r.itemType,r.id]),baselines=new Map();
+   let consistent=true;
+   for(const r of pending){
+    if(!r.before.length)consistent=false;
+    for(const b of r.before){
+     if(!Number.isSafeInteger(b.value))consistent=false;
+     if(baselines.has(key(b))&&baselines.get(key(b))!==b.value)consistent=false;
+     baselines.set(key(b),b.value);
+    }
+   }
+   const comparison=after.map(a=>({id:a.id,itemType:a.itemType,before:baselines.get(key(a))??null,after:a.value,expected:a.expected}));
+   const exact=consistent&&comparison.length>0&&comparison.length===baselines.size&&comparison.every(c=>Number.isSafeInteger(c.before)&&Number.isSafeInteger(c.after)&&Number.isSafeInteger(c.expected)&&c.expected>0&&c.after-c.before===c.expected);
+   const members=pending.map(r=>({calendarId:r.calendarId,rewardIndex:r.rewardIndex,lastClaimed:r.lastClaimed}));
+   for(const r of pending)Object.assign(r,{after:after.filter(a=>r.before.some(b=>key(a)===key(b))),batchBalanceComparison:comparison,batchMembers:members,baselineConsistent:consistent,rewardBalanceReconciled:exact,settlementEvidence:exact?(pending.length>1?'native-inventory-batch-delta':'native-inventory-delta'):'unconfirmed'});
+  }
+  return {readConfirmed:true,claims:records.map(r=>({...r}))};
  }
  function execute(op,p={}){
   if(op==='calendar-claim-status')return claimStatus();
