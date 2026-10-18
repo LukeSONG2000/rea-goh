@@ -67,4 +67,24 @@ shipController.fields._currentData=nil;assert.equal(bridge.detail(state).skillDi
 definition.fields._skillDefinitions.fields._size=5000;
 const invalid=bridge.detail(state);assert.match(invalid.skillsError,/bounds/);assert.equal(invalid.unitId,'vader-id','failed skill read does not remove basic identity');
 
-console.log('PASS inventory bridge: own filtered IDs only, preview/foreign/inactive/wrong-state rejection, original character/ship callbacks, detail readback and back; live unit/crew skill tiers, missing-skill indexer guard and bounded failure; no mutation API.');
+definition.fields._skillDefinitions.fields._size=1;abilityController.fields._abilityViewData.fields._size=1;
+abilityController.fields._skillsOverlayView=nil;abilityController.fields._abilityDetailsView=nil;
+state=obj('CharacterDetailsState',{_controller:displayController});
+assert.throws(()=>bridge.execute('inventory-skill',{unitId:'wrong',skillId:'present'}),/unit changed/);
+assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'missing'}),/Choose one skill/);
+bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'});
+assert.equal(calls.at(-1).method,'AbilityClicked');assert.equal(calls.at(-1).args[0].value,'ability-present');
+const popup=obj('Popup',{_data:obj('Crafting',{'<SkillId>k__BackingField':'present','<AbilityId>k__BackingField':'ability-present','<AbilityName>k__BackingField':'Original name'})});
+abilityController.fields._skillsOverlayView=popup;
+assert.equal(bridge.detail(state).skillPopup.skillId,'present');
+assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'}),/Close the current/);
+bridge.execute('inventory-skill-close',{unitId:'vader-id'});assert.equal(calls.at(-1).method,'OnBackClick');assert.equal(calls.at(-1).object,popup);
+abilityController.fields._skillsOverlayView=nil;assert.throws(()=>bridge.execute('inventory-skill-close',{unitId:'vader-id'}),/No active/);
+shipController.fields._currentData=shipData;shipController.fields._skillsOverlayView=nil;shipController.fields._abilityDetailsView=nil;
+// A single unambiguous selected row; duplicate IDs are rejected.
+state=obj('ShipDetailsState',{_controller:shipController});
+assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'}),/Choose one skill/);
+shipData.fields['<AdvancedAbilityData>k__BackingField']=nil;shipData.fields['<CrewAbilityData>k__BackingField']=list([]);
+bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'});assert.equal(calls.at(-1).type,'ShipDetailsController');assert.equal(calls.at(-1).args[0].value,display);
+state=obj('HomeBaseGameState');assert.throws(()=>bridge.execute('inventory-skill',{unitId:'vader-id',skillId:'present'}),/detail page/);
+console.log('PASS inventory bridge: owned navigation, live raw/display skill reads; character and ship original skill callbacks, stale unit/unknown/duplicate/overlapping popup rejection, original popup close.');

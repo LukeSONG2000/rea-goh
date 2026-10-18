@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-18",
+  "cases": [
+    {
+      "case": "skill-nav-open-result",
+      "confirmed": true,
+      "popup": {
+        "kind": "levels",
+        "skillId": "basicskill_VADER",
+        "abilityId": "basicability_darthvader",
+        "name": "恐吓挥砍"
+      }
+    },
+    {
+      "case": "skill-nav-close-result",
+      "confirmed": true,
+      "popup": null
+    },
+    {
+      "case": "skill-nav-ghost-result",
+      "confirmed": true,
+      "popup": {
+        "kind": "levels",
+        "skillId": "specialskill_GHOST02",
+        "abilityId": "specialability_ghost02",
+        "name": "全角攻击"
+      }
+    },
+    {
+      "case": "skill-nav-ghost-close",
+      "confirmed": true,
+      "popup": null
+    }
+  ],
+  "duplicateRejected": true,
+  "finalState": "HomeBaseGameState",
+  "nativeEvidence": [
+    "logs/high_reuse/native/character_show_skill.c",
+    "logs/high_reuse/native/character_skill_predicate.c",
+    "logs/high_reuse/native/ship_skill_clicked.c"
+  ],
+  "tests": [
+    "live original character/ship open-close with popup IDs",
+    "mock wrong unit/unknown/duplicate/current-popup rejection",
+    "mailbox malformed request and confirmation gates"
+  ],
+  "limitations": [
+    "Single-level popup not live-validated",
+    "No upgrade purchase unlock endpoints implemented"
+  ]
+}

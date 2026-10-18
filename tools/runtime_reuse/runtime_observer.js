@@ -55,16 +55,12 @@ globalThis.InventoryBridge=(()=>{
   if(!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(view)),'bool'))throw Error('Inventory view is not ready');
   return {kind,controller,rows:list(R.readRef(view,'_filterData'))};
  }
- function detail(state){
-  const type=R.fullName(R.classOf(state));if(!['CharacterDetailsState','ShipDetailsState'].includes(type))return null;
-  const controller=R.readRef(state,'_controller');if(controller.isNull())return {loading:true};
-  const data=R.readRef(controller,'_transitionData');
-  if(data.isNull())return {loading:true};
-  const unit=R.readRef(data,type==='CharacterDetailsState'?'<Unit>k__BackingField':'Unit');
-  if(unit.isNull())return {loading:true};
-  const result={kind:type==='CharacterDetailsState'?'characters':'ships',...unitInfo(unit)};
-  try{result.skills=skills(unit);}catch(error){result.skillsError=String(error);}
-  try{
+ function abilityOwner(controller,type){
+  if(type==='ShipDetailsState')return controller;
+  const panels=R.readRef(controller,'_unitDetailsInfoPanelsController');
+  return panels.isNull()?R.nil:R.readRef(panels,'_unitDetailsAbilityController');
+ }
+ function displayRows(controller,type){
    let rows=null;
    if(type==='CharacterDetailsState'){
     const panels=R.readRef(controller,'_unitDetailsInfoPanelsController');
@@ -81,6 +77,33 @@ globalThis.InventoryBridge=(()=>{
     }
    }
    if(rows!==null&&rows.length>256)throw Error('Skill display bound exceeded');
+   return rows;
+ }
+ function skillPopup(controller,type,raw=false){
+  const owner=abilityOwner(controller,type);if(owner.isNull())return null;
+  for(const [field,viewType] of [['_skillsOverlayView','UnitDetailsSkillOverlayView'],['_abilityDetailsView','AbilityDetailsView']]){
+   const view=R.readRef(owner,field);if(view.isNull()||!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(view)),'bool'))continue;
+   if(raw)return {view,viewType};
+   if(viewType==='UnitDetailsSkillOverlayView'){
+    const data=R.readRef(view,'_data');
+    return data.isNull()?{loading:true}:{kind:'levels',skillId:S.string(R.readRef(data,'<SkillId>k__BackingField')),abilityId:S.string(R.readRef(data,'<AbilityId>k__BackingField')),name:S.string(R.readRef(data,'<AbilityName>k__BackingField'))};
+   }
+   const label=R.readRef(view,'_abilityName');
+   return {kind:'single',name:S.string(S.invoke('UILabel','get_text',label))};
+  }
+  return null;
+ }
+ function detail(state){
+  const type=R.fullName(R.classOf(state));if(!['CharacterDetailsState','ShipDetailsState'].includes(type))return null;
+  const controller=R.readRef(state,'_controller');if(controller.isNull())return {loading:true};
+  const data=R.readRef(controller,'_transitionData');
+  if(data.isNull())return {loading:true};
+  const unit=R.readRef(data,type==='CharacterDetailsState'?'<Unit>k__BackingField':'Unit');
+  if(unit.isNull())return {loading:true};
+  const result={kind:type==='CharacterDetailsState'?'characters':'ships',...unitInfo(unit)};
+  try{result.skills=skills(unit);}catch(error){result.skillsError=String(error);}
+  try{
+   const rows=displayRows(controller,type);
    result.skillDisplay=rows===null?null:rows.map(({data,container,crewSlot=null})=>({
     container,crewSlot,
     skillId:S.string(R.readRef(data,'<SkillId>k__BackingField')),
@@ -94,9 +117,30 @@ globalThis.InventoryBridge=(()=>{
     locked:!!R.readValue(data,'<Locked>k__BackingField','bool')
    }));
   }catch(error){result.skillDisplayError=String(error);}
+  try{result.skillPopup=skillPopup(controller,type);}catch(error){result.skillPopupError=String(error);}
   return result;
  }
  function execute(operation,request){
+  if(['inventory-skill','inventory-skill-close'].includes(operation)){
+   const state=current(),type=R.fullName(R.classOf(state));
+   if(!['CharacterDetailsState','ShipDetailsState'].includes(type))throw Error('Skill command requires a unit detail page');
+   const controller=R.readRef(state,'_controller'),info=detail(state);
+   if(info.loading||!request||request.unitId!==info.unitId)throw Error('Skill command unit changed or missing unitId');
+   const popup=skillPopup(controller,type,true);
+   if(operation==='inventory-skill-close'){
+    if(!popup)throw Error('No active original skill popup');
+    S.invoke(popup.viewType,'OnBackClick',popup.view);
+    return {expectedState:type,unitId:info.unitId,closing:true};
+   }
+   if(popup)throw Error('Close the current skill popup first');
+   if(typeof request.skillId!=='string'||!request.skillId.length||request.skillId.length>256)throw Error('Invalid skillId');
+   const matches=(displayRows(controller,type)||[]).filter(({data})=>S.string(R.readRef(data,'<SkillId>k__BackingField'))===request.skillId);
+   if(matches.length!==1)throw Error('Choose one skill from the current original detail');
+   const data=matches[0].data,owner=abilityOwner(controller,type);
+   if(type==='CharacterDetailsState')S.invoke('CharacterDetailsAbilityController','AbilityClicked',owner,[R.arg.ref(R.readRef(data,'<AbilityId>k__BackingField'))],['System.String']);
+   else S.invoke('ShipDetailsController','AbilityClicked',owner,[R.arg.ref(data)]);
+   return {expectedState:type,unitId:info.unitId,skillId:request.skillId,name:S.string(R.readRef(data,'<NameText>k__BackingField'))};
+  }
   if(operation==='inventory-back'){
    const state=current(),type=R.fullName(R.classOf(state));
    if(!['CharacterDetailsState','ShipDetailsState'].includes(type))throw Error('Back requires a character or ship detail page');

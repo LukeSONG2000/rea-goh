@@ -195,3 +195,21 @@ node tools/runtime_reuse/runtime_cli.mjs inventory-home --pid PID
 不是战斗中经过升级和效果修正后的实际剩余 CD。读数失败明确返回 `skillsError`，不填假值。
 `detail.skillDisplay`（目前角色详情）读取当前原 UI 控制器的数据：技能/能力 ID、本地化名称与 levelText、内部 currentTier、requiredSkillTier、原 getter 的 displayLevel、maxed 和 locked。不要以 currentTier+1 替代 displayLevel；维达实测内部6对应界面8。船员技能显示仍待接入。数据未初始化返回 null，读取失败返回 skillDisplayError，不影响 detail.skills。
 飞船详情现也提供 `detail.skillDisplay`：`container` 区分 ship、advanced、crew；船员容器以零起始 `crewSlot` 标记，非船员为 null。角色为 character。全部 displayLevel 仍调用原 UI getter；实测 TIEADVANCED 为 8/8/3/8。
+
+### Original skill detail navigation
+
+With an original character/ship detail page open, save a request JSON containing
+`unitId` from `snapshot.detail.unitId` and `skillId` from `detail.skillDisplay`.
+Run `node tools/runtime_reuse/runtime_cli.mjs inventory-skill --pid <PID> --request <request.json>`.
+The original click handler chooses its normal single-level or multi-level popup.
+`detail.skillPopup` reports the active original popup; multi-level popups expose
+their original skill/ability IDs. The receipt confirms the observed popup rather
+than merely confirming a callback invocation.
+
+Use `inventory-skill-close` with a JSON containing the same current `unitId` to
+invoke the original popup Back callback. Closing is confirmed only after the
+popup disappears. Changed units, unknown/ambiguous skills and already-open
+popups are rejected. These commands do not upgrade, unlock or purchase skills;
+trial mode does not expose inventory navigation. Live verification covers Vader
+basic and Ghost crew skill multi-level popups; single-level popup behavior is
+implemented but not yet live-validated.
