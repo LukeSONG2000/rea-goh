@@ -499,3 +499,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 target-null-clear】认领右上角空目标残留清理，root独占battle_info_ui/tests；不修改战斗或CD规则。
 【Codex/root 2026-10-19 target-null-clear verified】右上角renderTarget/SetHealth遇空单位清空标签并替换旧unit，定时刷新不再复用旧目标；非战斗/不可见时清空status.target。新增实际函数VM回归覆盖旧目标→空→新目标、定时器无旧读数、无标签/空状态；health/layout/lifecycle/loading全PASS。重启已确认属主helper至38704，原客户端32088 Home，9hooks/errors空/target null。未触发战斗或消费；真实战斗切换目标画面仍待验收。
 【Codex/root 2026-10-19 target-live】认领隔离原运行时战斗目标信息实机验收，root独占runtime；不消费资源。
+【Codex/root 2026-10-19 target-live fixed+verified】原隔离PVE发现非空目标切换也残留：头像毁灭者但扩展150/150，原单位snapshot为1/1。改定时刷新读BattleBaseView原SelectedOpponent字段(offset0x500)，不依赖旧hook单位。复测原SelectManualTarget确认成功，截图1/1及三护盾0/0；90秒退出Home/guard/GC/definitions恢复/errors空，helper6580。target无回调切换及health/layout/lifecycle/loading全PASS。报告TARGET_SELECTION_LIVE_20261019.json；无资源消耗，未证明全模式CD或实机空目标分支。

@@ -8,10 +8,10 @@ const nil=pointer(null),view=pointer('view'),target=pointer('target');
 const first=pointer('first'),second=pointer('second');
 const item={view,target,label:{text:''},unit:first};
 const targets=new Map([['target',item]]),stats={target:'old',healthAnomalies:[]};
-let state=pointer('state'),reads=0,layouts=0;
+let state=pointer('state'),selected=nil,reads=0,layouts=0;
 const ctx=vm.createContext({targets,stats,
  R:{findBound:()=>pointer('controller'),classOf:()=> 'BattleGameState',fullName:x=>x,
- readRef:(o,k)=>k==='<CurrentState>k__BackingField'?state:k==='_opponentTargetComponent'?target:pointer(k)},
+ readRef:(o,k)=>k==='<CurrentState>k__BackingField'?state:k==='_opponentTargetComponent'?target:k==='<SelectedOpponent>k__BackingField'?selected:pointer(k)},
  call:()=>view,active:()=>true,
  setText:(label,text)=>{label.text=text;},
  healthText:unit=>{assert.equal(unit.isNull(),false);reads++;return unit.toString();},
@@ -23,6 +23,9 @@ ctx.renderTarget(view,nil);assert.equal(item.label.text,'');assert.equal(stats.t
 assert.equal(item.unit,nil);const before=reads;
 ctx.refreshCurrentTarget();assert.equal(reads,before,'Timer must not resurrect old unit');
 ctx.renderTarget(view,second);assert.equal(item.label.text,'second');assert.equal(stats.target,'second');
+selected=first;
+ctx.refreshCurrentTarget();assert.equal(item.label.text,'first','Native selection overrides stale callback cache');
+selected=second;
 ctx.refreshCurrentTarget();assert.equal(item.label.text,'second');
 ctx.updateTargetItem(item,nil);assert.equal(item.label.text,'');assert.equal(stats.target,null);
 targets.clear();stats.target='old';ctx.renderTarget(view,nil);assert.equal(stats.target,null);

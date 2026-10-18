@@ -89,6 +89,9 @@
   if(view.isNull())return;
   const target=R.readRef(view,'_opponentTargetComponent'),item=targets.get(target.toString());
   if(!item||!item.view.equals(view)||!active(target)){stats.target=null;return;}
+  // Native selection can change without either observed health callback.
+  // The view's selected opponent is authoritative, never the cached hook unit.
+  item.unit=R.readRef(view,'<SelectedOpponent>k__BackingField');
   if(item.unit.isNull()){setText(item.label,'');stats.target=null;return;}
   const text=healthText(item.unit);setText(item.label,text);stats.target=text;
   for(const row of stats.healthAnomalies)if(!row.deferred&&row.key.startsWith(item.unit.toString()+':')){

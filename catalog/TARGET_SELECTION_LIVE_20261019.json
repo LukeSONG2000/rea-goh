@@ -1,0 +1,28 @@
+{
+  "scope": "Original isolated PVE target absolute-health display",
+  "finding": "Native target selection changed portrait/name but observed callbacks left cached unit on previous opponent. Screenshot showed 150/150 for Droideka while original snapshot reported 1/1.",
+  "fix": "Periodic display refresh reads BattleBaseView.SelectedOpponent backing field instead of trusting cached callback unit. No stat setters or battle rules changed.",
+  "nativeMetadata": "il2cpp/dump/cs/il2cpp.cs BattleBaseView SelectedOpponent backing field offset 0x500",
+  "before": {
+    "trial": "logs/high_reuse/trial-20261019-061139-293-evidence.json",
+    "selection": "logs/high_reuse/target-live-switch-result.json",
+    "snapshot": "logs/high_reuse/target-live-after-switch.json",
+    "screenshot": "logs/high_reuse/target-live-switched.png"
+  },
+  "after": {
+    "trial": "logs/high_reuse/trial-20261019-061555-701-evidence.json",
+    "selection": "logs/high_reuse/target-fixed-result.json",
+    "screenshot": "logs/high_reuse/target-fixed-screen.png",
+    "visibleHealth": "1 / 1",
+    "visibleTotalPermanentBonusProtection": "0 / 0 each",
+    "targetConfirmed": true,
+    "cleanup": "Home, socket guard, GC and definitions restored; no errors",
+    "restoredHelperPid": 6580
+  },
+  "tests": ["target selection without hook callback", "null target", "health", "layout", "lifecycle", "runtime loading"],
+  "limitations": [
+    "One original isolated PVE fixture, not proof of all-mode CD coverage",
+    "Null-target behavior tested in VM; live selection tested non-null to non-null",
+    "Post-fix delayed snapshot was after return Home; visible 1/1 verified by screenshot, matching pre-fix original unit snapshot"
+  ]
+}
