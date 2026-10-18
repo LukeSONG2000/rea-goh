@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-18",
+  "scope": "Original TIEADVANCED detail UI",
+  "skills": [
+    {
+      "container": "ship",
+      "crewSlot": null,
+      "skillId": "basicskill_TIEADVANCED",
+      "abilityId": "basicability_tieadvanced",
+      "name": "致命精准度",
+      "levelText": "[9F9F9F]满级（基本）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    },
+    {
+      "container": "ship",
+      "crewSlot": null,
+      "skillId": "uniqueskill_TIEADVANCED01",
+      "abilityId": "uniqueability_tieadvanced01",
+      "name": "高级瞄准系统",
+      "levelText": "[9F9F9F]满级（独有）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    },
+    {
+      "container": "advanced",
+      "crewSlot": null,
+      "skillId": "hardwareskill_TIEADVANCED01",
+      "abilityId": "hardwareability_tieadvanced01",
+      "name": "心力交瘁",
+      "levelText": "[9F9F9F]满级（独有）[-]",
+      "currentTier": 1,
+      "requiredSkillTier": -1,
+      "displayLevel": 3,
+      "maxed": true,
+      "locked": false
+    },
+    {
+      "container": "crew",
+      "crewSlot": 0,
+      "skillId": "specialskill_TIEADVANCED01",
+      "abilityId": "specialability_tieadvanced01",
+      "name": "我现在逮到你了",
+      "levelText": "[9F9F9F]满级（船员）[-]",
+      "currentTier": 6,
+      "requiredSkillTier": -1,
+      "displayLevel": 8,
+      "maxed": true,
+      "locked": false
+    }
+  ],
+  "evidence": "logs/high_reuse/ship-display-tie.json",
+  "tests": [
+    "ship/advanced/crew containers",
+    "native display getter",
+    "uninitialized view returns null",
+    "character display regression",
+    "mailbox regression",
+    "original Back and Home verified"
+  ],
+  "limitations": [
+    "One ship live coverage; multiple-crew ships not yet verified",
+    "No purchase or upgrade executed"
+  ],
+  "finalState": "HomeBaseGameState"
+}

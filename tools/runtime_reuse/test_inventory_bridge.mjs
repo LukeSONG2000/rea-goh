@@ -57,6 +57,13 @@ let detail=bridge.detail(state);assert.equal(detail.skillDisplayError,undefined)
 uiLevel=5;assert.equal(bridge.detail(state).skillDisplay[0].displayLevel,5,'display getter remains live, not raw-tier arithmetic');
 abilityController.fields._abilityViewData.fields._size=5000;
 detail=bridge.detail(state);assert.match(detail.skillDisplayError,/bounds/);assert.equal(detail.skills.length,2,'display failure preserves raw skill data');
+const container=rows=>obj('Container',{'<AbilityData>k__BackingField':list(rows)});
+const shipData=obj('ShipData',{'<ShipAbilityData>k__BackingField':container([display]),'<AdvancedAbilityData>k__BackingField':nil,'<CrewAbilityData>k__BackingField':list([container([display])])});
+const shipController=obj('Controller',{_transitionData:obj('Data',{Unit:owned}),_currentData:shipData});
+state=obj('ShipDetailsState',{_controller:shipController});
+detail=bridge.detail(state);assert.equal(detail.skillDisplayError,undefined);assert.equal(detail.skillDisplay.length,2);assert.equal(detail.skillDisplay[0].container,'ship');assert.equal(detail.skillDisplay[1].container,'crew');assert.equal(detail.skillDisplay[1].crewSlot,0);assert.equal(detail.skillDisplay[1].displayLevel,5);
+shipData.fields['<AdvancedAbilityData>k__BackingField']=container([display]);assert.equal(bridge.detail(state).skillDisplay[1].container,'advanced');
+shipController.fields._currentData=nil;assert.equal(bridge.detail(state).skillDisplay,null,'uninitialized ship display is unknown');
 definition.fields._skillDefinitions.fields._size=5000;
 const invalid=bridge.detail(state);assert.match(invalid.skillsError,/bounds/);assert.equal(invalid.unitId,'vader-id','failed skill read does not remove basic identity');
 

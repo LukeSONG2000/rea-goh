@@ -64,10 +64,25 @@ globalThis.InventoryBridge=(()=>{
   if(unit.isNull())return {loading:true};
   const result={kind:type==='CharacterDetailsState'?'characters':'ships',...unitInfo(unit)};
   try{result.skills=skills(unit);}catch(error){result.skillsError=String(error);}
-  if(type==='CharacterDetailsState')try{
-   const panels=R.readRef(controller,'_unitDetailsInfoPanelsController');
-   const abilities=panels.isNull()?R.nil:R.readRef(panels,'_unitDetailsAbilityController');
-   result.skillDisplay=abilities.isNull()?null:list(R.readRef(abilities,'_abilityViewData')).map(data=>({
+  try{
+   let rows=null;
+   if(type==='CharacterDetailsState'){
+    const panels=R.readRef(controller,'_unitDetailsInfoPanelsController');
+    const abilities=panels.isNull()?R.nil:R.readRef(panels,'_unitDetailsAbilityController');
+    if(!abilities.isNull())rows=list(R.readRef(abilities,'_abilityViewData')).map(data=>({data,container:'character'}));
+   }else{
+    const viewData=R.readRef(controller,'_currentData');
+    if(!viewData.isNull()){
+     rows=[];
+     const append=(group,container,crewSlot=null)=>{if(!group.isNull())for(const data of list(R.readRef(group,'<AbilityData>k__BackingField')))rows.push({data,container,crewSlot});};
+     append(R.readRef(viewData,'<ShipAbilityData>k__BackingField'),'ship');
+     append(R.readRef(viewData,'<AdvancedAbilityData>k__BackingField'),'advanced');
+     list(R.readRef(viewData,'<CrewAbilityData>k__BackingField')).forEach((group,index)=>append(group,'crew',index));
+    }
+   }
+   if(rows!==null&&rows.length>256)throw Error('Skill display bound exceeded');
+   result.skillDisplay=rows===null?null:rows.map(({data,container,crewSlot=null})=>({
+    container,crewSlot,
     skillId:S.string(R.readRef(data,'<SkillId>k__BackingField')),
     abilityId:S.string(R.readRef(data,'<AbilityId>k__BackingField')),
     name:S.string(R.readRef(data,'<NameText>k__BackingField')),

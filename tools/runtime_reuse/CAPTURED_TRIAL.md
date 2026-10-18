@@ -194,3 +194,4 @@ node tools/runtime_reuse/runtime_cli.mjs inventory-home --pid PID
 `definitionIsZeta` 是定义标志，不代表当前已经购买 Zeta；`baseCooldown` 是能力定义值，
 不是战斗中经过升级和效果修正后的实际剩余 CD。读数失败明确返回 `skillsError`，不填假值。
 `detail.skillDisplay`（目前角色详情）读取当前原 UI 控制器的数据：技能/能力 ID、本地化名称与 levelText、内部 currentTier、requiredSkillTier、原 getter 的 displayLevel、maxed 和 locked。不要以 currentTier+1 替代 displayLevel；维达实测内部6对应界面8。船员技能显示仍待接入。数据未初始化返回 null，读取失败返回 skillDisplayError，不影响 detail.skills。
+飞船详情现也提供 `detail.skillDisplay`：`container` 区分 ship、advanced、crew；船员容器以零起始 `crewSlot` 标记，非船员为 null。角色为 character。全部 displayLevel 仍调用原 UI getter；实测 TIEADVANCED 为 8/8/3/8。
