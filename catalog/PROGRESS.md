@@ -350,3 +350,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 captured-trial-hud】root认领标准捕获试玩入口遗漏HUD的集成及停止清理；保留显式历史库存快照契约，当前选队/支援同步未完成，不伪称自动一致。
 
 【Codex/root 2026-10-18 captured-trial-hud diagnostic】标准visual入口接入battle_info_ui并在退出原战斗状态前停止HUD，headless不载入；prepare 5 tests、HUD lifecycle、node syntax PASS。两轮30s/120s实机均停FSM19 EncounterStart_LoadAbilityVfxPool，未进入可操作回合，不计HUD验收通过。追加15s只读函数观察：原AddSummonResourceNamesToSet(effect)请求specialability_monmothma02_summon_rebel_trooper的PVE_REBELTROOPER:SUMMON_SCALAR_1，原GameDataDomainController.GetUnitDefinition返回null；该id确实存在catalog/units_pve.json，非资源缺失结论。只读Ghidra 0x181BB5E90反编译确认从battleContext.GameDataDomainController解析SummonId，工程关闭未保存。三轮cleanup均Home/guardRestored/gcReleased/errors空，诊断host已退出并恢复普通显示host24128。尚待修复试玩定义环境/作用域，未跳过召唤或特效；无额外线上竞技场消耗。证据logs/high_reuse/summon-preload-diagnostic-evidence.json及native/vfx_summon_effect.c。
+
+【Codex/root 2026-10-18 captured-definition-scope】认领捕获PVE定义表生命周期及HUD空状态刷新。只读原GetUnitDefinition确认fallback到0x1C0表；短实验保留原转换表可进入原终局turn4，恢复旧表equal=true；HUD切换null报错导致host保留。已核Home/guard/GC/表恢复完成后仅停止自己诊断host34076，下一步正式作用域清理及回归。
