@@ -449,3 +449,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 sweep-cost】认领原CanAffordMission/SpendGrindTickets消耗与上限审计，root独占只读Ghidra，不调用消费入口。
 
 【Codex/root 2026-10-19 sweep-cost limits-live】只读核CanAffordMission/Spend/remaining/GetNumAffordableAttempts：可用性函数会弹购买提示且部分分支写initialCount，reader不调用；普通战役按原四项min并用原底层查询。campaign-mission实机1A：affordable24、remaining INT_MAX、券154286、原cap100，max24，eligible true，quoteError null，返回Home，host20332。mock上限/冷却归零+身份守卫/loading PASS，无消费。报告SWEEP_LIMITS_20261019.json；ticketCost仍未知，原Spend只证明提交请求而非真实扣减，多任务/活动及结算仍待。
+【Codex/root 2026-10-19 sweep-preview】认领原单关扫荡确认窗预览/关闭及成本标签核查，root独占runtime/Ghidra；不确认扫荡。
