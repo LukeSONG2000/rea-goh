@@ -1,0 +1,49 @@
+{
+  "scope": "Runnable captured PVE trial using current original squad and borrowed support",
+  "entry": "tools/runtime_reuse/start_captured_trial.ps1 -Battle logs/high_reuse/battle-proto-v2-19440.pb -SquadType 1 -CurrentSelection -Mode visual -Duration 60 -Auto",
+  "precondition": "Original PVE squad selection ready, full mission key matches capture (validated C01L/M01/N01/Mi01 difficulty 1)",
+  "implementation": [
+    "Copies current original squad, units and BattleSupport metadata; no historical inventory file required in current-selection mode",
+    "Checks all five mission keys before captured battle conversion; uses complete captured native enemy data and original simulation domain",
+    "Propagates player, support, event ID/instance/mode into original transition before context creation",
+    "Records actually observed battle units once in evidence; restores captured PVE definitions after owned battle teardown"
+  ],
+  "liveRuns": [
+    {
+      "evidence": "logs/high_reuse/trial-20261018-220758-151-evidence.json",
+      "support": "GRANDMASTERLUKE",
+      "terminal": true,
+      "turns": 2,
+      "serviceCalls": 0,
+      "cleanup": "Home, sockets, definition table, GC all restored; no errors"
+    },
+    {
+      "evidence": "logs/high_reuse/trial-20261018-222101-524-evidence.json",
+      "support": "GLLEIA",
+      "observedPlayerUnits": ["ZEBS3","GENERALSKYWALKER","MONMOTHMA","LUTHENRAEL","GLLEIA","HERMITYODA"],
+      "observedEnemyUnits": ["PVE_B1BATTLEDROID","PVE_B1BATTLEDROID","PVE_OOMCOMMANDBATTLEDROID","PVE_OOMSECURITYBATTLEDROID","PVE_DROIDEKA"],
+      "terminal": true,
+      "turns": 2,
+      "serviceCalls": 0,
+      "hudErrors": [],
+      "cleanup": "Home, sockets, definition table, GC all restored; no errors"
+    }
+  ],
+  "tests": [
+    "test_prepare_captured_trial.py PASS including visual-only current selection, assembly ordering, no inventory payload",
+    "test_selected_squad.mjs PASS",
+    "demo_turn_order.py PASS twice; built-in same-seed comparison identical",
+    "Actual current-selection prepare with omitted inventory and generated JS syntax PASS",
+    "captured_trial.js and run_captured_trial.mjs syntax PASS"
+  ],
+  "restored": {"gamePid":32088,"hostPid":9188,"state":"HomeBaseGameState"},
+  "limitations": [
+    "Both native battles ran before removing unused inventory preparation dependency; final no-inventory assembly validated without a third battle",
+    "Only this captured light-side mission validated; uncaptured enemies are not generated or substituted",
+    "Datacron, persisted battle unit state and squad abilities remain explicit rejected cases",
+    "No screenshot captured during these short battles; runtime units, native terminal and cleanup are the evidence",
+    "Summon definitions were available but these two short battles do not prove a summon was activated",
+    "Campaign selection and support selection used original UI; support CLI currently rejects null event IDs and needs follow-up",
+    "No online battle, ranking submission or resource-spending operation invoked"
+  ]
+}

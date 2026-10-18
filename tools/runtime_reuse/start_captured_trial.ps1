@@ -1,10 +1,11 @@
 param(
  [Parameter(Mandatory=$true)][string]$Battle,
- [Parameter(Mandatory=$true)][string]$Inventory,
+ [string]$Inventory,
  [Parameter(Mandatory=$true)][ValidateRange(0,255)][int]$SquadType,
  [ValidateSet('visual','headless')][string]$Mode='visual',
  [ValidateRange(15,600)][int]$Duration=300,
  [switch]$Auto,
+ [switch]$CurrentSelection,
  [switch]$TraceAI,
  [switch]$EnemyBasicDemo,
  [switch]$EnemyControl,
@@ -18,9 +19,13 @@ $gameId=$targets[0].Id
 $out=Join-Path $repo 'logs/high_reuse'
 $prefix=Join-Path $out ('trial-'+(Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
 $battlePath=(Resolve-Path -LiteralPath $Battle).Path
-$inventoryPath=(Resolve-Path -LiteralPath $Inventory).Path
-$prepare=@((Join-Path $PSScriptRoot 'prepare_captured_trial.py'),'--battle',$battlePath,'--inventory',$inventoryPath,'--dump',(Join-Path $repo 'il2cpp/dump/cs/il2cpp.cs'),'--output-prefix',$prefix,'--squad-type',$SquadType,'--mode',$Mode,'--duration',$Duration)
+$prepare=@((Join-Path $PSScriptRoot 'prepare_captured_trial.py'),'--battle',$battlePath,'--dump',(Join-Path $repo 'il2cpp/dump/cs/il2cpp.cs'),'--output-prefix',$prefix,'--squad-type',$SquadType,'--mode',$Mode,'--duration',$Duration)
+if(!$CurrentSelection){
+ if(!$Inventory){throw 'Saved squad trial requires -Inventory'}
+ $prepare+=@('--inventory',(Resolve-Path -LiteralPath $Inventory).Path)
+}
 if($Auto){$prepare+='--auto'}
+if($CurrentSelection){$prepare+='--current-selection'}
 if($TraceAI){$prepare+='--trace-ai'}
 if($EnemyBasicDemo){$prepare+='--enemy-basic-demo'}
 if($EnemyControl){$prepare+='--enemy-control'}
@@ -44,7 +49,8 @@ try{
    $restoreDisplay=$true
   }
  }
- Write-Host "Trial uses captured snapshots. No borrowed support. Evidence: $prefix-evidence.json"
+ if($CurrentSelection){Write-Host "Trial uses the current matching PVE squad and support. Evidence: $prefix-evidence.json"}
+ else{Write-Host "Trial uses captured snapshots. No borrowed support. Evidence: $prefix-evidence.json"}
  if($Mode -eq 'visual'){Write-Host "Play with the original controls. This session returns Home after at most $Duration seconds."}
  & node (Join-Path $PSScriptRoot 'run_captured_trial.mjs') $gameId ($prefix+'.json') ($prefix+'-evidence.json')
  if($LASTEXITCODE -ne 0){throw "Trial validation failed; inspect $prefix-evidence.json"}

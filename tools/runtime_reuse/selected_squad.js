@@ -84,12 +84,15 @@ globalThis.SelectedSquadTools=(()=>{
   if(!R.readRef(clone,'<SupportUnit>k__BackingField').equals(privateUnit)||!R.readRef(source,'<SupportUnit>k__BackingField').equals(unit))throw Error('Support copy binding failed');
   return clone;
  }
- function applyToTransition(data,selection,capturedMission){
+ function requireMission(selection,capturedMission){
   // Capture files frequently share MissionID (Mi01) across different maps.
   // Match all five original keys before touching even the private transition.
   for(const [name,key] of [['CampaignID','_campaignID'],['MapID','_mapId'],['NodeID','_nodeId'],['MissionID','_missionId'],['Difficulty','difficulty']]){
    if(selection.missionIdentity[name]===undefined||selection.missionIdentity[name]!==capturedMission?.[key])throw Error('Captured mission does not match current selection: '+name);
   }
+ }
+ function applyToTransition(data,selection,capturedMission){
+  requireMission(selection,capturedMission);
   if(R.fullName(R.classOf(data))!=='BattleGameState+TransitionData'||!R.readRef(data,'<BattleContext>k__BackingField').isNull())throw Error('Unbound private battle transition required');
   const set=(name,arg)=>S.invoke('BattleGameState+TransitionData','set_'+name,data,[arg]);
   set('PlayerBattleSquad',R.arg.ref(selection.player));
@@ -99,5 +102,5 @@ globalThis.SelectedSquadTools=(()=>{
   set('EventScreenMode',R.arg.value('i32',selection.eventScreenMode));
   return {missionMatched:true,supportPresent:!selection.battleSupport.isNull()};
  }
- return {copy,describe,fromPrebattle,copySupport,applyToTransition};
+ return {copy,describe,fromPrebattle,copySupport,applyToTransition,requireMission};
 })();

@@ -30,6 +30,7 @@ const saveStatus=(extra={})=>{
 };
 let session,script,timer,complete=null;
 const messages=[];
+const observedUnitKeys=new Set();
 const persist=(extra={})=>fs.writeFileSync(output,JSON.stringify({pid,manifest:manifestPath,messages,...extra},null,2));
 try{
  const npmRoot=execFileSync(process.env.ComSpec||'cmd.exe',['/d','/s','/c','npm root -g'],{encoding:'utf8'}).trim();
@@ -60,6 +61,13 @@ try{
    if(complete)break;
    try{
     const snapshot=await script.exports.snapshot();
+    if(manifest.currentSelection&&snapshot.state==='BattleGameState'){
+     const fresh=(snapshot.units||[]).filter(u=>!observedUnitKeys.has(u.sessionKey));
+     if(fresh.length&&observedUnitKeys.size<128){
+      for(const unit of fresh)observedUnitKeys.add(unit.sessionKey);
+      messages.push({type:'send',payload:{kind:'current-selection-battle-units',units:fresh,observedAt:new Date().toISOString()}});persist();
+     }
+    }
     if(manifest.enemyControl)snapshot.enemyInput=await script.exports.enemysnapshot();
     const temp=snapshotPath+'.tmp';fs.writeFileSync(temp,JSON.stringify({...snapshot,...owner,trial:true,observedAt:new Date().toISOString()}));fs.renameSync(temp,snapshotPath);
    }catch(e){saveStatus({snapshotError:String(e)});}

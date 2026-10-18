@@ -39,6 +39,8 @@ class CaptureIntegrityTests(unittest.TestCase):
             read_capture(self.file, 'inventory-proto-captured')
 
     def test_invalid_configuration_precedes_file_access(self):
+        with self.assertRaisesRegex(ValueError, 'Current selection requires visual'):
+            prepare('missing', 'missing', 'missing', 'missing', 1, 'headless', 60, False, current_selection=True)
         for order in [[], [0, 0], [-1, 0], [0, 2], [True], '0', list(range(513))]:
             with self.assertRaisesRegex(ValueError, 'permutation'):
                 prepare('missing', 'missing', 'missing', 'missing', 8, 'visual', 60, False, ai_priority_order=order)
@@ -66,6 +68,7 @@ class CaptureIntegrityTests(unittest.TestCase):
              patch('prepare_captured_trial.materialize', side_effect=lambda data, *_: data):
             visual = prepare('battle', 'inventory', dump, root / 'visual', 1, 'visual', 15, False)
             headless = prepare('battle', 'inventory', dump, root / 'headless', 1, 'headless', 15, False)
+            current = prepare('battle', 'inventory', dump, root / 'current', 1, 'visual', 15, False, current_selection=True)
         source = Path(visual['source']).read_text(encoding='utf-8')
         self.assertTrue(visual['informationDisplay'])
         self.assertLess(source.index('globalThis.stopBattleInfo='), source.index('globalThis.readRuntimeSnapshot='))
@@ -73,6 +76,13 @@ class CaptureIntegrityTests(unittest.TestCase):
         self.assertIn("cleanup.errors.push('HUD cleanup:", source)
         self.assertFalse(headless['informationDisplay'])
         self.assertNotIn('globalThis.stopBattleInfo=', Path(headless['source']).read_text(encoding='utf-8'))
+        current_source = Path(current['source']).read_text(encoding='utf-8')
+        self.assertTrue(current['currentSelection'])
+        self.assertIsNone(current['inventory'])
+        self.assertIn('globalThis.inventoryBytes=new Uint8Array([])', current_source)
+        self.assertIn('currentSelection:true', current_source)
+        self.assertIn('current original PVE selection; private native copies', current_source)
+        self.assertLess(current_source.index('globalThis.SelectedSquadTools='), current_source.index('globalThis.createCapturedTrial='))
 
 
 if __name__ == '__main__':
