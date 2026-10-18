@@ -316,3 +316,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 arena-dual-control】用户临时优先任务：小队竞技场双方控制、敌方仅普攻、HUD验收。支援选择集成暂挂，root独占运行时。先确认真实竞技场上下文与捕获；不把PVE试验当竞技场，不购买刷新，不改装备。
 
 【Codex/root 2026-10-18 arena-dual-control validated-partial】原选队私有PVP模拟第三轮进入原竞技场场景并terminal回Home，44 turn计数、32友方原回调均accepted、17敌方主动指令全部basic/index0/moveType0；被动协攻反击保留。serviceCalls0，guard恢复/GC释放/cleanup无错，原阵容身份槽位一致。前两次错误分别为encounter键和塔斯肯召唤定义缺失，未删机制。长按生命护盾与部分剩余回合实测可见且无重叠；右上文字压技能图标、死亡切换护盾max=-1、终态后一次UI system error未修。CD图标可见但非零CD及全模式未验收。非线上排名对局，无排名提交。报告ARENA_DUAL_CONTROL_VALIDATION_20261018.json；原32088，显示host15304恢复；本地原型尚非正式CLI。
+【Codex/root 2026-10-18 arena-hud-lifecycle】认领竞技场暴露的HUD生命周期与布局缺陷；root独占battle_info_ui及显示宿主，先修原终态后旧gateController调用，再验收。
