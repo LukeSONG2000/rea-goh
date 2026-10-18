@@ -344,3 +344,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-18 prebattle-readback】恢复原目标，root认领原选队阵容槽位及支援身份只读回读，增强支援选择成功判定；不消耗战斗次数，不修改装备。
 
 【Codex/root 2026-10-18 prebattle-readback validated】snapshot.prebattle新增原selectedSupport(playerId/unitId/baseId)及squadCells(原索引/类型/可选/必选/单位或null)。原HandleOnAllySelected写0x168已有native证据核对。支援选择成功改为同关卡选队ready且原selectedSupport.playerId匹配请求；实机challenge_XP/DIFF06选HK47，身份匹配且原SUPPORT槽5同unitId，其他5槽读回Bastila/Anakin/GMY/Ahsoka/Jolee。原Back→Events→Objectives→Home通过；无开战扣次。实际host确认表达式错身份/旧关卡/加载/支援中间页测试、bridge空槽及实时变化、mailbox/loading/语法PASS。报告PREBATTLE_READBACK_VALIDATION_20261018.json；原32088/host35588。尚未选队编辑/支援取消/全模式。
+【Codex/root 2026-10-18 squad-edit】root认领原选队编辑回调与当前候选列表；只读Ghidra单实例核对，随后可恢复换人验证，不开战、不修改mod或全息记录仪。
