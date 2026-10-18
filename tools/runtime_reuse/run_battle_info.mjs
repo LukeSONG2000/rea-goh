@@ -170,6 +170,8 @@ try{
  if(!detached){last=await script.exports.stop();save();}
 }finally{
  if(!detached&&script){
+  try{const result=await script.exports.storeclaimdispose();fs.writeFileSync(path.join(directory,`store-claims-${process.pid}.json`),JSON.stringify(result,null,2));}
+  catch(error){messages.push({kind:'store-claim-dispose-error',error:String(error)});}
   try{const claims=await script.exports.inboxclaimdispose();fs.writeFileSync(path.join(directory,`inbox-claims-${process.pid}.json`),JSON.stringify(claims,null,2));}
   catch(error){messages.push({kind:'inbox-claim-dispose-error',error:String(error)});}
   try{const claims=await script.exports.questclaimdispose();fs.writeFileSync(path.join(directory,`quest-claims-${process.pid}.json`),JSON.stringify(claims,null,2));}

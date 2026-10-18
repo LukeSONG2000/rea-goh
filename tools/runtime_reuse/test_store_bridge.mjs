@@ -19,7 +19,7 @@ const R={arg:{value:(t,v)=>v,ref:v=>v},readValue:read,readRef:read,findBound:()=
 let productReady=true,formatCalls=0;
 const S={string:x=>x,gameObject:x=>x,invoke:(t,m,o)=>{if(m==='get_activeInHierarchy')return o.active;if(m==='CanFormatOffer')return productReady;if(m==='Format'){formatCalls++;return 'cached price';}calls.push([t,m]);}};
 const balances={PREMIUM:100,SOCIAL:200};
-const context={InboxClaimTracker:{readBalances:rows=>rows.map(r=>({...r,expected:r.quantity,value:balances[r.id]??null}))},RuntimeApi:R,SceneApi:S,rpc:{exports:{}}};
+const context={StorePurchaseTracker:{install:()=>{},prepare:()=>{},status:()=>({record:null})},InboxClaimTracker:{readBalances:rows=>rows.map(r=>({...r,expected:r.quantity,value:balances[r.id]??null}))},RuntimeApi:R,SceneApi:S,rpc:{exports:{}}};
 vm.runInNewContext(fs.readFileSync(new URL('./store_bridge.js',import.meta.url),'utf8'),context);
 const bridge=context.StoreBridge;
 assert.deepEqual(Array.from(bridge.status().items,x=>x.id),['B','A']);
@@ -185,3 +185,4 @@ assert.throws(()=>context.StoreBridge.execute('store-claim-free',freeRequest),/W
 assert.equal(calls.length,callsBeforeMissingBalance);
 assert.equal(context.StoreBridge.execute('store-claim-status').submission,null);
 console.log('PASS missing wallet baseline blocks original claim before invocation');
+

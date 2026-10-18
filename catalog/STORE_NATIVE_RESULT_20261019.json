@@ -1,0 +1,11 @@
+{
+ "scope":"Passive native purchase success result observer",
+ "nativeCallbacks":["BaseStoreController.OnItemPurchaseSuccessful(PurchaseResultDO, StoreItemDO, OfferDO)","FixedStoreController.ItemPurchaseSuccessful(PurchaseResultDO, StoreItemDO, OfferDO)"],
+ "matching":["Exact retained controller object","Exact retained StoreItemDO object","PurchaseResultDO.ItemId equals requested ID"],
+ "resultFields":["nativeSuccessObserved","callbackSource","observedAt","creditedBucketItems","trackingError"],
+ "behavior":["Observers installed and flushed before native claim","Never invokes success handlers or service methods","Duplicate callbacks ignored","Managed handles released on observed success or disposal","Host writes tracker status on normal shutdown","Native success is not inventory delta proof"],
+ "tests":["Foreign controller/item, null result and mismatched item ID refused PASS","Two success callbacks counted once PASS","Malformed reward bounds recorded without throwing into original handler PASS","Managed handles released after success/error/dispose PASS","Bridge, durable, commands, loading and syntax PASS"],
+ "live":{"pid":32088,"hostPid":28756,"installed":true,"record":null,"oldSubmissionRetryBlocked":true,"newClaim":false},
+ "limitations":["No new real callback observed yet","Existing old claim cannot be retroactively associated","Same controller and item identity do not provide a server transaction ID","Reward before/after delta and automatic durable reconciliation remain pending"],
+ "evidence":["logs/high_reuse/store-native-tracker-status.json","il2cpp/decompiled/store/store_success_callback.c"]
+}

@@ -103,13 +103,14 @@ globalThis.StoreBridge=(()=>{
    return {navigationDispatched:true,rewardsBeforeClose:before};
   }
   if(op==='store-claim-status'){
+   StorePurchaseTracker.install();
    const after=wallet(),before=submission?.walletBefore;
-   return {readConfirmed:true,submission,walletAfter:after,walletUnchanged:before?before.length===after.length&&before.every(b=>Number.isSafeInteger(b.value)&&after.some(a=>a.id===b.id&&a.itemType===b.itemType&&a.value===b.value)):null,settlementConfirmed:false};
+   return {readConfirmed:true,submission,nativeResult:StorePurchaseTracker.status(),walletAfter:after,walletUnchanged:before?before.length===after.length&&before.every(b=>Number.isSafeInteger(b.value)&&after.some(a=>a.id===b.id&&a.itemType===b.itemType&&a.value===b.value)):null,settlementConfirmed:false};
   }
   if(op==='store-claim-free'){
    if(submission)throw Error('Prior store submission requires reconciliation');
    if(typeof p.itemId!=='string'||!p.itemId.length||p.itemId.length>256||p.quantity!==1||p.expectedCost!==0)throw Error('Explicit item, quantity one and zero cost required');
-   const {v,item}=details(),info=detailStatus();
+   const {c,v,item}=details(),info=detailStatus();
    if(info.id!==p.itemId||val(item,'ItemType')!==0||info.giftable||info.giftState!==0||!info.nativeFreePurchase||!info.freeButtonShown||info.maxPurchaseAmount<1)throw Error('Current standard free non-gift pack required');
    // Limit this first execution route to the audited in-game ally-point pack.
    if(!info.currentOffer||info.currentOffer.currencyType!==5||info.currentOffer.requiresProductPricing)throw Error('Unsupported free store currency route');
@@ -117,6 +118,7 @@ globalThis.StoreBridge=(()=>{
    if(visible.length!==1||!visible[0].enabled)throw Error('Unique active enabled single-purchase button required');
    const walletBefore=wallet();
    if(walletBefore.length!==2||walletBefore.some(b=>!Number.isSafeInteger(b.value)))throw Error('Wallet baseline unavailable');
+   StorePurchaseTracker.prepare(c,item,p.itemId);
    submission={itemId:p.itemId,quantity:1,expectedCost:0,walletBefore,submittedAt:Date.now(),nativeReturned:false,error:null};
    try{S.invoke('StorePackDetailsView','PurchasePackClicked',v);submission.nativeReturned=true;}
    catch(e){submission.error=String(e);throw e;}
@@ -153,5 +155,6 @@ globalThis.StoreBridge=(()=>{
  return {execute,status};
 })();
 rpc.exports.storecommand=(op,p)=>RuntimeApi.runOnMainThreadOnce(()=>StoreBridge.execute(op,p));
+
 
 

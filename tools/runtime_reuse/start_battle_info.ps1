@@ -15,7 +15,7 @@ if(Test-Path -LiteralPath $statusPath){
 $stopPath=Join-Path $outDir 'battle-info.stop'
 if(Test-Path -LiteralPath $stopPath){Remove-Item -LiteralPath $stopPath}
 $combined=Join-Path $outDir 'battle-info-combined.js'
-$parts=@('runtime_api.js','unity_scene_api.js','battle_status_reader.js','battle_info_ui.js','battle_attributes_reader.js','battle_input.js','runtime_observer.js','calendar_bridge.js','store_bridge.js') | ForEach-Object {Join-Path $PSScriptRoot $_}
+$parts=@('runtime_api.js','unity_scene_api.js','battle_status_reader.js','battle_info_ui.js','battle_attributes_reader.js','battle_input.js','runtime_observer.js','calendar_bridge.js','store_purchase_tracker.js','store_bridge.js') | ForEach-Object {Join-Path $PSScriptRoot $_}
 if($CaptureBattle){$parts+=@('battle_proto.js','battle_capture.js') | ForEach-Object {Join-Path $PSScriptRoot $_}}
 if($LiveArenaBasic){$parts+=Join-Path $PSScriptRoot 'live_arena_basic.js'}
 Get-Content -LiteralPath $parts -Encoding utf8 | Set-Content -Encoding utf8 $combined
