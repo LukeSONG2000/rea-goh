@@ -17,7 +17,12 @@ const context=vm.createContext({RuntimeApi:{
  const id=args[0].value;
  if(method==='GetInitialUnitCalculatedStat')return box(id===61?20:100);
  if(method==='GetStatValue'){assert.equal(types.length,1);return box(id===61?35:140);}
- if(method==='GetCalculatedStatValue')throw Error('Forbidden mutating getter');
+ if(method==='GetCalculatedStatValue'){
+  assert.equal(type,'StatCalculator');assert.equal(obj,calculator);
+  assert.deepEqual(Array.from(types),['UnitStatEnum','IStatSource','EquipmentExclusionType','System.Single','System.Int32']);
+  assert.deepEqual(Array.from(args,a=>a.value),[61,unit,0,0,-1]);
+  return box(40); // deliberately differs from final capped mastery (35)
+ }
  if(method==='HasMasteryContribution')return box(id===6?1:0,'bool');
  if(method==='GetMasteryContribution'){assert.equal(obj,calculator);assert.equal(args[1].value,unit);assert.equal(types[1],'IStatSource');return box(12.5);}
  throw Error('Unapproved invocation '+method);
@@ -31,6 +36,8 @@ assert.equal(result.protection.permanent.max,300);
 assert.equal(result.stats[0].netBattleDelta,40);
 assert.equal(result.stats[0].masteryCoefficient,12.5);
 assert.equal(result.stats[0].masteryContributionDelta,null);
+assert.equal(result.stats[0].masteryPreModifierTerm,500);
+assert.equal(result.mastery.recursiveCalculationValue,40);
 assert.equal(result.mastery.netBattleDelta,15);
 assert.equal(result.mastery.attributedStatChanges,null);
 assert.equal(result.warnings.length,0);
@@ -40,5 +47,5 @@ assert.throws(()=>context.readBattleAttributes(unit,{statIds:[256]}),/UnitStatEn
 assert.equal(calls.length,before,'Reject invalid enum before native calls');
 console.log('PASS: original getter arguments, byte enum overload, independent protection pools, net vs mastery attribution, no calls on load.');
 
-assert.ok(calls.every(c=>c.method!=='GetCalculatedStatValue'),'Never invoke mutating display getter');
+assert.ok(calls.every(c=>c.type!=='UnitDO'),'Never invoke mutating UnitDO display getter');
 assert.equal(result.stats[0].dtoDisplayOnly,null);

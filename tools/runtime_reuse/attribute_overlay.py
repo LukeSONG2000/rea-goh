@@ -15,6 +15,16 @@ def number(value):
 def pool(label, value):
     return f"{label}  {number(value.get('current'))} / {number(value.get('max'))}"
 
+def mastery_text(attributes):
+    value=attributes.get('mastery',{})
+    lines=[f"精通（Mastery）：初始 {number(value.get('initial'))} → 当前 {number(value.get('current'))}",
+           f"净变化：{number(value.get('netBattleDelta'))}", '',
+           '以下为原计算流程中的精通项，尚未经过后续属性修正和上下限；不等于最终属性增量。']
+    for stat in attributes.get('stats',[]):
+        if stat.get('hasMasteryContribution'):
+            lines.append(f"{LABELS.get(stat['id'],stat['name'])}：{number(stat.get('masteryPreModifierTerm'))}（全部因素净变化 {number(stat.get('netBattleDelta'))}）")
+    return '\n\n'.join(lines)
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--pid', type=int, required=True)
@@ -35,11 +45,13 @@ def main():
     scroll=ttk.Scrollbar(frame,orient='vertical',command=table.yview);table.configure(yscrollcommand=scroll.set)
     scroll.pack(side='right',fill='y');table.pack(fill='both',expand=True)
     effects=tk.Text(tabs,wrap='word',height=12);tabs.add(effects,text='状态期限')
+    mastery=tk.Text(tabs,wrap='word',height=12);tabs.add(mastery,text='精通变化')
     ttk.Label(window,text='净变化包含全部战斗因素；不等同于精通单独贡献。面板基础值尚未验证。',wraplength=620).pack(fill='x',padx=12,pady=8)
     keys=[]
     def clear(message):
         status.config(text=message);health.config(text='');table.delete(*table.get_children());choice['values']=[];choice.set('')
         effects.config(state='normal');effects.delete('1.0','end');effects.config(state='disabled')
+        mastery.config(state='normal');mastery.delete('1.0','end');mastery.config(state='disabled')
     def refresh():
         nonlocal keys
         try:
@@ -61,6 +73,7 @@ def main():
                     table.insert('','end',values=(LABELS.get(stat['id'],stat['name']),number(stat['initial']),number(stat['current']),number(stat['netBattleDelta'])))
                 rows=[f"{e.get('locKey') or e.get('effectId')}\n{e['durationText']}" for e in unit['status']['effects'] if e.get('iconSprite')]
                 effects.config(state='normal');effects.delete('1.0','end');effects.insert('1.0','\n\n'.join(rows) or '无状态效果');effects.config(state='disabled')
+                mastery.config(state='normal');mastery.delete('1.0','end');mastery.insert('1.0',mastery_text(a));mastery.config(state='disabled')
         except (OSError,ValueError,KeyError,TypeError) as exc: clear(str(exc))
         window.after(1000,refresh)
     def close():

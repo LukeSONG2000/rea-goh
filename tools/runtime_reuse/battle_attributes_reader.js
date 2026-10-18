@@ -22,6 +22,12 @@
     permanent:{current:scalar('CurrentPermanentShield'),max:scalar('MaxPermanentShield')},
     bonus:{current:scalar('CurrentBonusShield'),max:scalar('MaxBonusShield')}},stats:[],warnings};
    const calculator=read('StatCalculator',()=>R.readRef(unit,'_statCalculator'));
+  // FDE5C0 -> FDFF40 * recursive FDE5C0(MASTERY). This input is not the
+  // final clamped BattleUnitController.GetStatValue(MASTERY) reading.
+  const calculatedMastery=(!calculator||calculator.isNull())?null:read('recursive mastery calculation',()=>
+   number('StatCalculator','GetCalculatedStatValue',calculator,
+    [R.arg.value('u8',61),R.arg.ref(unit),R.arg.value('u8',0),R.arg.value('f32',0),R.arg.value('i32',-1)],
+    ['UnitStatEnum','IStatSource','EquipmentExclusionType','System.Single','System.Int32']));
   for(const id of [...new Set([...ids,61])]){
    const args=[R.arg.value('u8',id)],types=['UnitStatEnum'];
    const initial=read('initial '+id,()=>number('BattleUnitController','GetInitialUnitCalculatedStat',unit,args,types));
@@ -37,15 +43,18 @@
     read('mastery contribution '+id,()=>number('StatCalculator','GetMasteryContribution',calculator,
      [...args,R.arg.ref(unit)],['UnitStatEnum','IStatSource']));
    result.stats.push({id,name:names[id]||'UnitStatEnum_'+id,initial,current,netBattleDelta:delta(current,initial),dtoDisplayOnly,
-    hasMasteryContribution,masteryCoefficient,masteryContributionDelta:null});
+    hasMasteryContribution,masteryCoefficient,masteryContributionDelta:null,
+    masteryPreModifierTerm:hasMasteryContribution===false?0:
+     (Number.isFinite(calculatedMastery)&&Number.isFinite(masteryCoefficient)?Math.fround(calculatedMastery*masteryCoefficient):null)});
   }
   const mastery=result.stats.find(s=>s.id===61);
-  result.mastery={initial:mastery.initial,current:mastery.current,netBattleDelta:mastery.netBattleDelta,
+  result.mastery={initial:mastery.initial,current:mastery.current,netBattleDelta:mastery.netBattleDelta,recursiveCalculationValue:calculatedMastery,
    attributedStatChanges:null,reason:'No original baseline mastery-contribution snapshot; total stat delta is not mastery-only delta.'};
   result.contract={bonusShield:'Original CurrentBonusShield/MaxBonusShield getters; not inferred from total minus permanent.',
    dtoDisplayOnly:'Unavailable: original display getter mutates datacron context and is deliberately not invoked.',
    netBattleDelta:'Difference of original current and initial readings; includes all changes, not additive-effect sum.',
    masteryCoefficient:'Native FDFF40 primary-stat/role lookup coefficient; not current contribution or attributed change.',
+   masteryPreModifierTerm:'Float32 product of native recursive mastery calculation (initialValue=0) and coefficient, matching FDE5C0 MULSS stage. Initial stat already includes baseline mastery. Before subsequent stat modifiers and limits; not total mastery contribution or final attributed delta.',
    units:'Raw original stat units. Ratings are not converted to percentages.'};
   return result;
  }

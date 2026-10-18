@@ -1,0 +1,646 @@
+{
+  "scope": "Native pre-modifier mastery terms, not final stat attribution",
+  "units": [
+    {
+      "baseId": "JEDIMASTERKENOBI",
+      "attributes": {
+        "health": {
+          "current": 202948,
+          "max": 202948
+        },
+        "protection": {
+          "current": 254034,
+          "max": 254034,
+          "permanent": {
+            "current": 101823,
+            "max": 101823
+          },
+          "bonus": {
+            "current": 152211,
+            "max": 152211
+          }
+        },
+        "stats": [
+          {
+            "id": 1,
+            "name": "MAX_HEALTH",
+            "initial": 104076,
+            "current": 202948,
+            "netBattleDelta": 98872,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 2,
+            "name": "STRENGTH",
+            "initial": 2222,
+            "current": 2222,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 3,
+            "name": "AGILITY",
+            "initial": 2704,
+            "current": 2704,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 4,
+            "name": "INTELLIGENCE",
+            "initial": 1793,
+            "current": 1793,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 5,
+            "name": "SPEED",
+            "initial": 533,
+            "current": 563,
+            "netBattleDelta": 30,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 6,
+            "name": "ATTACK_DAMAGE",
+            "initial": 10304,
+            "current": 10694,
+            "netBattleDelta": 390,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 26,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 390
+          },
+          {
+            "id": 7,
+            "name": "ABILITY_POWER",
+            "initial": 7621,
+            "current": 8011,
+            "netBattleDelta": 390,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 26,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 390
+          },
+          {
+            "id": 8,
+            "name": "ARMOR",
+            "initial": 745,
+            "current": 745,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 9,
+            "name": "SUPPRESSION",
+            "initial": 331,
+            "current": 331,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 10,
+            "name": "ARMOR_PENETRATION",
+            "initial": 352,
+            "current": 352,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 11,
+            "name": "SUPPRESSION_PENETRATION",
+            "initial": 5,
+            "current": 5,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 12,
+            "name": "DODGE_RATING",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 13,
+            "name": "DEFLECTION_RATING",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 14,
+            "name": "ATTACK_CRITICAL_RATING",
+            "initial": 1965,
+            "current": 2073,
+            "netBattleDelta": 108,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 7.199999809265137,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 108
+          },
+          {
+            "id": 15,
+            "name": "ABILITY_CRITICAL_RATING",
+            "initial": 432,
+            "current": 540,
+            "netBattleDelta": 108,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 7.199999809265137,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 108
+          },
+          {
+            "id": 16,
+            "name": "CRITICAL_DAMAGE",
+            "initial": 0.6000000238418579,
+            "current": 0.6450000405311584,
+            "netBattleDelta": 0.04500001668930054,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 0.003000000026077032,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0.04500000178813934
+          },
+          {
+            "id": 18,
+            "name": "ACCURACY",
+            "initial": 0.9599999785423279,
+            "current": 0.9599999785423279,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 19,
+            "name": "RESISTANCE",
+            "initial": 1.097059965133667,
+            "current": 1.097059965133667,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 24,
+            "name": "HEALTH_STEAL",
+            "initial": 0.4000000059604645,
+            "current": 0.4000000059604645,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 25,
+            "name": "MAX_SHIELD",
+            "initial": 59896,
+            "current": 101823,
+            "netBattleDelta": 41927,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 28,
+            "name": "ATTACK_CRITICAL_PERCENT_ADDITIVE",
+            "initial": 0.04224000126123428,
+            "current": 0.04224000126123428,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 29,
+            "name": "ABILITY_CRITICAL_PERCENT_ADDITIVE",
+            "initial": 0.04224000126123428,
+            "current": 0.04224000126123428,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 61,
+            "name": "MASTERY",
+            "initial": 60,
+            "current": 75,
+            "netBattleDelta": 15,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          }
+        ],
+        "warnings": [],
+        "mastery": {
+          "initial": 60,
+          "current": 75,
+          "netBattleDelta": 15,
+          "recursiveCalculationValue": 15,
+          "attributedStatChanges": null,
+          "reason": "No original baseline mastery-contribution snapshot; total stat delta is not mastery-only delta."
+        },
+        "contract": {
+          "bonusShield": "Original CurrentBonusShield/MaxBonusShield getters; not inferred from total minus permanent.",
+          "dtoDisplayOnly": "Unavailable: original display getter mutates datacron context and is deliberately not invoked.",
+          "netBattleDelta": "Difference of original current and initial readings; includes all changes, not additive-effect sum.",
+          "masteryCoefficient": "Native FDFF40 primary-stat/role lookup coefficient; not current contribution or attributed change.",
+          "masteryPreModifierTerm": "Float32 product of native recursive mastery calculation (initialValue=0) and coefficient, matching FDE5C0 MULSS stage. Initial stat already includes baseline mastery. Before subsequent stat modifiers and limits; not total mastery contribution or final attributed delta.",
+          "units": "Raw original stat units. Ratings are not converted to percentages."
+        }
+      }
+    },
+    {
+      "baseId": "STORMTROOPER",
+      "attributes": {
+        "health": {
+          "current": 546,
+          "max": 546
+        },
+        "protection": {
+          "current": 0,
+          "max": 0,
+          "permanent": {
+            "current": 0,
+            "max": 0
+          },
+          "bonus": {
+            "current": 0,
+            "max": 0
+          }
+        },
+        "stats": [
+          {
+            "id": 1,
+            "name": "MAX_HEALTH",
+            "initial": 546,
+            "current": 546,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 2,
+            "name": "STRENGTH",
+            "initial": 22,
+            "current": 22,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 3,
+            "name": "AGILITY",
+            "initial": 24,
+            "current": 24,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 4,
+            "name": "INTELLIGENCE",
+            "initial": 17,
+            "current": 17,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 5,
+            "name": "SPEED",
+            "initial": 85,
+            "current": 85,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 6,
+            "name": "ATTACK_DAMAGE",
+            "initial": 60,
+            "current": 60,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 7,
+            "name": "ABILITY_POWER",
+            "initial": 40,
+            "current": 40,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 8,
+            "name": "ARMOR",
+            "initial": 4,
+            "current": 6,
+            "netBattleDelta": 2,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 3,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 9,
+            "name": "SUPPRESSION",
+            "initial": 1,
+            "current": 1,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 3,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 10,
+            "name": "ARMOR_PENETRATION",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 11,
+            "name": "SUPPRESSION_PENETRATION",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 12,
+            "name": "DODGE_RATING",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 13,
+            "name": "DEFLECTION_RATING",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 14,
+            "name": "ATTACK_CRITICAL_RATING",
+            "initial": 9,
+            "current": 9,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 15,
+            "name": "ABILITY_CRITICAL_RATING",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 16,
+            "name": "CRITICAL_DAMAGE",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 18,
+            "name": "ACCURACY",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 19,
+            "name": "RESISTANCE",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 24,
+            "name": "HEALTH_STEAL",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 0.001500000013038516,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 25,
+            "name": "MAX_SHIELD",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": true,
+            "masteryCoefficient": 220,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 28,
+            "name": "ATTACK_CRITICAL_PERCENT_ADDITIVE",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 29,
+            "name": "ABILITY_CRITICAL_PERCENT_ADDITIVE",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          },
+          {
+            "id": 61,
+            "name": "MASTERY",
+            "initial": 0,
+            "current": 0,
+            "netBattleDelta": 0,
+            "dtoDisplayOnly": null,
+            "hasMasteryContribution": false,
+            "masteryCoefficient": null,
+            "masteryContributionDelta": null,
+            "masteryPreModifierTerm": 0
+          }
+        ],
+        "warnings": [],
+        "mastery": {
+          "initial": 0,
+          "current": 0,
+          "netBattleDelta": 0,
+          "recursiveCalculationValue": 0,
+          "attributedStatChanges": null,
+          "reason": "No original baseline mastery-contribution snapshot; total stat delta is not mastery-only delta."
+        },
+        "contract": {
+          "bonusShield": "Original CurrentBonusShield/MaxBonusShield getters; not inferred from total minus permanent.",
+          "dtoDisplayOnly": "Unavailable: original display getter mutates datacron context and is deliberately not invoked.",
+          "netBattleDelta": "Difference of original current and initial readings; includes all changes, not additive-effect sum.",
+          "masteryCoefficient": "Native FDFF40 primary-stat/role lookup coefficient; not current contribution or attributed change.",
+          "masteryPreModifierTerm": "Float32 product of native recursive mastery calculation (initialValue=0) and coefficient, matching FDE5C0 MULSS stage. Initial stat already includes baseline mastery. Before subsequent stat modifiers and limits; not total mastery contribution or final attributed delta.",
+          "units": "Raw original stat units. Ratings are not converted to percentages."
+        }
+      }
+    }
+  ],
+  "evidence": {
+    "path": "logs\\high_reuse\\mastery-jmk-snapshot.json",
+    "sha256": "df39b8272a67bee9601d35129ac0f430460dd274d9f5fafce7b9a17398666f8f"
+  },
+  "limitations": [
+    "Decrease/caps and overlay layout not verified",
+    "Final mastery-only attributed delta still unknown"
+  ],
+  "cleanupEvidence": "logs/high_reuse/mastery-jmk-probe-evidence.json"
+}
