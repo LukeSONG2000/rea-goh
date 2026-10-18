@@ -1,0 +1,60 @@
+{
+  "scope": "Original store accordion tab selection and catalog readback",
+  "operation": "store-tab",
+  "nativeEvidence": [
+    "HandleNavTabClicked 0x181c97e60 changes accordion and emits store-tab event",
+    "HandleStoreTabClicked 0x181c4b210 checks interaction ready then original ShowTab",
+    "Bridge invokes current owned AccordionPanelItem.HandleButtonClick, not item purchase button"
+  ],
+  "live": {
+    "pid": 32088,
+    "hostPid": 17496,
+    "tabs": [
+      {
+        "index": 0,
+        "tab": 0,
+        "label": "特色内容",
+        "locked": false
+      },
+      {
+        "index": 1,
+        "tab": 8,
+        "label": "时代商店",
+        "locked": false
+      },
+      {
+        "index": 2,
+        "tab": 3,
+        "label": "补给",
+        "locked": false
+      },
+      {
+        "index": 3,
+        "tab": 2,
+        "label": "水晶",
+        "locked": false
+      }
+    ],
+    "selectedTab": 2,
+    "selectedItems": 5,
+    "returnedHome": true,
+    "purchaseInvocations": 0
+  },
+  "tests": [
+    "current tab context type",
+    "missing/locked tabs rejected",
+    "same-tab no-op",
+    "original navigation callback",
+    "host exact expected-tab readback",
+    "store/commands/loading regression PASS"
+  ],
+  "limitations": [
+    "Only real crystal tab switch validated; other visible tabs not yet exercised",
+    "No item purchase or shipment-store integration"
+  ],
+  "evidence": [
+    "logs/high_reuse/store-tabs-open.json",
+    "logs/high_reuse/store-tabs-crystals.json",
+    "logs/high_reuse/store-tabs-home.json"
+  ]
+}

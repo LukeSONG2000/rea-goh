@@ -59,14 +59,14 @@ try{
      return {...result,transitionConfirmed:confirmed,afterState:after.state};
     }
     if(operation.startsWith('store-')){
-     const result=await script.exports.storecommand(operation);
+     const result=await script.exports.storecommand(operation,payload);
      if(operation==='store-list')return result;
      let after=null,lastError=null;
      for(let i=0;i<30;i++){
       await new Promise(r=>setTimeout(r,250));
-      try{after=operation==='store-back'?await script.exports.snapshot():await script.exports.storecommand('store-list');if(operation==='store-back'?after.state===result.expectedState:after.readConfirmed)break;}catch(e){lastError=String(e);}
+      try{after=operation==='store-back'?await script.exports.snapshot():await script.exports.storecommand('store-list');if(operation==='store-back'?after.state===result.expectedState:after.readConfirmed&&(operation!=='store-tab'||after.storeTab===result.expectedTab))break;}catch(e){lastError=String(e);}
      }
-     return {...result,transitionConfirmed:operation==='store-back'?after?.state===result.expectedState:after?.readConfirmed===true,catalog:after,error:after?null:lastError};
+     return {...result,transitionConfirmed:operation==='store-back'?after?.state===result.expectedState:after?.readConfirmed===true&&(operation!=='store-tab'||after.storeTab===result.expectedTab),catalog:after,error:after?null:lastError};
     }
     if(operation.startsWith('calendar-')){
      const result=await script.exports.calendarcommand(operation,payload);

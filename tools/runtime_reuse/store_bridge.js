@@ -27,6 +27,13 @@ globalThis.StoreBridge=(()=>{
   }catch(e){priceError=String(e);}
   return {formattedPrice,priceSource,priceConfirmed:priceSource==='cached-commerce-product'||priceSource==='original-currency-formatter',priceError,currencyType,rawPrice:R.readValue(o,'_price','i32'),productId,webProductId,costKey:S.string(R.readRef(o,'_costKey')),requiresProductPricing:!!(productId||webProductId)};
  }
+ function tabs(v){
+  return list(R.readRef(R.readRef(v,'_storeAccordion'),'_panels')).map((panel,index)=>{
+   const button=R.readRef(panel,'_panelButton'),d=R.readRef(button,field('RenderData')),context=R.readRef(d,'ActionContext');
+   if(context.isNull()||name(context)!=='StoreLocation')throw Error('Unsupported store tab context');
+   return {button,index,tab:R.unbox(context,'i32'),label:S.string(R.readRef(d,'Label')),locked:R.readValue(d,'Locked','bool')};
+  });
+ }
  function status(){
   const {v}=live(),formatter=R.readRef(v,'_storeOfferPriceFormatter'),items=list(R.readRef(v,'_storeItemData')),render=list(R.readRef(v,'_storeItemRenderData')),seen=new Set();
   const rows=render.map(d=>{
@@ -34,18 +41,26 @@ globalThis.StoreBridge=(()=>{
    const item=items[index];if(item.isNull())throw Error('Null store item');
    return {itemIndex:index,id:str(item,'Id'),nameKey:str(d,'NameKey'),quantity:val(d,'Quantity'),possiblePurchases:val(d,'PossiblePurchases'),maxPurchaseLimit:val(d,'MaxPurchaseLimit'),maxPurchasePerTransaction:val(item,'MaxPurchasePerTransaction'),locked:val(d,'IsLocked','bool'),freeOffer:val(d,'IsFreeOffer','bool'),showPrice:val(d,'ShowPrice','bool'),overrideDisplayPrice:str(d,'OverrideDisplayPrice'),offers:array(R.readRef(d,field('Offers'))).map(o=>offer(o,formatter))};
   });
-  return {readConfirmed:true,storeTab:R.readValue(v,'_currentStoreTab','i32'),items:rows,purchaseAuthorized:false,note:'Original offer formatting; fallback prices remain unconfirmed. Per-item overrideDisplayPrice may override offer text; this is not a checkout authorization. PossiblePurchases is the original eligibility count, not physical stock.'};
+  return {readConfirmed:true,storeTab:R.readValue(v,'_currentStoreTab','i32'),items:rows,tabs:tabs(v).map(({button,...row})=>row),purchaseAuthorized:false,note:'Original offer formatting; fallback prices remain unconfirmed. Per-item overrideDisplayPrice may override offer text; this is not a checkout authorization. PossiblePurchases is the original eligibility count, not physical stock.'};
  }
- function execute(op){
+ function execute(op,p={}){
   if(op==='store-list')return status();
   if(op==='store-open'){
    const state=current();if(name(state)!=='HomeBaseGameState')throw Error('Open store from Home');
    S.invoke('HomeBaseController','OpenStore',R.readRef(state,'_homeBaseController'),[A.value('i32',0)],['StoreLocation']);
    return {navigationDispatched:true,expectedState:'StoreState'};
   }
+  if(op==='store-tab'){
+   if(!Number.isInteger(p.tab))throw Error('Explicit store tab required');
+   const {v}=live(),matches=tabs(v).filter(t=>t.tab===p.tab);
+   if(matches.length!==1||matches[0].locked)throw Error('Store tab missing, ambiguous or locked');
+   const unchanged=R.readValue(v,'_currentStoreTab','i32')===p.tab;
+   if(!unchanged)S.invoke('AccordionPanelItem','HandleButtonClick',matches[0].button);
+   return {navigationDispatched:!unchanged,alreadySelected:unchanged,expectedTab:p.tab};
+  }
   if(op==='store-back'){const {v}=live();S.invoke('HudBaseView','OnBackClick',v);return {navigationDispatched:true,expectedState:'HomeBaseGameState'};}
   throw Error('Unsupported store operation');
  }
  return {execute,status};
 })();
-rpc.exports.storecommand=(op)=>RuntimeApi.runOnMainThreadOnce(()=>StoreBridge.execute(op));
+rpc.exports.storecommand=(op,p)=>RuntimeApi.runOnMainThreadOnce(()=>StoreBridge.execute(op,p));

@@ -465,3 +465,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 
 【Codex/root 2026-10-19 sweep-rewards implemented-partial】新增campaign-sweep-rewards/rewards-close，仅当前mission grind controller所属奖励view，读原ID/type/quantity与Continue可用状态，关闭调用原BattlePveRewardView.OnButtonClick并host等隐藏；无再扫/卖mod。原按钮及controller Continue源码留证。mock所属view/奖励数量/禁用按钮/数组越界/未显示和settlement false、campaign/commands/durable/loading PASS。实机空奖励view读取成功后Home，host21376，无消费。报告SWEEP_REWARDS_20261019.json；暂无真实新奖励/Continue/回执关联/库存核验，不宣称结算完成。
 【Codex/root 2026-10-19 store-tabs】认领原商店页签导航及当前tab读回，root独占store bridge/Ghidra；不购买刷新。
+
+【Codex/root 2026-10-19 store-tabs native+live】store-list新增原accordion页签Label/StoreLocation/Locked，store-tab选择唯一现有未锁页签原HandleButtonClick，same-tab幂等，host核目标tab与商品ready。原nav/controller回调只读Ghidra留证。实机4页签，切水晶tab2读5商品成功并返回Home，host17496，无购买刷新。missing/locked/noop/原回调mock及store/commands/loading PASS。报告STORE_TABS_20261019.json；其余页签未实测，货运商店和购买仍待。
