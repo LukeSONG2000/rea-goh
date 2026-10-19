@@ -15,5 +15,7 @@ const colors=vm.createContext({R:{unbox:x=>x},A:{value:(t,x)=>x},
  nativeColor:x=>x,barColor:x=>x});
 vm.runInContext(source.slice(source.indexOf(' function numericHealth('),source.indexOf(' function targetNumbers(')),colors);
 assert.equal(colors.numericHealth({}, {health:'FF0000',shield:'AACCFF',bonus:'CC00FF'},{}),
- '[FF0000]23[-]/[00FF00]100[-]\n[AACCFF]12/90[-]    [CC00FF]45/60[-]');
+ '[FF0000]23[-]/[00FF00]100[-]\n[CC00FF]45/60[-]    [AACCFF]12/90[-]');
+assert.equal(colors.numericHealth({}, {health:'FF0000',shield:'AACCFF',bonus:'CC00FF'},{},true),
+ '[CC00FF]45/60[-]    [AACCFF]12/90[-]\n[FF0000]23[-]/[00FF00]100[-]');
 console.log('PASS compact timed prefix: unknown omitted, finite zero and distinct counters preserved');

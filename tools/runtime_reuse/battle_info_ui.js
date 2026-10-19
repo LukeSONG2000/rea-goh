@@ -64,13 +64,15 @@
  function barColor(bar){
   return nativeColor(call('UIWidget','get_color',call('UIProgressBar','get_foregroundWidget',bar)));
  }
- function numericHealth(unit,bars,healthComponent){
+ function numericHealth(unit,bars,healthComponent,shieldAbove=false){
   const read=n=>R.unbox(call('BattleUnitController','get_'+n,unit),'i32');
   const hp=barColor(bars.health),full=nativeColor(call('UnitHealthBar','GetHealthColor',healthComponent,[A.value('f32',1)]));
   const shield=barColor(bars.shield),bonus=barColor(bars.bonus);
-  return '['+hp+']'+read('CurrentHP')+'[-]/['+full+']'+read('MaxHP')+'[-]\n'+
-   '['+shield+']'+read('CurrentPermanentShield')+'/'+read('MaxPermanentShield')+'[-]    '+
-   '['+bonus+']'+read('CurrentBonusShield')+'/'+read('MaxBonusShield')+'[-]';
+  const healthLine='['+hp+']'+read('CurrentHP')+'[-]/['+full+']'+read('MaxHP')+'[-]';
+  const shieldLine='['+bonus+']'+read('CurrentBonusShield')+'/'+read('MaxBonusShield')+'[-]    '+
+   '['+shield+']'+read('CurrentPermanentShield')+'/'+read('MaxPermanentShield')+'[-]';
+  // Popup bars place protection above health; the target HUD does the reverse.
+  return (shieldAbove?[shieldLine,healthLine]:[healthLine,shieldLine]).join('\n');
  }
  function targetNumbers(item){
   const bars={health:R.readRef(item.target,'_healthBar'),shield:R.readRef(item.target,'_shieldBar'),bonus:R.readRef(item.target,'_bonusShieldBar')};
@@ -165,7 +167,7 @@
   const status=readBattleStatus(unit);
   const healthComponent=R.readRef(popup,'_healthBar');
   const bars={health:R.readRef(healthComponent,'_health'),shield:R.readRef(healthComponent,'_shield'),bonus:R.readRef(healthComponent,'_bonusShield')};
-  const text=numericHealth(unit,bars,healthComponent);
+  const text=numericHealth(unit,bars,healthComponent,true);
   setText(item.label,text);
   const parent=S.parent(S.transform(item.label)),hb=widgetBounds(parent,bars.health),sb=widgetBounds(parent,bars.shield);
   setVector(S.transform(item.label),'localPosition',[Math.max(hb.right,sb.right)+12,(hb.y+sb.y)/2,0]);
