@@ -1,0 +1,39 @@
+{
+  "scope": "First user-review screenshots: original isolated squad arena, in-game display and new external information overlay. Fleet deferred until acceptance.",
+  "implementation": [
+    "Snapshot follows original SelectedOpponent, or original long-press popup current unit while visible",
+    "Original opponent ability icons and current cooldown counters; friendly inspection hides CD strip",
+    "Two tabs: visible original status effects with durations, and live attributes with initial/current/net values and mastery",
+    "Explicit basic-only switch and multiple permitted target IDs via owned-trial CLI; original legal target resolver; no match pauses instead of AI fallback"
+  ],
+  "screenshots": {
+    "inGame": "logs/high_reuse/info-review-squad-ingame.png",
+    "inGamePopup": "logs/high_reuse/info-review-squad-ingame-popup.png",
+    "overlayStatus": "logs/high_reuse/info-review-squad-overlay-status.png",
+    "overlayAttributes": "logs/high_reuse/info-review-squad-overlay-attributes.png",
+    "overlayFriendly": "logs/high_reuse/info-review-squad-overlay-ally.png"
+  },
+  "live": {
+    "evidence": "logs/high_reuse/info-review-squad-v4-evidence.json",
+    "source": "Original currently selected arena squads copied into native private PVP simulation",
+    "serviceCalls": 0,
+    "sourceSquadIdentityUnchanged": true,
+    "policyConfigured": true,
+    "allowedTargets": ["ADMIRALRADDUS", "R2D2_LEGENDARY"],
+    "enemyMovesDuringCapture": 0,
+    "friendlyFollow": "GLLEIA via actual long press, CD hidden",
+    "cleanup": "Home, guard and GC restored; errors empty",
+    "restoredHelperPid": 38144
+  },
+  "validation": ["enemy gate legality/multi-target/block/no fallback/disable/PVE rejection mock", "mailbox and loading regressions", "existing overlay tests", "turn-order deterministic seed double-run identical", "actual screenshots visually inspected"],
+  "knownIncomplete": [
+    "Policy settings live-confirmed, but actual enemy action under this new whitelist not exercised in screenshot session",
+    "Policy currently only owned squad arena trial, not yet integrated into normal ranked or fleet arena host",
+    "Some newer original localization keys/names absent in current local translation snapshot, shown as keys or English",
+    "External panel overlaps right side of game; first layout awaiting user feedback",
+    "CD strip currently covers active ability contexts, not full original passive/ultimate presentation parity; captured counters zero, nonzero display requires live sample",
+    "In-game screenshot uses existing health/duration expansion; full live attribute view is external",
+    "First JML/Leia-training opponent fixture stalled at original ability VFX loading; no skipping assets or simplified rules. Changed to original JMK matchup which loaded successfully.",
+    "One later entry raced a connection error and rejected before creating fixture; guard/GC restored. Obsolete optional source verifier caused a cleanup diagnostic; verified no battle entered then stopped only owned helper. Final run passed cleanup."
+  ]
+}

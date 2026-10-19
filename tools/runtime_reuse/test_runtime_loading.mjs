@@ -4,9 +4,9 @@ import vm from 'node:vm';
 import {readSnapshotOrUnavailable} from './runtime_poll.mjs';
 const source=fs.readFileSync(new URL('./runtime_observer.js',import.meta.url),'utf8');
 const part=source.slice(source.indexOf('globalThis.readRuntimeSnapshot='),source.indexOf('globalThis.inventoryHome='));
-const nil={isNull:()=>true};
+const nil={isNull:()=>true,equals:o=>o===nil};
 const object=fields=>({fields,isNull:()=>false});
-const handles=object({_items:nil,_size:0}),view=object({_unitReticles:handles}),context=object({}),controller=object({_battleContext:context}),state=object({_battleController:controller});
+const handles=object({_items:nil,_size:0}),view=object({_unitReticles:handles,'<SelectedOpponent>k__BackingField':nil,_effectDetailsPopup:nil}),context=object({}),controller=object({_battleContext:context}),state=object({_battleController:controller});
 let currentView=view;
 const sandbox={RuntimeApi:{runOnMainThreadOnce:fn=>fn(),findBound:()=>object({}),
  readRef:(o,k)=>{assert.notEqual(o,nil,'No null dereference');return k==='<CurrentState>k__BackingField'?state:o.fields[k];},

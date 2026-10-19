@@ -109,7 +109,7 @@
   while(Date.now()<deadline){
    let shouldStop=false;
    await R.runOnMainThreadOnce(()=>{
-    if(enemyGate){
+    if(enemyGate&&!enemyGate.tickPolicy()){
      const snapshot=enemyGate.snapshot();
      if(snapshot.pending){
       if(heldToken!==snapshot.token){heldToken=snapshot.token;heldAt=Date.now();send({kind:'enemy-held-start',snapshot});}

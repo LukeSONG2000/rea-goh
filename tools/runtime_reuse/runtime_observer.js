@@ -920,8 +920,27 @@ globalThis.readRuntimeSnapshot=()=>RuntimeApi.runOnMainThreadOnce(()=>{
   if(unit.isNull()||seen.has(unit.toString())||!R.readRef(unit,'_battleContext').equals(context))continue;
   if(!R.unbox(S.invoke('UnityEngine.GameObject','get_activeInHierarchy',S.gameObject(reticle)),'bool'))continue;
   seen.add(unit.toString());
-  result.units.push({sessionKey:unit.toString(),baseId:S.string(R.readRef(R.readRef(R.readRef(unit,'_unitDO'),'<Definition>k__BackingField'),'BaseId')),attributes:readBattleAttributes(unit),status:readBattleStatus(unit)});
+  const abilities=[];
+  const owner=R.unbox(S.invoke('BattleUnitController','get_Owner',unit),'i32');
+  if(owner===1){
+   const special=R.readRef(unit,'_limitBreakAbilityContexts');
+   const size=R.readValue(special,'_size','i32'),array=S.array(R.readRef(special,'_items'));
+   if(size<0||size>64||size>array.length)throw Error('Opponent ability list bounds');
+   for(const ability of [R.readRef(unit,'_attackAbilityContext'),...array.slice(0,size)]){
+    if(ability.isNull())continue;
+    const data=R.readRef(ability,'<AbilityDO>k__BackingField');
+    abilities.push({id:S.string(S.invoke('AbilityDO','get_Id',data)),icon:S.string(S.invoke('AbilityDO','get_Icon',data)),
+     cooldown:R.readValue(ability,'<CooldownCounter>k__BackingField','i32'),ready:!!R.unbox(S.invoke('AbilityContext','get_IsAbilityReady',ability),'bool')});
+   }
+  }
+  result.units.push({sessionKey:unit.toString(),unitId:S.string(R.readRef(R.readRef(unit,'_unitDO'),'Id')),owner,abilities,baseId:S.string(R.readRef(R.readRef(R.readRef(unit,'_unitDO'),'<Definition>k__BackingField'),'BaseId')),attributes:readBattleAttributes(unit),status:readBattleStatus(unit)});
  }
+ const opponent=R.readRef(view,'<SelectedOpponent>k__BackingField');
+ const popup=R.readRef(view,'_effectDetailsPopup');
+ let selected=opponent;
+ if(!popup.isNull()&&R.readValue(popup,'<IsDisplaying>k__BackingField','bool'))selected=R.readRef(popup,'_currentUnit');
+ result.inspectedUnit=selected.isNull()?null:selected.toString();
+ result.inspectionSource=selected.equals(opponent)?'opponent-target':'status-popup';
  result.battleReady=true;
  return result;
 });

@@ -7,6 +7,13 @@ globalThis.installEnemyInputGate=context=>{
  const address=method.readPointer();
  const original=new NativeFunction(address,'void',['pointer','pointer','pointer','pointer']);
  const events=[],errors=[];let pending=null,serial=0,stopped=false,watchdogDeferrals=0;
+ let policy=null;
+ const policyToken='policy:'+Process.id+':'+Date.now()+':'+context.toString();
+ const policyState=()=>{
+  const probe=globalThis.visualProbe,data=probe?.fixture?.data;
+  const available=!!data&&!stopped&&R.readRef(probe.fixture.state,'<CurrentState>k__BackingField').equals(probe.entered)&&R.readValue(data,'<BattleTypeEnum>k__BackingField','u8')===0&&R.readValue(data,'<CombatTypeEnum>k__BackingField','u8')===0;
+  return {available,token:policyToken,configured:policy!==null,...(policy||{enabled:false,allowedTargets:[],blocked:null})};
+ };
  const call=(p,n,args=[])=>R.invoke(R.findMethod(R.classOf(p),n,args.length),p,args);
  const actor=()=>call(context,'get_CurrentUnit');
  const fsm=()=>call(context,'get_BattleFsmController');
@@ -72,9 +79,9 @@ globalThis.installEnemyInputGate=context=>{
    selectedTarget:unitId(call(controller,'GetCurrentTarget')),manualTarget:unitId(call(controller,'get_ManualTarget'))};
  }
  function snapshot(){
-  if(!pending)return {pending:false};
+  if(!pending)return {pending:false,policy:policyState()};
   const targetInfo=targeting(),ally=selection();
-  return {pending:true,token:pending.token,expiresAt:pending.expiresAt,actor:unitId(pending.unit),
+  return {pending:true,policy:policyState(),token:pending.token,expiresAt:pending.expiresAt,actor:unitId(pending.unit),
    selectingUnit:ally.selectingUnit,selectionCandidates:ally.selectionCandidates,
    selectedAbility:pending.choice?{moveType:pending.choice.moveType,index:pending.choice.index,id:pending.choice.id}:null,
    abilities:abilities().map(({ability,...info})=>info),
@@ -115,6 +122,35 @@ globalThis.installEnemyInputGate=context=>{
  try{Interceptor.replace(address,replacement);Interceptor.replace(watchdogAddress,watchdogReplacement);Interceptor.flush();}
  catch(e){Interceptor.revert(address);Interceptor.revert(watchdogAddress);throw e;}
  return {snapshot,events,errors,get watchdogDeferrals(){return watchdogDeferrals;},
+  configurePolicy(request){
+   const probe=globalThis.visualProbe;
+   if(stopped||request?.token!==policyToken||!probe?.fixture.context.equals(context))throw Error('Stale policy owner');
+   const state=R.readRef(probe.fixture.state,'<CurrentState>k__BackingField');
+   if(!state.equals(probe.entered))throw Error('Policy requires current owned battle');
+   if(R.readValue(probe.fixture.data,'<BattleTypeEnum>k__BackingField','u8')!==0||R.readValue(probe.fixture.data,'<CombatTypeEnum>k__BackingField','u8')!==0)throw Error('Policy currently supports squad arena trials only');
+   if(typeof request.enabled!=='boolean'||!Array.isArray(request.allowedTargets)||request.allowedTargets.length>16||request.allowedTargets.some(id=>typeof id!=='string'||!id||id.length>256)||new Set(request.allowedTargets).size!==request.allowedTargets.length)throw Error('Invalid enemy policy');
+   if(request.enabled&&!request.allowedTargets.length)throw Error('Select at least one permitted target');
+   policy={enabled:request.enabled,allowedTargets:request.allowedTargets.slice(),blocked:null};
+   events.push({event:'policy-configured',...policy});return policyState();
+  },
+  tickPolicy(){
+   if(!policy||!pending)return false;
+   if(!policy.enabled){this.resume(pending.token);return true;}
+   // Strict whitelist: wait for an explicit change when native taunt/death
+   // restrictions leave no selected legal target; never fall back to AI.
+   pending.expiresAt=Date.now()+10000;
+   const live=targeting(),allowed=live.targets.filter(t=>policy.allowedTargets.includes(t.id));
+   if(!allowed.length){policy.blocked='勾选单位目前不在原版合法目标中；等待修改选择';return true;}
+   try{
+    const target=allowed.find(t=>t.id===live.selectedTarget)||allowed[0];
+    const selected=this.selectTarget({token:pending.token,targetId:target.id});
+    if(!selected.targetConfirmed)throw Error('原版未确认允许的攻击目标');
+    const result=this.chooseBasic(pending.token);
+    if(!result.started)throw Error('原版普攻尚未执行');
+    policy.blocked=null;
+   }catch(e){policy.blocked=String(e);}
+   return true;
+  },
   selectTarget(request){
    validate();
    if(!request||request.token!==pending.token)throw Error('Stale enemy input token');
