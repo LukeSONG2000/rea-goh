@@ -506,3 +506,4 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 information-ingame-v2 verified】游戏内改为血/永久盾/临时盾两行纯数字，读取原条颜色，右上角实际边界右对齐留16单位，popup条右侧紧凑显示；有限原计数白色括号前缀同一行，无固定期限不加说明。外部悬浮窗未改。v6隔离原PVP实拍克诺比将军技能释放后CD3及状态(1)/(2)/(3)，serviceCalls0/阵容未变/Home+guard+GC恢复/errors空；helper16912/client33348。格式/生命周期/目标/布局/health/loading与确定性双跑通过。早期v4截图tick过早导致加载态清理失败，正常关闭重启原客户端恢复；新脚本ready gate及UI空context/view检查后v6通过。报告INFORMATION_INGAME_COMPACT_20261019.json；全模式/DPI及低血量颜色实拍尚未覆盖。
 【Codex/root 2026-10-19 information-row-order】认领按用户截图修正游戏内行序：popup上紫盾/盾下血，target上血下紫盾/盾；root独占battle_info_ui/compact测试，外部不改。
 【Codex/root 2026-10-19 information-row-order fixed】numericHealth分离popup/target行序：popup上紫盾/普通盾下血；target上血下紫盾/普通盾；每项仍为原当前/最大值、原颜色。维持原条组中心和左右定位；补两种格式断言，compact/layout/target/lifecycle PASS。在Home重启显示helper加载；本次未进入战斗，尚未重拍实机。
+【Codex/root 2026-10-19 overlay-attributes-controls】认领用户验收后推送：悬浮窗移除CD/状态，仅保留实时属性与既有控制器；root独占information_overlay，不改战斗规则。行序修正已隔离实拍，CD3可见，清理返回Home无错误。
