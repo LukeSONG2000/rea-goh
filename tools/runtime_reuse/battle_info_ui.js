@@ -17,11 +17,13 @@
   withString(options.name||'REA_AbsoluteHealth',name=>call('UnityEngine.Object','set_name',clone,[A.ref(name)]));
   const label=call('UnityEngine.GameObject','GetComponent',clone,[A.ref(S.type('UILabel'))],['System.Type']);
   for(const anchor of ['leftAnchor','rightAnchor','topAnchor','bottomAnchor']){const a=R.readRef(label,anchor);if(!a.isNull())R.writeRef(a,'target',R.nil);}
-  call('UIWidget','set_pivot',label,[A.value('i32',options.pivot||0)]);
+  call('UIWidget','set_pivot',label,[A.value('i32',options.pivot??0)]);
   call('UIWidget','set_width',label,[A.value('i32',options.width||450)]);
-  call('UIWidget','set_height',label,[A.value('i32',110)]);
+  call('UIWidget','set_height',label,[A.value('i32',48)]);
   call('UILabel','set_fontSize',label,[A.value('i32',options.font||20)]);
-  call('UILabel','set_maxLineCount',label,[A.value('i32',4)]);
+  call('UILabel','set_maxLineCount',label,[A.value('i32',2)]);
+  call('UILabel','set_alignment',label,[A.value('i32',options.align??3)]);
+  call('UILabel','set_supportEncoding',label,[A.value('bool',true)]);
   setVector(S.transform(label),'localPosition',options.position||[-205,-75,0]);
   const color=Memory.alloc(16);[1,1,1,1].forEach((v,i)=>color.add(i*4).writeFloat(v));call('UIWidget','set_color',label,[A.byRef(color)]);
   call('UnityEngine.GameObject','SetActive',clone,[A.value('bool',true)]);
@@ -50,6 +52,34 @@
   }
   return text;
  }
+ function widgetBounds(parent,control){
+  const box=call('NGUIMath','CalculateRelativeWidgetBounds',R.nil,[A.ref(parent),A.ref(S.transform(control))],['UnityEngine.Transform','UnityEngine.Transform']);
+  const p=R.api('object_unbox','pointer',['pointer'])(box);
+  return {left:p.readFloat()-p.add(12).readFloat(),right:p.readFloat()+p.add(12).readFloat(),y:p.add(4).readFloat()};
+ }
+ function nativeColor(box){
+  const p=R.api('object_unbox','pointer',['pointer'])(box);
+  return [0,4,8].map(i=>Math.round(Math.max(0,Math.min(1,p.add(i).readFloat()))*255).toString(16).padStart(2,'0')).join('').toUpperCase();
+ }
+ function barColor(bar){
+  return nativeColor(call('UIWidget','get_color',call('UIProgressBar','get_foregroundWidget',bar)));
+ }
+ function numericHealth(unit,bars,healthComponent){
+  const read=n=>R.unbox(call('BattleUnitController','get_'+n,unit),'i32');
+  const hp=barColor(bars.health),full=nativeColor(call('UnitHealthBar','GetHealthColor',healthComponent,[A.value('f32',1)]));
+  const shield=barColor(bars.shield),bonus=barColor(bars.bonus);
+  return '['+hp+']'+read('CurrentHP')+'[-]/['+full+']'+read('MaxHP')+'[-]\n'+
+   '['+shield+']'+read('CurrentPermanentShield')+'/'+read('MaxPermanentShield')+'[-]    '+
+   '['+bonus+']'+read('CurrentBonusShield')+'/'+read('MaxBonusShield')+'[-]';
+ }
+ function targetNumbers(item){
+  const bars={health:R.readRef(item.target,'_healthBar'),shield:R.readRef(item.target,'_shieldBar'),bonus:R.readRef(item.target,'_bonusShieldBar')};
+  return numericHealth(item.unit,bars,R.readRef(R.readRef(item.view,'_effectDetailsPopup'),'_healthBar'));
+ }
+ function timedPrefix(matches){
+  const counts=[...new Set(matches.flatMap(e=>e.conditions.filter(c=>c.kind==='event-count'&&Number.isInteger(c.remaining)).map(c=>c.remaining)))];
+  return counts.length?'[FFFFFF]('+counts.join('/')+')[-] ':'';
+ }
  function layoutTarget(item){
   const name=R.readRef(item.target,'_nameLabel'),parent=S.parent(S.transform(name));
   const component=R.readRef(item.view,'_opponentAbilitiesComponent');
@@ -73,11 +103,13 @@
   }
   if(left===null){stats.targetLayout={measured,unavailable:true};return;}
   const position=S.vector(S.transform(name),'localPosition');
-  setVector(S.transform(item.label),'localPosition',[left-16,position[1],position[2]]);
+  const health=widgetBounds(parent,R.readRef(item.target,'_healthBar')),shield=widgetBounds(parent,R.readRef(item.target,'_shieldBar'));
+  const center=(health.y+shield.y)/2;
+  setVector(S.transform(item.label),'localPosition',[left-16,center,position[2]]);
   // A cloned label can carry scaling/geometry offsets. Correct its actual
   // right edge rather than treating the Transform origin as the edge.
   const actual=bounds(item.label),delta=left-16-actual.right;
-  if(Number.isFinite(delta))setVector(S.transform(item.label),'localPosition',[left-16+delta,position[1],position[2]]);
+  if(Number.isFinite(delta))setVector(S.transform(item.label),'localPosition',[left-16+delta,center,position[2]]);
   stats.targetLayout={controlsLeft:left,label:bounds(item.label),gap:16,measured};
  }
  function refreshCurrentTarget(){
@@ -93,7 +125,7 @@
   // The view's selected opponent is authoritative, never the cached hook unit.
   item.unit=R.readRef(view,'<SelectedOpponent>k__BackingField');
   if(item.unit.isNull()){setText(item.label,'');stats.target=null;return;}
-  const text=healthText(item.unit);setText(item.label,text);stats.target=text;
+  const text=targetNumbers(item);setText(item.label,text);stats.target=text;
   for(const row of stats.healthAnomalies)if(!row.deferred&&row.key.startsWith(item.unit.toString()+':')){
    row.deferred={observedAt:Date.now(),text};
    send({kind:'battle-info-health-deferred',key:row.key,...row.deferred});
@@ -103,7 +135,7 @@
  function updateTargetItem(item,unit){
   item.unit=unit;
   if(unit.isNull()){setText(item.label,'');stats.target=null;return;}
-  const text=healthText(unit);setText(item.label,text);stats.target=text;
+  const text=targetNumbers(item);setText(item.label,text);stats.target=text;
  }
  function renderTarget(view,unit){
   const target=R.readRef(view,'_opponentTargetComponent');if(target.isNull())return;
@@ -111,7 +143,7 @@
   if(unit.isNull()){if(item)updateTargetItem(item,unit);else stats.target=null;return;}
   if(!item){
    const name=R.readRef(target,'_nameLabel'),transform=S.transform(name),position=S.vector(transform,'localPosition');
-   const label=makeLabel(R.readRef(view,'_effectDetailsPopup'),{parent:S.parent(transform),name:'REA_TargetAbsoluteHealth',pivot:2,width:350,font:18,position:[position[0],position[1],position[2]]});
+   const label=makeLabel(R.readRef(view,'_effectDetailsPopup'),{parent:S.parent(transform),name:'REA_TargetAbsoluteHealth',pivot:5,width:400,font:18,position:[position[0],position[1],position[2]]});
    item={target,label,unit,view};targets.set(target.toString(),item);
   }
   layoutTarget(item);
@@ -120,19 +152,23 @@
  function render(popup,unit){
   if(unit.isNull())return;
   const key=popup.toString();let item=popups.get(key);
-  if(!item){item={popup,unit,label:makeLabel(popup),rows:new Map(),table:S.transform(R.readRef(popup,'_effectsTable')),lastTime:0};item.tablePosition=S.vector(item.table,'localPosition');popups.set(key,item);}
+  if(!item){item={popup,unit,label:makeLabel(popup,{pivot:3,align:1,width:240,font:13}),rows:new Map(),table:S.transform(R.readRef(popup,'_effectsTable')),lastTime:0};item.tablePosition=S.vector(item.table,'localPosition');popups.set(key,item);}
   if(!item.scrollPanel){
    const scroll=R.readRef(popup,'_effectsScrollView');
    item.scrollPanel=call('UnityEngine.GameObject','GetComponent',S.gameObject(scroll),[A.ref(S.type('UIPanel'))],['System.Type']);
    item.topAnchor=R.readRef(item.scrollPanel,'topAnchor');
    item.topAbsolute=R.readValue(item.topAnchor,'absolute','i32');
-   R.writeValue(item.topAnchor,'absolute','i32',item.topAbsolute-140);
+   R.writeValue(item.topAnchor,'absolute','i32',item.topAbsolute);
    call('UIRect','ResetAndUpdateAnchors',item.scrollPanel);
   }
   item.unit=unit;
   const status=readBattleStatus(unit);
-  const text=healthText(unit);
+  const healthComponent=R.readRef(popup,'_healthBar');
+  const bars={health:R.readRef(healthComponent,'_health'),shield:R.readRef(healthComponent,'_shield'),bonus:R.readRef(healthComponent,'_bonusShield')};
+  const text=numericHealth(unit,bars,healthComponent);
   setText(item.label,text);
+  const parent=S.parent(S.transform(item.label)),hb=widgetBounds(parent,bars.health),sb=widgetBounds(parent,bars.shield);
+  setVector(S.transform(item.label),'localPosition',[Math.max(hb.right,sb.right)+12,(hb.y+sb.y)/2,0]);
   call('UnityEngine.GameObject','SetActive',S.gameObject(item.label),[A.value('bool',true)]);
   const displayed=[];
   for(const row of list(R.readRef(popup,'_effectItemsPool'))){
@@ -141,8 +177,9 @@
    const icon=S.string(call('BattleEffectSprite','get_EffectSpriteName',sprite));
    const overlay=S.string(call('BattleEffectSprite','get_EffectOverlaySpriteName',sprite))||'';
    const matches=status.effects.filter(e=>e.iconSprite===icon&&(e.overlaySprite||'')===overlay);
-   const base=S.string(call('UILabel','get_text',label)).split(marker)[0];
+   const original=S.string(call('UILabel','get_text',label)).split(marker)[0];
    let saved=item.rows.get(label.toString());
+   const base=saved&&original===saved.rendered?saved.base:original;
    if(!saved){
     const widget=call('UnityEngine.GameObject','GetComponent',S.gameObject(row),[A.ref(S.type('UIWidget'))],['System.Type']);
     saved={label,base,widget,overflow:R.unbox(call('UILabel','get_overflowMethod',label),'i32'),lines:R.unbox(call('UILabel','get_maxLineCount',label),'i32'),height:widget.isNull()?null:R.unbox(call('UIWidget','get_height',widget),'i32')};
@@ -150,9 +187,9 @@
    }else saved.base=base;
    call('UILabel','set_overflowMethod',label,[A.value('i32',3)]);
    call('UILabel','set_maxLineCount',label,[A.value('i32',0)]);
-   const durations=[...new Set(matches.map(e=>e.durationText))];
-   const suffix=durations.length?durations.join('；'):'未读取到计时（原显示标记）';
-   setText(label,base+marker+suffix+'[-]');
+   const suffix=timedPrefix(matches);
+   saved.rendered=suffix+base;
+   setText(label,saved.rendered);
    const size=R.api('object_unbox','pointer',['pointer'])(call('UILabel','get_printedSize',label));
    if(!saved.widget.isNull())call('UIWidget','set_height',saved.widget,[A.value('i32',Math.max(saved.height,Math.ceil(size.add(4).readFloat())+12))]);
    displayed.push({icon,suffix,instances:matches.length});
@@ -162,8 +199,10 @@
  }
  function refreshOpponent(enabled=true){
   const state=R.readRef(R.findBound('StateController'),'<CurrentState>k__BackingField');
+  if(state.isNull())return;
   if(R.fullName(R.classOf(state))!=='BattleGameState')return;
-  const context=R.readRef(R.readRef(state,'_battleController'),'_battleContext');
+  const controller=R.readRef(state,'_battleController');if(controller.isNull())return;
+  const context=R.readRef(controller,'_battleContext');if(context.isNull())return;
   if(enabled===null){
    // Resolve only from the current battle. A previous battle's helper may
    // already have been collected when the UI host is stopped in the tavern.
@@ -172,6 +211,7 @@
    enabled=R.unbox(call('BattleOpponentAbilityInfoEnabledController','IsEnabled',helper),'bool');
   }
   const view=call('BattleContext','get_BattleView',context);
+  if(view.isNull())return;
   call('BattleBaseView','FilterOpponentAbilityDisplay',view,[A.value('bool',enabled)]);
  }
  function showEmptyPopup(view,unit,effects){

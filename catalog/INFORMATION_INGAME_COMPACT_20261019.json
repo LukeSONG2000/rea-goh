@@ -1,0 +1,42 @@
+{
+  "scope": "In-game only; external information overlay unchanged",
+  "implementation": [
+    "Two numeric rows: HP current/max, then permanent shield current/max and bonus shield current/max",
+    "Current colors read from original progress bar foreground widgets; maximum HP green from original UnitHealthBar.GetHealthColor(1)",
+    "Target label right aligned, actual widget edge 16 local units left of original target UI; centered on health/shield bar group",
+    "Popup numbers placed right of native health bars, using compact font",
+    "Finite native event expiration counters prefixed in white parentheses on original description line; unlimited/unknown expiration adds no commentary",
+    "Multiple distinct counters retained with slash separators, never inferred from icon stacks",
+    "Opponent mode refresh skips null state/controller/context/view during loading"
+  ],
+  "screenshots": {
+    "numericLayout": "logs/high_reuse/compact-final-desktop-cd.png",
+    "popupAndNonzeroCooldown": "logs/high_reuse/compact-final-desktop-popup.png"
+  },
+  "liveValidation": {
+    "evidence": "logs/high_reuse/compact-squad-v6-evidence.json",
+    "clientPid": 33348,
+    "helperPid": 16912,
+    "enemy": "GENERALKENOBI",
+    "cooldownVisibleAfterSkill": 3,
+    "popupPrefixesVisible": [1, 2, 3],
+    "serviceCalls": 0,
+    "originalSquadUnchanged": true,
+    "cleanup": "Home confirmed; guard and GC handles released; errors empty",
+    "battleFinished": false,
+    "noAttemptCost": true
+  },
+  "validation": [
+    "Native color/number formatting and finite/unknown/multiple expiration prefix tests",
+    "Target clear/reselection, actual-edge layout, lifecycle, health diagnostics and runtime loading regressions",
+    "Turn-order deterministic script double-run identical",
+    "Actual desktop screenshot inspection"
+  ],
+  "limitations": [
+    "One matching opponent and one window size visually verified; not all modes or DPI sizes",
+    "Colored low-HP formatting unit-tested; final live target was full HP",
+    "Native ScreenCapture produced no usable file; final evidence is actual foreground desktop capture",
+    "Earlier v4 capture hook ran before view initialization and failed cleanup; original client was gracefully closed and restarted, clearing that private session. v6 added readiness gate and passed cleanup.",
+    "Earlier v5 capture could not resolve effect container; v6 resolves original BattleMessageReticle.TargetUnit and uses its original PopupData"
+  ]
+}

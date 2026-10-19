@@ -9,7 +9,7 @@ const source=fs.readFileSync(new URL('./battle_info_ui.js',import.meta.url),'utf
 async function scenario(inBattle,originalEnabled){
  const nil={isNull:()=>true},helper={isNull:()=>false},hooks=new Map(),calls=[];
  const state={type:inBattle?'BattleGameState':'HomeBaseGameState',isNull:()=>false};let current=state;
- const controller={},context={};let detached=0;
+ const controller={isNull:()=>false},context={isNull:()=>false};let detached=0;
  const R={arg:{value:(t,v)=>v,ref:v=>v},nil,
   runOnMainThreadOnce:async fn=>fn(),findBound:()=>({}),
   readRef:(o,k)=>k==='<CurrentState>k__BackingField'?current:k==='_battleController'?controller:k==='_battleContext'?context:assert.fail(k),
@@ -17,7 +17,7 @@ async function scenario(inBattle,originalEnabled){
   findClass:x=>x,findMethod:(c,m)=>({readPointer:()=>c+'.'+m})};
  const S={all:()=>[],invoke:(c,m,o,args)=>{
   calls.push({c,m,o,args});
-  if(m==='get_BattleView')return {};
+  if(m==='get_BattleView')return {isNull:()=>false};
   if(m==='get_BattleOpponentAbilityInfoEnabledHelper'){assert.equal(o,context);return helper;}
   if(m==='IsEnabled'){assert.equal(o,helper);assert.equal(detached,9);return originalEnabled;}
   if(m==='FilterOpponentAbilityDisplay')return;

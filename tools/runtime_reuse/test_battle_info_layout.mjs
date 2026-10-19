@@ -8,7 +8,7 @@ const name=obj({min:-187,max:65}),skills=obj({min:-260,max:58}),passives=obj({mi
 const label=obj({x:0});
 const item={target:obj({_nameLabel:name}),view:obj({_opponentAbilitiesComponent:obj({_abilityButtonGrid:skills,_leaderAndUniqueIconsGrid:passives})}),label};
 const stats={};
-const ctx=vm.createContext({stats,Number,Math,
+const ctx=vm.createContext({stats,Number,Math,widgetBounds:()=>({y:10}),
  R:{nil:null,readRef:(o,k)=>o.fields[k],api:()=>x=>x},
  S:{parent:x=>x,transform:x=>x,vector:()=>[0,10,0]},A:{ref:x=>x},active:()=>true,
  setVector:(o,k,v)=>{o.fields.x=v[0];},

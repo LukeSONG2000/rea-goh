@@ -14,7 +14,7 @@ const ctx=vm.createContext({targets,stats,
  readRef:(o,k)=>k==='<CurrentState>k__BackingField'?state:k==='_opponentTargetComponent'?target:k==='<SelectedOpponent>k__BackingField'?selected:pointer(k)},
  call:()=>view,active:()=>true,
  setText:(label,text)=>{label.text=text;},
- healthText:unit=>{assert.equal(unit.isNull(),false);reads++;return unit.toString();},
+ targetNumbers:item=>{assert.equal(item.unit.isNull(),false);reads++;return item.unit.toString();},
  layoutTarget:()=>{layouts++;},
  makeLabel:()=>assert.fail('Null or existing targets must not allocate labels')});
 vm.runInContext(source.slice(source.indexOf(' function refreshCurrentTarget('),source.indexOf(' function render(popup,')),ctx);
