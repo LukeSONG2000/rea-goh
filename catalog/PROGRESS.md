@@ -508,3 +508,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 information-row-order fixed】numericHealth分离popup/target行序：popup上紫盾/普通盾下血；target上血下紫盾/普通盾；每项仍为原当前/最大值、原颜色。维持原条组中心和左右定位；补两种格式断言，compact/layout/target/lifecycle PASS。在Home重启显示helper加载；本次未进入战斗，尚未重拍实机。
 【Codex/root 2026-10-19 overlay-attributes-controls】认领用户验收后推送：悬浮窗移除CD/状态，仅保留实时属性与既有控制器；root独占information_overlay，不改战斗规则。行序修正已隔离实拍，CD3可见，清理返回Home无错误。
 【Codex/root 2026-10-19 overlay-attributes-controls verified】information_overlay移除敌方CD图标区和状态tab/渲染，仅留血盾/实时属性/精通与原控制器。原控制器为仅普攻开关+多选合法攻击目标，关闭恢复AI，无合法目标等待；仍限owned小队竞技场trial。py_compile、4项属性测试、enemy gate回归及真实Tk历史单位属性渲染/空目标清理通过；未新增战斗或改变战斗规则。
+
+【Codex/root 2026-11-24 Webstore REA】认领网页商店免费礼物的公开页面与静态脚本分析，实机仅只读查看免费项。分析记录归入 rea-goh，领取实现归入 BlueMilk Editor。
