@@ -510,3 +510,5 @@ Tracker 每 ~5 分钟轮询交付标记，验证通过后集成（重导出→�
 【Codex/root 2026-10-19 overlay-attributes-controls verified】information_overlay移除敌方CD图标区和状态tab/渲染，仅留血盾/实时属性/精通与原控制器。原控制器为仅普攻开关+多选合法攻击目标，关闭恢复AI，无合法目标等待；仍限owned小队竞技场trial。py_compile、4项属性测试、enemy gate回归及真实Tk历史单位属性渲染/空目标清理通过；未新增战斗或改变战斗规则。
 
 【Codex/root 2026-11-24 Webstore REA】认领网页商店免费礼物的公开页面与静态脚本分析，实机仅只读查看免费项。分析记录归入 rea-goh，领取实现归入 BlueMilk Editor。
+
+【Codex/root 2026-11-24 Webstore REA findings】公开脚本与 REA 证据见 catalog/WEBSTORE_FREE_REWARDS.md。免费礼物区和价格必须同时确认，Claim 文案可用于 SOCIAL。Edge 独立配置两份重启验证、只读、付费详情拒绝及同名回执匹配通过本地隔离测试。真实商店窗口在登录页，本轮未提交真实领取。
